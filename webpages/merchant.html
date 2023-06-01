@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCash</title>
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/merchant.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="sidebar-top-image">
+                <img src="../images/bcash-logo.png" alt="BCash Logo">
+            </div>
+            <div class="sidebar-top-details">
+                <div class="sidebar-top-details-category">BCash: Merchant</div>
+                <div class="sidebar-top-details-fullname">Juan Dela Cruz</div>
+            </div>
+        </div>
+        <div class="sidebar-bottom">
+            <div class="sidebar-bottom-pattern"></div>
+            <nav class="sidebar-bottom-menu">
+                <ul>
+                    <li id="home" class="curson-pointer sidebar-bottom-menu-tab menu-selected" onclick="menuSelection('home')">
+                        <img src="../images/icons/home.png" alt="Home Icon">
+                        <p>Home</p>
+                    </li>
+                    <li id="myorders" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('myorders')">
+                        <img src="../images/icons/order.png" alt="My Orders Icon">
+                        <p>My Orders</p>
+                        <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
+                    </li>
+                    <li id="sidebar-bottom-menu-myorders-subitems">
+                        <ul>
+                            <li id="createorder" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('createorder')"><p>Create Order</p></li>
+                            <li id="transactions" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('transactions')"><p>Transactions</p></li>
+                        </ul>
+                    </li>
+                    <li id="itemmanagement" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('itemmanagement')">
+                        <img src="../images/icons/item.png" alt="Item Management Icon">
+                        <p>Item Management</p>
+                    </li>
+                    <li id="personalsettings" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('personalsettings')">
+                        <img src="../images/icons/settings.png" alt="Personal Settings Icon">
+                        <p>Personal Settings</p>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <main class="body">
+        <header class="body-header">
+            <div class="body-header-left">
+                <div class="body-header-left-image"><img src="../images/sscr-logo.png" alt="SSCR Logo"></div>
+                <div class="body-header-left-text">San Sebastian College - Recoletos</div>
+            </div>
+            <div class="body-header-right curson-pointer" onclick="">
+                <div class="body-header-right-text">Log out</div>
+                <div class="body-header-right-image"><img src="../images/icons/logout.png" alt="Logout Icon"></div>
+            </div>
+        </header>
+        <div id="body-content" class="body-content">
+            <div id="body-content-titlebar" class="body-content-titlebar">Home</div>
+            <div id="panel-transactions" class="body-content-panel">
+                <div class="panel-transactions-query"></div>
+                <div class="panel-transactions-buttons"></div>
+                <div class="panel-transactions-table"></div>
+                <div class="panel-transactions-summary"></div>
+            </div>
+        </div>
+    </main>
+    <script src="../scripts/merchant-menu.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,253 @@
+
+@font-face {
+    font-family: 'font-intert';
+    src: url('../fonts/Intert.ttf') format('truetype');
+}
+  
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'font-intert', serif;
+}
+
+.curson-pointer {
+    cursor: pointer;
+}
+
+body {
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+#notification {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+.sidebar {
+    position: relative;
+    width: 225px;
+    overflow: hidden;
+    background: #CB8213;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-top-image {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.sidebar-top-image img {
+    width: 50%;
+    aspect-ratio: 1/1;
+}
+
+.sidebar-top-details {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.sidebar-top-details-category {
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.sidebar-top-details-fullname {
+    margin-top: 2%;
+    font-size: 0.9em;
+}
+
+.sidebar-bottom-pattern {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-image: url(../images/pattern.png);
+    background-size: cover;
+    mix-blend-mode: color-dodge;
+    opacity: 0.3;
+}
+
+.sidebar-bottom-menu {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.sidebar-bottom-menu ul li {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar-bottom-menu ul li img {
+    align-self: center;
+    height: 25px;
+    aspect-ratio: 1/1;
+}
+
+.sidebar-bottom-menu ul li p {
+    align-self: center;
+    margin-left: 10px;
+    font-size: 0.8em;
+}
+
+.sidebar-bottom-menu .more {
+    position: absolute;
+    height: 75%;
+    right: 5%;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-bottom-menu-tab {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    height: fit-content;
+    margin-bottom: 7px;
+    padding: 10px 15px;
+}
+
+.sidebar-bottom-menu ul li ul {
+    width: 100%;
+}
+
+.sidebar-bottom-menu ul li ul li p {
+    width: 100%;
+    font-size: 0.8em;
+    margin-left: 34px;
+}
+
+.sidebar-bottom-menu #sidebar-bottom-menu-myorders-subitems {
+    height: 0px;
+    overflow-y: hidden;
+    transition: height 0.3s ease;
+}
+
+.sidebar-bottom-menu-tab:hover {
+    background-color: rgba(255, 255, 255, 0.200);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.menu-selected {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.body {
+    width: 100%;
+    height: 100%;
+}
+
+.body-header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.body-header-left {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.body-header-left-image img{
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+.body-header-left-text{
+    align-self: center;
+    margin-left: 5px;
+    font-size: 1.1em;
+}
+
+.body-header-right {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.body-header-right:hover {
+    background-color: rgba(255, 255, 255, 0.200);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.body-header-right-image {
+    height: 100%;
+    display: flex;
+    align-self: center;
+}
+
+.body-header-right-image img {
+    align-self: center;
+    height: 70%;
+    aspect-ratio: 1/1;
+}
+
+.body-header-right-text{
+    align-self: center;
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+.body-content {
+    overflow: hidden;
+    height: calc(100% - 80px);
+    width: calc(100% - 30px);
+    margin: 15px;
+
+    background: #ebebeb;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+    border: 2px solid #CB8213;
+}
+
+.body-content-titlebar {
+    padding-left: 5px;
+    height: 25px;
+    background: #CB8213;
+    border: 2px solid #CB8213;
+    color: white;
+}
+
+.body-content-panel {
+    height: calc(100% - 25px);
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+@media (max-width: 768px) {
+    /* Styles for screens smaller than 768px */
+    .sidebar {
+      display: none;
+    }
+
+    .body {
+      flex-direction: column;
+    }
+  
+    .body-header-left {
+      justify-content: center;
+    }
+  
+    .body-content {
+      margin: 15px;
+    }
+  }
+

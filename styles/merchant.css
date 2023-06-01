@@ -1,0 +1,14 @@
+
+
+
+#panel-transactions {
+    width: 100%;
+    height: calc(100% - 25px);
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-transactions-query {
+    
+}
