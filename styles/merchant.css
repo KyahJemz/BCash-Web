@@ -54,12 +54,28 @@
     width: 100%;
 }
 
+.panel-transactions-buttons {
+    width: 97%;
+}
+
+.panel-transactions-table {
+    width: 97%;
+}
+
+.panel-transactions-table table td {
+    border: 1px solid black;
+}
 
 
 .btn-default {
-    width: 30%;
-    padding: 5px;
+    font-size: 0.7em;
+    width: 75px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 4px;
     margin-top: 15px;
+    background-color: white;
     border: 2px solid #CB8213;
 }
