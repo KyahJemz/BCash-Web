@@ -65,12 +65,53 @@
         </header>
         <div id="body-content" class="body-content">
             <div id="body-content-titlebar" class="body-content-titlebar">Home</div>
+
+
             <div id="panel-transactions" class="body-content-panel">
-                <div class="panel-transactions-query"></div>
-                <div class="panel-transactions-buttons"></div>
+                <div class="panel-transactions-query panel">
+                    <div class="titlebar">Transactions Query</div>
+                    <div class="panel-transactions-query-forms">
+                        <div>
+                            <label for="StartDate">Start Date</label>
+                            <input class="textbox" type="date" name="StartDate">
+                        </div>
+                        <div>
+                            <label for="EndDate">End Date</label>
+                            <input class="textbox" type="date" name="EndDate">
+                        </div>
+                        <div>
+                            <label for="TransactionNumber">Transaction Number</label>
+                            <input class="textbox" type="text" name="TransactionNumber">
+                        </div>
+                        <div>
+                            <label for="TransactionName">Search Name</label>
+                            <input class="textbox" type="text" name="TransactionName">
+                        </div>
+                        <div>
+                            <label for="TransactionStatus">Status Filter</label>
+                            <select class="textbox" id="cars" name="cars">
+                                <option value="All">All</option>
+                                <option value="Success">Success</option>
+                                <option value="Failed">Failed</option>
+                                <option value="Waiting">Waiting</option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-transactions-buttons">
+                    <input type="submit" value="Search" name="TransactionsSubmit">
+                    <input type="reset" value="Clear">
+                </div>
+
+
+
+
                 <div class="panel-transactions-table"></div>
                 <div class="panel-transactions-summary"></div>
             </div>
+
+
         </div>
     </main>
     <div id="notification">
