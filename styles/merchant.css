@@ -55,16 +55,60 @@
 }
 
 .panel-transactions-buttons {
+    margin-top: 15px;
     width: 97%;
+    margin-bottom: 15px;
 }
 
 .panel-transactions-table {
     width: 97%;
+    height: 65%;
+    border-radius: 5px;
+    overflow: auto;
+    border: 2px solid #CB8213;
 }
 
-.panel-transactions-table table td {
-    border: 1px solid black;
+
+
+
+
+#active-table {
+    border-collapse: collapse;
+    display: inline-block;
+
 }
+
+
+#active-table td {
+    width: 400px;
+}
+
+
+tbody tr:hover {
+    background-color: #e5e5e5;
+}
+
+th, td {
+  border: 1px solid #CB8213;
+  padding: 5px;
+}
+
+th {
+  background-color: #cb811328;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .btn-default {
@@ -75,7 +119,6 @@
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 4px;
-    margin-top: 15px;
     background-color: white;
     border: 2px solid #CB8213;
 }

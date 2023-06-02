@@ -1,14 +1,14 @@
 
 @font-face {
-    font-family: 'font-intert';
-    src: url('../fonts/Intert.ttf') format('truetype');
+    font-family: 'font-montserratt';
+    src: url('../fonts/Montserratt.ttf') format('truetype');
 }
   
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'font-intert', serif;
+    font-family: 'font-montserratt', serif;
 }
 
 .curson-pointer {
@@ -96,6 +96,7 @@ body {
 .sidebar-bottom-menu ul li p {
     align-self: center;
     margin-left: 10px;
+    font-weight: 500;
     font-size: 0.8em;
 }
 
