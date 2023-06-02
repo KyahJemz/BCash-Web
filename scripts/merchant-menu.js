@@ -3,7 +3,6 @@ let menuMyOrderActivated = false;
 
 function menuSelection(selected) {
     
-
     if (selected === "myorders") {
         const menuMore = document.getElementById("sidebar-bottom-menu-myorders-more");
         const menuSubitems = document.getElementById("sidebar-bottom-menu-myorders-subitems");
@@ -27,4 +26,30 @@ function menuSelection(selected) {
         x.classList.add("menu-selected")
     }
     console.log(selected);
+
+    HideAllPanels();
+
+    if (selected === "transactions") {
+        const panel = document.getElementById("panel-transactions");
+        panel.classList.remove("hidden");
+        ChangeTitle("Transactions");
+    } else {
+        ChangeTitle(" ")
+        HideAllPanels()
+    }
+}
+
+function HideAllPanels() {
+    let panels = document.getElementsByClassName("body-content-panel");
+    for (var i = 0; i < panels.length; i++) {
+        panels[i].classList.remove("visible");
+        if (!(panels[i].classList.contains("hidden"))) {
+            panels[i].classList.add("hidden");
+        }
+    }
+}
+
+
+function ChangeTitle(value) {
+    document.getElementById("body-content-titlebar").innerHTML = value;
 }

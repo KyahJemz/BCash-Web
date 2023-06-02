@@ -36,8 +36,12 @@
                     </li>
                     <li id="sidebar-bottom-menu-myorders-subitems">
                         <ul>
-                            <li id="createorder" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('createorder')"><p>Create Order</p></li>
-                            <li id="transactions" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('transactions')"><p>Transactions</p></li>
+                            <li id="createorder" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('createorder')">
+                                <p>Create Order</p>
+                            </li>
+                            <li id="transactions" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('transactions')">
+                                <p>Transactions</p>
+                            </li>
                         </ul>
                     </li>
                     <li id="itemmanagement" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('itemmanagement')">
@@ -64,10 +68,8 @@
             </div>
         </header>
         <div id="body-content" class="body-content">
-            <div id="body-content-titlebar" class="body-content-titlebar">Home</div>
-
-
-            <div id="panel-transactions" class="body-content-panel">
+            <div id="body-content-titlebar" class="body-content-titlebar">Transactions</div>
+            <div id="panel-transactions" class="body-content-panel visible">
                 <div class="panel-transactions-query panel">
                     <div class="titlebar">Transactions Query</div>
                     <div class="panel-transactions-query-forms">
@@ -89,59 +91,57 @@
                         </div>
                         <div>
                             <label for="TransactionStatus">Status Filter</label>
-                            <select class="textbox curson-pointer" id="cars" name="cars">
+                            <select class="textbox curson-pointer" name="TransactionStatus">
                                 <option value="All">All</option>
                                 <option value="Success">Success</option>
                                 <option value="Failed">Failed</option>
                                 <option value="Waiting">Waiting</option>
-                              </select>
+                            </select>
                         </div>
                     </div>
                 </div>
-
                 <div class="panel-transactions-buttons">
                     <input class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
                     <input class="btn-default curson-pointer" type="reset" value="Clear">
-                </div>
+                    <input class="btn-default curson-pointer" type="button" value="Export">
 
+                    <label for="TotalOrders">Total Orders</label>
+                    <input type="text" value="" name="TotalOrders" disabled>
+
+                    <label for="TotalSales">Total Sales</label>
+                    <input type="text" value="" name="TotalSales" disabled>
+
+                    <label for="limit">Results</label>
+                    <select class="textbox curson-pointer" name="limit">
+                        <option value="25">25 Results</option>
+                        <option value="50">50 Results</option>
+                        <option value="75">75 Results</option>
+                        <option value="100">100 Results</option>
+                        <option value="500">500 Results</option>
+                    </select>
+                </div>
                 <div class="panel-transactions-table">
-                    <table id="active-table" class="active-table">
-                        <thead>
-                            <tr>
-                                <th><div class="resize-handle"></div>Transaction Number</th>
-                                <th><div class="resize-handle"></div>Customer Name</th>
-                                <th><div class="resize-handle"></div>Status</th>
-                                <th><div class="resize-handle"></div>Transaction Timestamp</th>
-                                <th><div class="resize-handle"></div>Item Ordered</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                              </tr>
-                              <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                              </tr>
-                        </tbody>
-                      </table>
+                    <div class="table">
+                        <div class="table-row table-header">
+                            <div class="table-cell">Transaction Number</div>
+                            <div class="table-cell">Customer Name</div>
+                            <div class="table-cell">Status</div>
+                            <div class="table-cell">Transaction Timestamp</div>
+                            <div class="table-cell">Item Ordered</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">1</div>
+                            <div class="table-cell">John Doe</div>
+                            <div class="table-cell">Pending</div>
+                            <div class="table-cell">2023-05-27 10:30 AM</div>
+                            <div class="table-cell">Product A</div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="panel-transactions-summary"></div>
-
             </div>
         </div>
     </main>
-    <div id="notification">
-        
-    </div>
+    <div id="notification"></div>
     <script src="../scripts/merchant-menu.js"></script>
 </body>
 

@@ -1,33 +1,26 @@
-
-
-
 #panel-transactions {
     width: 100%;
-    height: calc(100% - 25px);
-    border: 1px solid red;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-
 .titlebar {
     justify-self: center;
     font-size: 0.8em;
     padding-left: 5px;
-    height: 25px;
+    height: 20px;
     background: #CB8213;
-    border: 2px solid #CB8213;
+    border: 1px solid #CB8213;
     color: white;
 }
-
 .panel-transactions-query {
     height: fit-content;
     margin-top: 20px;
     width: 97%;
-
 }
-
 .panel-transactions-query-forms {
     display: flex;
     flex-direction: row;
@@ -38,79 +31,38 @@
     padding-right: 10px;
     padding-top: 5px;
 }
-
 .panel-transactions-query-forms label {
     font-size: 0.7em;
     display:block;
 }
-
 .panel-transactions-query-forms div {
     min-width: 150px;
     width: 18%;
 }
-
 .panel-transactions-query-forms .textbox {
     margin-right: 10px;
     width: 100%;
 }
-
 .panel-transactions-buttons {
     margin-top: 15px;
     width: 97%;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
-
 .panel-transactions-table {
     width: 97%;
-    height: 65%;
+    height: 300px;
     border-radius: 5px;
-    overflow: auto;
-    border: 2px solid #CB8213;
+    border: 1px solid #CB8213;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #CB8213 #F3F3F3;
 }
-
-
-
-
-
-#active-table {
-    border-collapse: collapse;
-    display: inline-block;
-
+.hidden {
+    visibility: hidden;
 }
-
-
-#active-table td {
-    width: 400px;
+.visible {
+    visibility: visible;
 }
-
-
-tbody tr:hover {
-    background-color: #e5e5e5;
-}
-
-th, td {
-  border: 1px solid #CB8213;
-  padding: 5px;
-}
-
-th {
-  background-color: #cb811328;
-  font-weight: bold;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .btn-default {
     font-size: 0.7em;
     width: 75px;
@@ -120,5 +72,30 @@ th {
     padding-right: 10px;
     border-radius: 4px;
     background-color: white;
-    border: 2px solid #CB8213;
+    border: 1px solid #CB8213;
+}
+.table {
+    display: flex;
+    flex-direction: column;
+    border-collapse: collapse;
+    position: relative;
+}
+.table-row {
+    display: flex;
+}
+.table-header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    font-weight: bold;
+}
+.table-cell {
+    flex: 1;
+    border: 0.5px solid #CB8213;
+    padding: 5px;
+    font-size: 0.7em;
+}
+.table-header .table-cell {
+    background-color: #ddcbb1;
+    color: #000;
 }
