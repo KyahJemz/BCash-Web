@@ -1,8 +1,14 @@
 h1 {
     border: 0.5px solid #CB8213 ;
     border: 0.5px solid #F5F5F5   ;
-    border: 0.5px solid #333333    ;
-    border: 0.5px solid #43A047     ;
-    border: 0.5px solid #E53935     ;
+    
     border: 0.5px solid #ECECEC     ;
+}
+
+
+p {
+    background-color: #eaeff0; /* Background */
+    background-color: #F5F5F5; /* 2nd Background */
+    background-color: #CB8213; /* Buttons */
+    background-color: #393939; /* text */
 }
