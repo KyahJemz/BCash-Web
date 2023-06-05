@@ -1,3 +1,14 @@
+:root {
+    --BackgroundPrimaryColor: #E3E4E6; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #d6d6d6;
+    --AsccentColor: rgb(203, 130, 19); /* Buttons */
+    --TextColor: #393939; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
+  }
+
 #panel-transactions {
     width: 100%;
     height: 100%;
@@ -7,23 +18,16 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
-.titlebar {
-    justify-self: center;
-    font-size: 0.8em;
-    padding-left: 5px;
-    height: 20px;
-    background: #CB8213;
-    border: 1px solid #CB8213;
-    color: white;
-}
+
 .panel-transactions-query {
     height: fit-content;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 97%;
 }
 .panel-transactions-query-forms {
     display: flex;
     flex-direction: row;
+    gap: 10px;
     justify-content: space-between;
     flex-wrap: wrap;
     padding-left: 10px;
@@ -36,68 +40,223 @@
     display:block;
 }
 .panel-transactions-query-forms div {
-    min-width: 150px;
-    width: 18%;
+    min-width:  150px;
+    flex: 1;
 }
 .panel-transactions-query-forms .textbox {
     margin-right: 10px;
     width: 100%;
 }
 .panel-transactions-buttons {
-    margin-top: 15px;
+    margin-top: 10px;
     width: 97%;
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap:wrap;    
+    gap: 5px;
 }
-.panel-transactions-table {
-    width: 97%;
-    height: 300px;
-    border-radius: 5px;
-    border: 1px solid #CB8213;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #CB8213 #F3F3F3;
-}
-.hidden {
-    visibility: hidden;
-}
-.visible {
-    visibility: visible;
-}
-.btn-default {
-    font-size: 0.7em;
-    width: 75px;
+
+.panel-transactions-buttons button {
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 10px;
     padding-right: 10px;
-    border-radius: 4px;
-    background-color: white;
-    border: 1px solid #CB8213;
-}
-.table {
+    height: 25px;
     display: flex;
-    flex-direction: column;
-    border-collapse: collapse;
-    position: relative;
+    flex-direction: row;
+    background-color: var(--BackgroundPanelColor);
+    gap: 5px;
+    border: 1px solid var(--BackgroundContentTitleBarColor);
+    align-items: center;
 }
-.table-row {
-    display: flex;
-}
-.table-header {
-    position: sticky;
-    z-index: 1;
-    top: 0;
-    font-weight: bold;
-}
-.table-cell {
-    flex: 1;
-    border: 0.5px solid #CB8213;
-    padding: 5px;
-    font-size: 0.7em;
 
+.panel-transactions-buttons button:hover {
+    background-color: #da891049;
+    border: 1px solid #da891085;
+}
+
+.panel-transactions-buttons button:active {
+    background-color: #da891049;
+    border: 1px solid var(--AsccentColor);
+}
+
+.panel-transactions-buttons button img{
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+.panel-transactions-buttons > *, .panel-transactions-buttons > :last-child div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+    font-size: 0.95em;
+}
+
+.panel-transactions-buttons > :last-child div .text{
+    color: var(--AsccentColor);
+    font-weight: 600;
+  }
+
+  .panel-transactions-buttons > :last-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 30px;
+  }
+
+.panel-transactions-footer, .panel-transactions-footer > * {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.panel-transactions-footer {
+    margin-top: 7px;
+    width: 97%;
+    justify-content: end;
+    gap: 20px;
+    font-size: 0.8em;
+}
+
+.page-numbers {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.page-numbers button{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.page-numbers {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .page-numbers li a {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .page-numbers li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  .page-numbers li a:hover {
+    color: var(--AsccentColor);
+  }
+
+  .page-numbers .selected {
+    color: var(--AsccentColor);
+    font-weight: 700;
+    border: 1px solid var(--AsccentColor);
+  }
+
+
+
+
+
+.panel-transactions-table {
+    width: 97%;
+    height: calc(100% - 200px);
+    border-radius: 3px;
+    border: 1px solid var(--BackgroundContentTitleBarColor);
+    overflow: auto;
+}
+
+.panel-transactions-table table {
+    border-collapse: collapse;
+}
+
+.panel-transactions-table .table-header {
+    background-color: var(--BackgroundContentTitleBarColor);
+    width: max-content;
+    font-size: 0.8em;
+    position: sticky;
+    top: 0px;
     
 }
-.table-header .table-cell {
-    background-color: #ddcbb1;
-    color: #000;
+
+.panel-transactions-table .table-header th div{
+    border: 1px solid var(--BackgroundPrimaryColor);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    padding: 5px;
 }
+
+.cell {
+    padding: 5px;
+    font-size: 0.8em;
+    font-weight: 100;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    border: 1px solid var(--BackgroundPrimaryColor);
+  }
+
+.panel-transactions-table table .col1 {
+    width: 110px;
+}
+.panel-transactions-table table .col2 {
+    width: 110px;
+}
+.panel-transactions-table table .col3 {
+    width: 110px;
+}
+.panel-transactions-table table .col4 {
+    width: 110px;
+}
+.panel-transactions-table table .col5 {
+    width: 110px;
+}
+.panel-transactions-table table .col6 {
+    width: 110px;
+}
+.panel-transactions-table table .col7 {
+    width: 110px;
+}
+.panel-transactions-table table .col8 {
+    width: 110px;
+}
+.panel-transactions-table table .col9 {
+    width: 110px;
+}
+.panel-transactions-table table .col10 {
+    width: 110px;
+}
+
+
+@media (min-width: 0px) and (max-width: 768px) {
+    /* Styles for phones */
+    .panel-transactions-buttons {
+        flex-direction: column;
+    }
+  }
+  
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for laptops */
+
+  }
+  
+  @media (min-width: 1025px) {
+    /* Styles for wide screens */
+  
+  }

@@ -91,8 +91,8 @@
                         </div>
                         <div>
                             <label for="TransactionStatus">Status Filter</label>
-                            <select class="textbox curson-pointer" name="TransactionStatus">
-                                <option value="All">All</option>
+                            <select class="textbox curson-pointer" name="TransactionStatus" onchange="HighlightSelectedOption(this)">
+                                <option class="selected" value="All">All</option>
                                 <option value="Success">Success</option>
                                 <option value="Failed">Failed</option>
                                 <option value="Waiting">Waiting</option>
@@ -101,41 +101,398 @@
                     </div>
                 </div>
                 <div class="panel-transactions-buttons">
-                    <input class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
-                    <input class="btn-default curson-pointer" type="reset" value="Clear">
-                    <input class="btn-default curson-pointer" type="button" value="Export">
-
-                    <label for="TotalOrders">Total Orders</label>
-                    <input type="text" value="" name="TotalOrders" disabled>
-
-                    <label for="TotalSales">Total Sales</label>
-                    <input type="text" value="" name="TotalSales" disabled>
-
-                    <label for="limit">Results</label>
-                    <select class="textbox curson-pointer" name="limit">
-                        <option value="25">25 Results</option>
-                        <option value="50">50 Results</option>
-                        <option value="75">75 Results</option>
-                        <option value="100">100 Results</option>
-                        <option value="500">500 Results</option>
-                    </select>
+                    <div>
+                        <button class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
+                            <img src="../images/icons/search-yellow.png" alt="search">
+                            <span>Search</span>
+                        </button>
+                        <button class="btn-default curson-pointer" type="reset" value="Clear">
+                            <img src="../images/icons/clear-yellow.png" alt="search">
+                            <span>Clear</span>
+                        </button>
+                        <button class="btn-default curson-pointer" type="button" value="Export">
+                            <img src="../images/icons/download-yellow.png" alt="search">
+                            <span>Export</span>
+                        </button>
+                    </div>
+                    <div>
+                        <div>
+                            <div>Total Orders: </div>
+                            <div id="TotalOrders" class="text">???</div>
+                        </div>
+                        <div>
+                            <div >Total Sales: </div>
+                            <div id="TotalSales" class="text">???</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-transactions-table">
-                    <div class="table">
-                        <div class="table-row table-header">
-                            <div class="table-cell">Transaction Number</div>
-                            <div class="table-cell">Customer Name</div>
-                            <div class="table-cell">Status</div>
-                            <div class="table-cell">Transaction Timestamp</div>
-                            <div class="table-cell">Item Ordered</div>
+                    <div class="table-header">
+                        <table>
+                            <colgroup>
+                              <col class="col1">
+                              <col class="col2">
+                              <col class="col3">
+                              <col class="col4">
+                              <col class="col5">
+                              <col class="col6">
+                              <col class="col7">
+                              <col class="col8">
+                              <col class="col9">
+                              <col class="col10">
+                            </colgroup>
+                            <thead>
+                              <tr>
+                                <th class="col1"><div>Transaction Id</div> </th>
+                                <th class="col2"><div>Status</div></th>
+                                <th class="col3"><div>Name</div></th>
+                                <th class="col4"><div>Category</div></th>
+                                <th class="col5"><div>Department</div></th>
+                                <th class="col6"><div>Course</div></th>
+                                <th class="col7"><div>Amount</div></th>
+                                <th class="col8"><div>Items</div></th>
+                                <th class="col9"><div>Timestamp</div></th>
+                                <th class="col10"><div>Seller</div></th>
+                              </tr>
+                            </thead>
+                          </table>
+                          </div>
+                          <div>
+                        <table>
+                            <colgroup>
+                                <col class="col1">
+                                <col class="col2">
+                                <col class="col3">
+                                <col class="col4">
+                                <col class="col5">
+                                <col class="col6">
+                                <col class="col7">
+                                <col class="col8">
+                                <col class="col9">
+                                <col class="col10">
+                              </colgroup>
+                          <tbody>
+                            <tr>
+                              <td><div class="col1 cell">123456789</div></td>
+                              <td><div class="col2 cell">Completed</div></td>
+                              <td><div class="col3 cell">John Doe</div></td>
+                              <td><div class="col4 cell">Student</div></td>
+                              <td><div class="col5 cell">IT Department</div></td>
+                              <td><div class="col6 cell">BSIT 3</div></td>
+                              <td><div class="col7 cell">150</div></td>
+                              <td><div class="col8 cell">Good Shit</div></td>
+                              <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                              <td><div class="col10 cell">ABC Store</div></td>
+                            </tr>
+                            <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                              <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                              </tr>
+                           
+                          </tbody>
+                        </table>
+                    </div>
+                  </div>
+                <div class="panel-transactions-footer">
+                    <div class="page-numbers-container">
+                        <ul class="page-numbers">
+                            <button>&lt;</button>
+                            <li><a class="curson-pointer selected" onclick="">1</a></li>
+                            <li><a class="curson-pointer" onclick="">2</a></li>
+                            <li><a class="curson-pointer" onclick="">3</a></li>
+                            <li><a class="curson-pointer" onclick="">4</a></li>
+                            <li><a class="curson-pointer" onclick="">5</a></li>
+                            <button>&gt;</button>
+                        </ul>
+                    </div>
+                    <div>
+                        <div>
+                            Total :
                         </div>
-                        <div class="table-row">
-                            <div class="table-cell">1</div>
-                            <div class="table-cell">John Doe</div>
-                            <div class="table-cell">Pending</div>
-                            <div class="table-cell">2023-05-27 10:30 AM</div>
-                            <div class="table-cell">Product A</div>
+                        <div>
+                            ???
                         </div>
+                    </div>
+                    <div>
+                        <select class="textbox curson-pointer" name="limit" onchange="HighlightSelectedOption(this)">
+                            <option class="selected" value="25">25/Page</option>
+                            <option value="50">50/Page</option>
+                            <option value="75">75/Page</option>
+                            <option value="100">100/Page</option>
+                            <option value="500">500/Page</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -143,6 +500,7 @@
     </main>
     <div id="notification"></div>
     <script src="../scripts/merchant-menu.js"></script>
+    <script src="../scripts/inputs.js"></script>
 </body>
 
 </html>

@@ -19,18 +19,22 @@
     margin: 0;
     padding: 0;
     font-family: Arial, serif;
+    scrollbar-width: thin;
+    scrollbar-color: #9c9c9c #E3E4E6;
 }
 
 *::-webkit-scrollbar {
     width: 8px; 
+    height: 8px
+
 }
   
 *::-webkit-scrollbar-track {
-    background-color: #d3b587; 
+    background-color: #E3E4E6; 
 }
   
 *::-webkit-scrollbar-thumb {
-    background-color: #814e00; 
+    background-color: #9c9c9c; 
 }
 
 .curson-pointer {
@@ -254,9 +258,55 @@ body {
 
 .panel {
     border-radius: 3px;
-    border: 1px solid var(--AsccentColor);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--BackgroundContentTitleBarColor);
 }
+
+.titlebar {
+    justify-self: center;
+    font-size: 0.8em;
+    padding-left: 5px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    background: var(--BackgroundContentTitleBarColor);
+    color: var(--TextColor);
+    font-weight: 600;
+}
+
+input, select{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border: 1px solid var(--BackgroundContentTitleBarColor);
+    transition: 2;
+    outline: none;
+    background-color: var(--BackgroundPanelColor);
+}
+
+input:not([type="submit"]):not([type="button"]):not([type="reset"]):focus, select:focus {
+    border: 1px solid var(--AsccentColor);
+}
+
+select option {
+    padding: 5px;
+    appearance: none;
+  }
+
+select option.selected {
+    color: var(--AsccentColor);
+    font-weight: 600;
+    background-color: var(--BackgroundPanelColor);
+  }
+
+  .hidden {
+    visibility: hidden;
+}
+.visible {
+    visibility: visible;
+}
+
 
 @media (max-width: 480px) {
     /* Styles for phones */
