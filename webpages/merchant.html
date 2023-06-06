@@ -25,30 +25,30 @@
             <div class="sidebar-bottom-pattern"></div>
             <nav class="sidebar-bottom-menu">
                 <ul>
-                    <li id="home" class="curson-pointer sidebar-bottom-menu-tab menu-selected" onclick="menuSelection('home')">
+                    <li id="Home" class="curson-pointer sidebar-bottom-menu-tab menu-selected" onclick="menuSelection(this)">
                         <img src="../images/icons/home.png" alt="Home Icon">
                         <p>Home</p>
                     </li>
-                    <li id="myorders" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('myorders')">
+                    <li id="MyOrders" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
                         <img src="../images/icons/order.png" alt="My Orders Icon">
                         <p>My Orders</p>
                         <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
                     </li>
                     <li id="sidebar-bottom-menu-myorders-subitems">
                         <ul>
-                            <li id="createorder" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('createorder')">
+                            <li id="CreateOrder" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
                                 <p>Create Order</p>
                             </li>
-                            <li id="transactions" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('transactions')">
+                            <li id="Transactions" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
                                 <p>Transactions</p>
                             </li>
                         </ul>
                     </li>
-                    <li id="itemmanagement" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('itemmanagement')">
+                    <li id="ItemManagement" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
                         <img src="../images/icons/item.png" alt="Item Management Icon">
                         <p>Item Management</p>
                     </li>
-                    <li id="personalsettings" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection('personalsettings')">
+                    <li id="PersonalSettings" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
                         <img src="../images/icons/settings.png" alt="Personal Settings Icon">
                         <p>Personal Settings</p>
                     </li>
@@ -68,8 +68,11 @@
             </div>
         </header>
         <div id="body-content" class="body-content">
-            <div class="body-content-titlebar"><p id="Panel-Title"> Transactions</p></div>
-            <div id="panel-transactions" class="body-content-panel visible">
+            <div class="body-content-titlebar"><p id="Panel-Title">Home</p></div>
+
+<!-- START TRANSACTIONS -->
+
+            <div id="panel-transactions" class="body-content-panel hidden">
                 <div class="panel-transactions-query panel">
                     <div class="titlebar"><p>Query Conditions</p></div>
                     <div class="panel-transactions-query-forms">
@@ -496,6 +499,11 @@
                     </div>
                 </div>
             </div>
+
+<!-- END TRANSACTIONS -->
+
+
+
         </div>
     </main>
     <div id="notification"></div>
@@ -504,3 +512,4 @@
 </body>
 
 </html>
+

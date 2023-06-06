@@ -2,8 +2,10 @@
 let menuMyOrderActivated = false;
 
 function menuSelection(selected) {
-    
-    if (selected === "myorders") {
+    const value = selected.querySelector('p').innerText;
+    console.log(value); 
+
+    if (value === "My Orders") {
         const menuMore = document.getElementById("sidebar-bottom-menu-myorders-more");
         const menuSubitems = document.getElementById("sidebar-bottom-menu-myorders-subitems");
 
@@ -17,39 +19,53 @@ function menuSelection(selected) {
             menuSubitems.style.height = "90px";
         }
     } else {
-        let x = document.getElementById(selected);
-        let elements = document.getElementsByClassName("menu-selected");
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].classList.remove("menu-selected");
-        }
-        x.classList.remove("menu-selected")
-        x.classList.add("menu-selected")
-    }
-    console.log(selected);
 
-    HideAllPanels();
+        ChangeTitle(value);
 
-    if (selected === "transactions") {
-        const panel = document.getElementById("panel-transactions");
-        panel.classList.remove("hidden");
-        ChangeTitle("Transactions");
-    } else {
-        ChangeTitle(" ")
-        HideAllPanels()
+        ChangeMenuSelected(value.replace(new RegExp(" ", 'g'), ''));
+
+        HideAllPanels(value.replace(new RegExp(" ", 'g'), ''));
+
+        ChangePanel(value.replace(new RegExp(" ", 'g'), ''))
     }
+}
+
+function ChangeMenuSelected(value){
+    const x = document.getElementById(value);
+    console.log(value);
+
+    let elements = document.getElementsByClassName("menu-selected");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove("menu-selected");
+    }
+    x.classList.add("menu-selected")
+    console.log(value);
+}
+
+function ChangePanel(value){
+    let x = "panel-"+value.toLowerCase();
+    let element = document.getElementById(x);
+    if (element.classList.contains("hidden")) {
+        element.classList.remove("hidden");
+    }
+    element.classList.add("visible");
+    if (!(element.classList.contains("visible"))) {
+        element.classList.add("visible");
+    }console.log(value+123);
 }
 
 function HideAllPanels() {
     let panels = document.getElementsByClassName("body-content-panel");
     for (var i = 0; i < panels.length; i++) {
-        panels[i].classList.remove("visible");
+        if (panels[i].classList.contains("visible")) {
+            panels[i].classList.remove("visible");
+        }
         if (!(panels[i].classList.contains("hidden"))) {
             panels[i].classList.add("hidden");
         }
     }
 }
 
-
 function ChangeTitle(value) {
-    document.getElementById("body-content-titlebar").innerHTML = value;
+    document.getElementById("Panel-Title").innerHTML = value;
 }

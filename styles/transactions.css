@@ -11,11 +11,11 @@
 
 #panel-transactions {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 50px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 
@@ -114,7 +114,8 @@
 }
 
 .panel-transactions-footer {
-    margin-top: 7px;
+    height: 40px;
+    margin-top: 10px;
     width: 97%;
     justify-content: end;
     gap: 20px;
@@ -166,13 +167,9 @@
     border: 1px solid var(--AsccentColor);
   }
 
-
-
-
-
 .panel-transactions-table {
     width: 97%;
-    height: calc(100% - 200px);
+    flex-grow: 1;
     border-radius: 3px;
     border: 1px solid var(--BackgroundContentTitleBarColor);
     overflow: auto;
@@ -192,7 +189,8 @@
 }
 
 .panel-transactions-table .table-header th div{
-    border: 1px solid var(--BackgroundPrimaryColor);
+    border-right: 1px solid var(--BackgroundPrimaryColor);
+    border-bottom: 1px solid var(--BackgroundPrimaryColor);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -208,7 +206,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     word-break: break-all;
-    border: 1px solid var(--BackgroundPrimaryColor);
+    border-right: 1px solid var(--BackgroundPrimaryColor);
+    border-bottom: 1px solid var(--BackgroundPrimaryColor);
   }
 
 .panel-transactions-table table .col1 {
