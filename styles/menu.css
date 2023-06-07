@@ -9,47 +9,6 @@
     --CorrectColor: #43A047;
   }
 
-@font-face {
-    font-family: 'font-montserratt';
-    src: url('../fonts/Montserratt.ttf') format('truetype');
-}
-  
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, serif;
-    scrollbar-width: thin;
-    scrollbar-color: #9c9c9c #E3E4E6;
-}
-
-*::-webkit-scrollbar {
-    width: 8px; 
-    height: 8px
-
-}
-  
-*::-webkit-scrollbar-track {
-    background-color: #E3E4E6; 
-}
-  
-*::-webkit-scrollbar-thumb {
-    background-color: #9c9c9c; 
-}
-
-.curson-pointer {
-    cursor: pointer;
-}
-
-body {
-    position: relative;
-    overflow: auto;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-}
-
 #notification {
     position: absolute;
     bottom: 0px;
@@ -276,39 +235,14 @@ body {
     font-weight: 600;
 }
 
-input, select{
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 3px;
-    padding-right: 3px;
-    border: 1px solid var(--BackgroundContentTitleBarColor);
-    transition: 2;
-    outline: none;
-    background-color: var(--BackgroundPanelColor);
-}
-
-input:not([type="submit"]):not([type="button"]):not([type="reset"]):focus, select:focus {
-    border: 1px solid var(--AsccentColor);
-}
-
-select option {
-    padding: 5px;
-    appearance: none;
-  }
-
-select option.selected {
-    color: var(--AsccentColor);
-    font-weight: 600;
-    background-color: var(--BackgroundPanelColor);
-  }
-
-  .hidden {
+.hidden {
     visibility: hidden;
+    transform: translateY(1000px);
 }
 .visible {
     visibility: visible;
+    transform: translateY(0px);
 }
-
 
 @media (max-width: 480px) {
     /* Styles for phones */

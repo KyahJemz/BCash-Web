@@ -1,3 +1,14 @@
+:root {
+    --BackgroundPrimaryColor: #E3E4E6; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #d6d6d6;
+    --AsccentColor: rgb(203, 130, 19); /* Buttons */
+    --TextColor: #393939; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
+  }
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,29 +18,38 @@
 body {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
+
 .header {
     width: 100%;
-    height: 13%;
+    height: fit-content;
     position: relative;
 
-    background: #CB8213;
+    background: var(--AsccentColor);
     border-bottom: 3px solid #FB5B04;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    overflow: hidden;
 }
 
 .header .header-left {
-    position: absolute;
-    top: 5%;
-    left: 0.5%;
     width: fit-content;
     height: 95%;
     display: flex;
     flex-direction: row;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 3px;
 }
 
 .header .sscr-image {
-    height: 100%;
+    height: 75px;
     width: fit-content;
 }
 
@@ -40,11 +60,8 @@ body {
 
 .header .sscr-text{
     align-self: center;
-    left: 151px;
-    top: 5%;
     margin-left: 10px;
 
-    font-family: 'Manuale';
     font-style: normal;
     font-weight: 400;
     color: #FBD604;
@@ -52,32 +69,33 @@ body {
 }
 
 .header .sscr-text .text1{
-    font-size: 20px;
+    font-size: 1.3em;
 }
 
 .header .sscr-text .text2{
-    font-size: 18px;
+    font-size: 1.1em;
 }
 
 .header .sscr-text .line{
-    width: 275px;
+    width: 285px;
     height: 0px;
-
     border: 1px solid #FFFFFF;
 }
 
 .body {
     width: 100%;
     height: 87%;
-
     display: flex;
     flex-direction: row;
+    overflow: hidden;
+    background: var(--BackgroundPrimaryColor);
 }
 
 .body .left-pnl {
-    width: 70%;
     height: 100%;
     position: relative;
+    flex-grow: 1;
+    z-index: 0;
 }
 
 
@@ -85,53 +103,35 @@ body {
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: url(../images/school.jpg);
+    background-image: url(../images/123.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
-    mix-blend-mode: multiply;
-    opacity: 0.6;
-    border: 1px solid #000000;
-    backdrop-filter: blur(2px);
-    
-}
-.body .left-pnl .mask {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: rgba(251, 214, 4, 0.596);
-    mix-blend-mode: color;
-    opacity: 0.75;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 0;
 
 }
-
-
 
 .body .left-pnl .text {
     width: fit-content;
     height: fit-content;
-    
-    z-index: 2;
+    z-index: 1;
     margin-top: 15%;
     margin-left: 30px;
+    position: relative;
 }
 
 .body .left-pnl .text .text1 {
     width: fit-content;
     height: fit-content;
-
     font-weight: 700;
     font-size: 50px;
     color: #000000;
-    mix-blend-mode: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .body .left-pnl .text .text2 {
     width: fit-content;
     height: fit-content;
-
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -140,20 +140,20 @@ body {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-
-
-
 .body .right-pnl {
-    width: 30%;
-    height: 100%;
-
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid #CB8213;
+    position: relative;
+    min-width: 400px;
+    width: 400px;
+    height: calc(100% - 30px);
+    background-color: var(--BackgroundPanelColor);
+    opacity: 0.95;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
+    margin: 15px;
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
     justify-items: center;
+    z-index: 1;
 }
 
 .body .right-pnl .image {
@@ -161,45 +161,133 @@ body {
     height: 25%;
     width: 100%;
     text-align: center;
+    z-index: 1;
 }
 
 .body .right-pnl .image img {
     height: 100%;
     width: fit-content;
     aspect-ratio: 1/1;
+    z-index: 1;
 }
 
 .body .right-pnl .text{
     text-align: center;
-    font-size: 25px;
+    font-size: 1.4em;
     font-weight: bold;
     margin-top: 5%;
+    z-index: 1;
 }
-
-
 
 .body .right-pnl .form {
     text-align: center;
+    z-index: 1;
 }
 
-.input-default {
-    width: 60%;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 4px;
+.input-container {
+    margin: auto;
+    width: 70%;
+    position: relative;
     margin-top: 10px;
-    border: 1px solid #CB8213;
+    height: fit-content;
+    padding: 8px;
+    z-index: 1;
 }
+
+.input-container input {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 16px;
+    color: #000;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    background: transparent;
+    background-color: var(--BackgroundTitleBarColor);
+    border-radius: 3px;
+    z-index: 1;
+  }
+.input-container label {
+    position: absolute;
+    top:8px;
+    left: 18px;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #000;
+    pointer-events: none;
+    transition: .5s;
+    z-index: 1;
+  }
+  
+.input-container input:focus ~ label,
+.input-container input:valid ~ label {
+    top: -18px;
+    left: 10px;
+    color: var(--AsccentColor);
+    font-size: 12px;
+  }
 
 .btn-default {
     width: 30%;
     padding: 5px;
     border-radius: 4px;
     margin-top: 15px;
-    border: 2px solid #CB8213;
+    border: 1px solid #CB8213;
 }
 
+.btn-default {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 25px;
+    text-align: center;
+    background-color: var(--BackgroundPrimaryColor);
+    gap: 5px;
+    border: 1px solid var(--BackgroundContentTitleBarColor);
+    align-items: center;
+}
 
+.btn-default:hover {
+    background-color: #da89102d;
+    border: 1px solid #da891085;
+}
 
+.btn-default:active {
+    background-color: #da891049;
+    border: 1px solid var(--AsccentColor);
+}
 
+@media (min-width: 0px) and (max-width: 768px) {
+    /* Styles for phones */
+    .body {
+        display: block;
+        position: relative;
+    }
 
+    .body .left-pnl {
+        width: 100%;
+        position: absolute;
+        z-index: 0;
+    }
+    .body .right-pnl {
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 1;
+    }
+    .body .left-pnl .text {
+        display: none;
+    }
+    
+
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for laptops */
+
+  }
+  
+  @media (min-width: 1025px) {
+    /* Styles for wide screens */
+  
+  }

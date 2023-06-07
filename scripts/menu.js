@@ -26,7 +26,9 @@ function menuSelection(selected) {
 
         HideAllPanels(value.replace(new RegExp(" ", 'g'), ''));
 
-        ChangePanel(value.replace(new RegExp(" ", 'g'), ''))
+       ChangePanel(value.replace(new RegExp(" ", 'g'), ''))
+
+       // loadPanelContent('general-panel', '../webpages/panels/transaction-logs.html');
     }
 }
 
@@ -68,4 +70,17 @@ function HideAllPanels() {
 
 function ChangeTitle(value) {
     document.getElementById("Panel-Title").innerHTML = value;
+}
+
+
+
+
+function loadPanelContent(panelId, panelFile) {
+
+    const panelElement = document.getElementById(panelId);
+
+    panelElement.innerHTML = "<div id='panel-transactions' class='body-content-panel hidden'> <div class='panel-transactions-query panel'> <div class='titlebar'><p>Query Conditions</p></div> <div class='panel-transactions-query-forms'> <div> <label for='StartDate'>Start Date</label> <input id='StartDate' class='textbox' type='date' name='StartDate'> </div> <div> <label for='EndDate'>End Date</label> <input id='EndDate' class='textbox' type='date' name='EndDate'> </div> <div> <label for='TransactionNumber'>Transaction Number</label> <input id='TransactionNumber' class='textbox' type='text' name='TransactionNumber'> </div> <div></div>";
+
+        console.log(panelId);
+
 }
