@@ -49,7 +49,9 @@ body {
     cursor: pointer;
 }
 
-/* DROP DOWN */
+/* 
+    DROP DOWN 
+*/
 
 .dropdown {
     height: 200%;
@@ -118,9 +120,9 @@ body {
   
 .rotate {transform: rotate(180deg);}
 
-
-
-/* INPUT TEXT */
+/* 
+    INPUT TEXT 
+*/ 
 
 input:not([type="submit"]):not([type="button"]):not([type="reset"]) {
     padding-top: 2px;
