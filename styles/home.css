@@ -1,1 +1,113 @@
 
+
+.panel-home-welcome {
+    width: 97%;
+    margin-top: 10px;
+}
+
+.panel-home-graphs-container {
+    margin-top: 10px;
+    width: 97%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.panel-home-container1 {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+}
+
+.panel-home-container1-col1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.panel-home-container1-col2 {
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+.panel-home-container2 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex: 1;
+}
+
+.panel-home-card1 {
+    min-width: 100px;
+    flex: 1;
+    width: 250px;
+    background-color: var(--TextColor);
+}
+
+.panel-home-card2 {
+    min-width: 100px;
+    width: 250px;
+    flex: 1;
+    background-color: var(--TextColor);
+}
+
+.panel-home-card3 {
+    flex: 1;
+    background-color: var(--TextColor);
+}
+
+.panel-home-card4 {
+    flex: 1;
+    background-color: var(--TextColor);
+}
+
+.panel-home-card5 {
+    flex: 1;
+    background-color: var(--TextColor);
+}
+
+.panel-home-card6 {
+    flex: 1;
+    background-color: var(--TextColor);
+}
+
+@media (min-width: 0px) and (max-width: 768px) {
+    /* Styles for phones */
+    .panel-home-container1 {
+        flex-direction: column;
+    }
+
+    .panel-home-container1-col1 {
+        flex-direction: row;
+    }
+
+    .panel-home-container1-col1 * , .panel-home-container1-col2 *{
+        flex-direction: row; 
+    }
+    .panel-home-container1-col2 * {
+        height: 200px;
+    }
+
+    .panel-home-container1-col1 * {
+        height: 125px;
+    }
+
+    
+  }
+  
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for laptops */
+
+  }
+  
+  @media (min-width: 1025px) {
+    /* Styles for wide screens */
+  
+  }

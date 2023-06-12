@@ -33,11 +33,13 @@
 .sidebar-top-details-category {
     font-weight: 700;
     font-size: 1.1em;
+    color: black;
 }
 
 .sidebar-top-details-fullname {
     margin-top: 2%;
     font-size: 0.9em;
+    color: black;
 }
 
 .sidebar-bottom-pattern {
@@ -73,6 +75,7 @@
     margin-left: 10px;
     font-weight: 500;
     font-size: 0.8em;
+    color: black;
 }
 
 .sidebar-bottom-menu .more {
@@ -99,6 +102,7 @@
     width: 100%;
     font-size: 0.8em;
     margin-left: 34px;
+    color: black;
 }
 
 .sidebar-bottom-menu #sidebar-bottom-menu-myorders-subitems {
@@ -206,7 +210,9 @@
     color: var(--TextColor);
 }
 
-
+.body-content-titlebar p {
+    font-size: 1rem;
+}
 
 .panel {
     border-radius: 3px;
@@ -214,6 +220,7 @@
 }
 
 .titlebar {
+    
     justify-self: center;
     font-size: 0.8em;
     padding-left: 5px;
@@ -238,15 +245,12 @@
 }
 
 .hidden {
-    display: none;
+    height: 0;
     transform: translateY(1000px);
 }
 .visible {
-    display: flex;
     transform: translateY(0px);
 }
-
-
 
 
 @media (max-width: 480px) {

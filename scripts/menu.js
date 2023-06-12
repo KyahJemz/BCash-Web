@@ -72,9 +72,6 @@ function ChangeTitle(value) {
     document.getElementById("Panel-Title").innerHTML = value;
 }
 
-
-
-
 function loadPanelContent(panelId, panelFile) {
 
     const panelElement = document.getElementById(panelId);
