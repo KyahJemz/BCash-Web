@@ -1,14 +1,3 @@
-:root {
-    --BackgroundPrimaryColor: #E3E4E6; /* Background */
-    --BackgroundPanelColor: #ffffff; /* 2nd Background */
-    --BackgroundTitleBarColor: #E3E4E6;
-    --BackgroundContentTitleBarColor: #d6d6d6;
-    --AsccentColor: #CB8213; /* Buttons */
-    --TextColor: #393939; /* text */
-    --ErrorColor: #E53935; 
-    --CorrectColor: #43A047;
-  }
-
 #notification {
     position: absolute;
     bottom: 0px;
@@ -217,6 +206,8 @@
     color: var(--TextColor);
 }
 
+
+
 .panel {
     border-radius: 3px;
     border: 1px solid var(--BackgroundContentTitleBarColor);
@@ -235,14 +226,28 @@
     font-weight: 600;
 }
 
+.body-content-panel {
+    width: 100%;
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    transition: transform 0.2s ease;
+}
+
 .hidden {
-    visibility: hidden;
+    display: none;
     transform: translateY(1000px);
 }
 .visible {
-    visibility: visible;
+    display: flex;
     transform: translateY(0px);
 }
+
+
+
 
 @media (max-width: 480px) {
     /* Styles for phones */
