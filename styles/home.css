@@ -17,7 +17,7 @@
 }
 
 .panel-home-graphs-container * {
-    flex-wrap: wrap;
+    
 }
 
 .panel-home-container1 {
@@ -47,17 +47,28 @@
     flex-direction: row;
     width: 100%;
     gap: 10px;
+    max-height: 300px;
 }
 
 .panel-home-card1, .panel-home-card2 , .panel-home-card3 , .panel-home-card4 ,.panel-home-card5 ,.panel-home-card6  {
     border: 2px solid;
     border-color: var(--BackgroundTitleBarColor);
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
 }
+
 
 .panel-home-card1 {
     flex: 1;
     width: 100%;
+}
+
+.panel-home-card1 h1, .panel-home-card2 h1 {
+    color: var(--AsccentColor);
 }
 
 .panel-home-card2 {
