@@ -1,0 +1,10 @@
+.panel-itemmanagement-query {
+    width: 97%;
+    margin-top: 10px;
+}
+
+.panel-itemmanagement-query-forms {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

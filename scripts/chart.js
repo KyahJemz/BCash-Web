@@ -8,8 +8,8 @@
       {
         label: 'Sales Per Day',
         data: [10, 20, 15, 25, 18, 30],
-        borderColor: 'gold',
-        backgroundColor: 'yellow',
+        borderColor: '#f0a93f',
+        backgroundColor: '#CB8213',
         pointStyle: 'circle',
         pointRadius: 5,
         pointHoverRadius: 10
@@ -46,8 +46,8 @@
     datasets: [
       {
         data: [10, 20, 15, 25, 18, 30],
-        borderColor: 'black',
-        backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)'],
+        borderColor: '#f0a93f',
+        backgroundColor: '#CB8213',
         borderWidth: 0.5,
       }
     ]
@@ -88,7 +88,7 @@
     datasets: [
       {
         data: [10, 20, 15, 25, 18, 30],
-        backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)'],
+        backgroundColor: ['#CB8213', '#FF7F50'],
         borderColor: 'black',
         borderWidth: 0.5,
       }
@@ -106,8 +106,8 @@
           text: (ctx) => 'Sales'
         },
         legend: {
-            display: true,
-          }
+            position: 'left'
+        }
       }
     }
   };

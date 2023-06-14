@@ -14,18 +14,15 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-}
-
-.panel-home-graphs-container * {
-    
+    padding-right: 8px;
 }
 
 .panel-home-container1 {
-    flex: 2;
     display: flex;
     flex-direction: row;
     width: 100%;
     gap: 10px;
+    flex: 2;
 }
 
 .panel-home-container1-col1 {
@@ -38,19 +35,26 @@
 .panel-home-container1-col2 {
     display: flex;
     flex-direction: column;
-    flex: 3;
+    flex: 2;
 }
 
 .panel-home-container2 {
-    flex: 1;
     display: flex;
     flex-direction: row;
     width: 100%;
     gap: 10px;
+    flex: 1;
+    flex-wrap: wrap;
     max-height: 300px;
+    max-height: 250px;
 }
 
-.panel-home-card1, .panel-home-card2 , .panel-home-card3 , .panel-home-card4 ,.panel-home-card5 ,.panel-home-card6  {
+.panel-home-card4 ,.panel-home-card5 {
+    max-height: 250px;
+}
+
+
+.panel-home-card1, .panel-home-card2 , .panel-home-card3 , .panel-home-card4 ,.panel-home-card5 {
     border: 2px solid;
     border-color: var(--BackgroundTitleBarColor);
     display: flex;
@@ -60,7 +64,6 @@
     padding: 10px;
     border-radius: 5px;
 }
-
 
 .panel-home-card1 {
     flex: 1;
@@ -85,45 +88,37 @@
     align-items: center;
 }
 
-.panel-home-card4, .panel-home-card5, .panel-home-card6 {
+.panel-home-card4, .panel-home-card5{
     flex: 1;
 }
+
+.panel-home-graphs-container canvas {
+    width: 100%;
+}
+
+
 
 
 @media (min-width: 0px) and (max-width: 768px) {
     /* Styles for phones */
-    .panel-home-container1 {
+    .panel-home-container1, .panel-home-container2 {
         flex-direction: column;
-        flex: 0;
-    }
-
-    .panel-home-container2 {
-        flex: 1;
-    }
-
-    .panel-home-container2 * {
-        width: 100px;
-        height: 100%;
+        flex-wrap: nowrap;
     }
 
     .panel-home-container1-col1 {
         flex-direction: row;
     }
 
-    .panel-home-container1-col1 * , .panel-home-container1-col2 *{
-        flex-direction: row; 
-    }
-    .panel-home-container1-col2 * {
-        height: 200px;
+    .panel-home-card3, .panel-home-card4, .panel-home-card5{
+        height: 250px;
     }
 
-    .panel-home-container1-col1 * {
-        height: 125px;
+    .panel-home-card1, .panel-home-card2 {
+        height: 150px;
     }
 
-    .panel-home-graphs-container * {
-        min-width: 10px;
-    }
+    
   }
   
   
