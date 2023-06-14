@@ -7,4 +7,129 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 8px;
 }
+
+.panel-itemmanagement-query-forms .icon{
+    margin-right: 8px;
+}
+
+.panel-itemmanagement-query-forms-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+    justify-content: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+    flex: 2;
+}
+
+.panel-itemmanagement-query-forms-left .input-icon {
+    position: absolute;
+    height: 22px;
+    top: 2px;
+    left: 2px;
+}
+
+.panel-itemmanagement-query-forms-left .textbox {
+    height: 25px;
+    text-indent: 22px;
+}
+
+.panel-itemmanagement-query-forms-left div {
+    position: relative;
+}
+
+
+
+
+.panel-itemmanagement-query-forms-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.panel-itemmanagement-query-forms-right button {
+    width: 100%;
+    height: 25px;
+}
+
+.panel-itemmanagement-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 10px;
+    width: 97%;
+    display: grid;
+    grid-template-columns: 2fr 2fr ;
+    grid-gap: 10px;
+}
+
+.grid-item {
+    padding: 1px;
+    background-color: #f2f2f2;
+    height: 125px;
+    border-radius: 5px;
+    border: 1px  solid var(--BackgroundPrimaryColor);
+  }
+
+  .grid-item img {
+    
+    height: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  .item-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+
+  .item-container .item-details {
+    position: relative;
+  }
+
+  .item-container .item-options {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+  }
+
+  .item-container .item-options button {
+    margin-top: 5px;
+    width: 75px;
+  }
+
+
+  
+ 
+
+
+@media (min-width: 0px) and (max-width: 768px) {
+    /* Styles for phones */
+    .panel-itemmanagement-query-forms {
+        
+        flex-direction: column;
+        gap: 10px;
+    }
+    .panel-itemmanagement-query-forms-right {
+        justify-content: flex-start;
+    }
+
+
+  }
+  
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for laptops */
+
+  }
+  
+  @media (min-width: 1025px) {
+    /* Styles for wide screens */
+  
+  }

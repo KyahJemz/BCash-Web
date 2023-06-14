@@ -69,10 +69,6 @@ p {
     font-size: 0.8rem;
 }
 
-
-
-
-
 .curson-pointer {
     cursor: pointer;
 }
@@ -88,7 +84,6 @@ p {
 }
 
 .dropdown .dropdownbtn {
-    width: fit-content;
     padding-top: 2px;
     padding-bottom: 2px;
     padding-left: 10px;
@@ -167,3 +162,33 @@ input:not([type="submit"]):not([type="button"]):not([type="reset"]):focus {
     border: 1px solid var(--AsccentColor);
 }
 
+/* 
+    BUTTON
+*/ 
+button {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--BackgroundPanelColor);
+    gap: 5px;
+    border: 1px solid var(--BackgroundContentTitleBarColor);
+    align-items: center;
+}
+
+button:hover {
+    background-color: #da891021;
+    border: 1px solid #da891085;
+}
+
+button:active {
+    background-color: #da891049;
+    border: 1px solid var(--AsccentColor);
+}
+
+button img{
+    height: 100%;
+    aspect-ratio: 1/1;
+}

@@ -51,27 +51,7 @@
 }
 
 .panel-transactions-buttons button {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
     height: 25px;
-    display: flex;
-    flex-direction: row;
-    background-color: var(--BackgroundPanelColor);
-    gap: 5px;
-    border: 1px solid var(--BackgroundContentTitleBarColor);
-    align-items: center;
-}
-
-.panel-transactions-buttons button:hover {
-    background-color: #da891049;
-    border: 1px solid #da891085;
-}
-
-.panel-transactions-buttons button:active {
-    background-color: #da891049;
-    border: 1px solid var(--AsccentColor);
 }
 
 .panel-transactions-buttons button img{

@@ -249,7 +249,7 @@
 
 
 <!-- START HOME -->
-            <div id="panel-home" class="body-content-panel visible">
+            <div id="panel-home" class="body-content-panel hidden">
                 <div class="panel-home-welcome">
                     <h3>Welcome Back!</h3>
                     <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
@@ -287,63 +287,97 @@
             </div>
 <!-- END HOME -->
 
+
 <!-- START ITEM MANAGEMENT -->
-            <div id="panel-itemmanagement" class="body-content-panel hidden">
+            <div id="panel-itemmanagement" class="body-content-panel visible">
                 <div class="panel-itemmanagement-query panel">
                     <div class="titlebar"><p>Query Conditions</p></div>
                     <div class="panel-itemmanagement-query-forms">
-                        <div>
-                            <label>Start Date</label>
-                            <input id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
-                        </div>
-                        <div>
-                            <label>Filter Category</label>
-                            <div class="dropdown">
-                                <button onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                    <span class="dropdown-text">All</span>
-                                    <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                </button>
-                                <div class="dropdown-content">
-                                    <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
-                                    <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Success</a>
-                                    <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Failed</a>
-                                    <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Waiting</a>
+                        <div class="panel-itemmanagement-query-forms-left">
+                            <div>
+                                <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
+                                <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
+                            </div>
+                            <div>
+                                <div class="dropdown">
+                                    <button title="Category Filter" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <img class="icon" src="../images/icons/category-yellow.png" alt="category">
+                                        <span class="dropdown-text">All</span>
+                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Success</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Failed</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Waiting</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="dropdown">
+                                    <button title="Sort" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
+                                        <span class="dropdown-text">Ascending</span>
+                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="dropdown">
+                                    <button title="Layout View" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <img class="icon" src="../images/icons/list-yellow.png" alt="layout">
+                                        <span class="dropdown-text">List</span>
+                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <label>Order By</label>
-                            <div class="dropdown">
-                                <button onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                    <span class="dropdown-text">Ascending</span>
-                                    <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                        <div class="panel-itemmanagement-query-forms-right">
+                            <div>
+                                <button class="curson-pointer" type="button">
+                                    <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
+                                    <span>Add Item</span>
                                 </button>
-                                <div class="dropdown-content">
-                                    <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
-                                    <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
-                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <label>Layout View</label>
-                            <div class="dropdown">
-                                <button onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                    <span class="dropdown-text">List View</span>
-                                    <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                </button>
-                                <div class="dropdown-content">
-                                    <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List View</a>
-                                    <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card View</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            
                         </div>
                     </div>
                 </div>
                 <div class="panel-itemmanagement-content">
-                    asdasdsa
+                    <div class="grid-item item-container">
+                        <img src="../images/school.jpg" alt="item-image">
+                        <div class="item-details">
+                            <h4>Tinapay</h4>
+                            <h5>Foods</h5>
+                            <h5>94.23</h5>
+                        </div>
+                        <div class="item-more">
+                            <p>last edit</p>
+                            <p>23543345</p>
+                            <p>created date</p>
+                            <p>4.62.2</p>
+                        </div>
+                        <div class="item-options">
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </div>
+                    </div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                    <div class="grid-item">4</div>
+                    <div class="grid-item">5</div>
+                    <div class="grid-item">6</div>
+                    <div class="grid-item">7</div>
+                    <div class="grid-item">8</div>
+                    <div class="grid-item">9</div>
+                    
                 </div>
 
             </div>
