@@ -20,6 +20,12 @@ function changeSelection(element) {
     let dropdownSelected = element.parentNode.querySelector('.dropdown-selected');
     dropdownSelected.classList.remove('dropdown-selected');
     element.classList.add('dropdown-selected');
+
+    if (element.textContent === "Card") {
+        document.getElementById("icon-layout-1").src="../images/icons/grid-yellow.png";
+    } else if (element.textContent === "List"){
+        document.getElementById("icon-layout-1").src="../images/icons/list-yellow.png";
+    }
 }
   
 window.onclick = function(event) {
