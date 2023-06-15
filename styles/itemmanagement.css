@@ -94,14 +94,25 @@
   }
 
   .item-container .item-options {
+    display: flex;
+    flex-direction: row;
     position: absolute;
     right: 5px;
     bottom: 5px;
+    gap: 5px;
   }
 
   .item-container .item-options button {
     margin-top: 5px;
-    width: 75px;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    background-color: #f2f2f2;
+    border: 0px;
+  }
+
+  .item-container .item-options button:hover {
+    background-color: #CB821325;
   }
 
 
