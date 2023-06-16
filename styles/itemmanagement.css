@@ -76,6 +76,7 @@
     height: 125px;
     border-radius: 5px;
     border: 1px  solid var(--BackgroundPrimaryColor);
+    gap: 10px;
   }
 
   
@@ -121,6 +122,7 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
+    padding-top: 10px;
   }
 
   .item-details-container div {
