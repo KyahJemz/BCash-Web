@@ -1,8 +1,8 @@
 :root {
-    --BackgroundPrimaryColor: #E3E4E6; /* Background */
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
     --BackgroundPanelColor: #ffffff; /* 2nd Background */
     --BackgroundTitleBarColor: #E3E4E6;
-    --BackgroundContentTitleBarColor: #d6d6d6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
     --AsccentColor: #CB8213; /* Buttons */
     --TextColor: #393939; /* text */
     --ErrorColor: #E53935; 
