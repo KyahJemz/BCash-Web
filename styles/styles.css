@@ -216,9 +216,8 @@ button img{
 }
 
 .dialog-container .dialog-content {
-    height: 500px;
-    width: 500px;
-    background-color: white;
+    height: 80vh;
+    width: 40vw;
     border-radius: 4px;
     overflow: hidden;
 }
@@ -244,6 +243,10 @@ button img{
 .dialog-container .dialog-content .header .close .close-btn:hover{
     font-weight: 750;
     color: var(--AsccentColor);
+}
+
+.dialog-container .dialog-content .body {
+    background-color: white;
 }
 
 /* 
@@ -294,3 +297,24 @@ button img{
     padding: 5px;
     min-height: 100px;
 }
+
+@media (min-width: 0px) and (max-width: 768px) {
+    /* Styles for phones */
+    .dialog-container .dialog-content {
+        width: 80vw;
+    }
+  }
+  
+  
+  @media (min-width: 769px) and (max-width: 1000px) {
+    /* Styles for laptops */
+    .dialog-container .dialog-content {
+        width: 60vw;
+    }
+    
+  }
+  
+  @media (min-width: 1025px) {
+    /* Styles for wide screens */
+  
+  }
