@@ -341,7 +341,7 @@
                         </div>
                         <div class="panel-itemmanagement-query-forms-right">
                             <div>
-                                <button class="curson-pointer" type="button">
+                                <button class="curson-pointer" type="button" onclick="openDialogBox('Add-Item')">
                                     <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
                                     <span>Add Item</span>
                                 </button>
@@ -450,8 +450,8 @@
     </main>
 
 <!-- NOTIFICATIONS -->
-    <div class="notification-container">
-        <div class="notification-box">
+    <div id="Notification-Box-Container" class="notification-container">
+        <div id="Notification-Box-Id" class="notification-box">
             <div class="header">
                 <div class="title">
                     <p class="text">New Notification 1</p>
@@ -464,39 +464,53 @@
                 <p>123</p>
             </div>
         </div>
-        <div class="notification-box">
-            <div class="header">
-                <div class="title">
-                    <p class="text">New Notification 2</p>
-                </div>
-                <div class="close">
-                    <p class="close-btn curson-pointer">X</p>
-                </div>
-            </div>
-            <div class="notification-content">
-                <p>123</p>
-            </div>
-        </div>
     </div>
 
 <!-- DIALOG BOXES -->
-    <div class="dialog-container">
+    <div id="Dialog-Box-Container" class="dialog-container">
         <div class="dialog-content">
             <div class="header">
                 <div class="title">
-                    <p class="text">Add New Item</p>
+                    <p id="Dialog-Box-header" class="text">Add New Item</p>
                 </div>
-                <div class="close">
-                    <p class="close-btn curson-pointer">X</p>
+                <div class="close" >
+                    <p class="close-btn curson-pointer" onclick="closeDialogBox()">X</p>
                 </div>
             </div>
-            <div class="body">
-                
+            <div id="Dialog-Box-Body" class="body">
+                <div class="Add-Item">
+                    <div class="image">
+                        <img src="../images/school.jpg" alt="">
+                    </div>
+                    <div class="form">
+                        <div>
+                            <p>Item Image</p>
+                            <input type="file" name="img" accept="image/*">
+                        </div>
+                        <div>
+                            <p>Item Name</p>
+                            <input type="text" name="name" maxlength="25" required>
+                        </div>
+                        <div>
+                            <p>Item Cost</p>
+                            <input type="number" name="cost" required>
+                        </div>
+                        <div>
+                            <p>Item Category</p>
+                            <input type="text" name="category" required>
+                        </div>
+                        <div class="button-container">
+                            <button type="button" onclick="closeDialogBox()">Cancel</button>
+                            <button type="submit" name="form" value="Add-Item">Add Item</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 <!-- JAVASCRIPTS -->
+    <script src="../scripts/dialog-box.js"></script>
     <script src="../scripts/menu.js"></script>
     <script src="../scripts/panel-scripts.js"></script>
     <script src="../scripts/chart.js"></script>

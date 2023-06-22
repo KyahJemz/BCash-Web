@@ -226,6 +226,40 @@
   background-color: #CB821325;
 }
 
+.Add-Item {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.Add-Item .image {
+  flex: 2;
+}
+  
+.Add-Item .image img {
+  aspect-ratio: 1/1;
+  width: 100% ;
+}
+
+.Add-Item .form {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Add-Item .form input {
+  width: 100%;
+}
+
+.Add-Item .form .button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 10px;
+}
 
 
 
