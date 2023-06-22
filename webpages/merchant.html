@@ -372,8 +372,8 @@
                                     </div>
                                 </div>
                                 <div class="item-options">
-                                    <button title="Edit" class="curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
+                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
                                 </div>
                             </div>
                             <div class="item-container">
@@ -391,8 +391,8 @@
                                     </div>
                                 </div>
                                 <div class="item-options">
-                                    <button title="Edit" class="curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
+                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
                                 </div>
                             </div>
                         </div>
@@ -426,8 +426,8 @@
                             </div>
                         </div>
                         <div class="item-options">
-                            <button title="Edit" class="curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                            <button title="Delete" class="curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
+                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
                         </div>
 
                     </div>
@@ -457,7 +457,7 @@
                     <p class="text">New Notification 1</p>
                 </div>
                 <div class="close">
-                    <p class="close-btn curson-pointer">X</p>
+                    <p class="close-btn curson-pointer" onclick="removeNotificationBox(this)">X</p>
                 </div>
             </div>
             <div class="notification-content">
@@ -471,13 +471,14 @@
         <div class="dialog-content">
             <div class="header">
                 <div class="title">
-                    <p id="Dialog-Box-header" class="text">Add New Item</p>
+                    <p id="Dialog-Box-header" class="text">N/A</p>
                 </div>
                 <div class="close" >
                     <p class="close-btn curson-pointer" onclick="closeDialogBox()">X</p>
                 </div>
             </div>
             <div id="Dialog-Box-Body" class="body">
+                <!--
                 <div class="Add-Item">
                     <div class="image">
                         <img src="../images/school.jpg" alt="">
@@ -485,19 +486,19 @@
                     <div class="form">
                         <div>
                             <p>Item Image</p>
-                            <input type="file" name="img" accept="image/*">
+                            <input type="file" name="item-image" accept="image/*">
                         </div>
                         <div>
                             <p>Item Name</p>
-                            <input type="text" name="name" maxlength="25" required>
+                            <input type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
                         </div>
                         <div>
                             <p>Item Cost</p>
-                            <input type="number" name="cost" required>
+                            <input type="number" title="Number Only" name="item-cost" required>
                         </div>
                         <div>
                             <p>Item Category</p>
-                            <input type="text" name="category" required>
+                            <input type="text" title="Can be Existing Category or new Category" name="item-category" required>
                         </div>
                         <div class="button-container">
                             <button type="button" onclick="closeDialogBox()">Cancel</button>
@@ -505,11 +506,61 @@
                         </div>
                     </div>
                 </div>
+                -->
+                <!--
+                <div class="Edit-Item">
+                    <div class="image">
+                        <img src="../images/school.jpg" alt="">
+                    </div>
+                    <div class="form">
+                        <div>
+                            <p>Item Image</p>
+                            <input type="file" name="item-image" accept="image/*">
+                        </div>
+                        <div>
+                            <p>Item Name</p>
+                            <input type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
+                        </div>
+                        <div>
+                            <p>Item Cost</p>
+                            <input type="number" title="Number Only" name="item-cost" required>
+                        </div>
+                        <div>
+                            <p>Item Category</p>
+                            <input type="text" title="Can be Existing Category or new Category" name="item-category" required>
+                        </div>
+                        <div class="button-container">
+                            <button type="button" onclick="closeDialogBox()">Cancel</button>
+                            <button type="submit" name="form" value="Add-Item">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+                -->
+                <!--
+                <div class="Delete-Item">
+                    <div class="form">
+                        <div>
+                            <p><strong>Are you sure you want to delete this item?</strong></p>
+                            <p><em>Item Name: Tinapaty</em></p>
+                            <p><em>Item Cost: $132</em></p>
+                            <p><em>Item Category: Food</em></p>
+                            <br>
+                            <p>Please confirm the deletion by entering your PIN CODE below:</p>
+                            <input type="text" name="item-delete-Pin-Code">
+                        </div>
+                        <div class="button-container">
+                            <button type="button" onclick="closeDialogBox()">Cancel</button>
+                            <button type="submit" name="form" value="Add-Item">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                -->
             </div>
         </div>
     </div>
 
 <!-- JAVASCRIPTS -->
+    <script src="../scripts/notification-box.js"></script>
     <script src="../scripts/dialog-box.js"></script>
     <script src="../scripts/menu.js"></script>
     <script src="../scripts/panel-scripts.js"></script>

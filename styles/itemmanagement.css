@@ -226,7 +226,7 @@
   background-color: #CB821325;
 }
 
-.Add-Item {
+.Add-Item, .Edit-Item {
   height: 100%;
   width: 100%;
   display: flex;
@@ -234,27 +234,35 @@
   gap: 10px;
 }
 
-.Add-Item .image {
+.Add-Item .image, .Edit-Item .image {
   flex: 2;
 }
   
-.Add-Item .image img {
+.Add-Item .image img, .Edit-Item .image img {
   aspect-ratio: 1/1;
   width: 100% ;
 }
 
-.Add-Item .form {
+.Add-Item .form, .Edit-Item .form {
   flex: 4;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.Add-Item .form input {
+.Add-Item .form input, .Edit-Item .form input {
   width: 100%;
 }
 
-.Add-Item .form .button-container {
+.Delete-Item .form input {
+
+}
+
+.Delete-Item .form .button-container {
+  margin-top: 10px;
+}
+
+.Add-Item .form .button-container, .Edit-Item .form .button-container, .Delete-Item .form .button-container {
   display: flex;
   flex-direction: row;
   justify-content: end;
