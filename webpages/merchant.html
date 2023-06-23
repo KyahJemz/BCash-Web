@@ -8,7 +8,7 @@
     <title>BCash</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../styles/styles.css">
-    
+
     <link rel="stylesheet" href="../styles/merchant/home.css">
     <link rel="stylesheet" href="../styles/merchant/menu.css">
     <link rel="stylesheet" href="../styles/merchant/createorder.css">
@@ -290,7 +290,7 @@
 
 
 <!-- START ITEM MANAGEMENT -->
-            <div id="panel-itemmanagement" class="body-content-panel visible">
+            <div id="panel-itemmanagement" class="body-content-panel hidden">
                 <div class="panel-itemmanagement-query panel">
                     <div class="titlebar"><p>Query Conditions</p></div>
                     <div class="forms">
@@ -448,14 +448,13 @@
 
 
 <!-- START CREATE ORDER -->
-            <div id="panel-createorder" class="body-content-panel hidden">
-                <div class="panel-createorder-query panel">
-                    <div class="titlebar"><p>Query Conditions</p></div>
-                    <div class="panel-createorder-query-forms">
-                        <div class="panel-createorder-query-forms-left">
+            <div id="panel-createorder" class="body-content-panel visible">
+                <div class="createorder-content">
+                    <div class="left-panel">
+                        <div class="query-container"> 
                             <div>
                                 <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
-                                <input placeholder="Search..." id="createorder-search" class="textbox" type="search" name="createorder-search">
+                                <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
                             </div>
                             <div>
                                 <div class="dropdown">
@@ -498,23 +497,54 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-createorder-query-forms-right">
-                            <div>
-                                <button class="curson-pointer" type="button" onclick="openDialogBox('Add-Item')">
-                                    <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
-                                    <span>Add Item</span>
-                                </button>
+                        <div class="items-container"> 
+                            <div class="category-container">
+                                <div class="category-title">
+                                    <p><b>Title</b></p>
+                                </div>
+                                <div class="category-contents">
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay asdas dasd asdasdasd a</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-createorder-content">
-                    <div class="category-container">
-                        <div class="category-title">
-                            <p><b>Title</b></p>
-                        </div>
-                        <div class="category-contents">
-                            <div class="item-container">
+                            <!--
+                            <div class="list-item-container">
                                 <div class="item-image">
                                     <img src="../images/school.jpg" alt="item-image">
                                 </div>
@@ -523,27 +553,21 @@
                                         <div class="info">
                                             <p class="title"><b>Tinapay</b></p>
                                         </div>
+                                        <div class="category">
+                                            <p class="">Category : <b>Foods</b></p>
+                                        </div>
                                         <div class="info">
                                             <p class="cost">Cost : <b>P94.23</b></p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
                                     <div class="info-container">
                                         <div class="info">
-                                            <p class="title"><b>Tinapay asdas dasd asdasdasd a</b></p>
+                                            <p>Date Modified:</p>
+                                            <p><b>2023-06-18</b></p>
                                         </div>
                                         <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
+                                            <p>Date Created:</p>
+                                            <p><b>2023-06-18</b></p>
                                         </div>
                                     </div>
                                 </div>
@@ -551,57 +575,40 @@
                                     <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
                                     <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
                                 </div>
+        
+                            </div>
+                        -->
+                        </div>
+                    </div>
+                    <div class="right-panel">
+                        <div class="receipt-container"> 
+                            <div class="orders">
+                                <p>Order:</p>
+                                <hr>
+
+                            </div>
+                            <div class="summary">
+                                <hr>
+                                <div class="details">
+                                    <p>5 items</p>
+                                    <p>Subtotal: P10.20</p>
+                                </div>
+                                <p>Discount: P10.20</p>
+                                <p><strong>Total: P10.20</strong></p>
+                                <hr>
+                                <div class="button-container">
+                                    <button type="button" class="curson-pointer">
+                                        <img src="../images/icons/delete-red.png" alt="">
+                                    </button>
+                                    <button type="button" class="curson-pointer">
+                                        <img src="../images/icons/order-receipt-yellow.png" alt="">
+                                        <p>Place Order</p>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!--
-                    <div class="list-item-container">
-                        <div class="item-image">
-                            <img src="../images/school.jpg" alt="item-image">
-                        </div>
-                        <div class="item-details-container">
-                            <div class="info-container">
-                                <div class="info">
-                                    <p class="title"><b>Tinapay</b></p>
-                                </div>
-                                <div class="category">
-                                    <p class="">Category : <b>Foods</b></p>
-                                </div>
-                                <div class="info">
-                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                </div>
-                            </div>
-                            <div class="info-container">
-                                <div class="info">
-                                    <p>Date Modified:</p>
-                                    <p><b>2023-06-18</b></p>
-                                </div>
-                                <div class="info">
-                                    <p>Date Created:</p>
-                                    <p><b>2023-06-18</b></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-options">
-                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                        </div>
-
-                    </div>
-                    -->
-
-                    
-
-                    
-
-                  
-
-
-
-
-                    
                 </div>
-
             </div>
 <!-- END CREATE ORDER -->
 
@@ -609,7 +616,8 @@
         </div>
     </main>
 
-<!-- NOTIFICATIONS -->
+
+<!-- START NOTIFICATIONS -->
     <div id="Notification-Box-Container" class="notification-container">
         <div id="Notification-Box-Id" class="notification-box">
             <div class="header">
@@ -625,8 +633,10 @@
             </div>
         </div>
     </div>
+<!-- END NOTIFICATIONS -->
 
-<!-- DIALOG BOXES -->
+
+<!-- START DIALOG BOXES -->
     <div id="Dialog-Box-Container" class="dialog-container">
         <div class="dialog-content">
             <div class="header">
@@ -718,13 +728,16 @@
             </div>
         </div>
     </div>
+<!-- END DIALOG BOXES -->
 
-<!-- JAVASCRIPTS -->
+
+<!-- START JAVASCRIPTS -->
     <script src="../scripts/notification-box.js"></script>
     <script src="../scripts/dialog-box.js"></script>
     <script src="../scripts/menu.js"></script>
     <script src="../scripts/panel-scripts.js"></script>
     <script src="../scripts/chart.js"></script>
+<!-- END JAVASCRIPTS -->
 </body>
 </html>
 

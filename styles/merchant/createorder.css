@@ -2,23 +2,33 @@
 /* CREATE ORDER PANEL */
 /* ##################### */
   
-  .panel-createorder-query{
-    width: 97%;
-    margin-top: 10px;
-  }
+.createorder-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
 
-  .panel-createorder-query .forms{
+  /*
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  grid-template-rows: 50px 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  padding: 10px;
+  */
+  }
+  
+  .createorder-content .left-panel {
+    flex: 1;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 8px;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .panel-createorder-query .forms .icon{
-    margin-right: 8px;
-  }
-
-  .panel-createorder-query .forms .left-panel{
+  .createorder-content .left-panel .query-container {
+    flex: 0 0 fit-content;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -26,260 +36,105 @@
     justify-content: flex-start;
     align-content: center;
     flex-wrap: wrap;
-    flex: 2;
+    padding: 10px;
+    background-color: var(--BackgroundContentTitleBarColor);
+    border-radius: 4px;
   }
 
-  .panel-createorder-query .forms .left-panel .input-icon {
+  .createorder-content .left-panel .query-container .icon{
+    margin-right: 8px;
+  }
+
+  .createorder-content .left-panel .query-container .input-icon {
     position: absolute;
     height: 22px;
     top: 2px;
     left: 2px;
   }
 
-  .panel-createorder-query .forms .left-panel .textbox {
+  .createorder-content .left-panel .query-container .textbox {
     height: 25px;
     text-indent: 22px;
   }
 
-  .panel-createorder-query .forms .left-panel div:first-child {
+  .createorder-content .left-panel .query-container div:first-child {
     position: relative;
   }
 
-  .panel-createorder-query .forms .right-panel {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 15px;
+
+
+
+
+  .createorder-content .left-panel .items-container {
     flex: 1;
-    justify-content: flex-end;
-    align-items: center;
+
+  }
+  
+  .createorder-content .right-panel {
+    flex: 0 0 300px;
+    background-color: var(--BackgroundContentTitleBarColor);
+    border-radius: 4px;
   }
 
-  .panel-createorder-query .forms .right-panel button {
-    width: 100%;
-    height: 25px;
-  }
-
-  .panel-createorder-content {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    margin-top: 10px;
-    width: 97%;
-    display: grid;
-    grid-template-columns: 2fr; /* 2fr 2fr or 2fr */
-    grid-gap: 10px;
-    padding-right: 8px;
-  }
-
-/* ############# */
-/* FOR LIST VIEW */
-/* ############# */
-
-  .list-item-container {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    margin: 5px;
-    padding: 1px;
-    background-color: #f2f2f2;
-    height: 125px;
-    border-radius: 5px;
-    border: 1px  solid var(--BackgroundPrimaryColor);
-    gap: 10px;
-    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3);
-  }
-
-  .list-item-container .item-image img {
+  .createorder-content .right-panel .receipt-container {
     height: 100%;
-    aspect-ratio: 1/1;
-  }
-
-  .list-item-container .item-details-container {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-evenly;
-    padding-top: 10px;
+    flex-direction: column;
+    padding: 10px;
   }
 
-  .list-item-container .item-details-container div {
+  .createorder-content .right-panel .receipt-container .orders {
     flex: 1;
   }
 
-  .list-item-container .item-details-container .info-container div {
+  .createorder-content .right-panel .receipt-container .orders>* {
     margin-bottom: 10px;
   }
 
-  .list-item-container .item-options {
+  .createorder-content .right-panel .receipt-container .summary {
+    flex: 0 0 fit-content;
+    width: 100%;
+    text-align: right;
+  }
+
+  .createorder-content .right-panel .receipt-container .summary .details {
     display: flex;
     flex-direction: row;
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    gap: 5px;
+    justify-content: space-between;
   }
 
-  .list-item-container .item-options button {
-    margin-top: 5px;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    background-color: #f2f2f2;
-    border: 0px;
-    padding: 2px;
-    border-radius: 3px;
-    transition: 8ms ease;
-  }
-
-  .list-item-container .item-options button:hover {
-    background-color: #CB821325;
-  }
-
-/* ############# */
-/* FOR GRID VIEW */
-/* ############# */
-
-  .category-container {
-    width: 100%; 
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: max-content;
-  }
-
-  .category-container .category-title p{
-    padding-left: 3px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 0.9rem;
-  }
-
-  .category-container .category-contents {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: 0px;
-  }
-
-  .category-container .category-contents::-webkit-scrollbar {
-    height: 5px
-  }
-
-  .category-container .category-contents .item-container {
-    padding-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-    border-radius: 3px;
-    scroll-snap-align: start;
-    box-shadow: 0px 0px 3px 0px var(--AsccentColor);
-    margin: 3px;
-    margin-bottom: 6px;
-    height: 225px;
-    position: relative;
-  }
-
-  .category-container .category-contents .item-container .item-image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .category-container .category-contents .item-container .item-image img {
-    width: 100%;
-    aspect-ratio: 1/1;
-  }
-
-  .category-container .category-contents .item-container .item-details-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 0;
-    padding: 3px;
-  }
-
-  .category-container .category-contents .item-container .item-details-container .info-container .info{
-    margin-bottom: 3px;
-  }
-
-  .category-container .category-contents .item-options {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    gap: 5px;
-  }
-
-
-  .category-container .category-contents .item-options button {
-    margin-top: 5px;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    background-color: #f2f2f2;
-    border: 0px;
-    padding: 2px;
-    border-radius: 3px;
-    transition: 8ms ease;
-  }
-
-  .category-container .category-contents .item-options button:hover {
-    background-color: #CB821325;
-  }
-
-/* ############################# */
-/* FOR DIALOG BOX ADD/ EDIT ITEM */
-/* ############################# */
-
-  .Add-Item, .Edit-Item {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-  }
-
-  .Add-Item .image, .Edit-Item .image {
-    flex: 2;
-  }
-    
-  .Add-Item .image img, .Edit-Item .image img {
-    aspect-ratio: 1/1;
-    width: 100% ;
-  }
-
-  .Add-Item .form, .Edit-Item .form {
-    flex: 4;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .Add-Item .form input, .Edit-Item .form input {
-    width: 100%;
-  }
-
-/* ########################## */
-/* FOR DIALOG BOX DELETE ITEM */
-/* ########################## */
-
-  .Delete-Item .form .button-container {
+  .createorder-content .right-panel .receipt-container .summary>* {
     margin-top: 10px;
   }
 
-/* ###################### */
-/* FOR DIALOG BOX BUTTONS */
-/* ###################### */
-
-  .Add-Item .form .button-container, .Edit-Item .form .button-container, .Delete-Item .form .button-container {
+  .createorder-content .right-panel .receipt-container .summary .button-container {
     display: flex;
     flex-direction: row;
-    justify-content: end;
-    gap: 10px;
+    gap: 5px;
+    width: 100%;
   }
+
+  .createorder-content .right-panel .receipt-container .summary .button-container img {
+    aspect-ratio: 1/1;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .createorder-content .right-panel .receipt-container .summary .button-container button:last-child {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #cb811344;
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .createorder-content .right-panel .receipt-container .summary .button-container button:first-child {
+    padding: 5px;
+    border-radius: 4px;
+  }
+
 
 
 
