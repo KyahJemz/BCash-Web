@@ -46,7 +46,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: url(../images/pattern.png);
+    background-image: url(../../images/pattern.png);
     background-size: cover;
     mix-blend-mode: color-dodge;
     opacity: 0.3;

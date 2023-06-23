@@ -9,10 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../styles/styles.css">
     
-    <link rel="stylesheet" href="../styles/transactions.css">
-    <link rel="stylesheet" href="../styles/home.css">
-    <link rel="stylesheet" href="../styles/menu.css">
-    <link rel="stylesheet" href="../styles/itemmanagement.css">
+    <link rel="stylesheet" href="../styles/merchant/home.css">
+    <link rel="stylesheet" href="../styles/merchant/menu.css">
+    <link rel="stylesheet" href="../styles/merchant/createorder.css">
+    <link rel="stylesheet" href="../styles/merchant/transactions.css">
+    <link rel="stylesheet" href="../styles/merchant/itemmanagement.css">
 </head>
 
 <body>
@@ -292,8 +293,8 @@
             <div id="panel-itemmanagement" class="body-content-panel visible">
                 <div class="panel-itemmanagement-query panel">
                     <div class="titlebar"><p>Query Conditions</p></div>
-                    <div class="panel-itemmanagement-query-forms">
-                        <div class="panel-itemmanagement-query-forms-left">
+                    <div class="forms">
+                        <div class="left-panel">
                             <div>
                                 <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
                                 <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
@@ -339,7 +340,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-itemmanagement-query-forms-right">
+                        <div class="right-panel">
                             <div>
                                 <button class="curson-pointer" type="button" onclick="openDialogBox('Add-Item')">
                                     <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
@@ -350,8 +351,6 @@
                     </div>
                 </div>
                 <div class="panel-itemmanagement-content">
-
-                    
                     <div class="category-container">
                         <div class="category-title">
                             <p><b>Title</b></p>
@@ -446,6 +445,167 @@
                 </div>
             </div>
 <!-- END ITEM MANAGEMENT -->
+
+
+<!-- START CREATE ORDER -->
+            <div id="panel-createorder" class="body-content-panel hidden">
+                <div class="panel-createorder-query panel">
+                    <div class="titlebar"><p>Query Conditions</p></div>
+                    <div class="panel-createorder-query-forms">
+                        <div class="panel-createorder-query-forms-left">
+                            <div>
+                                <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
+                                <input placeholder="Search..." id="createorder-search" class="textbox" type="search" name="createorder-search">
+                            </div>
+                            <div>
+                                <div class="dropdown">
+                                    <button title="Category Filter" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <img class="icon" src="../images/icons/category-yellow.png" alt="category">
+                                        <span class="dropdown-text">All</span>
+                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Foods</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Drinks</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="dropdown">
+                                    <button title="Sort" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
+                                        <span class="dropdown-text">Ascending</span>
+                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="dropdown">
+                                    <button title="Layout View" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
+                                        <span class="dropdown-text">List</span>
+                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-createorder-query-forms-right">
+                            <div>
+                                <button class="curson-pointer" type="button" onclick="openDialogBox('Add-Item')">
+                                    <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
+                                    <span>Add Item</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-createorder-content">
+                    <div class="category-container">
+                        <div class="category-title">
+                            <p><b>Title</b></p>
+                        </div>
+                        <div class="category-contents">
+                            <div class="item-container">
+                                <div class="item-image">
+                                    <img src="../images/school.jpg" alt="item-image">
+                                </div>
+                                <div class="item-details-container">
+                                    <div class="info-container">
+                                        <div class="info">
+                                            <p class="title"><b>Tinapay</b></p>
+                                        </div>
+                                        <div class="info">
+                                            <p class="cost">Cost : <b>P94.23</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-options">
+                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                </div>
+                            </div>
+                            <div class="item-container">
+                                <div class="item-image">
+                                    <img src="../images/school.jpg" alt="item-image">
+                                </div>
+                                <div class="item-details-container">
+                                    <div class="info-container">
+                                        <div class="info">
+                                            <p class="title"><b>Tinapay asdas dasd asdasdasd a</b></p>
+                                        </div>
+                                        <div class="info">
+                                            <p class="cost">Cost : <b>P94.23</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-options">
+                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="list-item-container">
+                        <div class="item-image">
+                            <img src="../images/school.jpg" alt="item-image">
+                        </div>
+                        <div class="item-details-container">
+                            <div class="info-container">
+                                <div class="info">
+                                    <p class="title"><b>Tinapay</b></p>
+                                </div>
+                                <div class="category">
+                                    <p class="">Category : <b>Foods</b></p>
+                                </div>
+                                <div class="info">
+                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                </div>
+                            </div>
+                            <div class="info-container">
+                                <div class="info">
+                                    <p>Date Modified:</p>
+                                    <p><b>2023-06-18</b></p>
+                                </div>
+                                <div class="info">
+                                    <p>Date Created:</p>
+                                    <p><b>2023-06-18</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-options">
+                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                        </div>
+
+                    </div>
+                    -->
+
+                    
+
+                    
+
+                  
+
+
+
+
+                    
+                </div>
+
+            </div>
+<!-- END CREATE ORDER -->
+
+
         </div>
     </main>
 

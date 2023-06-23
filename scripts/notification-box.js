@@ -9,7 +9,7 @@ class notification {
 }
 
 
-
+ 
 function activateNotification () {
     const box = document.getElementById("Notification-Box-Container");
     box.style.display = "flex";
