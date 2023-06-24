@@ -37,6 +37,7 @@
             <nav class="menu">
                 <ul>
                     <li id="Home" class="curson-pointer menu-tab menu-selected" onclick="menuSelection(this)">
+                        <div class="selctd"></div>
                         <img src="../images/icons/home.png" alt="Home Icon">
                         <p>Home</p>
                     </li>
@@ -48,14 +49,17 @@
                     <li id="sidebar-bottom-menu-myorders-subitems">
                         <ul>
                             <li id="CreateOrder" class="curson-pointer menu-tab" onclick="menuSelection(this)">
+                                <div class="selctd"></div>
                                 <p>Create Order</p>
                             </li>
                             <li id="Transactions" class="curson-pointer menu-tab" onclick="menuSelection(this);">
+                                <div class="selctd"></div>
                                 <p>Transactions</p>
                             </li>
                         </ul>
                     </li>
                     <li id="ItemManagement" class="curson-pointer menu-tab" onclick="menuSelection(this)">
+                        <div class="selctd"></div>
                         <img src="../images/icons/item.png" alt="Item Management Icon">
                         <p>Item Management</p>
                     </li>
@@ -86,126 +90,109 @@
             <div class="content">
                 <div class="titlebar"><p id="Panel-Title">Home</p></div>
 
-
-            </div>
-
-
-        </div>
-
-
-
-
-    </div>
-
-<!--
-
-
-
-
-
-    <main class="body">
-        
-        <div class="body-content">
-           
-
-
-            <div id="panel-transactions" class="body-content-panel hidden">
-                <div class="panel-transactions-query panel">
-                    <div class="titlebar"><p>Query Conditions</p></div>
-                    <div class="panel-transactions-query-forms">
-                        <div>
-                            <label for="StartDate">Start Date</label>
-                            <input id="StartDate" class="textbox" type="date" name="StartDate">
-                        </div>
-                        <div>
-                            <label for="EndDate">End Date</label>
-                            <input id="EndDate" class="textbox" type="date" name="EndDate">
-                        </div>
-                        <div>
-                            <label for="TransactionNumber">Transaction Number</label>
-                            <input id="TransactionNumber" class="textbox" type="text" name="TransactionNumber">
-                        </div>
-                        <div>
-                            <label for="TransactionName">Search Name</label>
-                            <input id="TransactionName" class="textbox" type="text" name="TransactionName">
-                        </div>
-                        <div>
-                            <label>Status Filter</label>
-                            <div class="dropdown">
-                                <button onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                    <span class="dropdown-text">All</span>
-                                    <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                </button>
-                                <div class="dropdown-content">
-                                    <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
-                                    <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Success</a>
-                                    <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Failed</a>
-                                    <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Waiting</a>
+                <div id="panel-home" class="body-content-panel visible">
+                    <div class="panel-home-welcome">
+                        <h3>Welcome Back!</h3>
+                        <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
+                    </div>
+                    <div class="panel-home-graphs-container">
+                        <div class="panel-home-container1">
+                            <div class="panel-home-container1-col1">
+                                <div class="panel-home-card1">
+                                    <h1>123,230.00</h1>
+                                    <h4>Sales</h4>
                                 </div>
+                                <div class="panel-home-card2">
+                                    <h1>53</h1>
+                                    <h4>Orders</h4>
+                                </div>
+                            </div>
+                            <div class="panel-home-container1-col2">
+                                <div class="panel-home-card3">
+                                    <h4>Sales Graph</h4>
+                                    <canvas id="graph-daily"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-home-container2">
+                            <div class="panel-home-card4">
+                                <h4>Orders by Items</h4>
+                                <canvas id="graph-order-by-items"></canvas>
+                            </div>
+                            <div class="panel-home-card5">
+                                <h4>Sales by Category</h4>
+                                <canvas id="graph-sales-by-category"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="panel-transactions-buttons">
-                    <div>
-                        <button class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
-                            <img src="../images/icons/search-yellow.png" alt="search">
-                            <span>Search</span>
-                        </button>
-                        <button class="btn-default curson-pointer" type="reset" value="Clear">
-                            <img src="../images/icons/clear-yellow.png" alt="search">
-                            <span>Clear</span>
-                        </button>
-                        <button class="btn-default curson-pointer" type="button" value="Export">
-                            <img src="../images/icons/download-yellow.png" alt="search">
-                            <span>Export</span>
-                        </button>
+
+                <div id="panel-transactions" class="body-content-panel hidden">
+                    <div class="panel-transactions-query panel">
+                        <div class="panel-transactions-query-forms">
+                            <div>
+                                <label for="StartDate">Start Date</label>
+                                <input id="StartDate" class="textbox" type="date" name="StartDate">
+                            </div>
+                            <div>
+                                <label for="EndDate">End Date</label>
+                                <input id="EndDate" class="textbox" type="date" name="EndDate">
+                            </div>
+                            <div>
+                                <label for="TransactionNumber">Transaction Number</label>
+                                <input id="TransactionNumber" class="textbox" type="text" name="TransactionNumber">
+                            </div>
+                            <div>
+                                <label for="TransactionName">Search Name</label>
+                                <input id="TransactionName" class="textbox" type="text" name="TransactionName">
+                            </div>
+                            <div>
+                                <label>Status Filter</label>
+                                <div class="dropdown">
+                                    <button onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <span class="dropdown-text">All</span>
+                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Success</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Failed</a>
+                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Waiting</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
+                    <div class="panel-transactions-buttons">
                         <div>
-                            <div>Total Orders: </div>
-                            <div id="TotalOrders" class="text">???</div>
+                            <button class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
+                                <img src="../images/icons/search-yellow.png" alt="search">
+                                <span>Search</span>
+                            </button>
+                            <button class="btn-default curson-pointer" type="reset" value="Clear">
+                                <img src="../images/icons/clear-yellow.png" alt="search">
+                                <span>Clear</span>
+                            </button>
+                            <button class="btn-default curson-pointer" type="button" value="Export">
+                                <img src="../images/icons/download-yellow.png" alt="search">
+                                <span>Export</span>
+                            </button>
                         </div>
                         <div>
-                            <div >Total Sales: </div>
-                            <div id="TotalSales" class="text">???</div>
+                            <div>
+                                <div>Total Orders: </div>
+                                <div id="TotalOrders" class="text">???</div>
+                            </div>
+                            <div>
+                                <div >Total Sales: </div>
+                                <div id="TotalSales" class="text">???</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-transactions-table">
-                    <div class="table-header">
-                        <table>
-                            <colgroup>
-                            <col class="col1">
-                            <col class="col2">
-                            <col class="col3">
-                            <col class="col4">
-                            <col class="col5">
-                            <col class="col6">
-                            <col class="col7">
-                            <col class="col8">
-                            <col class="col9">
-                            <col class="col10">
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th class="col1"><div>Transaction Id</div> </th>
-                                <th class="col2"><div>Status</div></th>
-                                <th class="col3"><div>Name</div></th>
-                                <th class="col4"><div>Category</div></th>
-                                <th class="col5"><div>Department</div></th>
-                                <th class="col6"><div>Course</div></th>
-                                <th class="col7"><div>Amount</div></th>
-                                <th class="col8"><div>Items</div></th>
-                                <th class="col9"><div>Timestamp</div></th>
-                                <th class="col10"><div>Seller</div></th>
-                            </tr>
-                            </thead>
-                        </table>
-                        </div>
-                        <div>
-                        <table>
-                            <colgroup>
+                    <div class="panel-transactions-table">
+                        <div class="table-header">
+                            <table>
+                                <colgroup>
                                 <col class="col1">
                                 <col class="col2">
                                 <col class="col3">
@@ -216,429 +203,409 @@
                                 <col class="col8">
                                 <col class="col9">
                                 <col class="col10">
-                            </colgroup>
-                        <tbody>
-                            <tr>
-                            <td><div class="col1 cell">123456789</div></td>
-                            <td><div class="col2 cell">Completed</div></td>
-                            <td><div class="col3 cell">John Doe</div></td>
-                            <td><div class="col4 cell">Student</div></td>
-                            <td><div class="col5 cell">IT Department</div></td>
-                            <td><div class="col6 cell">BSIT 3</div></td>
-                            <td><div class="col7 cell">150</div></td>
-                            <td><div class="col8 cell">Good Shit</div></td>
-                            <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
-                            <td><div class="col10 cell">ABC Store</div></td>
-                            </tr>                        
-                        </tbody>
-                        </table>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th class="col1"><div>Transaction Id</div> </th>
+                                    <th class="col2"><div>Status</div></th>
+                                    <th class="col3"><div>Name</div></th>
+                                    <th class="col4"><div>Category</div></th>
+                                    <th class="col5"><div>Department</div></th>
+                                    <th class="col6"><div>Course</div></th>
+                                    <th class="col7"><div>Amount</div></th>
+                                    <th class="col8"><div>Items</div></th>
+                                    <th class="col9"><div>Timestamp</div></th>
+                                    <th class="col10"><div>Seller</div></th>
+                                </tr>
+                                </thead>
+                            </table>
+                            </div>
+                            <div>
+                            <table>
+                                <colgroup>
+                                    <col class="col1">
+                                    <col class="col2">
+                                    <col class="col3">
+                                    <col class="col4">
+                                    <col class="col5">
+                                    <col class="col6">
+                                    <col class="col7">
+                                    <col class="col8">
+                                    <col class="col9">
+                                    <col class="col10">
+                                </colgroup>
+                            <tbody>
+                                <tr>
+                                <td><div class="col1 cell">123456789</div></td>
+                                <td><div class="col2 cell">Completed</div></td>
+                                <td><div class="col3 cell">John Doe</div></td>
+                                <td><div class="col4 cell">Student</div></td>
+                                <td><div class="col5 cell">IT Department</div></td>
+                                <td><div class="col6 cell">BSIT 3</div></td>
+                                <td><div class="col7 cell">150</div></td>
+                                <td><div class="col8 cell">Good Shit</div></td>
+                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
+                                <td><div class="col10 cell">ABC Store</div></td>
+                                </tr>                        
+                            </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="panel-transactions-footer">
-                    <div class="page-numbers-container">
-                        <ul class="page-numbers">
-                            <button>&lt;</button>
-                            <li><a class="curson-pointer selected" onclick="">1</a></li>
-                            <li><a class="curson-pointer" onclick="">2</a></li>
-                            <li><a class="curson-pointer" onclick="">3</a></li>
-                            <li><a class="curson-pointer" onclick="">4</a></li>
-                            <li><a class="curson-pointer" onclick="">5</a></li>
-                            <button>&gt;</button>
-                        </ul>
-                    </div>
-                    <div>
+                    <div class="panel-transactions-footer">
+                        <div class="page-numbers-container">
+                            <ul class="page-numbers">
+                                <button>&lt;</button>
+                                <li><a class="curson-pointer selected" onclick="">1</a></li>
+                                <li><a class="curson-pointer" onclick="">2</a></li>
+                                <li><a class="curson-pointer" onclick="">3</a></li>
+                                <li><a class="curson-pointer" onclick="">4</a></li>
+                                <li><a class="curson-pointer" onclick="">5</a></li>
+                                <button>&gt;</button>
+                            </ul>
+                        </div>
                         <div>
-                            Total :
-                        </div>
-                        <div>
-                            ???
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <div class="dropdown-content">
-                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">25/Page</a>
-                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">50/Page</a>
-                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">75/Page</a>
-                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">100/Page</a>
-                        </div>
-                        <button onclick="dropdown(event, this, 'top')" class="dropdownbtn curson-pointer">
-                            <span class="dropdown-text">25/Page</span>
-                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
-
- 
-            <div id="panel-home" class="body-content-panel visible">
-                <div class="panel-home-welcome">
-                    <h3>Welcome Back!</h3>
-                    <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
-                </div>
-                <div class="panel-home-graphs-container">
-                    <div class="panel-home-container1">
-                        <div class="panel-home-container1-col1">
-                            <div class="panel-home-card1">
-                                <h1>123,230.00</h1>
-                                <h4>Sales</h4>
+                            <div>
+                                Total :
                             </div>
-                            <div class="panel-home-card2">
-                                <h1>53</h1>
-                                <h4>Orders</h4>
+                            <div>
+                                ???
                             </div>
                         </div>
-                        <div class="panel-home-container1-col2">
-                            <div class="panel-home-card3">
-                                <h4>Sales Graph</h4>
-                                <canvas id="graph-daily"></canvas>
+                        <div class="dropdown">
+                            <div class="dropdown-content">
+                                <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">25/Page</a>
+                                <a class="" href="javascript:void(0)" onclick="changeSelection(this)">50/Page</a>
+                                <a class="" href="javascript:void(0)" onclick="changeSelection(this)">75/Page</a>
+                                <a class="" href="javascript:void(0)" onclick="changeSelection(this)">100/Page</a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="panel-home-container2">
-                        <div class="panel-home-card4">
-                            <h4>Orders by Items</h4>
-                            <canvas id="graph-order-by-items"></canvas>
-                        </div>
-                        <div class="panel-home-card5">
-                            <h4>Sales by Category</h4>
-                            <canvas id="graph-sales-by-category"></canvas>
+                            <button onclick="dropdown(event, this, 'top')" class="dropdownbtn curson-pointer">
+                                <span class="dropdown-text">25/Page</span>
+                                <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-
-
-
-            <div id="panel-itemmanagement" class="body-content-panel hidden">
-                <div class="panel-itemmanagement-query panel">
-                    <div class="titlebar"><p>Query Conditions</p></div>
-                    <div class="forms">
+                <div id="panel-itemmanagement" class="body-content-panel hidden">
+                    <div class="panel-itemmanagement-query panel">
+                        <div class="forms">
+                            <div class="left-panel">
+                                <div>
+                                    <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
+                                    <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button title="Category Filter" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                            <img class="icon" src="../images/icons/category-yellow.png" alt="category">
+                                            <span class="dropdown-text">All</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
+                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Foods</a>
+                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Drinks</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button title="Sort" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                            <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
+                                            <span class="dropdown-text">Ascending</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
+                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button title="Layout View" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                            <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
+                                            <span class="dropdown-text">List</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List</a>
+                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right-panel">
+                                <div>
+                                    <button class="curson-pointer" type="button" onclick="openDialogBox('Add-Item')">
+                                        <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
+                                        <span>Add Item</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-itemmanagement-content">
+                        <div class="category-container">
+                            <div class="category-title">
+                                <p><b>Title</b></p>
+                            </div>
+                            <div class="category-contents">
+                                <div class="item-container">
+                                    <div class="item-image">
+                                        <img src="../images/school.jpg" alt="item-image">
+                                    </div>
+                                    <div class="item-details-container">
+                                        <div class="info-container">
+                                            <div class="info">
+                                                <p class="title"><b>Tinapay</b></p>
+                                            </div>
+                                            <div class="info">
+                                                <p class="cost">Cost : <b>P94.23</b></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-options">
+                                        <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                        <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                    </div>
+                                </div>
+                                <div class="item-container">
+                                    <div class="item-image">
+                                        <img src="../images/school.jpg" alt="item-image">
+                                    </div>
+                                    <div class="item-details-container">
+                                        <div class="info-container">
+                                            <div class="info">
+                                                <p class="title"><b>Tinapay asdas dasd asdasdasd a</b></p>
+                                            </div>
+                                            <div class="info">
+                                                <p class="cost">Cost : <b>P94.23</b></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-options">
+                                        <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                        <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="list-item-container">
+                            <div class="item-image">
+                                <img src="../images/school.jpg" alt="item-image">
+                            </div>
+                            <div class="item-details-container">
+                                <div class="info-container">
+                                    <div class="info">
+                                        <p class="title"><b>Tinapay</b></p>
+                                    </div>
+                                    <div class="category">
+                                        <p class="">Category : <b>Foods</b></p>
+                                    </div>
+                                    <div class="info">
+                                        <p class="cost">Cost : <b>P94.23</b></p>
+                                    </div>
+                                </div>
+                                <div class="info-container">
+                                    <div class="info">
+                                        <p>Date Modified:</p>
+                                        <p><b>2023-06-18</b></p>
+                                    </div>
+                                    <div class="info">
+                                        <p>Date Created:</p>
+                                        <p><b>2023-06-18</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-options">
+                                <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                            </div>
+    
+                        </div>
+                     
+    
+                        
+    
+                        
+    
+                      
+    
+    
+    
+    
+                        
+                    </div>
+                </div>
+    
+                <div id="panel-createorder" class="body-content-panel hidden">
+                    <div class="createorder-content">
                         <div class="left-panel">
-                            <div>
-                                <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
-                                <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button title="Category Filter" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                        <img class="icon" src="../images/icons/category-yellow.png" alt="category">
-                                        <span class="dropdown-text">All</span>
-                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Foods</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Drinks</a>
+                            <div class="query-container"> 
+                                <div>
+                                    <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
+                                    <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button title="Category Filter" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                            <img class="icon" src="../images/icons/category-yellow.png" alt="category">
+                                            <span class="dropdown-text">All</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
+                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Foods</a>
+                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Drinks</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button title="Sort" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                            <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
+                                            <span class="dropdown-text">Ascending</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
+                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button title="Layout View" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                            <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
+                                            <span class="dropdown-text">List</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List</a>
+                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button title="Sort" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                        <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
-                                        <span class="dropdown-text">Ascending</span>
-                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
+                            <div class="items-container"> 
+                                <div class="category-container">
+                                    <div class="category-title">
+                                        <p><b>Title</b></p>
+                                    </div>
+                                    <div class="category-contents">
+                                        <div class="item-container">
+                                            <div class="item-image">
+                                                <img src="../images/school.jpg" alt="item-image">
+                                            </div>
+                                            <div class="item-details-container">
+                                                <div class="info-container">
+                                                    <div class="info">
+                                                        <p class="title"><b>Tinapay</b></p>
+                                                    </div>
+                                                    <div class="info">
+                                                        <p class="cost">Cost : <b>P94.23</b></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="item-options">
+                                                <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                                <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                            </div>
+                                        </div>
+                                        <div class="item-container">
+                                            <div class="item-image">
+                                                <img src="../images/school.jpg" alt="item-image">
+                                            </div>
+                                            <div class="item-details-container">
+                                                <div class="info-container">
+                                                    <div class="info">
+                                                        <p class="title"><b>Tinapay asdas dasd asdasdasd a</b></p>
+                                                    </div>
+                                                    <div class="info">
+                                                        <p class="cost">Cost : <b>P94.23</b></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="item-options">
+                                                <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                                <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button title="Layout View" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                        <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
-                                        <span class="dropdown-text">List</span>
-                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card</a>
+                          
+                                <div class="list-item-container">
+                                    <div class="item-image">
+                                        <img src="../images/school.jpg" alt="item-image">
                                     </div>
+                                    <div class="item-details-container">
+                                        <div class="info-container">
+                                            <div class="info">
+                                                <p class="title"><b>Tinapay</b></p>
+                                            </div>
+                                            <div class="category">
+                                                <p class="">Category : <b>Foods</b></p>
+                                            </div>
+                                            <div class="info">
+                                                <p class="cost">Cost : <b>P94.23</b></p>
+                                            </div>
+                                        </div>
+                                        <div class="info-container">
+                                            <div class="info">
+                                                <p>Date Modified:</p>
+                                                <p><b>2023-06-18</b></p>
+                                            </div>
+                                            <div class="info">
+                                                <p>Date Created:</p>
+                                                <p><b>2023-06-18</b></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-options">
+                                        <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                        <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                    </div>
+            
                                 </div>
+                        
                             </div>
                         </div>
                         <div class="right-panel">
-                            <div>
-                                <button class="curson-pointer" type="button" onclick="openDialogBox('Add-Item')">
-                                    <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
-                                    <span>Add Item</span>
-                                </button>
+                            <div class="receipt-container"> 
+                                <div class="orders">
+                                    <p>Order:</p>
+                                    <hr>
+    
+                                </div>
+                                <div class="summary">
+                                    <hr>
+                                    <div class="details">
+                                        <p>5 items</p>
+                                        <p>Subtotal: P10.20</p>
+                                    </div>
+                                    <p>Discount: P10.20</p>
+                                    <p><strong>Total: P10.20</strong></p>
+                                    <hr>
+                                    <div class="button-container">
+                                        <button type="button" class="curson-pointer">
+                                            <img src="../images/icons/delete-red.png" alt="">
+                                        </button>
+                                        <button type="button" class="curson-pointer">
+                                            <img src="../images/icons/order-receipt-yellow.png" alt="">
+                                            <p>Place Order</p>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="panel-itemmanagement-content">
-                    <div class="category-container">
-                        <div class="category-title">
-                            <p><b>Title</b></p>
-                        </div>
-                        <div class="category-contents">
-                            <div class="item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay asdas dasd asdasdasd a</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="list-item-container">
-                        <div class="item-image">
-                            <img src="../images/school.jpg" alt="item-image">
-                        </div>
-                        <div class="item-details-container">
-                            <div class="info-container">
-                                <div class="info">
-                                    <p class="title"><b>Tinapay</b></p>
-                                </div>
-                                <div class="category">
-                                    <p class="">Category : <b>Foods</b></p>
-                                </div>
-                                <div class="info">
-                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                </div>
-                            </div>
-                            <div class="info-container">
-                                <div class="info">
-                                    <p>Date Modified:</p>
-                                    <p><b>2023-06-18</b></p>
-                                </div>
-                                <div class="info">
-                                    <p>Date Created:</p>
-                                    <p><b>2023-06-18</b></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-options">
-                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                        </div>
 
-                    </div>
-                 
-
-                    
-
-                    
-
-                  
-
-
-
-
-                    
-                </div>
             </div>
-
-
-
-
-            <div id="panel-createorder" class="body-content-panel hidden">
-                <div class="createorder-content">
-                    <div class="left-panel">
-                        <div class="query-container"> 
-                            <div>
-                                <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
-                                <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button title="Category Filter" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                        <img class="icon" src="../images/icons/category-yellow.png" alt="category">
-                                        <span class="dropdown-text">All</span>
-                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Foods</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Drinks</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button title="Sort" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                        <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
-                                        <span class="dropdown-text">Ascending</span>
-                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button title="Layout View" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
-                                        <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
-                                        <span class="dropdown-text">List</span>
-                                        <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="items-container"> 
-                            <div class="category-container">
-                                <div class="category-title">
-                                    <p><b>Title</b></p>
-                                </div>
-                                <div class="category-contents">
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay asdas dasd asdasdasd a</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                      
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-        
-                            </div>
-                    
-                        </div>
-                    </div>
-                    <div class="right-panel">
-                        <div class="receipt-container"> 
-                            <div class="orders">
-                                <p>Order:</p>
-                                <hr>
-
-                            </div>
-                            <div class="summary">
-                                <hr>
-                                <div class="details">
-                                    <p>5 items</p>
-                                    <p>Subtotal: P10.20</p>
-                                </div>
-                                <p>Discount: P10.20</p>
-                                <p><strong>Total: P10.20</strong></p>
-                                <hr>
-                                <div class="button-container">
-                                    <button type="button" class="curson-pointer">
-                                        <img src="../images/icons/delete-red.png" alt="">
-                                    </button>
-                                    <button type="button" class="curson-pointer">
-                                        <img src="../images/icons/order-receipt-yellow.png" alt="">
-                                        <p>Place Order</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
         </div>
-    </main>
-
-
+    </div>
 
     <div id="Notification-Box-Container" class="notification-container">
         <div id="Notification-Box-Id" class="notification-box">
@@ -657,8 +624,6 @@
     </div>
 
 
-
-
     <div id="Dialog-Box-Container" class="dialog-container">
         <div class="dialog-content">
             <div class="header">
@@ -670,7 +635,7 @@
                 </div>
             </div>
             <div id="Dialog-Box-Body" class="body">
-          
+                <!--
                 <div class="Add-Item">
                     <div class="image">
                         <img src="../images/school.jpg" alt="">
@@ -698,7 +663,8 @@
                         </div>
                     </div>
                 </div>
-               
+                -->
+                <!--
                 <div class="Edit-Item">
                     <div class="image">
                         <img src="../images/school.jpg" alt="">
@@ -726,7 +692,8 @@
                         </div>
                     </div>
                 </div>
-              
+                -->
+                <!--
                 <div class="Delete-Item">
                     <div class="form">
                         <div>
@@ -744,13 +711,10 @@
                         </div>
                     </div>
                 </div>
-              
+                 -->
             </div>
         </div>
     </div>
-
-
--->
 
 <!-- START JAVASCRIPTS -->
     <script src="../scripts/notification-box.js"></script>
