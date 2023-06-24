@@ -40,16 +40,27 @@
 }
 
 @font-face {
-    font-family: 'font-montserratt';
+    font-family: 'font-Montserratt';
     src: url('../fonts/Montserratt.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'font-Oswald';
+    src: url('../fonts/Oswald.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'font-OldEnglish';
+    src: url('../fonts/OldEnglishText.ttf') format('truetype');
+}
+
 
 * {
     color: var(--TextColor);
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, serif;
+    font-family: 'font-Oswald', sans-serif;
     scrollbar-width: thin;
     scrollbar-color: #9c9c9c #E3E4E6;
 }
@@ -168,7 +179,7 @@ b {
 }
 
 .dropdown .dropdown-content .dropdown-selected {
-    color: var(--AsccentColor);
+    color: var(--TextColor-Red);
     font-weight: 650;
 }
 

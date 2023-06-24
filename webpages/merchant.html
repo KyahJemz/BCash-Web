@@ -17,76 +17,98 @@
 </head>
 
 <body>
-    <aside class="sidebar">
-        <div class="sidebar-top">
-            <div class="sidebar-top-image">
+    <div class="design-background"></div>
+    <div class="sidebar-container">
+        <div class="top-panel">
+            <div class="image">
                 <img src="../images/bcash-logo.png" alt="BCash Logo">
             </div>
-            <div class="sidebar-top-details">
-                <div class="sidebar-top-details-category">BCash: Merchant</div>
-                <div class="sidebar-top-details-fullname">Juan Dela Cruz</div>
+            <div class="details">
+                <div class="category">BCash: Merchant</div>
+                <div class="fullname">Juan Dela Cruz</div>
+            </div>
+            <div class="button-container">
+                <button type="button" class="curson-pointer" title="Notifications"><img src="../images/icons/add-yellow.png" alt="notification-icon"></button>
+                <button type="button" class="curson-pointer" title="Settings"><img src="../images/icons/add-yellow.png" alt="settings-icon"></button>
             </div>
         </div>
-        <div class="sidebar-bottom">
-            <div class="sidebar-bottom-pattern"></div>
-            <nav class="sidebar-bottom-menu">
+        <div class="bottom-panel">
+            <div class="pattern"></div>
+            <nav class="menu">
                 <ul>
-                    <li id="Home" class="curson-pointer sidebar-bottom-menu-tab menu-selected" onclick="menuSelection(this)">
+                    <li id="Home" class="curson-pointer menu-tab menu-selected" onclick="menuSelection(this)">
                         <img src="../images/icons/home.png" alt="Home Icon">
                         <p>Home</p>
                     </li>
-                    <li id="MyOrders" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
+                    <li id="MyOrders" class="curson-pointer menu-tab" onclick="menuSelection(this)">
                         <img src="../images/icons/order.png" alt="My Orders Icon">
                         <p>My Orders</p>
                         <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
                     </li>
                     <li id="sidebar-bottom-menu-myorders-subitems">
                         <ul>
-                            <li id="CreateOrder" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
+                            <li id="CreateOrder" class="curson-pointer menu-tab" onclick="menuSelection(this)">
                                 <p>Create Order</p>
                             </li>
-                            <li id="Transactions" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this);">
+                            <li id="Transactions" class="curson-pointer menu-tab" onclick="menuSelection(this);">
                                 <p>Transactions</p>
                             </li>
                         </ul>
                     </li>
-                    <li id="ItemManagement" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
+                    <li id="ItemManagement" class="curson-pointer menu-tab" onclick="menuSelection(this)">
                         <img src="../images/icons/item.png" alt="Item Management Icon">
                         <p>Item Management</p>
-                    </li>
-                    <li id="PersonalSettings" class="curson-pointer sidebar-bottom-menu-tab" onclick="menuSelection(this)">
-                        <img src="../images/icons/settings.png" alt="Personal Settings Icon">
-                        <p>Personal Settings</p>
                     </li>
                 </ul>
             </nav>
         </div>
-    </aside>
-
-
-    <main class="body">
-        <header class="body-header">
-            <div class="body-header-left">
-                <div class="body-header-left-image">
+    </div>
+    <div class="content-container">
+        <div class="top-panel">
+            <div class="left-side">
+                <div class="image">
                     <img src="../images/sscr-logo.png" alt="SSCR Logo">
                 </div>
-                <div class="body-header-left-text">
+                <div class="text">
                     San Sebastian College - Recoletos
                 </div>
             </div>
-            <div class="body-header-right curson-pointer" onclick="">
-                <div class="body-header-right-text">
+            <div class="right-side curson-pointer" onclick="">
+                <div class="text">
                     Log out
                 </div>
-                <div class="body-header-right-image">
+                <div class="image">
                     <img src="../images/icons/logout.png" alt="Logout Icon">
                 </div>
             </div>
-        </header>
-        <div class="body-content">
-            <div class="body-content-titlebar"><p id="Panel-Title">Home</p></div>
+        </div>
+        <div class="bottom-panel">
+            <div class="content">
+                <div class="titlebar"><p id="Panel-Title">Home</p></div>
 
-<!-- START TRANSACTIONS -->
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+<!--
+
+
+
+
+
+    <main class="body">
+        
+        <div class="body-content">
+           
+
+
             <div id="panel-transactions" class="body-content-panel hidden">
                 <div class="panel-transactions-query panel">
                     <div class="titlebar"><p>Query Conditions</p></div>
@@ -246,11 +268,11 @@
                     </div>
                 </div>
             </div>
-<!-- END TRANSACTIONS -->
 
 
-<!-- START HOME -->
-            <div id="panel-home" class="body-content-panel hidden">
+
+ 
+            <div id="panel-home" class="body-content-panel visible">
                 <div class="panel-home-welcome">
                     <h3>Welcome Back!</h3>
                     <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
@@ -286,10 +308,10 @@
                     </div>
                 </div>
             </div>
-<!-- END HOME -->
 
 
-<!-- START ITEM MANAGEMENT -->
+
+
             <div id="panel-itemmanagement" class="body-content-panel hidden">
                 <div class="panel-itemmanagement-query panel">
                     <div class="titlebar"><p>Query Conditions</p></div>
@@ -396,7 +418,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--
+                   
                     <div class="list-item-container">
                         <div class="item-image">
                             <img src="../images/school.jpg" alt="item-image">
@@ -430,7 +452,7 @@
                         </div>
 
                     </div>
-                    -->
+                 
 
                     
 
@@ -444,11 +466,11 @@
                     
                 </div>
             </div>
-<!-- END ITEM MANAGEMENT -->
 
 
-<!-- START CREATE ORDER -->
-            <div id="panel-createorder" class="body-content-panel visible">
+
+
+            <div id="panel-createorder" class="body-content-panel hidden">
                 <div class="createorder-content">
                     <div class="left-panel">
                         <div class="query-container"> 
@@ -543,7 +565,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--
+                      
                             <div class="list-item-container">
                                 <div class="item-image">
                                     <img src="../images/school.jpg" alt="item-image">
@@ -577,7 +599,7 @@
                                 </div>
         
                             </div>
-                        -->
+                    
                         </div>
                     </div>
                     <div class="right-panel">
@@ -610,14 +632,14 @@
                     </div>
                 </div>
             </div>
-<!-- END CREATE ORDER -->
+
 
 
         </div>
     </main>
 
 
-<!-- START NOTIFICATIONS -->
+
     <div id="Notification-Box-Container" class="notification-container">
         <div id="Notification-Box-Id" class="notification-box">
             <div class="header">
@@ -633,10 +655,10 @@
             </div>
         </div>
     </div>
-<!-- END NOTIFICATIONS -->
 
 
-<!-- START DIALOG BOXES -->
+
+
     <div id="Dialog-Box-Container" class="dialog-container">
         <div class="dialog-content">
             <div class="header">
@@ -648,7 +670,7 @@
                 </div>
             </div>
             <div id="Dialog-Box-Body" class="body">
-                <!--
+          
                 <div class="Add-Item">
                     <div class="image">
                         <img src="../images/school.jpg" alt="">
@@ -676,8 +698,7 @@
                         </div>
                     </div>
                 </div>
-                -->
-                <!--
+               
                 <div class="Edit-Item">
                     <div class="image">
                         <img src="../images/school.jpg" alt="">
@@ -705,8 +726,7 @@
                         </div>
                     </div>
                 </div>
-                -->
-                <!--
+              
                 <div class="Delete-Item">
                     <div class="form">
                         <div>
@@ -724,12 +744,13 @@
                         </div>
                     </div>
                 </div>
-                -->
+              
             </div>
         </div>
     </div>
-<!-- END DIALOG BOXES -->
 
+
+-->
 
 <!-- START JAVASCRIPTS -->
     <script src="../scripts/notification-box.js"></script>
