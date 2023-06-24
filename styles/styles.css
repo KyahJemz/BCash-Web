@@ -250,7 +250,6 @@ button img{
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    
 }
 
 .dialog-container .dialog-content .header {
