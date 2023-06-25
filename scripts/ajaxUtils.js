@@ -17,14 +17,92 @@ function sendAjaxRequest(url, method, data) {
         .catch(error => reject(error));
     });
 }
-  
-export function uploadOrderData(url, cardNumber, items) {
-const data = {
-    cardNumber,
-    items,
-};
 
-return sendAjaxRequest(url, 'POST', data);
-}
-  
-  // Add more AJAX utility functions as needed
+// ##########
+// ORDERS API
+// ##########
+
+    export function uploadOrderData(walletAddress, items) {
+        const url = "";
+        const data = {
+            walletAddress,
+            items,
+        };
+        return sendAjaxRequest(url, 'POST', data);
+    }
+
+// ##########
+// ITEMS API
+// ##########
+
+    export function deleteItemData(itemId) {
+        const url = "";
+        const data = {
+            itemId
+        };
+        return sendAjaxRequest(url, 'POST', data);
+    }
+
+    export function updateItemImage(itemId,image) {
+        const url = "";
+        const data = {
+            itemId,
+            itemImage
+        };
+        return sendAjaxRequest(url, 'POST', data);
+    }
+
+    export function UpdateItemData(item) {
+        const url = "";
+        const data = {
+        itemId: item.id,
+        itemName: item.name,
+        itemCost: item.cost
+        };
+        return sendAjaxRequest(url, 'POST', data);
+    }
+
+    export function addItemData(name, cost, image) {
+        const url = "";
+        const data = {
+        itemName: name,
+        itemCost: cost,
+        itemImage: image
+        };
+        return sendAjaxRequest(url, 'POST', data);
+    }
+    
+    export function searchItemData(query) {
+        const url = "";
+        const data = {
+            query
+        };
+        return sendAjaxRequest(url, 'GET', data);
+    }
+
+    export function filterItemData(query) {
+        const url = "";
+        const data = {
+            query
+        };
+        return sendAjaxRequest(url, 'GET', data);
+    }
+
+    export function layoutItem(query) {
+        const url = "";
+        const data = {
+            query
+        };
+        return sendAjaxRequest(url, 'GET', data);
+    }
+
+
+
+
+
+    
+
+// ##########
+// ITEMS API
+// ##########
+

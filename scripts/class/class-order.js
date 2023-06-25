@@ -1,7 +1,11 @@
+import { 
+  uploadOrderData 
+} from '../ajaxUtils.js';
+
 class Order {
     constructor() {
       this.items = [];
-      this.cardNumber = '';
+      this.walletAddress = '';
     }
   
     addItem(itemId, quantity) {
@@ -32,12 +36,12 @@ class Order {
       }
     }
   
-    setCardNumber(cardNumber) {
-      this.cardNumber = cardNumber;
+    setCardNumber(walletAddress) {
+      this.walletAddress = walletAddress;
     }
 
     uploadOrder(){
-        // send an ajax request to server upload thath card id and items. and wait for its responce if completed or not
+      uploadOrderData(this.walletAddress, this.items);
     }
   }
   

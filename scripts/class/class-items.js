@@ -1,4 +1,12 @@
-import { uploadOrderData } from '../ajaxUtils.js';
+import {
+  deleteItemData, 
+  updateItemImage, 
+  UpdateItemData, 
+  addItemData, 
+  searchItemData, 
+  filterItemData, 
+  layoutItemData 
+} from '../ajaxUtils.js';
 
 class Item {
   constructor(id, name, cost, dateModified, dateCreated, image) {
@@ -10,36 +18,34 @@ class Item {
     this.dateCreated = dateCreated;
   }
 
+  deleteItem() {
+    deleteItemData(this.id)
+  }
+
   updateItem(name, cost, image) {
     this.name = name;
     this.cost = cost;
     if (image !== null) {
-      uploadImage(this.id, image);
+      updateItemImage(this.id, image);
     }
-    uploadData(this);
+    UpdateItemData(this);
   }
 
-  deleteItem() {
-    // send a delete request with this.id to delete the item
+  static addItem(name, cost, image) {
+    addItemData(name, cost, image);
   }
-}
 
-function uploadImage(itemId, image) {
-  // send an AJAX request to upload the image for the specified itemId
-}
+  static searchItem(query) {
+    searchItemData(query);
+  }
 
-function uploadData(item) {
-  const url = 'your-api-endpoint'; // Replace with your actual API endpoint
-  const cardNumber = '1234567890'; // Example card number, replace with actual card number or retrieve it from user input
-  const items = [item]; // Convert the item to an array or modify the uploadOrderData function to accept a single item
+  static filterItem(query) {
+    filterItemData(query);
+  }
 
-  uploadOrderData(url, cardNumber, items)
-    .then(response => {
-      // Handle successful response
-    })
-    .catch(error => {
-      // Handle error
-    });
+  static layoutItem(query) {
+    layoutItemData(query);
+  }
 }
 
 export default Item;
