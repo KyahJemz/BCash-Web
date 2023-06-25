@@ -26,7 +26,7 @@ function menuSelection(selected) {
 
         HideAllPanels(value.replace(new RegExp(" ", 'g'), ''));
 
-       ChangePanel(value.replace(new RegExp(" ", 'g'), ''))
+        ChangePanel(value.replace(new RegExp(" ", 'g'), ''))
 
        // loadPanelContent('general-panel', '../webpages/panels/transaction-logs.html');
     }
@@ -71,6 +71,8 @@ function HideAllPanels() {
 function ChangeTitle(value) {
     document.getElementById("Panel-Title").innerHTML = value;
 }
+
+
 
 function loadPanelContent(panelId, panelFile) {
 
