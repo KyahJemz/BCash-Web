@@ -1,5 +1,14 @@
 import Order from './class/class-order.js';
-import { addToCart, placeOrder, menuSelection } from './eventHandlers.js';
+import { 
+    windowOnclickEvents,
+    addToCart, 
+    placeOrder, 
+    menuSelectionEvents, 
+    dropdownEvents, 
+    changeSelectionEvents
+} from './eventHandlers.js';
+
+window.onclick = windowOnclickEvents;
 
 //#####//
 // ORDER MODULE
@@ -22,12 +31,30 @@ document.querySelectorAll('.placeOrderButton').forEach(button => {
 });
 
 //#####//
-// DROPDOWN MODULE
+// MENU
 //#####//
 document.querySelectorAll('.menuSelectionButton').forEach(menuItem => {
     menuItem.addEventListener('click', () => {
-      menuSelection(menuItem);
+        menuSelectionEvents(menuItem);
+    });
+});
+
+//#####//
+// DROPDOWN
+//#####//
+
+document.querySelectorAll('.dropdownButton').forEach(dropdownBtn => {
+    dropdownBtn.addEventListener('click', event => {
+      const value = event.currentTarget;
+      const position = value.dataset.layout;
+      dropdownEvents(event, value, position);
     });
   });
-
+  
+  document.querySelectorAll('.dropdownButtonSubItem').forEach(item => {
+    item.addEventListener('click', event => {
+      const element = event.currentTarget;
+      changeSelectionEvents(element);
+    });
+  });
 

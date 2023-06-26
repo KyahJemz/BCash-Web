@@ -4,13 +4,29 @@ import {
     ChangeMenuSelected, 
     HideAllPanels, 
     ChangePanel 
-} from './utils/menuUtils';
+} from './modules/menu.js';
+
+import { 
+    dropdown, 
+    changeSelection, 
+    windowClickClearDropdown, 
+} from './modules/dropdown.js';
 
 import { 
     uploadOrderData 
 } from './ajaxUtils.js';
 
 
+
+export function windowOnclickEvents(event){
+    windowClickClearDropdown(event)
+}
+
+
+
+//#####//
+// DROPDOWN EVENTS
+//#####//
 
 export function addToCart(order, itemId, quantity) {
   order.addItem(itemId, quantity);
@@ -27,7 +43,7 @@ export function placeOrder(order) {
 // DROPDOWN EVENTS
 //#####//
 
-export function menuSelection(selected) {
+export function menuSelectionEvents(selected) {
     const value = selected.querySelector('p').innerText;
     console.log(value);
   
@@ -40,8 +56,22 @@ export function menuSelection(selected) {
         ChangePanel(value.replace(new RegExp(" ", 'g'), ''));
     }
 }
+
+//#####//
+// DROPDOWN EVENTS
+//#####//
   
-  
+export function dropdownEvents(event, value, position) {
+    dropdown(event, value, position);
+}
+
+export function changeSelectionEvents(element) {
+    changeSelection(element);
+}
+
+export function windowClickClearDropdownEvents(event) {
+    windowClickClearDropdown(event);
+}
   
   
   

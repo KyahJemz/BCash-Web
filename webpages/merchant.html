@@ -427,41 +427,41 @@
                                 </div>
                                 <div>
                                     <div class="dropdown">
-                                        <button title="Category Filter" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/category-yellow.png" alt="category">
                                             <span class="dropdown-text">All</span>
                                             <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                         </button>
                                         <div class="dropdown-content">
-                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
-                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Foods</a>
-                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Drinks</a>
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Foods</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Drinks</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="dropdown">
-                                        <button title="Sort" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <button title="Sort" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
                                             <span class="dropdown-text">Ascending</span>
                                             <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                         </button>
                                         <div class="dropdown-content">
-                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
-                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">Ascending</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Descending</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="dropdown">
-                                        <button title="Layout View" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <button title="Layout View" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
                                             <span class="dropdown-text">List</span>
                                             <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                         </button>
                                         <div class="dropdown-content">
-                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List</a>
-                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card</a>
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">List</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Card</a>
                                         </div>
                                     </div>
                                 </div>
@@ -891,13 +891,10 @@
     </div>
     <script src="../scripts/notification-box.js"></script>
     <script src="../scripts/dialog-box.js"></script>
-    <script src="../scripts/menu.js"></script>
-    <script src="../scripts/panel-scripts.js"></script>
     <script src="../scripts/chart.js"></script>
 
     
     <script src="../scripts/main.js" type="module"></script>
-    <script src="../scripts/eventHandlers.js" type="module"></script>
 
 </body>
 </html>
