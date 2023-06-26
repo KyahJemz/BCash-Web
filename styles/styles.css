@@ -19,6 +19,7 @@
     --Button-Background-Active-Red: #9A110D;
     --Button-Background-Gold: #F9AE28;
     --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-White: #ffffff;
 
     --Selected-Background-LightBlack: #333333;
 
@@ -218,9 +219,9 @@ button {
     padding-right: 8px;
     display: flex;
     flex-direction: row;
-    background-color: var(--BackgroundPanelColor);
+    background-color: var(--Button-Background-White);
     gap: 5px;
-    border: 1px solid var(--BackgroundContentTitleBarColor);
+    border: 1px solid var(--color-DarkWhite);
     align-items: center;
 }
 
@@ -232,7 +233,7 @@ button:hover {
 button:active {
     background-color: #da891049;
     border: 1px solid var(--AsccentColor);
-    box-shadow: 0px 0px 3px 0px var(--AsccentColor);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
 }
 
 button img{

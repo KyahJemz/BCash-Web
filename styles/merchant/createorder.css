@@ -2,7 +2,7 @@
 /* CREATE ORDER PANEL */
 /* ##################### */
   
-.createorder-content {
+.panel-createorder-content {
   width: 100%;
   height: 100%;
   display: flex;
@@ -20,14 +20,14 @@
   */
   }
   
-  .createorder-content .left-panel {
+  .panel-createorder-content .left-panel {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  .createorder-content .left-panel .query-container {
+  .panel-createorder-content .left-panel .query-container {
     flex: 0 0 fit-content;
     display: flex;
     flex-direction: row;
@@ -37,90 +37,107 @@
     align-content: center;
     flex-wrap: wrap;
     padding: 10px;
-    background-color: var(--BackgroundContentTitleBarColor);
     border-radius: 4px;
   }
 
-  .createorder-content .left-panel .query-container .icon{
+  .panel-createorder-content .left-panel .query-container .icon{
     margin-right: 8px;
   }
 
-  .createorder-content .left-panel .query-container .input-icon {
+  .panel-createorder-content .left-panel .query-container .input-icon {
     position: absolute;
     height: 22px;
     top: 2px;
     left: 2px;
   }
 
-  .createorder-content .left-panel .query-container .textbox {
+  .panel-createorder-content .left-panel .query-container .textbox {
     height: 25px;
     text-indent: 22px;
   }
 
-  .createorder-content .left-panel .query-container div:first-child {
+  .panel-createorder-content .left-panel .query-container div:first-child {
     position: relative;
   }
 
-
-
-
-
-  .createorder-content .left-panel .items-container {
+  .panel-createorder-content .left-panel .items-container {
     flex: 1;
-
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 10px;
+    padding-right: 8px;
   }
+
+/* ############# */
+/* FOR LIST VIEW */
+/* ############# */
+
+
+/* ############# */
+/* FOR GRID VIEW */
+/* ############# */
+
+ 
+
+
+
+
+
+
+
+
   
-  .createorder-content .right-panel {
+  .panel-createorder-content .right-panel {
     flex: 0 0 300px;
-    background-color: var(--BackgroundContentTitleBarColor);
     border-radius: 4px;
   }
 
-  .createorder-content .right-panel .receipt-container {
+  .panel-createorder-content .right-panel .receipt-container {
     height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: var(--Panel-Background-DarkWhite);
     padding: 10px;
   }
 
-  .createorder-content .right-panel .receipt-container .orders {
+  .panel-createorder-content .right-panel .receipt-container .orders {
     flex: 1;
   }
 
-  .createorder-content .right-panel .receipt-container .orders>* {
+  .panel-createorder-content .right-panel .receipt-container .orders>* {
     margin-bottom: 10px;
   }
 
-  .createorder-content .right-panel .receipt-container .summary {
+  .panel-createorder-content .right-panel .receipt-container .summary {
     flex: 0 0 fit-content;
     width: 100%;
     text-align: right;
   }
 
-  .createorder-content .right-panel .receipt-container .summary .details {
+  .panel-createorder-content .right-panel .receipt-container .summary .details {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .createorder-content .right-panel .receipt-container .summary>* {
+  .panel-createorder-content .right-panel .receipt-container .summary>* {
     margin-top: 10px;
   }
 
-  .createorder-content .right-panel .receipt-container .summary .button-container {
+  .panel-createorder-content .right-panel .receipt-container .summary .button-container {
     display: flex;
     flex-direction: row;
     gap: 5px;
     width: 100%;
   }
 
-  .createorder-content .right-panel .receipt-container .summary .button-container img {
+  .panel-createorder-content .right-panel .receipt-container .summary .button-container img {
     aspect-ratio: 1/1;
     height: 1rem;
     width: 1rem;
   }
 
-  .createorder-content .right-panel .receipt-container .summary .button-container button:last-child {
+  .panel-createorder-content .right-panel .receipt-container .summary .button-container button:last-child {
     flex: 1;
     width: 100%;
     display: flex;
@@ -130,7 +147,7 @@
     border-radius: 4px;
   }
 
-  .createorder-content .right-panel .receipt-container .summary .button-container button:first-child {
+  .panel-createorder-content .right-panel .receipt-container .summary .button-container button:first-child {
     padding: 5px;
     border-radius: 4px;
   }

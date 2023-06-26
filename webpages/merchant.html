@@ -129,7 +129,7 @@
 
                 <div id="panel-transactions" class="body-content-panel hidden">
                     <div class="panel-transactions-query panel">
-                        <div class="panel-transactions-query-forms">
+                        <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
                                 <input id="StartDate" class="textbox" type="date" name="StartDate">
@@ -236,16 +236,16 @@
                                 </colgroup>
                             <tbody>
                                 <tr>
-                                <td><div class="col1 cell">123456789</div></td>
-                                <td><div class="col2 cell">Completed</div></td>
-                                <td><div class="col3 cell">John Doe</div></td>
-                                <td><div class="col4 cell">Student</div></td>
-                                <td><div class="col5 cell">IT Department</div></td>
-                                <td><div class="col6 cell">BSIT 3</div></td>
-                                <td><div class="col7 cell">150</div></td>
-                                <td><div class="col8 cell">Good Shit</div></td>
-                                <td><div class="col9 cell">2023-05-27 10:30 AM</div></td>
-                                <td><div class="col10 cell">ABC Store</div></td>
+                                    <td><div class="col1 cell" title="123456789"><a class="view-more" href="">123456789</a></div></td>
+                                    <td><div class="col2 cell" title="Completed">Completed</div></td>
+                                    <td><div class="col3 cell" title="John Doe">John Doe</div></td>
+                                    <td><div class="col4 cell" title="Student">Student</div></td>
+                                    <td><div class="col5 cell" title="IT Department">IT Department</div></td>
+                                    <td><div class="col6 cell" title="BSIT 3">BSIT 3</div></td>
+                                    <td><div class="col7 cell" title="150">150</div></td>
+                                    <td><div class="col8 cell" title="Good Shit">Good Shit</div></td>
+                                    <td><div class="col9 cell" title="2023-05-27 10:30 AM">2023-05-27 10:30 AM</div></td>
+                                    <td><div class="col10 cell" title="ABC Store">ABC Store</div></td>
                                 </tr>                        
                             </tbody>
                             </table>
@@ -286,7 +286,7 @@
                     </div>
                 </div>
 
-                <div id="panel-itemmanagement" class="body-content-panel visible">
+                <div id="panel-itemmanagement" class="body-content-panel hidden"> 
                     <div class="panel-itemmanagement-query panel">
                         <div class="forms">
                             <div class="left-panel">
@@ -346,6 +346,7 @@
                         </div>
                     </div>
                     <div class="panel-itemmanagement-content">
+                        
                         <!--
                         <div class="card-layout">
                             <div class="item-container">
@@ -367,28 +368,10 @@
                                     <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
                                 </div>
                             </div>
-                            <div class="item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>23938498394394 8373 3</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
                         </div>
                         -->
-                       
+
+                       <!--
                         <div class="list-layout">
                             <div class="list-item-container">
                                 <div class="item-image">
@@ -422,726 +405,15 @@
                                     <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
                                 </div>
                             </div>
-
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            <div class="list-item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
                         </div>
-                      
-    
-    
-    
-    
-                        
+                        -->
                     </div>
                 </div>
     
-                <div id="panel-createorder" class="body-content-panel hidden">
-                    <div class="createorder-content">
+                <div id="panel-createorder" class="body-content-panel visible">
+                    <div class="panel-createorder-content">
                         <div class="left-panel">
-                            <div class="query-container"> 
+                            <div class="query-container panel"> 
                                 <div>
                                     <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
                                     <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
@@ -1188,90 +460,413 @@
                                 </div>
                             </div>
                             <div class="items-container"> 
-                                <div class="category-container">
-                                    <div class="category-title">
-                                        <p><b>Title</b></p>
-                                    </div>
-                                    <div class="category-contents">
-                                        <div class="item-container">
-                                            <div class="item-image">
-                                                <img src="../images/school.jpg" alt="item-image">
-                                            </div>
-                                            <div class="item-details-container">
-                                                <div class="info-container">
-                                                    <div class="info">
-                                                        <p class="title"><b>Tinapay</b></p>
-                                                    </div>
-                                                    <div class="info">
-                                                        <p class="cost">Cost : <b>P94.23</b></p>
-                                                    </div>
+                               
+                                <div class="card-layout">
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
                                                 </div>
-                                            </div>
-                                            <div class="item-options">
-                                                <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                                <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="item-container">
-                                            <div class="item-image">
-                                                <img src="../images/school.jpg" alt="item-image">
-                                            </div>
-                                            <div class="item-details-container">
-                                                <div class="info-container">
-                                                    <div class="info">
-                                                        <p class="title"><b>Tinapay asdas dasd asdasdasd a</b></p>
-                                                    </div>
-                                                    <div class="info">
-                                                        <p class="cost">Cost : <b>P94.23</b></p>
-                                                    </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
                                                 </div>
                                             </div>
-                                            <div class="item-options">
-                                                <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                                <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
                                         </div>
                                     </div>
                                 </div>
-                          
-                                <div class="list-item-container">
-                                    <div class="item-image">
-                                        <img src="../images/school.jpg" alt="item-image">
-                                    </div>
-                                    <div class="item-details-container">
-                                        <div class="info-container">
-                                            <div class="info">
-                                                <p class="title"><b>Tinapay</b></p>
+                                
+                                <!--
+                                <div class="list-layout">
+                                    <div class="list-item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="category">
+                                                    <p class="">Category : <b>Foods</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
                                             </div>
-                                            <div class="category">
-                                                <p class="">Category : <b>Foods</b></p>
-                                            </div>
-                                            <div class="info">
-                                                <p class="cost">Cost : <b>P94.23</b></p>
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p>Date Modified:</p>
+                                                    <p><b>2023-06-18</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p>Date Created:</p>
+                                                    <p><b>2023-06-18</b></p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="info-container">
-                                            <div class="info">
-                                                <p>Date Modified:</p>
-                                                <p><b>2023-06-18</b></p>
-                                            </div>
-                                            <div class="info">
-                                                <p>Date Created:</p>
-                                                <p><b>2023-06-18</b></p>
-                                            </div>
+                                        <div class="item-options">
+                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
                                         </div>
                                     </div>
-                                    <div class="item-options">
-                                        <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                        <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                    </div>
-            
                                 </div>
-                        
+                                -->
+                                
                             </div>
                         </div>
+
                         <div class="right-panel">
-                            <div class="receipt-container"> 
+                            <div class="receipt-container panel"> 
                                 <div class="orders">
                                     <p>Order:</p>
                                     <hr>

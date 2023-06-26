@@ -1,216 +1,283 @@
 
+:root {
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
+    --AsccentColor: #CB8213; /* Buttons */
+    --TextColor: #4b4b4b; /* text */
+    --DarkColor: #363636; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
 
-.panel-transactions-query {
-    height: fit-content;
-    margin-top: 10px;
-    width: 97%;
-}
-.panel-transactions-query-forms {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-}
+    --TextColor-White: #ffffff;
+    --TextColor-Red: #DA121A;
+    --TextColor-Gold: #F9AE28;
+    --TextColor-LightBlack: #333333;
+    --TextColor-Black: #0F1419;
 
-.panel-transactions-query-forms .dropdown button{
-    height: 21px;
-    flex: 1;
-    width: max-content;
-}
+    --Button-Background-Red: #DA121A;
+    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Gold: #F9AE28;
+    --Button-Background-Active-Gold: #DA121A;
 
-.panel-transactions-query-forms .dropdown a {
-    font-size: 0.7em;
-}
+    --Selected-Background-LightBlack: #333333;
 
-.panel-transactions-query-forms label {
-    font-size: 0.7em;
-    display:block;
-}
-.panel-transactions-query-forms div {
-    min-width:  150px;
-    flex: 1;
-}
-.panel-transactions-query-forms .textbox {
-    margin-right: 10px;
-    width: 100%;
-}
-.panel-transactions-buttons {
-    margin-top: 10px;
-    width: 97%;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap:wrap;    
-    gap: 5px;
+    --Panel-Background-LightBlack: #333333;
+    --Panel-Background-Gold: #FFCC00;
+    --Panel-Background-Red: #DA121A;
+    --Panel-Background-White: #ffffff;
+    --Panel-Background-DarkWhite: #F2F2F2;
+
+    --color-White: #ffffff;
+    --color-DarkWhite: #F2F2F2;
+    --color-Red: #DA121A;
+    --color-DarkRed: #9A110D;
+    --color-Gold: #FFCC00;
+    --color-DarkGold: #F9AE28;
+    --color-Gray: #282828;
+    --color-LightBlack: #333333;
+    --color-Black: #0F1419;
 }
 
-.panel-transactions-buttons button {
-    height: 25px;
-}
 
-.panel-transactions-buttons button img{
-    height: 100%;
-    aspect-ratio: 1/1;
-}
 
-.panel-transactions-buttons > *, .panel-transactions-buttons > :last-child div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: 5px;
-    font-size: 0.95em;
-}
 
-.panel-transactions-buttons > :last-child div .text{
-    color: var(--AsccentColor);
-    font-weight: 600;
-  }
 
-  .panel-transactions-buttons > :last-child {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: 30px;
-  }
 
-.panel-transactions-footer, .panel-transactions-footer > * {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
+/* ################## */
+/* TRANSACTIONS PANEL */
+/* ################## */
 
-.panel-transactions-footer {
-    height: 25px;
-    margin-top: 10px;
-    width: 97%;
-    justify-content: end;
-    gap: 20px;
-    font-size: 0.8em;
-}
+    /* ############### */
+    /* QUERY CONTAINER */
+    /* ############### */
 
-.page-numbers {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
+    .panel-transactions-query {
+        height: fit-content;
+        margin-top: 10px;
+        width: 97%;
+    }
+    .panel-transactions-query .form-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+    }
 
-.page-numbers button{
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-}
+    .panel-transactions-query .form-container .dropdown button{
+        height: 21px;
+        flex: 1;
+        width: max-content;
+    }
 
-.page-numbers {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-  }
-  
-  .page-numbers li a {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-  }
+    .panel-transactions-query .form-container .dropdown a {
+        font-size: 0.7em;
+    }
 
-  .page-numbers li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 2px;
-    margin-right: 2px;
-  }
+    .panel-transactions-query .form-container label {
+        font-size: 0.7em;
+        display:block;
+    }
+    .panel-transactions-query .form-container div {
+        min-width:  150px;
+        flex: 1;
+    }
+    .panel-transactions-query .form-container .textbox {
+        margin-right: 10px;
+        width: 100%;
+    }
 
-  .page-numbers li a:hover {
-    color: var(--AsccentColor);
-  }
+    /* ################# */
+    /* BUTTONS CONTAINER */
+    /* ################# */
 
-  .page-numbers .selected {
-    color: var(--AsccentColor);
-    font-weight: 700;
-    border: 1px solid var(--AsccentColor);
-  }
+    .panel-transactions-buttons {
+        margin-top: 10px;
+        width: 97%;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap:wrap;    
+        gap: 5px;
+    }
 
-.panel-transactions-table {
-    width: 97%;
-    flex-grow: 1;
-    border-radius: 3px;
-    border: 1px solid var(--BackgroundContentTitleBarColor);
-    overflow: auto;
-}
+    .panel-transactions-buttons button {
+        height: 25px;
+    }
 
-.panel-transactions-table table {
-    border-collapse: collapse;
-}
+    .panel-transactions-buttons button img{
+        height: 100%;
+        aspect-ratio: 1/1;
+    }
 
-.panel-transactions-table .table-header {
-    background-color: var(--BackgroundContentTitleBarColor);
-    width: max-content;
-    font-size: 0.8em;
-    position: sticky;
-    top: 0px;
-}
+    .panel-transactions-buttons > *, .panel-transactions-buttons > :last-child div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 5px;
+        font-size: 0.95em;
+    }
 
-.panel-transactions-table .table-header th div{
-    border-right: 1px solid var(--BackgroundPrimaryColor);
-    border-bottom: 1px solid var(--BackgroundPrimaryColor);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-break: break-all;
-    padding: 5px;
-}
+    .panel-transactions-buttons > :last-child div .text{
+        color: var(--AsccentColor);
+        font-weight: 600;
+    }
 
-.cell {
-    padding: 5px;
-    font-size: 0.8em;
-    font-weight: 100;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-break: break-all;
-    border-right: 1px solid var(--BackgroundPrimaryColor);
-    border-bottom: 1px solid var(--BackgroundPrimaryColor);
-  }
+    .panel-transactions-buttons > :last-child {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 30px;
+    }
 
-.panel-transactions-table table .col1 {
-    width: 110px;
-}
-.panel-transactions-table table .col2 {
-    width: 110px;
-}
-.panel-transactions-table table .col3 {
-    width: 110px;
-}
-.panel-transactions-table table .col4 {
-    width: 110px;
-}
-.panel-transactions-table table .col5 {
-    width: 110px;
-}
-.panel-transactions-table table .col6 {
-    width: 110px;
-}
-.panel-transactions-table table .col7 {
-    width: 110px;
-}
-.panel-transactions-table table .col8 {
-    width: 110px;
-}
-.panel-transactions-table table .col9 {
-    width: 110px;
-}
-.panel-transactions-table table .col10 {
-    width: 110px;
-}
+    /* ################ */
+    /* FOOTER CONTAINER */
+    /* ################ */
+
+    .panel-transactions-footer, .panel-transactions-footer > * {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .panel-transactions-footer {
+        height: 25px;
+        margin-top: 10px;
+        width: 97%;
+        justify-content: end;
+        gap: 20px;
+        font-size: 0.8em;
+    }
+
+    .page-numbers {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .page-numbers button{
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .page-numbers {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+    
+    .page-numbers li a {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .page-numbers li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+    .page-numbers li a:hover {
+        color: var(--TextColor-Red);
+        text-decoration: underline;
+    }
+
+    .page-numbers .selected {
+        color: var(--TextColor-Red);
+        font-weight: 700;
+        border: 1px solid var(--TextColor-Red);
+    }
+
+    /* ############### */
+    /* TABLE CONTAINER */
+    /* ############### */
+
+    .panel-transactions-table {
+        width: 97%;
+        flex-grow: 1;
+        border-radius: 3px;
+        border: 1px solid var(--BackgroundContentTitleBarColor);
+        overflow: auto;
+    }
+
+    .panel-transactions-table table {
+        border-collapse: collapse;
+    }
+
+    .panel-transactions-table .table-header {
+        background-color: var(--BackgroundContentTitleBarColor);
+        width: max-content;
+        font-size: 0.8em;
+        position: sticky;
+        top: 0px;
+    }
+
+    .panel-transactions-table .table-header th div{
+        border-right: 1px solid var(--BackgroundPrimaryColor);
+        border-bottom: 1px solid var(--BackgroundPrimaryColor);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        padding: 5px;
+    }
+
+    .cell {
+        padding: 5px;
+        font-size: 0.8em;
+        font-weight: 100;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        border-right: 1px solid var(--BackgroundPrimaryColor);
+        border-bottom: 1px solid var(--BackgroundPrimaryColor);
+    }
+
+    .panel-transactions-table table .col1 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col2 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col3 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col4 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col5 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col6 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col7 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col8 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col9 {
+        width: 110px;
+    }
+    .panel-transactions-table table .col10 {
+        width: 110px;
+    }
 
 
 @media (min-width: 0px) and (max-width: 768px) {
