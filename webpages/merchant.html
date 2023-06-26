@@ -14,9 +14,16 @@
     <link rel="stylesheet" href="../styles/merchant/createorder.css">
     <link rel="stylesheet" href="../styles/merchant/transactions.css">
     <link rel="stylesheet" href="../styles/merchant/itemmanagement.css">
+
+    <!-- START JAVASCRIPTS -->
+    
+    
+<!-- END JAVASCRIPTS -->
 </head>
 
 <body>
+
+
     <div class="design-background"></div>
     <div class="sidebar-container">
         <div class="top-panel">
@@ -36,29 +43,29 @@
             <div class="pattern"></div>
             <nav class="menu">
                 <ul>
-                    <li id="Home" class="curson-pointer menu-tab menu-selected" onclick="menuSelection(this)">
+                    <li id="Home" class="curson-pointer menu-tab menu-selected menuSelectionButton">
                         <div class="selctd"></div>
                         <img src="../images/icons/home.png" alt="Home Icon">
                         <p>Home</p>
                     </li>
-                    <li id="MyOrders" class="curson-pointer menu-tab" onclick="menuSelection(this)">
+                    <li id="MyOrders" class="curson-pointer menu-tab menuSelectionButton">
                         <img src="../images/icons/order.png" alt="My Orders Icon">
                         <p>My Orders</p>
                         <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
                     </li>
                     <li id="sidebar-bottom-menu-myorders-subitems">
                         <ul>
-                            <li id="CreateOrder" class="curson-pointer menu-tab" onclick="menuSelection(this)">
+                            <li id="CreateOrder" class="curson-pointer menu-tab menuSelectionButton">
                                 <div class="selctd"></div>
                                 <p>Create Order</p>
                             </li>
-                            <li id="Transactions" class="curson-pointer menu-tab" onclick="menuSelection(this);">
+                            <li id="Transactions" class="curson-pointer menu-tab menuSelectionButton">
                                 <div class="selctd"></div>
                                 <p>Transactions</p>
                             </li>
                         </ul>
                     </li>
-                    <li id="ItemManagement" class="curson-pointer menu-tab" onclick="menuSelection(this)">
+                    <li id="ItemManagement" class="curson-pointer menu-tab menuSelectionButton">
                         <div class="selctd"></div>
                         <img src="../images/icons/item.png" alt="Item Management Icon">
                         <p>Item Management</p>
@@ -476,9 +483,27 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="item-container">
+                                        <div class="item-image">
+                                            <img src="../images/school.jpg" alt="item-image">
+                                        </div>
+                                        <div class="item-details-container">
+                                            <div class="info-container">
+                                                <div class="info">
+                                                    <p class="title"><b>Tinapay</b></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="cost">Cost : <b>P94.23</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -495,9 +520,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -514,9 +538,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -533,9 +556,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -552,9 +574,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -571,9 +592,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -590,9 +610,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -609,9 +628,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -628,9 +646,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -647,9 +664,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -666,9 +682,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
                                         </div>
                                     </div>
                                     <div class="item-container">
@@ -685,142 +700,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-options">
-                                            <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                            <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                        <div class="item-button">
+                                            <button title="Add To Cart" class="addToCartButton curson-pointer" data-item-id="12"><p>Add</p></button>
                                         </div>
                                     </div>
                                 </div>
@@ -885,7 +766,7 @@
                                         <button type="button" class="curson-pointer">
                                             <img src="../images/icons/delete-red.png" alt="">
                                         </button>
-                                        <button type="button" class="curson-pointer">
+                                        <button type="button" class="placeOrderButton curson-pointer">
                                             <img src="../images/icons/order-receipt-yellow.png" alt="">
                                             <p>Place Order</p>
                                         </button>
@@ -1008,14 +889,16 @@
             </div>
         </div>
     </div>
-
-<!-- START JAVASCRIPTS -->
     <script src="../scripts/notification-box.js"></script>
     <script src="../scripts/dialog-box.js"></script>
     <script src="../scripts/menu.js"></script>
     <script src="../scripts/panel-scripts.js"></script>
     <script src="../scripts/chart.js"></script>
-<!-- END JAVASCRIPTS -->
+
+    
+    <script src="../scripts/main.js" type="module"></script>
+    <script src="../scripts/eventHandlers.js" type="module"></script>
+
 </body>
 </html>
 

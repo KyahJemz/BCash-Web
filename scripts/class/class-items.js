@@ -8,7 +8,7 @@ import {
   layoutItemData 
 } from '../ajaxUtils.js';
 
-class Item {
+export default class Item {
   constructor(id, name, cost, dateModified, dateCreated, image) {
     this.id = id;
     this.image = image;
@@ -47,5 +47,3 @@ class Item {
     layoutItemData(query);
   }
 }
-
-export default Item;

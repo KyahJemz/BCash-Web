@@ -1,3 +1,40 @@
+:root {
+
+  --TextColor-White: #ffffff;
+  --TextColor-Red: #DA121A;
+  --TextColor-Gold: #F9AE28;
+  --TextColor-LightBlack: #333333;
+  --TextColor-Black: #0F1419;
+
+  --Button-Background-Red: #DA121A;
+  --Button-Background-Active-Red: #9A110D;
+  --Button-Background-Gold: #F9AE28;
+  --Button-Background-Active-Gold: #DA121A;
+  --Button-Background-White: #ffffff;
+
+  --Selected-Background-LightBlack: #333333;
+
+  --Panel-Background-LightBlack: #333333;
+  --Panel-Background-Gold: #FFCC00;
+  --Panel-Background-Red: #DA121A;
+  --Panel-Background-White: #ffffff;
+  --Panel-Background-DarkWhite: #F2F2F2;
+
+  --color-White: #ffffff;
+  --color-DarkWhite: #F2F2F2;
+  --color-Red: #DA121A;
+  --color-DarkRed: #9A110D;
+  --color-Gold: #FFCC00;
+  --color-DarkGold: #F9AE28;
+  --color-Gray: #282828;
+  --color-LightBlack: #333333;
+  --color-Black: #0F1419;
+}
+
+
+
+
+
 /* ##################### */
 /* CREATE ORDER PANEL */
 /* ##################### */
@@ -76,6 +113,34 @@
 /* ############# */
 /* FOR GRID VIEW */
 /* ############# */
+
+.item-button {
+  position: absolute;
+  bottom: 5px;
+  align-self: center;
+  width: 75%;
+  text-align: center;
+}
+
+.item-button button {
+  background-color: var(--Button-Background-Gold);
+  width: 100%;
+  justify-content: center;
+  box-shadow: 2px 2px 5px 0px var(--Panel-Background-DarkWhite);
+  transition: 100ms;
+  border-radius: 3px;
+}
+
+.item-button button:active {
+  background-color: var(--Button-Background-Active-Gold);
+  transform: scale(0.97); 
+}
+
+.item-button button p{
+  color: var(--TextColor-White);
+}
+
+
 
  
 

@@ -55,9 +55,3 @@ window.onclick = function(event) {
 }
 
 
-
-
-
-
-
-  
