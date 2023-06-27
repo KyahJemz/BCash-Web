@@ -352,6 +352,9 @@ button img{
     transform: translateX(0);
 }
 
+
+
+
 @media (min-width: 0px) and (max-width: 768px) {
     /* Styles for phones */
     .dialog-container .dialog-content {

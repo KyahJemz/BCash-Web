@@ -156,15 +156,15 @@
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
-                                    <button onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
                                         <span class="dropdown-text">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
-                                        <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Success</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Failed</a>
-                                        <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Waiting</a>
+                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Success</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Failed</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Waiting</a>
                                     </div>
                                 </div>
                             </div>
@@ -280,12 +280,12 @@
                         </div>
                         <div class="dropdown">
                             <div class="dropdown-content">
-                                <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">25/Page</a>
-                                <a class="" href="javascript:void(0)" onclick="changeSelection(this)">50/Page</a>
-                                <a class="" href="javascript:void(0)" onclick="changeSelection(this)">75/Page</a>
-                                <a class="" href="javascript:void(0)" onclick="changeSelection(this)">100/Page</a>
+                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
+                                <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
+                                <a class="dropdownButtonSubItem" href="javascript:void(0)">75/Page</a>
+                                <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
                             </div>
-                            <button onclick="dropdown(event, this, 'top')" class="dropdownbtn curson-pointer">
+                            <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
                                 <span class="dropdown-text">25/Page</span>
                                 <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                             </button>
@@ -303,41 +303,41 @@
                                 </div>
                                 <div>
                                     <div class="dropdown">
-                                        <button title="Category Filter" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/category-yellow.png" alt="category">
                                             <span class="dropdown-text">All</span>
                                             <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                         </button>
                                         <div class="dropdown-content">
-                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">All</a>
-                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Foods</a>
-                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Drinks</a>
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Foods</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Drinks</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="dropdown">
-                                        <button title="Sort" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <button title="Sort" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
                                             <span class="dropdown-text">Ascending</span>
                                             <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                         </button>
                                         <div class="dropdown-content">
-                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">Ascending</a>
-                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Descending</a>
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">Ascending</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Descending</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="dropdown">
-                                        <button title="Layout View" onclick="dropdown(event, this, 'bottom')" class="dropdownbtn curson-pointer">
+                                        <button title="Layout View" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
                                             <span class="dropdown-text">List</span>
                                             <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                         </button>
                                         <div class="dropdown-content">
-                                            <a class="dropdown-selected" href="javascript:void(0)" onclick="changeSelection(this)">List</a>
-                                            <a class="" href="javascript:void(0)" onclick="changeSelection(this)">Card</a>
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">List</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Card</a>
                                         </div>
                                     </div>
                                 </div>
@@ -484,208 +484,10 @@
                                             </div>
                                         </div>
                                         <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
+                                            <button title="Add To Cart" class="addToCartButton curson-pointer" data-item-id="13"><p>Add</p></button>
                                         </div>
                                     </div>
                                     
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-container">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P94.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button title="Add To Cart" class="curson-pointer" onclick=""><p>Add</p></button>
-                                        </div>
-                                    </div>
                                     <div class="item-container">
                                         <div class="item-image">
                                             <img src="../images/school.jpg" alt="item-image">
@@ -751,16 +553,20 @@
                                 <div class="orders">
                                     <p>Order:</p>
                                     <hr>
-    
                                 </div>
                                 <div class="summary">
                                     <hr>
                                     <div class="details">
-                                        <p>5 items</p>
-                                        <p>Subtotal: P10.20</p>
+                                        <p id="order-quantity">Quantity: 5</p>
+                                        <p id="order-subtotal">Subtotal: ₱10.20</p>
                                     </div>
-                                    <p>Discount: P10.20</p>
-                                    <p><strong>Total: P10.20</strong></p>
+                                    <div class="discount">
+                                        <p>Discount: ₱</p>
+                                        <input id="txt-Discount" type="number" name="" id="" value="0.00">
+                                    </div>
+                                    <div class="total">
+                                        <p>Total: ₱10.20</p>
+                                    </div>
                                     <hr>
                                     <div class="button-container">
                                         <button type="button" class="curson-pointer">
@@ -776,7 +582,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
