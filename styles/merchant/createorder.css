@@ -162,7 +162,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: var(--Panel-Background-DarkWhite);
     padding: 10px;
   }
 
@@ -170,9 +169,76 @@
     flex: 1;
   }
 
+  .panel-createorder-content .right-panel .receipt-container .orders .title {
+    font-weight: 700;
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    height: 50px;
+    position: relative;
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item .image img {
+    aspect-ratio: 1/1;
+    height: 100%;
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item .details .name-text {
+    font-weight: 600;
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item .details .cost-text {
+    font-weight: 600;
+    color: var(--TextColor-Gold);
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item .quantity {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item .quantity p {
+    margin-top: 5px;
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item .quantity button {
+    background-color: var(--Button-Background-Gold);
+    width: 100%;
+    justify-content: center;
+    box-shadow: 2px 2px 5px 0px var(--Panel-Background-DarkWhite);
+    transition: 100ms;
+    border-radius: 3px;
+    color: var(--TextColor-White);
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .orders .item .quantity button:active {
+    background-color: var(--Button-Background-Active-Gold);
+    transform: scale(0.90); 
+  }
+  
+
+
   .panel-createorder-content .right-panel .receipt-container .orders>* {
     margin-bottom: 10px;
   }
+
+
+
 
   .panel-createorder-content .right-panel .receipt-container .summary {
     flex: 0 0 fit-content;
