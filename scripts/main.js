@@ -18,11 +18,36 @@ const order = new Order();
 
 document.querySelectorAll('.addToCartButton').forEach(button => {
   button.addEventListener('click', () => {
-    const itemId = button.dataset.itemId;
+    const itemId = button.parentNode.parentNode.dataset.itemId;
     const quantity = button.dataset.quantity;
     addToCart(order, itemId, quantity);
   });
 });
+
+document.querySelectorAll('.addQuantityButton').forEach(button => {
+  button.addEventListener('click', () => {
+    const itemId = button.parentNode.parentNode.dataset.itemId;
+    xxx(order, itemId);
+  });
+});
+
+document.querySelectorAll('.lessQuantityButton').forEach(button => {
+  button.addEventListener('click', () => {
+    const itemId = button.parentNode.parentNode.dataset.itemId;
+    xxx(order, itemId);
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
 
 document.querySelectorAll('.placeOrderButton').forEach(button => {
   button.addEventListener('click', () => {
@@ -58,3 +83,4 @@ document.querySelectorAll('.dropdownButton').forEach(dropdownBtn => {
     });
   });
 
+ 

@@ -228,7 +228,7 @@
 
   .panel-createorder-content .right-panel .receipt-container .orders .item .quantity button:active {
     background-color: var(--Button-Background-Active-Gold);
-    transform: scale(0.90); 
+    transform: scale(0.9); 
   }
   
 
@@ -290,16 +290,33 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: #cb811344;
+    background-color: var(--Button-Background-Gold);
+    box-shadow: 2px 2px 5px 0px var(--Panel-Background-DarkWhite);
     padding: 5px;
-    border-radius: 4px;
+    border-radius: 3px;
+    transition: 100ms;
+  }
+
+  .panel-createorder-content .right-panel .receipt-container .summary .button-container button:last-child:active {
+    background-color: var(--Button-Background-Active-Gold);
+    transform: scale(0.97); 
   }
 
   .panel-createorder-content .right-panel .receipt-container .summary .button-container button:first-child {
     padding: 5px;
     border-radius: 4px;
+    justify-content: center;
+    background-color: var(--Button-Background-Gold);
+    box-shadow: 2px 2px 5px 0px var(--Panel-Background-DarkWhite);
+    padding: 5px;
+    border-radius: 3px;
+    transition: 100ms;
   }
 
+  .panel-createorder-content .right-panel .receipt-container .summary .button-container button:first-child:active {
+    background-color: var(--Button-Background-Active-Gold);
+    transform: scale(0.97); 
+  }
 
 
 

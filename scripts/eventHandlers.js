@@ -7,10 +7,14 @@ import {
 } from './modules/menu.js';
 
 import { 
+    displayOrders
+} from './modules/dropdown.js';
+
+import { 
     dropdown, 
     changeSelection, 
     windowClickClearDropdown, 
-} from './modules/dropdown.js';
+} from './modules/order.js';
 
 import { 
     uploadOrderData 
@@ -25,11 +29,12 @@ export function windowOnclickEvents(event){
 
 
 //#####//
-// DROPDOWN EVENTS
+// ORDER EVENTS
 //#####//
 
 export function addToCart(order, itemId, quantity) {
   order.addItem(itemId, quantity);
+  displayOrders(order);
 }
 
 export function placeOrder(order) {
@@ -74,4 +79,4 @@ export function windowClickClearDropdownEvents(event) {
 }
   
   
-  
+   

@@ -20,12 +20,16 @@ export default class Order {
     }
   }
 
-  updateQuantity(itemId, quantity) {
+  updateQuantity(itemId, type) {
     const item = this.items.find(item => item.itemId === itemId);
     if (item) {
-      item.quantity = quantity;
-      if (item.quantity <= 0) {
-        this.removeItem(itemId);
+      if (type === "add") {
+        item.quantity = item.quantity+1;
+      } else if(type === "less") {
+        if (item.quantity <= 0) {
+          this.removeItem(itemId);
+        }
+        item.quantity = item.quantity-1;
       }
     }
   }
@@ -45,4 +49,6 @@ export default class Order {
     uploadOrderData(this.walletAddress, this.items);
     console.log("Uploading");
   }
+
+
 }
