@@ -2,51 +2,49 @@ import Order from './class/class-order.js';
 import { 
     windowOnclickEvents,
     addToCart, 
+    quantity,
     placeOrder, 
     menuSelectionEvents, 
     dropdownEvents, 
-    changeSelectionEvents
+    changeSelectionEvents,
+    refreshReceipt
 } from './eventHandlers.js';
 
-window.onclick = windowOnclickEvents;
+var doc = document;
 
 //#####//
 // ORDER MODULE
 //#####//
 
+
+
+  window.onclick = windowOnclickEvents;
+
 const order = new Order();
 
 document.querySelectorAll('.addToCartButton').forEach(button => {
   button.addEventListener('click', () => {
-    const itemId = button.parentNode.parentNode.dataset.itemId;
-    const quantity = button.dataset.quantity;
-    addToCart(order, itemId, quantity);
+      const itemId = button.parentNode.parentNode.dataset.itemId;
+      const name = button.parentNode.parentNode.dataset.name;
+      const cost = button.parentNode.parentNode.dataset.cost;
+      const image = button.parentNode.parentNode.dataset.image;
+      addToCart(button, order, itemId, name, cost, image, "1");
   });
 });
 
-document.querySelectorAll('.addQuantityButton').forEach(button => {
-  button.addEventListener('click', () => {
-    const itemId = button.parentNode.parentNode.dataset.itemId;
-    xxx(order, itemId);
+export function bindQuantityEventButtons() {
+  document.querySelectorAll('.quantityButton').forEach(button => {
+    button.addEventListener('click', () => {
+      const type = button.dataset.type;
+      const itemId = button.parentNode.parentNode.dataset.itemId;
+      quantity(button, order, itemId, type);
+    });
   });
+}
+
+document.getElementById('txt-order-Discount').addEventListener('input', () => {
+  refreshReceipt(order)
 });
-
-document.querySelectorAll('.lessQuantityButton').forEach(button => {
-  button.addEventListener('click', () => {
-    const itemId = button.parentNode.parentNode.dataset.itemId;
-    xxx(order, itemId);
-  });
-});
-
-
-
-
-
-
-
-
-
-
 
 
 document.querySelectorAll('.placeOrderButton').forEach(button => {
@@ -83,4 +81,3 @@ document.querySelectorAll('.dropdownButton').forEach(dropdownBtn => {
     });
   });
 
- 

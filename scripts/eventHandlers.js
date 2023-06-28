@@ -7,14 +7,17 @@ import {
 } from './modules/menu.js';
 
 import { 
-    displayOrders
-} from './modules/dropdown.js';
+    displayOrders,
+    toggleItemButton,
+    toggleQuantityButton,
+    refreshReceiptValues
+} from './modules/order.js';
 
 import { 
     dropdown, 
     changeSelection, 
     windowClickClearDropdown, 
-} from './modules/order.js';
+} from './modules/dropdown.js';
 
 import { 
     uploadOrderData 
@@ -32,9 +35,28 @@ export function windowOnclickEvents(event){
 // ORDER EVENTS
 //#####//
 
-export function addToCart(order, itemId, quantity) {
-  order.addItem(itemId, quantity);
-  displayOrders(order);
+export function addToCart(button, order, itemId, name, cost, image, quantity) {
+    if (button.dataset.type == "AddToCart") {
+        order.addItem(itemId, name, cost, image, quantity);
+    } 
+    if (button.dataset.type == "RemoveToCart") {
+        order.removeItem(itemId);
+    }
+    toggleItemButton(button);
+    displayOrders(order);
+    refreshReceiptValues(order);
+}
+
+export function quantity(button, order, itemId, type) {
+    console.log("Quantity Fired")
+    order.updateQuantity(itemId, type)
+    displayOrders(order);
+    toggleQuantityButton(button, order,itemId)
+    refreshReceiptValues(order);
+}
+
+export function refreshReceipt(order){
+    refreshReceiptValues(order);
 }
 
 export function placeOrder(order) {

@@ -167,10 +167,13 @@
 
   .panel-createorder-content .right-panel .receipt-container .orders {
     flex: 1;
+    overflow-x: auto;
+    padding-right: 8px;
   }
 
-  .panel-createorder-content .right-panel .receipt-container .orders .title {
+  .panel-createorder-content .right-panel .receipt-container .title {
     font-weight: 700;
+    height: 25px;
   }
 
   .panel-createorder-content .right-panel .receipt-container .orders .item {

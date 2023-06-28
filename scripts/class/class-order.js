@@ -8,9 +8,9 @@ export default class Order {
     this.walletAddress = '';
   }
 
-  addItem(itemId, quantity) {
-    this.items.push({itemId, quantity});
-    console.log(itemId);
+  addItem(itemId, name, cost, image, quantity) {
+    this.items.push({itemId, name, cost, image, quantity});
+    console.log(itemId+" Added");
   }
 
   removeItem(itemId) {
@@ -18,18 +18,23 @@ export default class Order {
     if (index !== -1) {
       this.items.splice(index, 1);
     }
+    console.log(itemId+" Removed");
   }
 
   updateQuantity(itemId, type) {
     const item = this.items.find(item => item.itemId === itemId);
     if (item) {
       if (type === "add") {
-        item.quantity = item.quantity+1;
-      } else if(type === "less") {
-        if (item.quantity <= 0) {
+        item.cost = Number(item.cost)/Number(item.quantity)
+        item.quantity = Number(item.quantity) + 1;
+        item.cost = Number(item.cost)*Number(item.quantity)
+      } else if (type === "less") {
+        item.cost = Number(item.cost)/Number(item.quantity)
+        item.quantity = Number(item.quantity) - 1;
+        item.cost = Number(item.cost)*Number(item.quantity)
+        if (item.quantity < 1) {
           this.removeItem(itemId);
         }
-        item.quantity = item.quantity-1;
       }
     }
   }
