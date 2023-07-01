@@ -64,7 +64,7 @@ function getLayoutTag (layout, container) {
     }
 }
 
-function updateFilterCategoryDropdown(dropdown,items){
+function updateFilterCategoryDropdown(dropdown,items, elemetId){
     dropdown.innerHTML = 
     `<a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>`;
 
@@ -76,7 +76,7 @@ function updateFilterCategoryDropdown(dropdown,items){
         `<a class="dropdownButtonSubItem" href="javascript:void(0)">`+ item +`</a>`;
     });
 
-    bindDropdownSubItemEventButtons("createorder-category-choices");
+    bindDropdownSubItemEventButtons(elemetId);
 }
 
 export function displayItems(items, order, type) {
@@ -136,7 +136,15 @@ export function displayItems(items, order, type) {
           `;
         });
 
-        updateFilterCategoryDropdown(document.getElementById("createorder-category-choices"),items);
+        updateFilterCategoryDropdown(document.getElementById("createorder-category-choices"),items,"createorder-category-choices");
+
+        if (temp.length === 0) {
+            if (items.length > 0) {
+                container.querySelector(layoutTag).innerHTML = `<div class="emptyBlock">No Results`;
+            } else {
+                container.querySelector(layoutTag).innerHTML = `<div class="emptyBlock">There are currently no items registered`;
+            }
+        }
         
     } else if (type == "ItemManagement"){
         console.log("REFRESHING cREATE ORDER ITEMS");
@@ -177,6 +185,14 @@ export function displayItems(items, order, type) {
             </div>
           `;
         });
+
+        if (temp.length === 0) {
+            if (items.length > 0) {
+                container.querySelector(layoutTag).innerHTML = `<div class="emptyBlock">No Results`;
+            } else {
+                container.querySelector(layoutTag).innerHTML = `<div class="emptyBlock">There are currently no items registered`;
+            }
+        }
     }
  
   bindItemsEventButtons();

@@ -10,7 +10,8 @@ import {
     dropdownEvents, 
     changeSelectionEvents,
     refreshReceipt,
-    refreshItems
+    refreshItems,
+    clearOrder
 } from './eventHandlers.js';
 
 var doc = document;
@@ -73,12 +74,21 @@ document.getElementById('txt-order-Discount').addEventListener('input', () => {
   refreshReceipt(order)
 });
 
-
 document.querySelectorAll('.placeOrderButton').forEach(button => {
   button.addEventListener('click', () => {
     placeOrder(order);
   });
 });
+
+document.getElementById('createorder-clear').addEventListener('click', () => {
+  clearOrder(order);
+});
+
+
+document.getElementById('createorder-placeorder').addEventListener('click', () => {
+  console.log("ACTIVATED222 !");
+});
+
 
 
 //#####//
@@ -113,7 +123,7 @@ export function bindItemsEventButtons() {
 document.querySelectorAll('.menuSelectionButton').forEach(menuItem => {
     menuItem.addEventListener('click', () => {
       const value = menuItem.querySelector('p').innerText;
-      menuSelectionEvents(value, order, items);
+      menuSelectionEvents(value, items, order);
     });
 });
 

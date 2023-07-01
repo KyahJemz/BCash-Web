@@ -20,7 +20,11 @@ export function displayOrders(order) {
         </div>
     </div>
   `});
-  
+
+  if (order.items.length === 0) {
+    document.getElementById("order-list").innerHTML = `<div class="emptyBlock">No items selected</div>`;
+  }
+
   bindQuantityEventButtons();
 }
 

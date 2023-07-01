@@ -63,6 +63,18 @@ export function refreshReceipt(order){
     refreshReceiptValues(order);
 }
 
+export function clearOrder(order) {
+    document.querySelectorAll(".addToCartButton").forEach(button => {
+        if(button.dataset.type === "RemoveToCart") {
+            console.log(button.parentNode.parentNode.dataset.itemId);
+            order.removeItem(button.parentNode.parentNode.dataset.itemId);
+            toggleItemButton(button);
+            displayOrders(order);
+            refreshReceiptValues(order);
+        }
+    })
+}
+
 export function placeOrder(order) {
     uploadOrderData();
 }
