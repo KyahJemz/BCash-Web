@@ -4,16 +4,16 @@ import {
   UpdateItemData, 
   addItemData, 
   searchItemData, 
-  filterItemData, 
-  layoutItemData 
+  filterItemData
 } from '../ajaxUtils.js';
 
 export default class Item {
-  constructor(id, name, cost, dateModified, dateCreated, image) {
-    this.id = id;
+  constructor(itemId, name, cost, category, dateModified, dateCreated, image) {
+    this.itemId = itemId;
     this.image = image;
     this.name = name;
     this.cost = cost;
+    this.category = category;
     this.dateModified = dateModified;
     this.dateCreated = dateCreated;
   }

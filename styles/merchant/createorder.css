@@ -98,7 +98,7 @@
     position: relative;
   }
 
-  .panel-createorder-content .left-panel .items-container {
+  .panel-createorder-content .left-panel .order-items-container {
     flex: 1;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -106,39 +106,63 @@
     padding-right: 8px;
   }
 
-/* ############# */
-/* FOR LIST VIEW */
-/* ############# */
 
+/* ############### */
+/* FOR LAYOUT VIEW */
+/* ############### */
 
-/* ############# */
-/* FOR GRID VIEW */
-/* ############# */
-
-.item-button {
+.card-layout .item-button, .list-layout .item-button {
   position: absolute;
-  bottom: 5px;
-  align-self: center;
-  width: 75%;
   text-align: center;
+  align-self: center;
 }
 
-.item-button button {
+.card-layout .item-button button, .list-layout .item-button button {
   background-color: var(--Button-Background-Gold);
-  width: 100%;
   justify-content: center;
   box-shadow: 2px 2px 5px 0px var(--Panel-Background-DarkWhite);
   transition: 100ms;
   border-radius: 3px;
 }
 
-.item-button button:active {
+.card-layout .item-button button:active, .list-layout .item-button button:active {
   background-color: var(--Button-Background-Active-Gold);
   transform: scale(0.97); 
 }
 
-.item-button button p{
+.card-layout .item-button button p, .list-layout .item-button button p{
   color: var(--TextColor-White);
+}
+
+/* ############# */
+/* FOR CARD VIEW */
+/* ############# */
+
+.list-layout .item-button {
+  width: calc(100% - 106px);
+  display: flex;
+  flex-direction: row;
+  right: 4px;
+  bottom: 4px;
+  gap: 4px;
+}
+
+.list-layout .item-button button {
+  width: 100%;
+  height: 20px;
+}
+
+/* ############# */
+/* FOR GRID VIEW */
+/* ############# */
+
+.card-layout .item-button {
+  bottom: 4px;
+  width: 95%;
+}
+
+.card-layout .item-button button{
+  width: 100%;
 }
 
 

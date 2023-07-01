@@ -6,6 +6,10 @@ import {
     ChangePanel 
 } from './modules/menu.js';
 
+import {
+    displayItems
+} from './modules/item.js';
+
 import { 
     displayOrders,
     toggleItemButton,
@@ -64,23 +68,36 @@ export function placeOrder(order) {
 }
 
 
+//#####//
+// ITEM EVENTS
+//#####//
+
+export function refreshItems(items, order, type){
+    displayItems(items,order, type);
+}
 
 
 //#####//
-// DROPDOWN EVENTS
+// MENU EVENTS
 //#####//
 
-export function menuSelectionEvents(selected) {
-    const value = selected.querySelector('p').innerText;
-    console.log(value);
-  
+export function menuSelectionEvents(value, items, order) {
+    // Used ".replace(new RegExp(" ", 'g'), '')" to remove spaces
+
     if (value === "My Orders") {
-        toggleMyOrdersMenu();
+        toggleMyOrdersMenu(); // 
     } else {
         ChangeTitle(value);
         ChangeMenuSelected(value.replace(new RegExp(" ", 'g'), ''));
         HideAllPanels(value.replace(new RegExp(" ", 'g'), ''));
         ChangePanel(value.replace(new RegExp(" ", 'g'), ''));
+    }
+
+    // Check and Refresh Items Depending On Panel Clicked
+    if (value.replace(new RegExp(" ", 'g'), '').toUpperCase() === "ITEMMANAGEMENT"){
+        refreshItems(items,order, value.replace(new RegExp(" ", 'g'), ''))
+    } else if (value.replace(new RegExp(" ", 'g'), '').toUpperCase() === "CREATEORDER") {3
+        refreshItems(items,order, value.replace(new RegExp(" ", 'g'), ''))
     }
 }
 

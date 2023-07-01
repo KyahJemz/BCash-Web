@@ -17,14 +17,12 @@ export function toggleMyOrdersMenu() {
 
 export function ChangeMenuSelected(value) {
     const x = document.getElementById(value);
-    console.log(value);
   
     let elements = document.getElementsByClassName("menu-selected");
     for (var i = 0; i < elements.length; i++) {
       elements[i].classList.remove("menu-selected");
     }
     x.classList.add("menu-selected")
-    console.log(value);
   }
   
 export function ChangePanel(value) {
@@ -37,7 +35,6 @@ export function ChangePanel(value) {
     if (!(element.classList.contains("visible"))) {
       element.classList.add("visible");
     }
-    console.log(value + 123);
   }
   
   export function HideAllPanels() {
