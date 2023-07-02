@@ -11,7 +11,8 @@ import {
     changeSelectionEvents,
     refreshReceipt,
     refreshItems,
-    clearOrder
+    clearOrder,
+    openDialogBoxEvents
 } from './eventHandlers.js';
 
 var doc = document;
@@ -40,8 +41,7 @@ console.log(items);
 
 
 
-
-
+openDialogBoxEvents("Add-Item");
 
 
 //#####//

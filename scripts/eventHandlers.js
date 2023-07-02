@@ -10,6 +10,11 @@ import {
     displayItems
 } from './modules/item.js';
 
+import {
+    openDialogBox,
+    closeDialogBox
+} from './modules/dialog-box.js';
+
 import { 
     displayOrders,
     toggleItemButton,
@@ -31,6 +36,13 @@ import {
 
 export function windowOnclickEvents(event){
     windowClickClearDropdown(event)
+
+    const dialogContainer = document.getElementById('Dialog-Box-Container');
+    const dialogContent = document.querySelector('.dialog-content');
+    
+    if (event.target === dialogContainer && !dialogContent.contains(event.target)) {
+        closeDialogBox();
+    }
 }
 
 
@@ -86,6 +98,7 @@ export function placeOrder(order) {
 
 export function refreshItems(items, order, type){
     displayItems(items,order, type);
+    displayOrders(order);
 }
 
 
@@ -128,6 +141,16 @@ export function changeSelectionEvents(element) {
 export function windowClickClearDropdownEvents(event) {
     windowClickClearDropdown(event);
 }
+  
+
+//#####//
+// DIALOG BOX EVENTS
+//#####//
+
+export function openDialogBoxEvents(type) {
+    openDialogBox(type)
+}
+
   
   
    
