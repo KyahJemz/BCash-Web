@@ -1,8 +1,55 @@
+:root {
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
+    --AsccentColor: #CB8213; /* Buttons */
+    --TextColor: #4b4b4b; /* text */
+    --DarkColor: #363636; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
+
+    --TextColor-White: #ffffff;
+    --TextColor-Red: #DA121A;
+    --TextColor-Gold: #F9AE28;
+    --TextColor-LightBlack: #333333;
+    --TextColor-Black: #0F1419;
+
+    --Button-Background-Red: #DA121A;
+    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Gold: #F9AE28;
+    --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-White: #ffffff;
+
+    --Selected-Background-LightBlack: #333333;
+
+    --Panel-Background-LightBlack: #333333;
+    --Panel-Background-Gold: #FFCC00;
+    --Panel-Background-Red: #DA121A;
+    --Panel-Background-White: #ffffff;
+    --Panel-Background-DarkWhite: #F2F2F2;
+
+    --color-White: #ffffff;
+    --color-DarkWhite: #F2F2F2;
+    --color-Red: #DA121A;
+    --color-DarkRed: #9A110D;
+    --color-Gold: #FFCC00;
+    --color-DarkGold: #F9AE28;
+    --color-Gray: #282828;
+    --color-LightBlack: #333333;
+    --color-Black: #0F1419;
+}
+
+
 
 .order-confirmation {
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.order-confirmation strong {
+    color: var(--TextColor-Red);
 }
 
 .order-confirmation fieldset {
@@ -34,47 +81,83 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    height: 350px;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .order-confirmation .content .left-panel .list {
     width: 100%;
     flex: 1;
-    padding: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
     font-size: 0.8rem;
-    justify-content: space-between;
+    overflow-y: scroll;
+    position: relative;
 }
 
 .order-confirmation .content .left-panel .list .list-header{
     width: 100%;
     display: flex;
     justify-content: space-around;
+    position: sticky;
+    background-color: var(--Panel-Background-White);
+    top: 0;
 }
 
 .order-confirmation .content .left-panel .list .item{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
+}
+
+.order-confirmation .content .left-panel .summary {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 .order-confirmation .content .right-panel{
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 .order-confirmation .content .right-panel .qr-code {
     display: flex;
-    flex-direction: row;
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .order-confirmation .content .right-panel .qr-code img {
     aspect-ratio: 1/1;
     width: 100px;
+    align-self: center;
+}
+
+.order-confirmation .content .right-panel .details fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.order-confirmation .content .right-panel .qr-code button{
+    width: 50%;
+    align-self: center;
+}
+
+.order-confirmation .content .right-panel .qr-code button{
+    justify-content: center;
 }
 
 .order-confirmation .content .right-panel .id-card {
@@ -83,31 +166,8 @@
     gap: 4px;
 }
 
-.order-confirmation .summary {
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-}
 
-.order-confirmation .content .left-panel .summary {
-    padding-bottom: 4px;
-    padding-top: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
-.order-confirmation .summary .right-panel{
-    flex: 1;
-}
-
-.order-confirmation .summary .right-panel fieldset {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
 .order-confirmation .buttons{
     width: fit-content;

@@ -43,7 +43,7 @@ console.log(items);
 
 
 
-openDialogBoxEvents("test");
+
 
 document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
   closeDialogBoxEvents();
@@ -56,7 +56,18 @@ document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () 
 // ORDER MODULE
 //#####//
 
+
 const order = new Order();
+
+openDialogBoxEvents("test");
+
+export function getOrder(){
+  if (order.items.length <= 0) {
+    return "";
+  } else {
+    return order;
+  }
+}
 
 document.querySelectorAll('.addToCartButton').forEach(button => {
   button.addEventListener('click', () => {
@@ -88,7 +99,7 @@ document.getElementById('createorder-clear').addEventListener('click', () => {
 
 
 document.getElementById('createorder-placeorder').addEventListener('click', () => {
-  placeOrderEvents(order);
+  openDialogBoxEvents("test");
   console.log("ACTIVATED222 !");
 });
 
