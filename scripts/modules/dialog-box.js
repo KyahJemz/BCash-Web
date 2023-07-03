@@ -14,6 +14,18 @@ export function openDialogBox(type){
     }
 }
 
+export function openAlertDialogBox(title,message){
+    const box = document.getElementById("Dialog-Box-Container");
+    const header = document.getElementById("Dialog-Box-header");
+    const body = document.getElementById("Dialog-Box-Body");
+
+    box.style.display = "flex";
+    header.innerHTML = title;
+    body.innerHTML = `
+    <div class="message">`+ message +`</div>
+    `;
+}
+
 export function closeDialogBox() {
     const box = document.getElementById("Dialog-Box-Container");
     box.style.display = "none";

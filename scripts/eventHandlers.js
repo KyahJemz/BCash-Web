@@ -12,6 +12,7 @@ import {
 
 import {
     openDialogBox,
+    openAlertDialogBox,
     closeDialogBox
 } from './modules/dialog-box.js';
 
@@ -43,6 +44,10 @@ export function windowOnclickEvents(event){
     if (event.target === dialogContainer && !dialogContent.contains(event.target)) {
         closeDialogBox();
     }
+}
+
+export function closeDialogBoxEvents(){
+    closeDialogBox();
 }
 
 
@@ -87,8 +92,12 @@ export function clearOrder(order) {
     })
 }
 
-export function placeOrder(order) {
-    uploadOrderData();
+export function placeOrderEvents(order) {
+    if (order.items != []) {
+        uploadOrderData();
+    } else {
+        openDialogBox()
+    }
 }
 
 

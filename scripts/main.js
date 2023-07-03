@@ -5,14 +5,15 @@ import {
     windowOnclickEvents,
     addToCart, 
     quantity,
-    placeOrder, 
+    placeOrderEvents, 
     menuSelectionEvents, 
     dropdownEvents, 
     changeSelectionEvents,
     refreshReceipt,
     refreshItems,
     clearOrder,
-    openDialogBoxEvents
+    openDialogBoxEvents,
+    closeDialogBoxEvents
 } from './eventHandlers.js';
 
 var doc = document;
@@ -43,7 +44,9 @@ console.log(items);
 
 openDialogBoxEvents("Add-Item");
 
-
+document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
+  closeDialogBoxEvents();
+});
 //#####//
 // ORDER MODULE
 //#####//
@@ -74,18 +77,13 @@ document.getElementById('txt-order-Discount').addEventListener('input', () => {
   refreshReceipt(order)
 });
 
-document.querySelectorAll('.placeOrderButton').forEach(button => {
-  button.addEventListener('click', () => {
-    placeOrder(order);
-  });
-});
-
 document.getElementById('createorder-clear').addEventListener('click', () => {
   clearOrder(order);
 });
 
 
 document.getElementById('createorder-placeorder').addEventListener('click', () => {
+  placeOrderEvents(order);
   console.log("ACTIVATED222 !");
 });
 
@@ -156,3 +154,5 @@ export function bindDropdownSubItemEventButtons(query) {
     });
   });
 }
+
+
