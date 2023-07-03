@@ -20,10 +20,10 @@ export function openDialogBox(type){
         const order = getOrder();
 
         if (order !== "") {
-            let quantiy = 0;
-            let subtotal = 0;
-            let discount = document.getElementById("txt-order-Discount").value;
-            let data = ``;
+            var quantiy = 0;
+            var subtotal = 0;
+            var discount = document.getElementById("txt-order-Discount").value;
+            var data = ``;
     
             order.items.forEach(item => {
             quantiy = Number(quantiy) + Number(item.quantity);
@@ -37,7 +37,7 @@ export function openDialogBox(type){
             });
 
             body.innerHTML = ``;
-    
+
             body.innerHTML = `
                 <div class="order-confirmation">
                     <div class="status">Status: PREPARING</div>
@@ -54,7 +54,7 @@ export function openDialogBox(type){
                                 <p class="quantity"><strong>Items: </strong>`+quantiy+`</p>
                                 <p class="subtotal"><strong>Subtotal: </strong>₱ `+subtotal+`</p>
                                 <p class="discount"><strong>Discount: </strong>₱ `+discount+`</p>
-                                <p class="total"><strong>Total: </strong>₱ `+Number(subtotal)-Number(discount)+`</p>
+                                <p class="total"><strong>Total: </strong>₱ `+(Number(subtotal)-Number(discount))+`</p>
                             </div>
                         </div>
                         <div class="right-panel">
@@ -70,9 +70,9 @@ export function openDialogBox(type){
                             <div class="details">
                                 <fieldset>
                                     <legend>Details:</legend>
-                                    <p class="Name"><strong>Name: </strong>stephen regan james layson</p>
-                                    <p class="Category"><strong>Categoty: </strong>Student</p>
-                                    <p class="waletId"><strong>Wallet Id: </strong> 235dfg463f34646r3</p>
+                                    <p class="Name"><strong>Name: </strong></p>
+                                    <p class="Category"><strong>Categoty: </strong></p>
+                                    <p class="waletId"><strong>Wallet Id: </strong></p>
                                 </fieldset>
                             </div>
                         </div>
