@@ -13,6 +13,7 @@ import {
     refreshItems,
     clearOrder,
     openDialogBoxEvents,
+    openAlertDialogBoxEvents,
     closeDialogBoxEvents
 } from './eventHandlers.js';
 
@@ -42,7 +43,11 @@ console.log(items);
 
 
 
-openDialogBoxEvents("Add-Item");
+openDialogBoxEvents("test");
+
+document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
+  closeDialogBoxEvents();
+});
 
 document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
   closeDialogBoxEvents();

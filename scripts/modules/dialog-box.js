@@ -11,6 +11,9 @@ export function openDialogBox(type){
     } else if (type=="Delete-Item"){
         box.style.display = "flex";
         header.innerHTML = "Delete Item Confirmation"
+    } else if (type=="test"){
+        box.style.display = "flex";
+        header.innerHTML = "test"
     }
 }
 
@@ -22,8 +25,15 @@ export function openAlertDialogBox(title,message){
     box.style.display = "flex";
     header.innerHTML = title;
     body.innerHTML = `
-    <div class="message">`+ message +`</div>
+    <div class="message-container">
+        <div class="message">`+ message +`</div>
+        <div class="button"><button id="dialog-box-btn-ok">OK</button></div>
+    </div>
     `;
+
+    document.getElementById("dialog-box-btn-ok").addEventListener('click', () => {
+        closeDialogBox();
+    });
 }
 
 export function closeDialogBox() {

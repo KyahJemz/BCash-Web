@@ -1,0 +1,125 @@
+
+.order-confirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.order-confirmation fieldset {
+    height: 100%;
+    width: 100%;
+    padding: 6px;
+    border-width: 1px;
+
+}
+
+.order-confirmation fieldset legend{
+    font-size: 0.9rem;
+}
+
+
+.order-confirmation .status {
+    background-color: yellow;
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+.order-confirmation .content {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.order-confirmation .content .left-panel{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-confirmation .content .left-panel .list {
+    width: 100%;
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.8rem;
+    justify-content: space-between;
+}
+
+.order-confirmation .content .left-panel .list .list-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.order-confirmation .content .left-panel .list .item{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-confirmation .content .right-panel{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-confirmation .content .right-panel .qr-code {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.order-confirmation .content .right-panel .qr-code img {
+    aspect-ratio: 1/1;
+    width: 100px;
+}
+
+.order-confirmation .content .right-panel .id-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.order-confirmation .summary {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.order-confirmation .content .left-panel .summary {
+    padding-bottom: 4px;
+    padding-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-confirmation .summary .right-panel{
+    flex: 1;
+}
+
+.order-confirmation .summary .right-panel fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-confirmation .buttons{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    gap: 10px
+}
+
+
+
+
+
+
+

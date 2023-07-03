@@ -52,6 +52,7 @@ export function closeDialogBoxEvents(){
 
 
 
+
 //#####//
 // ORDER EVENTS
 //#####//
@@ -93,10 +94,10 @@ export function clearOrder(order) {
 }
 
 export function placeOrderEvents(order) {
-    if (order.items != []) {
+    if (order.items.length > 0) {
         uploadOrderData();
     } else {
-        openDialogBox()
+        openAlertDialogBoxEvents("Invalid Request","Try adding some improvemnts");
     }
 }
 
@@ -158,6 +159,10 @@ export function windowClickClearDropdownEvents(event) {
 
 export function openDialogBoxEvents(type) {
     openDialogBox(type)
+}
+
+export function openAlertDialogBoxEvents(title,message){
+    openAlertDialogBox(title,message);
 }
 
   
