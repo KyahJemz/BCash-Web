@@ -291,7 +291,13 @@ button img{
 
 .dialog-container .dialog-content .header .close .close-btn:hover{
     font-weight: 750;
-    color: var(--AsccentColor);
+    color: var(--Button-Background-Red);
+}
+
+.dialog-container .dialog-content .header .close .close-btn:active{
+    font-weight: 750;
+    
+    color: var(--Button-Background-Active-Red);
 }
 
 .dialog-container .dialog-content .body {

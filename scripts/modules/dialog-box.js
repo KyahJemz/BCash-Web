@@ -13,78 +13,83 @@ export function openDialogBox(type){
     } else if (type=="Delete-Item"){
         box.style.display = "flex";
         header.innerHTML = "Delete Item Confirmation"
-    } else if (type=="test"){
+    } else if (type=="Place-Order"){
         box.style.display = "flex";
-        header.innerHTML = "test"
+        header.innerHTML = "Order Confirmation"
 
+        console.log(getOrder());
         const order = getOrder();
-
         if (order !== "") {
-            var quantiy = 0;
-            var subtotal = 0;
-            var discount = document.getElementById("txt-order-Discount").value;
-            var data = ``;
+            if (order.items.length !== 0) {
+                var quantiy = 0;
+                var subtotal = 0;
+                var discount = document.getElementById("txt-order-Discount").value;
+                var data = ``;
+        
+                order.items.forEach(item => {
+                quantiy = Number(quantiy) + Number(item.quantity);
+                subtotal = Number(subtotal) + Number(item.cost);
+                data = data + `
+                    <div class="item">
+                        <div class="name">`+item.name+`</div>
+                        <div class="cost">
+                            <p>x`+item.quantity+`</p>
+                            <p>₱ `+Number(item.cost).toFixed(2)+`</p>
+                        </div>
+                    </div>
+                `
+                });
     
-            order.items.forEach(item => {
-            quantiy = Number(quantiy) + Number(item.quantity);
-            subtotal = Number(subtotal) + Number(item.cost);
-            data = data + `
-                <div class="item">
-                    <div class="name">`+item.name+`</div>
-                    <div class="cost">`+item.cost+`</div>
-                </div>
-            `
-            });
-
-            body.innerHTML = ``;
-
-            body.innerHTML = `
-                <div class="order-confirmation">
-                    <div class="status">Status: PREPARING</div>
-                    <div class="content">
-                        <div class="left-panel">
-                            <div class="list">
-                                <div class="list-header">
-                                    <div class="name"><strong>Name</strong></div>
-                                    <div class="cost"><strong>Cost</strong></div>
+                body.innerHTML = ``;
+    
+                body.innerHTML = `
+                    <div class="order-confirmation">
+                        <div class="status">Status: PREPARING</div>
+                        <div class="content">
+                            <div class="left-panel">
+                                <div class="list">
+                                    <div class="list-header">
+                                        <p><strong>Order Summary</strong></p>
+                                    </div>
+                                    `+data+`
                                 </div>
-                                `+data+`
+                                <div class="summary">
+                                    <p class="quantity"><strong>Items: </strong>`+quantiy+`</p>
+                                    <p class="subtotal"><strong>Subtotal: </strong>₱ `+Number(subtotal).toFixed(2)+`</p>
+                                    <p class="discount"><strong>Discount: </strong>₱ `+Number(discount).toFixed(2)+`</p>
+                                    <p class="total"><strong>Total: </strong>₱ `+(Number(subtotal)-Number(discount)).toFixed(2)+`</p>
+                                </div>
                             </div>
-                            <div class="summary">
-                                <p class="quantity"><strong>Items: </strong>`+quantiy+`</p>
-                                <p class="subtotal"><strong>Subtotal: </strong>₱ `+subtotal+`</p>
-                                <p class="discount"><strong>Discount: </strong>₱ `+discount+`</p>
-                                <p class="total"><strong>Total: </strong>₱ `+(Number(subtotal)-Number(discount))+`</p>
+                            <div class="right-panel">
+                                <div class="qr-code">
+                                    <p><strong>QR-Code:</strong></p>
+                                    <img src="../images/sample-qr.jpg" alt="">
+                                    <button>Generate</button>
+                                </div>
+                                <div class="id-card">
+                                    <p><strong>Id Card or Manual Input: </strong></p>
+                                    <input type="search">
+                                </div>
+                                <div class="details">
+                                    <fieldset>
+                                        <legend>Details:</legend>
+                                        <p class="Name"><strong>Name: </strong></p>
+                                        <p class="Category"><strong>Categoty: </strong></p>
+                                        <p class="waletId"><strong>Wallet Id: </strong></p>
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
-                        <div class="right-panel">
-                            <div class="qr-code">
-                                <p><strong>QR-Code:</strong></p>
-                                <img src="../images/sample-qr.jpg" alt="">
-                                <button>Generate</button>
-                            </div>
-                            <div class="id-card">
-                                <p><strong>Id Card or Manual Input: </strong></p>
-                                <input type="search">
-                            </div>
-                            <div class="details">
-                                <fieldset>
-                                    <legend>Details:</legend>
-                                    <p class="Name"><strong>Name: </strong></p>
-                                    <p class="Category"><strong>Categoty: </strong></p>
-                                    <p class="waletId"><strong>Wallet Id: </strong></p>
-                                </fieldset>
-                            </div>
+                        <div class="buttons">
+                            <button class="btn-back">Cancel</button>
+                            <button class="btn-submit">Submit</button>
                         </div>
                     </div>
-                    <div class="buttons">
-                        <button class="btn-back">Cancel</button>
-                        <button class="btn-submit">Submit</button>
-                    </div>
-                </div>
-                `;
+                    `;
+            }
+    
         }
-
+        
         
     }
 }

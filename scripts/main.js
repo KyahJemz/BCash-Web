@@ -99,10 +99,12 @@ document.getElementById('createorder-clear').addEventListener('click', () => {
 
 
 document.getElementById('createorder-placeorder').addEventListener('click', () => {
-  openDialogBoxEvents("test");
-  console.log("ACTIVATED222 !");
+  if (order.items.length > 0) {
+    openDialogBoxEvents("Place-Order");
+  } else {
+    openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
+  }
 });
-
 
 
 //#####//
@@ -124,6 +126,8 @@ export function bindItemsEventButtons() {
     });
   });
 }
+
+
 
 
 
@@ -171,4 +175,30 @@ export function bindDropdownSubItemEventButtons(query) {
   });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById("menu-visibility-button").addEventListener('click', () => {
+  console.log("ACTIVATED222 !");
+  const sidebar = document.querySelector(".sidebar-container");
+  const screenWidth = window.innerWidth;
+
+    if (sidebar.style.minWidth === "0px") {
+      sidebar.style.width = "225px";
+      sidebar.style.minWidth = "225px";
+      document.getElementById("menu-visibility-button").style.transform = "rotate(180deg)";
+    } else {
+      sidebar.style.width = "0px";
+      sidebar.style.minWidth = "0px";
+      document.getElementById("menu-visibility-button").style.transform = "rotate(0deg)";
+    }
+});
 

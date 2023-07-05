@@ -167,15 +167,6 @@
 
 
 
- 
-
-
-
-
-
-
-
-
   
   .panel-createorder-content .right-panel {
     flex: 0 0 300px;
@@ -347,10 +338,56 @@
 
 
 
+
+  .panel-createorder-content .left-panel-LeftMax {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .panel-createorder-content .left-panel-RightMax {
+    flex: 0 0 0px;
+    border-radius: 0px;
+  }
+
+  .panel-createorder-content .right-panel-LeftMax {
+    flex: 0 0 0px;
+    border-radius: 0px;
+  }
+
+  .panel-createorder-content .right-panel-RightMax {
+    flex: 1;
+    border-radius: 4px;
+  }
+
+  
+@media (min-width: 0px) and (max-width: 768px) {
+  .panel-createorder-content {
+    width: 97%;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding-top: 10px;
+    overflow-y: scroll;
+    padding-right: 8px;
+  }
+
+  .panel-createorder-content .left-panel .order-items-container {
+    overflow-y: hidden;
+    padding-right: 0px;
+  }
+}
+
+
+
+
+
+
 @media (min-width: 0px) and (max-width: 768px) {
     /* Styles for phones */
     .panel-createorder-query .forms {
-        
         flex-direction: column;
         gap: 10px;
     }

@@ -84,18 +84,18 @@
     height: 350px;
     justify-content: space-between;
     gap: 10px;
+    overflow-y: scroll;
+    padding-right: 8px;
 }
 
 .order-confirmation .content .left-panel .list {
     width: 100%;
     flex: 1;
     padding-left: 8px;
-    padding-right: 8px;
     padding-bottom: 8px;
     display: flex;
     flex-direction: column;
     font-size: 0.8rem;
-    overflow-y: scroll;
     position: relative;
 }
 
@@ -106,16 +106,32 @@
     position: sticky;
     background-color: var(--Panel-Background-White);
     top: 0;
+    border-bottom: 1px solid gray;
+    padding-bottom: 6px;
 }
 
 .order-confirmation .content .left-panel .list .item{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-top: 10px;
 }
 
+.order-confirmation .content .left-panel .list .item .cost{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-confirmation .content .left-panel .list .item .name{
+    width: 100%;
+    font-weight: bold;
+}
+
 .order-confirmation .content .left-panel .summary {
+    position: sticky;
+    bottom: 0;
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
     display: flex;
@@ -123,6 +139,7 @@
     gap: 10px;
     padding-top: 6px;
     padding-bottom: 6px;
+    background-color: var(--Panel-Background-White);
 }
 
 .order-confirmation .content .right-panel{
@@ -158,6 +175,7 @@
 
 .order-confirmation .content .right-panel .qr-code button{
     justify-content: center;
+    
 }
 
 .order-confirmation .content .right-panel .id-card {
@@ -174,7 +192,28 @@
     display: flex;
     flex-direction: row;
     align-self: flex-end;
-    gap: 10px
+    gap: 10px;
+    
+}
+
+
+.order-confirmation .buttons button:last-child {
+    background-color: var(--Button-Background-Gold);
+    color: var(--TextColor-White);
+    border-radius: 3px;
+    transition: 100ms;
+}
+
+.order-confirmation .buttons button:first-child {
+    border: 1px solid var(--Button-Background-Gold);
+    border-radius: 3px;
+    transition: 100ms;
+}
+
+.order-confirmation .buttons button:active {
+    background-color: var(--Button-Background-Active-Gold);
+    color: var(--TextColor-White);
+    transform: scale(0.97); 
 }
 
 

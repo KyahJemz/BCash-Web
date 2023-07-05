@@ -1,8 +1,16 @@
+/* 
+#########################################
+BCASH WEB - ITEMS MODULE
+Event Handler for Items
+#########################################
+*/
+
 import {
     bindItemsEventButtons,
     bindDropdownSubItemEventButtons
 } from '../main.js';
 
+// USED FOR FILTERS
 function getFilteredItems (temp,items,filter,search) {
     if(filter == "All"){
         items.forEach(item => {
@@ -20,6 +28,7 @@ function getFilteredItems (temp,items,filter,search) {
     return temp;
 }
 
+// USED FOR SORTING
 function getSortedItems (temp,sort) {
     if (sort == "Ascending") {
         temp.sort((a, b) => {
@@ -48,6 +57,7 @@ function getSortedItems (temp,sort) {
     return temp;
 }
 
+// USED FOR LAYOUT
 function getLayoutTag (layout, container) {
     if(layout == "Card") {
         if (container.querySelector(".list-layout")) {
@@ -64,13 +74,13 @@ function getLayoutTag (layout, container) {
     }
 }
 
+// USED FOR UPDATING FILTER DROPDOWN SUBITEMS
 function updateFilterCategoryDropdown(dropdown,items, elemetId){
     dropdown.innerHTML = 
     `<a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>`;
 
     const uniqueCategories = new Set();
     items.forEach(item => uniqueCategories.add(item.category));
-
     Array.from(uniqueCategories).forEach(item => { 
         dropdown.innerHTML = dropdown.innerHTML + 
         `<a class="dropdownButtonSubItem" href="javascript:void(0)">`+ item +`</a>`;
@@ -79,6 +89,7 @@ function updateFilterCategoryDropdown(dropdown,items, elemetId){
     bindDropdownSubItemEventButtons(elemetId);
 }
 
+// USED FOR DISPLAYING ITEMS
 export function displayItems(items, order, type) {
     let temp = [];
 
@@ -92,16 +103,16 @@ export function displayItems(items, order, type) {
         let layoutTag ="";
         let button = ``;
 
-        temp = getFilteredItems(temp,items,filter,search);
+        temp = getFilteredItems(temp,items,filter,search); // FILTER ITEMS FISRT
 
-        temp = getSortedItems(temp,sort);
+        temp = getSortedItems(temp,sort); // SORT ITEMS SECOND
 
-        layoutTag = getLayoutTag(layout,container);
+        layoutTag = getLayoutTag(layout,container); // GET LAYOUT
 
-        container.querySelector(layoutTag).innerHTML = '';
+        container.querySelector(layoutTag).innerHTML = ''; // CLEAR DISPLAY
+
         temp.forEach(item => {
-            
-            const existing = order.items.find(itemx => itemx.itemId === item.itemId);
+            const existing = order.items.find(itemx => itemx.itemId === item.itemId); // USED TO CHANGE BUTTONS FOR ALL ADDED TO CART ITEMS
             if (existing) {
                 button = `
                 <div class="item-button">
@@ -116,6 +127,7 @@ export function displayItems(items, order, type) {
             `;
             }
 
+            // USED TO DISPLAY ITEMS IN LAYOUT SELECTED
             container.querySelector(layoutTag).innerHTML = container.querySelector(layoutTag).innerHTML + `
             <div class="item-container" data-item-id="`+ item.itemId +`" data-name="`+ item.name +`" data-cost="`+ item.cost +`"  data-image="`+ item.image +`">
                 <div class="item-image">
@@ -136,8 +148,10 @@ export function displayItems(items, order, type) {
           `;
         });
 
+        // UPDATETING FILTER DROPDON SUBITEMS
         updateFilterCategoryDropdown(document.getElementById("createorder-category-choices"),items,"createorder-category-choices");
 
+        // USED TO DIPLAY SEARCH RESULT OF EMPTY
         if (temp.length === 0) {
             if (items.length > 0) {
                 container.querySelector(layoutTag).innerHTML = `<div class="emptyBlock">No Results`;

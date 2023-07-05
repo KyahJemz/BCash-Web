@@ -54,6 +54,4 @@ export default class Order {
     uploadOrderData(this.walletAddress, this.items);
     console.log("Uploading");
   }
-
-
 }
