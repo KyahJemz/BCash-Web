@@ -127,7 +127,7 @@ export function displayItems(items, order, type) {
                             <p class="title"><b>`+ item.name +`</b></p>
                         </div>
                         <div class="info">
-                            <p class="cost">Cost : <b>`+ item.cost +`</b></p>
+                            <p class="cost">Cost : ₱<b>`+ Number(item.cost).toFixed(2) +`</b></p>
                         </div>
                     </div>
                 </div>
@@ -175,7 +175,7 @@ export function displayItems(items, order, type) {
                             <p class="title"><b>`+ item.name +`</b></p>
                         </div>
                         <div class="info">
-                            <p class="cost">Cost : <b>`+ item.cost +`</b></p>
+                            <p class="cost">Cost : ₱<b>`+ item.cost +`</b></p>
                         </div>
                     </div>
                 </div>

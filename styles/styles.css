@@ -120,6 +120,12 @@ b {
     cursor: pointer;
 }
 
+.emptyBlock {
+    color: var(--TextColor-LightBlack);
+    font-weight: lighter;
+    font-size: 0.8rem;
+}
+
 /* 
     DROP DOWN 
 */

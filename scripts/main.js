@@ -84,7 +84,7 @@ export function bindQuantityEventButtons() {
     button.addEventListener('click', () => {
       const type = button.dataset.type;
       const itemId = button.parentNode.parentNode.dataset.itemId;
-      quantity(button, order, itemId, type);
+      quantity(order, itemId, type);
     });
   });
 }

@@ -11,7 +11,7 @@ export function displayOrders(order) {
         </div>
         <div class="details">
           <p class="name-text">`+ item.name +`</p>
-          <p class="cost-text">P`+ item.cost +`</p>
+          <p class="cost-text">₱`+ Number(item.cost).toFixed(2) +`</p>
         </div>
         <div class="quantity">
           <button data-type="less" class="quantityButton">-</button>
@@ -41,14 +41,7 @@ export function displayOrders(order) {
     console.log("Fired");
   }
 
-  export function toggleQuantityButton(button, order, itemId) {
-    order.items.forEach(item => {
-      if (item.itemId === itemId) {
-        button.parentNode.querySelector('.quantity-text').innerHTML = item.quantity;
-        button.parentNode.parentNode.querySelector('.cost-text').innerHTML = "p"+item.cost;
-      }
-    });
-
+  export function toggleQuantityButton(order, itemId) {
     const item = order.items.find(item => item.itemId === itemId);
     if (!item) {
       let itemContainer = document.querySelectorAll('.item-container');
@@ -62,8 +55,6 @@ export function displayOrders(order) {
         }
       });
     }
-
-    
   }
 
   export function refreshReceiptValues(order) {
@@ -77,7 +68,7 @@ export function displayOrders(order) {
     })
 
     document.getElementById("order-quantity").innerHTML = "Quantity: "+quantiy;
-    document.getElementById("order-subtotal").innerHTML = "Subtotal: ₱"+subtotal;
-    document.getElementById("order-total").innerHTML = "Total: ₱"+(Number(subtotal)-Number(discount));
+    document.getElementById("order-subtotal").innerHTML = "Subtotal: ₱"+Number(subtotal).toFixed(2);
+    document.getElementById("order-total").innerHTML = "Total: ₱"+(Number(subtotal).toFixed(2)-Number(discount).toFixed(2));
 
   }

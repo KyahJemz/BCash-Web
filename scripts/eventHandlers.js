@@ -69,11 +69,11 @@ export function addToCart(button, order, itemId, name, cost, image, quantity) {
     refreshReceiptValues(order);
 }
 
-export function quantity(button, order, itemId, type) {
+export function quantity(order, itemId, type) {
     console.log("Quantity Fired")
     order.updateQuantity(itemId, type)
     displayOrders(order);
-    toggleQuantityButton(button, order,itemId)
+    toggleQuantityButton(order,itemId)
     refreshReceiptValues(order);
 }
 
