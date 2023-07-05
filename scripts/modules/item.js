@@ -161,12 +161,12 @@ export function displayItems(items, order, type) {
         }
         
     } else if (type == "ItemManagement"){
-        console.log("REFRESHING cREATE ORDER ITEMS");
-        const filter = document.getElementById('createorder-filter-dropdown').innerHTML;
-        const sort = document.getElementById('createorder-sort-dropdown').innerHTML;
-        const layout =document.getElementById('createorder-layout-dropdown').innerHTML;
-        const search = document.getElementById("createorder-search").value.toUpperCase();
-        const container = document.querySelector(".order-items-container");
+        console.log("REFRESHING ITEMMANAGEMETN ITEMS");
+        const filter = document.getElementById('itemmanagement-filter-dropdown').innerHTML;
+        const sort = document.getElementById('itemmanagement-sort-dropdown').innerHTML;
+        const layout =document.getElementById('itemmanagement-layout-dropdown').innerHTML;
+        const search = document.getElementById("itemmanagement-search").value.toUpperCase();
+        const container = document.querySelector(".panel-itemmanagement-content");
         let layoutTag ="";
 
         temp = getFilteredItems(temp,items,filter,search);
@@ -179,27 +179,38 @@ export function displayItems(items, order, type) {
         temp.forEach(item => {
 
             container.querySelector(layoutTag).innerHTML = container.querySelector(layoutTag).innerHTML + `
-            <div class="item-container" data-item-id="`+ item.itemId +`" data-name="`+ item.name +`" data-cost="`+ item.cost +`"  data-image="`+ item.image +`">
-                <div class="item-image">
-                    <img src="`+ item.image +`">
-                </div>
-                <div class="item-details-container">
-                    <div class="info-container">
-                        <div class="info">
-                            <p class="title"><b>`+ item.name +`</b></p>
-                        </div>
-                        <div class="info">
-                            <p class="cost">Cost : ₱<b>`+ item.cost +`</b></p>
+                <div class="item-container" data-item-id="`+ item.itemId +`" data-name="`+ item.name +`" data-cost="`+ item.cost +`"  data-image="`+ item.image +`">
+                    <div class="item-image">
+                        <img src="`+ item.image +`" alt="item-image">
+                    </div>
+                    <div class="item-details-container">
+                        <div class="info-container">
+                            <div class="info info-title">
+                                <p class="title"><b>`+ item.name +`</b></p>
+                            </div>
+                            <div class="info info-cost">
+                                <p class="cost">Cost: ₱ <b>`+ item.cost +`</b></p>
+                            </div>
+                            <div class="info info-created">
+                                <p class="created">Date Created: <b>`+ item.dateCreated +`</b></p>
+                            </div>
+                            <div class="info info-modified">
+                                <p class="modified">Date Modified: <b>`+ item.dateModified +`</b></p>
+                            </div>
                         </div>
                     </div>
+                    <div class="item-options">
+                        <button title="Edit" class="curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                        <button title="Delete" class="curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
+                    </div>
                 </div>
-                <div class="item-button">
-                    <button data-type="AddToCart" title="Add To Cart" class="addToCartButton curson-pointer"><p>Add</p></button>
-                </div>
-            </div>
-          `;
+            `;
         });
 
+        // UPDATETING FILTER DROPDON SUBITEMS
+        updateFilterCategoryDropdown(document.getElementById("itemmanagement-category-choices"),items,"itemmanagement-category-choices");
+
+        // USED TO DIPLAY SEARCH RESULT OF EMPTY
         if (temp.length === 0) {
             if (items.length > 0) {
                 container.querySelector(layoutTag).innerHTML = `<div class="emptyBlock">No Results`;

@@ -10,7 +10,7 @@ import {
     dropdownEvents, 
     changeSelectionEvents,
     refreshReceipt,
-    refreshItems,
+    displayItemsEvents,
     clearOrder,
     openDialogBoxEvents,
     openAlertDialogBoxEvents,
@@ -39,7 +39,7 @@ items.push(new Item("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-0
 
 console.log(items);
 
-//refreshItems(items, "CreateOrder");
+//displayItemsEvents(items, "CreateOrder");
 
 
 
@@ -112,7 +112,11 @@ document.getElementById('createorder-placeorder').addEventListener('click', () =
 //#####//
 
 document.getElementById('createorder-search').addEventListener('input', () => {
-  refreshItems(items, order, "CreateOrder");
+  displayItemsEvents(items, order, "CreateOrder");
+});
+
+document.getElementById('itemmanagement-search').addEventListener('input', () => {
+  displayItemsEvents(items, order, "ItemManagement");
 });
 
 export function bindItemsEventButtons() {
@@ -126,8 +130,6 @@ export function bindItemsEventButtons() {
     });
   });
 }
-
-
 
 
 
@@ -161,7 +163,9 @@ document.querySelectorAll('.dropdownButtonSubItem').forEach(item => {
   item.addEventListener('click', event => {
     const element = event.currentTarget;
     changeSelectionEvents(element);
-    refreshItems(items, order, "CreateOrder");
+
+    const panel = element.parentNode.parentNode.dataset.panel;
+    displayItemsEvents(items, order, panel);
   });
 });
 
@@ -170,7 +174,9 @@ export function bindDropdownSubItemEventButtons(query) {
     item.addEventListener('click', event => {
       const element = event.currentTarget; 
       changeSelectionEvents(element); 
-      refreshItems(items, order, "CreateOrder");
+      
+      const panel = element.parentNode.parentNode.dataset.panel;
+    displayItemsEvents(items, order, panel);
     });
   });
 }

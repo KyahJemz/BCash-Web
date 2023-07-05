@@ -297,7 +297,7 @@
                     </div>
                 </div>
 
-                <div id="panel-itemmanagement" class="body-content-panel hidden"> 
+                <div id="panel-itemmanagement" class="body-content-panel visible"> 
                     <div class="panel-itemmanagement-query panel">
                         <div class="forms">
                             <div class="left-panel">
@@ -306,21 +306,19 @@
                                     <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
                                 </div>
                                 <div>
-                                    <div class="dropdown">
+                                    <div class="dropdown" data-panel="ItemManagement">
                                         <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/category-yellow.png" alt="category">
                                             <span id="itemmanagement-filter-dropdown" class="dropdown-text">All</span>
                                             <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                         </button>
-                                        <div class="dropdown-content">
+                                        <div id="itemmanagement-category-choices" class="dropdown-content">
                                             <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Foods</a>
-                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Drinks</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="dropdown">
+                                    <div class="dropdown" data-panel="ItemManagement">
                                         <button title="Sort" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
                                             <span id="itemmanagement-sort-dropdown" class="dropdown-text">Ascending</span>
@@ -333,7 +331,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="dropdown">
+                                    <div class="dropdown" data-panel="ItemManagement">
                                         <button title="Layout View" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
                                             <span id="itemmanagement-layout-dropdown" class="dropdown-text">List</span>
@@ -357,75 +355,43 @@
                         </div>
                     </div>
                     <div class="panel-itemmanagement-content">
-                        
-                        
-                        <div class="card-layout">
-                            <!--
-                            <div class="item-container">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-                            -->
-                        </div>
-                        
-
+                    
                        
                         <div class="list-layout">
-                            <!--
-                            <div class="list-item-container">
+                            <div class="item-container" data-item-id="14" data-name="Tinapay" data-cost="123"  data-image="../images/school.jpg">
                                 <div class="item-image">
                                     <img src="../images/school.jpg" alt="item-image">
                                 </div>
                                 <div class="item-details-container">
                                     <div class="info-container">
-                                        <div class="info">
+                                        <div class="info info-title">
                                             <p class="title"><b>Tinapay</b></p>
                                         </div>
-                                        <div class="category">
-                                            <p class="">Category : <b>Foods</b></p>
+                                        <div class="info info-cost">
+                                            <p class="cost">Cost: ₱ <b>P123.23</b></p>
                                         </div>
-                                        <div class="info">
-                                            <p class="cost">Cost : <b>P94.23</b></p>
+                                        <div class="info info-created">
+                                            <p class="created">Date Created: <b>P123.23</b></p>
                                         </div>
-                                    </div>
-                                    <div class="info-container">
-                                        <div class="info">
-                                            <p>Date Modified:</p>
-                                            <p><b>2023-06-18</b></p>
-                                        </div>
-                                        <div class="info">
-                                            <p>Date Created:</p>
-                                            <p><b>2023-06-18</b></p>
+                                        <div class="info info-modified">
+                                            <p class="modified">Date Modified: <b>P123.23</b></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="item-options">
-                                    <button title="Edit" class="curson-pointer" onclick="openDialogBox('Edit-Item')"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button title="Delete" class="curson-pointer" onclick="openDialogBox('Delete-Item')"><img src="../images/icons/delete-red.png" alt=""></button>
+                                    <button title="Edit" class="curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                                    <button title="Delete" class="curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
                                 </div>
                             </div>
-                             -->
+
+                            
+    
                         </div>
                        
                     </div>
                 </div>
     
-                <div id="panel-createorder" class="body-content-panel visible">
+                <div id="panel-createorder" class="body-content-panel hidden">
                     <div class="panel-createorder-content">
                         <div class="left-panel">
                             <div class="query-container panel"> 
@@ -434,7 +400,7 @@
                                     <input placeholder="Search..." id="createorder-search" class="textbox" type="search" name="createorder-search">
                                 </div>
                                 <div>
-                                    <div class="dropdown">
+                                    <div class="dropdown" data-panel="CreateOrder">
                                         <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/category-yellow.png" alt="category">
                                             <span id="createorder-filter-dropdown" class="dropdown-text">All</span>
@@ -446,7 +412,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="dropdown">
+                                    <div class="dropdown" data-panel="CreateOrder">
                                         <button title="Sort" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
                                             <span id="createorder-sort-dropdown" class="dropdown-text">Ascending</span>
@@ -459,7 +425,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="dropdown">
+                                    <div class="dropdown" data-panel="CreateOrder">
                                         <button title="Layout View" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
                                             <span id="createorder-layout-dropdown" class="dropdown-text">List</span>
@@ -661,6 +627,8 @@
             </div>
         </div>
     </div>
+
+
     <script src="../scripts/notification-box.js"></script>
     <script src="../scripts/chart.js"></script>
 

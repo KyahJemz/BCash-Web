@@ -111,6 +111,31 @@
     margin-bottom: 2px;
   }
 
+  .list-layout .item-options {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    position: absolute;
+    gap: 2px;
+    bottom: 2px;
+    right: 2px;
+  }
+
+  .list-layout .item-options button {
+    width: 20px;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .list-layout .item-options button img{
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  .list-layout .item-container .item-details-container .info-container .info-created {
+    padding-top: 20px;
+  }
+
 /* ############# */
 /* FOR GRID VIEW */
 /* ############# */
@@ -160,11 +185,38 @@
     margin-bottom: 3px;
   }
 
+  .card-layout .item-container .item-details-container .info-container .info-created,
+  .card-layout .item-container .item-details-container .info-container .info-modified {
+    display: none;
+  }
 
   .card-layout .item-buttons button {
     width: 20px;
     height: 20px;
   }
+
+  .card-layout .item-options {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    position: absolute;
+    gap: 2px;
+    bottom: 4px;
+    right: 4px;
+  }
+
+  .card-layout .item-options button {
+    width: 20px;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .card-layout .item-options button img{
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+
 
 /* ############################# */
 /* FOR DIALOG BOX ADD/ EDIT ITEM */

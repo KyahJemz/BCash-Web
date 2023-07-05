@@ -106,7 +106,7 @@ export function placeOrderEvents(order) {
 // ITEM EVENTS
 //#####//
 
-export function refreshItems(items, order, type){
+export function displayItemsEvents(items, order, type){
     displayItems(items,order, type);
     displayOrders(order);
 }
@@ -130,9 +130,9 @@ export function menuSelectionEvents(value, items, order) {
 
     // Check and Refresh Items Depending On Panel Clicked
     if (value.replace(new RegExp(" ", 'g'), '').toUpperCase() === "ITEMMANAGEMENT"){
-        refreshItems(items,order, value.replace(new RegExp(" ", 'g'), ''))
+        displayItems(items,order, value.replace(new RegExp(" ", 'g'), ''))
     } else if (value.replace(new RegExp(" ", 'g'), '').toUpperCase() === "CREATEORDER") {3
-        refreshItems(items,order, value.replace(new RegExp(" ", 'g'), ''))
+        displayItems(items,order, value.replace(new RegExp(" ", 'g'), ''))
     }
 }
 
