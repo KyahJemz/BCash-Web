@@ -133,7 +133,17 @@
   }
 
   .list-layout .item-container .item-details-container .info-container .info-created {
-    padding-top: 20px;
+    padding-top: 25px;
+    padding-bottom: 4px;
+  }
+
+  .list-layout .item-container .item-details-container .info-container .info-cost {
+    padding-top: 4px;
+  }
+
+  .list-layout .item-container .item-details-container .info-container .info-created p,
+  .list-layout .item-container .item-details-container .info-container .info-modified p{
+    font-size: 0.7rem;
   }
 
 /* ############# */
@@ -215,8 +225,6 @@
     width: 100%;
     aspect-ratio: 1/1;
   }
-
-
 
 /* ############################# */
 /* FOR DIALOG BOX ADD/ EDIT ITEM */

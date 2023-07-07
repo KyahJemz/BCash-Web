@@ -45,21 +45,15 @@ console.log(items);
 
 
 
-document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
-  closeDialogBoxEvents();
-});
 
-document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
-  closeDialogBoxEvents();
-});
+
+
 //#####//
 // ORDER MODULE
 //#####//
 
 
 const order = new Order();
-
-openDialogBoxEvents("test");
 
 export function getOrder(){
   if (order.items.length <= 0) {
@@ -120,15 +114,38 @@ document.getElementById('itemmanagement-search').addEventListener('input', () =>
 });
 
 export function bindItemsEventButtons() {
-  document.querySelectorAll('.addToCartButton').forEach(button => {
-    button.addEventListener('click', () => {
-        const itemId = button.parentNode.parentNode.dataset.itemId;
-        const name = button.parentNode.parentNode.dataset.name;
-        const cost = button.parentNode.parentNode.dataset.cost;
-        const image = button.parentNode.parentNode.dataset.image;
-        addToCart(button, order, itemId, name, cost, image, "1");
+  const addToCartButtons = document.querySelectorAll('.addToCartButton');
+  if (addToCartButtons.length > 0) {
+    document.querySelectorAll('.addToCartButton').forEach(button => {
+      button.addEventListener('click', () => {
+          const itemId = button.parentNode.parentNode.dataset.itemId;
+          const name = button.parentNode.parentNode.dataset.name;
+          const cost = button.parentNode.parentNode.dataset.cost;
+          const image = button.parentNode.parentNode.dataset.image;
+          addToCart(button, order, itemId, name, cost, image, "1");
+      });
     });
-  });
+  }
+
+  const editItemButtons = document.querySelectorAll('.editItemButton');
+  if (editItemButtons.length > 0){
+    document.querySelectorAll('.editItemButton').forEach(button => {
+      button.addEventListener('click', () => {
+        const itemId = button.parentNode.parentNode.dataset.itemId; 
+        openDialogBoxEvents("Edit-Item",itemId);
+      });
+    });
+  }
+
+  const deleteItemButtons = document.querySelectorAll('.deleteItemButton');
+  if (deleteItemButtons.length > 0){
+    document.querySelectorAll('.deleteItemButton').forEach(button => {
+      button.addEventListener('click', () => {
+        const itemId = button.parentNode.parentNode.dataset.itemId; 
+        openDialogBoxEvents("Delete-Item",itemId);
+      });
+    });
+  }
 }
 
 
@@ -152,12 +169,12 @@ document.querySelectorAll('.menuSelectionButton').forEach(menuItem => {
 //#####//
 
 document.querySelectorAll('.dropdownButton').forEach(dropdownBtn => {
-    dropdownBtn.addEventListener('click', event => {
-      const value = event.currentTarget;
-      const position = value.dataset.layout;
-      dropdownEvents(event, value, position);
-    });
+  dropdownBtn.addEventListener('click', event => {
+    const value = event.currentTarget;
+    const position = value.dataset.layout;
+    dropdownEvents(event, value, position);
   });
+});
 
 document.querySelectorAll('.dropdownButtonSubItem').forEach(item => {
   item.addEventListener('click', event => {
@@ -176,7 +193,7 @@ export function bindDropdownSubItemEventButtons(query) {
       changeSelectionEvents(element); 
       
       const panel = element.parentNode.parentNode.dataset.panel;
-    displayItemsEvents(items, order, panel);
+      displayItemsEvents(items, order, panel);
     });
   });
 }
@@ -188,6 +205,15 @@ export function bindDropdownSubItemEventButtons(query) {
 
 
 
+document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
+  closeDialogBoxEvents();
+});
+
+export function bindDialogBoxCloseButton(){
+  document.querySelector(".dialog-box-close-button").addEventListener('click', () => {
+    closeDialogBoxEvents();
+  });
+}
 
 
 

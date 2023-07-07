@@ -7,7 +7,7 @@ Event Handler for Items
 
 import {
     bindItemsEventButtons,
-    bindDropdownSubItemEventButtons
+    bindDropdownSubItemEventButtons,
 } from '../main.js';
 
 // USED FOR FILTERS
@@ -200,8 +200,8 @@ export function displayItems(items, order, type) {
                         </div>
                     </div>
                     <div class="item-options">
-                        <button title="Edit" class="curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                        <button title="Delete" class="curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
+                        <button title="Edit" class="editItemButton curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
+                        <button title="Delete" class="deleteItemButton curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
                     </div>
                 </div>
             `;
@@ -220,5 +220,6 @@ export function displayItems(items, order, type) {
         }
     }
  
+    console.log("fired");
   bindItemsEventButtons();
 }

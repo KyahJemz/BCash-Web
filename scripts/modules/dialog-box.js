@@ -1,6 +1,9 @@
-import {getOrder} from '../main.js';
+import {
+    getOrder,
+    bindDialogBoxCloseButton
+} from '../main.js';
 
-export function openDialogBox(type){
+export function openDialogBox(type,data){
     const box = document.getElementById("Dialog-Box-Container");
     const header = document.getElementById("Dialog-Box-header");
     const body = document.getElementById("Dialog-Box-Body");
@@ -9,10 +12,68 @@ export function openDialogBox(type){
         header.innerHTML = "Add Item Form"
     } else if (type=="Edit-Item"){
         box.style.display = "flex";
-        header.innerHTML = "Edit Item Form"
+        header.innerHTML = "Edit Item Form";
+
+        body.innerHTML = ``;
+        body.innerHTML = `
+                <div class="Edit-Item">
+                    <div class="image">
+                        <img src="../images/school.jpg" alt="">
+                    </div>
+                    <div class="form">
+                        <div>
+                            <p>Item Image</p>
+                            <input type="file" name="item-image" accept="image/*">
+                        </div>
+                        <div>
+                            <p>Item Name</p>
+                            <input type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
+                        </div>
+                        <div>
+                            <p>Item Cost</p>
+                            <input type="number" title="Number Only" name="item-cost" required>
+                        </div>
+                        <div>
+                            <p>Item Category</p>
+                            <input type="text" title="Can be Existing Category or new Category" name="item-category" required>
+                        </div>
+                        <div class="button-container">
+                            <button class="dialog-box-close-button" type="button">Cancel</button>
+                            <button type="submit" name="form" value="Add-Item">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+                `;
+
+                bindDialogBoxCloseButton();
+
     } else if (type=="Delete-Item"){
         box.style.display = "flex";
         header.innerHTML = "Delete Item Confirmation"
+
+        body.innerHTML = ``;
+        body.innerHTML = `
+            <div class="Delete-Item">
+                <div class="form">
+                    <div>
+                        <p><strong>Are you sure you want to delete this item?</strong></p>
+                        <p><em>Item Name: Tinapaty</em></p>
+                        <p><em>Item Cost: $132</em></p>
+                        <p><em>Item Category: Food</em></p>
+                        <br>
+                        <p>Please confirm the deletion by entering your PIN CODE below:</p>
+                        <input type="text" name="item-delete-Pin-Code">
+                    </div>
+                    <div class="button-container">
+                        <button class="dialog-box-close-button" type="button">Cancel</button>
+                        <button type="submit" name="form" value="Add-Item">Delete</button>
+                    </div>
+                </div>
+            </div>
+            `;
+
+            bindDialogBoxCloseButton();
+
     } else if (type=="Place-Order"){
         box.style.display = "flex";
         header.innerHTML = "Order Confirmation"
@@ -81,17 +142,21 @@ export function openDialogBox(type){
                             </div>
                         </div>
                         <div class="buttons">
-                            <button class="btn-back">Cancel</button>
+                            <button class="btn-back dialog-box-close-button">Cancel</button>
                             <button class="btn-submit">Submit</button>
                         </div>
                     </div>
                     `;
+
+                    bindDialogBoxCloseButton();
             }
     
         }
         
         
     }
+
+    
 }
 
 export function openAlertDialogBox(title,message){
