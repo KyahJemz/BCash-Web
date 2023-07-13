@@ -13,8 +13,36 @@ export function openDialogBox(type,data){
 
         body.innerHTML = ``;
         body.innerHTML = `
-        
+            <div class="Add-Item">
+                <div class="image">
+                    <img src="../images/school.jpg" alt="">
+                </div>
+                <div class="form">
+                    <div>
+                        <p>Item Image</p>
+                        <input type="file" name="item-image" accept="image/*">
+                    </div>
+                    <div>
+                        <p>Item Name</p>
+                        <input type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
+                    </div>
+                    <div>
+                        <p>Item Cost</p>
+                        <input type="number" title="Number Only" name="item-cost" required>
+                    </div>
+                    <div>
+                        <p>Item Category</p>
+                        <input type="text" title="Can be Existing Category or new Category" name="item-category" required>
+                    </div>
+                    <div class="button-container">
+                        <button class="dialog-box-close-button" type="button">Cancel</button>
+                        <button type="submit" name="form" value="Add-Item">Save Changes</button>
+                    </div>
+                </div>
+            </div>
         `;
+
+        bindDialogBoxCloseButton();
 
     } else if (type=="Edit-Item"){
         box.style.display = "flex";

@@ -15,17 +15,16 @@
     <link rel="stylesheet" href="../styles/merchant/createorder.css">
     <link rel="stylesheet" href="../styles/merchant/transactions.css">
     <link rel="stylesheet" href="../styles/merchant/itemmanagement.css">
-
-    <!-- START JAVASCRIPTS -->
-    
-    
-<!-- END JAVASCRIPTS -->
 </head>
 
 <body>
 
 
     <div class="design-background"></div>
+    
+<!--
+    SIDEBAR
+-->  
     <div class="sidebar-container">
         <div class="top-panel">
             <div class="image">
@@ -75,6 +74,9 @@
             </nav>
         </div>
     </div>
+<!--
+    CONTENT TOP BAR
+-->   
     <div class="content-container">
         <div class="top-panel">
             <div class="left-side">
@@ -97,10 +99,18 @@
                 </div>
             </div>
         </div>
+<!--
+    CONTENT HEADER 
+-->
         <div class="bottom-panel">
             <div class="content">
                 <div class="titlebar"><p id="Panel-Title">Home</p></div>
-
+<!--
+    CONTENT BODY
+-->
+    <!--
+        HOME 
+    -->
                 <div id="panel-home" class="body-content-panel hidden">
                     <div class="panel-home-welcome">
                         <h3>Welcome Back!</h3>
@@ -137,31 +147,33 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="panel-transactions" class="body-content-panel hidden">
+    <!--
+        TRANSACTIONS 
+    -->
+                <div id="panel-transactions" class="body-content-panel visible">
                     <div class="panel-transactions-query panel">
                         <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input id="StartDate" class="textbox" type="date" name="StartDate">
+                                <input id="transactions-startdate" class="textbox" type="date" name="StartDate">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input id="EndDate" class="textbox" type="date" name="EndDate">
+                                <input id="transactions-enddate" class="textbox" type="date" name="EndDate">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Number</label>
-                                <input id="TransactionNumber" class="textbox" type="text" name="TransactionNumber">
+                                <input id="transactions-transactionnumber" class="textbox" type="text" name="TransactionNumber">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input id="TransactionName" class="textbox" type="text" name="TransactionName">
+                                <input id="transaction-transactionname" class="textbox" type="text" name="TransactionName">
                             </div>
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="dropdown-text">All</span>
+                                        <span class="transaction-status-dropdown dropdown-text">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -176,15 +188,15 @@
                     </div>
                     <div class="panel-transactions-buttons">
                         <div>
-                            <button class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
+                            <button id="transaction-search-button" class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
                                 <img src="../images/icons/search-yellow.png" alt="search">
                                 <span>Search</span>
                             </button>
-                            <button class="btn-default curson-pointer" type="reset" value="Clear">
+                            <button id="transaction-clear-button" class="btn-default curson-pointer" type="reset" value="Clear">
                                 <img src="../images/icons/clear-yellow.png" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button class="btn-default curson-pointer" type="button" value="Export">
+                            <button id="transaction-export-button" class="btn-default curson-pointer" type="button" value="Export">
                                 <img src="../images/icons/download-yellow.png" alt="search">
                                 <span>Export</span>
                             </button>
@@ -192,11 +204,11 @@
                         <div>
                             <div>
                                 <div>Total Orders: </div>
-                                <div id="TotalOrders" class="text">???</div>
+                                <div id="transaction-totalorders-text" class="text">???</div>
                             </div>
                             <div>
                                 <div >Total Sales: </div>
-                                <div id="TotalSales" class="text">???</div>
+                                <div id="transaction-totalsales-text" class="text">???</div>
                             </div>
                         </div>
                     </div>
@@ -247,7 +259,7 @@
                                 </colgroup>
                             <tbody>
                                 <tr>
-                                    <td><div class="col1 cell" title="123456789"><a class="view-more" href="">123456789</a></div></td>
+                                    <td><div class="col1 cell" title="123456789"><a class="transaction-viewdata-button view-more" href="">123456789</a></div></td>
                                     <td><div class="col2 cell" title="Completed">Completed</div></td>
                                     <td><div class="col3 cell" title="John Doe">John Doe</div></td>
                                     <td><div class="col4 cell" title="Student">Student</div></td>
@@ -264,40 +276,38 @@
                     </div>
                     <div class="panel-transactions-footer">
                         <div class="page-numbers-container">
-                            <ul class="page-numbers">
-                                <button>&lt;</button>
-                                <li><a class="curson-pointer selected" onclick="">1</a></li>
-                                <li><a class="curson-pointer" onclick="">2</a></li>
-                                <li><a class="curson-pointer" onclick="">3</a></li>
-                                <li><a class="curson-pointer" onclick="">4</a></li>
-                                <li><a class="curson-pointer" onclick="">5</a></li>
-                                <button>&gt;</button>
+                            <ul id="transaction-pagenumbers" class="page-numbers">
+                                <button id="transaction-leftpage-button">&lt;</button>
+                                <li><a class="transaction-pagenumber-button curson-pointer selected" onclick="">1</a></li>
+                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">2</a></li>
+                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">3</a></li>
+                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">4</a></li>
+                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">5</a></li>
+                                <button id="transaction-rightpage-button">&gt;</button>
                             </ul>
                         </div>
                         <div>
-                            <div>
-                                Total :
-                            </div>
-                            <div>
-                                ???
-                            </div>
+                            <div>Total: </div>
+                            <div id="transaction-totalsales-text" class="text">???</div>
                         </div>
                         <div class="dropdown">
                             <div class="dropdown-content">
                                 <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
                                 <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">75/Page</a>
                                 <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
+                                <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="dropdown-text">25/Page</span>
+                                <span id="transaction-recordscount-dropwond" class="dropdown-text">25/Page</span>
                                 <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                             </button>
                         </div>
                     </div>
                 </div>
-
-                <div id="panel-itemmanagement" class="body-content-panel visible"> 
+    <!--
+        ITEM MANAGEMENT 
+    -->
+                <div id="panel-itemmanagement" class="body-content-panel hidden"> 
                     <div class="panel-itemmanagement-query panel">
                         <div class="forms">
                             <div class="left-panel">
@@ -346,7 +356,7 @@
                             </div>
                             <div class="right-panel">
                                 <div>
-                                    <button class="curson-pointer" type="button" onclick="openDialogBox('Add-Item')">
+                                    <button class="curson-pointer addItemButton" type="button">
                                         <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
                                         <span>Add Item</span>
                                     </button>
@@ -355,42 +365,12 @@
                         </div>
                     </div>
                     <div class="panel-itemmanagement-content">
-                    
-                       
-                        <div class="list-layout">
-                            <div class="item-container" data-item-id="14" data-name="Tinapay" data-cost="123"  data-image="../images/school.jpg">
-                                <div class="item-image">
-                                    <img src="../images/school.jpg" alt="item-image">
-                                </div>
-                                <div class="item-details-container">
-                                    <div class="info-container">
-                                        <div class="info info-title">
-                                            <p class="title"><b>Tinapay</b></p>
-                                        </div>
-                                        <div class="info info-cost">
-                                            <p class="cost">Cost: ₱ <b>P123.23</b></p>
-                                        </div>
-                                        <div class="info info-created">
-                                            <p class="created">Date Created: <b>P123.23</b></p>
-                                        </div>
-                                        <div class="info info-modified">
-                                            <p class="modified">Date Modified: <b>P123.23</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-options">
-                                    <button class="editItemButton" title="Edit" class="curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                                    <button class="deleteItemButton" title="Delete" class="curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
-                                </div>
-                            </div>
-
-                            
-    
-                        </div>
-                       
+                        <div class="list-layout"></div>
                     </div>
                 </div>
-    
+    <!--
+        CREATE ORDER 
+    -->
                 <div id="panel-createorder" class="body-content-panel hidden">
                     <div class="panel-createorder-content">
                         <div class="left-panel">
@@ -439,28 +419,7 @@
                                 </div>
                             </div>
                             <div class="order-items-container"> 
-                                <div class="card-layout">
-                                    <!--
-                                    <div class="item-container" data-item-id="14" data-name="Tinapay" data-cost="123"  data-image="../images/school.jpg">
-                                        <div class="item-image">
-                                            <img src="../images/school.jpg" alt="item-image">
-                                        </div>
-                                        <div class="item-details-container">
-                                            <div class="info-container">
-                                                <div class="info">
-                                                    <p class="title"><b>Tinapay</b></p>
-                                                </div>
-                                                <div class="info">
-                                                    <p class="cost">Cost : <b>P123.23</b></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-button">
-                                            <button data-type="AddToCart" title="Add To Cart" class="addToCartButton curson-pointer"><p>Add</p></button>
-                                        </div>
-                                    </div>
-                                    -->
-                                </div>
+                                <div class="card-layout"></div>
                             </div>
                         </div>
 
@@ -469,24 +428,7 @@
                                 <div class="title">
                                     <p >Order:</p>
                                 </div>
-                                <div id="order-list" class="orders">
-                                    <!--
-                                    <div class="item" data-item-id="12" data-name="Tinapay" data-cost="123"  data-image="../images/school.jpg">
-                                        <div class="image">
-                                            <img src="../images/school.jpg" alt="">
-                                        </div>
-                                        <div class="details">
-                                            <p class="name-text">Tinapay</p>
-                                            <p class="cost-text">P230</p>
-                                        </div>
-                                        <div class="quantity">
-                                            <button data-type="less" class="quantityButton">-</button>
-                                            <p class="quantity-text">1</p>
-                                            <button data-type="add" class="quantityButton">+</button>
-                                        </div>
-                                    </div>
-                                    -->
-                                </div>
+                                <div id="order-list" class="orders"></div>
                                 <div class="summary">
                                     <hr>
                                     <div class="details">
@@ -515,10 +457,15 @@
                         </div>
                     </div>
                 </div>
+    <!--
+        END 
+    -->
             </div>
         </div>
     </div>
-
+<!--
+    NOTIFICATION ###
+-->
     <div id="Notification-Box-Container" class="notification-container">
         <div id="Notification-Box-Id" class="notification-box">
             <div class="header">
@@ -534,7 +481,9 @@
             </div>
         </div>
     </div>
-
+<!--
+    DIALOG BOX ###
+-->
     <div id="Dialog-Box-Container" class="dialog-container">
         <div class="dialog-content">
             <div class="header">
@@ -546,45 +495,15 @@
                 </div>
             </div>
             <div id="Dialog-Box-Body" class="body">
-                <!--
-                <div class="Add-Item">
-                    <div class="image">
-                        <img src="../images/school.jpg" alt="">
-                    </div>
-                    <div class="form">
-                        <div>
-                            <p>Item Image</p>
-                            <input type="file" name="item-image" accept="image/*">
-                        </div>
-                        <div>
-                            <p>Item Name</p>
-                            <input type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
-                        </div>
-                        <div>
-                            <p>Item Cost</p>
-                            <input type="number" title="Number Only" name="item-cost" required>
-                        </div>
-                        <div>
-                            <p>Item Category</p>
-                            <input type="text" title="Can be Existing Category or new Category" name="item-category" required>
-                        </div>
-                        <div class="button-container">
-                            <button type="button" onclick="closeDialogBox()">Cancel</button>
-                            <button type="submit" name="form" value="Add-Item">Add Item</button>
-                        </div>
-                    </div>
-                </div>
-                -->
+            </div>
         </div>
     </div>
-
-
+<!--
+    JAVASCRIPTS  ###
+-->
     <script src="../scripts/notification-box.js"></script>
     <script src="../scripts/chart.js"></script>
-
-    
     <script src="../scripts/main.js" type="module"></script>
-
 </body>
 </html>
 

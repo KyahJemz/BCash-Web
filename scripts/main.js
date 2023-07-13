@@ -146,7 +146,18 @@ export function bindItemsEventButtons() {
       });
     });
   }
+
+  const addItemButtons = document.querySelectorAll('.addItemButton');
+  if (addItemButtons.length > 0){
+    document.querySelectorAll('.addItemButton').forEach(button => {
+      button.addEventListener('click', () => {
+        openDialogBoxEvents("Add-Item");
+      });
+    });
+  }
 }
+
+
 
 
 
@@ -210,6 +221,8 @@ document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () 
 });
 
 export function bindDialogBoxCloseButton(){
+
+  
   document.querySelector(".dialog-box-close-button").addEventListener('click', () => {
     closeDialogBoxEvents();
   });
