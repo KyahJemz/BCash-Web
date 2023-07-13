@@ -10,6 +10,12 @@ export function openDialogBox(type,data){
     if (type=="Add-Item"){
         box.style.display = "flex";
         header.innerHTML = "Add Item Form"
+
+        body.innerHTML = ``;
+        body.innerHTML = `
+        
+        `;
+
     } else if (type=="Edit-Item"){
         box.style.display = "flex";
         header.innerHTML = "Edit Item Form";
@@ -150,13 +156,8 @@ export function openDialogBox(type,data){
 
                     bindDialogBoxCloseButton();
             }
-    
         }
-        
-        
     }
-
-    
 }
 
 export function openAlertDialogBox(title,message){

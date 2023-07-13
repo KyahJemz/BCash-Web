@@ -68,7 +68,7 @@ body {
     place-items: center;
     place-content: center;
     background-color: #da1219dc;
-    background-image: url("images/bgPattern.png");
+    background-image: url("../images/bgPattern.png");
     background-repeat: repeat ;
     background-blend-mode: multiply;
   }
@@ -222,6 +222,10 @@ body {
 
 
 
+
+
+
+
 .form-background {
     z-index: 40;
     position: absolute;
@@ -235,10 +239,10 @@ body {
 }
 
 .form-background .form-container {
-    width: 400px;
+    width: 350px;
     height: fit-content;
     background-color: var(--Panel-Background-DarkWhite);
-    padding: 40px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.5)
   
