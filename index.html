@@ -5,34 +5,85 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCash</title>
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="test.css">
 </head>
 <body>
-    <div class="header">
-        <div class="header-left">
-            <div class="sscr-image">
-                <img src="images/sscr-logo.png" alt="sscr-logo">
+    <div class="design-background"></div>
+
+    <div class="content-container">
+        <div class="header-box">
+            <div class="left-header">
+                <div class="sscr-image">
+                    <img src="images/sscr-logo.png"  alt="sscr-logo">
+                </div>
+                <div class="sscr-text">
+                    <div class="text1">San Sebastian College - Recoletos</div>
+                    <div class="line"></div>
+                    <div class="text2">Caritas et Scientia</div>
+                </div>
             </div>
-            <div class="sscr-text">
-                <div class="text1">San Sebastian College - Recoletos</div>
-                <div class="line"></div>
-                <div class="text2">Caritas et Scientia</div>
+            <div class="right-header">
+                v1.2.3
             </div>
+            
+        </div>
+        <div class="left-box">
+            <p class="welcome">WELCOME TO</p>
+            <img class="logo" src="images/bcash-logo.png" alt="">
+            <p class="title">BCASH</p>
+            <p class="quote">An E-wallet application for SSC-RdC</p>
+            <br>
+            <p class="intro">BCASH is a payment portal designed to offer food and supplies to all students in the school.</p>
+            <br>
+            <div class="button-contianer">
+                <button class="curson-pointer moreinfo-btn">More Info</button>
+                <button class="curson-pointer signin-btn">Sign-In</button>
+            </div>
+        </div>
+        <div class="right-box">
+            <img src="" alt="">
         </div>
     </div>
-    <div class="body">
-        <div class="left-pnl">
-            <div class="image"></div>
-            <div class="text">
-                <div class="text1">BCash:</div>
-                <div class="text2">A Mobile E-Wallet Application of BASTE</div>
-            </div>
+
+    <div class="form-background" style="display: none;">
+        <div class="form-container">
+            <form action="webpages/merchant.html" >
+                <div class="form-title">
+                   <p>Login Form</p> 
+                </div>
+                <div class="input-container">
+                    <input type="text" name="bcash-username"  required>
+                    <label>Username</label>
+                </div>
+                <div class="input-container">
+                    <input type="password" name="bcash-password" required>
+                    <label>Password</label>
+                </div>
+                <div class="button-container">
+                    <button class="btn-default curson-pointer" type="submit" name="bcash-login">Sign-In</button>
+                </div>
+                <div class="note">
+                    <a href=""><u>Forgot Password?</u></a>
+                </div>
+            </form>
         </div>
-        <div class="right-pnl">
-            <div class="image">
-                <img src="images/bcash-logo.png" alt="bcash-logo">
-            </div>
-            <div class="text">User Authentication</div>
+    </div>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
             <div class="form">
                 <form action="webpages/merchant.html" >
                     <div class="input-container">
@@ -49,7 +100,18 @@
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
+        
+        WELCOME TO
+        BCASH
+        Login 
+        
+        sign in
+        dont have an account? 
+        
+        version 1.1
+-->
+
+
+<script src="test.js"></script>
 </body>
 </html>
