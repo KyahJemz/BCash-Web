@@ -14,7 +14,9 @@ import {
     clearOrder,
     openDialogBoxEvents,
     openAlertDialogBoxEvents,
-    closeDialogBoxEvents
+    closeDialogBoxEvents,
+    applyTransactionsQueries,
+    clearTransactionsQueries
 } from './eventHandlers.js';
 
 var doc = document;
@@ -211,6 +213,23 @@ export function bindDropdownSubItemEventButtons(query) {
 
 
 
+
+
+// TRANSACTIONS
+
+document.getElementById("transaction-search-button").addEventListener('click', () => {
+  applyTransactionsQueries();
+});
+
+
+document.getElementById("transaction-clear-button").addEventListener('click', () => {
+  clearTransactionsQueries();
+});
+
+
+document.getElementById("transaction-export-button").addEventListener('click', () => {
+  exportTransactions();
+});
 
 
 

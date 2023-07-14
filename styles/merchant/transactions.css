@@ -106,6 +106,7 @@
         justify-content: space-between;
         flex-wrap:wrap;    
         gap: 5px;
+        z-index: 1;
     }
 
     .panel-transactions-buttons button {
@@ -249,34 +250,60 @@
     }
 
     .panel-transactions-table table .col1 {
-        width: 110px;
+        width: 25px;
+        max-width: 25px;;
     }
     .panel-transactions-table table .col2 {
-        width: 110px;
+        width: 50px;
+        max-width: 50px;;
     }
     .panel-transactions-table table .col3 {
         width: 110px;
+        max-width: 110px;;
     }
     .panel-transactions-table table .col4 {
         width: 110px;
+        max-width: 110px;;
     }
     .panel-transactions-table table .col5 {
         width: 110px;
+        max-width: 110px;;
     }
     .panel-transactions-table table .col6 {
         width: 110px;
+        max-width: 110px;;
     }
     .panel-transactions-table table .col7 {
         width: 110px;
+        max-width: 110px;;
     }
     .panel-transactions-table table .col8 {
         width: 110px;
+        max-width: 110px;;
     }
     .panel-transactions-table table .col9 {
         width: 110px;
+        max-width: 110px;;
     }
     .panel-transactions-table table .col10 {
         width: 110px;
+        max-width: 110px;;
+    }
+    .panel-transactions-table table .col11 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-transactions-table table .col12 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-transactions-table table .col13 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-transactions-table table .col14 {
+        width: 110px;
+        max-width: 110px;;
     }
 
 

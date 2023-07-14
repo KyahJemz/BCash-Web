@@ -6,6 +6,11 @@ import {
     ChangePanel 
 } from './modules/menu.js';
 
+import { 
+    getTransactionHistory, 
+    displayToTable, 
+} from './modules/transactions.js';
+
 import {
     displayItems
 } from './modules/item.js';
@@ -32,6 +37,8 @@ import {
 import { 
     uploadOrderData 
 } from './ajaxUtils.js';
+
+
 
 
 
@@ -166,5 +173,64 @@ export function openAlertDialogBoxEvents(title,message){
 }
 
   
+//#####//
+// TRANSACTIONS EVENTS
+//#####//
+
+export function applyTransactionsQueries(){
+    const transactionsTable = document.getElementById("transactions-table");
+    let transactionStartDate = document.getElementById("transactions-startdate").value;
+    let transactionEndDate = document.getElementById("transactions-enddate").value;
+    let transactionNumber = document.getElementById("transactions-transactionnumber").value;
+    let transactionName = document.getElementById("transaction-transactionname").value;
+    let transactionStatus = document.getElementById("transaction-status-dropdown").innerHTML;
+    let transactionsRecordPerPage = document.getElementById("transaction-recordscount-dropwond").innerHTML
+
+    if (transactionStartDate==="" || transactionEndDate==="") {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
+
+        if (transactionStartDate==="") {
+            transactionStartDate = `${formattedDate} ${"00:00:00"}`;
+        } else {
+            transactionStartDate = `${transactionStartDate} ${"00:00:00"}`;
+        }
+        if (transactionEndDate==="") {
+            transactionEndDate  = `${formattedDate} ${"23:59:59"}`;
+        } else {
+            transactionEndDate  = `${transactionEndDate} ${"23:59:59"}`;
+        }
+    }
+
+    if (transactionsRecordPerPage === "25/Page" || transactionsRecordPerPage === "50/Page" || transactionsRecordPerPage === "100/Page" || transactionsRecordPerPage === "500/Page") {
+        if (transactionsRecordPerPage === "25/Page") {
+            transactionsRecordPerPage = "25";
+        } else if (transactionsRecordPerPage === "50/Page"){
+            transactionsRecordPerPage = "50";
+        } else if (transactionsRecordPerPage === "100/Page"){
+            transactionsRecordPerPage = "100";
+        } else if (transactionsRecordPerPage === "500/Page"){
+            transactionsRecordPerPage = "500";
+        } else {
+            transactionsRecordPerPage = "25";
+        }
+    } else {
+        transactionsRecordPerPage = "25";
+    }
+
+    const data = getTransactionHistory(transactionStartDate,transactionEndDate,transactionNumber,transactionName,transactionStatus,transactionsRecordPerPage);
+    console.log(data);
+
+    displayToTable(transactionsTable,data);
+}
+
+export function clearTransactionsQueries(){
+
+}
+
+
   
    

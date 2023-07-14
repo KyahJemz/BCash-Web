@@ -55,7 +55,7 @@
     margin: 0;
     padding: 0;
 }
-
+ 
 .curson-pointer {
     cursor: pointer;
 }
@@ -67,26 +67,26 @@ body {
     display: grid;
     place-items: center;
     place-content: center;
-    background-color: #da1219dc;
+    background-color: #da1219;
     background-image: url("../images/bgPattern.png");
     background-repeat: repeat ;
-    background-blend-mode: multiply;
+    background-blend-mode:multiply;
   }
 
 
 .content-container {
-    width: 55%;
+    width: 30%;
     height: fit-content;
     background-color: var(--Panel-Background-White);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 50px 1fr;
     grid-column-gap: 20px;
-    grid-row-gap: 40px;
+    grid-row-gap: 20px;
     padding: 20px;
     border-radius: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 40px;
+    padding-right: 40px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
 }
 
@@ -124,11 +124,11 @@ body {
 }
 
 .content-container .header-box .sscr-text .text1{
-    font-size: 1.3em;
+    font-size: 1rem;
 }
 
 .content-container .header-box .sscr-text .text2{
-    font-size: 1.1em;
+    font-size: 1rem;
 }
 
 .content-container .header-box .sscr-text .line{
@@ -146,44 +146,46 @@ body {
 }
 
 .content-container .left-box .welcome {
-    font-size: 0.8rem;
-    padding-bottom: 20px;
+    font-size: 0.7rem;
+    padding-bottom: 10px;
 }
 
 .content-container .left-box .logo {
     aspect-ratio: 1/1;
-    height: 100px;
+    height: 75px;
 }
 
 .content-container .left-box .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
 }
 
 .content-container .left-box .quote {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     font-weight: 500;
 }
 
 .content-container .left-box .intro {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 400;
+    text-align: justify;
 }
 
 .content-container .left-box .button-contianer {
-    margin-top: 14px;
-    margin-bottom: 20px;
+    margin-top: 8px;
+    margin-bottom: 10px;
     width: 100%;
     display: flex;
     gap: 12px;
 }
 
 .content-container .left-box .button-contianer > * {
-    padding: 8px;
+    padding: 6px;
     width: 100%;
     transition: 100ms;
     border-radius: 5px;
     overflow: hidden;
+    font-size: 0.7rem;
    
 }
 
@@ -264,13 +266,13 @@ body {
 }
 
 .form-background .form-container .form-title p {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
 }
 
 .form-background .form-container .input-container input {
     width: 100%;
     padding: 8px 10px;
-    font-size: 1rem;
+    font-size: 0.8rem;
     border: none;
     border-bottom: 1px solid #000;
     outline: none;
@@ -287,7 +289,7 @@ body {
 
 .form-background .form-container .input-container label {
     position: absolute;
-    top:9px;
+    top:5px;
     left: 18px;
     padding: 10px 0;
     font-size: 0.9rem;
@@ -353,7 +355,8 @@ body {
 
 @media (max-width: 768px) {
     .content-container {
-      width: 95%;
+        width: 90%;
+        height: fit-content;
       padding-left: 20px;
       padding-right: 20px;
       display: flex;
@@ -402,7 +405,8 @@ body {
     /* Styles for tablets */
     
     .content-container {
-      width: 70%;
+        width: 600px;
+        height: 400px;
     }
   }
   
@@ -410,6 +414,7 @@ body {
     /* Styles for wide screens */
     
     .content-container {
-      width: 55%;
+      width: 600px;
+      height: 400px;
     }
   }

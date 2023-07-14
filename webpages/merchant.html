@@ -173,7 +173,7 @@
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="transaction-status-dropdown dropdown-text">All</span>
+                                        <span id="transaction-status-dropdown" class=" dropdown-text">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -216,30 +216,38 @@
                         <div class="table-header">
                             <table>
                                 <colgroup>
-                                <col class="col1">
-                                <col class="col2">
-                                <col class="col3">
-                                <col class="col4">
-                                <col class="col5">
-                                <col class="col6">
-                                <col class="col7">
-                                <col class="col8">
-                                <col class="col9">
-                                <col class="col10">
+                                    <col class="col1">
+                                    <col class="col2">
+                                    <col class="col3">
+                                    <col class="col4">
+                                    <col class="col5">
+                                    <col class="col6">
+                                    <col class="col7">
+                                    <col class="col8">
+                                    <col class="col9">
+                                    <col class="col10">
+                                    <col class="col11">
+                                    <col class="col12">
+                                    <col class="col13">
+                                    <col class="col14">
                                 </colgroup>
                                 <thead>
                                 <tr>
-                                    <th class="col1"><div>Transaction Id</div> </th>
-                                    <th class="col2"><div>Status</div></th>
-                                    <th class="col3"><div>Name</div></th>
-                                    <th class="col4"><div>Category</div></th>
-                                    <th class="col5"><div>Department</div></th>
-                                    <th class="col6"><div>Course</div></th>
-                                    <th class="col7"><div>Amount</div></th>
-                                    <th class="col8"><div>Items</div></th>
-                                    <th class="col9"><div>Timestamp</div></th>
-                                    <th class="col10"><div>Seller</div></th>
-                                </tr>
+                                    <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
+                                    <th class="col2"><div>#</div></th>
+                                    <th class="col3"><div>Transaction ID</div></th>
+                                    <th class="col4"><div>Status</div></th>
+                                    <th class="col5"><div>In Charge</div></th>
+                                    <th class="col6"><div>Name</div></th>
+                                    <th class="col7"><div>Category</div></th>
+                                    <th class="col8"><div>Department</div></th>
+                                    <th class="col9"><div>Course</div></th>
+                                    <th class="col10"><div>Amount</div></th>
+                                    <th class="col11"><div>Items</div></th>
+                                    <th class="col12"><div>Timestamp</div></th>
+                                    <th class="col13"><div>Payment Method</div></th>
+                                    <th class="col14"><div>Notes</div></th>
+                                </tr>Transaction ID, Status, In Charge, Name, Category, Department, Course, Amount, Items, Timestamp, Payment Method, Notes
                                 </thead>
                             </table>
                             </div>
@@ -256,19 +264,27 @@
                                     <col class="col8">
                                     <col class="col9">
                                     <col class="col10">
+                                    <col class="col11">
+                                    <col class="col12">
+                                    <col class="col13">
+                                    <col class="col14">
                                 </colgroup>
-                            <tbody>
+                            <tbody id="transactions-table">
                                 <tr>
-                                    <td><div class="col1 cell" title="123456789"><a class="transaction-viewdata-button view-more" href="">123456789</a></div></td>
-                                    <td><div class="col2 cell" title="Completed">Completed</div></td>
-                                    <td><div class="col3 cell" title="John Doe">John Doe</div></td>
-                                    <td><div class="col4 cell" title="Student">Student</div></td>
-                                    <td><div class="col5 cell" title="IT Department">IT Department</div></td>
-                                    <td><div class="col6 cell" title="BSIT 3">BSIT 3</div></td>
-                                    <td><div class="col7 cell" title="150">150</div></td>
-                                    <td><div class="col8 cell" title="Good Shit">Good Shit</div></td>
-                                    <td><div class="col9 cell" title="2023-05-27 10:30 AM">2023-05-27 10:30 AM</div></td>
-                                    <td><div class="col10 cell" title="ABC Store">ABC Store</div></td>
+                                    <td><div class="col1 cell" title="checkbox"><input type="checkbox" name="" id=""></div></td>
+                                    <td><div class="col2 cell" title="Completed"><center>2</center></div></td>
+                                    <td><div class="col3 cell" title="123456789"><a class="transaction-viewdata-button view-more" href="">123456789</a></div></td>
+                                    <td><div class="col4 cell" title="Completed">Completed</div></td>
+                                    <td><div class="col5 cell" title="John Doe">John Doe</div></td>
+                                    <td><div class="col6 cell" title="Student">Student</div></td>
+                                    <td><div class="col7 cell" title="IT Department">IT Department</div></td>
+                                    <td><div class="col8 cell" title="BSIT 3">BSIT 3</div></td>
+                                    <td><div class="col9 cell" title="150">150</div></td>
+                                    <td><div class="col10 cell" title="Good Shit">Good Shit</div></td>
+                                    <td><div class="col11 cell" title="2023-05-27 10:30 AM">2023-05-27 10:30 AM</div></td>
+                                    <td><div class="col12 cell" title="ABC Store">ABC Store</div></td>
+                                    <td><div class="col13 cell" title="ABC Store">ABC Store</div></td>
+                                    <td><div class="col14 cell" title="ABC Store">ABC Store</div></td>
                                 </tr>                        
                             </tbody>
                             </table>
