@@ -1408,7 +1408,10 @@ export function getTransactionHistory(transactionStartDate, transactionEndDate, 
         // Additional entries...
     ];
       
-      
+    
+
+    
+    // fire ajax request
       
     return data;
 }

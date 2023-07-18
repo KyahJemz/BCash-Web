@@ -111,46 +111,42 @@
     <!--
         HOME 
     -->
-                <div id="panel-home" class="body-content-panel hidden">
-                    <div class="panel-home-welcome">
-                        <h3>Welcome Back!</h3>
-                        <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
-                    </div>
-                    <div class="panel-home-graphs-container">
-                        <div class="panel-home-container1">
-                            <div class="panel-home-container1-col1">
-                                <div class="panel-home-card1">
-                                    <h1>123,230.00</h1>
-                                    <h4>Sales</h4>
-                                </div>
-                                <div class="panel-home-card2">
-                                    <h1>53</h1>
-                                    <h4>Orders</h4>
-                                </div>
-                            </div>
-                            <div class="panel-home-container1-col2">
-                                <div class="panel-home-card3">
-                                    <h4>Sales Graph</h4>
-                                    <canvas id="graph-daily"></canvas>
-                                </div>
-                            </div>
+                <div id="panel-home" class="body-content-panel visible">
+                    <div class="panel-home-content">
+                        <div class="grid-cell header">
+                            <p>Welcome Back!</p>
+                            <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
                         </div>
-                        <div class="panel-home-container2">
-                            <div class="panel-home-card4">
-                                <h4>Orders by Items</h4>
-                                <canvas id="graph-order-by-items"></canvas>
-                            </div>
-                            <div class="panel-home-card5">
-                                <h4>Sales by Category</h4>
-                                <canvas id="graph-sales-by-category"></canvas>
-                            </div>
+                        <div class="grid-cell sales-graph">
+                            <p>Sales Graph</p>
+                            <canvas id="graph-daily"></canvas>
+                        </div>
+                        <div class="grid-cell confirmed-orders">
+                            <p>53</p>
+                            <p>Orders</p>
+                        </div>
+                        <div class="grid-cell confirmed-sales">
+                            <p>123,230.00</p>
+                            <p>Sales</p>
+                        </div>
+                        <div class="grid-cell orders-by-items-graph">
+                            <p>Orders by Items</p>
+                            <canvas id="graph-order-by-items"></canvas>
+                        </div>
+                        <div class="grid-cell orders-by-category-graph">
+                            <p>Sales by Category</p>
+                            <canvas id="graph-sales-by-category"></canvas>
+                        </div>
+                        <div class="grid-cell latest-transaactions">
+
                         </div>
                     </div>
                 </div>
+
     <!--
         TRANSACTIONS 
     -->
-                <div id="panel-transactions" class="body-content-panel visible">
+                <div id="panel-transactions" class="body-content-panel hidden">
                     <div class="panel-transactions-query panel">
                         <div class="form-container">
                             <div>
@@ -247,7 +243,7 @@
                                     <th class="col12"><div>Timestamp</div></th>
                                     <th class="col13"><div>Payment Method</div></th>
                                     <th class="col14"><div>Notes</div></th>
-                                </tr>Transaction ID, Status, In Charge, Name, Category, Department, Course, Amount, Items, Timestamp, Payment Method, Notes
+                                </tr>
                                 </thead>
                             </table>
                             </div>
