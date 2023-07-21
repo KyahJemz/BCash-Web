@@ -35,8 +35,8 @@
                 <div class="fullname">Juan Dela Cruz</div>
             </div>
             <div class="button-container">
-                <button type="button" class="curson-pointer" title="Notifications"><img src="../images/icons/add-yellow.png" alt="notification-icon"></button>
-                <button type="button" class="curson-pointer" title="Settings"><img src="../images/icons/add-yellow.png" alt="settings-icon"></button>
+                <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="../images/icons/notification-yellow.png" alt="notification-icon"></button>
+                <button id="menu-settings-button" type="button" class="curson-pointer" title="Settings"><img src="../images/icons/settings-yellow.png" alt="settings-icon"></button>
             </div>
         </div>
         <div class="bottom-panel">
@@ -138,7 +138,7 @@
                             <canvas id="graph-sales-by-category"></canvas>
                         </div>
                         <div class="grid-cell latest-transaactions">
-
+                            <p>Recent Transactons</p>
                         </div>
                     </div>
                 </div>
@@ -479,19 +479,9 @@
     NOTIFICATION ###
 -->
     <div id="Notification-Box-Container" class="notification-container">
-        <div id="Notification-Box-Id" class="notification-box">
-            <div class="header">
-                <div class="title">
-                    <p class="text">New Notification 1</p>
-                </div>
-                <div class="close">
-                    <p class="close-btn curson-pointer" onclick="removeNotificationBox(this)">X</p>
-                </div>
-            </div>
-            <div class="notification-content">
-                <p>123</p>
-            </div>
-        </div>
+        <table class="Notification-Box-Table">
+            
+        </table>
     </div>
 <!--
     DIALOG BOX ###
@@ -513,7 +503,6 @@
 <!--
     JAVASCRIPTS  ###
 -->
-    <script src="../scripts/notification-box.js"></script>
     <script src="../scripts/chart.js"></script>
     <script src="../scripts/main.js" type="module"></script>
 </body>

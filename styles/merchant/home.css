@@ -1,59 +1,60 @@
 
 
-.panel-home-welcome {
-    width: 97%;
-    margin-top: 10px;
-}
+
 
 
 .panel-home-content {
     overflow-y: scroll;
     width: 100%;
     height: max-content;
-    padding: 20px;
+    padding: 16px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 75px repeat(2,150px) 300px;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+    grid-template-rows: 50px repeat(2,150px) 300px;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
     }
-    
-    .header { 
-        grid-area: 1 / 1 / 2 / 4; background-color: aqua;
+
+    .panel-home-content .grid-cell {
+        padding: 10px;
+        border-radius: 10px;
+        background-color: var(--color-DarkWhite);
     }
-    .sales-graph { 
+
+    .panel-home-content .header { 
+        grid-area: 1 / 1 / 2 / 4;
+        background-color: white;
+    }
+    .panel-home-content .sales-graph { 
         display: flex;
         flex-direction: column;
         align-items: center;
-        grid-area: 2 / 1 / 4 / 3; background-color: aqua;
+        grid-area: 2 / 1 / 4 / 3;
         text-align: center;
     }
-    .confirmed-orders { 
-        grid-area: 2 / 3 / 3 / 4; background-color: aqua;
+    .panel-home-content .confirmed-orders { 
+        grid-area: 2 / 3 / 3 / 4;
         text-align: center;
     }
-    .confirmed-sales { 
-        grid-area: 3 / 3 / 4 / 4; background-color: aqua;
+    .panel-home-content .confirmed-sales { 
+        grid-area: 3 / 3 / 4 / 4;
         text-align: center;
     }
-    .orders-by-items-graph { 
-        grid-area: 4 / 1 / 5 / 2; background-color: aqua;
+    .panel-home-content .orders-by-items-graph { 
+        grid-area: 4 / 1 / 5 / 2;
         text-align: center;
     }
-    .orders-by-category-graph { 
-        grid-area: 4 / 2 / 5 / 3; background-color: aqua;
+    .panel-home-content .orders-by-category-graph { 
+        grid-area: 4 / 2 / 5 / 3;
         text-align: center;
     }
-    .latest-transaactions { 
-        grid-area: 4 / 3 / 5 / 4; background-color: aqua;
+    .panel-home-content .latest-transaactions { 
+        grid-area: 4 / 3 / 5 / 4;
         text-align: center;
     }
-    .grid-cell {
-        padding: 10px;
-        border-radius: 10px;
-    }
+    
 
-canvas {
+    .panel-home-content canvas {
     aspect-ratio: auto;
     overflow: hidden;
 }
@@ -62,22 +63,6 @@ canvas {
 
 @media (min-width: 0px) and (max-width: 768px) {
     /* Styles for phones */
-    .panel-home-container1, .panel-home-container2 {
-        flex-direction: column;
-        flex-wrap: nowrap;
-    }
-
-    .panel-home-container1-col1 {
-        flex-direction: row;
-    }
-
-    .panel-home-card3, .panel-home-card4, .panel-home-card5{
-        height: 250px;
-    }
-
-    .panel-home-card1, .panel-home-card2 {
-        height: 150px;
-    }
 
     
   }

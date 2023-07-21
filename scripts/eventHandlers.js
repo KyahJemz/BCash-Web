@@ -21,6 +21,13 @@ import {
     closeDialogBox
 } from './modules/dialog-box.js';
 
+import {
+    activateNotification,
+    deactivateNotification,
+    removeNotificationBox,
+    addNotificationBox
+} from './modules/notification-box.js';
+
 import { 
     displayOrders,
     toggleItemButton,
@@ -230,6 +237,54 @@ export function applyTransactionsQueries(){
 export function clearTransactionsQueries(){
 
 }
+
+
+
+export function createNotification(notificationArray,notification){
+    if (notificationArray.length === 0) {
+        activateNotification();
+    }
+
+    const notificationTable = document.querySelector(".Notification-Box-Table");
+
+    const newRow = document.createElement('tr');
+    newRow.className = "notification-box";
+    newRow.dataset.type = notification.getId();
+    
+    const newCell = document.createElement('td');
+    newCell.innerHTML = `
+        <div class="header">
+            <div class="title">
+                <p class="text">`+ notification.getTitle() +`</p>
+            </div>
+            <div class="close">
+                <p class="close-btn cursor-pointer">X</p>
+            </div>
+        </div>
+        <div class="notification-content">
+            <p>`+ notification.getContent() +`</p>
+        </div>`;
+    
+    newRow.appendChild(newCell);
+    notificationTable.appendChild(newRow);
+
+    setTimeout(function() {
+        removeNotificationBox(notification,notificationTable);
+    }, notification.getMaxNotificationTimeout());
+
+    
+
+
+    
+}
+
+
+
+
+
+
+
+
 
 
   

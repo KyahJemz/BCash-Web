@@ -8,8 +8,8 @@
       {
         label: 'Sales Per Day',
         data: [10, 20, 15, 25, 18, 30],
-        borderColor: '#f0a93f',
-        backgroundColor: '#CB8213',
+        borderColor: '#DA121A',
+        backgroundColor: '#DA121A',
         pointStyle: 'circle',
         pointRadius: 5,
         pointHoverRadius: 10
@@ -29,7 +29,7 @@
         },
         legend: {
             display: false,
-          }
+        }
       }
     }
   };
@@ -45,9 +45,9 @@
     labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
     datasets: [
       {
-        data: [10, 20, 15, 25, 18, 30],
-        borderColor: '#f0a93f',
-        backgroundColor: '#CB8213',
+        data: [10, 20, 15, 25, 18, 30,20,100],
+        borderColor: '#DA121A',
+        backgroundColor: '#DA121A',
         borderWidth: 0.5,
       }
     ]
@@ -57,7 +57,7 @@
     type: 'bar',
     data: chatOrderByItem_Data,
     options: {
-      indexAxis: 'y',
+      indexAxis: 'x',
       responsive: true,
       plugins: {
         title: {
@@ -87,18 +87,19 @@
     labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
     datasets: [
       {
-        data: [10, 20, 15, 25, 18, 30],
-        backgroundColor: ['#CB8213', '#FF7F50'],
-        borderColor: 'black',
+        data: [10, 20, 15, 25, 18, 30,20,100],
+        borderColor: '#DA121A',
+        backgroundColor: '#DA121A',
         borderWidth: 0.5,
       }
     ]
   };
 
   const chartSalesByCategory_Config = {
-    type: 'pie',
+    type: 'bar',
     data: chartSalesByCategory_Data,
     options: {
+      indexAxis: 'x',
       responsive: true,
       plugins: {
         title: {
@@ -106,7 +107,12 @@
           text: (ctx) => 'Sales'
         },
         legend: {
-            position: 'left'
+          display: false,
+          }
+      },
+      elements: {
+        bar: {
+          borderWidth: 1,
         }
       }
     }

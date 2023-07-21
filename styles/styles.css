@@ -107,7 +107,8 @@ h6 {
 }
 
 p {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+
     color: var(--TextColor);
     word-wrap: break-word;
 }
@@ -340,48 +341,53 @@ button img{
 /* 
     NOTIFICATION BOX
 */ 
-.notification-container {
+#Notification-Box-Container {
     position: absolute;
     bottom: 5px;
     right: 5px;
     width: 300px;
     z-index: 9;
-    display: none; /* flex */
+    display: table; /* flex */
     flex-direction: column;
-    gap: 10px;
 }
 
-.notification-container .notification-box{
-    transition: ease 100ms;
+.Notification-Box-Table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.Notification-Box-Table .notification-box{
     width: 100%;
     box-shadow: 0px 0px 4px 0px var(--AsccentColor);
     background-color: #c2c2c2;
+    transition: opacity 0.5s ease;
 }
 
-.notification-container .notification-box .header {
+.Notification-Box-Table .notification-box .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: var(--BackgroundTitleBarColor);
 }
 
-.notification-container .notification-box .header div{
+.Notification-Box-Table .notification-box .header div{
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.notification-container .notification-box .header .title .text{
+.Notification-Box-Table .notification-box .header .title .text{
     font-weight: 750;
 }
 
-.notification-container .notification-box .header .close .close-btn:hover{
+.Notification-Box-Table .notification-box .header .close .close-btn:hover{
     font-weight: 750;
     color: var(--AsccentColor);
 }
 
-.notification-container .notification-box .notification-content {
+.Notification-Box-Table .notification-box .notification-content {
     padding: 5px;
     min-height: 100px;
 }

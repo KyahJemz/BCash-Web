@@ -1,5 +1,6 @@
 import Order from './class/class-order.js';
 import Item from './class/class-items.js';
+import Notification from './class/class-notification.js';
 
 import { 
     windowOnclickEvents,
@@ -16,7 +17,8 @@ import {
     openAlertDialogBoxEvents,
     closeDialogBoxEvents,
     applyTransactionsQueries,
-    clearTransactionsQueries
+    clearTransactionsQueries,
+    createNotification
 } from './eventHandlers.js';
 
 var doc = document;
@@ -46,8 +48,23 @@ console.log(items);
 
 
 
+var notificationArray = [];
 
+function makeNotification(id,title,content){
+  const notification = new Notification();
+  notification.createInfo(id,title,content);
+  
 
+  createNotification(notificationArray,notification);
+  console.log("making");
+
+  notificationArray.push(notification)
+}
+
+console.log("sad");
+makeNotification("12345","title daw to","it is a content daw");
+makeNotification("12345","title daw to","it is a content daw");
+//
 
 
 //#####//
