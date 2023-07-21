@@ -45,25 +45,25 @@ console.log(items);
 
 //displayItemsEvents(items, "CreateOrder");
 
-
-
-
 var notificationArray = [];
 
-function makeNotification(id,title,content){
+export function makeNotification(id,title,content){
   const notification = new Notification();
-  notification.createInfo(id,title,content);
+  notification.setInfo(id,title,content);
   
-
   createNotification(notificationArray,notification);
-  console.log("making");
 
   notificationArray.push(notification)
 }
 
-console.log("sad");
-makeNotification("12345","title daw to","it is a content daw");
-makeNotification("12345","title daw to","it is a content daw");
+makeNotification("23","title daw to","it is a content daw");
+makeNotification("12322245","title daw to","it is a content daw");
+
+setTimeout(function() {
+  makeNotification("3333","title daw to","it is a content daw");
+}, 1000);
+
+
 //
 
 
