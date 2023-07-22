@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCash - Administrator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/dialog-box.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    
+</head>
+
+<body>
+
+
+    <div class="design-background"></div>
+    
+<!--
+    SIDEBAR
+-->  
+    <div class="sidebar-container">
+        <div class="top-panel">
+            <div class="image">
+                <img src="../images/bcash-logo.png" alt="BCash Logo">
+            </div>
+            <div class="details">
+                <div class="category">BCash: Administrator</div>
+                <div class="fullname">Juan Dela Cruz</div>
+            </div>
+            <div class="button-container">
+                <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="../images/icons/notification-yellow.png" alt="notification-icon"></button>
+                <button id="menu-settings-button" type="button" class="curson-pointer" title="Settings"><img src="../images/icons/settings-yellow.png" alt="settings-icon"></button>
+            </div>
+        </div>
+        <div class="bottom-panel">
+            <div class="pattern"></div>
+            <nav class="menu">
+                <ul>
+                    <li id="Home" class="curson-pointer menu-tab menu-selected menuSelectionButton">
+                        <div class="selctd"></div>
+                        <img src="../images/icons/home.png" alt="Home Icon">
+                        <p>Home</p>
+                    </li>
+                    <li id="Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                        <img src="../images/icons/order.png" alt="My Orders Icon">
+                        <p>Transactions</p>
+                        <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
+                    </li>
+                    <li id="sidebar-bottom-menu-myorders-subitems">
+                        <ul>
+                            <li id="My-Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                                <div class="selctd"></div>
+                                <p>My Transactions</p>
+                            </li>
+                            <li id="All-Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                                <div class="selctd"></div>
+                                <p>All Transactions</p>
+                            </li>
+                            <li id="User-Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                                <div class="selctd"></div>
+                                <p>User Transactions</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="Accounts" class="curson-pointer menu-tab menuSelectionButton">
+                        <div class="selctd"></div>
+                        <img src="../images/icons/home.png" alt="Home Icon">
+                        <p>Accounts</p>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+<!--
+    CONTENT TOP BAR
+-->   
+    <div class="content-container">
+        <div class="top-panel">
+            <div class="left-side">
+                <div id="menu-visibility-button" class="curson-pointer">
+                    <img src="../images/icons/view-more-white.png" alt="view more">
+                </div>
+                <div class="image">
+                    <img src="../images/sscr-logo.png" alt="SSCR Logo">
+                </div>
+                <div class="text">
+                    San Sebastian College - Recoletos
+                </div>
+            </div>
+            <div class="right-side curson-pointer" onclick="">
+                <div class="text">
+                    Log out
+                </div>
+                <div class="image">
+                    <img src="../images/icons/logout.png" alt="Logout Icon">
+                </div>
+            </div>
+        </div>
+<!--
+    CONTENT HEADER 
+-->
+        <div class="bottom-panel">
+            <div class="content">
+                <div class="titlebar"><p id="Panel-Title">Home</p></div>
+<!--
+    CONTENT BODY
+-->
+    <!--
+        HOME 
+    -->
+                <div id="panel-home" class="body-content-panel visible">
+                    <div class="panel-home-content">
+                       
+                    </div>
+                </div>
+
+
+    <!--
+        END 
+    -->
+            </div>
+        </div>
+    </div>
+<!--
+    NOTIFICATION ###
+-->
+    <div id="Notification-Box-Container" class="notification-container">
+        <table class="Notification-Box-Table">
+            
+        </table>
+    </div>
+<!--
+    DIALOG BOX ###
+-->
+    <div id="Dialog-Box-Container" class="dialog-container">
+        <div class="dialog-content">
+            <div class="header">
+                <div class="title">
+                    <p id="Dialog-Box-header" class="text">N/A</p>
+                </div>
+                <div class="close" >
+                    <p id="Dialog-Box-Close-Button" class="close-btn curson-pointer">X</p>
+                </div>
+            </div>
+            <div id="Dialog-Box-Body" class="body">
+                
+
+            </div>
+        </div>
+    </div>
+<!--
+    JAVASCRIPTS  ###
+-->
+    <script src="../scripts/main.js" type="module"></script>
+</body>
+</html>
+

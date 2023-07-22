@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCash - Accounting</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/dialog-box.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    
+    <link rel="stylesheet" href="../styles/accounting/transactions.css">
+</head>
+
+<body>
+
+
+    <div class="design-background"></div>
+    
+<!--
+    SIDEBAR
+-->  
+    <div class="sidebar-container">
+        <div class="top-panel">
+            <div class="image">
+                <img src="../images/bcash-logo.png" alt="BCash Logo">
+            </div>
+            <div class="details">
+                <div class="category">BCash: Accounting</div>
+                <div class="fullname">Juan Dela Cruz</div>
+            </div>
+            <div class="button-container">
+                <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="../images/icons/notification-yellow.png" alt="notification-icon"></button>
+                <button id="menu-settings-button" type="button" class="curson-pointer" title="Settings"><img src="../images/icons/settings-yellow.png" alt="settings-icon"></button>
+            </div>
+        </div>
+        <div class="bottom-panel">
+            <div class="pattern"></div>
+            <nav class="menu">
+                <ul>
+                    <li id="Home" class="curson-pointer menu-tab menu-selected menuSelectionButton">
+                        <div class="selctd"></div>
+                        <img src="../images/icons/home.png" alt="Home Icon">
+                        <p>Home</p>
+                    </li>
+                    <li id="Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                        <img src="../images/icons/order.png" alt="My Orders Icon">
+                        <p>Transactions</p>
+                        <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
+                    </li>
+                    <li id="sidebar-bottom-menu-myorders-subitems">
+                        <ul>
+                            <li id="My-Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                                <div class="selctd"></div>
+                                <p>My Transactions</p>
+                            </li>
+                            <li id="All-Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                                <div class="selctd"></div>
+                                <p>All Transactions</p>
+                            </li>
+                            <li id="User-Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                                <div class="selctd"></div>
+                                <p>User Transactions</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="Accounts" class="curson-pointer menu-tab menuSelectionButton">
+                        <div class="selctd"></div>
+                        <img src="../images/icons/home.png" alt="Home Icon">
+                        <p>Accounts</p>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+<!--
+    CONTENT TOP BAR
+-->   
+    <div class="content-container">
+        <div class="top-panel">
+            <div class="left-side">
+                <div id="menu-visibility-button" class="curson-pointer">
+                    <img src="../images/icons/view-more-white.png" alt="view more">
+                </div>
+                <div class="image">
+                    <img src="../images/sscr-logo.png" alt="SSCR Logo">
+                </div>
+                <div class="text">
+                    San Sebastian College - Recoletos
+                </div>
+            </div>
+            <div class="right-side curson-pointer" onclick="">
+                <div class="text">
+                    Log out
+                </div>
+                <div class="image">
+                    <img src="../images/icons/logout.png" alt="Logout Icon">
+                </div>
+            </div>
+        </div>
+<!--
+    CONTENT HEADER 
+-->
+        <div class="bottom-panel">
+            <div class="content">
+                <div class="titlebar"><p id="Panel-Title">Home</p></div>
+<!--
+    CONTENT BODY
+-->
+    <!--
+        HOME 
+    -->
+                <div id="panel-home" class="body-content-panel visible">
+                    <div class="panel-home-content">
+                       
+                    </div>
+                </div>
+
+<!--
+    TRANSACTIONS 
+-->
+    <div id="panel-transactions" class="body-content-panel hidden">
+        <div class="panel-transactions-query panel">
+            <div class="form-container">
+                <div>
+                    <label for="StartDate">Start Date</label>
+                    <input id="transactions-startdate" class="textbox" type="date" name="StartDate">
+                </div>
+                <div>
+                    <label for="EndDate">End Date</label>
+                    <input id="transactions-enddate" class="textbox" type="date" name="EndDate">
+                </div>
+                <div>
+                    <label for="TransactionNumber">Transaction Number</label>
+                    <input id="transactions-transactionnumber" class="textbox" type="text" name="TransactionNumber">
+                </div>
+                <div>
+                    <label for="TransactionName">Search Name</label>
+                    <input id="transaction-transactionname" class="textbox" type="text" name="TransactionName">
+                </div>
+                <div>
+                    <label>Status Filter</label>
+                    <div class="dropdown">
+                        <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
+                            <span id="transaction-status-dropdown" class=" dropdown-text">All</span>
+                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                        </button>
+                        <div class="dropdown-content">
+                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
+                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Success</a>
+                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Failed</a>
+                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Waiting</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-transactions-buttons">
+            <div>
+                <button id="transaction-search-button" class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
+                    <img src="../images/icons/search-yellow.png" alt="search">
+                    <span>Search</span>
+                </button>
+                <button id="transaction-clear-button" class="btn-default curson-pointer" type="reset" value="Clear">
+                    <img src="../images/icons/clear-yellow.png" alt="search">
+                    <span>Clear</span>
+                </button>
+                <button id="transaction-export-button" class="btn-default curson-pointer" type="button" value="Export">
+                    <img src="../images/icons/download-yellow.png" alt="search">
+                    <span>Export</span>
+                </button>
+            </div>
+            <div>
+                <div>
+                    <div>Total Orders: </div>
+                    <div id="transaction-totalorders-text" class="text">???</div>
+                </div>
+                <div>
+                    <div >Total Sales: </div>
+                    <div id="transaction-totalsales-text" class="text">???</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-transactions-table">
+            <div class="table-header">
+                <table>
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                        <col class="col3">
+                        <col class="col4">
+                        <col class="col5">
+                        <col class="col6">
+                        <col class="col7">
+                        <col class="col8">
+                        <col class="col9">
+                        <col class="col10">
+                        <col class="col11">
+                        <col class="col12">
+                        <col class="col13">
+                        <col class="col14">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
+                        <th class="col2"><div>#</div></th>
+                        <th class="col3"><div>Transaction ID</div></th>
+                        <th class="col4"><div>Status</div></th>
+                        <th class="col5"><div>In Charge</div></th>
+                        <th class="col6"><div>Name</div></th>
+                        <th class="col7"><div>Category</div></th>
+                        <th class="col8"><div>Department</div></th>
+                        <th class="col9"><div>Course</div></th>
+                        <th class="col10"><div>Amount</div></th>
+                        <th class="col11"><div>Items</div></th>
+                        <th class="col12"><div>Timestamp</div></th>
+                        <th class="col13"><div>Payment Method</div></th>
+                        <th class="col14"><div>Notes</div></th>
+                    </tr>
+                    </thead>
+                </table>
+                </div>
+                <div>
+                <table>
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                        <col class="col3">
+                        <col class="col4">
+                        <col class="col5">
+                        <col class="col6">
+                        <col class="col7">
+                        <col class="col8">
+                        <col class="col9">
+                        <col class="col10">
+                        <col class="col11">
+                        <col class="col12">
+                        <col class="col13">
+                        <col class="col14">
+                    </colgroup>
+                <tbody id="transactions-table">
+                          
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-transactions-footer">
+            <div class="page-numbers-container">
+                <ul id="transaction-pagenumbers" class="page-numbers">
+                    <button id="transaction-leftpage-button">&lt;</button>
+                    <li><a class="transaction-pagenumber-button curson-pointer selected" onclick="">1</a></li>
+                    <li><a class="transaction-pagenumber-button curson-pointer" onclick="">2</a></li>
+                    <li><a class="transaction-pagenumber-button curson-pointer" onclick="">3</a></li>
+                    <li><a class="transaction-pagenumber-button curson-pointer" onclick="">4</a></li>
+                    <li><a class="transaction-pagenumber-button curson-pointer" onclick="">5</a></li>
+                    <button id="transaction-rightpage-button">&gt;</button>
+                </ul>
+            </div>
+            <div>
+                <div>Total: </div>
+                <div id="transaction-totalsales-text" class="text">???</div>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-content">
+                    <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
+                    <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
+                    <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
+                    <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
+                </div>
+                <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
+                    <span id="transaction-recordscount-dropwond" class="dropdown-text">25/Page</span>
+                    <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--
+        END 
+    -->
+            </div>
+        </div>
+    </div>
+<!--
+    NOTIFICATION ###
+-->
+    <div id="Notification-Box-Container" class="notification-container">
+        <table class="Notification-Box-Table">
+            
+        </table>
+    </div>
+<!--
+    DIALOG BOX ###
+-->
+    <div id="Dialog-Box-Container" class="dialog-container">
+        <div class="dialog-content">
+            <div class="header">
+                <div class="title">
+                    <p id="Dialog-Box-header" class="text">N/A</p>
+                </div>
+                <div class="close" >
+                    <p id="Dialog-Box-Close-Button" class="close-btn curson-pointer">X</p>
+                </div>
+            </div>
+            <div id="Dialog-Box-Body" class="body">
+                
+
+            </div>
+        </div>
+    </div>
+<!--
+    JAVASCRIPTS  ###
+-->
+    <script src="../scripts/main.js" type="module"></script>
+</body>
+</html>
+

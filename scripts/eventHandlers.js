@@ -246,25 +246,25 @@ export function createNotification(notificationArray,notification){
         activateNotification();
     }
 
-    if (notificationTable.querySelectorAll(".notification-box").length > notification.getMaxNotificationCount()) {
+    if (notificationTable.querySelectorAll(".notification-box").length > notification.getPopupNotificationMaxNotificationCount()) {
         notificationTable.removeChild(notificationTable.querySelector("tr"));
     }
 
     const newRow = document.createElement('tr');
     newRow.className = "notification-box";
-    newRow.dataset.type = notification.getId();
+    newRow.dataset.type = notification.getPopupNotificationId();
     
     const newCell = document.createElement('td');
-    newCell.innerHTML = notification.getView();
+    newCell.innerHTML = notification.getPopupNotificationView();
 
-    notification.setElement(newRow);
+    notification.setPopupNotificationElement(newRow);
     
     newRow.appendChild(newCell);
     notificationTable.appendChild(newRow);
 
     setTimeout(function() {
         removeNotificationBox(notification,notificationTable);
-    }, notification.getMaxNotificationTimeout());
+    }, notification.getPopupNotificationMaxNotificationTimeout());
 }
 
 

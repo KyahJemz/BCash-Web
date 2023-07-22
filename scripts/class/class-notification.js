@@ -4,22 +4,46 @@ export default class Notification {
     maxNotificationTimeout = 2000;
     maxNotificationCount = 5;
 
-    setInfo(id,title,content) {
+// NOTIFICATION BOX
+    setNotificationBoxInfo(id,title,content,timestamp,type) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.timestamp = timestamp;
+        this.type = type;
+    }
+
+    getNotificationBoxView(){
+        return `
+            <div class="notification-item" data-type="`+ this.type +`" data-id="`+ this.id +`">
+                <div class="title-container">
+                    <p class="title">`+ this.title +`</p>
+                    <p class="date">`+ this.timestamp +`</p>
+                </div>
+                <div class="content-container">
+                    <p class="content">`+ this.content +`</p>
+                </div>
+            </div>
+            `;
+    }
+
+// NOTIFICATION POPUP
+    setPopupNotificationInfo(id,title,content) {
         this.id = id;
         this.title = title;
         this.content = content;
     }
 
-    setElement(element){
+    setPopupNotificationElement(element){
         this.element = element;
     }
 
-    removeElement(){
+    removePopupNotificationElement(){
         const notificationTable = document.querySelector(".Notification-Box-Table");
         notificationTable.removeChild(this.element);
     }
 
-    getView(){
+    getPopupNotificationView(){
         return  `<div class="header">
                     <div class="title">
                         <p class="text">`+ this.title +`</p>
@@ -35,15 +59,15 @@ export default class Notification {
         
     }
 
-    getMaxNotificationTimeout(){
+    getPopupNotificationMaxNotificationTimeout(){
         return this.maxNotificationTimeout;
     }
 
-    getMaxNotificationCount(){
+    getPopupNotificationMaxNotificationCount(){
         return this.maxNotificationCount;
     }
 
-    getId(){
+    getPopupNotificationId(){
         return this.id;
     }
 }

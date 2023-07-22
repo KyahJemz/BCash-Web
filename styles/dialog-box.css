@@ -221,4 +221,45 @@
 
 
 
+.notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  
+}
+
+.notification-list .notification-item {
+    border-radius: 6px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.notification-list .notification-item .title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-list .notification-item .title-container .title{
+    font-weight: bolder;
+}
+
+.notification-list .notification-item .title-container .date{
+    font-style: italic;
+    font-size: 0.7rem;
+}
+
+.notification-list .notification-item .content-container{
+    margin-top: 4px;
+}
+
+
+
+
+
+.notification-list .notification-item .content-container .content{
+
+}
+
+
 

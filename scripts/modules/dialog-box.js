@@ -3,6 +3,11 @@ import {
     bindDialogBoxCloseButton
 } from '../main.js';
 
+import {
+    getNotifications,
+    refreshNotifications
+} from './notification-box.js';
+
 export function openDialogBox(type,data){
     const box = document.getElementById("Dialog-Box-Container");
     const header = document.getElementById("Dialog-Box-header");
@@ -185,6 +190,30 @@ export function openDialogBox(type,data){
                     bindDialogBoxCloseButton();
             }
         }
+    } else if (type=="Notification Panel"){
+        box.style.display = "flex";
+        header.innerHTML = "Notifications"
+
+        refreshNotifications();
+        const notificationArray = getNotifications();
+
+        body.innerHTML = ``;
+        var layout = ``;
+
+        if (notificationArray.length > 0) {
+            notificationArray.forEach(element => {
+                layout = layout + element.getNotificationBoxView();;
+            });
+    
+            body.innerHTML = body.innerHTML + `<div id="notification-list" class="notification-list">` + layout + `</div>`;
+        }
+
+    } else if (type=="Settings Panel"){
+        box.style.display = "flex";
+        header.innerHTML = "Personal Settings"
+        body.innerHTML = ``;
+
+      //  bindDialogBoxCloseButton();
     }
 }
 

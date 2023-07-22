@@ -47,20 +47,26 @@ console.log(items);
 
 var notificationArray = [];
 
-export function makeNotification(id,title,content){
-  const notification = new Notification();
-  notification.setInfo(id,title,content);
-  
-  createNotification(notificationArray,notification);
-
-  notificationArray.push(notification)
+export function getNotificationArray(){
+  return notificationArray;
 }
 
-makeNotification("23","title daw to","it is a content daw");
-makeNotification("12322245","title daw to","it is a content daw");
+export function setNotificationArray(data){
+  notificationArray = data;
+}
+
+export function makePopupNotification(id,title,content){
+  const notification = new Notification();
+  notification.setPopupNotificationInfo(id,title,content);
+  
+  createNotification(notificationArray,notification);
+}
+
+makePopupNotification("23","title daw to","it is a content daw");
+makePopupNotification("12322245","title daw to","it is a content daw");
 
 setTimeout(function() {
-  makeNotification("3333","title daw to","it is a content daw");
+  makePopupNotification("3333","title daw to","it is a content daw");
 }, 1000);
 
 
@@ -82,16 +88,6 @@ export function getOrder(){
   }
 }
 
-document.querySelectorAll('.addToCartButton').forEach(button => {
-  button.addEventListener('click', () => {
-      const itemId = button.parentNode.parentNode.dataset.itemId;
-      const name = button.parentNode.parentNode.dataset.name;
-      const cost = button.parentNode.parentNode.dataset.cost;
-      const image = button.parentNode.parentNode.dataset.image;
-      addToCart(button, order, itemId, name, cost, image, "1");
-  });
-});
-
 export function bindQuantityEventButtons() {
   document.querySelectorAll('.quantityButton').forEach(button => {
     button.addEventListener('click', () => {
@@ -102,35 +98,47 @@ export function bindQuantityEventButtons() {
   });
 }
 
-document.getElementById('txt-order-Discount').addEventListener('input', () => {
-  refreshReceipt(order)
-});
+if (document.getElementById('txt-order-Discount')){
+  document.getElementById('txt-order-Discount').addEventListener('input', () => {
+    refreshReceipt(order)
+  });
+}
 
-document.getElementById('createorder-clear').addEventListener('click', () => {
-  clearOrder(order);
-});
+if(document.getElementById('createorder-clear')) {
+  document.getElementById('createorder-clear').addEventListener('click', () => {
+    clearOrder(order);
+  });
+}
 
+if(document.getElementById('createorder-placeorder')){
+  document.getElementById('createorder-placeorder').addEventListener('click', () => {
+    if (order.items.length > 0) {
+      openDialogBoxEvents("Place-Order");
+    } else {
+      openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
+    }
+  });
+}
 
-document.getElementById('createorder-placeorder').addEventListener('click', () => {
-  if (order.items.length > 0) {
-    openDialogBoxEvents("Place-Order");
-  } else {
-    openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
-  }
-});
 
 
 //#####//
 // ITEMS MODULE
 //#####//
 
-document.getElementById('createorder-search').addEventListener('input', () => {
-  displayItemsEvents(items, order, "CreateOrder");
-});
+if (document.getElementById('createorder-search')){
+  document.getElementById('createorder-search').addEventListener('input', () => {
+    displayItemsEvents(items, order, "CreateOrder");
+  });
+  
+}
 
-document.getElementById('itemmanagement-search').addEventListener('input', () => {
-  displayItemsEvents(items, order, "ItemManagement");
-});
+if (document.getElementById('itemmanagement-search')){
+  document.getElementById('itemmanagement-search').addEventListener('input', () => {
+    displayItemsEvents(items, order, "ItemManagement");
+  });
+}
+
 
 export function bindItemsEventButtons() {
   const addToCartButtons = document.querySelectorAll('.addToCartButton');
@@ -251,19 +259,15 @@ document.getElementById("transaction-export-button").addEventListener('click', (
 
 
 
-
 document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
   closeDialogBoxEvents();
 });
 
 export function bindDialogBoxCloseButton(){
-
-  
   document.querySelector(".dialog-box-close-button").addEventListener('click', () => {
     closeDialogBoxEvents();
   });
 }
-
 
 
 
@@ -283,3 +287,12 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
     }
 });
 
+openDialogBoxEvents("Settings Panel");
+
+document.getElementById("menu-notification-button").addEventListener('click', () => {
+  openDialogBoxEvents("Notification Panel");
+});
+
+document.getElementById("menu-settings-button").addEventListener('click', () => {
+  openDialogBoxEvents("Settings Panel");
+});
