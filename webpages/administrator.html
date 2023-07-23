@@ -39,38 +39,75 @@
             <div class="pattern"></div>
             <nav class="menu">
                 <ul>
-                    <li id="Home" class="curson-pointer menu-tab menu-selected menuSelectionButton">
-                        <div class="selctd"></div>
+                    <li data-menu="Home" class="curson-pointer menu-selected menuSelectionButton">
+                        <div class="selected"></div>
                         <img src="../images/icons/home.png" alt="Home Icon">
                         <p>Home</p>
                     </li>
-                    <li id="Transactions" class="curson-pointer menu-tab menuSelectionButton">
-                        <img src="../images/icons/order.png" alt="My Orders Icon">
+                    <li data-menu="Transactions Management" class="curson-pointer menuSelectionButton menuSelectionDropdownButton">
+                        <img src="../images/icons/longreceipt.png" alt="Transactions Icon">
                         <p>Transactions</p>
                         <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
                     </li>
-                    <li id="sidebar-bottom-menu-myorders-subitems">
-                        <ul>
-                            <li id="My-Transactions" class="curson-pointer menu-tab menuSelectionButton">
-                                <div class="selctd"></div>
-                                <p>My Transactions</p>
-                            </li>
-                            <li id="All-Transactions" class="curson-pointer menu-tab menuSelectionButton">
-                                <div class="selctd"></div>
-                                <p>All Transactions</p>
-                            </li>
-                            <li id="User-Transactions" class="curson-pointer menu-tab menuSelectionButton">
-                                <div class="selctd"></div>
-                                <p>User Transactions</p>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="Accounts" class="curson-pointer menu-tab menuSelectionButton">
-                        <div class="selctd"></div>
-                        <img src="../images/icons/home.png" alt="Home Icon">
+                        <li class="menuSelectionDropdownItems">
+                            <ul>
+                                <li data-menu="My Transactions" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>My Transactions</p>
+                                </li>
+                                <li data-menu="All Transactions" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>All Transactions</p>
+                                </li>
+                                <li data-menu="User Transactions" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>User Transactions</p>
+                                </li>
+                            </ul>
+                        </li>
+                    <li data-menu="Accounts Management" class="curson-pointer menuSelectionButton menuSelectionDropdownButton">
+                        <img src="../images/icons/accounts.png" alt="Transactions Icon">
                         <p>Accounts</p>
+                        <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
+                    </li>
+                        <li class="menuSelectionDropdownItems">
+                            <ul>
+                                <li data-menu="User Accounts" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>User Accounts</p>
+                                </li>
+                                <li data-menu="Merchant Accounts" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>Merchant Accounts</p>
+                                </li>
+                                <li data-menu="Parental Accounts" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>Parental Accounts</p>
+                                </li>
+                                <li data-menu="Accounting Accounts" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>Accounting Accounts</p>
+                                </li>
+                                <li data-menu="Administrator Accounts" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>Administrator Accounts</p>
+                                </li>
+                            </ul>
+                        </li>
+                    <li data-menu="Notifications Control Management" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="../images/icons/addnitification.png" alt="Add Notification Icon">
+                        <p>Notification</p>
+                    </li>
+                    <li data-menu="Application Control Management" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="../images/icons/control.png" alt="Control Icon">
+                        <p>Application</p>
                     </li>
                 </ul>
+
+
+
             </nav>
         </div>
     </div>
@@ -117,6 +154,95 @@
                     </div>
                 </div>
 
+    <!--
+        MY TRANSACTIONS 
+    -->
+                <div id="panel-mytransactions" class="body-content-panel hidden">
+                    <div class="panel-mytransactions-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        ALL TRANSACTIONS 
+    -->
+                <div id="panel-alltransactions" class="body-content-panel hidden">
+                    <div class="panel-alltransactions-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        USER TRANSACTIONS 
+    -->
+                <div id="panel-usertransactions" class="body-content-panel hidden">
+                    <div class="panel-usertransactions-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        USER ACCOUNTS 
+    -->
+                <div id="panel-useraccounts" class="body-content-panel hidden">
+                    <div class="panel-useraccounts-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        MERCHANT ACCOUNTS 
+    -->
+                <div id="panel-merchantaccounts" class="body-content-panel hidden">
+                    <div class="panel-merchantaccounts-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        PARENTAL ACCOUNTS 
+    -->
+                <div id="panel-parentalaccounts" class="body-content-panel hidden">
+                    <div class="panel-parentalaccounts-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        ACCOUNTING ACCOUNTS 
+    -->
+                <div id="panel-accountingaccounts" class="body-content-panel hidden">
+                    <div class="panel-accountingaccounts-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        ADMINISTRATOR ACCOUNTS 
+    -->
+                <div id="panel-administratoraccounts" class="body-content-panel hidden">
+                    <div class="panel-administratoraccounts-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        NOTIFICATIONS CONTROL MANAGEMENT 
+    -->
+                <div id="panel-notificationscontrolmanagement" class="body-content-panel hidden">
+                    <div class="panel-notificationscontrolmanagement-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        APPLICATION CONTROL MANAGEMENT 
+    -->
+                <div id="panel-applicationcontrolmanagement" class="body-content-panel hidden">
+                    <div class="panel-applicationcontrolmanagement-content">
+                    
+                    </div>
+                </div>
 
     <!--
         END 
