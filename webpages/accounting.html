@@ -40,36 +40,41 @@
             <div class="pattern"></div>
             <nav class="menu">
                 <ul>
-                    <li id="Home" class="curson-pointer menu-tab menu-selected menuSelectionButton">
-                        <div class="selctd"></div>
+                    <li data-menu="Home" class="curson-pointer menu-selected menuSelectionButton">
+                        <div class="selected"></div>
                         <img src="../images/icons/home.png" alt="Home Icon">
                         <p>Home</p>
                     </li>
-                    <li id="Transactions" class="curson-pointer menu-tab menuSelectionButton">
+                    <li data-menu="Transactions Management" class="curson-pointer menuSelectionButton menuSelectionDropdownButton">
                         <img src="../images/icons/order.png" alt="My Orders Icon">
                         <p>Transactions</p>
                         <img id="sidebar-bottom-menu-myorders-more" class="more" src="../images/icons/more.png" alt="More Icon">
                     </li>
-                    <li id="sidebar-bottom-menu-myorders-subitems">
+                    <li class="menuSelectionDropdownItems">
                         <ul>
-                            <li id="My-Transactions" class="curson-pointer menu-tab menuSelectionButton">
-                                <div class="selctd"></div>
+                            <li data-menu="My Transactions" class="curson-pointer menuSelectionButton">
+                                <div class="selected"></div>
                                 <p>My Transactions</p>
                             </li>
-                            <li id="All-Transactions" class="curson-pointer menu-tab menuSelectionButton">
-                                <div class="selctd"></div>
+                            <li data-menu="All Transactions" class="curson-pointer menuSelectionButton">
+                                <div class="selected"></div>
                                 <p>All Transactions</p>
                             </li>
-                            <li id="User-Transactions" class="curson-pointer menu-tab menuSelectionButton">
-                                <div class="selctd"></div>
+                            <li data-menu="User Transactions" class="curson-pointer menuSelectionButton">
+                                <div class="selected"></div>
                                 <p>User Transactions</p>
                             </li>
                         </ul>
                     </li>
-                    <li id="Accounts" class="curson-pointer menu-tab menuSelectionButton">
-                        <div class="selctd"></div>
+                    <li data-menu="Accounts" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
                         <img src="../images/icons/home.png" alt="Home Icon">
                         <p>Accounts</p>
+                    </li>
+                    <li data-menu="Reports" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="../images/icons/home.png" alt="Home Icon">
+                        <p>Reports</p>
                     </li>
                 </ul>
             </nav>
@@ -117,6 +122,49 @@
                        
                     </div>
                 </div>
+
+    <!--
+        HOME 
+    -->
+                <div id="panel-reports" class="body-content-panel hidden">
+                    <div class="panel-reports-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        HOME 
+    -->
+    <div id="panel-accounts" class="body-content-panel hidden">
+        <div class="panel-accounts-content">
+        
+        </div>
+    </div>
+
+    <!--
+        HOME 
+    -->
+    <div id="panel-mytransactions" class="body-content-panel hidden">
+        <div class="panel-mytransactions-content">
+        
+        </div>
+    </div>
+    <!--
+        HOME 
+    -->
+    <div id="panel-alltransactions" class="body-content-panel hidden">
+        <div class="panel-alltransactions-content">
+        
+        </div>
+    </div>
+    <!--
+        HOME 
+    -->
+    <div id="panel-usertransactions" class="body-content-panel hidden">
+        <div class="panel-usertransactions-content">
+        
+        </div>
+    </div>
 
 <!--
     TRANSACTIONS 

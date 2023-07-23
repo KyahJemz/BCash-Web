@@ -1,5 +1,5 @@
 import { 
-    toggleMyOrdersMenu, 
+    toggleSubMenuDropdown, 
     ChangeTitle, 
     ChangeMenuSelected, 
     HideAllPanels, 
@@ -131,21 +131,29 @@ export function displayItemsEvents(items, order, type){
 
 export function menuSelectionEvents(value, items, order) {
     // Used ".replace(new RegExp(" ", 'g'), '')" to remove spaces
+    const panelName = value.dataset.menu;
+    const panelId = "panel-"+panelName.replace(new RegExp(" ", 'g'), '').toLowerCase();
 
-    if (value === "My Orders") {
-        toggleMyOrdersMenu(); // 
+    console.log(panelName);
+    if (value.classList.contains("menuSelectionDropdownButton")) {
+        toggleSubMenuDropdown(value); 
     } else {
-        ChangeTitle(value);
-        ChangeMenuSelected(value.replace(new RegExp(" ", 'g'), ''));
-        HideAllPanels(value.replace(new RegExp(" ", 'g'), ''));
-        ChangePanel(value.replace(new RegExp(" ", 'g'), ''));
+        if(document.getElementById(panelId)){
+            ChangeTitle(panelName);
+            ChangeMenuSelected(panelName);
+            HideAllPanels(panelId);
+            ChangePanel(panelId);
+            console.log(panelId);
+        } else {
+            console.log("Panel Does Not Exist");
+        }
     }
 
     // Check and Refresh Items Depending On Panel Clicked
-    if (value.replace(new RegExp(" ", 'g'), '').toUpperCase() === "ITEMMANAGEMENT"){
-        displayItems(items,order, value.replace(new RegExp(" ", 'g'), ''))
-    } else if (value.replace(new RegExp(" ", 'g'), '').toUpperCase() === "CREATEORDER") {3
-        displayItems(items,order, value.replace(new RegExp(" ", 'g'), ''))
+    if (panelName === "Item Management"){
+        displayItems(items,order, panelName.replace(new RegExp(" ", 'g'), ''));
+    } else if (panelName === "Create Order") {
+        displayItems(items,order, panelName.replace(new RegExp(" ", 'g'), ''));
     }
 }
 

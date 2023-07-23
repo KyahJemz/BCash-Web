@@ -60,7 +60,7 @@
 
 body {
     background-color: var(--Panel-Background-DarkWhite);
-}
+} 
 
 /* ############# */
 /* SIDE BAR MENU */
@@ -165,11 +165,14 @@ body {
 
         .sidebar-container .bottom-panel .menu  ul li {
             width: 100%;
+            padding-top: 8px;
+            padding-bottom: 8px;
             display: flex;
             flex-direction: row;
+
         }
 
-        .sidebar-container .bottom-panel .menu  ul li img {
+        .sidebar-container .bottom-panel .menu ul li img {
             margin-left: 20px;
             align-self: center;
             height: 20px;
@@ -183,6 +186,10 @@ body {
             font-size: 0.8rem;
         }
 
+        .sidebar-container .bottom-panel .menu .menuSelectionButton {
+            position: relative;
+        }
+
         .sidebar-container .bottom-panel .menu  .more {
             position: absolute;
             height: 75%;
@@ -190,22 +197,12 @@ body {
             transition: transform 0.3s ease;
         }
 
-        .sidebar-container .bottom-panel .menu .menu-tab {
-            position: relative;
-            width: 100%;
-            z-index: 1;
-            height: fit-content;
-            margin-bottom: 7px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 15px;
-        }
-
-        .sidebar-container .bottom-panel .menu .menu-tab .selctd {
+        .sidebar-container .bottom-panel .menu .menu-selected .selected {
             position: absolute;
             top: 0px;
-            height: 40px;
+            height: 100%;
             width: 5px;
+            background-color: var(--Panel-Background-Red);
         }
 
         .sidebar-container .bottom-panel .menu ul li ul {
@@ -219,13 +216,19 @@ body {
             margin-left: 50px;
         }
 
-        .sidebar-container .bottom-panel .menu #sidebar-bottom-menu-myorders-subitems {
+        .sidebar-container .bottom-panel .menu .menuSelectionDropdownItems {
             height: 0px;
             overflow-y: hidden;
             transition: height 0.3s ease;
+            padding: 0px;
         }
 
-        .sidebar-container .bottom-panel .menu .menu-tab:hover {
+        .sidebar-container .bottom-panel .menu .menuSelectionDropdownItems ul li {
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-container .bottom-panel .menu .menuSelectionButton:hover {
             box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
         }
 
@@ -239,9 +242,7 @@ body {
             color: var(--TextColor-Gold);
         }
 
-        .sidebar-container .bottom-panel .menu .menu-selected .selctd {
-            background-color: var(--Panel-Background-Red);
-        }
+        
 
 /* ############ */
 /* CONTENT PAGE */

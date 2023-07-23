@@ -197,10 +197,10 @@ export function bindItemsEventButtons() {
 //#####//
 document.querySelectorAll('.menuSelectionButton').forEach(menuItem => {
     menuItem.addEventListener('click', () => {
-      const value = menuItem.querySelector('p').innerText;
-      menuSelectionEvents(value, items, order);
+        menuSelectionEvents(menuItem, items, order);
     });
 });
+
 
 //#####//
 // DROPDOWN
