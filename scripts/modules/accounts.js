@@ -1,9 +1,8 @@
 
 
 
-export function getTransactionsData(transactionStartDate, transactionEndDate, transactionNumber, transactionName, transactionStatus, transactionsRecordPerPage){
-    console.log(transactionStartDate+" | "+transactionEndDate+" | "+transactionNumber+" | "+transactionName+" | "+transactionStatus+" | "+transactionsRecordPerPage);
-    let data = [];
+export function getAccountsData(){
+        let data = [];
     data = [
         {
           "Transaction ID": "246810",
@@ -1416,19 +1415,16 @@ export function getTransactionsData(transactionStartDate, transactionEndDate, tr
     return data;
 }
 
-export function getTransactionDetails(){
+
+export function clearAccountsQueries(button){
 
 }
 
-export function clearTransactioQueries(){
+export function exportAccounts(button){
 
 }
 
-export function exportTransactions(){
-
-}
-
-export function displayTransactionsToTable(table, data){
+export function displayAccountsToTable(table, data){
     let template = ``;
     let count = 0;
     console.log(data);
@@ -1462,13 +1458,5 @@ export function displayTransactionsToTable(table, data){
 }
 
 export function getTotalRecords (recordsArray){
-    return recordsArray;
-}
-
-function getTotalOrders (recordsArray){
-    return recordsArray;
-}
-
-function getTotalSales (recordsArray){
     return recordsArray;
 }

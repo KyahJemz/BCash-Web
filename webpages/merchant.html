@@ -156,25 +156,25 @@
                         <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input id="transactions-startdate" class="textbox" type="date" name="StartDate">
+                                <input class="transactions-startdate" class="textbox" type="date" name="StartDate">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input id="transactions-enddate" class="textbox" type="date" name="EndDate">
+                                <input class="transactions-enddate" class="textbox" type="date" name="EndDate">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Number</label>
-                                <input id="transactions-transactionnumber" class="textbox" type="text" name="TransactionNumber">
+                                <input class="transactions-transactionnumber" class="textbox" type="text" name="TransactionNumber">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input id="transaction-transactionname" class="textbox" type="text" name="TransactionName">
+                                <input class="transactions-transactionname" class="textbox" type="text" name="TransactionName">
                             </div>
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span id="transaction-status-dropdown" class=" dropdown-text">All</span>
+                                        <span class="transactions-status-dropdown" class=" dropdown-text">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -189,15 +189,15 @@
                     </div>
                     <div class="panel-transactions-buttons">
                         <div>
-                            <button id="transaction-search-button" class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
+                            <button class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="TransactionsSubmit">
                                 <img src="../images/icons/search-yellow.png" alt="search">
                                 <span>Search</span>
                             </button>
-                            <button id="transaction-clear-button" class="btn-default curson-pointer" type="reset" value="Clear">
+                            <button class="btn-default curson-pointer transaction-clear-button" type="reset" value="Clear">
                                 <img src="../images/icons/clear-yellow.png" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button id="transaction-export-button" class="btn-default curson-pointer" type="button" value="Export">
+                            <button class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
                                 <img src="../images/icons/download-yellow.png" alt="search">
                                 <span>Export</span>
                             </button>
@@ -205,11 +205,11 @@
                         <div>
                             <div>
                                 <div>Total Orders: </div>
-                                <div id="transaction-totalorders-text" class="text">???</div>
+                                <div class="transaction-totalorders-text" class="text">???</div>
                             </div>
                             <div>
                                 <div >Total Sales: </div>
-                                <div id="transaction-totalsales-text" class="text">???</div>
+                                <div class="transaction-totalsales-text" class="text">???</div>
                             </div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                                     <col class="col13">
                                     <col class="col14">
                                 </colgroup>
-                            <tbody id="transactions-table">
+                            <tbody id="transactions-table" class="transactions-table">
                                       
                             </tbody>
                             </table>
@@ -290,7 +290,7 @@
                         </div>
                         <div>
                             <div>Total: </div>
-                            <div id="transaction-totalsales-text" class="text">???</div>
+                            <div class="transaction-totalsales-text" class="text">???</div>
                         </div>
                         <div class="dropdown">
                             <div class="dropdown-content">
@@ -300,7 +300,7 @@
                                 <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span id="transaction-recordscount-dropwond" class="dropdown-text">25/Page</span>
+                                <span class="transactions-recordscount-dropwond" class="dropdown-text">25/Page</span>
                                 <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                             </button>
                         </div>

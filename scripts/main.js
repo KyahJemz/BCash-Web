@@ -4,6 +4,7 @@ import Notification from './class/class-notification.js';
 
 import { 
     windowOnclickEvents,
+    
     addToCart, 
     quantity,
     placeOrderEvents, 
@@ -13,12 +14,19 @@ import {
     refreshReceipt,
     displayItemsEvents,
     clearOrder,
+
     openDialogBoxEvents,
     openAlertDialogBoxEvents,
     closeDialogBoxEvents,
+
     applyTransactionsQueries,
     clearTransactionsQueries,
+
+    applyAccountsQueries,
+    clearAccountsQueries,
+
     createNotification
+    
 } from './eventHandlers.js';
 
 var doc = document;
@@ -242,19 +250,58 @@ export function bindDropdownSubItemEventButtons(query) {
 
 // TRANSACTIONS
 
-document.getElementById("transaction-search-button").addEventListener('click', () => {
-  applyTransactionsQueries();
-});
+if(document.querySelectorAll('.transaction-search-button').length > 0) {
+  document.querySelectorAll('.transaction-search-button').forEach(button => {
+    button.addEventListener('click', () => {
+      applyTransactionsQueries(button);
+    });
+  });
+}
+
+if(document.querySelectorAll('.transaction-clear-button').length > 0) {
+  document.querySelectorAll('.transaction-clear-button').forEach(button => {
+    button.addEventListener('click', () => {
+      clearTransactionsQueries(button)
+    });
+  });
+}
+
+if(document.querySelectorAll('.transaction-export-button').length > 0) {
+  document.querySelectorAll('.transaction-export-button').forEach(button => {
+    button.addEventListener('click', () => {
+      // EXPORT
+    });
+  });
+}
+
+// ACCOUNTS
+
+if(document.querySelectorAll('.accounts-search-button').length > 0) {
+  document.querySelectorAll('.accounts-search-button').forEach(button => {
+    button.addEventListener('click', () => {
+      applyAccountsQueries(button);
+    });
+  });
+}
+
+if(document.querySelectorAll('.accounts-clear-button').length > 0) {
+  document.querySelectorAll('.accounts-clear-button').forEach(button => {
+    button.addEventListener('click', () => {
+      clearAccountsQueries(button);
+    });
+  });
+}
+
+if(document.querySelectorAll('.accounts-export-button').length > 0) {
+  document.querySelectorAll('.accounts-export-button').forEach(button => {
+    button.addEventListener('click', () => {
+      // EXPORT
+    });
+  });
+}
 
 
-document.getElementById("transaction-clear-button").addEventListener('click', () => {
-  clearTransactionsQueries();
-});
 
-
-document.getElementById("transaction-export-button").addEventListener('click', () => {
-  exportTransactions();
-});
 
 
 

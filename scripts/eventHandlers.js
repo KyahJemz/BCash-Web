@@ -7,9 +7,14 @@ import {
 } from './modules/menu.js';
 
 import { 
-    getTransactionHistory, 
-    displayToTable, 
+    getTransactionsData, 
+    displayTransactionsToTable, 
 } from './modules/transactions.js';
+
+import { 
+    getAccountsData, 
+    displayAccountsToTable, 
+} from './modules/accounts.js';
 
 import {
     displayItems
@@ -191,14 +196,14 @@ export function openAlertDialogBoxEvents(title,message){
 // TRANSACTIONS EVENTS
 //#####//
 
-export function applyTransactionsQueries(){
-    const transactionsTable = document.getElementById("transactions-table");
-    let transactionStartDate = document.getElementById("transactions-startdate").value;
-    let transactionEndDate = document.getElementById("transactions-enddate").value;
-    let transactionNumber = document.getElementById("transactions-transactionnumber").value;
-    let transactionName = document.getElementById("transaction-transactionname").value;
-    let transactionStatus = document.getElementById("transaction-status-dropdown").innerHTML;
-    let transactionsRecordPerPage = document.getElementById("transaction-recordscount-dropwond").innerHTML
+export function applyTransactionsQueries(button){
+    const transactionsTable = button.parentNode.parentNode.parentNode.querySelector(".transactions-table");
+    let transactionStartDate = button.parentNode.parentNode.parentNode.querySelector(".transactions-startdate").value;
+    let transactionEndDate = button.parentNode.parentNode.parentNode.querySelector(".transactions-enddate").value;
+    let transactionNumber = button.parentNode.parentNode.parentNode.querySelector(".transactions-transactionnumber").value;
+    let transactionName = button.parentNode.parentNode.parentNode.querySelector(".transactions-transactionname").value;
+    let transactionStatus = button.parentNode.parentNode.parentNode.querySelector(".transactions-status-dropdown").innerHTML;
+    let transactionsRecordPerPage = button.parentNode.parentNode.parentNode.querySelector(".transactions-recordscount-dropwond").innerHTML
 
     if (transactionStartDate==="" || transactionEndDate==="") {
         const currentDate = new Date();
@@ -235,15 +240,70 @@ export function applyTransactionsQueries(){
         transactionsRecordPerPage = "25";
     }
 
-    const data = getTransactionHistory(transactionStartDate,transactionEndDate,transactionNumber,transactionName,transactionStatus,transactionsRecordPerPage);
+    const data = getTransactionsData(transactionStartDate,transactionEndDate,transactionNumber,transactionName,transactionStatus,transactionsRecordPerPage);
     console.log(data);
 
-    displayToTable(transactionsTable,data);
+    displayTransactionsToTable(transactionsTable,data);
 }
 
-export function clearTransactionsQueries(){
+export function clearTransactionsQueries(button){
 
 }
+
+//#####//
+// ACCOUNTS EVENTS
+//#####//
+
+export function applyAccountsQueries(button){
+    const accountsTable = button.parentNode.parentNode.parentNode.querySelector(".accounts-table");
+    let accountId = button.parentNode.parentNode.parentNode.querySelector(".accounts-accountschoolid").value;
+    let accountFirstName = button.parentNode.parentNode.parentNode.querySelector(".accounts-accountfirstname").value;
+    let accountLastName = button.parentNode.parentNode.parentNode.querySelector(".accounts-accountlastname").value;
+    let accountCategoryFilter = button.parentNode.parentNode.parentNode.querySelector(".accounts-category-dropdown").innerHTML;
+    let accountDepartmentFilter = button.parentNode.parentNode.parentNode.querySelector(".accounts-department-dropdown").innerHTML;
+    let accountCourseFilter = button.parentNode.parentNode.parentNode.querySelector(".accounts-course-dropdown").innerHTML;
+    let accountsRecordPerPage = button.parentNode.parentNode.parentNode.querySelector(".accounts-recordscount-dropdown").innerHTML
+
+    if (accountsRecordPerPage === "25/Page" || accountsRecordPerPage === "50/Page" || accountsRecordPerPage === "100/Page" || accountsRecordPerPage === "500/Page") {
+        if (accountsRecordPerPage === "25/Page") {
+            accountsRecordPerPage = "25";
+        } else if (accountsRecordPerPage === "50/Page"){
+            accountsRecordPerPage = "50";
+        } else if (accountsRecordPerPage === "100/Page"){
+            accountsRecordPerPage = "100";
+        } else if (accountsRecordPerPage === "500/Page"){
+            accountsRecordPerPage = "500";
+        } else {
+            accountsRecordPerPage = "25";
+        }
+    } else {
+        accountsRecordPerPage = "25";
+    }
+
+    const data = getAccountsData();
+    console.log(data);
+
+   displayAccountsToTable(accountsTable,data);
+}
+
+export function clearAccountsQueries(button){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
