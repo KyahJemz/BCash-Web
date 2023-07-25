@@ -13,17 +13,19 @@ export function dropdown(event, value, position) {
 }
   
 export function changeSelection(element) {
+  console.log(element.parentNode.parentNode);
+  console.log(element.innerHTML);
     let grandparent = element.parentNode.parentNode;
     let btnText = grandparent.querySelector(".dropdown-text");
-    btnText.textContent = element.textContent;
+    btnText.innerHTML = element.innerHTML;
 
     let dropdownSelected = element.parentNode.querySelector('.dropdown-selected');
     dropdownSelected.classList.remove('dropdown-selected');
     element.classList.add('dropdown-selected');
 
-    if (element.textContent === "Card") {
+    if (element.innerHTML === "Card") {
         document.getElementById("icon-layout-1").src="../../images/icons/grid-yellow.png";
-    } else if (element.textContent === "List"){
+    } else if (element.innerHTML === "List"){
         document.getElementById("icon-layout-1").src="../../images/icons/list-yellow.png";
     }
 }

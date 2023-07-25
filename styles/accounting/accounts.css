@@ -80,14 +80,24 @@
         font-size: 0.7em;
     }
 
+    .panel-accounts-query .form-container .dropdown .dropdown-content {
+        z-index: 10;
+    }
+
     .panel-accounts-query .form-container label {
         font-size: 0.7em;
         display:block;
     }
     .panel-accounts-query .form-container div {
-        min-width:  150px;
+        min-width: 200px;
+        flex-grow: 1;
         flex: 1;
     }
+
+    .panel-accounts-query .form-container div input {
+        width: 100%;
+    }
+
     .panel-accounts-query .form-container .textbox {
         margin-right: 10px;
         width: 100%;

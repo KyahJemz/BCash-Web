@@ -225,7 +225,9 @@ document.querySelectorAll('.dropdownButton').forEach(dropdownBtn => {
 document.querySelectorAll('.dropdownButtonSubItem').forEach(item => {
   item.addEventListener('click', event => {
     const element = event.currentTarget;
+    console.log(element);
     changeSelectionEvents(element);
+    
 
     const panel = element.parentNode.parentNode.dataset.panel;
     displayItemsEvents(items, order, panel);
