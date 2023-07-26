@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCash - Merchant</title>
+    <title>BCash - Merchant Admin</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/dialog-box.css">
@@ -31,7 +31,7 @@
                 <img src="../images/bcash-logo.png" alt="BCash Logo">
             </div>
             <div class="details">
-                <div class="category">BCash: Merchant</div>
+                <div class="category">BCash: Merchant Admin</div>
                 <div class="fullname">Juan Dela Cruz</div>
             </div>
             <div class="button-container">
@@ -64,6 +64,21 @@
                                 <p>Transactions</p>
                             </li>
                         </ul>
+                    </li>
+                    <li data-menu="Item Management" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="../images/icons/item.png" alt="Item Management Icon">
+                        <p>Item Management</p>
+                    </li>
+                    <li data-menu="Staff Management" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="../images/icons/accounts.png" alt="Staff Management Icon">
+                        <p>Staff Management</p>
+                    </li>
+                    <li data-menu="Fund Remittance" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="../images/icons/remittance.png" alt="Fund Remittance Icon">
+                        <p>Fund Remittance</p>
                     </li>
                 </ul>
             </nav>
@@ -107,7 +122,35 @@
         HOME 
     -->
                 <div id="panel-home" class="body-content-panel visible">
-                   
+                    <div class="panel-home-content">
+                        <div class="grid-cell header">
+                            <p>Welcome Back!</p>
+                            <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
+                        </div>
+                        <div class="grid-cell sales-graph">
+                            <p>Sales Graph</p>
+                            <canvas id="graph-daily"></canvas>
+                        </div>
+                        <div class="grid-cell confirmed-orders">
+                            <p>53</p>
+                            <p>Orders</p>
+                        </div>
+                        <div class="grid-cell confirmed-sales">
+                            <p>123,230.00</p>
+                            <p>Sales</p>
+                        </div>
+                        <div class="grid-cell orders-by-items-graph">
+                            <p>Orders by Items</p>
+                            <canvas id="graph-order-by-items"></canvas>
+                        </div>
+                        <div class="grid-cell orders-by-category-graph">
+                            <p>Sales by Category</p>
+                            <canvas id="graph-sales-by-category"></canvas>
+                        </div>
+                        <div class="grid-cell latest-transaactions">
+                            <p>Recent Transactons</p>
+                        </div>
+                    </div>
                 </div>
 
     <!--
@@ -269,6 +312,70 @@
                     </div>
                 </div>
     <!--
+        ITEM MANAGEMENT 
+    -->
+                <div id="panel-itemmanagement" class="body-content-panel hidden"> 
+                    <div class="panel-itemmanagement-query panel">
+                        <div class="forms">
+                            <div class="left-panel">
+                                <div>
+                                    <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
+                                    <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
+                                </div>
+                                <div>
+                                    <div class="dropdown" data-panel="ItemManagement">
+                                        <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
+                                            <img class="icon" src="../images/icons/category-yellow.png" alt="category">
+                                            <span id="itemmanagement-filter-dropdown" class="dropdown-text">All</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div id="itemmanagement-category-choices" class="dropdown-content">
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dropdown" data-panel="ItemManagement">
+                                        <button title="Sort" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
+                                            <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
+                                            <span id="itemmanagement-sort-dropdown" class="dropdown-text">Ascending</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">Ascending</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Descending</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dropdown" data-panel="ItemManagement">
+                                        <button title="Layout View" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
+                                            <img id="icon-layout-1" class="icon" src="../images/icons/list-yellow.png" alt="layout">
+                                            <span id="itemmanagement-layout-dropdown" class="dropdown-text">List</span>
+                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">List</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Card</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right-panel">
+                                <div>
+                                    <button class="curson-pointer addItemButton" type="button">
+                                        <img class="icon" src="../images/icons/add-yellow.png" alt="layout">
+                                        <span>Add Item</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-itemmanagement-content">
+                        <div class="list-layout"></div>
+                    </div>
+                </div>
+    <!--
         CREATE ORDER 
     -->
                 <div id="panel-createorder" class="body-content-panel hidden">
@@ -357,6 +464,25 @@
                         </div>
                     </div>
                 </div>
+
+    <!--
+        STAFF MANAGEMENT 
+    -->
+                <div id="panel-staffmanagement" class="body-content-panel hidden">
+                    <div class="panel-staffmanagement-content">
+                    
+                    </div>
+                </div>
+
+    <!--
+        FUND REMITTANCE 
+    -->
+                <div id="panel-fundremittance" class="body-content-panel hidden">
+                    <div class="panel-fundremittance-content">
+                    
+                    </div>
+                </div>
+
     <!--
         END 
     -->
@@ -390,6 +516,26 @@
             </div>
         </div>
     </div>
+
+
+    <div class="numpad-container">
+        <button class="numpad numpad-7 curson-pointer">7</button>
+        <button class="numpad numpad-8 curson-pointer">8</button>
+        <button class="numpad numpad-9 curson-pointer">9</button>
+        <button class="numpad numpad-4 curson-pointer">4</button>
+        <button class="numpad numpad-5 curson-pointer">5</button>
+        <button class="numpad numpad-6 curson-pointer">6</button>
+        <button class="numpad numpad-1 curson-pointer">1</button>
+        <button class="numpad numpad-2 curson-pointer">2</button>
+        <button class="numpad numpad-3 curson-pointer">3</button>
+        <button class="numpad numpad-clear curson-pointer">X</button>
+        <button class="numpad numpad-0 curson-pointer">0</button>
+        <button class="numpad numpad-backspace curson-pointer">&lt</button>
+    </div>
+
+
+
+
 <!--
     JAVASCRIPTS  ###
 -->
