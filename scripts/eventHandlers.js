@@ -1,4 +1,11 @@
 import { 
+    getNotificationArray, 
+    getItems, 
+    getOrder,
+    bindDropdownSubItemEventButtons
+} from './main.js';
+
+import { 
     toggleSubMenuDropdown, 
     ChangeTitle, 
     ChangeMenuSelected, 
@@ -75,20 +82,30 @@ export function closeDialogBoxEvents(){
 // ORDER EVENTS
 //#####//
 
-export function addToCart(button, order, itemId, name, cost, image, quantity) {
-    if (button.dataset.type == "AddToCart") {
+export function addToCart(event, order) {
+    const value = event.currentTarget;
+    const itemId = value.parentNode.parentNode.dataset.itemId;
+    const name = value.parentNode.parentNode.dataset.name;
+    const cost = value.parentNode.parentNode.dataset.cost;
+    const image = value.parentNode.parentNode.dataset.image;
+    const quantity = "1";
+
+    if (value.dataset.type == "AddToCart") {
         order.addItem(itemId, name, cost, image, quantity);
     } 
-    if (button.dataset.type == "RemoveToCart") {
+    if (value.dataset.type == "RemoveToCart") {
         order.removeItem(itemId);
     }
-    toggleItemButton(button);
+    toggleItemButton(value);
     displayOrders(order);
     refreshReceiptValues(order);
 }
 
-export function quantity(order, itemId, type) {
-    console.log("Quantity Fired")
+export function quantity(event, order) {
+    const value = event.currentTarget;
+    const itemId = value.parentNode.parentNode.dataset.itemId;
+    const type = value.dataset.type;
+
     order.updateQuantity(itemId, type)
     displayOrders(order);
     toggleQuantityButton(order,itemId)
@@ -134,8 +151,11 @@ export function displayItemsEvents(items, order, type){
 // MENU EVENTS
 //#####//
 
-export function menuSelectionEvents(value, items, order) {
+export function menuSelectionEvents(event) {
+    let items = getItems();
+    let order = getOrder();
     // Used ".replace(new RegExp(" ", 'g'), '')" to remove spaces
+    const value = event.currentTarget;
     const panelName = value.dataset.menu;
     const panelId = "panel-"+panelName.replace(new RegExp(" ", 'g'), '').toLowerCase();
 
@@ -166,12 +186,22 @@ export function menuSelectionEvents(value, items, order) {
 // DROPDOWN EVENTS
 //#####//
   
-export function dropdownEvents(event, value, position) {
+export function dropdownEvents(event) {
+    const value = event.currentTarget;
+    const position = value.dataset.layout;
     dropdown(event, value, position);
 }
 
-export function changeSelectionEvents(element) {
-    changeSelection(element);
+export function changeSelectionEvents(event) {
+    const value = event.currentTarget;
+    changeSelection(value);
+
+    const panel = value.parentNode.parentNode.dataset.panel;
+    console.log(panel);
+    if (panel != undefined){
+        displayItemsEvents(getItems(), getOrder(), panel);
+        bindDropdownSubItemEventButtons();
+    }
 }
 
 export function windowClickClearDropdownEvents(event) {
@@ -198,12 +228,19 @@ export function openAlertDialogBoxEvents(title,message){
 
 export function applyTransactionsQueries(button){
     const transactionsTable = button.parentNode.parentNode.parentNode.querySelector(".transactions-table");
-    let transactionStartDate = button.parentNode.parentNode.parentNode.querySelector(".transactions-startdate").value;
-    let transactionEndDate = button.parentNode.parentNode.parentNode.querySelector(".transactions-enddate").value;
-    let transactionNumber = button.parentNode.parentNode.parentNode.querySelector(".transactions-transactionnumber").value;
-    let transactionName = button.parentNode.parentNode.parentNode.querySelector(".transactions-transactionname").value;
-    let transactionStatus = button.parentNode.parentNode.parentNode.querySelector(".transactions-status-dropdown").innerHTML;
-    let transactionsRecordPerPage = button.parentNode.parentNode.parentNode.querySelector(".transactions-recordscount-dropwond").innerHTML
+    const transactionStartDateElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-startdate");
+    const transactionEndDateElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-enddate");
+    const transactionNumberElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-transactionnumber");
+    const transactionNameElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-transactionname");
+    const transactionStatusDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-status-dropdown");
+    const transactionsRecordPerPageDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-recordscount-dropdown");
+    
+    let transactionStartDate = transactionStartDateElement ? transactionStartDateElement.value : '';
+    let transactionEndDate = transactionEndDateElement ? transactionEndDateElement.value : '';
+    const transactionNumber = transactionNumberElement ? transactionNumberElement.value : '';
+    const transactionName = transactionNameElement ? transactionNameElement.value : '';
+    const transactionStatus = transactionStatusDropdown ? transactionStatusDropdown.textContent.trim() : '';
+    const transactionsRecordPerPage = transactionsRecordPerPageDropdown ? transactionsRecordPerPageDropdown.textContent.trim() : '';
 
     if (transactionStartDate==="" || transactionEndDate==="") {
         const currentDate = new Date();
@@ -224,6 +261,7 @@ export function applyTransactionsQueries(button){
         }
     }
 
+    /*
     if (transactionsRecordPerPage === "25/Page" || transactionsRecordPerPage === "50/Page" || transactionsRecordPerPage === "100/Page" || transactionsRecordPerPage === "500/Page") {
         if (transactionsRecordPerPage === "25/Page") {
             transactionsRecordPerPage = "25";
@@ -239,6 +277,7 @@ export function applyTransactionsQueries(button){
     } else {
         transactionsRecordPerPage = "25";
     }
+    */
 
     const data = getTransactionsData(transactionStartDate,transactionEndDate,transactionNumber,transactionName,transactionStatus,transactionsRecordPerPage);
     console.log(data);
@@ -255,15 +294,26 @@ export function clearTransactionsQueries(button){
 //#####//
 
 export function applyAccountsQueries(button){
-    const accountsTable = button.parentNode.parentNode.parentNode.querySelector(".accounts-table");
-    let accountId = button.parentNode.parentNode.parentNode.querySelector(".accounts-accountschoolid").value;
-    let accountFirstName = button.parentNode.parentNode.parentNode.querySelector(".accounts-accountfirstname").value;
-    let accountLastName = button.parentNode.parentNode.parentNode.querySelector(".accounts-accountlastname").value;
-    let accountCategoryFilter = button.parentNode.parentNode.parentNode.querySelector(".accounts-category-dropdown").innerHTML;
-    let accountDepartmentFilter = button.parentNode.parentNode.parentNode.querySelector(".accounts-department-dropdown").innerHTML;
-    let accountCourseFilter = button.parentNode.parentNode.parentNode.querySelector(".accounts-course-dropdown").innerHTML;
-    let accountsRecordPerPage = button.parentNode.parentNode.parentNode.querySelector(".accounts-recordscount-dropdown").innerHTML
+    const accountsTable = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-table");
+    const accountIdElement = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-accountschoolid");
+    const accountFirstNameElement = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-accountfirstname");
+    const accountLastNameElement = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-accountlastname");
+    const groupDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-group-dropdown");
+    const departmentDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-department-dropdown");
+    const courseDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-course-dropdown");
+    const recordsCountDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-recordscount-dropdown");
+    const categoryDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".accounts-category-dropdown");
 
+    const accountId = accountIdElement ? accountIdElement.value : '';
+    const accountFirstName = accountFirstNameElement ? accountFirstNameElement.value : '';
+    const accountLastName = accountLastNameElement ? accountLastNameElement.value : '';
+    const accountGroupFilter = groupDropdown ? groupDropdown.textContent.trim() : '';
+    const accountDepartmentFilter = departmentDropdown ? departmentDropdown.textContent.trim() : '';
+    const accountCourseFilter = courseDropdown ? courseDropdown.textContent.trim() : '';
+    const accountsRecordPerPage = recordsCountDropdown ? recordsCountDropdown.textContent.trim() : '';
+    const accountCategoryFilter = categoryDropdown ? categoryDropdown.textContent.trim() : '';
+        
+    /*
     if (accountsRecordPerPage === "25/Page" || accountsRecordPerPage === "50/Page" || accountsRecordPerPage === "100/Page" || accountsRecordPerPage === "500/Page") {
         if (accountsRecordPerPage === "25/Page") {
             accountsRecordPerPage = "25";
@@ -279,6 +329,7 @@ export function applyAccountsQueries(button){
     } else {
         accountsRecordPerPage = "25";
     }
+    */
 
     const data = getAccountsData();
     console.log(data);

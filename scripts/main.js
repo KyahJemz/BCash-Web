@@ -29,15 +29,75 @@ import {
     
 } from './eventHandlers.js';
 
-var doc = document;
 
-//#####//
-// INITIALZASIO MODULE
-//#####//
+////////////////////////////
+// VARIABLES
+////////////////////////////
 
 window.onclick = windowOnclickEvents;
 
-const items = [];
+var items = [];
+var notificationArray = [];
+const order = new Order();
+
+var doc = document;
+
+export function getOrder(){
+  return order;
+}
+
+export function getItems(){
+  return items;
+}
+
+export function getNotificationArray(){
+  return notificationArray;
+}
+
+
+
+////////////////////////////
+// EVENT LISTENERS
+////////////////////////////
+
+function addElementClickListener(element, callback) {
+  const elements = document.querySelectorAll(element);
+  if (elements.length > 0) {
+    elements.forEach((element) => {
+      element.addEventListener('click', callback);
+    });
+  }
+}
+
+function addElementInputistener(element, callback) {
+  const elements = document.querySelectorAll(element);
+  if (elements.length > 0) {
+    elements.forEach((element) => {
+      element.addEventListener('intput', callback);
+    });
+  }
+}
+
+function addElementClickListenerById(element, callback) {
+  const elements = document.getElementById(element);
+  if (elements) {
+    elements.addEventListener('click', callback);
+  }
+}
+
+function addElementInputListenerById(element, callback) {
+  const elements = document.getElementById(element);
+  if (elements) {
+    elements.addEventListener('input', callback);
+  }
+}
+
+
+
+////////////////////////////
+// INITIALIZATIONS
+////////////////////////////
+
 items.push(new Item("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../images/items/1.png"));
 items.push(new Item("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../images/items/2.png"));
 items.push(new Item("3","Margherita Pizza","180","Pizza","2023-06-29","2023-06-29", "../images/items/3.png"));
@@ -53,80 +113,41 @@ console.log(items);
 
 //displayItemsEvents(items, "CreateOrder");
 
-var notificationArray = [];
 
-export function getNotificationArray(){
-  return notificationArray;
+
+
+////////////////////////////
+// ORDER
+////////////////////////////
+
+function onTxtOrderDiscountInput(){
+  refreshReceipt(order);
 }
 
-export function setNotificationArray(data){
-  notificationArray = data;
+function onCreateOrderClearClick(){
+  clearOrder(order);
 }
 
-export function makePopupNotification(id,title,content){
-  const notification = new Notification();
-  notification.setPopupNotificationInfo(id,title,content);
-  
-  createNotification(notificationArray,notification);
-}
-
-makePopupNotification("23","title daw to","it is a content daw");
-makePopupNotification("12322245","title daw to","it is a content daw");
-
-setTimeout(function() {
-  makePopupNotification("3333","title daw to","it is a content daw");
-}, 1000);
-
-
-//
-
-
-//#####//
-// ORDER MODULE
-//#####//
-
-
-const order = new Order();
-
-export function getOrder(){
-  if (order.items.length <= 0) {
-    return "";
+function onCreateOrderPlaceOrderClick(){
+  if (order.items.length > 0) {
+    openDialogBoxEvents("Place-Order");
   } else {
-    return order;
+    openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
   }
 }
 
+function onBindQuantityEventButtonsEvent(event){
+  quantity(event, order);
+}
+
 export function bindQuantityEventButtons() {
-  document.querySelectorAll('.quantityButton').forEach(button => {
-    button.addEventListener('click', () => {
-      const type = button.dataset.type;
-      const itemId = button.parentNode.parentNode.dataset.itemId;
-      quantity(order, itemId, type);
-    });
-  });
+  addElementClickListener('.quantityButton',onBindQuantityEventButtonsEvent);
 }
 
-if (document.getElementById('txt-order-Discount')){
-  document.getElementById('txt-order-Discount').addEventListener('input', () => {
-    refreshReceipt(order)
-  });
-}
+addElementInputListenerById('txt-order-Discount',onTxtOrderDiscountInput);
+addElementClickListenerById('createorder-clear',onCreateOrderClearClick);
+addElementClickListenerById('createorder-placeorder',onCreateOrderPlaceOrderClick);
 
-if(document.getElementById('createorder-clear')) {
-  document.getElementById('createorder-clear').addEventListener('click', () => {
-    clearOrder(order);
-  });
-}
-
-if(document.getElementById('createorder-placeorder')){
-  document.getElementById('createorder-placeorder').addEventListener('click', () => {
-    if (order.items.length > 0) {
-      openDialogBoxEvents("Place-Order");
-    } else {
-      openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
-    }
-  });
-}
 
 
 
@@ -134,189 +155,158 @@ if(document.getElementById('createorder-placeorder')){
 // ITEMS MODULE
 //#####//
 
-if (document.getElementById('createorder-search')){
-  document.getElementById('createorder-search').addEventListener('input', () => {
-    displayItemsEvents(items, order, "CreateOrder");
-  });
-  
+function onCreateOrderSearchInput(){
+  displayItemsEvents(items, order, "CreateOrder");
 }
 
-if (document.getElementById('itemmanagement-search')){
-  document.getElementById('itemmanagement-search').addEventListener('input', () => {
-    displayItemsEvents(items, order, "ItemManagement");
-  });
+function onItemManagementSearchInput(){
+  displayItemsEvents(items, order, "ItemManagement");
 }
 
+function onAddToCartButtonsClick(event){
+  addToCart(event, order);
+}
+
+function onEditItemButtonClick(event){
+  openDialogBoxEvents("Edit-Item",event.currentTarget.parentNode.parentNode.dataset.itemId);
+}
+
+function onDeleteItemButtonClick(event){
+  openDialogBoxEvents("Delete-Item",event.currentTarget.parentNode.parentNode.dataset.itemId);
+}
+
+function onAddItemButtonClick(){
+  openDialogBoxEvents("Add-Item");
+}
 
 export function bindItemsEventButtons() {
-  const addToCartButtons = document.querySelectorAll('.addToCartButton');
-  if (addToCartButtons.length > 0) {
-    document.querySelectorAll('.addToCartButton').forEach(button => {
-      button.addEventListener('click', () => {
-          const itemId = button.parentNode.parentNode.dataset.itemId;
-          const name = button.parentNode.parentNode.dataset.name;
-          const cost = button.parentNode.parentNode.dataset.cost;
-          const image = button.parentNode.parentNode.dataset.image;
-          addToCart(button, order, itemId, name, cost, image, "1");
-      });
-    });
-  }
-
-  const editItemButtons = document.querySelectorAll('.editItemButton');
-  if (editItemButtons.length > 0){
-    document.querySelectorAll('.editItemButton').forEach(button => {
-      button.addEventListener('click', () => {
-        const itemId = button.parentNode.parentNode.dataset.itemId; 
-        openDialogBoxEvents("Edit-Item",itemId);
-      });
-    });
-  }
-
-  const deleteItemButtons = document.querySelectorAll('.deleteItemButton');
-  if (deleteItemButtons.length > 0){
-    document.querySelectorAll('.deleteItemButton').forEach(button => {
-      button.addEventListener('click', () => {
-        const itemId = button.parentNode.parentNode.dataset.itemId; 
-        openDialogBoxEvents("Delete-Item",itemId);
-      });
-    });
-  }
-
-  const addItemButtons = document.querySelectorAll('.addItemButton');
-  if (addItemButtons.length > 0){
-    document.querySelectorAll('.addItemButton').forEach(button => {
-      button.addEventListener('click', () => {
-        openDialogBoxEvents("Add-Item");
-      });
-    });
-  }
+  addElementClickListener('.addToCartButton',onAddToCartButtonsClick);
+  addElementClickListener('.editItemButton',onEditItemButtonClick);
+  addElementClickListener('.deleteItemButton',onDeleteItemButtonClick);
+  addElementClickListener('.addItemButton',onAddItemButtonClick);
 }
 
+addElementInputListenerById('createorder-search', onCreateOrderSearchInput);
+addElementInputListenerById('itemmanagement-search', onItemManagementSearchInput)
 
 
 
-
-
-
-
-
-//#####//
+////////////////////////////
 // MENU
-//#####//
-document.querySelectorAll('.menuSelectionButton').forEach(menuItem => {
-    menuItem.addEventListener('click', () => {
-        menuSelectionEvents(menuItem, items, order);
-    });
-});
+////////////////////////////
+
+function onMenuSelectionButton(event) {
+  menuSelectionEvents(event);
+}
+
+addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
 
 
-//#####//
+
+////////////////////////////
 // DROPDOWN
-//#####//
+////////////////////////////
 
-document.querySelectorAll('.dropdownButton').forEach(dropdownBtn => {
-  dropdownBtn.addEventListener('click', event => {
-    const value = event.currentTarget;
-    const position = value.dataset.layout;
-    dropdownEvents(event, value, position);
-  });
-});
-
-document.querySelectorAll('.dropdownButtonSubItem').forEach(item => {
-  item.addEventListener('click', event => {
-    const element = event.currentTarget;
-    console.log(element);
-    changeSelectionEvents(element);
-    
-
-    const panel = element.parentNode.parentNode.dataset.panel;
-    displayItemsEvents(items, order, panel);
-  });
-});
-
-export function bindDropdownSubItemEventButtons(query) {
-  let x = document.getElementById(query).querySelectorAll(".dropdownButtonSubItem").forEach(item => {
-    item.addEventListener('click', event => {
-      const element = event.currentTarget; 
-      changeSelectionEvents(element); 
-      
-      const panel = element.parentNode.parentNode.dataset.panel;
-      displayItemsEvents(items, order, panel);
-    });
-  });
+function onDropdownButtonClick(event) {
+  dropdownEvents(event);
 }
 
+function onDropdownButtonSubItemClick(event) {
+  changeSelectionEvents(event);
+}
+
+export function bindDropdownSubItemEventButtons() {
+  addElementClickListener(".dropdownButtonSubItem", onDropdownButtonSubItemClick);
+}
+
+addElementClickListener('.dropdownButton', onDropdownButtonClick);
+addElementClickListener('.dropdownButtonSubItem', onDropdownButtonSubItemClick);
 
 
 
-
+////////////////////////////
 // TRANSACTIONS
+////////////////////////////
 
-if(document.querySelectorAll('.transaction-search-button').length > 0) {
-  document.querySelectorAll('.transaction-search-button').forEach(button => {
-    button.addEventListener('click', () => {
-      applyTransactionsQueries(button);
-    });
-  });
+function onTransactionsSearchClick() {
+  applyTransactionsQueries(this);
 }
 
-if(document.querySelectorAll('.transaction-clear-button').length > 0) {
-  document.querySelectorAll('.transaction-clear-button').forEach(button => {
-    button.addEventListener('click', () => {
-      clearTransactionsQueries(button)
-    });
-  });
+function onTransactionsClearClick() {
+  clearTransactionsQueries(this);
 }
 
-if(document.querySelectorAll('.transaction-export-button').length > 0) {
-  document.querySelectorAll('.transaction-export-button').forEach(button => {
-    button.addEventListener('click', () => {
-      // EXPORT
-    });
-  });
+function onTransactionsExportClick() {
+  //exprtTransactionsQueries(this);
 }
 
+addElementClickListener('.transaction-search-button', onTransactionsSearchClick);
+addElementClickListener('.transaction-clear-button', onTransactionsClearClick);
+addElementClickListener('.transaction-export-button', onTransactionsExportClick);
+
+
+
+////////////////////////////
 // ACCOUNTS
+////////////////////////////
 
-if(document.querySelectorAll('.accounts-search-button').length > 0) {
-  document.querySelectorAll('.accounts-search-button').forEach(button => {
-    button.addEventListener('click', () => {
-      applyAccountsQueries(button);
-    });
-  });
+function onAccountsSearchClick() {
+  applyAccountsQueries(this);
 }
 
-if(document.querySelectorAll('.accounts-clear-button').length > 0) {
-  document.querySelectorAll('.accounts-clear-button').forEach(button => {
-    button.addEventListener('click', () => {
-      clearAccountsQueries(button);
-    });
-  });
+function onAccountsClearClick() {
+  clearAccountsQueries(this);
 }
 
-if(document.querySelectorAll('.accounts-export-button').length > 0) {
-  document.querySelectorAll('.accounts-export-button').forEach(button => {
-    button.addEventListener('click', () => {
-      // EXPORT
-    });
-  });
+function onAccountsExportClick() {
+  //exprtAccountsQueries(this);
 }
 
+addElementClickListener('.accounts-search-button', onAccountsSearchClick);
+addElementClickListener('.accounts-clear-button', onAccountsClearClick);
+addElementClickListener('.accounts-export-button', onAccountsExportClick);
 
 
 
+////////////////////////////
+// DIALOG BOX
+////////////////////////////
 
-
-
-document.getElementById("Dialog-Box-Close-Button").addEventListener('click', () => {
+function onDialogBoxCloseButtonClick() {
   closeDialogBoxEvents();
-});
+}
 
 export function bindDialogBoxCloseButton(){
-  document.querySelector(".dialog-box-close-button").addEventListener('click', () => {
-    closeDialogBoxEvents();
-  });
+  addElementClickListener('.dialog-box-close-button', onDialogBoxCloseButtonClick);
 }
+
+addElementClickListenerById('Dialog-Box-Close-Button', onDialogBoxCloseButtonClick);
+
+
+
+
+////////////////////////////
+// MENU PRIMARY BUTTONS
+////////////////////////////
+
+function onMenuNotificationButtonClick() {
+  openDialogBoxEvents("Notification Panel");
+}
+
+function onMenuSettingsButtonClick() {
+  openDialogBoxEvents("Settings Panel");
+}
+
+addElementClickListenerById('menu-notification-button', onMenuNotificationButtonClick);
+addElementClickListenerById('menu-settings-button', onMenuSettingsButtonClick);
+
+openDialogBoxEvents("Settings Panel");
+
+
+
+////////////////////////////
+// OTHERS
+////////////////////////////
 
 
 
@@ -336,12 +326,23 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
     }
 });
 
-openDialogBoxEvents("Settings Panel");
 
-document.getElementById("menu-notification-button").addEventListener('click', () => {
-  openDialogBoxEvents("Notification Panel");
-});
 
-document.getElementById("menu-settings-button").addEventListener('click', () => {
-  openDialogBoxEvents("Settings Panel");
-});
+export function setNotificationArray(data){
+  notificationArray = data;
+}
+
+export function makePopupNotification(id,title,content){
+  const notification = new Notification();
+  notification.setPopupNotificationInfo(id,title,content);
+  
+  createNotification(notificationArray,notification);
+}
+
+makePopupNotification("23","title daw to","it is a content daw");
+makePopupNotification("12322245","title daw to","it is a content daw");
+
+setTimeout(function() {
+  makePopupNotification("3333","title daw to","it is a content daw");
+}, 1000);
+
