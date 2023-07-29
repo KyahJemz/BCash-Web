@@ -34,13 +34,9 @@ import {
 // VARIABLES
 ////////////////////////////
 
-window.onclick = windowOnclickEvents;
-
 var items = [];
 var notificationArray = [];
 const order = new Order();
-
-var doc = document;
 
 export function getOrder(){
   return order;
@@ -59,6 +55,8 @@ export function getNotificationArray(){
 ////////////////////////////
 // EVENT LISTENERS
 ////////////////////////////
+
+window.onclick = windowOnclickEvents;
 
 function addElementClickListener(element, callback) {
   const elements = document.querySelectorAll(element);
@@ -97,6 +95,12 @@ function addElementInputListenerById(element, callback) {
 ////////////////////////////
 // INITIALIZATIONS
 ////////////////////////////
+
+export function makePopupNotification(id,title,content){
+  const notification = new Notification();
+  notification.setPopupNotificationInfo(id,title,content);
+  createNotification(notificationArray,notification);
+}
 
 items.push(new Item("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../images/items/1.png"));
 items.push(new Item("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../images/items/2.png"));
@@ -332,12 +336,7 @@ export function setNotificationArray(data){
   notificationArray = data;
 }
 
-export function makePopupNotification(id,title,content){
-  const notification = new Notification();
-  notification.setPopupNotificationInfo(id,title,content);
-  
-  createNotification(notificationArray,notification);
-}
+
 
 makePopupNotification("23","title daw to","it is a content daw");
 makePopupNotification("12322245","title daw to","it is a content daw");

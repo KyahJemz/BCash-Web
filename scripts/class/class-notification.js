@@ -1,7 +1,7 @@
 
 export default class Notification {
 
-    maxNotificationTimeout = 2000;
+    maxNotificationTimeout = 3000;
     maxNotificationCount = 5;
 
 // NOTIFICATION BOX
@@ -28,10 +28,13 @@ export default class Notification {
     }
 
 // NOTIFICATION POPUP
-    setPopupNotificationInfo(id,title,content) {
+    setPopupNotificationInfo(id,title,content,timeout) {
         this.id = id;
         this.title = title;
         this.content = content;
+        if (timeout > 0){
+            this.maxNotificationTimeout = number;
+        }
     }
 
     setPopupNotificationElement(element){

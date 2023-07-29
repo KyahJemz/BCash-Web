@@ -1,4 +1,5 @@
 import { 
+    makePopupNotification,
     getNotificationArray, 
     getItems, 
     getOrder,
@@ -55,7 +56,6 @@ import {
 import { 
     uploadOrderData 
 } from './ajaxUtils.js';
-
 
 
 
@@ -152,8 +152,6 @@ export function displayItemsEvents(items, order, type){
 //#####//
 
 export function menuSelectionEvents(event) {
-    let items = getItems();
-    let order = getOrder();
     // Used ".replace(new RegExp(" ", 'g'), '')" to remove spaces
     const value = event.currentTarget;
     const panelName = value.dataset.menu;
@@ -168,17 +166,29 @@ export function menuSelectionEvents(event) {
             ChangeMenuSelected(panelName);
             HideAllPanels(panelId);
             ChangePanel(panelId);
-            console.log(panelId);
         } else {
             console.log("Panel Does Not Exist");
+            makePopupNotification("","Panel Does Not Exist","Panel Does Not Exist");
         }
     }
 
     // Check and Refresh Items Depending On Panel Clicked
+
     if (panelName === "Item Management"){
-        displayItems(items,order, panelName.replace(new RegExp(" ", 'g'), ''));
-    } else if (panelName === "Create Order") {
-        displayItems(items,order, panelName.replace(new RegExp(" ", 'g'), ''));
+        try {
+            displayItems(getItems(),getOrder(), panelName.replace(new RegExp(" ", 'g'), ''));
+        } catch (error) {
+            makePopupNotification("","Display Error",error);
+            console.error("Error getting items or order:", error);
+        }
+    } 
+    if (panelName === "Create Order") {
+        try {
+            displayItems(getItems(),getOrder(), panelName.replace(new RegExp(" ", 'g'), ''));
+        } catch (error) {
+            makePopupNotification("","Display Error",error);
+            console.error("Error getting items or order:", error);
+        }
     }
 }
 
