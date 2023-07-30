@@ -7,23 +7,25 @@ Event Handler for Items
 
 import {
     bindItemsEventButtons,
-    bindDropdownSubItemEventButtons,
+    bindCategoryItems
 } from '../main.js';
 
 // USED FOR FILTERS
 function getFilteredItems (temp,items,filter,search) {
-    if(filter == "All"){
+    if(filter.length <= 0){
         items.forEach(item => {
             if(item.name.toUpperCase().includes(search)) {
                 temp.push(item);
             }
         })
     } else { 
-        items.forEach(item => {
-            if(item.category == filter && item.name.toUpperCase().includes(search)) {
-                temp.push(item);
-            }
-        })
+        filter.forEach(element => {
+            items.forEach(item => {
+                if(item.category == element.dataset.category && item.name.toUpperCase().includes(search)) {
+                    temp.push(item);
+                }
+            })
+        });
     }
     return temp;
 }
@@ -59,34 +61,51 @@ function getSortedItems (temp,sort) {
 
 // USED FOR LAYOUT
 function getLayoutTag (layout, container) {
-    if(layout == "Card") {
+    if(layout == "List") {
         if (container.querySelector(".list-layout")) {
             container.querySelector(".list-layout").classList.add("card-layout");
             container.querySelector(".list-layout").classList.remove("list-layout");
         }
         return ".card-layout";
-    } else if (layout == "List") {
+    } else if (layout == "Details") {
         if (container.querySelector(".card-layout")) {
             container.querySelector(".card-layout").classList.add("list-layout");
             container.querySelector(".card-layout").classList.remove("card-layout");
         }
         return ".list-layout";
+    } else if (layout == "Tiles") {
+        if (container.querySelector(".card-layout")) {
+            container.querySelector(".card-layout").classList.add("list-layout");
+            container.querySelector(".card-layout").classList.remove("card-layout");
+        }
+        return ".detailed-layout";
     }
 }
 
-// USED FOR UPDATING FILTER DROPDOWN SUBITEMS
-function updateFilterCategoryDropdown(dropdown,items, elemetId){
-    dropdown.innerHTML = 
-    `<a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>`;
+// USED FOR UPDATING FILTER DROPDOWN SUBITEM
+function updateCategoryItems(categoryContainer,items,filter){
+    let categoryActiveItems = [];
+    if(filter.length > 0){
+        filter.forEach(element => {
+            categoryActiveItems.push(element.dataset.category);
+        });
+    }
+
+    categoryContainer.innerHTML = ``;
 
     const uniqueCategories = new Set();
     items.forEach(item => uniqueCategories.add(item.category));
     Array.from(uniqueCategories).forEach(item => { 
-        dropdown.innerHTML = dropdown.innerHTML + 
-        `<a class="dropdownButtonSubItem" href="javascript:void(0)">`+ item +`</a>`;
+        if (categoryActiveItems.includes(item)) {
+            categoryContainer.innerHTML = categoryContainer.innerHTML + 
+            `<button class="category-item curson-pointer category-item-selected" data-category="`+ item +`"><p>`+ item +`</p></button>`;
+        } else {
+            categoryContainer.innerHTML = categoryContainer.innerHTML + 
+            `<button class="category-item curson-pointer" data-category="`+ item +`"><p>`+ item +`</p></button>`;
+        }
     });
 
-    bindDropdownSubItemEventButtons(elemetId);
+    bindCategoryItems();
 }
 
 // USED FOR DISPLAYING ITEMS
@@ -94,8 +113,7 @@ export function displayItems(items, order, type) {
     let temp = [];
 
     if (type == "CreateOrder") {
-        console.log("REFRESHING cREATE ORDER ITEMS");
-        const filter = document.getElementById('createorder-filter-dropdown').innerHTML;
+        const filter = document.getElementById('createorder-category').querySelectorAll('.category-item-selected');
         const sort = document.getElementById('createorder-sort-dropdown').innerHTML;
         const layout =document.getElementById('createorder-layout-dropdown').innerHTML;
         const search = document.getElementById("createorder-search").value.toUpperCase();
@@ -149,7 +167,7 @@ export function displayItems(items, order, type) {
         });
 
         // UPDATETING FILTER DROPDON SUBITEMS
-        updateFilterCategoryDropdown(document.getElementById("createorder-category-choices"),items,"createorder-category-choices");
+        updateCategoryItems(document.getElementById("createorder-category"),items,filter);
 
         // USED TO DIPLAY SEARCH RESULT OF EMPTY
         if (temp.length === 0) {
@@ -162,7 +180,7 @@ export function displayItems(items, order, type) {
         
     } else if (type == "ItemManagement"){
         console.log("REFRESHING ITEMMANAGEMETN ITEMS");
-        const filter = document.getElementById('itemmanagement-filter-dropdown').innerHTML;
+        const filter = document.getElementById('itemmanagement-category').querySelectorAll('.category-item-selected');
         const sort = document.getElementById('itemmanagement-sort-dropdown').innerHTML;
         const layout =document.getElementById('itemmanagement-layout-dropdown').innerHTML;
         const search = document.getElementById("itemmanagement-search").value.toUpperCase();
@@ -208,7 +226,7 @@ export function displayItems(items, order, type) {
         });
 
         // UPDATETING FILTER DROPDON SUBITEMS
-        updateFilterCategoryDropdown(document.getElementById("itemmanagement-category-choices"),items,"itemmanagement-category-choices");
+        updateCategoryItems(document.getElementById("itemmanagement-category"),items,filter);
 
         // USED TO DIPLAY SEARCH RESULT OF EMPTY
         if (temp.length === 0) {

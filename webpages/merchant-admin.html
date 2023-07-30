@@ -323,18 +323,6 @@
                                 </div>
                                 <div>
                                     <div class="dropdown" data-panel="ItemManagement">
-                                        <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
-                                            <img class="icon" src="../images/icons/category-yellow.png" alt="category">
-                                            <span id="itemmanagement-filter-dropdown" class="dropdown-text">All</span>
-                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                        </button>
-                                        <div id="itemmanagement-category-choices" class="dropdown-content">
-                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="dropdown" data-panel="ItemManagement">
                                         <button title="Sort" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
                                             <img class="icon" src="../images/icons/sort-yellow.png" alt="sort">
                                             <span id="itemmanagement-sort-dropdown" class="dropdown-text">Ascending</span>
@@ -355,7 +343,8 @@
                                         </button>
                                         <div class="dropdown-content">
                                             <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">List</a>
-                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Card</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Details</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Tiles</a>
                                         </div>
                                     </div>
                                 </div>
@@ -368,6 +357,11 @@
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="category-container">
+                        <p>Category:</p>
+                        <div class="category-list" id="itemmanagement-category" data-type="ItemManagement">
                         </div>
                     </div>
                     <div class="panel-itemmanagement-content">
@@ -384,18 +378,6 @@
                                 <div>
                                     <img class="input-icon icon" src="../images/icons/search-yellow.png" alt="search">
                                     <input placeholder="Search..." id="createorder-search" class="textbox" type="search" name="createorder-search">
-                                </div>
-                                <div>
-                                    <div class="dropdown" data-panel="CreateOrder">
-                                        <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
-                                            <img class="icon" src="../images/icons/category-yellow.png" alt="category">
-                                            <span id="createorder-filter-dropdown" class="dropdown-text">All</span>
-                                            <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                                        </button>
-                                        <div id="createorder-category-choices" class="dropdown-content">
-                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div>
                                     <div class="dropdown" data-panel="CreateOrder">
@@ -422,6 +404,11 @@
                                             <a class="dropdownButtonSubItem" href="javascript:void(0)">Card</a>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="category-container">
+                                <p>Category:</p>
+                                <div class="category-list" id="createorder-category" data-type="CreateOrder">
                                 </div>
                             </div>
                             <div class="order-items-container"> 

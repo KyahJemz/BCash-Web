@@ -146,6 +146,12 @@ export function displayItemsEvents(items, order, type){
     displayOrders(order);
 }
 
+export function categorySelected(event, items, order) {
+    const value = event.currentTarget;
+    value.classList.toggle("category-item-selected");
+    displayItems(items,order, value.parentNode.dataset.type);
+}
+
 
 //#####//
 // MENU EVENTS

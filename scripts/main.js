@@ -14,6 +14,7 @@ import {
     refreshReceipt,
     displayItemsEvents,
     clearOrder,
+    categorySelected,
 
     openDialogBoxEvents,
     openAlertDialogBoxEvents,
@@ -183,11 +184,19 @@ function onAddItemButtonClick(){
   openDialogBoxEvents("Add-Item");
 }
 
+function onCategoryItemsClick(event){
+  categorySelected(event, items, order);
+}
+
 export function bindItemsEventButtons() {
   addElementClickListener('.addToCartButton',onAddToCartButtonsClick);
   addElementClickListener('.editItemButton',onEditItemButtonClick);
   addElementClickListener('.deleteItemButton',onDeleteItemButtonClick);
   addElementClickListener('.addItemButton',onAddItemButtonClick);
+}
+
+export function bindCategoryItems(){
+  addElementClickListener('.category-item',onCategoryItemsClick);
 }
 
 addElementInputListenerById('createorder-search', onCreateOrderSearchInput);

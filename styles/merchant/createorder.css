@@ -98,6 +98,52 @@
     position: relative;
   }
 
+
+
+
+  .panel-createorder-content .left-panel .category-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .panel-createorder-content .left-panel .category-container p{
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+
+  .panel-createorder-content .left-panel .category-container .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .panel-createorder-content .left-panel .category-container .category-list .category-item {
+    transition: 300ms;
+    border-radius: 5px;
+    border-color: var(--color-DarkWhite);
+  }
+
+  .panel-createorder-content .left-panel .category-container .category-list .category-item:hover {
+    background-color: #f9ac287a;
+  }
+
+  .panel-createorder-content .left-panel .category-container .category-list .category-item-selected {
+    background-color: var(--Button-Background-Gold);
+    
+  }
+
+  .panel-createorder-content .left-panel .category-container .category-list .category-item-selected p {
+    color: var(--TextColor-White);
+  }
+
+  
+
+
+
   .panel-createorder-content .left-panel .order-items-container {
     flex: 1;
     overflow-y: scroll;
@@ -105,6 +151,10 @@
     margin-top: 10px;
     padding-right: 8px;
   }
+
+
+
+
 
 
 /* ############### */
