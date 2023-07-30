@@ -118,10 +118,10 @@
   }
 
 /* ############# */
-/* FOR LIST VIEW */
+/* FOR DETAIL VIEW */
 /* ############# */
 
-  .list-layout {
+  .detail-layout {
     width: 100%;
     height: fit-content;
     margin-bottom: 10px;
@@ -130,7 +130,7 @@
     grid-gap: 1px;
   }
 
-  .list-layout .item-container {
+  .detail-layout .item-container {
     display: flex;
     flex-direction: row;
     position: relative;
@@ -143,12 +143,12 @@
     box-shadow: 0px 0px 5px 0px rgba(75, 75, 75, 0.25);
   }
 
-  .list-layout .item-container .item-image img {
+  .detail-layout .item-container .item-image img {
     height: 100%;
     aspect-ratio: 1/1;
   }
 
-  .list-layout .item-container .item-details-container {
+  .detail-layout .item-container .item-details-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -156,11 +156,11 @@
     padding: 2px;
   }
 
-  .list-layout .item-container .item-details-container .info-container .info{
+  .detail-layout .item-container .item-details-container .info-container .info{
     margin-bottom: 2px;
   }
 
-  .list-layout .item-options {
+  .detail-layout .item-options {
     display: flex;
     flex-direction: row;
     height: fit-content;
@@ -170,36 +170,36 @@
     right: 2px;
   }
 
-  .list-layout .item-options button {
+  .detail-layout .item-options button {
     width: 20px;
     padding: 0px;
     margin: 0px;
   }
 
-  .list-layout .item-options button img{
+  .detail-layout .item-options button img{
     width: 100%;
     aspect-ratio: 1/1;
   }
 
-  .list-layout .item-container .item-details-container .info-container .info-created {
+  .detail-layout .item-container .item-details-container .info-container .info-created {
     padding-top: 25px;
     padding-bottom: 4px;
   }
 
-  .list-layout .item-container .item-details-container .info-container .info-cost {
+  .detail-layout .item-container .item-details-container .info-container .info-cost {
     padding-top: 4px;
   }
 
-  .list-layout .item-container .item-details-container .info-container .info-created p,
-  .list-layout .item-container .item-details-container .info-container .info-modified p{
+  .detail-layout .item-container .item-details-container .info-container .info-created p,
+  .detail-layout .item-container .item-details-container .info-container .info-modified p{
     font-size: 0.7rem;
   }
 
 /* ############# */
-/* FOR GRID VIEW */
+/* FOR TILE VIEW */
 /* ############# */
 
-  .card-layout {
+  .tile-layout {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(126px, 1fr));
     width: 100%;
@@ -207,7 +207,7 @@
     grid-gap: 1px;
   }
 
-  .card-layout .item-container {
+  .tile-layout .item-container {
     padding-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -221,18 +221,18 @@
     position: relative;
   }
 
-  .card-layout .item-container .item-image {
+  .tile-layout .item-container .item-image {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .card-layout .item-container .item-image img {
+  .tile-layout .item-container .item-image img {
     width: 100%;
     aspect-ratio: 1/1;
   }
 
-  .card-layout .item-container .item-details-container {
+  .tile-layout .item-container .item-details-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -240,21 +240,21 @@
     padding: 3px;
   }
 
-  .card-layout .item-container .item-details-container .info-container .info{
+  .tile-layout .item-container .item-details-container .info-container .info{
     margin-bottom: 3px;
   }
 
-  .card-layout .item-container .item-details-container .info-container .info-created,
-  .card-layout .item-container .item-details-container .info-container .info-modified {
+  .tile-layout .item-container .item-details-container .info-container .info-created,
+  .tile-layout .item-container .item-details-container .info-container .info-modified {
     display: none;
   }
 
-  .card-layout .item-buttons button {
+  .tile-layout .item-buttons button {
     width: 20px;
     height: 20px;
   }
 
-  .card-layout .item-options {
+  .tile-layout .item-options {
     display: flex;
     flex-direction: row;
     height: fit-content;
@@ -264,16 +264,92 @@
     right: 4px;
   }
 
-  .card-layout .item-options button {
+  .tile-layout .item-options button {
     width: 20px;
     padding: 0px;
     margin: 0px;
   }
 
-  .card-layout .item-options button img{
+  .tile-layout .item-options button img{
     width: 100%;
     aspect-ratio: 1/1;
   }
+
+/* ############# */
+/* FOR LIST VIEW */
+/* ############# */
+
+.list-layout {
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr;
+  grid-gap: 1px;
+}
+
+.list-layout .item-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin: 5px;
+  padding: 1px;
+  background-color: #f2f2f2;
+  height: 50px;
+  border-radius: 3px;
+  gap: 2px;
+  box-shadow: 0px 0px 5px 0px rgba(75, 75, 75, 0.25);
+}
+
+.list-layout .item-container .item-image img {
+  height: 0%;
+  aspect-ratio: 1/1;
+}
+
+.list-layout .item-container .item-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  padding: 2px;
+}
+
+.list-layout .item-container .item-details-container .info-container .info{
+  margin-bottom: 2px;
+}
+
+.list-layout .item-options {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  position: absolute;
+  gap: 2px;
+  bottom: 2px;
+  right: 2px;
+}
+
+.list-layout .item-options button {
+  width: 20px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.list-layout .item-options button img{
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.list-layout .item-container .item-details-container .info-container .info-cost {
+  padding-top: 4px;
+}
+
+.list-layout .item-container .item-details-container .info-container .info-created,
+.list-layout .item-container .item-details-container .info-container .info-modified{
+  display: none;
+}
+
+
+
 
 /* ############################# */
 /* FOR DIALOG BOX ADD/ EDIT ITEM */
@@ -342,16 +418,23 @@
     .panel-itemmanagement-query .forms .right-panel {
         justify-content: flex-start;
     }
-    .list-layout {
+    .detail-layout {
       grid-template-columns: 2fr;
+    }
+    .list-layout {
+      grid-template-columns: 2fr 2fr;
     }
   }
   
   
 @media (min-width: 1000px) and (max-width: 1250px) {
   /* Styles for laptops */
-  .list-layout {
+  .detail-layout {
     grid-template-columns: 2fr 2fr;
+  }
+
+  .list-layout {
+    grid-template-columns: 2fr 2fr 2fr;
   }
   
 }

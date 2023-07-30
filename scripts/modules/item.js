@@ -61,24 +61,20 @@ function getSortedItems (temp,sort) {
 
 // USED FOR LAYOUT
 function getLayoutTag (layout, container) {
+    const className = container.firstElementChild.className;
+
     if(layout == "List") {
-        if (container.querySelector(".list-layout")) {
-            container.querySelector(".list-layout").classList.add("card-layout");
-            container.querySelector(".list-layout").classList.remove("list-layout");
-        }
-        return ".card-layout";
-    } else if (layout == "Details") {
-        if (container.querySelector(".card-layout")) {
-            container.querySelector(".card-layout").classList.add("list-layout");
-            container.querySelector(".card-layout").classList.remove("card-layout");
-        }
+        container.firstElementChild.classList.remove(className);
+        container.firstElementChild.classList.add("list-layout");
         return ".list-layout";
+    } else if (layout == "Details") {
+        container.firstElementChild.classList.remove(className);
+        container.firstElementChild.classList.add("detail-layout");
+        return ".detail-layout";
     } else if (layout == "Tiles") {
-        if (container.querySelector(".card-layout")) {
-            container.querySelector(".card-layout").classList.add("list-layout");
-            container.querySelector(".card-layout").classList.remove("card-layout");
-        }
-        return ".detailed-layout";
+        container.firstElementChild.classList.remove(className);
+        container.firstElementChild.classList.add("tile-layout");
+        return ".tile-layout";
     }
 }
 
