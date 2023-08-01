@@ -1,48 +1,4 @@
 
-:root {
-    --BackgroundPrimaryColor: #d3d3d3; /* Background */
-    --BackgroundPanelColor: #ffffff; /* 2nd Background */
-    --BackgroundTitleBarColor: #E3E4E6;
-    --BackgroundContentTitleBarColor: #e7e7e7;
-    --AsccentColor: #CB8213; /* Buttons */
-    --TextColor: #4b4b4b; /* text */
-    --DarkColor: #363636; /* text */
-    --ErrorColor: #E53935; 
-    --CorrectColor: #43A047;
-
-    --TextColor-White: #ffffff;
-    --TextColor-Red: #DA121A;
-    --TextColor-Gold: #F9AE28;
-    --TextColor-LightBlack: #333333;
-    --TextColor-Black: #0F1419;
-
-    --Button-Background-Red: #DA121A;
-    --Button-Background-Active-Red: #9A110D;
-    --Button-Background-Gold: #F9AE28;
-    --Button-Background-Active-Gold: #DA121A;
-
-    --Selected-Background-LightBlack: #333333;
-
-    --Panel-Background-LightBlack: #333333;
-    --Panel-Background-Gold: #FFCC00;
-    --Panel-Background-Red: #DA121A;
-    --Panel-Background-White: #ffffff;
-    --Panel-Background-DarkWhite: #F2F2F2;
-
-    --color-White: #ffffff;
-    --color-DarkWhite: #F2F2F2;
-    --color-Red: #DA121A;
-    --color-DarkRed: #9A110D;
-    --color-Gold: #FFCC00;
-    --color-DarkGold: #F9AE28;
-    --color-Gray: #282828;
-    --color-LightBlack: #333333;
-    --color-Black: #0F1419;
-}
-
-
-
-
 
 
 /* ################## */
