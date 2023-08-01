@@ -204,7 +204,7 @@
     grid-template-columns: repeat(auto-fill, minmax(126px, 1fr));
     width: 100%;
     height: fit-content;
-    grid-gap: 1px;
+    grid-gap: 1px; 
   }
 
   .tile-layout .item-container {
@@ -295,14 +295,15 @@
   margin: 5px;
   padding: 1px;
   background-color: #f2f2f2;
-  height: 50px;
+  height: fit-content;
   border-radius: 3px;
   gap: 2px;
   box-shadow: 0px 0px 5px 0px rgba(75, 75, 75, 0.25);
 }
 
 .list-layout .item-container .item-image img {
-  height: 0%;
+  height: 0px;
+  width: 0px;
   aspect-ratio: 1/1;
 }
 

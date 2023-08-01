@@ -161,13 +161,14 @@
 /* FOR LAYOUT VIEW */
 /* ############### */
 
+.detail-layout .item-button, .list-layout .item-button, 
 .tile-layout .item-button, .list-layout .item-button {
   position: absolute;
   text-align: center;
   align-self: center;
 }
 
-.tile-layout .item-button button, .list-layout .item-button button {
+.order-items-container .item-button button, .list-layout .item-button button {
   background-color: var(--Button-Background-Gold);
   justify-content: center;
   box-shadow: 2px 2px 5px 0px var(--Panel-Background-DarkWhite);
@@ -175,17 +176,17 @@
   border-radius: 3px;
 }
 
-.tile-layout .item-button button:active, .list-layout .item-button button:active {
+.order-items-container .item-button button:active, .list-layout .item-button button:active {
   background-color: var(--Button-Background-Active-Gold);
   transform: scale(0.97); 
 }
 
-.tile-layout .item-button button p, .list-layout .item-button button p{
+.order-items-container .item-button button p, .list-layout .item-button button p{
   color: var(--TextColor-White);
 }
 
 /* ############# */
-/* FOR CARD VIEW */
+/* FOR DETAIL VIEW */
 /* ############# */
 
 .detail-layout .item-button {
@@ -203,7 +204,7 @@
 }
 
 /* ############# */
-/* FOR GRID VIEW */
+/* FOR TILE VIEW */
 /* ############# */
 
 .tile-layout .item-button {
@@ -215,6 +216,28 @@
   width: 100%;
 }
 
+/* ############# */
+/* FOR LIST VIEW */
+/* ############# */
+
+.panel-createorder-content .list-layout .item-container {
+  height: 80px;
+}
+
+.list-layout .item-button {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 0px;
+  margin-top: 55px;
+  width: 97%;
+  gap: 4px;
+}
+
+.list-layout .item-button button {
+  width: 100%;
+  height: 20px;
+}
 
 
   
