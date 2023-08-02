@@ -31,19 +31,19 @@ export default class Item {
     UpdateItemData(this);
   }
 
-  static addItem(name, cost, image) {
+  addItem(name, cost, image) {
     addItemData(name, cost, image);
   }
 
-  static searchItem(query) {
+  searchItem(query) {
     searchItemData(query);
   }
 
-  static filterItem(query) {
+  filterItem(query) {
     filterItemData(query);
   }
 
-  static layoutItem(query) {
+  layoutItem(query) {
     layoutItemData(query);
   }
 }

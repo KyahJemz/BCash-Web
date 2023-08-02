@@ -2,6 +2,8 @@ import Order from './class/class-order.js';
 import Item from './class/class-items.js';
 import Notification from './class/class-notification.js';
 
+import Transactions from './modules/transactions.js';
+
 import { 
     windowOnclickEvents,
     
@@ -34,6 +36,7 @@ import {
 ////////////////////////////
 // VARIABLES
 ////////////////////////////
+
 
 var items = [];
 var notificationArray = [];
@@ -169,7 +172,7 @@ function onItemManagementSearchInput(){
 }
 
 function onAddToCartButtonsClick(event){
-  addToCart(event, order);
+  addToCart(event);
 }
 
 function onEditItemButtonClick(event){
@@ -271,13 +274,12 @@ function onAccountsClearClick() {
   clearAccountsQueries(this);
 }
 
-function onAccountsExportClick() {
-  //exprtAccountsQueries(this);
-}
-
 addElementClickListener('.accounts-search-button', onAccountsSearchClick);
 addElementClickListener('.accounts-clear-button', onAccountsClearClick);
-addElementClickListener('.accounts-export-button', onAccountsExportClick);
+
+export function bindAccountsRowButtons(){
+
+}
 
 
 

@@ -1,4 +1,9 @@
-export function dropdown(event, value, position) {
+
+import Helper from '../helper.js';
+
+export default class Dropdown {
+
+  dropdown(event, value, position) {
     event.stopPropagation();    
     if (position === "top") {
         var dropdownContent = value.previousElementSibling;
@@ -12,7 +17,7 @@ export function dropdown(event, value, position) {
     image.classList.toggle("rotate")
 }
   
-export function changeSelection(element) {
+changeSelection(element) {
   console.log(element.parentNode.parentNode);
   console.log(element.innerHTML);
     let grandparent = element.parentNode.parentNode;
@@ -22,15 +27,16 @@ export function changeSelection(element) {
     let dropdownSelected = element.parentNode.querySelector('.dropdown-selected');
     dropdownSelected.classList.remove('dropdown-selected');
     element.classList.add('dropdown-selected');
-
+/*
     if (element.innerHTML === "Card") {
         document.getElementById("icon-layout-1").src="../../images/icons/grid-yellow.png";
     } else if (element.innerHTML === "List"){
         document.getElementById("icon-layout-1").src="../../images/icons/list-yellow.png";
     }
+*/
 }
 
-export function windowClickClearDropdown(event) {
+windowClickClearDropdown(event) {
     if (!event.target.matches('.dropdownbtn')) {
       const dropdowns = document.getElementsByClassName('dropdown-content');
       for (let i = 0; i < dropdowns.length; i++) {
@@ -52,3 +58,47 @@ export function windowClickClearDropdown(event) {
     }
   }
   
+dropdownEvents(event) {
+  const value = event.currentTarget;
+  const position = value.dataset.layout;
+  this.dropdown(event, value, position);
+}
+
+changeSelectionEvents(event,items,order) {
+    const value = event.currentTarget;
+    this.changeSelection(value);
+
+    const panel = value.parentNode.parentNode.dataset.panel;
+    console.log(panel);
+    if (panel != undefined){
+        items.displayItems(items, order, panel);
+
+       // const helper = new Helper();
+        //helper.addElementClickListener(".dropdownButtonSubItem", (event) => this.changeSelectionEvents(event,items,order));
+    }
+  }
+
+  customChangeSelectionEvents(target,items,order) {
+    this.changeSelection(target);
+
+    const panel = value.parentNode.parentNode.dataset.panel;
+    console.log(panel);
+    if (panel != undefined){
+        items.displayItems(items, order, panel);
+
+       // const helper = new Helper();
+        //helper.addElementClickListener(".dropdownButtonSubItem", (event) => this.changeSelectionEvents(event,items,order));
+    }
+  }
+
+
+  
+
+
+
+
+
+
+}
+
+

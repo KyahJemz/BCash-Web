@@ -16,6 +16,7 @@ import {
 
 import { 
     getTransactionsData, 
+    clearTransactioQueries,
     displayTransactionsToTable, 
 } from './modules/transactions.js';
 
@@ -26,7 +27,7 @@ import {
 
 import {
     displayItems
-} from './modules/item.js';
+} from './modules/items.js/index.js';
 
 import {
     openDialogBox,
@@ -38,7 +39,7 @@ import {
     activateNotification,
     deactivateNotification,
     removeNotificationBox
-} from './modules/notification-box.js';
+} from './modules/notifications.js';
 
 import { 
     displayOrders,
@@ -249,6 +250,7 @@ export function applyTransactionsQueries(button){
     const transactionNumberElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-transactionnumber");
     const transactionNameElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-transactionname");
     const transactionStatusDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-status-dropdown");
+
     const transactionsRecordPerPageDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-recordscount-dropdown");
     
     let transactionStartDate = transactionStartDateElement ? transactionStartDateElement.value : '';
@@ -265,44 +267,39 @@ export function applyTransactionsQueries(button){
         const day = String(currentDate.getDate()).padStart(2, '0');
         const formattedDate = `${year}-${month}-${day}`;
 
-        if (transactionStartDate==="") {
+        if (transactionStartDate==="") { // Check if empty, add default value
             transactionStartDate = `${formattedDate} ${"00:00:00"}`;
-        } else {
+        } else { // If has value, add morning time
             transactionStartDate = `${transactionStartDate} ${"00:00:00"}`;
         }
-        if (transactionEndDate==="") {
+
+        if (transactionEndDate==="") { // Check if empty, add default value
             transactionEndDate  = `${formattedDate} ${"23:59:59"}`;
-        } else {
+        } else { // If has value, add evening time
             transactionEndDate  = `${transactionEndDate} ${"23:59:59"}`;
         }
     }
 
-    /*
-    if (transactionsRecordPerPage === "25/Page" || transactionsRecordPerPage === "50/Page" || transactionsRecordPerPage === "100/Page" || transactionsRecordPerPage === "500/Page") {
-        if (transactionsRecordPerPage === "25/Page") {
-            transactionsRecordPerPage = "25";
-        } else if (transactionsRecordPerPage === "50/Page"){
-            transactionsRecordPerPage = "50";
-        } else if (transactionsRecordPerPage === "100/Page"){
-            transactionsRecordPerPage = "100";
-        } else if (transactionsRecordPerPage === "500/Page"){
-            transactionsRecordPerPage = "500";
-        } else {
-            transactionsRecordPerPage = "25";
-        }
-    } else {
-        transactionsRecordPerPage = "25";
-    }
-    */
+
 
     const data = getTransactionsData(transactionStartDate,transactionEndDate,transactionNumber,transactionName,transactionStatus,transactionsRecordPerPage);
-    console.log(data);
 
     displayTransactionsToTable(transactionsTable,data);
 }
 
 export function clearTransactionsQueries(button){
+    const transactionsTable = button.parentNode.parentNode.parentNode.querySelector(".transactions-table");
+    const transactionStartDateElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-startdate");
+    const transactionEndDateElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-enddate");
+    const transactionNumberElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-transactionnumber");
+    const transactionNameElement = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-transactionname");
+    const transactionStatusDropdown = button.parentNode?.parentNode?.parentNode.querySelector(".transactions-status-dropdown");
 
+    clearTransactioQueries(transactionsTable,transactionStartDateElement,transactionEndDateElement,transactionNumberElement,transactionNameElement,transactionStatusDropdown);
+
+
+    
+    
 }
 
 //#####//

@@ -1,6 +1,4 @@
 
-
-
 export function getAccountsData(){
         let data = [];
     data = [
@@ -1417,44 +1415,59 @@ export function getAccountsData(){
 
 
 export function clearAccountsQueries(button){
+} 
 
-}
-
-export function exportAccounts(button){
-
-}
-
-export function displayAccountsToTable(table, data){
-    let template = ``;
+export function displayAccountsToTable(table, data, type){
+  let template = ``;
+  if (type==="staff-management"){
     let count = 0;
-    console.log(data);
     if (data) {
-        data.forEach((record) => {  
-            count++;
-            template = template + `
-            <tr>
-                <td><div class="col1 cell" title="checkbox"><input class="transactionCheckbox" type="checkbox" name="`+record["Transaction ID"]+`" id=""></div></td>
-                <td><div class="col2 cell" title="`+count+`"><center>`+count+`</center></div></td>
-                <td><div class="col3 cell" title="`+record["Transaction ID"]+`"><a class="transaction-viewdata-button view-more" href="">`+record["Transaction ID"]+`</a></div></td>
-                <td><div class="col4 cell" title="`+record["Status"]+`">`+record["Status"]+`</div></td>
-                <td><div class="col5 cell" title="`+record["In Charge"]+`">`+record["In Charge"]+`</div></td>
-                <td><div class="col6 cell" title="`+record["Name"]+`">`+record["Name"]+`</div></td>
-                <td><div class="col7 cell" title="`+record["Category"]+`">`+record["Category"]+`</div></td>
-                <td><div class="col8 cell" title="`+record["Department"]+`">`+record["Department"]+`</div></td>
-                <td><div class="col9 cell" title="`+record["Course"]+`">`+record["Course"]+`</div></td>
-                <td><div class="col10 cell" title="`+record["Amount"]+`">`+record["Amount"]+`</div></td>
-                <td><div class="col11 cell" title="`+record["Items"]+`">`+record["Items"]+`</div></td>
-                <td><div class="col12 cell" title="`+record["Timestamp"]+`">`+record["Timestamp"]+`</div></td>
-                <td><div class="col13 cell" title=`+record["Payment Method"]+`">`+record["Payment Method"]+`</div></td>
-                <td><div class="col14 cell" title="`+record["Notes"]+`">`+record["Notes"]+`</div></td>
-            </tr>       
-        `
-        });
+      data.forEach((record) => {  
+        count++;
+        template = template + `
+          <tr class="curson-pointer" data-userid="123">
+            <td class="col1">
+              <div class="cell">
+                <div><p>#</p></div>
+                <div><p>Status</p></div>
+                <div><p>UserId</p></div>
+                <div><p>Username</p> </div>
+                <div><p>Firstname</p></div>
+                <div><p>Lastname</p></div>
+              </div>
+            </td>
+          </tr>   
+        `;
+      });
     }
-    
+  } else if (type==="account-management"){
+    let count = 0;
+    if (data) {
+      data.forEach((record) => {  
+        count++;
+        template = template + `
+          <tr>
+            <td><div class="col1 cell" title="checkbox"><input class="transactionCheckbox" type="checkbox" name="`+record["Transaction ID"]+`" id=""></div></td>
+            <td><div class="col2 cell" title="`+count+`"><center>`+count+`</center></div></td>
+            <td><div class="col3 cell" title="`+record["Transaction ID"]+`"><a class="transaction-viewdata-button view-more" href="">`+record["Transaction ID"]+`</a></div></td>
+            <td><div class="col4 cell" title="`+record["Status"]+`">`+record["Status"]+`</div></td>
+            <td><div class="col5 cell" title="`+record["In Charge"]+`">`+record["In Charge"]+`</div></td>
+            <td><div class="col6 cell" title="`+record["Name"]+`">`+record["Name"]+`</div></td>
+            <td><div class="col7 cell" title="`+record["Category"]+`">`+record["Category"]+`</div></td>
+            <td><div class="col8 cell" title="`+record["Department"]+`">`+record["Department"]+`</div></td>
+            <td><div class="col9 cell" title="`+record["Course"]+`">`+record["Course"]+`</div></td>
+            <td><div class="col10 cell" title="`+record["Amount"]+`">`+record["Amount"]+`</div></td>
+            <td><div class="col11 cell" title="`+record["Items"]+`">`+record["Items"]+`</div></td>
+            <td><div class="col12 cell" title="`+record["Timestamp"]+`">`+record["Timestamp"]+`</div></td>
+            <td><div class="col13 cell" title=`+record["Payment Method"]+`">`+record["Payment Method"]+`</div></td>
+            <td><div class="col14 cell" title="`+record["Notes"]+`">`+record["Notes"]+`</div></td>
+          </tr>       
+        `;
+      });
+    }
+  }
 
-    table.innerHTML = template;
-
+  table.innerHTML = template;
 }
 
 export function getTotalRecords (recordsArray){

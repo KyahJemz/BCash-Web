@@ -249,9 +249,9 @@ button img{
 }
 
 /* 
-    DIALOG BOX
+    MODALS
 */ 
-.dialog-container {
+.modal-container {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -262,7 +262,7 @@ button img{
     justify-content: center;
 }
 
-.dialog-container .dialog-content {
+.modal-container .modal-content {
     height: 80vh;
     width: 40vw;
     border-radius: 4px;
@@ -271,37 +271,37 @@ button img{
     overflow: hidden;
 }
 
-.dialog-container .dialog-content .header {
+.modal-container .modal-content .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: var(--BackgroundTitleBarColor);
 }
 
-.dialog-container .dialog-content .header div{
+.modal-container .modal-content .header div{
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 6px;
     margin-bottom: 6px;
 }
 
-.dialog-container .dialog-content .header .title .text{
+.modal-container .modal-content .header .title .text{
     font-weight: 750;
     font-size: 0.9rem;
 }
 
-.dialog-container .dialog-content .header .close .close-btn:hover{
+.modal-container .modal-content .header .close .close-btn:hover{
     font-weight: 750;
     color: var(--Button-Background-Red);
 }
 
-.dialog-container .dialog-content .header .close .close-btn:active{
+.modal-container .modal-content .header .close .close-btn:active{
     font-weight: 750;
     
     color: var(--Button-Background-Active-Red);
 }
 
-.dialog-container .dialog-content .body {
+.modal-container .modal-content .body {
     background-color: white;
     padding: 10px;
     height: max-content;
@@ -310,21 +310,21 @@ button img{
     border-bottom-right-radius: 4px;
 }
 
-.dialog-container .dialog-content .body .message-container{
+.modal-container .modal-content .body .message-container{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.dialog-container .dialog-content .body .message-container .message{
+.modal-container .modal-content .body .message-container .message{
     font-size: 0.9rem;
 }
 
-.dialog-container .dialog-content .body .message-container .button{
+.modal-container .modal-content .body .message-container .button{
     align-self: flex-end;
 }
 
-.dialog-container .dialog-content .body .message-container .button button{
+.modal-container .modal-content .body .message-container .button button{
     text-align: center;
     justify-content: center;
     width: 100px;
@@ -332,7 +332,7 @@ button img{
     color: var(--TextColor-LightBlack);
 }
 
-.dialog-container .dialog-content .body .message-container .button button:active{
+.modal-container .modal-content .body .message-container .button button:active{
     width: 100px;
     background-color: var(--Button-Background-Active-Gold);
     color: var(--TextColor-White);
@@ -342,7 +342,7 @@ button img{
 /* 
     NOTIFICATION BOX
 */ 
-#Notification-Box-Container {
+#Alert-Box-Container {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -352,52 +352,52 @@ button img{
     flex-direction: column;
 }
 
-.Notification-Box-Table {
+.Alert-Box-Table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 5px;
 }
 
-.Notification-Box-Table .notification-box{
+.Alert-Box-Table .Alert-box{
     width: 100%;
     box-shadow: 0px 0px 4px 0px var(--AsccentColor);
     background-color: #c2c2c2;
     transition: opacity 0.5s ease;
 }
 
-.Notification-Box-Table .notification-box .header {
+.Alert-Box-Table .Alert-box .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: var(--BackgroundTitleBarColor);
 }
 
-.Notification-Box-Table .notification-box .header div{
+.Alert-Box-Table .Alert-box .header div{
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.Notification-Box-Table .notification-box .header .title .text{
+.Alert-Box-Table .Alert-box .header .title .text{
     font-weight: 750;
 }
 
-.Notification-Box-Table .notification-box .header .close .close-btn:hover{
+.Alert-Box-Table .Alert-box .header .close .close-btn:hover{
     font-weight: 750;
     color: var(--AsccentColor);
 }
 
-.Notification-Box-Table .notification-box .notification-content {
+.Alert-Box-Table .Alert-box .Alert-content {
     padding: 5px;
     min-height: 100px;
 }
 
-.remove-notification {
+.remove-Alert {
     transform: translateX(100%);
 }
 
-.add-notification {
+.add-Alert {
     transform: translateX(0);
 }
 

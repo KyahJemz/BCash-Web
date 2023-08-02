@@ -150,29 +150,29 @@
         My TRANSACTIONS 
     -->
                 <div id="panel-mytransactions" class="body-content-panel hidden">
-                    <div class="panel-transactions-query panel">
+                    <div id="My-Transactions-Query" class="panel-transactions-query panel">
                         <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate" class="textbox" type="date" name="MyTransactionStartDate">
+                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate" class="textbox" type="date" name="MyTransactionEndDate">
+                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Number</label>
-                                <input class="transactions-transactionnumber" class="textbox" type="text" name="MyTransactionNumber">
+                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname" class="textbox" type="text" name="MyTransactionName">
+                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName">
                             </div>
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="transactions-status-dropdown dropdown-text">All</span>
+                                        <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -185,7 +185,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-transactions-buttons" data-transactiontype="mytransactions">
+                    <div class="panel-transactions-buttons" data-transactiontype="MyTransactions">
                         <div>
                             <button id="mytransaction-search-button" class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../images/icons/search-yellow.png" alt="search">
@@ -268,7 +268,7 @@
                                     <col class="col13">
                                     <col class="col14">
                                 </colgroup>
-                            <tbody id="transactions-table" class="transactions-table">
+                            <tbody id="My-Transactions-Table" class="transactions-table">
                                
                             </tbody>
                             </table>
@@ -309,29 +309,29 @@
         ALL TRANSACTIONS 
     -->
                 <div id="panel-alltransactions" class="body-content-panel hidden">
-                    <div class="panel-transactions-query panel">
+                    <div id="All-Transactions-Query" class="panel-transactions-query panel">
                         <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate" class="textbox" type="date" name="MyTransactionStartDate">
+                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate" class="textbox" type="date" name="MyTransactionEndDate">
+                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Number</label>
-                                <input class="transactions-transactionnumber" class="textbox" type="text" name="MyTransactionNumber">
+                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname" class="textbox" type="text" name="MyTransactionName">
+                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName">
                             </div>
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="transactions-status-dropdown dropdown-text">All</span>
+                                        <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -344,7 +344,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-transactions-buttons" data-transactiontype="mytransactions">
+                    <div class="panel-transactions-buttons" data-transactiontype="AllTransactions">
                         <div>
                             <button id="mytransaction-search-button" class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../images/icons/search-yellow.png" alt="search">
@@ -427,7 +427,7 @@
                                     <col class="col13">
                                     <col class="col14">
                                 </colgroup>
-                            <tbody id="transactions-table" class="transactions-table">
+                            <tbody id="All-Transactions-Table" class="transactions-table">
                              
                             </tbody>
                             </table>
@@ -468,29 +468,29 @@
         USER TRANSACTIONS 
     -->
                 <div id="panel-usertransactions" class="body-content-panel hidden">
-                    <div class="panel-transactions-query panel">
+                    <div id="User-Transactions-Query" class="panel-transactions-query panel">
                         <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate" class="textbox" type="date" name="MyTransactionStartDate">
+                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate" class="textbox" type="date" name="MyTransactionEndDate">
+                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Number</label>
-                                <input class="transactions-transactionnumber" class="textbox" type="text" name="MyTransactionNumber">
+                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname" class="textbox" type="text" name="MyTransactionName">
+                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName">
                             </div>
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="transactions-status-dropdown dropdown-text">All</span>
+                                        <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -503,7 +503,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-transactions-buttons" data-transactiontype="mytransactions">
+                    <div class="panel-transactions-buttons" data-transactiontype="UserTransactions">
                         <div>
                             <button id="mytransaction-search-button" class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../images/icons/search-yellow.png" alt="search">
@@ -586,7 +586,7 @@
                                     <col class="col13">
                                     <col class="col14">
                                 </colgroup>
-                            <tbody id="transactions-table" class="transactions-table">
+                            <tbody id="User-Transactions-Table" class="transactions-table">
                                
                             </tbody>
                             </table>
@@ -832,36 +832,35 @@
         </div>
     </div>
 <!--
-    NOTIFICATION ###
+    ALERTS ###
 -->
-    <div id="Notification-Box-Container" class="notification-container">
-        <table class="Notification-Box-Table">
-            
-        </table>
-    </div>
+<div id="Alert-Box-Container" class="Alert-container">
+    <table class="Alert-Box-Table">
+        
+    </table>
+</div>
 <!--
-    DIALOG BOX ###
+MODALS ###
 -->
-    <div id="Dialog-Box-Container" class="dialog-container">
-        <div class="dialog-content">
-            <div class="header">
-                <div class="title">
-                    <p id="Dialog-Box-header" class="text">N/A</p>
-                </div>
-                <div class="close" >
-                    <p id="Dialog-Box-Close-Button" class="close-btn curson-pointer">X</p>
-                </div>
+<div id="Modal-Container" class="modal-container">
+    <div class="modal-content">
+        <div class="header">
+            <div class="title">
+                <p id="Modal-Header" class="text">N/A</p>
             </div>
-            <div id="Dialog-Box-Body" class="body">
-                
-
+            <div class="close" >
+                <p id="Modal-Close-Button" class="close-btn curson-pointer">X</p>
             </div>
         </div>
+        <div id="Modal-Body" class="body">
+            
+        </div>
     </div>
+</div>
 <!--
     JAVASCRIPTS  ###
 -->
-    <script src="../scripts/main.js" type="module"></script>
+    <script src="../scripts/main-accounting.js" type="module"></script>
 </body>
 </html>
 
