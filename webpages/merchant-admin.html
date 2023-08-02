@@ -457,23 +457,11 @@
         STAFF MANAGEMENT 
     -->
                 <div id="panel-staffmanagement" class="body-content-panel hidden">
-                    <div class="panel-staffmanagement-content">
+                    <div class="panel-staffmanagement-query panel">
                         <div class="form-container">
                             <div>
-                                <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate" class="textbox" type="date" name="StartDate">
-                            </div>
-                            <div>
-                                <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate" class="textbox" type="date" name="EndDate">
-                            </div>
-                            <div>
-                                <label for="TransactionNumber">Transaction Number</label>
-                                <input class="transactions-transactionnumber" class="textbox" type="text" name="TransactionNumber">
-                            </div>
-                            <div>
-                                <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname" class="textbox" type="text" name="TransactionName">
+                                <label for="TransactionNumber">Name/Username/Email</label>
+                                <input class="staffmanagement-transactionnumber" class="textbox" type="search" name="TransactionNumber">
                             </div>
                             <div>
                                 <label>Status Filter</label>
@@ -484,15 +472,14 @@
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Success</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Failed</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Waiting</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Not active</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-transactions-buttons">
+                    <div class="panel-staffmanagement-buttons">
                         <div>
                             <button class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="TransactionsSubmit">
                                 <img src="../images/icons/search-yellow.png" alt="search">
@@ -502,114 +489,306 @@
                                 <img src="../images/icons/clear-yellow.png" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
-                                <img src="../images/icons/download-yellow.png" alt="search">
-                                <span>Export</span>
-                            </button>
                         </div>
                         <div>
-                            <div>
-                                <div>Total Orders: </div>
-                                <div class="transaction-totalorders-text" class="text">???</div>
-                            </div>
-                            <div>
-                                <div >Total Sales: </div>
-                                <div class="transaction-totalsales-text" class="text">???</div>
-                            </div>
+                            <p>Total Results: </p>
+                            <p>12</p>
                         </div>
                     </div>
-                    <div class="panel-transactions-table">
+                    <div class="panel-staffmanagement-table">
                         <div class="table-header">
                             <table>
-                                <colgroup>
-                                    <col class="col1">
-                                    <col class="col2">
-                                    <col class="col3">
-                                    <col class="col4">
-                                    <col class="col5">
-                                    <col class="col6">
-                                    <col class="col7">
-                                    <col class="col8">
-                                    <col class="col9">
-                                    <col class="col10">
-                                    <col class="col11">
-                                    <col class="col12">
-                                    <col class="col13">
-                                    <col class="col14">
-                                </colgroup>
                                 <thead>
-                                <tr>
-                                    <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
-                                    <th class="col2"><div>#</div></th>
-                                    <th class="col3"><div>Transaction ID</div></th>
-                                    <th class="col4"><div>Status</div></th>
-                                    <th class="col5"><div>In Charge</div></th>
-                                    <th class="col6"><div>Name</div></th>
-                                    <th class="col7"><div>Category</div></th>
-                                    <th class="col8"><div>Department</div></th>
-                                    <th class="col9"><div>Course</div></th>
-                                    <th class="col10"><div>Amount</div></th>
-                                    <th class="col11"><div>Items</div></th>
-                                    <th class="col12"><div>Timestamp</div></th>
-                                    <th class="col13"><div>Payment Method</div></th>
-                                    <th class="col14"><div>Notes</div></th>
-                                </tr>
+                                    <tr>
+                                        <th class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </th>
+                                    </tr>
                                 </thead>
                             </table>
-                            </div>
-                            <div>
+                        </div>
+                        <div class="table-content">
                             <table>
                                 <colgroup>
                                     <col class="col1">
-                                    <col class="col2">
-                                    <col class="col3">
-                                    <col class="col4">
-                                    <col class="col5">
-                                    <col class="col6">
-                                    <col class="col7">
-                                    <col class="col8">
-                                    <col class="col9">
-                                    <col class="col10">
-                                    <col class="col11">
-                                    <col class="col12">
-                                    <col class="col13">
-                                    <col class="col14">
                                 </colgroup>
-                            <tbody id="transactions-table" class="transactions-table">
-                                        
-                            </tbody>
+                                <tbody id="staffmanagement-table" class="staffmanagement-table">
+                                    <tr class="curson-pointer" data-userid="123">
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1">
+                                            <div class="cell">
+                                                <div><p>#</p></div>
+                                                <div><p>Status</p></div>
+                                                <div><p>UserId</p></div>
+                                                <div><p>Username</p> </div>
+                                                <div><p>Firstname</p></div>
+                                                <div><p>Lastname</p></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="panel-transactions-footer">
-                        <div class="page-numbers-container">
-                            <ul id="transaction-pagenumbers" class="page-numbers">
-                                <button id="transaction-leftpage-button">&lt;</button>
-                                <li><a class="transaction-pagenumber-button curson-pointer selected" onclick="">1</a></li>
-                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">2</a></li>
-                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">3</a></li>
-                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">4</a></li>
-                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">5</a></li>
-                                <button id="transaction-rightpage-button">&gt;</button>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>Total: </div>
-                            <div class="transaction-totalsales-text" class="text">???</div>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-content">
-                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
-                            </div>
-                            <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="transactions-recordscount-dropwond" class="dropdown-text">25/Page</span>
-                                <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                            </button>
-                        </div>
-                    </div> 
                 </div>
 
     <!--

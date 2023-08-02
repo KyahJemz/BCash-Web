@@ -279,6 +279,10 @@ addElementClickListener('.accounts-search-button', onAccountsSearchClick);
 addElementClickListener('.accounts-clear-button', onAccountsClearClick);
 addElementClickListener('.accounts-export-button', onAccountsExportClick);
 
+export function bindAccountsRowButtons(){
+
+}
+
 
 
 ////////////////////////////
