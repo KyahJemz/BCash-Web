@@ -441,7 +441,7 @@ button img{
 
 @media (min-width: 0px) and (max-width: 768px) {
     /* Styles for phones */
-    .dialog-container .dialog-content {
+    .modal-container .modal-content {
         width: 80vw;
     }
   }
@@ -449,7 +449,7 @@ button img{
   
   @media (min-width: 769px) and (max-width: 1000px) {
     /* Styles for laptops */
-    .dialog-container .dialog-content {
+    .modal-container .modal-content {
         width: 60vw;
     }
     

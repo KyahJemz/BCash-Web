@@ -263,3 +263,82 @@
 
 
 
+
+
+.personal-information-container {
+    width: 100%;
+    height: fit-content;
+}
+
+.personal-information-container fieldset {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-width: 1px;
+    border-color: var(--color-DarkGold);
+}
+
+.personal-information-container fieldset table * p {
+    font-size: smaller;
+}
+
+.personal-information-container fieldset legend p{
+    font-weight: bold;
+    color: var(--color-Red);
+}
+
+.personal-information-container fieldset table {
+    width: 100%;
+}
+
+.personal-information-container fieldset table tr td {
+    padding: 4px;
+    width: calc(100%/2);
+}
+
+.personal-information-container fieldset table tr td img {
+    aspect-ratio: 1/1;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.personal-information-container fieldset table tr td input[type="text"],
+.personal-information-container fieldset table tr td input[type="password"] {
+    width: 100%;
+}
+
+.personal-information-container .buttons-container{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.personal-information-container .buttons-container .buttons{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    gap: 10px;
+    
+}
+
+.personal-information-container .buttons-container button:last-child {
+    background-color: var(--Button-Background-Gold);
+    color: var(--TextColor-White);
+    border-radius: 3px;
+    transition: 100ms;
+}
+
+.personal-information-container .buttons-container button:first-child {
+    border: 1px solid var(--Button-Background-Gold);
+    border-radius: 3px;
+    transition: 100ms;
+}
+
+.personal-information-container .buttons-container button:active {
+    background-color: var(--Button-Background-Active-Gold);
+    color: var(--TextColor-White);
+    transform: scale(0.97); 
+}

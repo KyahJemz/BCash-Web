@@ -211,7 +211,7 @@ function onMenuSettingsButtonClick() {
 helper.addElementClickListenerById('menu-notification-button', onMenuNotificationButtonClick);
 helper.addElementClickListenerById('menu-settings-button', onMenuSettingsButtonClick);
 
-makeModal("Modal", "Personal Settings Panel", modals.getModalView("Settings Panel"));
+//makeModal("Modal", "Personal Settings Panel", modals.getModalView("Settings Panel"));
 
 
 

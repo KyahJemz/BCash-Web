@@ -249,7 +249,95 @@ export default class Modals {
             return view;
     
         } else if (type=="Settings Panel"){
-            return ``;
+            return `
+                <div class="personal-information-container">
+                    <fieldset class="personalInformationSettings">
+                        <table>
+                            <tr>
+                                <td>
+                                    <img src="" alt="">
+                                </td>
+                                <td>
+                                    <p>User Id:</p>
+                                    <input type="text" name="UserId" value="merch-123653">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Firstname:</p>
+                                    <input type="text" name="Firstname" value="Stephen Regan James">
+                                </td>
+                                <td>
+                                    <p>Lastname:</p>
+                                    <input type="text" name="Lastname" value="Layson">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>User Category:</p>
+                                    <input type="text" name="ActorCategory" value="Merchant">
+                                </td>
+                                <td>
+                                    <p>Merhant Category:</p>
+                                    <input type="text" name="MerchantCategory" value="Baste Canteen">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>E-Mail:</p>
+                                    <input type="text" name="email" value="jameslayson.0@gmail.com">
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    <fieldset class="passwordSettings">
+                        <legend><p>Password Settings</p></legend>
+                        <table>
+                            <tr>
+                                <td><label for="changePassword"><p>Change Password?</p></label></td>
+                                <td><input type="checkbox" name="changePassword" id="changePassword"></td>
+                            </tr>
+                            <tr>
+                                <td><p>Old Password:</p></td>
+                                <td><input type="text" name="OldPassword" value="*****************"></td>
+                            </tr>
+                            <tr>
+                                <td><p>New Password:</p></td>
+                                <td><input type="text" name="NewPassword" value="*****************"></td>
+                            </tr>
+                            <tr>
+                                <td><p>Re-type New Password:</p></td>
+                                <td><input type="text" name="ConfirmNewPassword" value="*****************"></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    <fieldset class="pinCodeSettings">
+                        <legend><p>Pin Code Settings</p></legend>
+                        <table>
+                            <tr>
+                                <td><label for="changePinCode"><p>Change PIN code?</p></label></td>
+                                <td><input type="checkbox" name="changePinCode" id="changePinCode"></td>
+                            </tr>
+                            <tr>
+                                <td><p>Old PIN Code:</p></td>
+                                <td><input type="text" name="OldPinCode" value="******"></td>
+                            </tr>
+                            <tr>
+                                <td><p>New PIN Code:</p></td>
+                                <td><input type="text" name="NewPinCode" value="******"></td>
+                            </tr>
+                            <tr>
+                                <td><p>Re-type New PIN Code:</p></td>
+                                <td><input type="text" name="ConfirmNewPinCode" value="******"></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    <div class="buttons-container">
+                        <button class="btn-back dialog-box-close-button">Close</button>
+                        <button class="btn-submit">Update Changes</button>
+                    </div>
+                </div>
+            `;
     
             //  bindDialogBoxCloseButton();
         }
