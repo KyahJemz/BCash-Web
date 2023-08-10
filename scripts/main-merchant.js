@@ -2,7 +2,7 @@ import Transactions from './modules/transactions.js';
 import Orders from './modules/order.js';
 import Items from './modules/items.js';
 import Notifications from './modules/notifications.js';
-import Alerts from './modules/alerts.js';
+import { createAlert } from './modules/alerts.js';
 import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
@@ -21,7 +21,6 @@ const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
 const helper = new Helper();
-
 
 var notificationArray = [];
 
@@ -52,10 +51,9 @@ window.addEventListener('click', (event) => {
 // INITIALIZATIONS
 ////////////////////////////
 
-export function makeAlert(type,text){
-  const alerts = new Alerts();
-  alerts.createAlert(type,text);
-}
+
+
+
 
 export function makeNotification(id,title,content){
  // const notification = new Notification();
@@ -101,7 +99,7 @@ function onCreateOrderPlaceOrderClick(){
     makeModal("Modal", "Order Confirmation", modals.getModalView("Place-Order",myOrders));
    // openDialogBoxEvents("Place-Order");
   } else {
-    makeAlert("Invalid Order", "No items selectd to place an order. Please select and try again...");
+    createAlert("warning", "No items selectd to place an order. Please select and try again...");
   //  openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
   }
 }
@@ -240,5 +238,3 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
 export function setNotificationArray(data){
   notificationArray = data;
 }
-
-

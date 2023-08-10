@@ -344,11 +344,13 @@ button img{
 */ 
 #Alert-Box-Container {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 300px;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 50%;
+    height: fit-content;
     z-index: 9;
-    display: table; /* flex */
+    display: flex; /* flex */
     flex-direction: column;
 }
 
@@ -360,38 +362,39 @@ button img{
 
 .Alert-Box-Table .Alert-box{
     width: 100%;
-    box-shadow: 0px 0px 4px 0px var(--AsccentColor);
-    background-color: #c2c2c2;
     transition: opacity 0.5s ease;
 }
 
-.Alert-Box-Table .Alert-box .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: var(--BackgroundTitleBarColor);
-}
-
-.Alert-Box-Table .Alert-box .header div{
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.Alert-Box-Table .Alert-box .header .title .text{
-    font-weight: 750;
-}
-
-.Alert-Box-Table .Alert-box .header .close .close-btn:hover{
-    font-weight: 750;
-    color: var(--AsccentColor);
-}
-
 .Alert-Box-Table .Alert-box .Alert-content {
-    padding: 5px;
-    min-height: 100px;
+    padding: 15px;
+    height: fit-content;
+    border-radius: 10px;
 }
+
+.Alert-Box-Table .Alert-box * p {
+    color: inherit;
+}
+
+.Alert-Box-Table .Alert-box .danger{
+    background-color: #dc3545;
+    color: white;
+}
+
+.Alert-Box-Table .Alert-box .warning{
+    background-color: #ffc107;
+    color: var(--TextColor-LightBlack);
+}
+
+.Alert-Box-Table .Alert-box .success{
+    background-color: #198754;
+    color: white;
+}
+
+.Alert-Box-Table .Alert-box .info{
+    background-color: #0dcaf0;
+    color: var(--TextColor-LightBlack);
+}
+
 
 .remove-Alert {
     transform: translateX(100%);
@@ -444,6 +447,10 @@ button img{
     .modal-container .modal-content {
         width: 80vw;
     }
+
+    #Alert-Box-Container {
+        max-width: 90%;
+    }
   }
   
   
@@ -451,6 +458,10 @@ button img{
     /* Styles for laptops */
     .modal-container .modal-content {
         width: 60vw;
+    }
+
+    #Alert-Box-Container {
+        max-width: 75%;
     }
     
   }

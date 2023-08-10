@@ -1,10 +1,10 @@
 
 export default class Alerts {
 
-    constructor(){
+    constructor(alertTable){
         this.AlertTimeout = 3000;
         this.AlertCount = 5;
-        this.alertTable = document.querySelector(".Alert-Box-Table");
+        this.alertTable = alertTable;
         this.alertType = '';
         this.alertText = '';
     }
@@ -33,49 +33,20 @@ export default class Alerts {
 
     getAlertView(){
         return `
-            <div class="header">
-                <div class="title">
-                    <p class="text">`+ this.alertType +`</p>
-                </div>
-                <div class="close">
-                    <p class="close-btn cursor-pointer">X</p>
-                </div>
-            </div>
-            <div class="Alert-content">
-                <p>`+ this.text +`</p>
+            <div class="Alert-content `+ this.alertType +`">
+                <p>`+ this.alertText +`</p>
             </div>
         `;
     }
 
-    activateAlertContainer() {
-        const box = document.getElementById("Alert-Box-Container");
-        if (box) {
-          box.style.display = "flex";
-        }
-      }
-    
-    deactivateAlertContainer() {
-        const box = document.getElementById("Alert-Box-Container");
-        if (box) {
-          box.style.display = "none";
-        }
-      }
-
-    createAlert(type, text){
+    createAlertElement(type, text){
         if (!type || !text) {
             throw new Error("Invalid type or text for creating an alert.");
         }
 
+        console.log(type, text);
         this.alertType = type;
         this.alertText = text;
-
-        if (this.alertType === "warning") {
-
-        } else if (this.alertType === "danger") {
-
-        } else if (this.alertType === "success") {
-            
-        } 
 
         this.addAlertElement();
         
@@ -84,3 +55,8 @@ export default class Alerts {
         }, this.AlertTimeout);
     }
 }
+
+export function createAlert(type,text){
+    const alerts = new Alerts(document.querySelector(".Alert-Box-Table"));
+    alerts.createAlertElement(type,text);
+  }

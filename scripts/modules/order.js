@@ -4,6 +4,7 @@ BCASH WEB - ORDER MODULE
 #########################################
 */
 
+import { createAlert } from './alerts.js';
 import Helper from '../helper.js';
 
 export default class Orders {
@@ -18,7 +19,7 @@ export default class Orders {
 
   addItem(itemId, name, cost, image, quantity) {
     this.items.push({itemId, name, cost, image, quantity});
-    console.log(itemId+" Added");
+    console.log("success", `${itemId} Added`);
   }
 
   removeItem(itemId) {
@@ -26,7 +27,7 @@ export default class Orders {
     if (index !== -1) {
       this.items.splice(index, 1);
     }
-    console.log(itemId+" Removed");
+    console.log("success", `${itemId} Removed`);
   }
 
   updateQuantity(itemId, order, type) {
@@ -67,9 +68,7 @@ export default class Orders {
     if (button.dataset.type == "AddToCart") { // CHANGE TO ADD TO CART BUTTON
       button.innerHTML = '<p>Remove</p>';
       button.dataset.type = 'RemoveToCart';
-      console.log("RemoveToCart");
     } else if (button.dataset.type == "RemoveToCart"){ // CHANGE TO REMOVE TO CART BUTTON
-      console.log("AddToCart");
       button.innerHTML = '<p>Add</p>';
       button.dataset.type = 'AddToCart';
     }
