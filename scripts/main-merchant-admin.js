@@ -1,4 +1,5 @@
 import Transactions from './modules/transactions.js';
+import Accounts from './modules/accounts.js';
 import Orders from './modules/order.js';
 import Items from './modules/items.js';
 import Notifications from './modules/notifications.js';
@@ -21,6 +22,7 @@ const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
 const helper = new Helper();
+const accounts = new Accounts("merchantStaffs", document.getElementById("staffmanagement-table-header"),document.getElementById("staffmanagement-table-body") )
 
 
 var notificationArray = [];
@@ -242,3 +244,12 @@ export function setNotificationArray(data){
 }
 
 
+
+
+function testupdate(event) {
+  console.log("wow");
+  accounts.refreshTable(event);
+  
+}
+
+helper.addElementClickListener('.accounts-search-button', testupdate);
