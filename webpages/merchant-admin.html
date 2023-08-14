@@ -457,17 +457,17 @@
         STAFF MANAGEMENT 
     -->
                 <div id="panel-staffmanagement" class="body-content-panel hidden">
-                    <div class="panel-staffmanagement-query panel">
+                    <div id="staffmanagement-table-query" class="panel-staffmanagement-query panel">
                         <div class="form-container">
                             <div>
                                 <label for="TransactionNumber">Name/Username/Email</label>
-                                <input class="staffmanagement-transactionnumber" class="textbox" type="search" name="TransactionNumber">
+                                <input class="staffmanagement-transactionnumber query inputtext" class="textbox" type="search" name="TransactionNumber">
                             </div>
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="transactions-status-dropdown dropdown-text">All</span>
+                                        <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -517,20 +517,6 @@
                         <div class="table-content">
                             <table>
                                 <tbody id="staffmanagement-table-body" class="staffmanagement-table">
-                                    <tr class="curson-pointer" data-userid="123">
-                                        <td class="col1">
-                                            <div class="cell">
-                                                <div><p>#</p></div>
-                                                <div><p>Status</p></div>
-                                                <div><p>UserId</p></div>
-                                                <div><p>Username</p> </div>
-                                                <div><p>Firstname</p></div>
-                                                <div><p>Lastname</p></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    
-
                                 </tbody>
                             </table>
                         </div>

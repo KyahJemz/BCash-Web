@@ -343,3 +343,9 @@ export default class Modals {
         }
     }
 }
+
+
+export function makeModal(type, title, content){
+    const modal = new Modals();
+    modal.activateModal(type, title, content);
+}

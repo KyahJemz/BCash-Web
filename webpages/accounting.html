@@ -627,7 +627,7 @@
         ACCOUNTS 
     -->
                 <div id="panel-accounts" class="body-content-panel hidden">
-                    <div class="panel-accounts-query panel">
+                    <div id="accounts-query" class="panel-accounts-query panel">
                         <div class="form-container">
                             <div>
                                 <label for="accountschoolid">Id Number</label>
@@ -715,32 +715,12 @@
                                 <img src="../images/icons/clear-yellow.png" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button class="btn-default curson-pointer accounts-export-button" type="button" value="Export">
-                                <img src="../images/icons/download-yellow.png" alt="search">
-                                <span>Export</span>
-                            </button>
                         </div>
                     </div>
                     <div class="panel-accounts-table">
                         <div class="table-header">
                             <table>
-                                <colgroup>
-                                    <col class="col1">
-                                    <col class="col2">
-                                    <col class="col3">
-                                    <col class="col4">
-                                    <col class="col5">
-                                    <col class="col6">
-                                    <col class="col7">
-                                    <col class="col8">
-                                    <col class="col9">
-                                    <col class="col10">
-                                    <col class="col11">
-                                    <col class="col12">
-                                    <col class="col13">
-                                    <col class="col14">
-                                </colgroup>
-                                <thead>
+                                <thead id="accounts-table-header">
                                     <tr>
                                         <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
                                         <th class="col2"><div>#</div></th>
@@ -759,28 +739,12 @@
                                     </tr>
                                 </thead>
                             </table>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <table>
-                                <colgroup>
-                                    <col class="col1">
-                                    <col class="col2">
-                                    <col class="col3">
-                                    <col class="col4">
-                                    <col class="col5">
-                                    <col class="col6">
-                                    <col class="col7">
-                                    <col class="col8">
-                                    <col class="col9">
-                                    <col class="col10">
-                                    <col class="col11">
-                                    <col class="col12">
-                                    <col class="col13">
-                                    <col class="col14">
-                                </colgroup>
-                            <tbody id="accounts-table" class="accounts-table">
-                            
-                            </tbody>
+                                <tbody id="accounts-table-body" class="accounts-table">
+                                    
+                                </tbody>
                             </table>
                         </div>
                     </div>

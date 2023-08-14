@@ -22,9 +22,12 @@ const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
 const helper = new Helper();
-const accounts = new Accounts("merchantStaffs", document.getElementById("staffmanagement-table-header"),document.getElementById("staffmanagement-table-body") )
-
-
+const accounts = new Accounts(
+  "merchantStaffs", 
+  document.getElementById("staffmanagement-table-header"),
+  document.getElementById("staffmanagement-table-body"),
+  document.getElementById("staffmanagement-table-query")
+  );
 var notificationArray = [];
 
 export function getItemsArray(){
@@ -246,10 +249,17 @@ export function setNotificationArray(data){
 
 
 
-function testupdate(event) {
-  console.log("wow");
-  accounts.refreshTable(event);
-  
+////////////////////////////
+// ACCOUNTS
+////////////////////////////
+
+function onMerchantStaffAccountsSearchClick(event) {
+  accounts.applyAccountsQuery(event);
 }
 
-helper.addElementClickListener('.accounts-search-button', testupdate);
+function onMerchantStaffAccountsClearClick(event) {
+  accounts.clearAccountsQuery(event);
+}
+
+helper.addElementClickListener('.accounts-search-button', onMerchantStaffAccountsSearchClick);
+helper.addElementClickListener('.accounts-clear-button', onMerchantStaffAccountsClearClick);

@@ -6,6 +6,7 @@ import Alerts from './modules/alerts.js';
 import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
+import Accounts from './modules/accounts.js';
 
 import Helper from './helper.js';
 
@@ -14,9 +15,21 @@ import Helper from './helper.js';
 ////////////////////////////
 
 const notifications = new Notifications();
-const myTransactions = new Transactions(document.getElementById("My-Transactions-Table"),document.getElementById("My-Transactions-Query"));
-const allTransactions = new Transactions(document.getElementById("All-Transactions-Table"),document.getElementById("All-Transactions-Query"));
-const userTransactions = new Transactions(document.getElementById("User-Transactions-Table"),document.getElementById("User-Transactions-Query"));
+const myTransactions = new Transactions(
+  document.getElementById("My-Transactions-Table"),
+  document.getElementById("My-Transactions-Query"));
+const allTransactions = new Transactions(
+  document.getElementById("All-Transactions-Table"),
+  document.getElementById("All-Transactions-Query"));
+const userTransactions = new Transactions(
+  document.getElementById("User-Transactions-Table"),
+  document.getElementById("User-Transactions-Query"));
+const userAccounts = new Accounts(
+  "users",
+  document.getElementById("accounts-table-header"),
+  document.getElementById("accounts-table-body"),
+  document.getElementById("accounts-query")
+  );
 const myOrders = new Orders();
 const myItems = new Items();
 const modals = new Modals();
