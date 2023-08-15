@@ -439,6 +439,17 @@ button img{
     background-color: wheat;
 }
 
+.active {
+    font-weight: bold;
+    text-align: center;
+    color: var(--CorrectColor);
+}
+
+.inactive {
+    font-weight: bold;
+    text-align: center;
+    color: var(--ErrorColor);
+}
 
 
 

@@ -631,21 +631,21 @@
                         <div class="form-container">
                             <div>
                                 <label for="accountschoolid">Id Number</label>
-                                <input class="accounts-accountschoolid" class="textbox" type="text" name="accountschoolid">
+                                <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
                             </div>
                             <div>
                                 <label for="accountfirstname">First name</label>
-                                <input class="accounts-accountfirstname" class="textbox" type="text" name="accountfirstname">
+                                <input class="accounts-accountfirstname query textbox inputtext" type="text" name="accountfirstname">
                             </div>
                             <div>
                                 <label for="accountlastname">Last name</label>
-                                <input class="accounts-accountlastname" class="textbox" type="text" name="accountlastname">
+                                <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
                             </div>
                             <div>
                                 <label>Group Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text">All</span>
+                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -660,7 +660,7 @@
                                 <label>Department Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-department-dropdown dropdown-text">All</span>
+                                        <span class="accounts-department-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -675,7 +675,7 @@
                                 <label>Course Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-course-dropdown dropdown-text">All</span>
+                                        <span class="accounts-course-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -692,7 +692,7 @@
                                 <label>Group Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text">All</span>
+                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -711,7 +711,7 @@
                                 <img src="../images/icons/search-yellow.png" alt="search">
                                 <span>Search</span>
                             </button>
-                            <button lass="btn-default curson-pointer accounts-clear-button" type="reset" value="Clear">
+                            <button class="btn-default curson-pointer accounts-clear-button" type="reset" value="Clear">
                                 <img src="../images/icons/clear-yellow.png" alt="search">
                                 <span>Clear</span>
                             </button>
@@ -722,20 +722,19 @@
                             <table>
                                 <thead id="accounts-table-header">
                                     <tr>
-                                        <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
-                                        <th class="col2"><div>#</div></th>
-                                        <th class="col3"><div>Account ID</div></th>
-                                        <th class="col4"><div>Status</div></th>
-                                        <th class="col5"><div>Category</div></th>
-                                        <th class="col6"><div>Username</div></th>
-                                        <th class="col7"><div>Firstname</div></th>
-                                        <th class="col8"><div>Lastname</div></th>
-                                        <th class="col9"><div>Email</div></th>
-                                        <th class="col10"><div>Campus</div></th>
-                                        <th class="col11"><div>Group</div></th>
-                                        <th class="col12"><div>Department</div></th>
-                                        <th class="col13"><div>Course</div></th>
-                                        <th class="col14"><div>Last Seen</div></th>
+                                        <th><div class="col1">#</div></th>
+                                        <th><div class="col2">Account ID</div></th>
+                                        <th><div class="col3">Status</div></th>
+                                        <th><div class="col4">Category</div></th>
+                                        <th><div class="col5">Username</div></th>
+                                        <th><div class="col6">Firstname</div></th>
+                                        <th><div class="col7">Lastname</div></th>
+                                        <th><div class="col8">Email</div></th>
+                                        <th><div class="col9">Campus</div></th>
+                                        <th><div class="col10">Group</div></th>
+                                        <th><div class="col11">Department</div></th>
+                                        <th><div class="col12">Course</div></th>
+                                        <th><div class="col13">Last Seen</div></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -746,35 +745,6 @@
                                     
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <div class="panel-accounts-footer">
-                        <div class="page-numbers-container">
-                            <ul id="accounts-pagenumbers" class="page-numbers">
-                                <button id="transaction-leftpage-button">&lt;</button>
-                                <li><a class="accounts-pagenumber-button curson-pointer selected" onclick="">1</a></li>
-                                <li><a class="accounts-pagenumber-button curson-pointer" onclick="">2</a></li>
-                                <li><a class="accounts-pagenumber-button curson-pointer" onclick="">3</a></li>
-                                <li><a class="accounts-pagenumber-button curson-pointer" onclick="">4</a></li>
-                                <li><a class="accounts-pagenumber-button curson-pointer" onclick="">5</a></li>
-                                <button id="accounts-rightpage-button">&gt;</button>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>Total: </div>
-                            <div class="accounts-totalsales-text" class="text">???</div>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-content">
-                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
-                            </div>
-                            <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="accounts-recordscount-dropdown dropdown-text">25/Page</span>
-                                <img class="dropdown-arrow" src="../images/icons/more.png" alt="more">
-                            </button>
                         </div>
                     </div>
                 </div>

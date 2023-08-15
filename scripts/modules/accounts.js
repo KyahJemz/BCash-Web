@@ -72,7 +72,7 @@ export default class Accounts {
     return this.parentalAccounts;
   }
 
-  test(){
+  teststaffmerchant(){
     const list = [
       {
         "Status": "Active",
@@ -118,6 +118,124 @@ export default class Accounts {
     return list;
   }
 
+  testusers(){
+    const list = [
+        {
+            "Account ID": "ACC12345",
+            "Status": "Active",
+            "Category": "General",
+            "Username": "user123",
+            "Firstname": "John",
+            "Lastname": "Doe",
+            "Email": "john.doe@example.com",
+            "Campus": "Main Campus",
+            "Group": "Group A",
+            "Department": "Computer Science",
+            "Course": "Introduction to Programming",
+            "Last Seen": "2023-08-16 10:30 AM"
+        },
+        {
+            "Account ID": "ACC67890",
+            "Status": "Inactive",
+            "Category": "Library",
+            "Username": "jane_smith",
+            "Firstname": "Jane",
+            "Lastname": "Smith",
+            "Email": "jane.smith@example.com",
+            "Campus": "North Campus",
+            "Group": "Group B",
+            "Department": "English Literature",
+            "Course": "Shakespearean Studies",
+            "Last Seen": "2023-08-15 3:45 PM"
+        },
+        {
+            "Account ID": "ACC24680",
+            "Status": "Active",
+            "Category": "Canteen",
+            "Username": "foodie123",
+            "Firstname": "Alex",
+            "Lastname": "Johnson",
+            "Email": "alex.johnson@example.com",
+            "Campus": "South Campus",
+            "Group": "Group C",
+            "Department": "Culinary Arts",
+            "Course": "Gourmet Cuisine",
+            "Last Seen": "2023-08-14 11:15 AM"
+        },
+        {
+            "Account ID": "ACC13579",
+            "Status": "Active",
+            "Category": "Sports",
+            "Username": "sporty88",
+            "Firstname": "Michael",
+            "Lastname": "Williams",
+            "Email": "michael.williams@example.com",
+            "Campus": "West Campus",
+            "Group": "Group D",
+            "Department": "Physical Education",
+            "Course": "Advanced Yoga",
+            "Last Seen": "2023-08-14 4:30 PM"
+        },
+        {
+            "Account ID": "ACC98765",
+            "Status": "Inactive",
+            "Category": "Arts",
+            "Username": "artlover",
+            "Firstname": "Emily",
+            "Lastname": "Taylor",
+            "Email": "emily.taylor@example.com",
+            "Campus": "East Campus",
+            "Group": "Group E",
+            "Department": "Fine Arts",
+            "Course": "Oil Painting Techniques",
+            "Last Seen": "2023-08-15 1:20 PM"
+        },
+        {
+            "Account ID": "ACC55555",
+            "Status": "Active",
+            "Category": "Music",
+            "Username": "musicmaniac",
+            "Firstname": "David",
+            "Lastname": "Robinson",
+            "Email": "david.robinson@example.com",
+            "Campus": "Main Campus",
+            "Group": "Group A",
+            "Department": "Music Composition",
+            "Course": "Jazz Improvisation",
+            "Last Seen": "2023-08-16 9:00 AM"
+        },
+        {
+            "Account ID": "ACC88888",
+            "Status": "Active",
+            "Category": "Science",
+            "Username": "sciencewhiz",
+            "Firstname": "Sarah",
+            "Lastname": "Garcia",
+            "Email": "sarah.garcia@example.com",
+            "Campus": "North Campus",
+            "Group": "Group B",
+            "Department": "Physics",
+            "Course": "Quantum Mechanics",
+            "Last Seen": "2023-08-15 2:10 PM"
+        },
+        {
+            "Account ID": "ACC77777",
+            "Status": "Inactive",
+            "Category": "Technology",
+            "Username": "techgeek",
+            "Firstname": "Daniel",
+            "Lastname": "Lee",
+            "Email": "daniel.lee@example.com",
+            "Campus": "South Campus",
+            "Group": "Group C",
+            "Department": "Computer Engineering",
+            "Course": "Advanced AI",
+            "Last Seen": "2023-08-14 5:40 PM"
+        }
+    ];
+
+    return list;
+  }
 
   refreshTable(button){
     switch (this.type) {
@@ -125,6 +243,7 @@ export default class Accounts {
         //this.getAllAccounts(button);
         break;
       case "users": 
+        this.users = this.testusers();
         //this.getUsers(button);
         break;
       case "merchants":
@@ -182,19 +301,47 @@ export default class Accounts {
         this.type === "administrators" ||
         this.type === "parentalAccounts"
       ) {
-        list.forEach(element => {
+        list.forEach(record => {
           num++,
           view = view + `
-            
+            <tr>
+              <td><div class="col1 cell" title="`+num+`"><center>`+num+`</center></div></td>
+              <td><div class="col2 cell" title="`+record["Account ID"]+`"><a class="account-viewdata-button view-more" href="">`+record["Account ID"]+`</a></div></td>
+              <td><div class="col3 cell `+ record["Status"].replace(new RegExp(" ", 'g'), '').toLowerCase() +`" title="`+record["Status"]+`">`+record["Status"]+`</div></td>
+              <td><div class="col4 cell" title="`+record["Category"]+`">`+record["Category"]+`</div></td>
+              <td><div class="col5 cell" title="`+record["Username"]+`">`+record["Username"]+`</div></td>
+              <td><div class="col6 cell" title="`+record["Firstname"]+`">`+record["Firstname"]+`</div></td>
+              <td><div class="col7 cell" title="`+record["Lastname"]+`">`+record["Lastname"]+`</div></td>
+              <td><div class="col8 cell" title="`+record["Email"]+`">`+record["Email"]+`</div></td>
+              <td><div class="col9 cell" title="`+record["Campus"]+`">`+record["Campus"]+`</div></td>
+              <td><div class="col10 cell" title="`+record["Group"]+`">`+record["Group"]+`</div></td>
+              <td><div class="col11 cell" title="`+record["Department"]+`">`+record["Department"]+`</div></td>
+              <td><div class="col12 cell" title=`+record["Course"]+`">`+record["Course"]+`</div></td>
+              <td><div class="col13 cell" title="`+record["Last Seen"]+`">`+record["Last Seen"]+`</div></td>
+            </tr>  
           `;
         });
     } else if (
       this.type === "all"
     ) {
-      list.forEach(element => {
+      list.forEach(record => {
         num++,
         view = view + `
-          
+          <tr>
+            <td><div class="col1 cell" title="`+num+`"><center>`+num+`</center></div></td>
+            <td><div class="col2 cell" title="`+record["Account ID"]+`"><a class="account-viewdata-button view-more" href="">`+record["Account ID"]+`</a></div></td>
+            <td><div class="col3 cell `+ record["Status"].replace(new RegExp(" ", 'g'), '').toLowerCase() +`" title="`+record["Status"]+`">`+record["Status"]+`</div></td>
+            <td><div class="col4 cell" title="`+record["Category"]+`">`+record["Category"]+`</div></td>
+            <td><div class="col5 cell" title="`+record["Username"]+`">`+record["Username"]+`</div></td>
+            <td><div class="col6 cell" title="`+record["Firstname"]+`">`+record["Firstname"]+`</div></td>
+            <td><div class="col7 cell" title="`+record["Lastname"]+`">`+record["Lastname"]+`</div></td>
+            <td><div class="col8 cell" title="`+record["Email"]+`">`+record["Email"]+`</div></td>
+            <td><div class="col9 cell" title="`+record["Campus"]+`">`+record["Campus"]+`</div></td>
+            <td><div class="col10 cell" title="`+record["Group"]+`">`+record["Group"]+`</div></td>
+            <td><div class="col11 cell" title="`+record["Department"]+`">`+record["Department"]+`</div></td>
+            <td><div class="col12 cell" title=`+record["Course"]+`">`+record["Course"]+`</div></td>
+            <td><div class="col13 cell" title="`+record["Last Seen"]+`">`+record["Last Seen"]+`</div></td>
+          </tr>    
         `;
       });
     }
@@ -208,8 +355,8 @@ export default class Accounts {
       ) {
         view = view + `
           <tr>
-            <th class="col1">
-              <div class="cell">
+            <th>
+              <div class="col1 cell">
                 <div><p>#</p></div>
                 <div><p>Status</p></div>
                 <div><p>UserId</p></div>
@@ -230,23 +377,19 @@ export default class Accounts {
       ) {
         view = view + `
           <tr>
-            <th class="col1">
-              <div class="cell">
-                <div><p>#</p></div>
-                <div><p>Account ID</p></div>
-                <div><p>Status</p></div>
-                <div><p>Category</p> </div>
-                <div><p>Username</p></div>
-                <div><p>Firstname</p></div>
-                <div><p>Lastname</p></div>
-                <div><p>Email</p></div>
-                <div><p>Campus</p></div>
-                <div><p>Group</p></div>
-                <div><p>Department</p></div>
-                <div><p>Course</p></div>
-                <div><p>Last Seen</p></div>
-              </div>
-            </th>
+            <th><div class="col1">#</div></th>
+            <th><div class="col2">Account ID</div></th>
+            <th><div class="col3">Status</div></th>
+            <th><div class="col4">Category</div></th>
+            <th><div class="col5">Username</div></th>
+            <th><div class="col6">Firstname</div></th>
+            <th><div class="col7">Lastname</div></th>
+            <th><div class="col8">Email</div></th>
+            <th><div class="col9">Campus</div></th>
+            <th><div class="col10">Group</div></th>
+            <th><div class="col11">Department</div></th>
+            <th><div class="col12">Course</div></th>
+            <th><div class="col13">Last Seen</div></th>
           </tr>
         `;
     } 
@@ -321,6 +464,7 @@ export default class Accounts {
   applyAccountsQuery(event){
     const value = event.currentTarget;
     this.refreshTable(value);
+    this.displayTableView();
   }
 
   clearAccountsQuery(event){

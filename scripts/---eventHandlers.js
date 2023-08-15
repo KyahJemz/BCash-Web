@@ -4,7 +4,7 @@ import {
     getItems, 
     getOrder,
     bindDropdownSubItemEventButtons
-} from './main.js';
+} from './---main.js';
 
 import { 
     toggleSubMenuDropdown, 

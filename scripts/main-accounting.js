@@ -271,3 +271,20 @@ export function setNotificationArray(data){
 }
 
 
+////////////////////////////
+// ACCOUNTS
+////////////////////////////
+
+function onUsersAccountsSearchClick(event) {
+  userAccounts.applyAccountsQuery(event);
+  console.log("eee");
+}
+
+function onUserAccountsClearClick(event) {
+  console.log("eee");
+  userAccounts.clearAccountsQuery(event);
+  
+}
+
+helper.addElementClickListener('.accounts-search-button', onUsersAccountsSearchClick);
+helper.addElementClickListener('.accounts-clear-button', onUserAccountsClearClick);
