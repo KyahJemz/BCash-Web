@@ -1,4 +1,5 @@
 import { makeModal } from './modals.js';
+import { createAlert } from './alerts.js';
 
 export default class Accounts {
   constructor(type, tableHeader, tableBody, queryContainer) {
@@ -263,6 +264,7 @@ export default class Accounts {
       //  this.getParentalAccounts(button);
         break;
       default:
+        createAlert("danger","Invalid account type parameter");
         break;
     }
     this.displayTableView();

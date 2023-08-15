@@ -9,6 +9,8 @@ export default class Alerts {
         this.alertText = '';
     }
 
+    // Alert type : danger warning success
+
     addAlertElement(){
         if (!this.alertTable) {
             throw new Error("Alert table element not found in the DOM.");
