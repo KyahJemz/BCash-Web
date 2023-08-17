@@ -6,6 +6,7 @@ import Alerts from './modules/alerts.js';
 import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
+import Accounts from './modules/accounts.js';
 
 import Helper from './helper.js';
 
@@ -14,9 +15,64 @@ import Helper from './helper.js';
 ////////////////////////////
 
 const notifications = new Notifications();
-const allTransactions = new Transactions(document.getElementById("All-Transactions-Table"),document.getElementById("All-Transactions-Query"));
-const userTransactions = new Transactions(document.getElementById("User-Transactions-Table"),document.getElementById("User-Transactions-Query"));
-const merchantTransactions = new Transactions(document.getElementById("Merchant-Transactions-Table"),document.getElementById("Merchant-Transactions-Query"));
+const allTransactions = new Transactions(
+  document.getElementById("All-Transactions-Table")
+  ,document.getElementById("All-Transactions-Query")
+  );
+const userTransactions = new Transactions(
+  document.getElementById("User-Transactions-Table"),
+  document.getElementById("User-Transactions-Query")
+  );
+const merchantTransactions = new Transactions(
+  document.getElementById("Merchant-Transactions-Table"),
+  document.getElementById("Merchant-Transactions-Query")
+  );
+
+const userAccounts = new Accounts(
+  "users",
+  document.getElementById("User-Accounts-Table-Header"),
+  document.getElementById("User-Accounts-Table-Body"),
+  document.getElementById("User-Accounts-Query")
+  );
+
+const merchantAccounts = new Accounts(
+  "merchants",
+  document.getElementById("Merchant-Accounts-Table-Header"),
+  document.getElementById("Merchant-Accounts-Table-Body"),
+  document.getElementById("Merchant-Accounts-Query")
+  );
+
+const merchantStaffsAccounts = new Accounts(
+  "merchantStaffsView2",
+  document.getElementById("MerchantStaffs-Accounts-Table-Header"),
+  document.getElementById("MerchantStaffs-Accounts-Table-Body"),
+  document.getElementById("MerchantStaffs-Accounts-Query")
+);
+
+const parentalAccounts = new Accounts(
+  "parentalAccounts",
+  document.getElementById("Parental-Accounts-Table-Header"),
+  document.getElementById("Parental-Accounts-Table-Body"),
+  document.getElementById("Parental-Accounts-Query")
+  );
+
+const accountingAccounts = new Accounts(
+  "accounting",
+  document.getElementById("Accounting-Accounts-Table-Header"),
+  document.getElementById("Accounting-Accounts-Table-Body"),
+  document.getElementById("Accounting-Accounts-Query")
+  );
+
+const administratorAccounts = new Accounts(
+  "administrators",
+  document.getElementById("Administrator-Accounts-Table-Header"),
+  document.getElementById("Administrator-Accounts-Table-Body"),
+  document.getElementById("Administrator-Accounts-Query")
+  );
+
+
+
+
 const myOrders = new Orders();
 const myItems = new Items();
 const modals = new Modals();
@@ -174,7 +230,7 @@ function onTransactionsSearchClick(event) {
     allTransactions.applyTransactionsQueries(event);
   } else if (transactionPanel === "UserTransactions") {
     userTransactions.applyTransactionsQueries(event);
-  } else if (transactionPanel === "MarchantTransactions") {
+  } else if (transactionPanel === "MerchantTransactions") {
     merchantTransactions.applyTransactionsQueries(event);
   }
 }
@@ -185,7 +241,7 @@ function onTransactionsClearClick(event) {
     allTransactions.clearTransactionsQueries(event);
   } else if (transactionPanel === "UserTransactions") {
     userTransactions.clearTransactionsQueries(event);
-  } else if (transactionPanel === "MarchantTransactions") {
+  } else if (transactionPanel === "MerchantTransactions") {
     merchantTransactions.clearTransactionsQueries(event);
   }
 }
@@ -258,3 +314,31 @@ export function setNotificationArray(data){
 }
 
 
+
+////////////////////////////
+// ACCOUNTS
+////////////////////////////
+
+function onUsersAccountsSearchClick(event) {
+  userAccounts.applyAccountsQuery(event);
+  merchantAccounts.applyAccountsQuery(event);
+  merchantStaffsAccounts.applyAccountsQuery(event);
+  parentalAccounts.applyAccountsQuery(event);
+  accountingAccounts.applyAccountsQuery(event);
+  administratorAccounts.applyAccountsQuery(event);
+  console.log("eee");
+}
+
+function onUserAccountsClearClick(event) {
+  console.log("eee");
+  userAccounts.clearAccountsQuery(event);
+  merchantAccounts.clearAccountsQuery(event);
+  merchantStaffsAccounts.clearAccountsQuery(event);
+  parentalAccounts.clearAccountsQuery(event);
+  accountingAccounts.clearAccountsQuery(event);
+  administratorAccounts.clearAccountsQuery(event);
+  
+}
+
+helper.addElementClickListener('.accounts-search-button', onUsersAccountsSearchClick);
+helper.addElementClickListener('.accounts-clear-button', onUserAccountsClearClick);

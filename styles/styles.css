@@ -445,7 +445,7 @@ button img{
     color: var(--CorrectColor);
 }
 
-.inactive {
+.inactive, .notactive{
     font-weight: bold;
     text-align: center;
     color: var(--ErrorColor);

@@ -248,25 +248,34 @@ export default class Accounts {
         //this.getUsers(button);
         break;
       case "merchants":
+        this.merchants = this.testusers();
        // this.getMerchants(button);
         break;
       case "merchantStaffs":
-        this.merchantStaffs = this.test();
+        this.merchantStaffs = this.teststaffmerchant();
+        //this.getMerchantStaffs(button);
+        break;
+      case "merchantStaffsView2":
+        this.merchantStaffs = this.teststaffmerchant();
         //this.getMerchantStaffs(button);
         break;
       case "accounting":
+        this.accounting = this.testusers();
        // this.getAccounting(button);
         break;
       case "administrators":
+        this.administrators = this.testusers();
        // this.getAdministrators(button);
         break;
       case "parentalAccounts":
+        this.parentalAccounts = this.testusers();
       //  this.getParentalAccounts(button);
         break;
       default:
         createAlert("danger","Invalid account type parameter");
         break;
     }
+    console.log("132");
     this.displayTableView();
   }
 
@@ -299,6 +308,7 @@ export default class Accounts {
     } else if (
         this.type === "users" || 
         this.type === "merchants" ||
+        this.type === "merchantStaffsView2" ||
         this.type === "accounting" ||
         this.type === "administrators" ||
         this.type === "parentalAccounts"
@@ -350,7 +360,7 @@ export default class Accounts {
     return view;
   }
 
-  getTableHeaderView(){
+  getTableHeaderView() {
     let view = ``;
     if (
       this.type === "merchantStaffs"
@@ -373,6 +383,7 @@ export default class Accounts {
         this.type === "all" || 
         this.type === "users" || 
         this.type === "merchants" ||
+        this.type === "merchantStaffsView2" ||
         this.type === "accounting" ||
         this.type === "administrators" ||
         this.type === "parentalAccounts"
@@ -395,10 +406,9 @@ export default class Accounts {
           </tr>
         `;
     } 
-     
+    console.log(this.tableHeader);
     return view;
   }
-
 
   displayTableView(){
     switch (this.type) {
@@ -418,6 +428,11 @@ export default class Accounts {
         break;
 
       case "merchantStaffs":
+        this.tableHeader.innerHTML = this.getTableHeaderView();
+        this.tableBody.innerHTML = this.getTableBodyView(this.merchantStaffs);
+        break;
+
+      case "merchantStaffsView2":
         this.tableHeader.innerHTML = this.getTableHeaderView();
         this.tableBody.innerHTML = this.getTableBodyView(this.merchantStaffs);
         break;

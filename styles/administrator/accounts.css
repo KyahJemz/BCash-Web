@@ -205,8 +205,8 @@
         max-width: 25px;;
     }
     .panel-accounts-table table .col2 {
-        width: 50px;
-        max-width: 50px;;
+        width: 110px;
+        max-width: 110px;;
     }
     .panel-accounts-table table .col3 {
         width: 110px;
@@ -249,10 +249,6 @@
         max-width: 110px;;
     }
     .panel-accounts-table table .col13 {
-        width: 110px;
-        max-width: 110px;;
-    }
-    .panel-accounts-table table .col14 {
         width: 110px;
         max-width: 110px;;
     }
