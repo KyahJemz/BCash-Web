@@ -52,7 +52,7 @@
     height: 225px;
     width: 100vw;
     background-color: #da1219;
-    background-image: url("../../images/bgPattern.png");
+    background-image: url("../images/bgPattern.png");
     background-repeat: repeat ;
     background-blend-mode: multiply;
     z-index: -1;

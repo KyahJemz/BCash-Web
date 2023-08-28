@@ -1,0 +1,96 @@
+.panel-cashinform-content {
+    width: 98%;
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* .panel-cashinform-content * {
+    border: 1px dotted red;
+} */
+
+.panel-cashinform-content .left-container {
+    width: 40%;
+}
+.panel-cashinform-content .right-container {
+    width: 35%;
+}
+
+.panel-cashinform-content .left-container {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.panel-cashinform-content .right-container {
+    border: 1px solid gainsboro;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.panel-cashinform-content .right-container .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.panel-cashinform-content .right-container .title {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+.panel-cashinform-content .right-container .date {
+    font-size: smaller;
+}
+
+.panel-cashinform-content .right-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.panel-cashinform-content .right-container ul li {
+    padding: 10px;
+    padding-left: 15px;
+    border-top: 1px solid gainsboro;
+    align-items: center;
+    display: grid;
+}
+
+.panel-cashinform-content .right-container ul li{
+    grid-template-columns: 50px auto 50px;
+}
+
+.panel-cashinform-content .right-container ul li img {
+    height: 40px;
+    width: 40px;
+    border: 1px solid gainsboro;
+    border-radius: 50%;
+}
+
+.panel-cashinform-content .right-container ul li .name {
+    font-weight: bold;
+}
+
+.panel-cashinform-content .right-container ul li .date {
+    
+}
+
+.panel-cashinform-content .right-container ul li .amount {
+    
+}
+
+.panel-cashinform-content .right-container ul li .type {
+    
+}
+
