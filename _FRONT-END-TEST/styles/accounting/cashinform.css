@@ -1,48 +1,88 @@
 .panel-cashinform-content {
     width: 98%;
+    height: 100%;
     padding: 50px;
     display: flex;
+    align-items: center;
     justify-content: space-around;
+    border: 1px solid red;
 }
 
 /* .panel-cashinform-content * {
     border: 1px dotted red;
 } */
 
-.panel-cashinform-content .left-container {
-    width: 40%;
-}
 .panel-cashinform-content .right-container {
     width: 35%;
-}
-
-.panel-cashinform-content .left-container {
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-.panel-cashinform-content .right-container {
+    height: 100%;
     border: 1px solid gainsboro;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
+    position: relative;
+    overflow-y: scroll;
 }
+
+.panel-cashinform-content .left-container {
+    border: 1px solid gainsboro;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+    width: 50%;
+}
+
+.panel-cashinform-content .left-container .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-bottom: 1px solid gainsboro;
+}
+
+.panel-cashinform-content .left-container .header .title {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+.panel-cashinform-content .left-container .header .help {
+    font-size: smaller;
+}
+
+.panel-cashinform-content .left-container .input-container {
+    padding-left: 25px;
+    width: 100%;
+    padding-right: 25px;
+}
+
+.panel-cashinform-content .left-container .input-container input {
+    width: 100%;
+}
+
+
+.panel-cashinform-content .left-container .transfer {
+    
+    width: 100px;
+}
+
+
+
+
 
 .panel-cashinform-content .right-container .header {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-bottom: 1px solid gainsboro;
 }
 
 .panel-cashinform-content .right-container .title {
@@ -62,7 +102,7 @@
 .panel-cashinform-content .right-container ul li {
     padding: 10px;
     padding-left: 15px;
-    border-top: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
     align-items: center;
     display: grid;
 }

@@ -178,3 +178,32 @@
 .panel-home-content .charts-container-row3 .chart-item ul li .type {
     
 }
+
+
+
+
+@media (min-width: 0px) and (max-width: 1107px){
+    .panel-home-content .charts-container-row1{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .panel-home-content .charts-container-row2{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .panel-home-content .charts-container-row3{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 0px) and (max-width: 928px){
+    .panel-home-content .charts-container-row3{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 0px) and (max-width: 689px){
+    .panel-home-content .charts-container-row1{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
