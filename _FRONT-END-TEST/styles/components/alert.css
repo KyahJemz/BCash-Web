@@ -1,0 +1,61 @@
+#Alert-Box-Container {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 50%;
+    height: fit-content;
+    z-index: 9;
+    display: flex; /* flex */
+    flex-direction: column;
+}
+
+.Alert-Box-Table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.Alert-Box-Table .Alert-box{
+    width: 100%;
+    transition: opacity 0.5s ease;
+}
+
+.Alert-Box-Table .Alert-box .Alert-content {
+    padding: 15px;
+    height: fit-content;
+    border-radius: 10px;
+}
+
+.Alert-Box-Table .Alert-box * p {
+    color: inherit;
+}
+
+.Alert-Box-Table .Alert-box .danger{
+    background-color: #dc3545;
+    color: white;
+}
+
+.Alert-Box-Table .Alert-box .warning{
+    background-color: #ffc107;
+    color: var(--TextColor-LightBlack);
+}
+
+.Alert-Box-Table .Alert-box .success{
+    background-color: #198754;
+    color: white;
+}
+
+.Alert-Box-Table .Alert-box .info{
+    background-color: #0dcaf0;
+    color: var(--TextColor-LightBlack);
+}
+
+
+.remove-Alert {
+    transform: translateX(100%);
+}
+
+.add-Alert {
+    transform: translateX(0);
+}

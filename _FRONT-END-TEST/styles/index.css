@@ -56,8 +56,13 @@
     padding: 0;
 }
 
-.cursor-pointer {
+.cursor-pointer,
+button {
     cursor: pointer;
+}
+
+hr {
+    width: 100%;
 }
 
 body {
@@ -240,17 +245,87 @@ body {
     align-items: center;
 }
 
-.form-background .form-container {
+.pin-container,
+.create-pin-container,
+.otp-container,
+.login-container {
     width: 350px;
     height: fit-content;
     background-color: var(--Panel-Background-DarkWhite);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.5)
-  
+    box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    
 }
 
-.form-background .form-container .input-container {
+.pin-container .form-title,
+.create-pin-container .form-title,
+.otp-container .form-title,
+.login-container .form-title{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.pin-container .form-title .title,
+.create-pin-container .form-title .title,
+.otp-container .form-title .title,
+.login-container .form-title .title{
+    font-size: 1.5rem;
+}
+
+.pin-container .form-title .subtitle,
+.create-pin-container .form-title .subtitle,
+.otp-container .form-title .subtitle,
+.login-container .form-title .subtitle{
+    font-size: 1rem;
+}
+
+.pin-container .form-title .note,
+.create-pin-container .form-title .note,
+.otp-container .form-title .note,
+.login-container .form-title .note{
+    font-size: 0.8rem;
+}
+
+.pin-container label,
+.create-pin-container label,
+.otp-container label{
+    font-size: 0.8rem;
+}
+
+.pin-container .note p,
+.create-pin-container .note p,
+.otp-container .note p,
+.login-container .note p{
+    font-size: 0.9rem;
+    color: var(--ErrorColor);
+}
+
+.pin-container input[type="password"],
+.create-pin-container input[type="password"]{
+    margin: auto;
+    text-align: center;
+    width: 100px;
+    padding: 4px;
+    letter-spacing: 0.5rem;
+}
+
+.otp-container input[type="text"] {
+    margin: auto;
+    text-align: center;
+    width: 150px;
+    padding: 4px;
+    letter-spacing: 0.5rem;
+}
+
+.login-container .input-container {
     margin: auto;
     width: 100%;
     position: relative;
@@ -258,18 +333,9 @@ body {
     height: fit-content;
     padding: 8px;
     z-index: 1;
-    
 }
 
-.form-background .form-container .form-title {
-    text-align: center;
-}
-
-.form-background .form-container .form-title p {
-    font-size: 1.5rem;
-}
-
-.form-background .form-container .input-container input {
+.login-container .input-container input {
     width: 100%;
     padding: 8px 10px;
     font-size: 0.8rem;
@@ -283,11 +349,11 @@ body {
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.30);
   }
 
-.form-background .form-container .input-container input:focus {
+  .login-container .input-container input:focus {
     border-bottom: 1px solid var(--TextColor-Gold);
 }
 
-.form-background .form-container .input-container label {
+.login-container .input-container label {
     position: absolute;
     top:5px;
     left: 18px;
@@ -300,58 +366,63 @@ body {
     z-index: 1;
   }
   
-.form-background .form-container .input-container input:focus ~ label,
-.form-background .form-container .input-container input:valid ~ label {
+.login-container .input-container input:focus ~ label,
+.login-container .input-container input:valid ~ label {
     top: -18px;
     left: 10px;
     color: var(--TextColor-Gold);
     font-size: 0.8rem;
   }
 
-.form-background .form-container .button-container {
-    width: 100%;
-    padding: 8px 8px;
-    border-radius: 4px;
-    margin-top: 15px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 550;
-}
 
-.form-background .form-container .btn-default {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 100%;
-    height: 28px;
-    text-align: center;
-    background-color: var(--Button-Background-Gold);
+.pin-container button,
+.create-pin-container button,
+.otp-container button,
+.login-container button{
+    cursor: pointer;
+    padding: 2px;
+    width: 75px;
     border-color: var(--Button-Background-Gold);
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.30);
-    align-items: center;
-    transition: 100ms ease;
-    border-radius: 2px;
+    background-color: var(--Button-Background-Gold);
+    color: rgb(31, 31, 31);
+    font-weight: bold;
 }
 
-.form-background .form-container .btn-default:hover {
-    background-color: red;
+.pin-container button:hover,
+.create-pin-container button:hover,
+.otp-container button:hover,
+.login-container button:hover{
+    cursor: pointer;
+    transform: scale(0.98);
+    border-color: var(--color-DarkGold);
+}
+
+.pin-container button:active,
+.create-pin-container button:active,
+.otp-container button:active,
+.login-container button:active{
+    cursor: pointer;
+    transform: scale(0.9);
+    background-color: var(--Button-Background-Active-Red);
     color: var(--TextColor-White);
 }
 
-.form-background .form-container .btn-default:active {
-    background-color: var(--Button-Background-Active-Gold);
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.30);
-}
 
-.form-background .form-container .note {
-    text-align: right;
-    margin-top: 20px;
-    font-size: 0.8em;
-}
 
-.form-background .form-container .note a{
-    text-decoration: none;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 768px) {
     .content-container {

@@ -4,12 +4,14 @@ export default class AjaxRequest {
         this.baseURL = baseURL
     }
 
-    sendRequest(url, method, data) {
+    sendRequest(url, method, data, AccountAddress, token) {
         return new Promise((resolve, reject) => {
             fetch(url, {
                 method,
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token,
+                    'AccountAddress': AccountAddress,
                 },
                 body: JSON.stringify(data),
             })
@@ -23,99 +25,4 @@ export default class AjaxRequest {
             .catch(error => reject(error));
         });
     }
-
-
-
-
-    
 }
-
-
-// ##########
-// ORDERS API
-// ##########
-
-    export function uploadOrderData(walletAddress, items) {
-        const url = "";
-        const data = {
-            walletAddress,
-            items,
-        };
-        return sendAjaxRequest(url, 'POST', data);
-    }
-
-// ##########
-// ITEMS API
-// ##########
-
-    export function deleteItemData(itemId) {
-        const url = "";
-        const data = {
-            itemId
-        };
-        return sendAjaxRequest(url, 'POST', data);
-    }
-
-    export function updateItemImage(itemId,image) {
-        const url = "";
-        const data = {
-            itemId,
-            itemImage
-        };
-        return sendAjaxRequest(url, 'POST', data);
-    }
-
-    export function UpdateItemData(item) {
-        const url = "";
-        const data = {
-        itemId: item.id,
-        itemName: item.name,
-        itemCost: item.cost
-        };
-        return sendAjaxRequest(url, 'POST', data);
-    }
-
-    export function addItemData(name, cost, image) {
-        const url = "";
-        const data = {
-        itemName: name,
-        itemCost: cost,
-        itemImage: image
-        };
-        return sendAjaxRequest(url, 'POST', data);
-    }
-    
-    export function searchItemData(query) {
-        const url = "";
-        const data = {
-            query
-        };
-        return sendAjaxRequest(url, 'GET', data);
-    }
-
-    export function filterItemData(query) {
-        const url = "";
-        const data = {
-            query
-        };
-        return sendAjaxRequest(url, 'GET', data);
-    }
-
-    export function layoutItem(query) {
-        const url = "";
-        const data = {
-            query
-        };
-        return sendAjaxRequest(url, 'GET', data);
-    }
-
-
-
-
-
-    
-
-// ##########
-// ITEMS API
-// ##########
-

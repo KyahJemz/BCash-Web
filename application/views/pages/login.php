@@ -11,7 +11,7 @@
                     <div class="line"></div>
                     <div class="text2">Caritas et Scientia</div>
                 </div>
-            </div>
+            </div>a
             <div class="right-header">
                 v1.2.3
             </div>
