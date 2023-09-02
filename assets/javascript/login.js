@@ -16,7 +16,6 @@ function bindEventListeners() {
   });
 
   document.addEventListener("click", function (event) {
-    console.log("123");
       if (event.target !== formContainer && event.target !== signinButton) {
           formBackground.style.display = "none";
       }

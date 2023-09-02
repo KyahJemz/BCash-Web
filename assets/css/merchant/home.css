@@ -1,0 +1,75 @@
+
+.panel-home-content {
+    overflow-y: scroll;
+    width: 100%;
+    height: max-content;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 50px repeat(2,150px) 300px;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    }
+
+    .panel-home-content .grid-cell {
+        padding: 10px;
+        border-radius: 10px;
+        background-color: var(--color-DarkWhite);
+    }
+
+    .panel-home-content .header { 
+        grid-area: 1 / 1 / 2 / 4;
+        background-color: white;
+    }
+    .panel-home-content .sales-graph { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-area: 2 / 1 / 4 / 3;
+        text-align: center;
+    }
+    .panel-home-content .confirmed-orders { 
+        grid-area: 2 / 3 / 3 / 4;
+        text-align: center;
+    }
+    .panel-home-content .confirmed-sales { 
+        grid-area: 3 / 3 / 4 / 4;
+        text-align: center;
+    }
+    .panel-home-content .orders-by-items-graph { 
+        grid-area: 4 / 1 / 5 / 2;
+        text-align: center;
+    }
+    .panel-home-content .orders-by-category-graph { 
+        grid-area: 4 / 2 / 5 / 3;
+        text-align: center;
+    }
+    .panel-home-content .latest-transaactions { 
+        grid-area: 4 / 3 / 5 / 4;
+        text-align: center;
+    }
+    
+
+    .panel-home-content canvas {
+    aspect-ratio: auto;
+    overflow: hidden;
+}
+
+
+
+@media (min-width: 0px) and (max-width: 768px) {
+    /* Styles for phones */
+
+    
+  }
+  
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for laptops */
+
+  }
+  
+  @media (min-width: 1025px) {
+    /* Styles for wide screens */
+  
+  }

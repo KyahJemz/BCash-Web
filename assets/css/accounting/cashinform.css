@@ -1,0 +1,249 @@
+:root {
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
+    --AsccentColor: #CB8213; /* Buttons */
+    --TextColor: #4b4b4b; /* text */
+    --DarkColor: #363636; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
+
+    --TextColor-White: #ffffff;
+    --TextColor-Red: #DA121A;
+    --TextColor-Gold: #F9AE28;
+    --TextColor-LightBlack: #333333;
+    --TextColor-Black: #0F1419;
+
+    --Button-Background-Red: #DA121A;
+    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Gold: #F9AE28;
+    --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-White: #ffffff;
+
+    --Selected-Background-LightBlack: #333333;
+
+    --Panel-Background-LightBlack: #333333;
+    --Panel-Background-Gold: #FFCC00;
+    --Panel-Background-Red: #DA121A;
+    --Panel-Background-White: #ffffff;
+    --Panel-Background-DarkWhite: #F2F2F2;
+
+    --color-White: #ffffff;
+    --color-DarkWhite: #F2F2F2;
+    --color-Red: #DA121A;
+    --color-DarkRed: #9A110D;
+    --color-Gold: #FFCC00;
+    --color-DarkGold: #F9AE28;
+    --color-Gray: #282828;
+    --color-LightBlack: #333333;
+    --color-Black: #0F1419;
+}
+
+
+.panel-cashinform-content {
+    padding: 50px;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid red;
+    overflow-y: auto;
+    justify-items: center
+}
+
+/* .panel-cashinform-content * {
+    border: 1px dotted red;
+} */
+
+.panel-cashinform-content .right-container {
+    width: 300px;
+    height: 100%;
+    border: 1px solid gainsboro;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.panel-cashinform-content .left-container {
+    padding-bottom: 20px;
+    position: relative;
+    border: 1px solid gainsboro;
+    text-align: center;
+    gap: 20px;
+    height: 100%;
+    width: 300px;
+    overflow-y: auto;
+}
+
+.panel-cashinform-content .left-container .content-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+    align-items: center;
+    overflow: hidden;
+    height: fit-content;
+    width: 100%;
+    
+}
+
+.panel-cashinform-content .left-container .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-bottom: 1px solid gainsboro;
+}
+
+.panel-cashinform-content .left-container .header .title {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+.panel-cashinform-content .left-container .header .help {
+    font-size: smaller;
+}
+
+.panel-cashinform-content .left-container .input-container {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 25px;
+    width: 100%;
+    padding-right: 25px;
+}
+
+.panel-cashinform-content .left-container .input-container input {
+    width: 50%;
+}
+
+.panel-cashinform-content .left-container button {
+    background-color: var(--Button-Background-Gold);
+    color: var(--TextColor-White);
+}
+
+.panel-cashinform-content .left-container fieldset{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.panel-cashinform-content .left-container fieldset .item {
+    display: flex;
+    
+}
+
+
+
+
+
+
+
+.panel-cashinform-content .right-container .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-bottom: 1px solid gainsboro;
+}
+
+.panel-cashinform-content .right-container .title {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+.panel-cashinform-content .right-container .date {
+    font-size: smaller;
+}
+
+.panel-cashinform-content .right-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.panel-cashinform-content .right-container ul li {
+    padding: 10px;
+    padding-left: 15px;
+    border-bottom: 1px solid gainsboro;
+    align-items: center;
+    display: grid;
+}
+
+.panel-cashinform-content .right-container ul li{
+    grid-template-columns: 50px auto 50px;
+}
+
+.panel-cashinform-content .right-container ul li img {
+    height: 40px;
+    width: 40px;
+    border: 1px solid gainsboro;
+    border-radius: 50%;
+}
+
+.panel-cashinform-content .right-container ul li .name {
+    font-weight: bold;
+}
+
+.panel-cashinform-content .right-container ul li .date {
+    
+}
+
+.panel-cashinform-content .right-container ul li .amount {
+    
+}
+
+.panel-cashinform-content .right-container ul li .type {
+    
+}
+
+
+@media (min-width: 955px) {
+    .panel-cashinform-content {
+        gap: 10px;
+    }
+
+    .panel-cashinform-content .left-container .content-container{
+        gap: 20px;
+    }
+
+
+    .panel-cashinform-content .left-container,
+    .panel-cashinform-content .right-container{
+       width: 100%;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 955px){
+    .panel-cashinform-content {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
+
+    .panel-cashinform-content .left-container,
+    .panel-cashinform-content .right-container{
+       width: 500px;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 802px){
+    .panel-cashinform-content {
+        padding: 20px;
+    }
+
+    .panel-cashinform-content .left-container,
+    .panel-cashinform-content .right-container{
+        width: 400px;
+    }
+}

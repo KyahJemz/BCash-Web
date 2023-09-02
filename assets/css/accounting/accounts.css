@@ -1,0 +1,273 @@
+
+
+/* ################## */
+/* ACCOUNTS PANEL */
+/* ################## */
+
+    /* ############### */
+    /* QUERY CONTAINER */
+    /* ############### */
+
+    .panel-accounts-query {
+        height: fit-content;
+        margin-top: 10px;
+        width: 97%;
+    }
+    .panel-accounts-query .form-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+    }
+
+    .panel-accounts-query .form-container .dropdown button{
+        height: 21px;
+        flex: 1;
+        width: max-content;
+    }
+
+    .panel-accounts-query .form-container .dropdown a {
+        font-size: 0.7em;
+    }
+
+    .panel-accounts-query .form-container .dropdown .dropdown-content {
+        z-index: 10;
+    }
+
+    .panel-accounts-query .form-container label {
+        font-size: 0.7em;
+        display:block;
+    }
+    .panel-accounts-query .form-container div {
+        min-width: 200px;
+        flex-grow: 1;
+        flex: 1;
+    }
+
+    .panel-accounts-query .form-container div input {
+        width: 100%;
+    }
+
+    .panel-accounts-query .form-container .textbox {
+        margin-right: 10px;
+        width: 100%;
+    }
+
+    /* ################# */
+    /* BUTTONS CONTAINER */
+    /* ################# */
+
+    .panel-accounts-buttons {
+        margin-top: 10px;
+        width: 97%;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap:wrap;    
+        gap: 5px;
+        z-index: 1;
+    }
+
+    .panel-accounts-buttons button {
+        height: 25px;
+    }
+
+    .panel-accounts-buttons button img{
+        height: 100%;
+        aspect-ratio: 1/1;
+    }
+
+    .panel-accounts-buttons > *, .panel-accounts-buttons > :last-child div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 5px;
+        font-size: 0.95em;
+    }
+
+    /* ################ */
+    /* FOOTER CONTAINER */
+    /* ################ */
+
+    .panel-accounts-footer, .panel-accounts-footer > * {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .panel-accounts-footer {
+        height: 25px;
+        margin-top: 10px;
+        width: 97%;
+        justify-content: end;
+        gap: 20px;
+        font-size: 0.8em;
+    }
+
+    .page-numbers {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .page-numbers button{
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .page-numbers {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+    
+    .page-numbers li a {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .page-numbers li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+    .page-numbers li a:hover {
+        color: var(--TextColor-Red);
+        text-decoration: underline;
+    }
+
+    .page-numbers .selected {
+        color: var(--TextColor-Red);
+        font-weight: 700;
+        border: 1px solid var(--TextColor-Red);
+    }
+
+    /* ############### */
+    /* TABLE CONTAINER */
+    /* ############### */
+
+    .panel-accounts-table {
+        width: 97%;
+        flex-grow: 1;
+        border-radius: 3px;
+        border: 1px solid var(--BackgroundContentTitleBarColor);
+        overflow: auto;
+    }
+
+    .panel-accounts-table table {
+        border-collapse: collapse;
+    }
+
+    .panel-accounts-table .table-header {
+        background-color: var(--BackgroundContentTitleBarColor);
+        width: max-content;
+        font-size: 0.8em;
+        position: sticky;
+        top: 0px;
+    }
+
+    .panel-accounts-table .table-header th div{
+        border-right: 1px solid var(--BackgroundPrimaryColor);
+        border-bottom: 1px solid var(--BackgroundPrimaryColor);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        padding: 5px;
+    }
+
+    .cell {
+        padding: 5px;
+        font-size: 0.8em;
+        font-weight: 100;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        border-right: 1px solid var(--BackgroundPrimaryColor);
+        border-bottom: 1px solid var(--BackgroundPrimaryColor);
+    }
+
+    .panel-accounts-table table .col1 {
+        width: 25px;
+        max-width: 25px;;
+    }
+    .panel-accounts-table table .col2 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col3 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col4 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col5 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col6 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col7 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col8 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col9 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col10 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col11 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col12 {
+        width: 110px;
+        max-width: 110px;;
+    }
+    .panel-accounts-table table .col13 {
+        width: 110px;
+        max-width: 110px;;
+    }
+
+@media (min-width: 0px) and (max-width: 768px) {
+    /* Styles for phones */
+    .panel-accounts-buttons {
+        flex-direction: column;
+    }
+  }
+  
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for laptops */
+
+  }
+  
+  @media (min-width: 1025px) {
+    /* Styles for wide screens */
+  
+  }

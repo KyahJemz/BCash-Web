@@ -1,5 +1,3 @@
-    <script src="../scripts/notification-box.js"></script>
-    <script src="../scripts/chart.js"></script>
-    <script src="../scripts/main.js" type="module"></script>
+    <script src="<?php echo base_url('assets/javascript/main-merchant.js'); ?>" type="module"></script>
 </body>
 </html>

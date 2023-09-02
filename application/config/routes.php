@@ -50,5 +50,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['default_controller'] = 'login/view';
-$route['merchant'] = 'login/view';
+$route['default_controller'] = 'login/index';
+$route['login'] = 'login/index';
+
+$route['test'] = 'api/test/index';
+
+
+$route['validateLogin'] = 'login/validateLogin';
+
+$route['Administrator'] = 'Administrator/index';
+$route['Accounting'] = 'Accounting/index';
+$route['MerchantAdmin'] = 'MerchantAdmin/index';
+$route['Merchant'] = 'Merchant/index';
+
+

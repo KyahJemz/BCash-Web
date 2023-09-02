@@ -1,23 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCash</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/dialog-box.css">
 
-    <link rel="stylesheet" href="../styles/merchant/home.css">
-    <link rel="stylesheet" href="../styles/merchant/menu.css">
-    <link rel="stylesheet" href="../styles/merchant/createorder.css">
-    <link rel="stylesheet" href="../styles/merchant/transactions.css">
-    <link rel="stylesheet" href="../styles/merchant/itemmanagement.css">
-</head>
-
-<body>
 
 
     <div class="design-background"></div>
@@ -464,7 +446,7 @@
                                             <img src="../images/icons/delete-red.png" alt="">
                                         </button>
                                         <button id="createorder-placeorder" type="button" class="placeOrderButton curson-pointer">
-                                            <img src="../images/icons/order-receipt.png" alt="">
+                                            <img src="<?php echo base_url('assets/images/icons/order-receipt.png'); ?>" alt="">
                                             <p>Place Order</p>
                                         </button>
                                     </div>

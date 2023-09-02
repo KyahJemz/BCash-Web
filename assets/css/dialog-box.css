@@ -1,0 +1,344 @@
+:root {
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
+    --AsccentColor: #CB8213; /* Buttons */
+    --TextColor: #4b4b4b; /* text */
+    --DarkColor: #363636; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
+
+    --TextColor-White: #ffffff;
+    --TextColor-Red: #DA121A;
+    --TextColor-Gold: #F9AE28;
+    --TextColor-LightBlack: #333333;
+    --TextColor-Black: #0F1419;
+
+    --Button-Background-Red: #DA121A;
+    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Gold: #F9AE28;
+    --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-White: #ffffff;
+
+    --Selected-Background-LightBlack: #333333;
+
+    --Panel-Background-LightBlack: #333333;
+    --Panel-Background-Gold: #FFCC00;
+    --Panel-Background-Red: #DA121A;
+    --Panel-Background-White: #ffffff;
+    --Panel-Background-DarkWhite: #F2F2F2;
+
+    --color-White: #ffffff;
+    --color-DarkWhite: #F2F2F2;
+    --color-Red: #DA121A;
+    --color-DarkRed: #9A110D;
+    --color-Gold: #FFCC00;
+    --color-DarkGold: #F9AE28;
+    --color-Gray: #282828;
+    --color-LightBlack: #333333;
+    --color-Black: #0F1419;
+}
+
+
+
+.order-confirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.order-confirmation strong {
+    color: var(--TextColor-Red);
+}
+
+.order-confirmation fieldset {
+    height: 100%;
+    width: 100%;
+    padding: 6px;
+    border-width: 1px;
+
+}
+
+.order-confirmation fieldset legend{
+    font-size: 0.9rem;
+}
+
+
+.order-confirmation .status {
+    background-color: yellow;
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+.order-confirmation .content {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.order-confirmation .content .left-panel{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    justify-content: space-between;
+    gap: 10px;
+    overflow-y: scroll;
+    padding-right: 8px;
+}
+
+.order-confirmation .content .left-panel .list {
+    width: 100%;
+    flex: 1;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    position: relative;
+}
+
+.order-confirmation .content .left-panel .list .list-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: sticky;
+    background-color: var(--Panel-Background-White);
+    top: 0;
+    border-bottom: 1px solid gray;
+    padding-bottom: 6px;
+}
+
+.order-confirmation .content .left-panel .list .item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.order-confirmation .content .left-panel .list .item .cost{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-confirmation .content .left-panel .list .item .name{
+    width: 100%;
+    font-weight: bold;
+}
+
+.order-confirmation .content .left-panel .summary {
+    position: sticky;
+    bottom: 0;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: var(--Panel-Background-White);
+}
+
+.order-confirmation .content .right-panel{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-confirmation .content .right-panel .qr-code {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-confirmation .content .right-panel .qr-code img {
+    aspect-ratio: 1/1;
+    width: 100px;
+    align-self: center;
+}
+
+.order-confirmation .content .right-panel .details fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.order-confirmation .content .right-panel .qr-code button{
+    width: 50%;
+    align-self: center;
+}
+
+.order-confirmation .content .right-panel .qr-code button{
+    justify-content: center;
+    
+}
+
+.order-confirmation .content .right-panel .id-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+
+
+.order-confirmation .buttons{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    gap: 10px;
+    
+}
+
+
+.order-confirmation .buttons button:last-child {
+    background-color: var(--Button-Background-Gold);
+    color: var(--TextColor-White);
+    border-radius: 3px;
+    transition: 100ms;
+}
+
+.order-confirmation .buttons button:first-child {
+    border: 1px solid var(--Button-Background-Gold);
+    border-radius: 3px;
+    transition: 100ms;
+}
+
+.order-confirmation .buttons button:active {
+    background-color: var(--Button-Background-Active-Gold);
+    color: var(--TextColor-White);
+    transform: scale(0.97); 
+}
+
+
+
+
+
+
+.notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  
+}
+
+.notification-list .notification-item {
+    border-radius: 6px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.notification-list .notification-item .title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-list .notification-item .title-container .title{
+    font-weight: bolder;
+}
+
+.notification-list .notification-item .title-container .date{
+    font-style: italic;
+    font-size: 0.7rem;
+}
+
+.notification-list .notification-item .content-container{
+    margin-top: 4px;
+}
+
+
+
+
+
+.notification-list .notification-item .content-container .content{
+
+}
+
+
+
+
+
+.personal-information-container {
+    width: 100%;
+    height: fit-content;
+}
+
+.personal-information-container fieldset {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-width: 1px;
+    border-color: var(--color-DarkGold);
+}
+
+.personal-information-container fieldset table * p {
+    font-size: smaller;
+}
+
+.personal-information-container fieldset legend p{
+    font-weight: bold;
+    color: var(--color-Red);
+}
+
+.personal-information-container fieldset table {
+    width: 100%;
+}
+
+.personal-information-container fieldset table tr td {
+    padding: 4px;
+    width: calc(100%/2);
+}
+
+.personal-information-container fieldset table tr td img {
+    aspect-ratio: 1/1;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.personal-information-container fieldset table tr td input[type="text"],
+.personal-information-container fieldset table tr td input[type="password"] {
+    width: 100%;
+}
+
+.personal-information-container .buttons-container{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.personal-information-container .buttons-container .buttons{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    gap: 10px;
+    
+}
+
+.personal-information-container .buttons-container button:last-child {
+    background-color: var(--Button-Background-Gold);
+    color: var(--TextColor-White);
+    border-radius: 3px;
+    transition: 100ms;
+}
+
+.personal-information-container .buttons-container button:first-child {
+    border: 1px solid var(--Button-Background-Gold);
+    border-radius: 3px;
+    transition: 100ms;
+}
+
+.personal-information-container .buttons-container button:active {
+    background-color: var(--Button-Background-Active-Gold);
+    color: var(--TextColor-White);
+    transform: scale(0.97); 
+}
