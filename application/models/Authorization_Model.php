@@ -20,7 +20,7 @@ class Authorization_Model extends CI_Model {
         return $text;
     }
 
-    function get_current_timestamp (){
+    public function get_current_timestamp (){
         //return $this->db->query("SELECT NOW() AS current_time")->row()->current_time;
         return date('Y-m-d H:i:s');
     }
@@ -60,6 +60,31 @@ class Authorization_Model extends CI_Model {
             ->where('Location', $Location)
             ->get()->row();
     }
+
+
+// check if account is enabled
+// check if has pin code
+// chech if record existed in login history for new login   
+
+
+
+    public function setOTP() {
+
+    }
+
+    public function setAuthorization(){
+        
+    }
+
+    public function setLoginHistory(){
+        
+    }
+
+    public function updateLastLogin(){
+        
+    }
+
+
 
 
     public function initialize_login($Account_Address,$IpAddress,$Device,$Location){
