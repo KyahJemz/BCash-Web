@@ -20,6 +20,11 @@
                 'Content-Type': 'application/json',
                 'Authorization': token,
                 'AccountAddress': AccountAddress,
+                'Intent': 'OTP Validation'
+                //OTP Validation
+                //PIN Validation
+                //PIN Creation
+                //Web Login
             },
             body: JSON.stringify(data),
         })
@@ -37,19 +42,50 @@
 // Example usage
 const baseUrl = `http://localhost/index.php`;
 
-const url = baseUrl + '/Api/Login/initiateWebLogin';
+const url = baseUrl + '/Api/Login/AuthenticateLogin';
 const method = 'POST';
+// const data = {
+//     Username: 'administrator',
+//     Password: '12345',
+//     IpAddress: '192.168.1.1',
+//     Device: 'Na',
+//     Location: 'xyz'
+// };
+
 const data = {
-    Username: 'administrator',
-    Password: '12345',
+    OTP: '296381',
     IpAddress: '192.168.1.1',
     Device: 'Na',
-    Location: 'Cavite'
+    Location: 'xyz'
 };
-const AccountAddress = ''; // Replace with the user's account address
-const token = ''; // Replace with your authorization token
 
-sendRequest(url, method, data, AccountAddress, token)
+// const data = {
+//     NewPIN: '123456',
+//     IpAddress: '192.168.1.1',
+//     Device: 'Na',
+//     Location: 'Cavite'
+// };
+
+// const data = {
+//     PIN: '123452',
+//     IpAddress: '192.168.1.1',
+//     Device: 'Na',
+//     Location: 'Cavite'
+// };
+
+// const data = {
+//     PIN: '123456',
+//     IpAddress: '192.168.1.1',
+//     Device: 'Na',
+//     Location: 'Cavite'
+// };
+
+
+const AccountAddress = 'ADM000000000000'; // Replace with the user's account address
+const token = '$2y$10$R9LXFQ/ZQ2Unphm.3wtUue.'; // Replace with your authorization token
+
+for (let i = 0; i < 1; i++){
+    sendRequest(url, method, data, AccountAddress, token)
     .then(responseData => {
         // Handle the successful response data here
         console.log('Response Data:', responseData);
@@ -60,6 +96,14 @@ sendRequest(url, method, data, AccountAddress, token)
         document.body.innerHTML = error;
         console.log('Request Error:', error);
     });
+}
+
+
+
+
+
+
+
 
 
     </script>
