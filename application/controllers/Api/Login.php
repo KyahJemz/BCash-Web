@@ -10,9 +10,12 @@ class Login extends CI_Controller {
         }
 
         function sanitize($value) {
-            $value = $this->db->escape_str($value);
-           // $value = $this->input->xss_clean($value);
-            return $value;
+                if ($value === null) {
+                        return null; // Return null if the value is null
+                }
+                $value = $this->db->escape_str($value);
+                // $value = $this->input->xss_clean($value);
+                return $value;
         }
 
         public function checkUser(){
@@ -27,21 +30,31 @@ class Login extends CI_Controller {
 
                 $requestPostBody = $this->input->raw_input_stream; // READ POST BODY
                 $requestPostBody = json_decode($requestPostBody, TRUE); // DECODES
-                $this->form_validation->set_data($requestPostBody); // SET FORM VALIDATION
 
+
+                if (is_array($requestPostBody)) {
+                        $this->form_validation->set_data($requestPostBody);
+                        // Rest of your code
+                
                 $this->form_validation->set_rules('Username', 'Username', 'trim|required|alpha_numeric');
                 $this->form_validation->set_rules('Password', 'Password', 'trim|required|alpha_numeric');
                 $this->form_validation->set_rules('IpAddress', 'IpAddress', 'trim|required|valid_ip');
                 $this->form_validation->set_rules('Device', 'Device', 'trim|required|alpha_numeric');
                 $this->form_validation->set_rules('Location', 'Location', 'trim|required|alpha_numeric');
 
-                $validatedRequestPostBody = $this->input->post(); 
+               // $validatedRequestPostBody = $this->input->post(); 
+
+                $validatedUsername = $requestPostBody['Username'];
+                $validatedPassword = $requestPostBody['Password'];
+                $validatedIpAddress = $requestPostBody['IpAddress'];
+                $validatedDevice = $requestPostBody['Device'];
+                $validatedLocation = $requestPostBody['Location'];
 
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
 
                         if ($this->validateAuthToken($AccountAddressHeader,$AuthorizationTokenHeader)) {
 
-                                if ($this->validateClient($AccountAddressHeader,$validatedRequestPostBody['IpAddress'],$validatedRequestPostBody['Device'],$validatedRequestPostBody['Location'])){
+                                if ($this->validateClient($AccountAddressHeader,$validatedIpAddress,$validatedDevice,$validatedLocation)){
                         
                                         $webactor_category = $this->Authorization_Model->get_webactor_category($AccountAddressHeader);
                                         $parameters = [
@@ -88,80 +101,20 @@ class Login extends CI_Controller {
                                         'Message' => 'Failed, Reason: The provided parameters does not meet the validation requirements. [' . $validationErrors .']'
                                 ];
                         } else {
-                                $Username = $validatedRequestPostBody['Username'];
-                                $Password = $validatedRequestPostBody['Password'];
-                                $IpAddress = $validatedRequestPostBody['IpAddress'];
-                                $Device = $validatedRequestPostBody['Device'];
-                                $Location = $validatedRequestPostBody['Location'];
-
-                                $validAccount = $this->Login_Model->get_tbl_webaccounts_by_username($Username);
+                                $validAccount = $this->Login_Model->get_tbl_webaccounts_by_username($validatedUsername);
                         
                                 if ($validAccount) {
-                                        if (password_verify($Password,$validAccount->Password)) {
+                                        if (password_verify($validatedPassword,$validAccount->Password)) {
+
+                                                
                                                 
                                                 $AccountAddress = $validAccount->WebAccounts_Address;
-                                                $result = $this->Authorization_Model->initialize_login($AccountAddress,$IpAddress,$Device,$Location);
 
 
+                                                   // Debug statement: Log the AccountAddress for debugging
 
 
-                                                
-// check if account is enabled
-// check if a login is detected
-// check if has pin code
-// chech if record existed in login history for new login   
-
-
-
-
-
-
-
-
-
-                                                if ($result && $result === "Successful"){
-                                                        $Actor = $this->Authorization_Model->get_webactor_category($AccountAddress);
-                                                        $AuthorizationToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
-                                                        $parameters = [
-                                                                'AccountAddress' => $AccountAddress,
-                                                                'AuthorizationToken' => $AuthorizationToken->AuthToken,
-                                                                'Actor' => $Actor,
-                                                        ];
-                                                        $response = [
-                                                                'Success' => TRUE,
-                                                                'Target' => 'PIN validation',
-                                                                'Parameters' => $parameters,
-                                                                'Message' => 'Success: PIN validation required!'
-                                                        ];
-                                                } else if ($result && $result === "OTP Validation") {
-                                                        $Actor = $this->Authorization_Model->get_webactor_category($AccountAddress);
-                                                        $AuthorizationToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
-                                                        $parameters = [
-                                                                'AccountAddress' => $AccountAddress,
-                                                                'AuthorizationToken' => $AuthorizationToken->AuthToken,
-                                                                'Actor' => $Actor,
-                                                        ];
-                                                        $response = [
-                                                                'Success' => TRUE,
-                                                                'Target' => 'OTP Validation',
-                                                                'Parameters' => $parameters,
-                                                                'Message' => 'Success: New Sign-in detected, OTP validation required!'
-                                                        ];
-                                                } else if ($result && $result === "PIN Creation") {
-                                                        $Actor = $this->Authorization_Model->get_webactor_category($AccountAddress);
-                                                        $AuthorizationToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
-                                                        $parameters = [
-                                                                'AccountAddress' => $AccountAddress,
-                                                                'AuthorizationToken' => $AuthorizationToken->AuthToken,
-                                                                'Actor' => $Actor,
-                                                        ];
-                                                        $response = [
-                                                                'Success' => TRUE,
-                                                                'Target' => 'PIN Creation',
-                                                                'Parameters' => $parameters,,
-                                                                'Message' => 'Success: PIN creation required!'
-                                                        ];
-                                                } else if ($result && $result === "Access Blocked") {
+                                                if (!($this->validateAccountIfEnabled($AccountAddress))){
                                                         $response = [
                                                                 'Success' => FALSE,
                                                                 'Target' => null,
@@ -169,13 +122,78 @@ class Login extends CI_Controller {
                                                                 'Message' => 'Failed: Access to this account is blocked!'
                                                         ];
                                                 } else {
-                                                        $response = [
-                                                                'Success' => FALSE,
-                                                                'Target' => null,
-                                                                'Parameters' => null,
-                                                                'Message' => 'Failed: Authorization Failed!'
-                                                        ];
+                                                        if ($this->validateAccountIfOnline($AccountAddress)) {
+                                                                $AuthorizationToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
+                                                                if ($this->validateClient($AccountAddress,$AuthorizationToken->AuthToken,$validatedIpAddress,$validatedDevice,$validatedLocation)) {
+                                                                        $Actor = $this->Authorization_Model->get_webactor_category($AccountAddress);
+                                                                        $parameters = [
+                                                                                'AccountAddress' => $AccountAddress,
+                                                                                'AuthorizationToken' => $AuthorizationToken->AuthToken,
+                                                                                'Actor' => $Actor,
+                                                                        ];
+                                                                        $response = [
+                                                                                'Success' => TRUE,
+                                                                                'Target' => $Actor,
+                                                                                'Parameters' => $parameters,
+                                                                                'Message' => 'Success: Account already signed in!'
+                                                                        ];
+                                                                } else {
+                                                                        $response = [
+                                                                                'Success' => FALSE,
+                                                                                'Target' => null,
+                                                                                'Parameters' => null,
+                                                                                'Message' => 'Failed: Account already signed in on another device!'
+                                                                        ];
+                                                                }        
+                                                        } else {
+                                                                if ($this->validateIfNewAccountLogin($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)) {
+                                                                        $Actor = $this->Authorization_Model->get_webactor_category($AccountAddress);
+                                                                        $AuthorizationToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
+                                                                        $parameters = [
+                                                                                'AccountAddress' => $AccountAddress,
+                                                                                'AuthorizationToken' => $AuthorizationToken->AuthToken,
+                                                                                'Actor' => $Actor,
+                                                                        ];
+                                                                        $response = [
+                                                                                'Success' => TRUE,
+                                                                                'Target' => 'OTP Validation',
+                                                                                'Parameters' => $parameters,
+                                                                                'Message' => 'Success: New Sign-in detected, OTP validation required!'
+                                                                        ];
+                                                                } else {
+                                                                        if ($this->validateIfAccountHasPINCode($AccountAddress)) {
+                                                                                $Actor = $this->Authorization_Model->get_webactor_category($AccountAddress);
+                                                                                $AuthorizationToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
+                                                                                $parameters = [
+                                                                                        'AccountAddress' => $AccountAddress,
+                                                                                        'AuthorizationToken' => $AuthorizationToken->AuthToken,
+                                                                                        'Actor' => $Actor,
+                                                                                ];
+                                                                                $response = [
+                                                                                        'Success' => TRUE,
+                                                                                        'Target' => 'PIN validation',
+                                                                                        'Parameters' => $parameters,
+                                                                                        'Message' => 'Success: PIN validation required!'
+                                                                                ];
+                                                                        } else {
+                                                                                $Actor = $this->Authorization_Model->get_webactor_category($AccountAddress);
+                                                                                $AuthorizationToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
+                                                                                $parameters = [
+                                                                                        'AccountAddress' => $AccountAddress,
+                                                                                        'AuthorizationToken' => $AuthorizationToken->AuthToken,
+                                                                                        'Actor' => $Actor,
+                                                                                ];
+                                                                                $response = [
+                                                                                        'Success' => TRUE,
+                                                                                        'Target' => 'PIN Creation',
+                                                                                        'Parameters' => $parameters,
+                                                                                        'Message' => 'Success: PIN creation required!'
+                                                                                ];
+                                                                        }
+                                                                }
+                                                        }
                                                 }
+
                                         } else {
                                                 $response = [
                                                         'Success' => FALSE,
@@ -194,8 +212,19 @@ class Login extends CI_Controller {
                                 }
                         }
                 }
+        } else {
+                $response = [
+                        'Success' => FALSE,
+                        'Target' => null,
+                        'Parameters' => null,
+                        'Message' => 'FAILED'
+                ];        
+        }
                 // Return the response as JSON
+                
                 $this->output->set_content_type('application/json')->set_output(json_encode($response));
+
+    
         }
 
         public function initiateWebLogout() {
@@ -205,7 +234,7 @@ class Login extends CI_Controller {
 
 
         public function initiateMobileLogin() {
-                
+
         }
 
 
@@ -256,20 +285,20 @@ class Login extends CI_Controller {
         //     }
 
 
-        function getAccountCategoryId($AccountAddress) {
-                $tbl_webaccounts = $this->login_Model->get_tbl_webaccounts_by_address($AccountAddress);
+        function getAccountsByAddress($AccountAddress) {
+                $tbl_webaccounts = $this->Login_Model->get_tbl_webaccounts_by_address($AccountAddress);
                 if ($tbl_webaccounts) {
-                        return $tbl_webaccounts->ActorCategory_Id;
+                        return $tbl_webaccounts;
                 }
                 
-                $tbl_usersaccount = $this->login_Model->get_tbl_usersaccount_by_address($AccountAddress);
+                $tbl_usersaccount = $this->Login_Model->get_tbl_usersaccount_by_address($AccountAddress);
                 if ($tbl_usersaccount){
-                        return $tbl_usersaccount->ActorCategory_Id;
+                        return $tbl_usersaccount;
                 }
 
-                $tbl_guardiansaccount = $this->login_Model->get_tbl_guardiansaccount_by_address($AccountAddress);
+                $tbl_guardiansaccount = $this->Login_Model->get_tbl_guardiansaccount_by_address($AccountAddress);
                 if ($tbl_guardiansaccount){
-                        return $tbl_guardiansaccount->ActorCategory_Id;
+                        return $tbl_guardiansaccount;
                 }
 
                 return FALSE;
@@ -277,7 +306,7 @@ class Login extends CI_Controller {
 
         function validateAuthToken($AccountAddress, $AuthToken) {
                 $tbl_authentications = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
-                if (trim($AuthToken) === trim($tbl_authentications->AuthToken)) {
+                if ($AuthToken === $tbl_authentications->AuthToken) {
                         return TRUE;
                 } else {
                         return FALSE;
@@ -288,9 +317,9 @@ class Login extends CI_Controller {
                 $tbl_authentications = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress);
                 if (
                         $tbl_authentications && 
-                        trim($IpAddress) === trim($tbl_authentications->IpAddress) &&
-                        trim($Device) === trim($tbl_authentications->Device) &&
-                        trim($Location) === trim($tbl_authentications->Location)
+                        $IpAddress === $tbl_authentications->IpAddress &&
+                        $Device === $tbl_authentications->Device &&
+                        $Location === $tbl_authentications->Location
                 ) {
                         return TRUE;
                 } else {
@@ -298,11 +327,39 @@ class Login extends CI_Controller {
                 }
         }
 
-        function validateNewClient($AccountAddress, $AuthToken) {
-
+        function validateAccountIfEnabled($AccountAddress) {
+                $result = $this->getAccountsByAddress($AccountAddress);
+                if ($result && $result->IsAccountActive === '1') {
+                        return  TRUE;
+                } else {
+                        return  FALSE;
+                }
         }
 
+        function validateAccountIfOnline($AccountAddress) {
+                $result = $this->getAccountsByAddress($AccountAddress);
+                if ($result && $result->IsAccountActive === 1) {
+                        return  TRUE;
+                } else {
+                        return  FALSE;
+                }
+        }
 
+        function validateIfNewAccountLogin($AccountAddress,$IpAddress,$Device,$Location) {
+                $result = $this->Authorization_Model->get_tbl_loginhistory_by_data($AccountAddress,$IpAddress,$Device,$Location);
+                if ($result) {
+                        return FALSE;
+                } else {
+                        return TRUE;
+                }
+        }
 
-        
+        function validateIfAccountHasPINCode($AccountAddress) {
+                $result = $this->getAccountsByAddress($AccountAddress);
+                if ($result && !($result->PinCode === null || $result->PinCode === '')){
+                        return TRUE;
+                } else {
+                        return FALSE;
+                }
+        }
 }
