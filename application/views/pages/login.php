@@ -11,7 +11,7 @@
                     <div class="line"></div>
                     <div class="text2">Caritas et Scientia</div>
                 </div>
-            </div>a
+            </div>
             <div class="right-header">
                 v1.2.3
             </div>
@@ -37,37 +37,12 @@
 
     <div class="form-background" style="display: none;">
         <div class="form-container">
-            <div>
-                
-                <div class="form-title">
-                   <p>Login Form</p> 
-                </div>
-                
-
-                <?php echo validation_errors(); ?>
-                <?php echo form_open('validateLogin'); ?>
-
-                <div class="input-container">
-                    <input type="text" name="bcash-username" value="<?php echo set_value('bcash-username'); ?>" required>
-                    <label>Username</label>
-                    <?php echo form_error('bcash-username'); ?>
-                </div>
-                <div class="input-container">
-                    <input type="password" name="bcash-password" required>
-                    <label>Password</label>
-                    <?php echo form_error('bcash-password'); ?>
-                </div>
-                <div class="button-container">
-                    <button class="btn-default curson-pointer" type="submit" name="bcash-login">Sign-In</button>
-                </div>
-                <?php echo form_close(); ?>
-
-
-                <div class="note">
-                    <a href=""><u>Forgot Password?</u></a>
-                </div>
-            </div>
+           
         </div>
+    </div>
+
+    <div id="redirect" style="display: none;">
+
     </div>
 
     <div id="Alert-Box-Container" class="Alert-container">

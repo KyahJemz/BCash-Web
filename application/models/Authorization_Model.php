@@ -3,7 +3,6 @@ class Authorization_Model extends CI_Model {
 
     public function __construct() {
         parent::__construct();
-        $this->load->database();
     }
 
     // WEB APPLICATION
@@ -133,6 +132,7 @@ class Authorization_Model extends CI_Model {
         $newAuthTokenCreationTime = $this->get_current_timestamp();
         $newAuthTokenExpirationTime = $this->get_current_timestamp_add($newAuthTokenCreationTime);
         $data = [
+            'Account_Address' => $AccountAddress,
             'AuthToken' => $newAuthToken,
             'AuthCreationTime' => $newAuthTokenCreationTime,
             'AuthExpirationTime' => $newAuthTokenExpirationTime,
@@ -145,7 +145,7 @@ class Authorization_Model extends CI_Model {
             $this->db->where('Account_Address', $AccountAddress);
             $this->db->update('tbl_authentications', $data);
         } elseif ($type === "new") { // Insert a new record
-            $this->db->insert('table_name', $data);
+            $this->db->insert('tbl_authentications', $data);
         }
         return TRUE;
     }

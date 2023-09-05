@@ -168,8 +168,6 @@ function changeForm(value) {
 
 
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     bindEventListeners();
     changeForm("user-verification");

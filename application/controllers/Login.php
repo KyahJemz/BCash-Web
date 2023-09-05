@@ -37,9 +37,11 @@ class Login extends CI_Controller {
 
                 echo '
                 <script>
-                    var IpAddress = ' . json_encode($data['IpAddress']) . ';
-                    var Device = ' . json_encode($data['Device']) . ';
-                    var Location = ' . json_encode($data['Location']) . ';
+                        const IpAddress = ' . json_encode($data['IpAddress']) . ';
+                        const Device = ' . json_encode($data['Device']) . ';
+                        const Location = ' . json_encode($data['Location']) . ';
+                        var AccountAddress = "";
+                        var AuthToken = "";
                 </script>
             ';
         }
