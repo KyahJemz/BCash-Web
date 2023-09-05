@@ -1,10 +1,10 @@
 <?php
 
-class Merchant extends CI_Controller {
+class MerchantStaff extends CI_Controller {
 
-        public function index($page = 'merchant')
+        public function index($page = 'merchantstaff')
         {
-                $config['base_url'] = 'http://localhost/';
+                $config['base_url'] = 'http://localhost/index.php/';
 
                 if ( ! file_exists(APPPATH.'views/pages/'.$page.'.php'))
                 {
@@ -13,9 +13,7 @@ class Merchant extends CI_Controller {
 
                 $data['title'] = ucfirst($page); // Capitalize the first letter
 
-                $this->load->view('templates/merchant_header', $data);
                 $this->load->view('pages/'.$page, $data);
-                $this->load->view('templates/merchant_footer', $data);
         
         }
 }

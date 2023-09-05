@@ -1,13 +1,15 @@
-import Transactions from './modules/transactions.js';
-import Orders from './modules/order.js';
-import Items from './modules/items.js';
-import Notifications from './modules/notifications.js';
-import { createAlert } from './modules/alerts.js';
-import Modals from './modules/modals.js';
-import Menu from './modules/menu.js';
-import Dropdown from './modules/dropdown.js';
+header("Access-Control-Allow-Origin: http://localhost");
 
-import Helper from './helper.js';
+import Transactions from './public/modules/transactions.js';
+import Orders from './public/modules/order.js';
+import Items from './public/modules/items.js';
+import Notifications from './public/modules/notifications.js';
+import { createAlert } from './public/modules/alerts.js';
+import Modals from './public/modules/modals.js';
+import Menu from './public/modules/menu.js';
+import Dropdown from './public/modules/dropdown.js';
+
+import Helper from './public/helper.js';
 
 ////////////////////////////
 // VARIABLES

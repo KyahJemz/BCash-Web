@@ -31,9 +31,7 @@ class Login extends CI_Controller {
                 $data['Device'] = $Device;
                 $data['Location'] = "Unknown";
 
-                $this->load->view('templates/login_header', $data);
                 $this->load->view('pages/'.$page, $data);
-                $this->load->view('templates/login_footer', $data);
 
                 echo '
                 <script>

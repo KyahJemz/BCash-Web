@@ -27,6 +27,8 @@ function sendRequest(data,url) {
     });
 }
 
+
+
 function bindEventListeners() {
     const signinButton = document.querySelector(".signin-btn");
     const formBackground = document.querySelector(".form-background");
@@ -47,9 +49,28 @@ function bindEventListeners() {
     document.addEventListener("click", function (event) {
         if (event.target !== formContainer && event.target !== signinButton) {
             formBackground.style.display = "none";
+            if (AuthToken === "" || AccountAddress === "") {
+                console.log("CLEAR");
+            } else {
+                console.log("LOGOUT");
+                logout();
+                Intent = "Web Login";
+                changeForm(Intent);
+                AccountAddress = "";
+                AuthToken = "";
+
+            }
         }
     });
   }
+
+
+
+
+
+
+
+
   
   function reBindEventListeners() {
       const signinButton = document.querySelector(".signin-btn");
@@ -63,14 +84,14 @@ function bindEventListeners() {
       document.addEventListener("click", function (event) {
           if (event.target !== formContainer && event.target !== signinButton) {
               formBackground.style.display = "none";
-              console.log("OFF");
-              if (AuthToken === "" || AccountAddress === "") {
-                
-              } else {
-                logout();
-              }
+              Intent = "Web Login";
+              changeForm(Intent);
           }
       });
+
+      document.querySelector('.validate').addEventListener("click", function () {
+        validate ();
+    });
   }
   
   function changeForm(value) {
@@ -260,13 +281,9 @@ function bindEventListeners() {
         }
         document.querySelector('.ResponseMessage').innerHTML = ResponseMessage;
 
-        document.querySelector('.validate').addEventListener("click", function () {
-            validate ();
-        });
-
         if (Intent === "1"){
             console.log("ADMIN");
-            const target = 'merchant';
+            const target = 'merchantstaff';
             document.getElementById('redirect').innerHTML = `
                 <form id="redirectForm" action="`+baseUrl+`/`+target+`" method="post">
                 <input type="hidden" name="AuthToken" value="`+AuthToken+`">
@@ -298,14 +315,6 @@ function logout(){
     sendRequest(data,url)
     .then(responseData => {
         console.log('Response Data:', responseData);
-        console.log(responseData.Traget);
-        Intent = responseData.Target;
-
-        if (responseData.Success === 'true'){
-            AccountAddress = "";
-            AuthToken = "";
-        }
-
      })
     .catch(error => {
         console.error('Request Error:', error);
@@ -317,10 +326,6 @@ document.addEventListener("DOMContentLoaded", function () {
     bindEventListeners();
     changeForm("Web Login");
     validate ();
+
+    
 });
-
-
-
-
-
-

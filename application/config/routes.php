@@ -51,16 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route['default_controller'] = 'login/index';
-$route['login'] = 'login/index';
-
-$route['test'] = 'api/test/index';
-
-
-$route['validateLogin'] = 'login/validateLogin';
+$route[''] = 'login/index';
 
 $route['Administrator'] = 'Administrator/index';
 $route['Accounting'] = 'Accounting/index';
 $route['MerchantAdmin'] = 'MerchantAdmin/index';
-$route['Merchant'] = 'Merchant/index';
+$route['MerchantStaff'] = 'MerchantStaff/index';
 
 
