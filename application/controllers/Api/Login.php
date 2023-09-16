@@ -4,37 +4,56 @@ class Login extends CI_Controller {
 
         public function __construct() {
                 parent::__construct();
-                $this->load->model(['Login_Model', 'Authorization_Model','Authentication_Model']);
+                $this->load->model([
+                        'Functions_Model',
+                        'WebAccounts_Model',
+                        'UsersAccount_Model',
+                        'GuardianAccount_Model',
+                        'Authentications_Model',
+                        'LoginHistory_Model',
+                        'Configurations_Model' 
+                ]);
                 $this->load->helper('string');
                 $this->load->library(['form_validation']);
                 $this->load->database();
         }
 
-
         public function AuthenticateLogin() {
 
-                $AuthorizationTokenHeader = $this->Authentication_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
-                $AccountAddressHeader = $this->Authentication_Model->sanitize($this->input->get_request_header('AccountAddress', TRUE));
-                $IntentHeader = $this->Authentication_Model->sanitize($this->input->get_request_header('Intent', TRUE));
+                $AuthorizationTokenHeader = $this->Functions_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
+                $AccountAddressHeader = $this->Functions_Model->sanitize($this->input->get_request_header('AccountAddress', TRUE));
+                $ClientVersionHeader = $this->Functions_Model->sanitize($this->input->get_request_header('ClientVersion', TRUE));
+                $IntentHeader = $this->Functions_Model->sanitize($this->input->get_request_header('Intent', TRUE));
 
                 $requestPostBody = $this->input->raw_input_stream; // READ POST BODY
                 $requestPostBody = json_decode($requestPostBody, TRUE); // DECODES
 
+                $IsMaintenance = $this->Configurations_Model->IsMaintenance()[0];
+                if ($IsMaintenance[0]) {
+                        $response = [
+                                'Success' => FALSE,
+                                'Target' => 'WebLogin',
+                                'Parameters' => null,
+                                'Message' => $IsMaintenance[1]
+                        ];
+                        return $response;
+                }
+
                 if (!(is_array($requestPostBody))) {
                         $response = [
                                 'Success' => FALSE,
-                                'Target' => null,
+                                'Target' => 'WebLogin',
                                 'Parameters' => null,
                                 'Message' => 'Failed, Reason: Invalid HTTPS Body parameters!'
                         ];  
                 }  else {
 
                         if ($IntentHeader === "Web Login") {
-                                $response = $this->WebLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader);
+                                $response = $this->WebLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader);
                         } else if ($IntentHeader === "User Login") {
-                                $response = $this->UserLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader);
+                                $response = $this->UserLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader);
                         } else if ($IntentHeader === "Parent Login") {
-                                $response = $this->ParentLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader);
+                                $response = $this->ParentLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader);
                         } else if ($IntentHeader === "OTP Validation") {
                                 $response = $this->OTPValidation($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader);
                         } else if ($IntentHeader === "PIN Validation") {
@@ -46,7 +65,7 @@ class Login extends CI_Controller {
                         } else {
                                 $response = [
                                         'Success' => FALSE,
-                                        'Target' => null,
+                                        'Target' => 'WebLogin',
                                         'Parameters' => null,
                                         'Message' => ''
                                 ];   
@@ -56,7 +75,19 @@ class Login extends CI_Controller {
                 $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }
 
-        function WebLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader){
+        function WebLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader){
+
+                $Version = $this->Configurations_Model->ValidateWebVersion($ClientVersionHeader);
+                if (!($Version[0])){
+                        $response = [
+                                'Success' => FALSE,
+                                'Target' => 'WebLogin',
+                                'Parameters' => null,
+                                'Message' => $Version[1]
+                        ];   
+                        return $response;
+                }
+
                 $this->form_validation->set_data($requestPostBody);
                 
                 $this->form_validation->set_rules('Username', 'Username', 'trim|required|alpha_numeric');
@@ -82,10 +113,10 @@ class Login extends CI_Controller {
                                         'Success' => FALSE,
                                         'Target' => 'Web Login',
                                         'Parameters' => null,
-                                        'Message' => 'Failed, Reason: The provided parameters does not meet the validation requirements. [' . $validationErrors .']'
+                                        'Message' => 'Failed, Reason: '. $validationErrors .'.'
                                 ];
                         } else {
-                                $validAccount = $this->Login_Model->get_tbl_webaccounts_by_username($validatedUsername);
+                                $validAccount = $this->WebAccounts_Model->read_by_username($validatedUsername);
                         
                                 if ($validAccount) {
                                         if (password_verify($validatedPassword,$validAccount->Password)) {
@@ -115,7 +146,20 @@ class Login extends CI_Controller {
                 return $response;
         }
 
-        function UserLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader){
+        function UserLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader){
+
+                $Version = $this->Configurations_Model->ValidateMobileVersion($ClientVersionHeader);
+                if (!($Version[0])){
+                        $response = [
+                                'Success' => FALSE,
+                                'Target' => 'WebLogin',
+                                'Parameters' => null,
+                                'Message' => $Version[1]
+                        ];   
+                        return $response;
+                }
+
+
                 // $this->form_validation->set_data($requestPostBody);
                 
                 // $this->form_validation->set_rules('Email', 'Email', 'trim|required');
@@ -174,7 +218,18 @@ class Login extends CI_Controller {
                 // return $response;
         }
 
-        function ParentLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader){
+        function ParentLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader, $ClientVersionHeader){
+                
+                $Version = $this->Configurations_Model->ValidateMobileVersion($ClientVersionHeader);
+                if (!($Version[0])){
+                        $response = [
+                                'Success' => FALSE,
+                                'Target' => 'WebLogin',
+                                'Parameters' => null,
+                                'Message' => $Version[1]
+                        ];   
+                        return $response;
+                }
 
                 // return $response;
         }
@@ -194,8 +249,8 @@ class Login extends CI_Controller {
 
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
 
-                        if ($this->Authentication_Model->validateOTP($AccountAddressHeader, $validatedOTP)) {
-                                $this->Authorization_Model->setLoginHistory($AccountAddressHeader,$validatedIpAddress,$validatedDevice,$validatedLocation);
+                        if ($this->Functions_Model->validateOTP($AccountAddressHeader, $validatedOTP)) {
+                                $this->Authentications_Model->create($AccountAddressHeader,$validatedIpAddress,$validatedLocation,$validatedDevice);
                                 $response = $this->verification($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
                         } else {
                                 $response = [
@@ -231,8 +286,8 @@ class Login extends CI_Controller {
 
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
 
-                        if ($this->Authentication_Model->validatePIN($AccountAddressHeader, $validatedPIN)) {
-                                $this->Authorization_Model->updateLoginHistory($AccountAddressHeader,$validatedIpAddress,$validatedDevice,$validatedLocation);
+                        if ($this->Functions_Model->validatePIN($AccountAddressHeader, $validatedPIN)) {
+                                $this->Authentications_Model->update($AccountAddressHeader,$validatedIpAddress,$validatedLocation, $validatedDevice);
                                 $response = $this->verification($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation, $validatedPIN);
                         } else {
                                 $response = [
@@ -268,8 +323,8 @@ class Login extends CI_Controller {
 
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
 
-                        if ($this->Authentication_Model->validateNewPIN($AccountAddressHeader)) {
-                                $this->Authentication_Model->updatePIN($AccountAddressHeader,$validatedNewPIN);
+                        if ($this->Functions_Model->validateNewPIN($AccountAddressHeader)) {
+                                $this->Functions_Model->updatePIN($AccountAddressHeader,$validatedNewPIN);
                                 $response = $this->verification($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
                         } else {
                                 $response = [
@@ -290,10 +345,11 @@ class Login extends CI_Controller {
                 return $response;
         }
 
+        //// FOR REVIEW
         function accountLogout($AuthorizationTokenHeader,$AccountAddressHeader){
  
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
-                        if ($this->Authentication_Model->validateAuthToken($AccountAddressHeader,$AuthorizationTokenHeader)) {
+                        if ($this->Functions_Model->validateAuthToken($AccountAddressHeader,$AuthorizationTokenHeader)) {
                                 $this->Authorization_Model->setLogout($AccountAddressHeader);
                                 $response = [
                                         'Success' => TRUE,
@@ -321,8 +377,9 @@ class Login extends CI_Controller {
                 return $response;
         }
 
+
         function verification($AccountAddress, $AuthToken, $validatedIpAddress, $validatedDevice, $validatedLocation, $validatedPin){
-                $account = $this->Authentication_Model->getAccountsByAddress($AccountAddress);
+                $account = $this->Functions_Model->getAccountsByAddress($AccountAddress);
 
                 if (!(is_object($account) && property_exists($account, 'ActorCategory_Id'))) {
                         $response = [
@@ -334,7 +391,7 @@ class Login extends CI_Controller {
                 } else {
 
                         $Actor = $account->ActorCategory_Id;
-                        if (!($this->Authentication_Model->validateAccountIfEnabled($AccountAddress))){
+                        if (!($this->Functions_Model->validateAccountIfEnabled($AccountAddress))){
                                 $response = [
                                         'Success' => FALSE,
                                         'Target' => 'Web Login',
@@ -342,12 +399,12 @@ class Login extends CI_Controller {
                                         'Message' => 'Failed, Reason: Access to this account is blocked!'
                                 ];
                         } else {
-                                if ($this->Authentication_Model->validateAccountIfOnline($AccountAddress)) {
+                                if ($this->Functions_Model->validateAccountIfOnline($AccountAddress)) {
 
-                                        if ($this->Authentication_Model->validateClient($AccountAddress, $AuthToken, $validatedIpAddress, $validatedDevice, $validatedLocation)) {
+                                        if ($this->Functions_Model->validateClient($AccountAddress, $AuthToken, $validatedIpAddress, $validatedDevice, $validatedLocation)) {
 
-                                                if ($this->Authentication_Model->generateNewAuth($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)){
-                                                        $AuthToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress)->AuthToken;
+                                                if ($this->Functions_Model->generateNewAuth($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)){
+                                                        $AuthToken = $this->Authentications_Model->read_by_address($AccountAddress)->AuthToken;
 
                                                         $parameters = [
                                                                 'AccountAddress' => $AccountAddress,
@@ -379,11 +436,11 @@ class Login extends CI_Controller {
                                                 ];
                                         }        
                                 } else {
-                                        if ($this->Authentication_Model->generateNewAuth($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)){
-                                                $AuthToken = $this->Authorization_Model->get_tbl_authentications_by_address($AccountAddress)->AuthToken;
+                                        if ($this->Functions_Model->generateNewAuth($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)){
+                                                $AuthToken = $this->Authentications_Model->read_by_address($AccountAddress)->AuthToken;
 
-                                                if ($this->Authentication_Model->validateIfNewAccountLogin($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)) {
-                                                        $this->Authentication_Model->generateOTP($AccountAddress);
+                                                if ($this->Functions_Model->validateIfNewAccountLogin($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)) {
+                                                        $this->Functions_Model->generateOTP($AccountAddress);
                                                         $parameters = [
                                                                 'AccountAddress' => $AccountAddress,
                                                                 'AuthorizationToken' => $AuthToken,
@@ -398,9 +455,9 @@ class Login extends CI_Controller {
 
                                                         // check also if blocked
                                                 } else {
-                                                        if ($this->Authentication_Model->validateIfAccountHasPINCode($AccountAddress)) {
+                                                        if ($this->Functions_Model->validateIfAccountHasPINCode($AccountAddress)) {
                                                                 if (!empty($validatedPin)){
-                                                                        if ($this->Authentication_Model->validatePIN($AccountAddress, $validatedPin)) {
+                                                                        if ($this->Functions_Model->validatePIN($AccountAddress, $validatedPin)) {
                                                                                 $parameters = [
                                                                                         'AccountAddress' => $AccountAddress,
                                                                                         'AuthorizationToken' => $AuthToken,

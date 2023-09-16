@@ -1,75 +1,209 @@
 
+
+
 .panel-home-content {
-    overflow-y: scroll;
     width: 100%;
-    height: max-content;
-    padding: 16px;
+    padding: 10px;
+    padding-right: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.panel-home-content .header p {
+    font-size: large;
+}
+
+.panel-home-content .charts-container-row1 {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 50px repeat(2,150px) 300px;
-    grid-column-gap: 16px;
-    grid-row-gap: 16px;
-    }
+    grid-template-columns: repeat(4, 1fr); 
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
 
-    .panel-home-content .grid-cell {
-        padding: 10px;
-        border-radius: 10px;
-        background-color: var(--color-DarkWhite);
-    }
+.panel-home-content .charts-container-row1 .chart-header {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-    .panel-home-content .header { 
-        grid-area: 1 / 1 / 2 / 4;
-        background-color: white;
-    }
-    .panel-home-content .sales-graph { 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        grid-area: 2 / 1 / 4 / 3;
-        text-align: center;
-    }
-    .panel-home-content .confirmed-orders { 
-        grid-area: 2 / 3 / 3 / 4;
-        text-align: center;
-    }
-    .panel-home-content .confirmed-sales { 
-        grid-area: 3 / 3 / 4 / 4;
-        text-align: center;
-    }
-    .panel-home-content .orders-by-items-graph { 
-        grid-area: 4 / 1 / 5 / 2;
-        text-align: center;
-    }
-    .panel-home-content .orders-by-category-graph { 
-        grid-area: 4 / 2 / 5 / 3;
-        text-align: center;
-    }
-    .panel-home-content .latest-transaactions { 
-        grid-area: 4 / 3 / 5 / 4;
-        text-align: center;
-    }
+.panel-home-content .charts-container-row1 .chart-header .chart-title{ 
+    color: brown;
+    font-size: small;
+}
+
+.panel-home-content .charts-container-row1 .chart-header .chart-number { 
+    color: black;
+    font-size: x-large;
+}
+
+.panel-home-content .charts-container-row1 .chart-header .chart-value { 
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.panel-home-content .charts-container-row1 .chart-header .chart-value .chart-status {
+    display: flex;
+}
+
+.panel-home-content .charts-container-row1 .chart-header .chart-value .chart-status .chart-red {
+    color: red;
+}
+
+.panel-home-content .charts-container-row1 .chart-header .chart-value .chart-status .chart-green {
+    color: green;
+}
+
+.panel-home-content .charts-container-row1 .chart-header .chart-value .chart-status .chart-status-number {
+    font-size: small;
+}
+
+.panel-home-content .charts-container-row1 .chart-header .chart-value .chart-status .chart-status-image {
+    aspect-ratio: 1/1;
+    height: 15px;
+    width: 15px;
+    background-color: rebeccapurple;
+}
+
+.panel-home-content .charts-container-row1 .chart-mini {
+    height: 50%;
+    width: 100%;
+}
+
+.panel-home-content canvas{
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.panel-home-content .charts-container-row1 .chart-item {
+    border: 1px solid gainsboro;
+    padding: 20px;
+    border-radius: 5px;
+
+}
+
+.panel-home-content .charts-container-row2 {
+    display: grid;
+    grid-template-columns: 70fr 30fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+
+.panel-home-content .charts-container-row2 .chart-item{
+    border: 1px solid gainsboro;
+    padding: 20px;
+    border-radius: 5px;
+    height: max-content;
+}
+
+.panel-home-content .charts-container-row3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+.panel-home-content .charts-container-row3 .chart-item {
+    border: 1px solid gainsboro;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.panel-home-content .charts-container-row3 .chart-item .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.panel-home-content .charts-container-row3 .chart-item .title {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+.panel-home-content .charts-container-row3 .chart-item .date {
+    font-size: smaller;
+}
+
+.panel-home-content .charts-container-row3 .chart-item ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.panel-home-content .charts-container-row3 .chart-item ul li {
+    padding: 10px;
+    padding-left: 15px;
+    border-top: 1px solid gainsboro;
+    align-items: center;
+    display: grid;
+}
+
+.panel-home-content .charts-container-row3 .chart-8 ul li,
+.panel-home-content .charts-container-row3 .chart-7 ul li {
+    grid-template-columns: 50px auto 50px;
+}
+
+.panel-home-content .charts-container-row3 .chart-9 ul li {
+    grid-template-columns: 50px auto;
+}
+
+.panel-home-content .charts-container-row3 .chart-item ul li img {
+    height: 40px;
+    width: 40px;
+    border: 1px solid gainsboro;
+    border-radius: 50%;
+}
+
+.panel-home-content .charts-container-row3 .chart-item ul li .name {
+    font-weight: bold;
+}
+
+.panel-home-content .charts-container-row3 .chart-item ul li .date {
     
+}
 
-    .panel-home-content canvas {
-    aspect-ratio: auto;
-    overflow: hidden;
+.panel-home-content .charts-container-row3 .chart-item ul li .amount {
+    
+}
+
+.panel-home-content .charts-container-row3 .chart-item ul li .type {
+    
 }
 
 
 
-@media (min-width: 0px) and (max-width: 768px) {
-    /* Styles for phones */
 
-    
-  }
-  
-  
-  @media (min-width: 769px) and (max-width: 1024px) {
-    /* Styles for laptops */
+@media (min-width: 0px) and (max-width: 1107px){
+    .panel-home-content .charts-container-row1{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .panel-home-content .charts-container-row2{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .panel-home-content .charts-container-row3{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-  }
-  
-  @media (min-width: 1025px) {
-    /* Styles for wide screens */
-  
-  }
+@media (min-width: 0px) and (max-width: 928px){
+    .panel-home-content .charts-container-row3{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 0px) and (max-width: 689px){
+    .panel-home-content .charts-container-row1{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+

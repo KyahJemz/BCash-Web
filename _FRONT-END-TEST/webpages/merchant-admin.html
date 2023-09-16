@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../styles/merchant/createorder.css">
     <link rel="stylesheet" href="../styles/merchant/transactions.css">
     <link rel="stylesheet" href="../styles/merchant/accounts.css">
+    <link rel="stylesheet" href="../styles/merchant/fundremittance.css">
 </head>
 
 <body>
@@ -123,33 +124,276 @@
     -->
                 <div id="panel-home" class="body-content-panel visible">
                     <div class="panel-home-content">
-                        <div class="grid-cell header">
-                            <p>Welcome Back!</p>
-                            <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
+                        <div class="header">
+                            <p>Welcome to Dashboard</p>
                         </div>
-                        <div class="grid-cell sales-graph">
-                            <p>Sales Graph</p>
-                            <canvas id="graph-daily"></canvas>
+                        <div class="charts-container-row1">
+                            <div class="chart-item">
+                                <!-- Total Cash In Today / Total Amount -->
+                                <div class="chart-header">
+                                    <p class="chart-title">Total cash-in today</p>
+                                    <div class="chart-value">
+                                        <p class="chart-number">P100.00</p>
+                                        <div class="chart-status">
+                                            <p class="chart-status-number">150%</p>
+                                            <img class="chart-status-image" src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="chart-total-cash-in" class="chart-mini">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-item">
+                                <!-- Total Orders In Merchants  -->
+                                <div class="chart-header">
+                                    <p class="chart-title">Total orders in merchants</p>
+                                    <div class="chart-value">
+                                        <p class="chart-number">P100.00</p>
+                                        <div class="chart-status">
+                                            <p class="chart-status-number">150%</p>
+                                            <img class="chart-status-image" src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="chart-total-orders-merchants" class="chart-mini">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-item">
+                                <!-- Total Total Sales In Merchants -->
+                                <div class="chart-header">
+                                    <p class="chart-title">Total Sales in merchants</p>
+                                    <div class="chart-value">
+                                        <p class="chart-number">P100.00</p>
+                                        <div class="chart-status">
+                                            <p class="chart-status-number">150%</p>
+                                            <img class="chart-status-image" src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="chart-total-sales-merchants" class="chart-mini">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-item">
+                                <!-- Total Transactions Today -->
+                                <div class="chart-header">
+                                    <p class="chart-title">Total transactions today</p>
+                                    <div class="chart-value">
+                                        <p class="chart-number">P100.00</p>
+                                        <div class="chart-status">
+                                            <p class="chart-status-number">150%</p>
+                                            <img class="chart-status-image" src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="chart-total-transactions-today" class="chart-mini">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
                         </div>
-                        <div class="grid-cell confirmed-orders">
-                            <p>53</p>
-                            <p>Orders</p>
+
+                        <div class="charts-container-row2">
+                            <div class="chart-5 chart-item">
+                                <!-- Total Transactions Today -->
+                                <div class="chart-header">
+                                    <p class="chart-title">Daily Transactions Line Graph</p>
+                                    <p class="chart-description">fhjuhfu sfjha hafewf a dfwef awfwa agn agag ag nag  </p>
+                                    <div class="chart-value">
+                                        <div class="chart-value-1">
+                                            <p class="chart-value-1-number"></p>
+                                            <p class="chart-value-1-title"></p>
+                                        </div>
+                                        <div class="chart-value-2">
+                                            <p class="chart-value-2-number"></p>
+                                            <p class="chart-value-2-title"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="chart-cashin-total-history" class="">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+
+                            <div class="chart-6 chart-item">
+                                <!-- Total Transactions Today -->
+                                <div class="chart-header">
+                                    <p class="chart-title">Circulating Money</p>
+                                    <p class="chart-description">eithed dfmk sdfe sfesf </p>
+                                </div>
+                                <div id="chart-money-in-circulation" class="">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
                         </div>
-                        <div class="grid-cell confirmed-sales">
-                            <p>123,230.00</p>
-                            <p>Sales</p>
+
+                        <div class="charts-container-row3">
+                            <div class="chart-7 chart-item">
+                                <!-- Recent Transactions -->
+                                <div class="header">
+                                    <p class="title">Recent Transactions</p>
+                                    <p class="date">Last Update: 12:98AM</p>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="chart-8 chart-item">
+                                <div class="header">
+                                    <p class="title">Recent Cash-In</p>
+                                    <p class="date">Last Update: 12:98AM</p>
+                                </div>
+                                <!-- Recent Cash In -->
+                                <ul>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                        <div>
+                                            <p class="amount">amount</p>
+                                            <p class="type">type</p>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="chart-9 chart-item">
+                                <div class="header">
+                                    <p class="title">Recent Activities</p>
+                                    <p class="date">Last Update: 12:98AM</p>
+                                </div>
+                                <!-- Recent Activities -->
+                                <ul>
+                                    
+                                    <li>
+                                        <img src="" alt="" >
+                                        <div>
+                                            <p class="name">name</p>
+                                            <p class="date">date</p>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
                         </div>
-                        <div class="grid-cell orders-by-items-graph">
-                            <p>Orders by Items</p>
-                            <canvas id="graph-order-by-items"></canvas>
-                        </div>
-                        <div class="grid-cell orders-by-category-graph">
-                            <p>Sales by Category</p>
-                            <canvas id="graph-sales-by-category"></canvas>
-                        </div>
-                        <div class="grid-cell latest-transaactions">
-                            <p>Recent Transactons</p>
-                        </div>
+
+                       <!--
+                    
+
+
+                        Total Cash In Today / Total Amount
+                        Total Orders In Merchants
+                        Total Total Sales In Merhcants
+                        Total Transactions Today
+
+                        Mpney in Circulation
+                            Hold By Users
+                            Hold By Merchants   
+
+                        graph of sales every day Cash ins               
+                       -->
                     </div>
                 </div>
 
@@ -528,7 +772,70 @@
     -->
                 <div id="panel-fundremittance" class="body-content-panel hidden">
                     <div class="panel-fundremittance-content">
-                    
+                        <div class="left-panel">
+                            <div class="top-panel">
+                                <div class="row">
+                                    <div class="flex"> 
+                                        <p>Date: </p>
+                                        <input type="date" name="" id="date-picker" value="">
+                                        <input type="text" name="" id="date-text" value="" disabled>
+                                    </div>
+                                    <div>
+                                        <button>Export as File</button>
+                                        <button>Submit to Accounting</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    Remarks:<input type="text" name="" id="date-text" value="">
+                                </div>
+                                <div class="row">
+                                    <div>Total Orders: 250</div>
+                                    <div>Total Sales: 250</div>
+                                </div>
+                            </div>
+                            <div class="bottom-panel">
+                                <div class="table-container">
+                                    <div class="table-header">
+                                        <div class="table-row">
+                                            <div>#</div>
+                                            <div>Transaction#</div>
+                                            <div>Status</div>
+                                            <div>Amount</div>
+                                        </div>
+                                    </div>
+                                    <div class="table-content">
+                                        <div class="table-row">
+                                            <div>1</div>
+                                            <div>14235235252erwr3</div>
+                                            <div>Completed</div>
+                                            <div>123,556</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-panel">
+                            <div class="header">Recent Remitances</div>
+                            <div class="table-container">
+                                <div class="table-header">
+                                    <div class="table-row">
+                                        <div>#</div>
+                                        <div>Date</div>
+                                        <div>Status</div>
+                                        <div>Amount</div>
+                                    </div>
+                                </div>
+                                <div class="table-content">
+                                    <div class="table-row">
+                                        <div class="num">12</div>
+                                        <div>September 16, 2023</div>
+                                        <div>Completed</div>
+                                        <div>123,556</div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
