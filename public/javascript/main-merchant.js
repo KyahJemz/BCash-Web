@@ -1,15 +1,13 @@
-header("Access-Control-Allow-Origin: http://localhost");
+import Transactions from './modules/transactions.js';
+import Orders from './modules/order.js';
+import Items from './modules/items.js';
+import Notifications from './modules/notifications.js';
+import { createAlert } from './modules/alerts.js';
+import Modals from './modules/modals.js';
+import Menu from './modules/menu.js';
+import Dropdown from './modules/dropdown.js';
 
-import Transactions from './public/modules/transactions.js';
-import Orders from './public/modules/order.js';
-import Items from './public/modules/items.js';
-import Notifications from './public/modules/notifications.js';
-import { createAlert } from './public/modules/alerts.js';
-import Modals from './public/modules/modals.js';
-import Menu from './public/modules/menu.js';
-import Dropdown from './public/modules/dropdown.js';
-
-import Helper from './public/helper.js';
+import Helper from './helper.js';
 
 ////////////////////////////
 // VARIABLES
@@ -66,16 +64,16 @@ export function makeModal(type, title, content){
   modals.activateModal(type, title, content);
 }
 
-myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../images/items/1.png")
-myItems.registerItem("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../images/items/2.png");
-myItems.registerItem("3","Margherita Pizza","180","Pizza","2023-06-29","2023-06-29", "../images/items/3.png");
-myItems.registerItem("4","Vegetable Curry with Naan Bread","130","Food","2023-06-29","2023-06-29", "../images/items/4.png");
-myItems.registerItem("5","BBQ Pulled Pork Burger","140","Food","2023-06-29","2023-06-29", "../images/items/5.png");
-myItems.registerItem("6","Fish Tacos with Salsa","160","Food","2023-06-29","2023-06-29", "../images/items/6.png");
-myItems.registerItem("7","Iced Caramel Macchiato","110","Drink","2023-06-29","2023-06-29", "../images/items/7.png");
-myItems.registerItem("8","Strawberry Banana Smoothie","90","Drink","2023-06-29","2023-06-29", "../images/items/8.png");
-myItems.registerItem("9","Chocolate Chip Ice Cream","70","Disert","2023-06-29","2023-06-29", "../images/items/9.png");
-myItems.registerItem("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-06-29", "../images/items/10.png");
+myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png")
+myItems.registerItem("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../public/images/items/2.png");
+myItems.registerItem("3","Margherita Pizza","180","Pizza","2023-06-29","2023-06-29", "../public/images/items/3.png");
+myItems.registerItem("4","Vegetable Curry with Naan Bread","130","Food","2023-06-29","2023-06-29", "../public/images/items/4.png");
+myItems.registerItem("5","BBQ Pulled Pork Burger","140","Food","2023-06-29","2023-06-29", "../public/images/items/5.png");
+myItems.registerItem("6","Fish Tacos with Salsa","160","Food","2023-06-29","2023-06-29", "../public/images/items/6.png");
+myItems.registerItem("7","Iced Caramel Macchiato","110","Drink","2023-06-29","2023-06-29", "../public/images/items/7.png");
+myItems.registerItem("8","Strawberry Banana Smoothie","90","Drink","2023-06-29","2023-06-29", "../public/images/items/8.png");
+myItems.registerItem("9","Chocolate Chip Ice Cream","70","Disert","2023-06-29","2023-06-29", "../public/images/items/9.png");
+myItems.registerItem("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-06-29", "../public/images/items/10.png");
 
 //console.log(myItems.getItemsArray());
 
@@ -232,7 +230,7 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
       document.getElementById("menu-visibility-button").style.transform = "rotate(180deg)";
     } else {
       sidebar.style.width = "0px";
-      sidebar.style.minWidth = "0px";
+      sidebar.style.minWidth = "0px";f
       document.getElementById("menu-visibility-button").style.transform = "rotate(0deg)";
     }
 });

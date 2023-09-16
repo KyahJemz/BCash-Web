@@ -5,19 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCash - Merchant Staff</title>
-
+    <title>BCash - Merchant</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="<?php echo base_url('./public/css/styles.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/dialog-box.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/menu.css'); ?>">
 
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/home.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/itemmanagement.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/createorder.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/transactions.css'); ?>">
-    
 </head>
 
+
 <body>
+
+
     <div class="design-background"></div>
+    
 <!--
     SIDEBAR
 -->  
@@ -31,40 +36,35 @@
                 <div class="fullname">Juan Dela Cruz</div>
             </div>
             <div class="button-container">
-                <button type="button" class="curson-pointer" title="Notifications"><img src="<?php echo base_url('./public/images/icons/add-yellow.png'); ?>" alt="notification-icon"></button>
-                <button type="button" class="curson-pointer" title="Settings"><img src="<?php echo base_url('./public/images/icons/add-yellow.png'); ?>" alt="settings-icon"></button>
+                <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="../images/icons/notification-yellow.png" alt="notification-icon"></button>
+                <button id="menu-settings-button" type="button" class="curson-pointer" title="Settings"><img src="../images/icons/settings-yellow.png" alt="settings-icon"></button>
             </div>
         </div>
         <div class="bottom-panel">
             <div class="pattern"></div>
             <nav class="menu">
                 <ul>
-                    <li id="Home" class="curson-pointer menu-tab menu-selected menuSelectionButton">
-                        <div class="selctd"></div>
+                    <li data-menu="Home" class="curson-pointer menu-selected menuSelectionButton">
+                        <div class="selected"></div>
                         <img src="<?php echo base_url('./public/images/icons/home.png'); ?>" alt="Home Icon">
                         <p>Home</p>
                     </li>
-                    <li id="MyOrders" class="curson-pointer menu-tab menuSelectionButton">
+                    <li data-menu="My Orders" class="curson-pointer menuSelectionButton menuSelectionDropdownButton">
                         <img src="<?php echo base_url('./public/images/icons/order.png'); ?>" alt="My Orders Icon">
                         <p>My Orders</p>
                         <img id="sidebar-bottom-menu-myorders-more" class="more" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="More Icon">
                     </li>
-                    <li id="sidebar-bottom-menu-myorders-subitems">
+                    <li class="menuSelectionDropdownItems">
                         <ul>
-                            <li id="CreateOrder" class="curson-pointer menu-tab menuSelectionButton">
-                                <div class="selctd"></div>
+                            <li data-menu="Create Order" class="curson-pointer menuSelectionButton">
+                                <div class="selected"></div>
                                 <p>Create Order</p>
                             </li>
-                            <li id="Transactions" class="curson-pointer menu-tab menuSelectionButton">
-                                <div class="selctd"></div>
+                            <li data-menu="Transactions" class="curson-pointer menuSelectionButton">
+                                <div class="selected"></div>
                                 <p>Transactions</p>
                             </li>
                         </ul>
-                    </li>
-                    <li id="ItemManagement" class="curson-pointer menu-tab menuSelectionButton">
-                        <div class="selctd"></div>
-                        <img src="<?php echo base_url('./public/images/icons/item.png'); ?>" alt="Item Management Icon">
-                        <p>Item Management</p>
                     </li>
                 </ul>
             </nav>
@@ -107,69 +107,37 @@
     <!--
         HOME 
     -->
-                <div id="panel-home" class="body-content-panel hidden">
-                    <div class="panel-home-welcome">
-                        <h3>Welcome Back!</h3>
-                        <p>All systems are operating flawlessly, ensuring a smooth and seamless experience as usual.</p>
-                    </div>
-                    <div class="panel-home-graphs-container">
-                        <div class="panel-home-container1">
-                            <div class="panel-home-container1-col1">
-                                <div class="panel-home-card1">
-                                    <h1>123,230.00</h1>
-                                    <h4>Sales</h4>
-                                </div>
-                                <div class="panel-home-card2">
-                                    <h1>53</h1>
-                                    <h4>Orders</h4>
-                                </div>
-                            </div>
-                            <div class="panel-home-container1-col2">
-                                <div class="panel-home-card3">
-                                    <h4>Sales Graph</h4>
-                                    <canvas id="graph-daily"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-home-container2">
-                            <div class="panel-home-card4">
-                                <h4>Orders by Items</h4>
-                                <canvas id="graph-order-by-items"></canvas>
-                            </div>
-                            <div class="panel-home-card5">
-                                <h4>Sales by Category</h4>
-                                <canvas id="graph-sales-by-category"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                <div id="panel-home" class="body-content-panel visible">
+                   
                 </div>
+
     <!--
         TRANSACTIONS 
     -->
-                <div id="panel-transactions" class="body-content-panel visible">
-                    <div class="panel-transactions-query panel">
+                <div id="panel-transactions" class="body-content-panel hidden">
+                    <div id="My-Tansactions-Query" class="panel-transactions-query panel">
                         <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input id="transactions-startdate" class="textbox" type="date" name="StartDate">
+                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="StartDate">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input id="transactions-enddate" class="textbox" type="date" name="EndDate">
+                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="EndDate">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Number</label>
-                                <input id="transactions-transactionnumber" class="textbox" type="text" name="TransactionNumber">
+                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="TransactionNumber">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input id="transaction-transactionname" class="textbox" type="text" name="TransactionName">
+                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="TransactionName">
                             </div>
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span id="transaction-status-dropdown" class=" dropdown-text">All</span>
+                                        <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -184,15 +152,15 @@
                     </div>
                     <div class="panel-transactions-buttons">
                         <div>
-                            <button id="transaction-search-button" class="btn-default curson-pointer" type="submit" value="Search" name="TransactionsSubmit">
+                            <button class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="TransactionsSubmit">
                                 <img src="<?php echo base_url('./public/images/icons/search-yellow.png'); ?>" alt="search">
                                 <span>Search</span>
                             </button>
-                            <button id="transaction-clear-button" class="btn-default curson-pointer" type="reset" value="Clear">
+                            <button class="btn-default curson-pointer transaction-clear-button" type="reset" value="Clear">
                                 <img src="<?php echo base_url('./public/images/icons/clear-yellow.png'); ?>" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button id="transaction-export-button" class="btn-default curson-pointer" type="button" value="Export">
+                            <button class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
                                 <img src="<?php echo base_url('./public/images/icons/download-yellow.png'); ?>" alt="search">
                                 <span>Export</span>
                             </button>
@@ -200,11 +168,11 @@
                         <div>
                             <div>
                                 <div>Total Orders: </div>
-                                <div id="transaction-totalorders-text" class="text">???</div>
+                                <div class="transaction-totalorders-text" class="text">???</div>
                             </div>
                             <div>
-                                <div>Total Sales: </div>
-                                <div id="transaction-totalsales-text" class="text">???</div>
+                                <div >Total Sales: </div>
+                                <div class="transaction-totalsales-text" class="text">???</div>
                             </div>
                         </div>
                     </div>
@@ -243,7 +211,7 @@
                                     <th class="col12"><div>Timestamp</div></th>
                                     <th class="col13"><div>Payment Method</div></th>
                                     <th class="col14"><div>Notes</div></th>
-                                </tr>Transaction ID, Status, In Charge, Name, Category, Department, Course, Amount, Items, Timestamp, Payment Method, Notes
+                                </tr>
                                 </thead>
                             </table>
                             </div>
@@ -265,23 +233,8 @@
                                     <col class="col13">
                                     <col class="col14">
                                 </colgroup>
-                            <tbody id="transactions-table">
-                                <tr>
-                                    <td><div class="col1 cell" title="checkbox"><input type="checkbox" name="" id=""></div></td>
-                                    <td><div class="col2 cell" title="Completed"><center>2</center></div></td>
-                                    <td><div class="col3 cell" title="123456789"><a class="transaction-viewdata-button view-more" href="">123456789</a></div></td>
-                                    <td><div class="col4 cell" title="Completed">Completed</div></td>
-                                    <td><div class="col5 cell" title="John Doe">John Doe</div></td>
-                                    <td><div class="col6 cell" title="Student">Student</div></td>
-                                    <td><div class="col7 cell" title="IT Department">IT Department</div></td>
-                                    <td><div class="col8 cell" title="BSIT 3">BSIT 3</div></td>
-                                    <td><div class="col9 cell" title="150">150</div></td>
-                                    <td><div class="col10 cell" title="Good Shit">Good Shit</div></td>
-                                    <td><div class="col11 cell" title="2023-05-27 10:30 AM">2023-05-27 10:30 AM</div></td>
-                                    <td><div class="col12 cell" title="ABC Store">ABC Store</div></td>
-                                    <td><div class="col13 cell" title="ABC Store">ABC Store</div></td>
-                                    <td><div class="col14 cell" title="ABC Store">ABC Store</div></td>
-                                </tr>                        
+                            <tbody id="My-Tansactions-Table" class="transactions-table">
+                                      
                             </tbody>
                             </table>
                         </div>
@@ -300,7 +253,7 @@
                         </div>
                         <div>
                             <div>Total: </div>
-                            <div id="transaction-totalsales-text" class="text">???</div>
+                            <div class="transaction-totalsales-text" class="text">???</div>
                         </div>
                         <div class="dropdown">
                             <div class="dropdown-content">
@@ -310,98 +263,22 @@
                                 <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span id="transaction-recordscount-dropwond" class="dropdown-text">25/Page</span>
+                                <span class="transactions-recordscount-dropwond" class="dropdown-text">25/Page</span>
                                 <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
                             </button>
                         </div>
                     </div>
                 </div>
-                <!--
-        ITEM MANAGEMENT 
-    -->
-                <div id="panel-itemmanagement" class="body-content-panel hidden"> 
-                    <div class="panel-itemmanagement-query panel">
-                        <div class="forms">
-                            <div class="left-panel">
-                                <div>
-                                    <img class="input-icon icon" src="<?php echo base_url('./public/images/icons/search-yellow.png'); ?>" alt="search">
-                                    <input placeholder="Search..." id="itemmanagement-search" class="textbox" type="search" name="itemmanagement-search">
-                                </div>
-                                <div>
-                                    <div class="dropdown" data-panel="ItemManagement">
-                                        <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
-                                            <img class="icon" src="<?php echo base_url('./public/images/icons/category-yellow.png'); ?>" alt="category">
-                                            <span id="itemmanagement-filter-dropdown" class="dropdown-text">All</span>
-                                            <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
-                                        </button>
-                                        <div id="itemmanagement-category-choices" class="dropdown-content">
-                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="dropdown" data-panel="ItemManagement">
-                                        <button title="Sort" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
-                                            <img class="icon" src="<?php echo base_url('./public/images/icons/sort-yellow.png'); ?>" alt="sort">
-                                            <span id="itemmanagement-sort-dropdown" class="dropdown-text">Ascending</span>
-                                            <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
-                                        </button>
-                                        <div class="dropdown-content">
-                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">Ascending</a>
-                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Descending</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="dropdown" data-panel="ItemManagement">
-                                        <button title="Layout View" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
-                                            <img id="icon-layout-1" class="icon" src="<?php echo base_url('./public/images/icons/list-yellow.png'); ?>" alt="layout">
-                                            <span id="itemmanagement-layout-dropdown" class="dropdown-text">List</span>
-                                            <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
-                                        </button>
-                                        <div class="dropdown-content">
-                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">List</a>
-                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Card</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right-panel">
-                                <div>
-                                    <button class="curson-pointer addItemButton" type="button">
-                                        <img class="icon" src="<?php echo base_url('./public/images/icons/add-yellow.png'); ?>" alt="layout">
-                                        <span>Add Item</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-itemmanagement-content">
-                        <div class="list-layout"></div>
-                    </div>
-                </div>
-                <!--
+    <!--
         CREATE ORDER 
     -->
                 <div id="panel-createorder" class="body-content-panel hidden">
-                    <div class="panel-createorder-query panel">
-                        <div class="forms">
-                            <div class="left-panel">
+                    <div class="panel-createorder-content">
+                        <div class="left-panel">
+                            <div class="query-container panel"> 
                                 <div>
                                     <img class="input-icon icon" src="<?php echo base_url('./public/images/icons/search-yellow.png'); ?>" alt="search">
                                     <input placeholder="Search..." id="createorder-search" class="textbox" type="search" name="createorder-search">
-                                </div>
-                                <div>
-                                    <div class="dropdown" data-panel="CreateOrder">
-                                        <button title="Category Filter" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
-                                            <img class="icon" src="<?php echo base_url('./public/images/icons/category-yellow.png'); ?>" alt="category">
-                                            <span id="createorder-filter-dropdown" class="dropdown-text">All</span>
-                                            <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
-                                        </button>
-                                        <div id="createorder-category-choices" class="dropdown-content">
-                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div>
                                     <div class="dropdown" data-panel="CreateOrder">
@@ -416,32 +293,102 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="right-panel">
                                 <div>
-                                    <button class="curson-pointer addItemButton" type="button">
-                                        <img class="icon" src="<?php echo base_url('v/images/icons/add-yellow.png'); ?>" alt="layout">
-                                        <span>Add Item</span>
-                                    </button>
+                                    <div class="dropdown" data-panel="CreateOrder">
+                                        <button title="Layout View" data-layout="bottom" class="dropdownButton dropdownbtn curson-pointer">
+                                            <img id="icon-layout-1" class="icon" src="<?php echo base_url('./public/images/icons/list-yellow.png'); ?>" alt="layout">
+                                            <span id="createorder-layout-dropdown" class="dropdown-text">List</span>
+                                            <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">List</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Details</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Tiles</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-container">
+                                <p>Category:</p>
+                                <div class="category-list" id="createorder-category" data-type="CreateOrder">
+                                </div>
+                            </div>
+                            <div class="order-items-container"> 
+                                <div class="card-layout"></div>
+                            </div>
+                        </div>
+
+                        <div class="right-panel">
+                            <div class="receipt-container panel"> 
+                                <div class="title">
+                                    <p >Order:</p>
+                                </div>
+                                <div id="order-list" class="orders"></div>
+                                <div class="summary">
+                                    <hr>
+                                    <div class="details">
+                                        <p id="order-quantity">Quantity: 0</p>
+                                        <p id="order-subtotal">Subtotal: ₱0</p>
+                                    </div>
+                                    <div class="discount">
+                                        <p>Discount: ₱</p>
+                                        <input id="txt-order-Discount" type="number" name="" id="" value="0.00">
+                                    </div>
+                                    <div class="total">
+                                        <p id="order-total">Total: ₱0</p>
+                                    </div>
+                                    <hr>
+                                    <div class="button-container">
+                                        <button id="createorder-clear" type="button" class="curson-pointer">
+                                            <img src="<?php echo base_url('./public/images/icons/delete-red.png'); ?>" alt="">
+                                        </button>
+                                        <button id="createorder-placeorder" type="button" class="placeOrderButton curson-pointer">
+                                            <img src="<?php echo base_url('./public/images/icons/order-receipt.png'); ?>" alt="">
+                                            <p>Place Order</p>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-createorder-content">
-                        <div class="list-layout"></div>
-                    </div>
                 </div>
+    <!--
+        END 
+    -->
             </div>
         </div>
     </div>
 <!--
-    CONTENT BOTTOM BAR
--->  
-    <div class="bottom-bar">
-        <div class="text">BCash Version 1.0</div>
-    </div>
-</div>
-<script type="module" src="<?php echo base_url('/public/javascript/main-merchant.js'); ?>"></script>
-</body>
+    ALERTS ###
+-->
+    <div id="Alert-Box-Container" class="Alert-container">
+        <table class="Alert-Box-Table">
 
+        </table>
+    </div>
+<!--
+    MODALS ###
+-->
+    <div id="Modal-Container" class="modal-container">
+        <div class="modal-content">
+            <div class="header">
+                <div class="title">
+                    <p id="Modal-Header" class="text">N/A</p>
+                </div>
+                <div class="close" >
+                    <p id="Modal-Close-Button" class="close-btn curson-pointer">X</p>
+                </div>
+            </div>
+            <div id="Modal-Body" class="body">
+                
+            </div>
+        </div>
+    </div>
+<!--
+    JAVASCRIPTS  ###
+-->
+    <script src="../public/javascript/chart.js"></script>
+    <script src="../public/javascript/main-merchant.js" type="module"></script>
+</body>
 </html>
+
