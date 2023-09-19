@@ -19,7 +19,7 @@
 .panel-home-content .charts-container-row1 {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(2, 1fr); 
     grid-column-gap: 10px;
     grid-row-gap: 10px;
 }

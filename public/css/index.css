@@ -489,3 +489,24 @@ body {
       height: 400px;
     }
   }
+
+
+
+
+
+  .test-links {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+
+  .test-links button {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .test-links button a{
+    text-decoration: none;
+  }
