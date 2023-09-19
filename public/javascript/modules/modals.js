@@ -203,7 +203,7 @@ export default class Modals {
                                 <div class="right-panel">
                                     <div class="qr-code">
                                         <p><strong>QR-Code:</strong></p>
-                                        <img src="../images/sample-qr.jpg" alt="">
+                                        <img src="../public/images/sample-qr.jpg" alt="">
                                         <button>Generate</button>
                                     </div>
                                     <div class="id-card">

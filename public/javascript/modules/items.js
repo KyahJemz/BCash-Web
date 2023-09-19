@@ -253,8 +253,8 @@ export default class Item {
                             </div>
                         </div>
                         <div class="item-options">
-                            <button title="Edit" class="editItemButton curson-pointer"><img src="../images/icons/edit-yellow.png" alt=""></button>
-                            <button title="Delete" class="deleteItemButton curson-pointer"><img src="../images/icons/delete-red.png" alt=""></button>
+                            <button title="Edit" class="editItemButton curson-pointer"><img src="../public/images/icons/edit-yellow.png" alt=""></button>
+                            <button title="Delete" class="deleteItemButton curson-pointer"><img src="../public/images/icons/delete-red.png" alt=""></button>
                         </div>
                     </div>
                 `;
