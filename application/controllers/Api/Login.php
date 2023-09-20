@@ -28,8 +28,8 @@ class Login extends CI_Controller {
                 $requestPostBody = $this->input->raw_input_stream; // READ POST BODY
                 $requestPostBody = json_decode($requestPostBody, TRUE); // DECODES
 
-                $IsMaintenance = $this->Configurations_Model->IsMaintenance()[0];
-                if ($IsMaintenance[0]) {
+                $IsMaintenance = $this->Configurations_Model->IsMaintenance();
+                if ($IsMaintenance['success']) {
                         $response = [
                                 'Success' => FALSE,
                                 'Target' => 'WebLogin',
@@ -48,17 +48,17 @@ class Login extends CI_Controller {
                         ];  
                 }  else {
 
-                        if ($IntentHeader === "Web Login") {
+                        if ($IntentHeader === "WebLogin") {
                                 $response = $this->WebLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader);
-                        } else if ($IntentHeader === "User Login") {
+                        } else if ($IntentHeader === "UserLogin") {
                                 $response = $this->UserLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader);
-                        } else if ($IntentHeader === "Parent Login") {
+                        } else if ($IntentHeader === "ParentLogin") {
                                 $response = $this->ParentLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader);
-                        } else if ($IntentHeader === "OTP Validation") {
+                        } else if ($IntentHeader === "OTPValidation") {
                                 $response = $this->OTPValidation($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader);
-                        } else if ($IntentHeader === "PIN Validation") {
+                        } else if ($IntentHeader === "PINValidation") {
                                 $response = $this->PINValidation($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader);
-                        } else if ($IntentHeader === "PIN Creation") {
+                        } else if ($IntentHeader === "PINCreation") {
                                 $response = $this->PINCreation($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader);
                         } else if ($IntentHeader === "Logout") {
                                 $response = $this->accountLogout($AuthorizationTokenHeader,$AccountAddressHeader);
@@ -67,7 +67,7 @@ class Login extends CI_Controller {
                                         'Success' => FALSE,
                                         'Target' => 'WebLogin',
                                         'Parameters' => null,
-                                        'Message' => ''
+                                        'Message' => 'no headers'
                                 ];   
                         }
                 }
@@ -78,7 +78,7 @@ class Login extends CI_Controller {
         function WebLogin($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader){
 
                 $Version = $this->Configurations_Model->ValidateWebVersion($ClientVersionHeader);
-                if (!($Version[0])){
+                if (!($Version['success'])){
                         $response = [
                                 'Success' => FALSE,
                                 'Target' => 'WebLogin',
@@ -111,7 +111,7 @@ class Login extends CI_Controller {
                                 $validationErrors = validation_errors();
                                 $response = [
                                         'Success' => FALSE,
-                                        'Target' => 'Web Login',
+                                        'Target' => 'WebLogin',
                                         'Parameters' => null,
                                         'Message' => 'Failed, Reason: '. $validationErrors .'.'
                                 ];
@@ -128,7 +128,7 @@ class Login extends CI_Controller {
                                         } else {
                                                 $response = [
                                                         'Success' => FALSE,
-                                                        'Target' => 'Web Login',
+                                                        'Target' => 'WebLogin',
                                                         'Parameters' => null,
                                                         'Message' => 'Failed: Incorrect Password!'
                                                 ];
@@ -136,7 +136,7 @@ class Login extends CI_Controller {
                                 } else {
                                         $response = [
                                                 'Success' => FALSE,
-                                                'Target' => 'Web Login',
+                                                'Target' => 'WebLogin',
                                                 'Parameters' => null,
                                                 'Message' => 'Failed: Invalid Account!'
                                         ];
@@ -255,7 +255,7 @@ class Login extends CI_Controller {
                         } else {
                                 $response = [
                                         'Success' => FALSE,
-                                        'Target' => 'OTP Validation',
+                                        'Target' => 'OTPValidation',
                                         'Parameters' => null,
                                         'Message' => 'Failed, Reason: Invalid OTP or time exeeded, Try-again!'
                                 ];
@@ -263,7 +263,7 @@ class Login extends CI_Controller {
                 } else {
                         $response = [
                                 'Success' => FALSE,
-                                'Target' => 'Web Login',
+                                'Target' => 'WebLogin',
                                 'Parameters' => null,
                                 'Message' => 'Failed, Reason: Invalid entry point, refresh and try-again!'
                         ];
@@ -292,7 +292,7 @@ class Login extends CI_Controller {
                         } else {
                                 $response = [
                                         'Success' => FALSE,
-                                        'Target' => 'PIN Validation',
+                                        'Target' => 'PINValidation',
                                         'Parameters' => null,
                                         'Message' => 'Failed, Reason: Invalid PIN, Try-again!'
                                 ];
@@ -300,7 +300,7 @@ class Login extends CI_Controller {
                 } else {
                         $response = [
                                 'Success' => FALSE,
-                                'Target' => 'Web Login',
+                                'Target' => 'WebLogin',
                                 'Parameters' => null,
                                 'Message' => 'Failed, Reason: Invalid entry point, refresh and try-again!'
                         ];
@@ -329,7 +329,7 @@ class Login extends CI_Controller {
                         } else {
                                 $response = [
                                         'Success' => FALSE,
-                                        'Target' => 'PIN Craetion',
+                                        'Target' => 'PINCraetion',
                                         'Parameters' => null,
                                         'Message' => 'Failed, Reason: PIN registration failed, Try-again!'
                                 ];
@@ -337,7 +337,7 @@ class Login extends CI_Controller {
                 } else {
                         $response = [
                                 'Success' => FALSE,
-                                'Target' => 'Web Login',
+                                'Target' => 'WebLogin',
                                 'Parameters' => null,
                                 'Message' => 'Failed, Reason: Invalid entry point, refresh and try-again!'
                         ];
@@ -353,14 +353,14 @@ class Login extends CI_Controller {
                                 $this->Authorization_Model->setLogout($AccountAddressHeader);
                                 $response = [
                                         'Success' => TRUE,
-                                        'Target' => null,
+                                        'Target' => 'WebLogin',
                                         'Parameters' => null,
                                         'Message' => 'Success!'
                                 ]; 
                         } else {
                                 $response = [
                                         'Success' => FALSE,
-                                        'Target' => null,
+                                        'Target' => 'WebLogin',
                                         'Parameters' => null,
                                         'Message' => 'Failed, Reason: AuthToken Invalid!'
                                 ]; 
@@ -368,7 +368,7 @@ class Login extends CI_Controller {
                 } else {
                         $response = [
                                 'Success' => FALSE,
-                                'Target' => null,
+                                'Target' => 'WebLogin',
                                 'Parameters' => null,
                                 'Message' => 'Failed, Reason: Logout parameters are empty!'
                         ];
@@ -384,7 +384,7 @@ class Login extends CI_Controller {
                 if (!(is_object($account) && property_exists($account, 'ActorCategory_Id'))) {
                         $response = [
                                 'Success' => FALSE,
-                                'Target' => 'Web Login',
+                                'Target' => 'WebLogin',
                                 'Parameters' => null,
                                 'Message' => 'Failed, Reason: Invalid client category, Try-again!'
                         ];
@@ -394,7 +394,7 @@ class Login extends CI_Controller {
                         if (!($this->Functions_Model->validateAccountIfEnabled($AccountAddress))){
                                 $response = [
                                         'Success' => FALSE,
-                                        'Target' => 'Web Login',
+                                        'Target' => 'WebLogin',
                                         'Parameters' => null,
                                         'Message' => 'Failed, Reason: Access to this account is blocked!'
                                 ];
@@ -420,7 +420,7 @@ class Login extends CI_Controller {
                                                 } else {
                                                         $response = [
                                                                 'Success' => FALSE,
-                                                                'Target' => 'Web Login',
+                                                                'Target' => 'WebLogin',
                                                                 'Parameters' => null,
                                                                 'Message' => 'Failed, Reason: Auth creation failed, Try-again!'
                                                         ]; 
@@ -430,7 +430,7 @@ class Login extends CI_Controller {
                                                 $this->Authorization_Model->setLogout($AccountAddress);
                                                 $response = [
                                                         'Success' => FALSE,
-                                                        'Target' => 'Web Login',
+                                                        'Target' => 'WebLogin',
                                                         'Parameters' => null,
                                                         'Message' => 'Failed, Reason: Account already signed in on another device, Try-again!'
                                                 ];
@@ -448,7 +448,7 @@ class Login extends CI_Controller {
                                                         ];
                                                         $response = [
                                                                 'Success' => TRUE,
-                                                                'Target' => 'OTP Validation',
+                                                                'Target' => 'OTPValidation',
                                                                 'Parameters' => $parameters,
                                                                 'Message' => 'Success: New Sign-in detected, OTP validation required!'
                                                         ];
@@ -472,7 +472,7 @@ class Login extends CI_Controller {
                                                                         } else {
                                                                                 $response = [
                                                                                         'Success' => FALSE,
-                                                                                        'Target' => 'PIN Validation',
+                                                                                        'Target' => 'PINValidation',
                                                                                         'Parameters' => null,
                                                                                         'Message' => 'Failed, Reason: Wrong account PIN!'
                                                                                 ];
@@ -485,7 +485,7 @@ class Login extends CI_Controller {
                                                                         ];
                                                                         $response = [
                                                                                 'Success' => TRUE,
-                                                                                'Target' => 'PIN Validation',
+                                                                                'Target' => 'PINValidation',
                                                                                 'Parameters' => $parameters,
                                                                                 'Message' => 'Success: PIN validation required!'
                                                                         ];
@@ -499,7 +499,7 @@ class Login extends CI_Controller {
                                                                 ];
                                                                 $response = [
                                                                         'Success' => TRUE,
-                                                                        'Target' => 'PIN Creation',
+                                                                        'Target' => 'PINCreation',
                                                                         'Parameters' => $parameters,
                                                                         'Message' => 'Success: PIN creation required!'
                                                                 ];
@@ -508,7 +508,7 @@ class Login extends CI_Controller {
                                         } else {
                                                 $response = [
                                                         'Success' => FALSE,
-                                                        'Target' => 'Web Login',
+                                                        'Target' => 'WebLogin',
                                                         'Parameters' => null,
                                                         'Message' => 'Failed, Reason: Auth creation failed, Try-again!'
                                                 ];

@@ -53,14 +53,88 @@ class Functions_Model extends CI_Model {
                 return FALSE;
         }
 
+        public function getActorType($AccountAddress) {
+                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address($AccountAddress);
+                if ($tbl_webaccounts) {
+                        return 'Web';
+                }
+                
+                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address($AccountAddress);
+                if ($tbl_usersaccount){
+                        return 'Mobile';
+                }
+
+                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address($AccountAddress);
+                if ($tbl_guardiansaccount){
+                        return 'Mobile';
+                }
+
+                return 'Invalid';
+        }
+
         public function setLogout($AccountAddress) {
                 $this->db->where('Account_Address', $AccountAddress);
                 $this->db->delete('tbl_authentications');
         }
 
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+// ALL API VALIDATION FUNCTIONS 
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$   
+
+        public function validateRequest($AccountAddress, $AuthToken, $IpAddress, $Device, $Location, $Version) {
+
+                $validateVersion = $this->validateVersion($AccountAddress,$Version);
+                if (!($validateVersion['success'])) {
+                        return ['success' => FALSE, 'response' => $validateVersion['response']];
+                }
+
+                $validateAuthToken = $this->validateAuthToken($AccountAddress, $AuthToken);
+                if (!($validateAuthToken)) {
+                        return ['success' => FALSE, 'response' => 'Invalid token'];
+                }
+
+                $validateClient = $this->validateClient($AccountAddress, $IpAddress, $Device, $Location);
+                if (!($validateClient)){
+                        return ['success' => FALSE, 'response' => 'Invalid client'];
+                }
+
+                return ['success' => TRUE, 'response' => 'Validation Success'];
+        }
+
+
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // VALIDATION FUNCTIONS 
-// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$     
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+
+        public function validateVersion($AccountAddress,$ClientVersion){
+                $IsMaintenance = $this->Configurations_Model->IsMaintenance()[0];
+                if ($IsMaintenance['success']) {
+                        return ['success' => FALSE, 'response' => "Server in maintenance, ".$IsMaintenance['response']];
+                } else {
+
+                        $category = $this->getActorType($AccountAddress);
+
+                        if ($category === 'Web') {
+                                $Version = $this->Configurations_Model->ValidateWebVersion($ClientVersion);
+                                if (($Version['success'])){
+                                        return ['success' => TRUE, 'response' => $Version['response']];
+                                } else {
+                                        return ['success' => FALSE, 'response' => $Version['response']];
+                                }
+
+                        } else if ($category === 'Mobile') {
+                                $Version = $this->Configurations_Model->ValidateMobileVersion($ClientVersion);
+                                if (($Version['success'])){
+                                        return ['success' => TRUE, 'response' => $Version['response']];
+                                } else {
+                                        return ['success' => FALSE, 'response' => $Version['response']];
+                                }
+
+                        } else {
+                                return ['success' => FALSE, 'response' => 'INVALID!'];
+                        }
+                }
+        }
 
         public function validateAuthToken($AccountAddress, $AuthToken) {
                 if (empty($AccountAddress) || empty($AuthToken)) {

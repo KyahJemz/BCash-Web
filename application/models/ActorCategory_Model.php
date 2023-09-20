@@ -6,7 +6,7 @@ class ActorCategory_Model extends CI_Model {
         $this->load->database();
     }
 
-    public function read_by_address($Id){
+    public function read_by_Id($Id){
         $result = $this->db
             ->select('*')
             ->from('tbl_actorcategory')
