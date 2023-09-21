@@ -110,16 +110,18 @@ class Transactions_Model extends CI_Model {
         }
     }
 
-    public function read_transactions($TargetCategory, $Startdate, $EndDate, $TransactionAddress, $SearchName, $StatusFilter) {
+    public function read_transactions_by_category($category, $id, $Startdate, $EndDate, $TransactionAddress, $SearchName, $StatusFilter) {
         $this->db->select('*')->from('tbl_transactionsinfo');
     
-        if (!empty($TargetCategory) && $TargetCategory !== 'All') {
-            if ($TargetCategory === 'merchant') {
+        if (!empty($category) && $category !== 'All') {
+            if ($category === 'merchant') {
                 $this->db->join('tbl_merchants', 'tbl_merchants.WebAccounts_Address = tbl_transactionsinfo.Receiver_Address OR tbl_merchants.WebAccounts_Address = tbl_transactionsinfo.Sender_Address');
-            } else if ($TargetCategory === 'accounting') {
+                $this->db->where('tbl_merchants.MerchantsCategory_Id', $id);
+            } else if ($category === 'accounting') {
                 $this->db->where('Receiver_Address', 'Accounting');
-            } else if ($TargetCategory === 'users') {
+            } else if ($category === 'users') {
                 $this->db->join('tbl_usersaccount', 'tbl_usersaccount.UsersAccount_Address = tbl_transactionsinfo.Receiver_Address OR tbl_usersaccount.UsersAccount_Address = tbl_transactionsinfo.Sender_Address');
+                $this->db->where('tbl_usersaccount.UsersAccount_Address', $id);
             }
         }
     
@@ -150,6 +152,7 @@ class Transactions_Model extends CI_Model {
     
         return ['status' => ($result !== FALSE), 'response' => $result];
     }
+    
     
     
    

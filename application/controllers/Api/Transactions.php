@@ -56,9 +56,6 @@ class Transactions extends CI_Controller {
                                 $validatedSearchName = $requestPostBody['SearchName']; 
                                 $validatedStatusFilter = $requestPostBody['StatusFilter']; 
 
-
-                                
-
                                 if ($this->form_validation->run() === FALSE) {
                                         $validationErrors = validation_errors();
                                         $response = [
@@ -71,22 +68,29 @@ class Transactions extends CI_Controller {
                                         $Account = $this->functions_Model->getAccountsByAddress($AccountAddressHeader);
 
                                         if ($Account->ActorCategory_Id === '1') {
-                                                $result = $this->Transactions_Model->read_transactions($validatedTargetCategory,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
+                                                $result = $this->Transactions_Model->read_transactions_by_category($validatedTargetCategory, '', ,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
                                         
                                         } else if ($Account->ActorCategory_Id === '2'){
-                                                $result = $this->Transactions_Model->read_transactions($validatedTargetCategory,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
+                                                $result = $this->Transactions_Model->read_transactions_by_category($validatedTargetCategory, '',$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
                                         
                                         } else if ($Account->ActorCategory_Id === '3' || $Account->ActorCategory_Id === '4') {
-                                                $result = $this->Transactions_Model->read_transactions($validatedTargetCategory,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
+                                                //get merchant category id                                            HERE vv
+                                                $result = $this->Transactions_Model->read_transactions_by_category($validatedTargetCategory, 'id here',$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
                                         
                                         } else if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '7') {
-                                                $result = $this->Transactions_Model->
+                                                $result = $this->Transactions_Model->read_transactions_by_category($validatedTargetCategory,$Account->UsersAccount_Address,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
                                         
                                         } else if ($Account->ActorCategory_Id === '6'){
-                                                $result = $this->Transactions_Model->
-                                        
+                                                $result = $this->Transactions_Model->read_transactions_by_category($validatedTargetCategory,$Account->UsersAccount_Address,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
+                                                $response = [
+                                                        'Success' => $result['success'],
+                                                        'response' => $result
+                                                ]; 
                                         } else {
-                                                $result = $this->Transactions_Model->
+                                                $response = [
+                                                        'Success' => FALSE,
+                                                        'response' => 'Invalid Request'
+                                                ]; 
                                         }
                                 } 
                         }
