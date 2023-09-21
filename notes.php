@@ -29,4 +29,60 @@ $this->db->insert('table_name', $data);
 
 // LOGGING MESSAGE
     log_message('debug', $OTP . ' === ' . $tbl_authentications->OtpCode);
+
+/*
+
+API Transactions
+    Headers 
+        Authorization
+        AccountAddress
+        ClientVersion
+        IpAddress
+        Device
+        Location
+        Intent
+    BODY
+        TransactionAddress - 
+        TargetAccountAddress
+
+
+API Login
+    Headers 
+        Authorization
+        AccountAddress
+        ClientVersion
+        Intent
+    BODY
+        Username
+        Password
+        OTP
+        PIN
+        NewPIN
+
+        IpAddress
+        Device
+        Location
+
+        
+
+
+
+
+
+TargetActor
+Startdate 
+EndDate
+TransactionAddress
+SearchName
+StatusFilter
+
+
+
+
+*/
 ?>
+
+
+
+
+

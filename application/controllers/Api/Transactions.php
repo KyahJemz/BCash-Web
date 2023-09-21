@@ -19,6 +19,89 @@ class Transactions extends CI_Controller {
                 $this->load->database();
         }
 
+        public function History() {
+
+                $AuthorizationTokenHeader = $this->Functions_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
+                $AccountAddressHeader = $this->Functions_Model->sanitize($this->input->get_request_header('AccountAddress', TRUE));
+                $ClientVersionHeader = $this->Functions_Model->sanitize($this->input->get_request_header('ClientVersion', TRUE));
+                $IpAddressHeader = $this->Functions_Model->sanitize($this->input->get_request_header('IpAddress', TRUE));
+                $DeviceHeader = $this->Functions_Model->sanitize($this->input->get_request_header('Device', TRUE));
+                $LocationHeader = $this->Functions_Model->sanitize($this->input->get_request_header('Location', TRUE));
+
+                $requestPostBody = $this->input->raw_input_stream; // READ POST BODY
+                $requestPostBody = json_decode($requestPostBody, TRUE); // DECODES
+
+                if(empty($AuthorizationTokenHeader)||empty($AccountAddressHeader)||empty($ClientVersionHeader)||empty($IpAddressHeader)||empty($DeviceHeader)||empty($LocationHeader)||empty($IntentHeader)) {
+                        $response = [
+                                'Success' => FALSE,
+                                'response' => 'Invalsid Request'
+                        ]; 
+                } else {
+                        $validated = $this->Functions_Model->validateRequest($AccountAddressHeader, $AuthorizationTokenHeader, $IpAddressHeader, $DeviceHeader, $LocationHeader, $ClientVersionHeader);
+                        if ($validated['success']) {
+
+                                $this->form_validation->set_data($requestPostBody);
+
+                                $this->form_validation->set_rules('TargetActor', 'TargetActor', 'trim|alpha_numeric');
+                                $this->form_validation->set_rules('Startdate', 'Startdate', 'trim');
+                                $this->form_validation->set_rules('EndDate', 'EndDate', 'trim');
+                                $this->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim|alpha_numeric');
+                                $this->form_validation->set_rules('SearchName', 'SearchName', 'trim|alpha_numeric');
+                                $this->form_validation->set_rules('StatusFilter', 'StatusFilter', 'trim|alpha_numeric');
+
+                                $validatedTargetCategory = $requestPostBody['TargetActor']; 
+                                $validatedStartdate = $requestPostBody['Startdate'];
+                                $validatedEndDate = $requestPostBody['EndDate'];
+                                $validatedTransactionAddress = $requestPostBody['TransactionAddress']; 
+                                $validatedSearchName = $requestPostBody['SearchName']; 
+                                $validatedStatusFilter = $requestPostBody['StatusFilter']; 
+
+
+                                
+
+                                if ($this->form_validation->run() === FALSE) {
+                                        $validationErrors = validation_errors();
+                                        $response = [
+                                                'Success' => FALSE,
+                                                'Target' => null,
+                                                'Parameters' => null,
+                                                'Message' => 'Failed, Reason: '. $validationErrors .'.'
+                                        ];
+                                } else {
+                                        $Account = $this->functions_Model->getAccountsByAddress($AccountAddressHeader);
+
+                                        if ($Account->ActorCategory_Id === '1') {
+                                                $result = $this->Transactions_Model->read_transactions($validatedTargetCategory,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
+                                        
+                                        } else if ($Account->ActorCategory_Id === '2'){
+                                                $result = $this->Transactions_Model->read_transactions($validatedTargetCategory,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
+                                        
+                                        } else if ($Account->ActorCategory_Id === '3' || $Account->ActorCategory_Id === '4') {
+                                                $result = $this->Transactions_Model->read_transactions($validatedTargetCategory,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
+                                        
+                                        } else if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '7') {
+                                                $result = $this->Transactions_Model->
+                                        
+                                        } else if ($Account->ActorCategory_Id === '6'){
+                                                $result = $this->Transactions_Model->
+                                        
+                                        } else {
+                                                $result = $this->Transactions_Model->
+                                        }
+                                } 
+                        }
+                }
+                $this->output->set_content_type('application/json')->set_output(json_encode($response));
+        }
+
+
+
+
+
+
+
+
+
         public function Transactions() {
 
                 $AuthorizationTokenHeader = $this->Functions_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
@@ -44,10 +127,25 @@ class Transactions extends CI_Controller {
                                 $this->form_validation->set_data($requestPostBody);
 
                                 $this->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim|alpha_numeric');
-                                $this->form_validation->set_rules('TargetAccountAddress', 'TargetAccountAddress', 'trim|alpha_numeric');
+                                $this->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim|alpha_numeric');
 
-                                $validatedNTransactionAddress = $requestPostBody['TransactionAddress'];
-                                $validatedNTargetAccountAddress = $requestPostBody['TargetAccountAddress'];
+                                $this->form_validation->set_rules('TargetActor', 'TargetActor', 'trim|alpha_numeric');
+                                $this->form_validation->set_rules('Startdate', 'Startdate', 'trim');
+                                $this->form_validation->set_rules('EndDate', 'EndDate', 'trim');
+                                $this->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim|alpha_numeric');
+                                $this->form_validation->set_rules('SearchName', 'SearchName', 'trim|alpha_numeric');
+                                $this->form_validation->set_rules('StatusFilter', 'StatusFilter', 'trim|alpha_numeric');
+
+                                $validatedTransactionAddress = $requestPostBody['TransactionAddress']; // target  tranaction
+                                $validatedAccountAddress = $requestPostBody['TransactionAddress']; // target account
+
+                                $validatedTargetCategory = $requestPostBody['TargetActor']; 
+                                $validatedStartdate = $requestPostBody['Startdate'];
+                                $validatedEndDate = $requestPostBody['EndDate'];
+                                $validatedTransactionAddress = $requestPostBody['TransactionAddress']; 
+                                $validatedSearchName = $requestPostBody['SearchName']; 
+                                $validatedStatusFilter = $requestPostBody['StatusFilter']; 
+
 
                                 if ($this->form_validation->run() === FALSE) {
                                         $validationErrors = validation_errors();
@@ -60,64 +158,137 @@ class Transactions extends CI_Controller {
                                 } else {
                                 
                                         switch ($IntentHeader) {
-                                                case 'getTransactions': // yung debit creadit
+                                                
+                                                // DEBIT - CREDIT
+                                                case 'getTransactions': 
                                                         $Account = $this->functions_Model->getAccountsByAddress($AccountAddressHeader);
-                                                        if ($Account['ActorCategory_Id'] === '1' || $Account['ActorCategory_Id'] === '2') {
 
+                                                        // ACCOUNTING
+                                                        if ($Account['ActorCategory_Id'] === '2') { 
+                                                                if (empty($validatedAccountAddress)) {
+                                                                        $result = $this->Transactions_Model->read_transactions_by_address($AccountAddressHeader);
+                                                                        $response = [
+                                                                                'Success' => TRUE,
+                                                                                'response' => $result['response']
+                                                                        ]; 
+                                                                } else {
+                                                                        $result = $this->Transactions_Model->read_transactions_by_address($validatedAccountAddress);
+                                                                        $response = [
+                                                                                'Success' => TRUE,
+                                                                                'response' => $result['response']
+                                                                        ]; 
+                                                                }
 
-                                                        } else if ($Account['ActorCategory_Id'] === '2' || $Account['ActorCategory_Id'] === '3') {
-                                                                
-
-
-                                                        } else {
-                                                                $result = $this->Transactions_Model->read_transactions_by_address($AccountAddressHeader);
+                                                        // MERCHANT ADMIN
+                                                        } else if ($Account['ActorCategory_Id'] === '3') {
+                                                                $result = $this->Transactions_Model->read_transactions_by_address($Account->WebAccounts_Address);
                                                                 $response = [
                                                                         'Success' => TRUE,
                                                                         'response' => $result['response']
+                                                                ];
+                              
+                                                        // USERS, GUEST
+                                                        } else if ($Account['ActorCategory_Id'] === '5' || $Account['ActorCategory_Id'] === '7') {
+                                                                $result = $this->Transactions_Model->read_transactions_by_address($Account->UsersAccount_Address);
+                                                                $response = [
+                                                                        'Success' => TRUE,
+                                                                        'response' => $result['response']
+                                                                ]; 
+                                                        
+                                                        // PARENTS
+                                                        } else if ($Account['ActorCategory_Id'] === '6') {
+                                                                $result = $this->Transactions_Model->read_transactions_by_address($Account->UsersAccount_Address);
+                                                                $response = [
+                                                                        'Success' => TRUE,
+                                                                        'response' => $result['response']
+                                                                ]; 
+
+                                                        // MERCHANT STAFF, ADMINISTRATOR
+                                                        } else {
+                                                                $response = [
+                                                                        'Success' => FALSE,
+                                                                        'response' => []
                                                                 ]; 
                                                         }
                                                         
                                                         break;
 
-
-                                                case 'getUsersTransactionInfos': // yung full details
+                                                // TRANSACTION FULL DETAILS
+                                                case 'getUsersTransactionInfos':
                                                         $Account = $this->functions_Model->getAccountsByAddress($AccountAddressHeader);
-                                                        if ($Account['ActorCategory_Id'] === '1' || $Account['ActorCategory_Id'] === '2') {
-                                                                if (empty($validatedNTargetAccountAddress)) {
-                                                                        $result = $this->Transactions_Model->read_transactionsinfo_by_address($validatedNTargetAccountAddress);
-                                                                        $response = [
-                                                                                'Success' => TRUE,
-                                                                                'response' => $$result['response']
-                                                                        ]; 
-                                                                } else {
-                                                                        $result = $this->Transactions_Model->read_transactionsinfo_by_address($validatedNTargetAccountAddress);
-                                                                        $response = [
-                                                                                'Success' => TRUE,
-                                                                                'response' => $$result['response']
-                                                                        ]; 
-                                                                }
 
 
 
 
 
 
-                                                                // kulang pa pag mag rretrive yung mismong accounting asrili nila
-                                                                $result = $this->Transactions_Model->read_transactionsinfo_by_address($validatedNTargetAccountAddress);
-                                                                $response = [
-                                                                        'Success' => TRUE,
-                                                                        'response' => $$result['response']
-                                                                ]; 
-                                                        } else if ($Account['ActorCategory_Id'] === '3' || $Account['ActorCategory_Id'] === '4') {
-                                                                        // FOR MERCHANTS
 
-                                                        } else {
-                                                                $result = $this->Transactions_Model->read_transactionsinfo_by_address($AccountAddressHeader);
-                                                                $response = [
-                                                                        'Success' => TRUE,
-                                                                        'response' => $$result['response']
-                                                                ]; 
-                                                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        // if (empty($validatedTargetCategory)) {
+                                                        //         if ($Account['ActorCategory_Id'] === '1') {
+
+
+
+                                                        //         } else if ($Account['ActorCategory_Id'] === '2') {
+
+
+
+                                                        //         }
+                                                        // } else if ($validatedTargetCategory === '2') {
+
+                                                        //         // ADMINISTRATOR, ACCOUNTING
+                                                        //         if ($Account['ActorCategory_Id'] === '1' || $Account['ActorCategory_Id'] === '2') {
+                                                        //                 $result = $this->Transactions_Model->read_transactionsinfo_of_accounting();
+                                                        //                 $response = [
+                                                        //                         'Success' => TRUE,
+                                                        //                         'response' => $result['response']
+                                                        //                 ]; 
+
+                                                        //         // OTHER USERS
+                                                        //         } else {
+                                                        //                 $response = [
+                                                        //                         'Success' => FALSE,
+                                                        //                         'response' => []
+                                                        //                 ]; 
+                                                        //         }
+                                                        // } else if ($validatedTargetCategory === '3') {
+
+                                                        //         // ADMINISTRATOR, ACCOUNTING
+                                                        //         if ($Account['ActorCategory_Id'] === '1' || $Account['ActorCategory_Id'] === '2') {
+                                                        //                 $result = $this->Transactions_Model->read_transactionsinfo_of_merchants();
+                                                        //                 $response = [
+                                                        //                         'Success' => TRUE,
+                                                        //                         'response' => $result['response']
+                                                        //                 ]; 
+
+                                                        //         // OTHER USERS
+                                                        //         } else {
+                                                        //                 $response = [
+                                                        //                         'Success' => FALSE,
+                                                        //                         'response' => []
+                                                        //                 ]; 
+                                                        //         }
+                                                        // }
+
+                                                        
                                                         break;
 
 

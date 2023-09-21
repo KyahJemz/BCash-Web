@@ -82,6 +82,18 @@ class Authentications_Model extends CI_Model {
         return ($result > 0) ? TRUE : FALSE;
     }
 
+    public function Update_Auth_Session($AccountAddress,$AuthExpirationTime) {
+        $data = [
+            'AuthExpirationTime' => $AuthExpirationTime,
+        ];
+        $this->db->where('Account_Address', $AccountAddress);
+        $this->db->update('tbl_authentications', $data);
+        $result = $this->db->affected_rows();
+        return ($result > 0) ? TRUE : FALSE;
+
+    }
+
+
 
 
 

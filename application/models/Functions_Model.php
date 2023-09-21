@@ -34,6 +34,8 @@ class Functions_Model extends CI_Model {
                 return $formattedTime;
         }
 
+        
+
         public function getAccountsByAddress($AccountAddress) {
                 $tbl_webaccounts = $this->WebAccounts_Model->read_by_address($AccountAddress);
                 if ($tbl_webaccounts) {
@@ -141,8 +143,12 @@ class Functions_Model extends CI_Model {
                         return FALSE;
                 } else {
                         $tbl_authentications = $this->Authentications_Model->read_by_address($AccountAddress);
-                        if ($AuthToken === $tbl_authentications->AuthToken) {
-                                return TRUE;
+                        if ($this->get_current_timestamp() <= $tbl_authentications->AuthExpirationTime) {
+                                if ($AuthToken === $tbl_authentications->AuthToken) {
+                                        return TRUE;
+                                } else {
+                                        return FALSE;
+                                }
                         } else {
                                 return FALSE;
                         }
