@@ -15,7 +15,7 @@ class Functions_Model extends CI_Model {
                         return null;
                 }
                 $value = $this->db->escape_str($value);
-                // $value = $this->input->xss_clean($value);
+                $value = $this->input->xss_clean($value);
                 return $value;
         }
 
@@ -87,17 +87,17 @@ class Functions_Model extends CI_Model {
 
                 $validateVersion = $this->validateVersion($AccountAddress,$Version);
                 if (!($validateVersion['success'])) {
-                        return ['success' => FALSE, 'response' => $validateVersion['response']];
+                        return ['success' => FALSE, 'intent' => 'login', 'response' => $validateVersion['response']];
                 }
 
                 $validateAuthToken = $this->validateAuthToken($AccountAddress, $AuthToken);
                 if (!($validateAuthToken)) {
-                        return ['success' => FALSE, 'response' => 'Invalid token'];
+                        return ['success' => FALSE, 'intent' => 'login', 'response' => 'Invalid token'];
                 }
 
                 $validateClient = $this->validateClient($AccountAddress, $IpAddress, $Device, $Location);
                 if (!($validateClient)){
-                        return ['success' => FALSE, 'response' => 'Invalid client'];
+                        return ['success' => FALSE, 'intent' => 'login', 'response' => 'Invalid client'];
                 }
 
                 return ['success' => TRUE, 'response' => 'Validation Success'];

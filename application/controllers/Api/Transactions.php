@@ -68,7 +68,7 @@ class Transactions extends CI_Controller {
                                         $Account = $this->functions_Model->getAccountsByAddress($AccountAddressHeader);
 
                                         if ($Account->ActorCategory_Id === '1') {
-                                                $result = $this->Transactions_Model->read_transactions_by_category($validatedTargetCategory, '', ,$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
+                                                $result = $this->Transactions_Model->read_transactions_by_category($validatedTargetCategory, '',$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);
                                         
                                         } else if ($Account->ActorCategory_Id === '2'){
                                                 $result = $this->Transactions_Model->read_transactions_by_category($validatedTargetCategory, '',$validatedStartdate,$validatedEndDate,$validatedTransactionAddress,$validatedSearchName,$validatedStatusFilter);

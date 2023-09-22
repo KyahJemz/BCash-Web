@@ -12,7 +12,8 @@ class ActorCategory_Model extends CI_Model {
             ->from('tbl_actorcategory')
             ->where('ActorCategory_Id ', $Id)
             ->get()
-            ->row();
+            ->row()
+            ->Name;
         if ($result) {
             return $result;
         } else {
