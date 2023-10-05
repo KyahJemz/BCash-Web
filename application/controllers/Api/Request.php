@@ -61,7 +61,7 @@ class Request extends CI_Controller {
                 case 'Guest':
                     $response = $this->Users();
                     break;
-                case 'Parents/Guaridan':
+                case 'Parents/Guardian':
                     $response = $this->Guardians();
                     break;
                 default:
@@ -229,15 +229,15 @@ class Request extends CI_Controller {
                 $response = null;
                 break;
 
-            case 'View Fund Remitance':
+            case 'View Fund Remittance':
                 $response = null;
                 break;
 
-            case 'View Specific Fund Remitance':
+            case 'View Specific Fund Remittance':
                 $response = null;
                 break;
 
-            case 'Update Specific Fund Remitance':
+            case 'Update Specific Fund Remittance':
                 $response = null;
                 break;
 
