@@ -48,6 +48,23 @@ class WebAccounts_Model extends CI_Model {
         }
     }
 
+    public function uploadPass() {
+        $hashed_password = password_hash("12345", PASSWORD_BCRYPT);
+        $data = [
+            'Password ' => $hashed_password
+        ];
+        $this->db->where('WebAccounts_Address', 'ADM000000000000');
+        $this->db->update('tbl_webaccounts', $data);
+
+        if ($this->db->affected_rows() > 0) {
+             return TRUE;
+        } else {
+             return FALSE;
+        }
+    }
+
+
+    
 
 
     

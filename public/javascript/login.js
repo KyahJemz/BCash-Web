@@ -222,7 +222,7 @@ function changeForm(value) {
 function validate (){
     var data = {};
     let url = "/Api/Auth/Process";
-    if (Intent === "Login") {
+    if (Intent === "Login" || Intent === "" || Intent === null || Intent === "WebLogin") {
         data = { 
             Username: document.querySelector('.bcash-username').value,
             Password: document.querySelector('.bcash-password').value,
@@ -230,6 +230,7 @@ function validate (){
             Device: Device,
             Location: Location
         }; 
+        Intent = "WebLogin";
     } else if (Intent === "OTPValidation") {
         data = { 
             OTP: document.querySelector('.bcash-otp').value,

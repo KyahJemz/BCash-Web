@@ -1,5 +1,4 @@
 <?php
-require_once APPPATH . 'controllers/api/ApiHelper.php';
 
 class Auth extends CI_Controller {
 
@@ -12,19 +11,17 @@ class Auth extends CI_Controller {
                         'Functions_Model',
                         'Configurations_Model' 
                 ]);
-                $this->load->library([
-                        'Auth/Login/Web_Login', 
-                        'Auth/Login/User_Login', 
-                        'Auth/Login/Guardian_Login'
-                ]);
-                $this->load->library([
-                        'Auth/Login/OTP_Validation', 
-                        'Auth/Login/PIN_Creation', 
-                        'Auth/Login/PIN_Validation'
-                ]);  
+                $this->load->library('Auth/Login/Web_Login', NULL, 'Web_Login');
+                $this->load->library('Auth/Login/User_Login', NULL, 'User_Login');
+                $this->load->library('Auth/Login/Guardian_Login', NULL, 'Guardian_Login');
+                $this->load->library('Auth/Login/OTP_Validation', NULL, 'OTP_Validation');
+                $this->load->library('Auth/Login/PIN_Creation', NULL, 'PIN_Creation');
+                $this->load->library('Auth/Login/PIN_Validation', NULL, 'PIN_Validation');
         }
 
         public function Process() {
+
+                $response = null;
 
                 $AuthorizationTokenHeader = $this->Functions_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
                 $AccountAddressHeader = $this->Functions_Model->sanitize($this->input->get_request_header('AccountAddress', TRUE));
@@ -42,7 +39,6 @@ class Auth extends CI_Controller {
                                 'Parameters' => null,
                                 'Message' => $IsMaintenance['response']
                         ];
-                        return $response;
                 }
 
                 if (!(is_array($requestPostBody))) {
@@ -53,7 +49,6 @@ class Auth extends CI_Controller {
                                 'Message' => 'Invalid HTTPS body parameters!'
                         ];  
                 }  else {
-
                         switch ($IntentHeader) {
                                 case 'WebLogin':
                                     $response = $this->Web_Login->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader, $ClientVersionHeader);
@@ -93,6 +88,7 @@ class Auth extends CI_Controller {
                         }
                 }
                 // Return the response as JSON 
+
                 $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }
 

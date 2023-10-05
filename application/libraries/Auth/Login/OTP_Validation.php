@@ -12,9 +12,7 @@ class OTP_Validation {
                         'Functions_Model',
                         'Authentications_Model',
                 ]);
-                $this->CI->load->library([
-                        'Auth/Verification',
-                ]);
+                $this->CI->load->library('Auth/Verification', NULL, 'Verification');
         }
 
         public function Process($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader){

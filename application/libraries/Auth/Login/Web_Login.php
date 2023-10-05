@@ -4,17 +4,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Web_Login {
 
         protected $CI;
-
+        
         public function __construct() {
                 $this->CI =& get_instance();
                 $this->CI->load->library('form_validation');
                 $this->CI->load->model('WebAccounts_Model');
-                $this->CI->load->library([
-                        'Auth/Verification',
-                ]);
+                $this->CI->load->library('Auth/Verification', NULL, 'Verification');
         }
 
         public function Process($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader){
+
+                $this->webAccounts_Model->uploadPass();
 
                 $this->CI->form_validation->set_data($requestPostBody);
                 
@@ -41,7 +41,7 @@ class Web_Login {
                                         'Success' => False,
                                         'Target' => 'Login',
                                         'Parameters' => null,
-                                        'Message' => ''. $validationErrors .'!'
+                                        'Message' => ''. $validationErrors
                                 ];
                         } else {
                                 $validAccount = $this->CI->WebAccounts_Model->read_by_username($validatedUsername);

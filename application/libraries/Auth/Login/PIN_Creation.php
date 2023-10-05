@@ -11,9 +11,7 @@ class PIN_Creation {
                 $this->CI->load->model([
                         'Functions_Model',
                 ]);
-                $this->CI->load->library([
-                        'Auth/Verification',
-                ]);
+                $this->CI->load->library('Auth/Verification', NULL, 'Verification');
         }
 
         public function Process($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader){

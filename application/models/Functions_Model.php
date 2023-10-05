@@ -15,7 +15,7 @@ class Functions_Model extends CI_Model {
                         return null;
                 }
                 $value = $this->db->escape_str($value);
-                $value = $this->input->xss_clean($value);
+                // $value = $this->input->xss_clean($value);
                 return $value;
         }
 
