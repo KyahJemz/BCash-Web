@@ -2,9 +2,11 @@ const baseUrl = 'http://localhost/index.php';
 var Intent = "";
 var ResponseMessage = "";
 
+//    '/Api/Login/AuthenticateLogin'
+
+// AJAX
 function sendRequest(data,url) {
     console.log('Request Data:', data);
-//    '/Api/Login/AuthenticateLogin'
     return new Promise((resolve, reject) => {
         fetch(baseUrl+url, {
             method: 'POST',
@@ -54,175 +56,173 @@ function bindEventListeners() {
             } else {
                 console.log("LOGOUT");
                 logout();
-                Intent = "WebLogin";
+                Intent = "Login";
                 changeForm(Intent);
                 AccountAddress = "";
                 AuthToken = "";
-
             }
         }
     });
-  }
+}
 
 
 
 
 
+function reBindEventListeners() {
+    const signinButton = document.querySelector(".signin-btn");
+    const formBackground = document.querySelector(".form-background");
+    const formContainer = document.querySelector(".form-container");
 
+    formContainer.addEventListener("click", function (event) {
+        event.stopPropagation(); 
+    });
 
+    document.addEventListener("click", function (event) {
+        if (event.target !== formContainer && event.target !== signinButton) {
+            formBackground.style.display = "none";
+            Intent = "Login";
+            changeForm(Intent);
+        }
+    });
 
-
-  function reBindEventListeners() {
-      const signinButton = document.querySelector(".signin-btn");
-      const formBackground = document.querySelector(".form-background");
-      const formContainer = document.querySelector(".form-container");
-
-      formContainer.addEventListener("click", function (event) {
-          event.stopPropagation(); 
-      });
-
-      document.addEventListener("click", function (event) {
-          if (event.target !== formContainer && event.target !== signinButton) {
-              formBackground.style.display = "none";
-              Intent = "WebLogin";
-              changeForm(Intent);
-          }
-      });
-
-      document.querySelector('.validate').addEventListener("click", function () {
+    document.querySelector('.validate').addEventListener("click", function () {
         validate ();
     });
-  }
+}
 
-  function changeForm(value) {
-      const form_background = document.querySelector('.form-background');
-      const formContainer = document.querySelector(".form-container");
 
-      switch (value) {
-          case "WebLogin":
+
+
+function changeForm(value) {
+    const form_background = document.querySelector('.form-background');
+    const formContainer = document.querySelector(".form-container");
+
+    switch (value) {
+        case "Login":
             form_background.innerHTML = `
-                  <div class="login-container form-container">
-                      <div class="form-title">
-                          <p class="title">User Verification</p> 
-                          <hr>
-                          <p class="subtitle">Enter your username & Password</p>
-                          <p class="note"></p>
-                      </div>
-                      
-                      <div class="input-container">
-                          <input class="bcash-username" type="text" name="bcash-username"  required>
-                          <label>Username</label>
-                      </div>
-                      <div class="input-container">
-                          <input class="bcash-password" type="password" name="bcash-password" required>
-                          <label>Password</label>
-                      </div>
-  
-                      <button class="validate btn-default curson-pointer" type="submit" name="bcash-pin-verify">Verify</button>
-                      <hr>
-                      <div class="note">
-                          <p class="ResponseMessage"></p> 
-                          <a href=""><u>Forgot Password?</u></a>
-                      </div>
-                  </div>
-              `;
-              break;
+                <div class="login-container form-container">
+                    <div class="form-title">
+                        <p class="title">User Verification</p> 
+                        <hr>
+                        <p class="subtitle">Enter your username & Password</p>
+                        <p class="note"></p>
+                    </div>
+                    
+                    <div class="input-container">
+                        <input class="bcash-username" type="text" name="bcash-username"  required>
+                        <label>Username</label>
+                    </div>
+                    <div class="input-container">
+                        <input class="bcash-password" type="password" name="bcash-password" required>
+                        <label>Password</label>
+                    </div>
 
-          case "PINValidation":
-            form_background.innerHTML = `
-                  <div class="pin-container form-container">
-                      <div class="form-title">
-                          <p class="title">PIN Verification</p> 
-                          <hr>
-                          <p class="subtitle">Enter your 6 digit PIN code.</p>
-                      </div>
-                      <input class="bcash-pin" type="password" name="pin" minlength="6" pattern="[0-9]{6}" maxlength="6">
-                      <button class="validate btn-default curson-pointer" type="submit" name="bcash-pin-verify">Verify</button>
-                      <hr>
-                      <div class="note">
+                    <button class="validate btn-default cursor-pointer" type="submit" name="bcash-pin-verify">Verify</button>
+                    <hr>
+                    <div class="note">
                         <p class="ResponseMessage"></p> 
-                      </div>
-                  </div>
-              `;
-              break;
+                        <a href=""><u>Forgot Password?</u></a>
+                    </div>
+                </div>
+            `;
+            break;
 
-          case "PINCreation":
+        case "PINValidation":
             form_background.innerHTML = `
-                  <div class="create-pin-container form-container">
-                      <div class="form-title">
-                          <p class="title">PIN Creation</p> 
-                          <hr>
-                          <p class="subtitle">Create your 6 digit PIN code.</p>
-                      </div>
-                      <input class="bcash-pin1" type="password" name="pin1" minlength="6" pattern="[0-9]{6}" maxlength="6">
-                      <label for="">Re-type PIN:</label>
-                      <input class="bcash-pin2" type="password" name="pin2" minlength="6" pattern="[0-9]{6}" maxlength="6">
-                      <button class="validate btn-default curson-pointer" type="submit" name="bcash-pin-create">Create</button>
-                      <hr>
-                      <div class="note">
+                <div class="pin-container form-container">
+                    <div class="form-title">
+                        <p class="title">PIN Verification</p> 
+                        <hr>
+                        <p class="subtitle">Enter your 6 digit PIN code.</p>
+                    </div>
+                    <input class="bcash-pin" type="password" name="pin" minlength="6" pattern="[0-9]{6}" maxlength="6">
+                    <button class="validate btn-default cursor-pointer" type="submit" name="bcash-pin-verify">Verify</button>
+                    <hr>
+                    <div class="note">
+                        <p class="ResponseMessage"></p> 
+                    </div>
+                </div>
+            `;
+            break;
+
+        case "PINCreation":
+            form_background.innerHTML = `
+                <div class="create-pin-container form-container">
+                    <div class="form-title">
+                        <p class="title">PIN Creation</p> 
+                        <hr>
+                        <p class="subtitle">Create your 6 digit PIN code.</p>
+                    </div>
+                    <input class="bcash-pin1" type="password" name="pin1" minlength="6" pattern="[0-9]{6}" maxlength="6">
+                    <label for="">Re-type PIN:</label>
+                    <input class="bcash-pin2" type="password" name="pin2" minlength="6" pattern="[0-9]{6}" maxlength="6">
+                    <button class="validate btn-default cursor-pointer" type="submit" name="bcash-pin-create">Create</button>
+                    <hr>
+                    <div class="note">
                         <p class="ResponseMessage"></p>   
-                      </div>
-                  </div>
-              `;
-              break;
+                    </div>
+                </div>
+            `;
+            break;
 
-          case "OTPValidation":
+        case "OTPValidation":
             form_background.innerHTML = `
-                  <div class="otp-container form-container">
-                      <div class="form-title">
-                          <p class="title">One-Time-Password Verification</p> 
-                          <hr>
-                          <p class="subtitle">Enter 6 digit OTP sent to your email below:</p>
-                          <p class="note">jameslayso@fasasd.com</p>
-                      </div>
-                      <input class="bcash-otp" type="text" name="otp" minlength="6" pattern="[0-9]{6}" maxlength="6">
-                      <button class="validate btn-default curson-pointer" type="submit" name="bcash-otp">Verify</button>
-                      <hr>
-                      <div class="note">
+                <div class="otp-container form-container">
+                    <div class="form-title">
+                        <p class="title">One-Time-Password Verification</p> 
+                        <hr>
+                        <p class="subtitle">Enter 6 digit OTP sent to your email below:</p>
+                        <p class="note">jameslayso@fasasd.com</p>
+                    </div>
+                    <input class="bcash-otp" type="text" name="otp" minlength="6" pattern="[0-9]{6}" maxlength="6">
+                    <button class="validate btn-default cursor-pointer" type="submit" name="bcash-otp">Verify</button>
+                    <hr>
+                    <div class="note">
                         <p class="ResponseMessage"></p> 
-                      </div>
-                  </div>
-              `;
-              break;
+                    </div>
+                </div>
+            `;
+            break;
 
-          default:
+        default:
             form_background.innerHTML = `
-                  <div class="login-container form-container">
-                      <div class="form-title">
-                          <p class="title">User Verification</p> 
-                          <hr>
-                          <p class="subtitle">Enter your username & Password</p>
-                          <p class="note"></p>
-                      </div>
-                      
-                      <div class="input-container">
-                          <input class="bcash-username" type="text" name="bcash-username"  required>
-                          <label>Username</label>
-                      </div>
-                      <div class="input-container">
-                          <input class="bcash-password" type="password" name="bcash-password" required>
-                          <label>Password</label>
-                      </div>
-  
-                      <button class="validate btn-default curson-pointer" type="submit" name="bcash-pin-verify">Verify</button>
-                      <hr>
-                      <div class="note">
+                <div class="login-container form-container">
+                    <div class="form-title">
+                        <p class="title">User Verification</p> 
+                        <hr>
+                        <p class="subtitle">Enter your username & Password</p>
+                        <p class="note"></p>
+                    </div>
+                    
+                    <div class="input-container">
+                        <input class="bcash-username" type="text" name="bcash-username"  required>
+                        <label>Username</label>
+                    </div>
+                    <div class="input-container">
+                        <input class="bcash-password" type="password" name="bcash-password" required>
+                        <label>Password</label>
+                    </div>
+
+                    <button class="validate btn-default cursor-pointer" type="submit" name="bcash-pin-verify">Verify</button>
+                    <hr>
+                    <div class="note">
                         <p class="ResponseMessage"></p> 
-                          <a href=""><u>Forgot Password?</u></a>
-                      </div>
-                  </div>
-              `;
-              break;
+                        <a href=""><u>Forgot Password?</u></a>
+                    </div>
+                </div>
+            `;
+            break;
 
-      }
-     reBindEventListeners();
-  }
+    }
+    reBindEventListeners();
+}
 
-  function validate (){
-
+    
+function validate (){
     var data = {};
-    let url = "/Api/Login/AuthenticateLogin";
-    if (Intent === "WebLogin") {
+    let url = "/Api/Auth/Process";
+    if (Intent === "Login") {
         data = { 
             Username: document.querySelector('.bcash-username').value,
             Password: document.querySelector('.bcash-password').value,
@@ -261,11 +261,10 @@ function bindEventListeners() {
 
         if (responseData.Parameters) {
             if (responseData.Parameters.AccountAddress) {
-              AccountAddress = responseData.Parameters.AccountAddress;
+                AccountAddress = responseData.Parameters.AccountAddress;
             }
-
             if (responseData.Parameters.AuthorizationToken) {
-              AuthToken = responseData.Parameters.AuthorizationToken;
+                AuthToken = responseData.Parameters.AuthorizationToken;
             }
         }
 
@@ -277,7 +276,7 @@ function bindEventListeners() {
         console.log(Intent);
         changeForm(Intent);
         if (Intent === null) {
-            Intent = "WebLogin";
+            Intent = "Login";
         }
         document.querySelector('.ResponseMessage').innerHTML = ResponseMessage;
 
@@ -307,11 +306,11 @@ function bindEventListeners() {
             }
             document.getElementById('redirect').innerHTML = `
                 <form id="redirectForm" action="`+baseUrl+`/`+target+`" method="post">
-                <input type="hidden" name="AuthToken" value="`+AuthToken+`">
-                <input type="hidden" name="AccountAddress" value="`+AccountAddress+`">
-                <input type="hidden" name="IpAddress" value="`+IpAddress+`">
-                <input type="hidden" name="Device" value="`+Device+`">
-                <input type="hidden" name="Location" value="`+Location+`">
+                    <input type="hidden" name="AuthToken" value="`+AuthToken+`">
+                    <input type="hidden" name="AccountAddress" value="`+AccountAddress+`">
+                    <input type="hidden" name="IpAddress" value="`+IpAddress+`">
+                    <input type="hidden" name="Device" value="`+Device+`">
+                    <input type="hidden" name="Location" value="`+Location+`">
                 </form>
             `;
             var form = document.getElementById("redirectForm");
@@ -322,28 +321,26 @@ function bindEventListeners() {
     .catch(error => {
         console.error('Request Error:', error);
     });
-
 }
 
 
 function logout(){
     var data = {};
-    let url = "/Api/Login/AuthenticateLogin";
-    Intent = "Logout"
+    let url = "/Api/Auth/Process";
+    Intent = "Logout";
+
     sendRequest(data,url)
-    .then(responseData => {
-        console.log('Response Data:', responseData);
-     })
-    .catch(error => {
-        console.error('Request Error:', error);
+        .then(responseData => {
+            console.log('Response Data:', responseData);
+    })
+        .catch(error => {
+            console.error('Request Error:', error);
     });
 }
 
-// ONBLAOD
+// ONLOAD
 document.addEventListener("DOMContentLoaded", function () {
     bindEventListeners();
-    changeForm("WebLogin");
+    changeForm("Login");
     validate ();
-
-
 });
