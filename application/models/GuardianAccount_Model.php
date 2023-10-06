@@ -20,6 +20,20 @@ class GuardianAccount_Model extends CI_Model {
         }
     }
 
+    public function read_by_emailid($EmailId){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_guardianaccount')
+            ->where('EmailId ', $EmailId)
+            ->get()
+            ->row();
+        if ($result) {
+            return $result;
+        } else {
+            return null; 
+        }
+    }
+
     public function update_pin($AccountAddress,$PIN) {
         $data = [
             'PinCode ' => $PIN

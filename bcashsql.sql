@@ -34,11 +34,11 @@ CREATE TABLE tbl_Campus (
 -- Create tbl_UsersData
 CREATE TABLE tbl_UsersData (
     UsersAccount_Address VARCHAR(15) PRIMARY KEY,
-    GuardianAccount_Address VARCHAR(15) NOT NULL,
+    GuardianAccount_Address VARCHAR(15) NULL,
     Group_Id INT NULL,
     Department_Id INT NULL,
     Course_Id INT NULL,
-    Campus_Id INT NOT NULL,
+    Campus_Id INT NULL,
     SchoolPersonalId VARCHAR(15) NULL,
     Balance FLOAT DEFAULT 0,
     YearLevel VARCHAR(10) NULL,
@@ -173,7 +173,7 @@ CREATE TABLE tbl_TransactionType (
 
 -- Create tbl_TransactionItems
 CREATE TABLE tbl_TransactionItems (
-    Transaction_Address VARCHAR(15) PRIMARY KEY,
+    Transaction_Address VARCHAR(20) PRIMARY KEY,
     MerchantItems_Id INT NOT NULL,
     Quantity INT NOT NULL,
     Amount FLOAT NOT NULL
@@ -181,7 +181,7 @@ CREATE TABLE tbl_TransactionItems (
 
 -- Create tbl_TransactionsInfo
 CREATE TABLE tbl_TransactionsInfo (
-    Transaction_Address VARCHAR(15) PRIMARY KEY,
+    Transaction_Address VARCHAR(20) PRIMARY KEY,
     TransactionType_Id INT NOT NULL,
     Sender_Address VARCHAR(15) NOT NULL,
     Receiver_Address VARCHAR(15) NOT NULL,
@@ -196,7 +196,7 @@ CREATE TABLE tbl_TransactionsInfo (
 
 -- Create tbl_Transactions
 CREATE TABLE tbl_Transactions (
-    Transaction_Address VARCHAR(15) PRIMARY KEY,
+    Transaction_Address VARCHAR(20) PRIMARY KEY,
     Account_Address VARCHAR(15) NOT NULL,
     Status VARCHAR(50) NOT NULL,
     Debit FLOAT NOT NULL,

@@ -1,6 +1,7 @@
 {
        "cSpell.words": [
               "APPPATH",
-              "BASEPATH"
-       ]
+              "BASEPATH",
+       ],
+       "editor.tabSize": 7
 }

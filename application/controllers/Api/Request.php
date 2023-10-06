@@ -5,8 +5,17 @@ class Request extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(['form_validation']);
-        $this->load->model('ActorCategory_Model');
-        $this->load->model('Functions_Model');
+        $this->load->model([
+            'ActorCategory_Model', 
+            'Functions_Model',
+        ]);
+        $this->load->library('Actor/Accounting_Actor', NULL, 'Accounting_Actor');
+        $this->load->library('Actor/Administrator_Actor', NULL, 'Administrator_Actor');
+        $this->load->library('Actor/Guest_Actor', NULL, 'Guest_Actor');
+        $this->load->library('Actor/MerchantAdmin_Actor', NULL, 'MerchantAdmin_Actor');
+        $this->load->library('Actor/MerchantStaff_Actor', NULL, 'MerchantStaff_Actor');
+        $this->load->library('Actor/ParentsGuardian_Actor', NULL, 'ParentsGuardian_Actor');
+        $this->load->library('Actor/User_Actor', NULL, 'User_Actor');
     }
 
     private $AuthorizationToken;
@@ -16,6 +25,7 @@ class Request extends CI_Controller {
     private $Device;
     private $Location;
     private $Intent;
+
     private $Account;
     private $ActorCategory;
 
@@ -32,11 +42,9 @@ class Request extends CI_Controller {
         $requestPostBody = $this->input->raw_input_stream; // READ POST BODY
         $requestPostBody = json_decode($requestPostBody, TRUE); // DECODES
 
-        $this->form_validation->set_data($requestPostBody);
-
         $ValidateHeaders = $this->ValidateHeaders();
 
-        if ($ValidateHeaders['success']) {
+        if ($ValidateHeaders['Success']) {
 
             $this->Account = $this->Functions_Model->getAccountsByAddress($this->AccountAddress);
 
@@ -44,28 +52,33 @@ class Request extends CI_Controller {
 
             switch ($this->ActorCategory) {
                 case 'Administrator':
-                    $response = $this->Administrator();
+                    $response = $this->Administrator_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
                 case 'Accounting':
-                    $response = $this->Accounting();
+                    $response = $this->Accounting_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
                 case 'Merchant Admin':
-                    $response = $this->MerchantAdmin();
+                    $response = $this->MerchantAdmin_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
                 case 'Merchant Staff':
-                    $response = $this->MerchantStaff();
+                    $response = $this->MerchantStaff_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
                 case 'User':
-                    $response = $this->Users();
+                    $response = $this->User_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
                 case 'Guest':
-                    $response = $this->Users();
+                    $response = $this->Guest_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
-                case 'Parents/Guaridan':
-                    $response = $this->Guardians();
+                case 'Guardian':
+                    $response = $this->Guardians->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
                 default:
-                    $response = $this->defaultAction();
+                    $response = [
+                        'Success' => False,
+                        'Target' => 'Login',
+                        'Parameters' => null,
+                        'Response' => 'Invalid'
+                    ]; 
                     break;
             }
         } else {
@@ -77,202 +90,19 @@ class Request extends CI_Controller {
 
     public function ValidateHeaders(){
         // Empty Headers
-        if (empty($this->IpAddress) || empty($this->Device) || empty($this->Location) || empty($this->ClientVersion)) {
-            return ['success' => FALSE, 'response' => 'Invalid Headers']; 
+        if (empty($this->IpAddress) || empty($this->Device) || empty($this->Location) || empty($this->ClientVersion) || empty($this->Intent)) {
+            return ['Success' => False,'Target' => 'Login','Parameters' => null,'Response' => 'Invalid Headers']; 
         } 
         // Invalid Login
         if (empty($this->AccountAddress) || empty($this->AuthorizationToken)) {
-            return ['success' => FALSE, 'intent' => 'login', 'response' => 'Login Required']; 
+            return ['Success' => False,'Target' => 'Login','Parameters' => null,'Response' => 'Login Required!']; 
         }
         // Validation Of Account
         $validated = $this->Functions_Model->validateRequest($this->AccountAddress, $this->AuthorizationToken, $this->IpAddress, $this->Device, $this->Location, $this->ClientVersion);
-        if ($validated['success']) {
-            return ['success' => TRUE, 'response' => 'success']; 
+        if ($validated['Success']) {
+            return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Success']; 
         }
         // Validation Failed
-        return $validated; 
-    }
-
-    public function defaultAction() 
-    {
-            // can the variable $met read here?
-
-    
-    }
-
-    public function Administrator()
-    {
-        switch ($this->Intent) {
-            case 'View Transactions History':
-                $response = null;
-                break;
-
-            case 'View Accounts':
-                $response = null;
-                break;
-
-            case 'Update Account':
-                $response = null;
-                break;
-
-            case 'View Settings':
-                $response = null;
-                break;
-
-            case 'Update Settings':
-                $response = null;
-                break;
-
-            case 'View Notifications':
-                $response = null;
-                break;
-
-            case 'Set Notifications':
-                $response = null;
-                break;
-
-            case 'View Configurations':
-                $response = null;
-                break;
-
-            case 'Update Configurations':
-                $response = null;
-                break;
-
-            case 'View Activity Logs':
-                $response = null;
-                break;
-
-            case 'View Login History':
-                $response = null;
-                break;
-
-            case 'Update Login History':
-                $response = null;
-                break;
-
-            case 'Clear Login History':
-                $response = null;
-                break;
-
-            case 'View Charts':
-                $response = null;
-                break;
-
-            case 'Logout':
-                $response = null;
-                break;
-                
-            default:
-                $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
-                break;
-        }
-        return $response;
-    }
-
-    public function Accounting()
-    {
-        switch ($this->Intent) {
-            case 'View Transactions History':
-                $response = null;
-                break;
-
-            case 'View Accounts':
-                $response = null;
-                break;
-
-            case 'Update Account':
-                $response = null;
-                break;
-
-            case 'View Settings':
-                $response = null;
-                break;
-
-            case 'Update Settings':
-                $response = null;
-                break;
-
-            case 'View Notifications':
-                $response = null;
-                break;
-
-            case 'View Activity Logs':
-                $response = null;
-                break;
-
-            case 'View Login History':
-                $response = null;
-                break;
-
-            case 'Update Login History':
-                $response = null;
-                break;
-
-            case 'Clear Login History':
-                $response = null;
-                break;
-
-            case 'View Charts':
-                $response = null;
-                break;
-
-            case 'Make CashIn':
-                $response = null;
-                break;
-
-            case 'View CashIn':
-                $response = null;
-                break;
-
-            case 'View Receiver Details':
-                $response = null;
-                break;
-
-            case 'View Fund Remitance':
-                $response = null;
-                break;
-
-            case 'View Specific Fund Remitance':
-                $response = null;
-                break;
-
-            case 'Update Specific Fund Remitance':
-                $response = null;
-                break;
-
-            case 'Logout':
-                $response = null;
-                break;
-                
-            default:
-                $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
-                break;
-        }
-        return $response;
-    }
-
-    public function MerchantAdmin()
-    {
-            
-    
-    }
-
-    public function MerchantStaff()
-    {
-            
-    
-    }
-
-    public function Users()
-    {
-            
-    
-    }
-
-    public function Guardians()
-    {
-            
-    
+        return ['Success' => False,'Target' => 'Login','Parameters' => null,'Response' => 'Validation Failed!' ];
     }
 }

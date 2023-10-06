@@ -22,7 +22,7 @@ class Functions_Model extends CI_Model {
         public function get_current_timestamp (){
                 //return $this->db->query("SELECT NOW() AS current_time")->row()->current_time;
                 return date('Y-m-d H:i:s');
-            }
+        }
         
         public function get_current_timestamp_add($currentTimestamp) {
                 $unixCurrentTimestamp = strtotime($currentTimestamp);
@@ -34,8 +34,71 @@ class Functions_Model extends CI_Model {
                 return $formattedTime;
         }
 
-        
+        function generate_random_alphanumeric($length) {
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $randomString = '';
+            
+                for ($i = 0; $i < $length; $i++) {
+                    $randomString .= $characters[rand(0, strlen($characters) - 1)];
+                }
+            
+                return $randomString;
+            }
 
+        public function create_unique_address($initials) {
+
+                do {
+                        $random_string = $this->generate_random_alphanumeric(13);
+
+                        $address_exists = $this->getAccountsByAddress($initials . $random_string);
+
+                        if ($address_exists === NULL) {
+                                $address_exists = true;
+                        } else {
+                                $address_exists = false;
+                        }
+
+                    } while ($address_exists);
+                
+                return $initials . $random_string;
+        }
+
+        public function create_unique_transaction_address() {
+
+                $datePart = date('YmdHis');  // Format: YYYYMMDDHHMMSS
+                $randomString = $this->generate_random_alphanumeric(20 - strlen($datePart));
+            
+                // Combine the date part and the random string to form the unique address
+                $uniqueAddress = $datePart . $randomString;
+            
+                return substr($uniqueAddress, 0, 20);  // Trim to 20 characters
+        }
+
+        
+        public function getAccountsByAddress($AccountAddress) {
+                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address($AccountAddress);
+                if ($tbl_webaccounts) {
+                        return $tbl_webaccounts;
+                }
+                
+                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address($AccountAddress);
+                if ($tbl_usersaccount){
+                        return $tbl_usersaccount;
+                }
+
+                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address($AccountAddress);
+                if ($tbl_guardiansaccount){
+                        return $tbl_guardiansaccount;
+                }
+
+                return FALSE;
+        }
+
+                
+                return $initials . $random_string;
+        }
+
+        
         public function getAccountsByAddress($AccountAddress) {
                 $tbl_webaccounts = $this->WebAccounts_Model->read_by_address($AccountAddress);
                 if ($tbl_webaccounts) {
@@ -85,22 +148,37 @@ class Functions_Model extends CI_Model {
 
         public function validateRequest($AccountAddress, $AuthToken, $IpAddress, $Device, $Location, $Version) {
 
-                $validateVersion = $this->validateVersion($AccountAddress,$Version);
-                if (!($validateVersion['success'])) {
-                        return ['success' => FALSE, 'intent' => 'login', 'response' => $validateVersion['response']];
-                }
+                // $validateVersion = $this->validateVersion($AccountAddress,$Version);
+                // if (!($validateVersion['success'])) {
+                //         return ['success' => FALSE, 'intent' => 'login', 'response' => $validateVersion['response']];
+                // }
 
                 $validateAuthToken = $this->validateAuthToken($AccountAddress, $AuthToken);
                 if (!($validateAuthToken)) {
-                        return ['success' => FALSE, 'intent' => 'login', 'response' => 'Invalid token'];
+                        return [
+                                'Success' => FALSE, 
+                                'Target' => 'login', 
+                                'Parameters' => null,
+                                'Response' => 'Invalid token'
+                        ];
                 }
 
                 $validateClient = $this->validateClient($AccountAddress, $IpAddress, $Device, $Location);
                 if (!($validateClient)){
-                        return ['success' => FALSE, 'intent' => 'login', 'response' => 'Invalid client'];
+                        return [
+                                'Success' => False,
+                                'Target' => 'Login',
+                                'Parameters' => null,
+                                'Response' => 'Invalid client'
+                        ];
                 }
 
-                return ['success' => TRUE, 'response' => 'Validation Success'];
+                return [
+                        'Success' => True, 
+                        'Target' => null,
+                        'Parameters' => null,
+                        'Response' => 'Validation Success'
+                ];
         }
 
 

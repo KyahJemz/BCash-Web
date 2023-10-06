@@ -6,6 +6,15 @@ class UsersData_Model extends CI_Model {
         $this->load->database();
     }
 
+    public function create($UsersAccount_Address) {
+        $data = [
+            'UsersAccount_Address' => $UsersAccount_Address,
+        ];
+        $this->db->insert('tbl_usersdata', $data);
+        $result = $this->db->insert_id();
+        return ($result) ? TRUE : FALSE;
+    }
+
     public function read_by_address($AccountAdress){
         $result = $this->db
             ->select('*')

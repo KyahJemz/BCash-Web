@@ -6,6 +6,47 @@ class Transactions_Model extends CI_Model {
         $this->load->database();
     }
 
+    public function create_transactioninfo($params): bool {
+        $data = [
+            'Transaction_Address' => $params['Transaction_Address'],
+            'TransactionType_Id' => $params['TransactionType_Id'],
+            'Sender_Address ' => $params['Sender_Address'],
+            'Receiver_Address ' => $params['Receiver_Address'],
+            'Status ' => $params['Status'],
+            'Amount ' => $params['Amount'],
+            'Discount ' => $params['Discount'],
+            'DiscountReason ' => $params['DiscountReason'],
+            'TotalAmount ' => $params['TotalAmount'],
+            'PostedBy ' => $params['PostedBy'],
+        ];
+        $this->db->insert('tbl_transactionsinfo', $data);
+        $result = $this->db->insert_id();
+        return ($result) ? TRUE : FALSE;
+    }
+
+    public function create_transaction($params): bool {
+        $data = [
+            'Transaction_Address' => $params['Transaction_Address'],
+            'Account_Address' => $params['Account_Address'],
+            'Status ' => $params['Status'],
+            'Debit ' => $params['Debit'],
+            'Credit ' => $params['Credit'],
+        ];
+        $this->db->insert('tbl_transactions', $data);
+        $result = $this->db->insert_id();
+        return ($result) ? TRUE : FALSE;
+    }
+
+
+
+
+
+
+
+
+
+
+
     // TABLES
     // tbl_transactiontype - category type
     // tbl_transactionsinfo - full details

@@ -1,74 +1,128 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+// composer require guzzlehttp/guzzle
+// use GuzzleHttp\Client;
+
 class User_Login {
 
-    protected $CI;
+        protected $CI;
 
-    public function __construct() {
-        $this->CI =& get_instance();
-        $this->CI->load->library('form_validation');
-        $this->CI->load->model('UsersAccount_Model');
-    }
+        public function __construct() {
+                $this->CI =& get_instance();
+                $this->CI->load->library('form_validation');
+                $this->CI->load->model([
+                        'Functions_Model',
+                        'UsersAccount_Model', 
+                        'UsersData_Model',
+                ]);
+                $this->CI->load->library('Auth/Verification', NULL, 'Verification');
+                $this->CI->load->database();
+        }
 
-    public function Process($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader){
+        public function Process($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader){
 
-
-        // $this->form_validation->set_data($requestPostBody);
-        
-        // $this->form_validation->set_rules('Email', 'Email', 'trim|required');
-        // $this->form_validation->set_rules('EmailId', 'EmailId', 'trim|required|alpha_numeric');
-        // $this->form_validation->set_rules('IpAddress', 'IpAddress', 'trim|required|valid_ip');
-        // $this->form_validation->set_rules('Device', 'Device', 'trim|required|alpha_numeric');
-        // $this->form_validation->set_rules('Location', 'Location', 'trim|required|alpha_numeric');
-
-        // $validatedEmail = $requestPostBody['Email'];
-        // $validatedEmailId = $requestPostBody['EmailId'];
-        // $validatedIpAddress = $requestPostBody['IpAddress'];
-        // $validatedDevice = $requestPostBody['Device'];
-        // $validatedLocation = $requestPostBody['Location'];
-
-        // if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
-
-        //         $response = $this->verification($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation);
-
-        // } else {
-        //         if ($this->form_validation->run() === FALSE) {
-        //                 $validationErrors = validation_errors();
-        //                 $response = [
-        //                         'Success' => FALSE,
-        //                         'Target' => null,
-        //                         'Parameters' => null,
-        //                         'Message' => 'Failed, Reason: The provided parameters does not meet the validation requirements. [' . $validationErrors .']'
-        //                 ];
-        //         } else {
-        //                 $validAccount = $this->Login_Model->get_tbl_webaccounts_by_username($validatedUsername);
+                $this->CI->form_validation->set_data($requestPostBody);
                 
-        //                 if ($validAccount) {
-        //                         if (password_verify($validatedPassword,$validAccount->Password)) {
+                // $this->CI->form_validation->set_rules('GoogleId', 'GoogleId', 'trim|required|alpha_numeric');
+                // $this->CI->form_validation->set_rules('GoogleEmail', 'GoogleEmail', 'trim|required|alpha_numeric');
+                // $this->CI->form_validation->set_rules('GoogleFirstName', 'GoogleFirstName', 'trim|required|alpha_numeric');
+                // $this->CI->form_validation->set_rules('GoogleLastName', 'GoogleLastName', 'trim|required|alpha_numeric');
+                $this->CI->form_validation->set_rules('GoogleToken', 'GoogleToken', 'trim|required|alpha_numeric');
+                $this->CI->form_validation->set_rules('IpAddress', 'IpAddress', 'trim|required|valid_ip');
+                $this->CI->form_validation->set_rules('Device', 'Device', 'trim|required');
+                $this->CI->form_validation->set_rules('Location', 'Location', 'trim|required|alpha_numeric');
 
-        //                                 $AccountAddress = $validAccount->WebAccounts_Address;
+                // $validatedGoogleId = $requestPostBody['GoogleId'];
+                // $validatedGoogleEmail = $requestPostBody['GoogleEmail'];
+                // $validatedGoogleFirstName = $requestPostBody['GoogleFirstName'];
+                // $validatedGoogleLastName = $requestPostBody['GoogleLastName'];
+                $validatedGoogleToken = $requestPostBody['GoogleToken'];
+                $validatedIpAddress = $requestPostBody['IpAddress'];
+                $validatedDevice = $requestPostBody['Device'];
+                $validatedLocation = $requestPostBody['Location'];
 
-        //                                 $response = $this->verification($AccountAddress, null, $validatedIpAddress, $validatedDevice, $validatedLocation);
+                if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
 
-        //                         } else {
-        //                                 $response = [
-        //                                         'Success' => FALSE,
-        //                                         'Target' => null,
-        //                                         'Parameters' => null,
-        //                                         'Message' => 'Failed: Incorrect Password!'
-        //                                 ];
-        //                         }
-        //                 } else {
-        //                         $response = [
-        //                                 'Success' => FALSE,
-        //                                 'Target' => null,
-        //                                 'Parameters' => null,
-        //                                 'Message' => 'Failed: Invalid Account!'
-        //                         ];
-        //                 }
-        //         }
-        // }
-        // return $response;
-    }
+                        $response = $this->CI->Verification->Process($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
+
+                } else {
+                        if ($this->CI->form_validation->run() === FALSE) {
+                                $validationErrors = validation_errors();
+                                $response = [
+                                        'Success' => False,
+                                        'Target' => 'Login',
+                                        'Parameters' => null,
+                                        'Message' => ''. $validationErrors
+                                ];
+                        } else {
+
+
+                                $client = new Client();
+                                $response = $client->post('https://www.googleapis.com/oauth2/v3/tokeninfo', 
+                                        ['form_params' => ['id_token' => $token]]
+                                );
+
+                                $body = json_decode($response->getBody(), true);  // Parse the response JSON
+
+                                if (!isset($body['error'])) {
+
+                                        $validatedGoogleId = $body['sub'];
+                                        $validatedGoogleEmail = $body['email'];
+                                        $validatedGoogleFirstName = $body['given_name'];
+                                        $validatedGoogleLastName = $body['family_name'];
+
+                                        $validAccount = $this->CI->UsersAccount_Model->read_by_emailid($validatedGoogleId);
+
+                                        if (!$validAccount) {
+                                                try {
+
+                                                        $UsersAccount_Address = $this->CI->Functions_Model->create_unique_address();
+
+                                                        $this->CI->db->trans_start();
+
+                                                                $this->UsersAccount_Model->create($UsersAccount_Address, $validatedGoogleEmail, $validatedGoogleId, $validatedGoogleFirstName, $validatedGoogleLastName);
+
+                                                                $this->UsersData_Model->create($UsersAccount_Address);
+
+                                                        $this->CI->db->trans_complete();
+
+                                                        if ($this->CI->db->trans_status() === FALSE) {
+                                                                $this->CI->db->trans_rollback();
+                                                                $response = [
+                                                                        'Success' => False,
+                                                                        'Target' => 'Login',
+                                                                        'Parameters' => null,
+                                                                        'Message' => 'Error during registering your account!'
+                                                                ];
+                                                        } else {
+                                                                // Continue
+                                                        }
+                                                } catch (Exception $e) {
+                                                        $this->CI->db->trans_rollback();
+                                                        $response = [
+                                                                'Success' => False,
+                                                                'Target' => 'Login',
+                                                                'Parameters' => null,
+                                                                'Message' => 'Database Error! ' + $e
+                                                        ];   
+                                                }
+                                        } 
+
+                                        $AccountAddress = $validAccount->UsersAccount_Address;
+
+                                        $response = $this->CI->Verification->Process($AccountAddress, null, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
+
+                                } else {
+                                        $response = [
+                                                'Success' => False,
+                                                'Target' => 'Login',
+                                                'Parameters' => null,
+                                                'Message' => 'Invalid Token! ' + $body['error']
+                                        ];   
+                                }
+                        }
+                }
+                return $response;
+        }
 }
