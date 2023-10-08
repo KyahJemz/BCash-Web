@@ -46,6 +46,7 @@ CREATE TABLE tbl_UsersData (
     CanDoTransactions BIT DEFAULT 1,
     CanUseCard BIT DEFAULT 1,
     CanModifySettings BIT DEFAULT 1,
+    IsPurchaseAutoConfirm BIT DEFAULT 0,
     IsParentalActive BIT DEFAULT 0
 );
 
@@ -191,6 +192,7 @@ CREATE TABLE tbl_TransactionsInfo (
     DiscountReason VARCHAR(255) NULL,
     TotalAmount FLOAT NOT NULL,
     PostedBy VARCHAR(15) NOT NULL,
+    Message VARCHAR(255) NULL,
     Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -37,6 +37,43 @@ class Transactions_Model extends CI_Model {
         return ($result) ? TRUE : FALSE;
     }
 
+    public function update_status_transactioninfo($params): bool {
+        $data = [
+            'Status' => $params['Status'],  
+        ];
+    
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);  
+        $this->db->update('tbl_transactionsinfo', $data);
+    
+        return ($this->db->affected_rows() > 0); 
+    }
+    
+    public function update_status_transaction($params): bool {
+        $data = [
+            'Status' => $params['Status'],  
+        ];
+    
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);  
+        $this->db->update('tbl_transactions', $data);
+    
+        return ($this->db->affected_rows() > 0);  
+    }
+
+    public function calculate_total_balance($params) {
+        $result = $this->db
+            ->select('SUM(Credit) - SUM(Debit) AS total_balance', FALSE)
+            ->from('tbl_Transactions')
+            ->where('Account_Address', $params['Account_Address'])
+            ->where('Status !=', 'Canceled')
+            ->get()
+            ->row()
+            ->total_balance;
+    
+        $total_balance = ($result !== null) ? $result : 0;
+    
+        return ['status' => TRUE, 'response' => $total_balance];
+    }
+
 
 
 
