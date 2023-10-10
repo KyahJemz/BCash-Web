@@ -74,6 +74,28 @@ class Transactions_Model extends CI_Model {
         return ['status' => TRUE, 'response' => $total_balance];
     }
 
+    public function read_transactions_by_address($params) {
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_transactions')
+            ->where('Account_Address', $params['Account_Address']);
+    
+        if (isset($params['Limit']) && strtolower($params['Limit']) !== 'all') {
+            $limit = (int)$params['Limit'];
+            $result->limit($limit);
+        }
+    
+        $result = $result->get();
+    
+        if ($result) {
+            return ['status' => TRUE, 'response' => $result];
+        } else {
+            return ['status' => FALSE, 'response' => []];
+        }
+    }
+  
+    
+
 
 
 

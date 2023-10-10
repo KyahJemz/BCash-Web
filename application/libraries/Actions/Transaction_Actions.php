@@ -44,27 +44,70 @@ class Transaction_Actions {
 
 /* 
 -- ---------------------
-   GUARDIAN VIEW BALANCE
+   VIEW TOP TRANSACTION HISTORY
 -- ---------------------
 */   
-       public function Guardian_View_My_Balance ($Account) {
+       public function View_Top_Transaction_History ($Account) {
 
-              $AccountAddress = $this->CI->GuardianAccount_Model->read_by_address($Account->UsersAccount_Address);
-
-              $AccountBalance = (float)$this->CI->Transactions_Model->calculate_total_balance(array(
-                     'Account_Address' => $AccountAddress,
+              $TransactionHistory = $this->CI->Transactions_Model->read_transactions_by_address(array(
+                     'Account_Address' => $Account->UsersAccount_Address,
+                     'Limit' => '10',
               ));
 
-              if (!is_numeric($AccountBalance)) {
-                     return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'Invalid balance!. Please contact system administrator.'];
-              }
-
-              $parameters = [
-                     'AccountBalance' => $AccountBalance
-              ];
-
-              return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => 'Success'];
+              return ['Success' => True,'Target' => null,'Parameters' => $TransactionHistory,'Response' => 'Success'];
        }
+
+
+
+/* 
+-- ---------------------
+   VIEW ALL TRANSACTION HISTORY
+-- ---------------------
+*/  
+       public function View_All_Transaction_History ($Account) {
+
+              $TransactionHistory = $this->CI->Transactions_Model->read_transactions_by_address(array(
+                     'Account_Address' => $Account->UsersAccount_Address,
+                     'Limit' => 'all',
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $TransactionHistory,'Response' => 'Success'];
+       }
+
+
+
+/* 
+-- ---------------------
+   VIEW USER TRANSACTION HISTORY INFO
+-- ---------------------
+*/  
+public function View_User_Transaction_History_Info ($Account, $requestPostBody) {
+
+       $this->CI->form_validation->set_data($requestPostBody);
+
+       $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|alpha_numeric|exact_length[15]');
+       $this->CI->form_validation->set_rules('Amount', 'Amount', 'trim|required|number');
+
+       if ($this->CI->form_validation->run() === FALSE) {
+              $validationErrors = validation_errors();
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+       }
+
+       $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+       $Amount = $this->CI->Functions_Model->sanitize($requestPostBody['Amount']);
+
+       $TransactionHistoryInfo = $this->CI->Transactions_Model->read_transactions_by_address(array(
+              'Account_Address' => $Account->UsersAccount_Address,
+              'Limit' => 'all',
+       ));
+
+       return ['Success' => True,'Target' => null,'Parameters' => $TransactionHistory,'Response' => 'Success'];
+}
+
+
+
+
+
 
 
 
