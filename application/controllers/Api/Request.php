@@ -69,8 +69,13 @@ class Request extends CI_Controller {
                 case 'Guest':
                     $response = $this->Guest_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
+<<<<<<< HEAD
                 case 'Guardian':
                     $response = $this->Guardians->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
+=======
+                case 'Parents/Guardian':
+                    $response = $this->Guardians();
+>>>>>>> 69e4b173af6dba75ad8aa00ba08e6fc112308a47
                     break;
                 default:
                     $response = [
@@ -103,6 +108,193 @@ class Request extends CI_Controller {
             return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Success']; 
         }
         // Validation Failed
+<<<<<<< HEAD
         return ['Success' => False,'Target' => 'Login','Parameters' => null,'Response' => 'Validation Failed!' ];
+=======
+        return $validated; 
+    }
+
+    public function defaultAction() 
+    {
+            // can the variable $met read here?
+
+    
+    }
+
+    public function Administrator()
+    {
+        switch ($this->Intent) {
+            case 'View Transactions History':
+                $response = null;
+                break;
+
+            case 'View Accounts':
+                $response = null;
+                break;
+
+            case 'Update Account':
+                $response = null;
+                break;
+
+            case 'View Settings':
+                $response = null;
+                break;
+
+            case 'Update Settings':
+                $response = null;
+                break;
+
+            case 'View Notifications':
+                $response = null;
+                break;
+
+            case 'Set Notifications':
+                $response = null;
+                break;
+
+            case 'View Configurations':
+                $response = null;
+                break;
+
+            case 'Update Configurations':
+                $response = null;
+                break;
+
+            case 'View Activity Logs':
+                $response = null;
+                break;
+
+            case 'View Login History':
+                $response = null;
+                break;
+
+            case 'Update Login History':
+                $response = null;
+                break;
+
+            case 'Clear Login History':
+                $response = null;
+                break;
+
+            case 'View Charts':
+                $response = null;
+                break;
+
+            case 'Logout':
+                $response = null;
+                break;
+                
+            default:
+                $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
+                break;
+        }
+        return $response;
+    }
+
+    public function Accounting()
+    {
+        switch ($this->Intent) {
+            case 'View Transactions History':
+                $response = null;
+                break;
+
+            case 'View Accounts':
+                $response = null;
+                break;
+
+            case 'Update Account':
+                $response = null;
+                break;
+
+            case 'View Settings':
+                $response = null;
+                break;
+
+            case 'Update Settings':
+                $response = null;
+                break;
+
+            case 'View Notifications':
+                $response = null;
+                break;
+
+            case 'View Activity Logs':
+                $response = null;
+                break;
+
+            case 'View Login History':
+                $response = null;
+                break;
+
+            case 'Update Login History':
+                $response = null;
+                break;
+
+            case 'Clear Login History':
+                $response = null;
+                break;
+
+            case 'View Charts':
+                $response = null;
+                break;
+
+            case 'Make CashIn':
+                $response = null;
+                break;
+
+            case 'View CashIn':
+                $response = null;
+                break;
+
+            case 'View Receiver Details':
+                $response = null;
+                break;
+
+            case 'View Fund Remittance':
+                $response = null;
+                break;
+
+            case 'View Specific Fund Remittance':
+                $response = null;
+                break;
+
+            case 'Update Specific Fund Remittance':
+                $response = null;
+                break;
+
+            case 'Logout':
+                $response = null;
+                break;
+                
+            default:
+                $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
+                break;
+        }
+        return $response;
+    }
+
+    public function MerchantAdmin()
+    {
+            
+    
+    }
+
+    public function MerchantStaff()
+    {
+            
+    
+    }
+
+    public function Users()
+    {
+            
+    
+    }
+
+    public function Guardians()
+    {
+            
+    
+>>>>>>> 69e4b173af6dba75ad8aa00ba08e6fc112308a47
     }
 }
