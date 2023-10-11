@@ -50,17 +50,18 @@ class WebAccounts_Model extends CI_Model {
 
     public function uploadPass() {
         $hashed_password = password_hash("12345", PASSWORD_BCRYPT);
+    
+        $addresses = ['ADM000000000000', 'ACT000000000000', 'MTA000000000000', 'MTS000000000000'];
+    
         $data = [
-            'Password ' => $hashed_password
+            'Password' => $hashed_password
         ];
-        $this->db->where('WebAccounts_Address', 'ADM000000000000');
+    
+        // Use or_where_in to match multiple values for 'WebAccounts_Address'
+        $this->db->where_in('WebAccounts_Address', $addresses);
         $this->db->update('tbl_webaccounts', $data);
-
-        if ($this->db->affected_rows() > 0) {
-             return TRUE;
-        } else {
-             return FALSE;
-        }
+    
+        return $this->db->affected_rows() > 0;
     }
 
 

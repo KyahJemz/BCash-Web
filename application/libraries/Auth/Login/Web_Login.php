@@ -8,13 +8,17 @@ class Web_Login {
         public function __construct() {
                 $this->CI =& get_instance();
                 $this->CI->load->library('form_validation');
-                $this->CI->load->model('WebAccounts_Model');
+                $this->CI->load->model([
+                        'WebAccounts_Model',
+                        'LoginHistory_Model',
+                        'Authentications_Model'
+                ]);
                 $this->CI->load->library('Auth/Verification', NULL, 'Verification');
         }
 
         public function Process($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader){
 
-                $this->webAccounts_Model->uploadPass();
+                // $this->CI->WebAccounts_Model->uploadPass();
 
                 $this->CI->form_validation->set_data($requestPostBody);
                 
@@ -47,11 +51,22 @@ class Web_Login {
                                 $validAccount = $this->CI->WebAccounts_Model->read_by_username($validatedUsername);
                         
                                 if ($validAccount) {
+                                        // log_message('debug', $validAccount->Password);
                                         if (password_verify($validatedPassword,$validAccount->Password)) {
 
                                                 $AccountAddress = $validAccount->WebAccounts_Address;
 
-                                                $response = $this->CI->Verification->Process($AccountAddress, null, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
+                                                if ($this->CI->Authentications_Model->read_by_address($AccountAddress)) {
+                                                        $this->CI->Authentications_Model->delete($AccountAddress);
+                                                        $response = [
+                                                                'Success' => True,
+                                                                'Target' => 'Login',
+                                                                'Parameters' => null,
+                                                                'Message' => 'Account is already active. Force logout activated, Please try again!'
+                                                        ];
+                                                } else {
+                                                        $response = $this->CI->Verification->Process($AccountAddress, null, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
+                                                }
 
                                         } else {
                                                 $response = [

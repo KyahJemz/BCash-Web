@@ -81,7 +81,7 @@ CREATE TABLE tbl_WebAccounts (
     WebAccounts_Address VARCHAR(15) PRIMARY KEY,
     ActorCategory_Id INT NOT NULL,
     Username VARCHAR(50) NOT NULL,
-    Password VARCHAR(50) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
     Email VARCHAR(50) NOT NULL,
     Firstname VARCHAR(50) NOT NULL,
     Lastname VARCHAR(50) NOT NULL,

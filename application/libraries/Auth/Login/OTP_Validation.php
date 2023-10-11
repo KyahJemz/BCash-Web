@@ -11,6 +11,7 @@ class OTP_Validation {
                 $this->CI->load->model([
                         'Functions_Model',
                         'Authentications_Model',
+                        'LoginHistory_Model',
                 ]);
                 $this->CI->load->library('Auth/Verification', NULL, 'Verification');
         }
@@ -32,7 +33,7 @@ class OTP_Validation {
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
 
                         if ($this->CI->Functions_Model->validateOTP($AccountAddressHeader, $validatedOTP)) {
-                                $this->CI->Authentications_Model->create($AccountAddressHeader,$validatedIpAddress,$validatedLocation,$validatedDevice);
+                                $this->CI->LoginHistory_Model->create($AccountAddressHeader,$validatedIpAddress,$validatedLocation,$validatedDevice,$this->CI->Functions_Model->get_current_timestamp());
                                 $response = $this->CI->Verification->Process($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
                         } else {
                                 $response = [

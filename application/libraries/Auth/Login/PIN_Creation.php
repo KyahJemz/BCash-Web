@@ -16,7 +16,7 @@ class PIN_Creation {
 
         public function Process($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader){
 
-                $this->form_validation->set_data($requestPostBody);
+                $this->CI->form_validation->set_data($requestPostBody);
                 
                 $this->CI->form_validation->set_rules('NewPIN', 'NewPIN', 'trim|required|numeric|min_length[6]');
                 $this->CI->form_validation->set_rules('IpAddress', 'IpAddress', 'trim|required|valid_ip');

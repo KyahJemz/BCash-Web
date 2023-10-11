@@ -47,7 +47,7 @@ class Authentications_Model extends CI_Model {
         return ($result > 0) ? TRUE : FALSE;
     }
 
-    public function update_otp($AccountAddress){
+    public function create_otp($AccountAddress){
         $newOTP = random_string('numeric', 6);
         $newOTPCreationTime = $this->Functions_Model->get_current_timestamp();
         $newOTPExpirationTime = $this->Functions_Model->get_current_timestamp_add($newOTPCreationTime);
@@ -63,7 +63,19 @@ class Authentications_Model extends CI_Model {
         return ($result > 0) ? TRUE : FALSE;
     }
 
-    public function update($AccountAddress,$IpAddress,$Location,$Device){
+    public function clear_otp($AccountAddress){
+        $data = [
+            'OtpCode' => null,
+            'OtpCreationTime' => null,
+            'OtpExpirationTime' => null,
+        ];
+        $this->db->where('Account_Address', $AccountAddress);
+        $this->db->update('tbl_authentications', $data);
+        $result = $this->db->affected_rows();
+        return ($result > 0) ? TRUE : FALSE;
+    }
+
+    public function update_otp($AccountAddress,$IpAddress,$Location,$Device){
         $data = [
             'IpAddress' => $IpAddress,
             'Location' => $Location,
@@ -92,13 +104,5 @@ class Authentications_Model extends CI_Model {
         return ($result > 0) ? TRUE : FALSE;
 
     }
-
-
-
-
-
-
-
-
 
 }

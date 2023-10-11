@@ -3,7 +3,6 @@ class Functions_Model extends CI_Model {
 
     public function __construct() {
         parent::__construct();
-        
     }
 
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -92,30 +91,7 @@ class Functions_Model extends CI_Model {
                 }
 
                 return FALSE;
-        }
 
-                
-                return $initials . $random_string;
-        }
-
-        
-        public function getAccountsByAddress($AccountAddress) {
-                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address($AccountAddress);
-                if ($tbl_webaccounts) {
-                        return $tbl_webaccounts;
-                }
-                
-                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address($AccountAddress);
-                if ($tbl_usersaccount){
-                        return $tbl_usersaccount;
-                }
-
-                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address($AccountAddress);
-                if ($tbl_guardiansaccount){
-                        return $tbl_guardiansaccount;
-                }
-
-                return FALSE;
         }
 
         public function getActorType($AccountAddress) {
@@ -157,7 +133,7 @@ class Functions_Model extends CI_Model {
                 if (!($validateAuthToken)) {
                         return [
                                 'Success' => FALSE, 
-                                'Target' => 'login', 
+                                'Target' => 'Login', 
                                 'Parameters' => null,
                                 'Response' => 'Invalid token'
                         ];
@@ -292,7 +268,7 @@ class Functions_Model extends CI_Model {
         }
 
         public function generateOTP($AccountAddress) {
-                $OTP = $this->Authentications_Model->update_otp($AccountAddress);
+                $OTP = $this->Authentications_Model->create_otp($AccountAddress);
                 if ($OTP){
                         return FALSE;
                 } else {

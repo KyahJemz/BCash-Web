@@ -61,13 +61,6 @@
         </table>
     </div>
 
-    <div class="test-links">
-        <button><a href="index.php/MerchantStaff">Merchant Portal</a></button>
-        <button><a href="index.php/MerchantAdmin">Merchant Admin Portal</a></button>
-        <button><a href="index.php/Accounting">Accounting Portal</a></button>
-        <button><a href="index.php/Administrator">Administrator Portal</a></button>
-    </div>
-
     <script src="<?php echo base_url('./public/javascript/login.js'); ?>"></script>
 </body>
 </html>

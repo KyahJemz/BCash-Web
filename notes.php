@@ -68,19 +68,51 @@ API Login
 
 
 
+ACCOUNTING
+    - CHARTS 
+        Total cash-in today
+        Total orders in merchants
+        Total Sales in merchants
+        Total transactions today
+        Daily Transactions Line Graph
+        Circulating Money
+        Recent Transactions
+        Recent Cash-In
+        Recent Activities
+    - CASH IN  
+        RECENT CASH IN
+        SEARCH USER
+        PROVIDE CASH IN
+    - TRANSACTIONS
+        MY TRANSACTION
+        ALL TRANSACTIONS
+        USER TRANSACTIONS
+    - ACCOUNTS
+        SEARCH ALL USER ACCOUNTS
+        EDIT USER ACCOUNT
+    - FUN REMITTANCe
+        VIEW TOP RECENT REMITTANCES
+        View SPECIFIC REMITTANCES
+        GET TODAYS TOTAL
+        SUBMIT TO REMITTANCES
+    - NOTIFICATION
+        GET NOTIFICATION
+    - SETTINGS
+        CHANGE PASSWORD
+        CHANGE PIN CODE
 
-TargetActor
-Startdate 
-EndDate
-TransactionAddress
-SearchName
-StatusFilter
 
 
-
+        
 
 */
 ?>
+
+
+
+
+
+
 
 
 

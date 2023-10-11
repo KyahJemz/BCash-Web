@@ -32,7 +32,7 @@ class PIN_Validation {
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
 
                         if ($this->CI->Functions_Model->validatePIN($AccountAddressHeader, $validatedPIN)) {
-                                $this->CI->Authentications_Model->update($AccountAddressHeader,$validatedIpAddress,$validatedLocation, $validatedDevice);
+                                // $this->CI->Authentications_Model->update($AccountAddressHeader,$validatedIpAddress,$validatedLocation, $validatedDevice);
                                 $response = $this->CI->Verification->Process($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation, $validatedPIN);
                         } else {
                                 $response = [
