@@ -45,6 +45,7 @@ class Transaction_Actions {
 /* 
 -- ---------------------
    VIEW TOP TRANSACTION HISTORY
+   - para sa users and guardian makita yung top history 
 -- ---------------------
 */   
        public function View_Top_Transaction_History ($Account) {
@@ -62,6 +63,7 @@ class Transaction_Actions {
 /* 
 -- ---------------------
    VIEW ALL TRANSACTION HISTORY
+   - para sa users and guardian makita yung all history 
 -- ---------------------
 */  
        public function View_All_Transaction_History ($Account) {

@@ -7,6 +7,7 @@ import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
 import Accounts from './modules/accounts.js';
+import AjaxRequest from './ajax.js';
 
 import Helper from './helper.js';
 
@@ -36,6 +37,7 @@ const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
 const helper = new Helper();
+const Ajax = new AjaxRequest(BaseURL);
 
 
 var notificationArray = [];
@@ -288,3 +290,38 @@ function onUserAccountsClearClick(event) {
 
 helper.addElementClickListener('.accounts-search-button', onUsersAccountsSearchClick);
 helper.addElementClickListener('.accounts-clear-button', onUserAccountsClearClick);
+
+
+////////////////////////////
+// API
+////////////////////////////
+
+function sendCashIn () {
+  Ajax.sendRequest(data,url)
+    .then(responseData => {
+      console.log('Response Data:', responseData);
+  })
+    .catch(error => {
+      console.error('Request Error:', error);
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

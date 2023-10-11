@@ -48,6 +48,21 @@ class WebAccounts_Model extends CI_Model {
         }
     }
 
+    public function update_password($AccountAddress, $Password) {
+        $hashed_password = password_hash($Password, PASSWORD_BCRYPT);
+        $data = [
+            'Password ' => $hashed_password
+        ];
+        $this->db->where('WebAccounts_Address', $AccountAddress);
+        $this->db->update('tbl_webaccounts', $data);
+
+        if ($this->db->affected_rows() > 0) {
+             return TRUE;
+        } else {
+             return FALSE;
+        }
+    }
+
     public function uploadPass() {
         $hashed_password = password_hash("12345", PASSWORD_BCRYPT);
     

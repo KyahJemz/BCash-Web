@@ -7,82 +7,105 @@ class Guest_Actor {
 
     public function __construct() {
         $this->CI =& get_instance();
+        $this->CI->load->library('Actions/Transaction_Actions', NULL, 'Transaction_Actions');
+        $this->CI->load->library('Actions/Account_Actions', NULL, 'Account_Actions');
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
         switch ($Intent) {
-            case 'View Transactions History':
+
+            case 'get my account details':
+                $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
+                break;
+
+            case 'get chart data':
                 $response = null;
                 break;
 
-            case 'View Accounts':
+            case 'get top recent cash in':
                 $response = null;
                 break;
 
-            case 'Update Account':
+            case 'initiate cash in':
+                $response = $this->CI->Transaction_Actions->Cash_In($Account, $requestPostBody);
+                break;
+
+            case 'get my transactions':
                 $response = null;
                 break;
 
-            case 'View Settings':
+            case 'get user transactions':
                 $response = null;
                 break;
 
-            case 'Update Settings':
+            case 'get user accounts':
                 $response = null;
                 break;
 
-            case 'View Notifications':
+            case 'update users accounts':
                 $response = null;
                 break;
 
-            case 'View Activity Logs':
+            case 'get user details':
                 $response = null;
                 break;
 
-            case 'View Login History':
+            case 'get my notifications':
                 $response = null;
                 break;
 
-            case 'Update Login History':
+            case 'get my settings':
+                $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
+                break;
+
+            case 'update my pin':
+                $response = $this->CI->Account_Actions->Update_My_PinCode($Account, $requestPostBody);
+                break;
+
+            case 'update my password':
+                $response = $this->CI->Account_Actions->Update_My_Password($Account, $requestPostBody);
+                break;
+
+            case 'get activity logs':
                 $response = null;
                 break;
 
-            case 'Clear Login History':
+            case 'get activity log details':
                 $response = null;
                 break;
 
-            case 'View Charts':
+            case 'get login history':
                 $response = null;
                 break;
 
-            case 'Make CashIn':
+            case 'update login history':
                 $response = null;
                 break;
 
-            case 'View CashIn':
+            case 'clear login history':
                 $response = null;
                 break;
 
-            case 'View Receiver Details':
+            case 'get top remittance':
                 $response = null;
                 break;
 
-            case 'View Fund Remittance':
+            case 'get remittance details':
                 $response = null;
                 break;
 
-            case 'View Specific Fund Remittance':
+            case 'get todays total':
                 $response = null;
                 break;
 
-            case 'Update Specific Fund Remittance':
+            case 'initiate remittance':
                 $response = null;
                 break;
 
             case 'Logout':
                 $response = null;
                 break;
-                
+
             default:
                 $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
                 break;

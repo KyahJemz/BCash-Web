@@ -32,41 +32,24 @@ $this->db->insert('table_name', $data);
 
 /*
 
-API Transactions
-    Headers 
-        Authorization
-        AccountAddress
-        ClientVersion
-        IpAddress
-        Device
-        Location
-        Intent
-    BODY
-        TransactionAddress - 
-        TargetAccountAddress
 
 
-API Login
-    Headers 
-        Authorization
-        AccountAddress
-        ClientVersion
-        Intent
-    BODY
-        Username
-        Password
-        OTP
-        PIN
-        NewPIN
+HEADERS
+    AuthorizationToken
+    AccountAddress
+    ClientVersion
+    IpAddress
+    Device
+    Location
+    Intent
 
-        IpAddress
-        Device
-        Location
-
-        
+BODY: depends sa intent
+- Actor category is automatically created
 
 
 
+
+    
 
 ACCOUNTING
     - CHARTS 
