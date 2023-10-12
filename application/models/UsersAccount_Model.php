@@ -52,6 +52,19 @@ class UsersAccount_Model extends CI_Model {
         }
     }
 
+    public function read(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_usersaccount')
+            ->get()
+            ->row();
+        if ($result) {
+            return $result;
+        } else {
+            return null; 
+        }
+    }
+
     public function read_by_emailid($EmailId){
         $result = $this->db
             ->select('*')

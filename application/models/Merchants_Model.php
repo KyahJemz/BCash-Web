@@ -22,7 +22,7 @@ class Merchants_Model extends CI_Model {
                      'WebAccounts_Address' => $Account_Address,
               ];
               $this->db->insert('tbl_usersdata', $data);
-              $result = $this->db->insert_id();s
+              $result = $this->db->insert_id();
               return ($result) ? TRUE : FALSE;
        }
 

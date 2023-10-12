@@ -12,7 +12,7 @@ class ActivityLogs_Model extends CI_Model {
             ->from('tbl_activitylogs')
             ->where('ActivityLogs_Id ', $params['Id'])
             ->get()
-            ->row()
+            ->row();
         return ($result) ? $result : FALSE;
     }
 

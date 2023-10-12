@@ -69,9 +69,10 @@ window.addEventListener('click', (event) => {
 // INITIALIZATIONS
 ////////////////////////////
 
+
 export function makeAlert(type,text){
-  const alerts = new Alerts();
-  alerts.createAlert(type,text);
+  const alerts = new Alerts(document.querySelector(".Alert-Box-Table"));
+  alerts.createAlertElement(type,text);
 }
 
 export function makeNotification(id,title,content){
@@ -295,16 +296,92 @@ helper.addElementClickListener('.accounts-clear-button', onUserAccountsClearClic
 ////////////////////////////
 // API
 ////////////////////////////
+function displayparameters(){
+  console.log('------------------------------------------');
+  console.log('--AccountAddress--', AccountAddress);
+  console.log('--AuthToken--', AuthToken);
+  console.log('--ClientVersion--', ClientVersion);
+  console.log('--IpAddress--', IpAddress);
+  console.log('--Device--', Device);
+  console.log('--Location--', Location);
+  console.log('--BaseURL--', BaseURL);
+  console.log('------------------------------------------');
+}
 
-function sendCashIn () {
-  Ajax.sendRequest(data,url)
+
+helper.addElementClickListenerById('CashIn-Btn-SearchUser', CashIn_SearchUser);
+function CashIn_SearchUser () {
+  const intent = "get user details";
+  const data = { 
+    AccountAddress : document.getElementById('CashIn-Id').value,
+    Amount : document.getElementById('CashIn-Amount').value,
+  }; 
+
+  Ajax.sendRequest(data, intent)
     .then(responseData => {
       console.log('Response Data:', responseData);
+      if (responseData.Success) {
+        document.getElementById('CashIn-UserName').innerHTML = responseData.Parameters.Account.Firstname + ' ' + responseData.Parameters.Account.Lastname;
+        document.getElementById('CashIn-UserBalance').innerHTML = responseData.Parameters.Details.Balance;
+      } else {
+        document.getElementById('CashIn-UserName').innerHTML = '';
+        document.getElementById('CashIn-UserBalance').innerHTML = '';
+        makeAlert('danger',responseData.Response);
+      }
+  })
+    .catch(error => {
+      console.error('Request Error:', error);
+  });
+  CashIn_RecentCashIn ();
+}
+
+helper.addElementClickListenerById('CashIn-Btn-Transfer', CashIn_Transfer);
+function CashIn_Transfer () {
+  const intent = "initiate cash in";
+  const data = { 
+    AccountAddress : document.getElementById('CashIn-Id').value,
+    Amount : document.getElementById('CashIn-Amount').value,
+  }; 
+  
+  Ajax.sendRequest(data, intent)
+    .then(responseData => {
+      console.log('Response Data:', responseData);
+      if (responseData.Success) {
+        document.getElementById('CashIn-Id').value = '';
+        document.getElementById('CashIn-Amount').value = '';
+        document.getElementById('CashIn-UserName').innerHTML = '';
+        document.getElementById('CashIn-UserBalance').innerHTML = '';
+        makeAlert('success',responseData.Response);
+      } else {
+        document.getElementById('CashIn-UserName').innerHTML = '';
+        document.getElementById('CashIn-UserBalance').innerHTML = '';
+        makeAlert('danger',responseData.Response);
+      }
+  })
+    .catch(error => {
+      console.error('Request Error:', error);
+  });
+  CashIn_RecentCashIn ();
+}
+
+function CashIn_RecentCashIn () {
+  const intent = "get top recent cash in";
+  const data = {}; 
+
+  Ajax.sendRequest(data, intent)
+    .then(responseData => {
+      console.log('Response Datassssssssssssss:', responseData);
+      if (responseData.Success) {
+
+      } else {
+
+      }
   })
     .catch(error => {
       console.error('Request Error:', error);
   });
 }
+
 
 
 

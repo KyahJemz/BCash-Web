@@ -9,13 +9,13 @@ class Request extends CI_Controller {
             'ActorCategory_Model', 
             'Functions_Model',
         ]);
-        $this->load->library('Actor/Accounting_Actor', NULL, 'Accounting_Actor');
-        $this->load->library('Actor/Administrator_Actor', NULL, 'Administrator_Actor');
-        $this->load->library('Actor/Guest_Actor', NULL, 'Guest_Actor');
-        $this->load->library('Actor/MerchantAdmin_Actor', NULL, 'MerchantAdmin_Actor');
-        $this->load->library('Actor/MerchantStaff_Actor', NULL, 'MerchantStaff_Actor');
-        $this->load->library('Actor/ParentsGuardian_Actor', NULL, 'ParentsGuardian_Actor');
-        $this->load->library('Actor/User_Actor', NULL, 'User_Actor');
+        $this->load->library('Actors/Accounting_Actor', NULL, 'Accounting_Actor');
+        $this->load->library('Actors/Administrator_Actor', NULL, 'Administrator_Actor');
+        $this->load->library('Actors/Guest_Actor', NULL, 'Guest_Actor');
+        $this->load->library('Actors/MerchantAdmin_Actor', NULL, 'MerchantAdmin_Actor');
+        $this->load->library('Actors/MerchantStaff_Actor', NULL, 'MerchantStaff_Actor');
+        $this->load->library('Actors/Guardian_Actor', NULL, 'Guardian_Actor');
+        $this->load->library('Actors/User_Actor', NULL, 'User_Actor');
     }
 
     private $AuthorizationToken;
@@ -29,7 +29,7 @@ class Request extends CI_Controller {
     private $Account;
     private $ActorCategory;
 
-    public function handleRequest() {
+    public function Process() {
 
         $this->AuthorizationToken = $this->Functions_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
         $this->AccountAddress = $this->Functions_Model->sanitize($this->input->get_request_header('AccountAddress', TRUE));
@@ -70,7 +70,7 @@ class Request extends CI_Controller {
                     $response = $this->Guest_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
                 case 'Guardian':
-                    $response = $this->Guardians->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
+                    $response = $this->Guardian_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                 default:
                     $response = [
                         'Success' => False,
@@ -78,7 +78,6 @@ class Request extends CI_Controller {
                         'Parameters' => null,
                         'Response' => 'Invalid'
                     ]; 
-                    break;
             }
         } else {
             $response = $ValidateHeaders; 
@@ -88,6 +87,7 @@ class Request extends CI_Controller {
     }
 
     public function ValidateHeaders(){
+        log_message('debug', '--VALIDATING--');
         // Empty Headers
         if (empty($this->IpAddress) || empty($this->Device) || empty($this->Location) || empty($this->ClientVersion) || empty($this->Intent)) {
             return ['Success' => False,'Target' => 'Login','Parameters' => null,'Response' => 'Invalid Headers']; 
@@ -100,8 +100,11 @@ class Request extends CI_Controller {
         $validated = $this->Functions_Model->validateRequest($this->AccountAddress, $this->AuthorizationToken, $this->IpAddress, $this->Device, $this->Location, $this->ClientVersion);
         if ($validated['Success']) {
             return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Success']; 
+        } else {
+            return $validated;
         }
         // Validation Failed
-        return ['Success' => False,'Target' => 'Login','Parameters' => null,'Response' => 'Validation Failed!' ];
+        
+        
     }
 }

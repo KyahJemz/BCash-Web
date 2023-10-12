@@ -11,8 +11,7 @@ class LoginHistory_Model extends CI_Model {
             ->select('*')
             ->from('tbl_loginhistory')
             ->where('Account_Address', $AccountAddress)
-            ->get()
-            ->row();
+            ->get();
         if ($result) {
             return $result;
         } else {
@@ -67,11 +66,14 @@ class LoginHistory_Model extends CI_Model {
         return ($result) ? TRUE : FALSE;
     }
 
-    public function update_isblocked_by_address($AccountAddress,$Value){
+    public function update_isblocked($AccountAddress,$IpAddress,$Location,$Device,$Value){
         $data = [
             'IsBlocked' => $Value,
         ];
         $this->db->where('Account_Address', $AccountAddress);
+        $this->db->where('IpAddress', $IpAddress);
+        $this->db->where('Location', $Location);
+        $this->db->where('Device', $Device);
         $this->db->update('tbl_loginhistory', $data);
         $result = $this->db->affected_rows();
         return ($result > 0) ? TRUE : FALSE;

@@ -55,7 +55,7 @@ class Accounting extends CI_Controller {
                 $data['Location'] = "Unknown";
                 $data['AccountAddress'] = "Unknown";
                 $data['AuthToken'] = "Unknown";
-                $data['BaseURL'] = "http://localhost/index.php/";
+                $data['BaseURL'] = "http://localhost/index.php/Api/Request/Process";
 
                 if ($data['IpAddress'] != $IpAddress || $data['Location'] != $Location || $data['Device'] != $Device) {
                          redirect('Login/index');
@@ -82,6 +82,7 @@ class Accounting extends CI_Controller {
                         <script>
                                 var AccountAddress = ' . json_encode($AccountAddress) . ';
                                 var AuthToken = ' . json_encode($AuthToken) . ';
+                                const ClientVersion = ' . json_encode('1.0') . ';
                                 const IpAddress = ' . json_encode($data['IpAddress']) . ';
                                 const Device = ' . json_encode($data['Device']) . ';
                                 const Location = ' . json_encode($data['Location']) . ';

@@ -15,9 +15,10 @@ class UsersData_Model extends CI_Model {
         // return ($result) ? TRUE : FALSE;
     }
 
-    public function update($params) {
+    public function update_by_admin($params) {
         $data = [
             'Campus_Id' => $params['Campus_Id'],
+            'SchoolPersonalId ' => $params['SchoolPersonalId'],
             'CanDoTransfers ' => $params['CanDoTransfers'],
             'CanDoTransactions ' => $params['CanDoTransactions'],
             'CanUseCard ' => $params['CanUseCard'],
@@ -25,7 +26,42 @@ class UsersData_Model extends CI_Model {
             'IsPurchaseAutoConfirm' => $params['IsPurchaseAutoConfirm'],
         ];
         $this->db->where('UsersAccount_Address', $params['Account_Address']);
-        $this->db->update('tbl_usersaccounts', $data);
+        $this->db->update('tbl_usersdata', $data);
+
+        if ($this->db->affected_rows() > 0) {
+             return TRUE;
+        } else {
+             return FALSE;
+        }
+    }
+
+    public function update_by_users($params) {
+        $data = [
+            'CanDoTransfers ' => $params['CanDoTransfers'],
+            'CanDoTransactions ' => $params['CanDoTransactions'],
+            'CanUseCard ' => $params['CanUseCard'],
+            'CanModifySettings ' => $params['CanModifySettings'],
+            'IsPurchaseAutoConfirm' => $params['IsPurchaseAutoConfirm'],
+        ];
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_usersdata', $data);
+
+        if ($this->db->affected_rows() > 0) {
+             return TRUE;
+        } else {
+             return FALSE;
+        }
+    }
+
+    public function update_by_guardian($params) {
+        $data = [
+            'CanDoTransfers ' => $params['CanDoTransfers'],
+            'CanDoTransactions ' => $params['CanDoTransactions'],
+            'CanUseCard ' => $params['CanUseCard'],
+            'IsPurchaseAutoConfirm' => $params['IsPurchaseAutoConfirm'],
+        ];
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_usersdata', $data);
 
         if ($this->db->affected_rows() > 0) {
              return TRUE;
@@ -47,6 +83,17 @@ class UsersData_Model extends CI_Model {
             return null; 
         }
     }
+
+    public function update_user_balance($params){
+        $data = [
+            'Balance ' => $params['Balance'],
+        ];
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_usersdata', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
 
 
 }

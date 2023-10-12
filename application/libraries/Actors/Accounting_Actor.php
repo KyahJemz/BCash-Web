@@ -1,21 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Guest_Actor {
+class Accounting_Actor {
 
     protected $CI;
 
     public function __construct() {
         $this->CI =& get_instance();
+        $this->CI->load->library('form_validation');
+        $this->CI->load->library('Auth/Account_Logout', NULL, 'Account_Logout');
         $this->CI->load->library('Actions/Transaction_Actions', NULL, 'Transaction_Actions');
         $this->CI->load->library('Actions/Account_Actions', NULL, 'Account_Actions');
+        $this->CI->load->library('Actions/Notifications_Actions', NULL, 'Notifications_Actions');
+        $this->CI->load->library('Actions/LoginHistory_Actions', NULL, 'LoginHistory_Actions');
+        $this->CI->load->library('Actions/ActivityLogs_Actions', NULL, 'ActivityLogs_Actions');
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
         switch ($Intent) {
-
-            case 'get my account details':
-                $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
+            case 'Logout':
+                $response = $this->CI->Account_Logout->Logout($Account);
                 break;
 
             case 'get chart data':
@@ -23,7 +27,7 @@ class Guest_Actor {
                 break;
 
             case 'get top recent cash in':
-                $response = null;
+                $response = $this->CI->Transaction_Actions->View_Recent_CashIn();
                 break;
 
             case 'initiate cash in':
@@ -39,22 +43,26 @@ class Guest_Actor {
                 break;
 
             case 'get user accounts':
-                $response = null;
+                $response =  $this->CI->Account_Actions->View_User_Accounts();
                 break;
 
-            case 'update users accounts':
-                $response = null;
+            case 'update user details': 
+                $response =  $this->CI->Account_Actions->Update_User_Account($Account, $requestPostBody);
                 break;
 
             case 'get user details':
-                $response = null;
+                $response =  $this->CI->Account_Actions->View_User_Account($Account, $requestPostBody);
                 break;
 
             case 'get my notifications':
-                $response = null;
+                $response = $this->CI->Notifications_Actions->View_My_Notifications();
                 break;
 
-            case 'get my settings':
+            case 'get my notifications details':
+                $response = $this->CI->Notifications_Actions->View_My_Notifications_Details($requestPostBody);
+                break;
+
+            case 'get my account':
                 $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
                 break;
 
@@ -66,24 +74,28 @@ class Guest_Actor {
                 $response = $this->CI->Account_Actions->Update_My_Password($Account, $requestPostBody);
                 break;
 
-            case 'get activity logs':
-                $response = null;
+            case 'get all activity logs':
+                $response = $this->CI->ActivityLogs_Actions->View_All_ActivityLogs($Account);
                 break;
 
-            case 'get activity log details':
-                $response = null;
+            case 'get my activity logs':
+                $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
                 break;
 
             case 'get login history':
-                $response = null;
+                $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
                 break;
 
             case 'update login history':
-                $response = null;
+                $response = $this->CI->LoginHistory_Actions->Update_My_LoginHistory($Account, $requestPostBody);
                 break;
 
-            case 'clear login history':
-                $response = null;
+            case 'delete one login history':
+                $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);
+                break;
+
+            case 'delete all login history':
+                $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
                 break;
 
             case 'get top remittance':
@@ -102,13 +114,8 @@ class Guest_Actor {
                 $response = null;
                 break;
 
-            case 'Logout':
-                $response = null;
-                break;
-
             default:
                 $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
-                break;
         }
         return $response;
     }

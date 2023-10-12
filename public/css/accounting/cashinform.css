@@ -47,7 +47,6 @@
     height: 100%;
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
-    border: 1px solid red;
     overflow-y: auto;
     justify-items: center
 }
@@ -89,6 +88,10 @@
     height: fit-content;
     width: 100%;
     
+}
+
+.details-container{
+    width: 100%;
 }
 
 .panel-cashinform-content .left-container .header {

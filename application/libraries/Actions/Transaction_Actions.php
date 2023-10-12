@@ -8,6 +8,7 @@ class Transaction_Actions {
        public function __construct() {
               $this->CI =& get_instance();
               $this->CI->load->database();
+              $this->CI->load->library('form_validation');
               $this->CI->load->model([
                      'UsersAccount_Model',
                      'Transactions_Model',
@@ -107,6 +108,21 @@ public function View_User_Transaction_History_Info ($Account, $requestPostBody) 
 }
 
 
+/* 
+-- ---------------------
+   VIEW USER TRANSACTION HISTORY INFO
+-- ---------------------
+*/  
+public function View_Recent_CashIn () {
+
+       $RecentCashIn = $this->CI->Transactions_Model->read_recent_cashin(array(
+              'Limit' => 10,
+       ));
+
+       return ['Success' => True,'Target' => null,'Parameters' => $RecentCashIn,'Response' => ''];
+}
+
+
 
 
 
@@ -122,8 +138,8 @@ public function View_User_Transaction_History_Info ($Account, $requestPostBody) 
 
               $this->CI->form_validation->set_data($requestPostBody);
 
-              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|alpha_numeric|exact_length[15]');
-              $this->CI->form_validation->set_rules('Amount', 'Amount', 'trim|required|number');
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|exact_length[15]');
+              $this->CI->form_validation->set_rules('Amount', 'Amount', 'trim|required|numeric');
 
               if ($this->CI->form_validation->run() === FALSE) {
                      $validationErrors = validation_errors();
@@ -133,7 +149,7 @@ public function View_User_Transaction_History_Info ($Account, $requestPostBody) 
               $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
               $Amount = $this->CI->Functions_Model->sanitize($requestPostBody['Amount']);
 
-              $isAccountExist =  $this->CI->UsersAccount_Model->read_by_address($AccountAddress);
+              $isAccountExist =  $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
               if (!$isAccountExist) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid receivers account!'];
               }
@@ -141,7 +157,7 @@ public function View_User_Transaction_History_Info ($Account, $requestPostBody) 
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'The receiver account was declared Inactive, cannot proceed to transaction!'];
               }
 
-              $this->db->trans_start(); 
+              $this->CI->db->trans_start(); 
 
                      $TransactionAddress = $this->CI->Functions_Model->create_unique_transaction_address();
 
@@ -166,15 +182,15 @@ public function View_User_Transaction_History_Info ($Account, $requestPostBody) 
                             'PostedBy' => $Account->WebAccounts_Address,
                      ));
 
-              $this->db->trans_complete(); 
+              $this->CI->db->trans_complete(); 
 
-              if ($this->db->trans_status() === FALSE) {
-                     $this->db->trans_rollback();
-                     $error = $this->db->error();
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
               }
 
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Success'];
+              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Transfer Success'];
        }
 
 

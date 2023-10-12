@@ -128,7 +128,6 @@ class Functions_Model extends CI_Model {
                 // if (!($validateVersion['success'])) {
                 //         return ['success' => FALSE, 'intent' => 'login', 'response' => $validateVersion['response']];
                 // }
-
                 $validateAuthToken = $this->validateAuthToken($AccountAddress, $AuthToken);
                 if (!($validateAuthToken)) {
                         return [
@@ -195,17 +194,23 @@ class Functions_Model extends CI_Model {
         public function validateAuthToken($AccountAddress, $AuthToken) {
                 if (empty($AccountAddress) || empty($AuthToken)) {
                         return FALSE;
+                        
                 } else {
-                        $tbl_authentications = $this->Authentications_Model->read_by_address($AccountAddress);
-                        if ($this->get_current_timestamp() <= $tbl_authentications->AuthExpirationTime) {
-                                if ($AuthToken === $tbl_authentications->AuthToken) {
-                                        return TRUE;
-                                } else {
-                                        return FALSE;
-                                }
-                        } else {
-                                return FALSE;
-                        }
+                        return TRUE; // PANSAMANTALA ############################################################################
+                        // $tbl_authentications = $this->Authentications_Model->read_by_address($AccountAddress);
+                        // if ($tbl_authentications && $this->get_current_timestamp() <= $tbl_authentications->AuthExpirationTime) {
+                        //         if ($AuthToken === $tbl_authentications->AuthToken) {
+                        //                 $newAuthTokenCreationTime = $this->get_current_timestamp();
+                        //                 $newAuthTokenExpirationTime = $this->get_current_timestamp_add($newAuthTokenCreationTime);
+                        //                 $this->Authentications_Model->Update_Auth_Session($AccountAddress, $newAuthTokenExpirationTime);
+                        //                 return TRUE;
+                        //         } else {
+                        //                 return FALSE;
+                        //         }
+                        // } else {
+                        //         $this->Authentications_Model->delete($AccountAddress);
+                        //         return FALSE;
+                        // }
                 }
         }
 

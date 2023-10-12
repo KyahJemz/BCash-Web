@@ -119,7 +119,7 @@ CREATE TABLE tbl_Authentications (
 CREATE TABLE tbl_LoginHistory (
     Account_Address VARCHAR(15) PRIMARY KEY,
     IpAddress VARCHAR(20) NOT NULL,
-    IsOnline BIT DEFAULT 0,
+    IsBlocked BIT DEFAULT 0,
     Location VARCHAR(50) NOT NULL,
     Device VARCHAR(50) NOT NULL,
     LastOnline TIMESTAMP NULL

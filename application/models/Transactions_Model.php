@@ -4,6 +4,9 @@ class Transactions_Model extends CI_Model {
     public function __construct() {
         parent::__construct();
         $this->load->database();
+        $this->load->model([
+            'UsersData_Model',
+        ]);
     }
 
     public function create_transactioninfo($params): bool {
@@ -70,8 +73,13 @@ class Transactions_Model extends CI_Model {
             ->total_balance;
     
         $total_balance = ($result !== null) ? $result : 0;
+
+        $this->UsersData_Model->update_user_balance(array(
+            'Account_Address'=> $params['Account_Address'],
+            'Balance' => $total_balance,
+        ));
     
-        return ['status' => TRUE, 'response' => $total_balance];
+        return ($total_balance) ? $total_balance : 0;
     }
 
     public function read_transactions_by_address($params) {
@@ -92,6 +100,20 @@ class Transactions_Model extends CI_Model {
         } else {
             return ['status' => FALSE, 'response' => []];
         }
+    }
+
+    public function read_recent_cashin($params) {
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_transactionsinfo')
+            ->like('Sender_Address', 'ACT', 'after')
+            ->limit($params['Limit'])
+            ->get();
+
+            // $query = $this->db->last_query();
+            // log_message('debug', 'Last executed SQL query: ' . $query);
+        
+            return ($result) ? $result : FALSE;
     }
   
     
@@ -180,21 +202,6 @@ class Transactions_Model extends CI_Model {
         }
 
         return ['status' => TRUE, 'response' => $result];
-    }
-
-
-
-    public function read_transactions_by_address($AccountAddress){
-        $result = $this->db
-            ->select('*')
-            ->from('tbl_transactions')
-            ->where('Account_Address', $AccountAddress)
-            ->get();
-        if ($result) {
-            return ['status' => TRUE, 'response' => $result];
-        } else {
-            return ['status' => FALSE, 'response' => []];
-        }
     }
 
     public function read_transactionitems_by_transaction_address($TransactionAddress){

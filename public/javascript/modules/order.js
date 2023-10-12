@@ -3,8 +3,6 @@
 BCASH WEB - ORDER MODULE
 #########################################
 */
-
-import { createAlert } from './alerts.js';
 import Helper from '../helper.js';
 
 export default class Orders {

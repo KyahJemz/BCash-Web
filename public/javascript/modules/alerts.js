@@ -1,10 +1,10 @@
 
 export default class Alerts {
 
-    constructor(alertTable){
+    constructor(table){
         this.AlertTimeout = 3000;
         this.AlertCount = 5;
-        this.alertTable = alertTable;
+        this.alertTable = table;
         this.alertType = '';
         this.alertText = '';
     }
@@ -46,7 +46,6 @@ export default class Alerts {
             throw new Error("Invalid type or text for creating an alert.");
         }
 
-        console.log(type, text);
         this.alertType = type;
         this.alertText = text;
 
@@ -57,8 +56,3 @@ export default class Alerts {
         }, this.AlertTimeout);
     }
 }
-
-export function createAlert(type,text){
-    const alerts = new Alerts(document.querySelector(".Alert-Box-Table"));
-    alerts.createAlertElement(type,text);
-  }

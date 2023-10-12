@@ -65,10 +65,6 @@
                                 <div class="selected"></div>
                                 <p>My Transactions</p>
                             </li>
-                            <li data-menu="All Transactions" class="curson-pointer menuSelectionButton">
-                                <div class="selected"></div>
-                                <p>All Transactions</p>
-                            </li>
                             <li data-menu="User Transactions" class="curson-pointer menuSelectionButton">
                                 <div class="selected"></div>
                                 <p>User Transactions</p>
@@ -412,32 +408,35 @@
                                 <p class="help">?</p>
                             </div>
                             <div class="content-container">
+
+                                <div class="input-container">
+                                    <label for="">Id:</label>
+                                    <input id="CashIn-Id" type="text" name="">
+                                </div>
+
                                 <div class="input-container">
                                     <label for="amount">Amount: </label>
-                                    <input type="text" name="amount" id="">
+                                    <input id="CashIn-Amount" type="text" name="amount">
                                 </div>
     
-                                <div class="input-container">
-                                    <label for="">Student Id:</label>
-                                    <input type="text" name="" id="">
-                                </div>
+                                
     
-                                <button class="search">Search User</button>
+                                <button id="CashIn-Btn-SearchUser" class="search">Search User</button>
     
                                 <fieldset class="details-container">
                                     <legend>User Details</legend>
                                     <div class="item">
                                         <p>Name: </p>
-                                        <p id="user-name">Stephen Regan James Layson</p>
+                                        <p id="CashIn-UserName"></p>
                                     </div>
     
                                     <div class="item">
                                         <p>Curent Balance: </p>
-                                        <p id="user-name">123.23</p>
+                                        <p id="CashIn-UserBalance"></p>
                                     </div>
                                 </fieldset>
     
-                                <button class="transfer">Confirm Transfer</button>
+                                <button id="CashIn-Btn-Transfer" class="transfer">Confirm Transfer</button>
                             </div>
                         </div>
                         <div class="right-container">
@@ -458,149 +457,7 @@
                                         <p class="type">type</p>
                                     </div>
                                 </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li>
+                                
 
                             </ul>
                         </div>                        

@@ -7,20 +7,22 @@ export default class AjaxRequest {
     }
 
     makeAlert(type,text){
-        if (text!=''){
-            const alerts = new Alerts();
-            alerts.createAlert(type,text);
-        }
+        const alerts = new Alerts(document.querySelector(".Alert-Box-Table"));
+        alerts.createAlertElement(type,text);
     }
 
-    sendRequest(url, data, intent) {
+    sendRequest(data, intent) {
         return new Promise((resolve, reject) => {
-            fetch(url, {
+            fetch(this.baseURL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': AuthToken,
                     'AccountAddress': AccountAddress,
+                    'ClientVersion': ClientVersion,
+                    'IpAddress': IpAddress,
+                    'Device': Device,
+                    'Location': Location,
                     'Intent': intent, 
                 },
                 body: JSON.stringify(data),
@@ -32,26 +34,10 @@ export default class AjaxRequest {
                 return response.json();
             })
             .then(data => resolve(data))
-            .catch(error => reject(error));
+            .catch(error => {
+                this.makeAlert('danger', error);
+                reject(error);
+            });
         });
     }
 }
-
-
-// ##########
-// ORDERS API
-// ##########
-
-
-// ##########
-// ITEMS API
-// ##########
-
-    
-
-    
-
-// ##########
-// ITEMS API
-// ##########
-

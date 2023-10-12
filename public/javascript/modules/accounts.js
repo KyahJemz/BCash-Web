@@ -1,5 +1,4 @@
 import { makeModal } from './modals.js';
-import { createAlert } from './alerts.js';
 
 export default class Accounts {
   constructor(type, tableHeader, tableBody, queryContainer) {
