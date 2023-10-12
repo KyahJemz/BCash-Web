@@ -20,11 +20,29 @@ class UsersAccount_Model extends CI_Model {
         return ($result) ? TRUE : FALSE;
     }
 
-    public function read_by_address($AccountAdress){
+    public function update($params) {
+        $data = [
+            'Email ' => $params['Email'],
+            'EmailId ' => $params['EmailId'],
+            'Firstname ' => $params['Firstname'],
+            'Lastname ' => $params['Lastname'],
+            'IsAccountActive' => $params['IsAccountActive'],
+        ];
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_usersaccounts', $data);
+
+        if ($this->db->affected_rows() > 0) {
+             return TRUE;
+        } else {
+             return FALSE;
+        }
+    }
+
+    public function read_by_address($params){
         $result = $this->db
             ->select('*')
             ->from('tbl_usersaccount')
-            ->where('UsersAccount_Address ', $AccountAdress)
+            ->where('UsersAccount_Address ', $params['Account_Address'])
             ->get()
             ->row();
         if ($result) {

@@ -128,7 +128,7 @@ CREATE TABLE tbl_LoginHistory (
 -- Create tbl_ActivityLogs
 CREATE TABLE tbl_ActivityLogs (
     ActivityLogs_Id INT AUTO_INCREMENT PRIMARY KEY,
-    WebAccounts_Address VARCHAR(15) NOT NULL,
+    Account_Address VARCHAR(15) NOT NULL,
     Task VARCHAR(255) NOT NULL,
     Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
