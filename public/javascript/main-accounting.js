@@ -184,25 +184,39 @@ helper.addElementClickListener('.dropdownButtonSubItem', onDropdownButtonSubItem
 // TRANSACTIONS
 ////////////////////////////
 
-function onTransactionsSearchClick(event) {
+async function onTransactionsSearchClick(event) {
   const transactionPanel = event.currentTarget.parentNode.parentNode.dataset.transactiontype;
   if (transactionPanel === "MyTransactions") {
-  myTransactions.applyTransactionsQueries(event);
+
+    myTransactions.applyTransactionsQueries(event);
+
   } else if (transactionPanel === "AllTransactions") {
-    allTransactions.applyTransactionsQueries(event);
-  } else if (transactionPanel === "UserTransactions") {
-    userTransactions.applyTransactionsQueries(event);
+    const intent = "get user transactions";
+    const data = {
+      PageNumber : '1',
+      ResultsPerPage : '10',
+    }; 
+    await Ajax.sendRequest(data, intent)
+      .then(responseData => {
+        console.log('Response ssss:', responseData);
+        if (responseData.Success) {
+          allTransactions.applyTransactionsQueries(event, responseData.Parameters);
+        }
+    })
+      .catch(error => {
+        console.error('Request Error:', error);
+    });
   }
 }
 
-function onTransactionsClearClick(event) {
+async function onTransactionsClearClick(event) {
   const transactionPanel = event.currentTarget.parentNode.parentNode.dataset.transactiontype;
   if (transactionPanel === "MyTransactions") {
-  myTransactions.clearTransactionsQueries(event);
+    
+    myTransactions.clearTransactionsQueries(event);
   } else if (transactionPanel === "AllTransactions") {
+    
     allTransactions.clearTransactionsQueries(event);
-  } else if (transactionPanel === "UserTransactions") {
-    userTransactions.clearTransactionsQueries(event);
   }
 }
 
@@ -310,16 +324,15 @@ function displayparameters(){
 
 
 helper.addElementClickListenerById('CashIn-Btn-SearchUser', CashIn_SearchUser);
-function CashIn_SearchUser () {
+async function CashIn_SearchUser () {
   const intent = "get user details";
   const data = { 
     AccountAddress : document.getElementById('CashIn-Id').value,
     Amount : document.getElementById('CashIn-Amount').value,
   }; 
 
-  Ajax.sendRequest(data, intent)
+  await Ajax.sendRequest(data, intent)
     .then(responseData => {
-      console.log('Response Data:', responseData);
       if (responseData.Success) {
         document.getElementById('CashIn-UserName').innerHTML = responseData.Parameters.Account.Firstname + ' ' + responseData.Parameters.Account.Lastname;
         document.getElementById('CashIn-UserBalance').innerHTML = responseData.Parameters.Details.Balance;
@@ -328,24 +341,23 @@ function CashIn_SearchUser () {
         document.getElementById('CashIn-UserBalance').innerHTML = '';
         makeAlert('danger',responseData.Response);
       }
+      CashIn_RecentCashIn ();
   })
     .catch(error => {
       console.error('Request Error:', error);
   });
-  CashIn_RecentCashIn ();
 }
 
 helper.addElementClickListenerById('CashIn-Btn-Transfer', CashIn_Transfer);
-function CashIn_Transfer () {
+async function CashIn_Transfer () {
   const intent = "initiate cash in";
   const data = { 
     AccountAddress : document.getElementById('CashIn-Id').value,
     Amount : document.getElementById('CashIn-Amount').value,
   }; 
   
-  Ajax.sendRequest(data, intent)
+  await Ajax.sendRequest(data, intent)
     .then(responseData => {
-      console.log('Response Data:', responseData);
       if (responseData.Success) {
         document.getElementById('CashIn-Id').value = '';
         document.getElementById('CashIn-Amount').value = '';
@@ -357,22 +369,38 @@ function CashIn_Transfer () {
         document.getElementById('CashIn-UserBalance').innerHTML = '';
         makeAlert('danger',responseData.Response);
       }
+      CashIn_RecentCashIn ();
   })
     .catch(error => {
       console.error('Request Error:', error);
   });
-  CashIn_RecentCashIn ();
 }
 
-function CashIn_RecentCashIn () {
+CashIn_RecentCashIn ();
+async function CashIn_RecentCashIn () {
   const intent = "get top recent cash in";
   const data = {}; 
 
-  Ajax.sendRequest(data, intent)
+  await Ajax.sendRequest(data, intent)
     .then(responseData => {
-      console.log('Response Datassssssssssssss:', responseData);
       if (responseData.Success) {
-
+        let layout = ``;
+        responseData.Parameters.forEach(row => {
+          layout = layout + `
+            <li>
+              <img src="" alt="" >
+              <div>
+                <p class="name">${row['Firstname']} ${row['Lastname']}</p>
+                <p class="date">${row['Timestamp']}</p>
+              </div>
+              <div>
+                <p class="amount">₱ ${helper.formatNumber(row['TotalAmount'])}</p>
+                <p class="type">Cash-In</p>
+              </div>
+            </li>
+          `;
+        });
+        document.getElementById('CashIn-Content').innerHTML = layout;
       } else {
 
       }

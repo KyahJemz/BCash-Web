@@ -82,36 +82,40 @@ class Transaction_Actions {
 /* 
 -- ---------------------
    VIEW USER TRANSACTION HISTORY INFO
+   - for accounting
 -- ---------------------
 */  
 public function View_User_Transaction_History_Info ($Account, $requestPostBody) {
 
        $this->CI->form_validation->set_data($requestPostBody);
 
-       $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|alpha_numeric|exact_length[15]');
-       $this->CI->form_validation->set_rules('Amount', 'Amount', 'trim|required|number');
+       $this->CI->form_validation->set_rules('PageNumber', 'ResultsPerPage', 'trim|required|numeric');
+       $this->CI->form_validation->set_rules('ResultsPerPage', 'ResultsPerPage', 'trim|required|numeric');
 
        if ($this->CI->form_validation->run() === FALSE) {
               $validationErrors = validation_errors();
               return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
        }
 
-       $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
-       $Amount = $this->CI->Functions_Model->sanitize($requestPostBody['Amount']);
+       $PageNumber = $this->CI->Functions_Model->sanitize($requestPostBody['PageNumber']);
+       $ResultsPerPage = $this->CI->Functions_Model->sanitize($requestPostBody['ResultsPerPage']);
+       $Campus_Id = $Account->Campus_Id;
 
-       $TransactionHistoryInfo = $this->CI->Transactions_Model->read_transactions_by_address(array(
-              'Account_Address' => $Account->UsersAccount_Address,
-              'Limit' => 'all',
+       $AllTransactionHistoryInfo = $this->CI->Transactions_Model->read_all_user_transactions(array(
+              'PageNumber' => $PageNumber,
+              'ResultsPerPage' => $ResultsPerPage,
+              'Campus_Id' => $Campus_Id,
        ));
 
-       return ['Success' => True,'Target' => null,'Parameters' => $TransactionHistory,'Response' => 'Success'];
+       return ['Success' => True,'Target' => null,'Parameters' => $AllTransactionHistoryInfo,'Response' => 'transactinsss'];
 }
 
 
 /* 
 -- ---------------------
-   VIEW USER TRANSACTION HISTORY INFO
--- ---------------------
+   VIEW RECENT CASHIN
+   - for accounting use
+-- --------------------
 */  
 public function View_Recent_CashIn () {
 

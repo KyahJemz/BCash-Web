@@ -55,6 +55,10 @@
     border: 1px dotted red;
 } */
 
+.panel-cashinform-content button {
+    cursor: pointer;
+}
+
 .panel-cashinform-content .right-container {
     width: 300px;
     height: 100%;
@@ -178,7 +182,8 @@
 
 .panel-cashinform-content .right-container ul li {
     padding: 10px;
-    padding-left: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-bottom: 1px solid gainsboro;
     align-items: center;
     display: grid;
@@ -204,11 +209,11 @@
 }
 
 .panel-cashinform-content .right-container ul li .amount {
-    
+    text-wrap: nowrap;
 }
 
 .panel-cashinform-content .right-container ul li .type {
-    
+    text-wrap: nowrap;
 }
 
 

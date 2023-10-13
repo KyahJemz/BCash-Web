@@ -38,7 +38,6 @@ CREATE TABLE tbl_UsersData (
     Group_Id INT NULL,
     Department_Id INT NULL,
     Course_Id INT NULL,
-    Campus_Id INT NULL,
     SchoolPersonalId VARCHAR(15) NULL,
     Balance FLOAT DEFAULT 0,
     YearLevel VARCHAR(10) NULL,
@@ -60,7 +59,7 @@ CREATE TABLE tbl_UsersAccount (
     Lastname VARCHAR(50) NOT NULL,
     PinCode VARCHAR(6) NULL,
     IsAccountActive BIT DEFAULT 1,
-    LastSeen TIMESTAMP NULL
+    Campus_Id INT NULL
 );
 
 -- Create tbl_GuardianAccount
@@ -73,7 +72,8 @@ CREATE TABLE tbl_GuardianAccount (
     Firstname VARCHAR(50) NOT NULL,
     Lastname VARCHAR(50) NOT NULL,
     PinCode VARCHAR(6) NULL,
-    IsAccountActive BIT DEFAULT 1
+    IsAccountActive BIT DEFAULT 1,
+    Campus_Id INT NULL
 );
 
 -- Create tbl_WebAccounts
@@ -87,7 +87,7 @@ CREATE TABLE tbl_WebAccounts (
     Lastname VARCHAR(50) NOT NULL,
     PinCode VARCHAR(6) NULL,
     IsAccountActive BIT DEFAULT 1,
-    LastSeen TIMESTAMP NULL
+    Campus_Id INT NULL
 );
 
 -- Create tbl_Notifications
@@ -224,17 +224,19 @@ CREATE TABLE tbl_Whitelist (
 -- Add foreign key constraints
 ALTER TABLE tbl_UsersData
     ADD FOREIGN KEY (GuardianAccount_Address) REFERENCES tbl_GuardianAccount(GuardianAccount_Address),
-    ADD FOREIGN KEY (Group_Id) REFERENCES tbl_Group(Group_Id),
-    ADD FOREIGN KEY (Department_Id) REFERENCES tbl_Department(Department_Id),
-    ADD FOREIGN KEY (Course_Id) REFERENCES tbl_Course(Course_Id),
-    ADD FOREIGN KEY (Campus_Id) REFERENCES tbl_Campus(Campus_Id);
 
 ALTER TABLE tbl_GuardianAccount
     ADD FOREIGN KEY (UsersAccount_Address) REFERENCES tbl_UsersData(UsersAccount_Address),
     ADD FOREIGN KEY (ActorCategory_Id) REFERENCES tbl_ActorCategory(ActorCategory_Id);
+    ADD FOREIGN KEY (Campus_Id) REFERENCES tbl_Campus(Campus_Id);
 
 ALTER TABLE tbl_WebAccounts
     ADD FOREIGN KEY (ActorCategory_Id) REFERENCES tbl_ActorCategory(ActorCategory_Id);
+    ADD FOREIGN KEY (Campus_Id) REFERENCES tbl_Campus(Campus_Id);
+
+ALTER TABLE tbl_UsersAccount
+    ADD FOREIGN KEY (ActorCategory_Id) REFERENCES tbl_ActorCategory(ActorCategory_Id);
+    ADD FOREIGN KEY (Campus_Id) REFERENCES tbl_Campus(Campus_Id);
 
 ALTER TABLE tbl_Notifications
     ADD FOREIGN KEY (Creator_Account_Address) REFERENCES tbl_WebAccounts(WebAccounts_Address);

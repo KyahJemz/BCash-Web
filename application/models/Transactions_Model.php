@@ -104,17 +104,55 @@ class Transactions_Model extends CI_Model {
 
     public function read_recent_cashin($params) {
         $result = $this->db
-            ->select('*')
+            ->select('tbl_transactionsinfo.*, tbl_usersaccount.Firstname, tbl_usersaccount.Lastname')
             ->from('tbl_transactionsinfo')
             ->like('Sender_Address', 'ACT', 'after')
             ->limit($params['Limit'])
-            ->get();
-
-            // $query = $this->db->last_query();
-            // log_message('debug', 'Last executed SQL query: ' . $query);
-        
-            return ($result) ? $result : FALSE;
+            ->order_by('Timestamp', 'DESC') 
+            ->join('tbl_usersaccount', 'tbl_transactionsinfo.Receiver_Address = tbl_usersaccount.UsersAccount_Address', 'left')
+            ->get()
+            ->result();
+            
+        return ($result) ? $result : FALSE;
     }
+
+
+
+    public function read_all_user_transactions($params) {
+        $page = isset($params['PageNumber']) ? (int)$params['PageNumber'] : 1; 
+        $results_per_page = isset($params['ResultsPerPage']) ? (int)$params['ResultsPerPage'] : 50;
+        $offset = ($page - 1) * $results_per_page;
+
+        $result = $this->db
+            ->select(
+                'tbl_transactionsinfo.*, 
+                sender.Firstname AS Sender_Firstname, 
+                sender.Lastname AS Sender_Lastname, 
+                sender.Email AS Sender_Email, 
+                sender_data.Campus_Id AS sender_Campus_Id, 
+                sender_data.SchoolPersonalId AS sender_SchoolPersonalId,
+                receiver.Firstname AS Receiver_Firstname, 
+                receiver.Lastname AS Receiver_Lastname, 
+                receiver.Email AS Receiver_Email, 
+                receiver_data.Campus_Id AS Receiver_Campus_Id, 
+                receiver_data.SchoolPersonalId AS Receiver_SchoolPersonalId')
+            ->from('tbl_transactionsinfo')
+            ->order_by('Timestamp', 'DESC') 
+            ->join('tbl_usersaccount as sender', 'tbl_transactionsinfo.Sender_Address = sender.UsersAccount_Address', 'left')
+            ->join('tbl_usersaccount as receiver', 'tbl_transactionsinfo.Receiver_Address = receiver.UsersAccount_Address', 'left')
+            ->join('tbl_usersdata as sender_data', 'sender.UsersAccount_Address = sender_data.UsersAccount_Address', 'left')
+            ->join('tbl_usersdata as receiver_data', 'receiver.UsersAccount_Address = receiver_data.UsersAccount_Address', 'left')
+            ->group_start()
+                ->where('receiver_data.Campus_Id', $params['Campus_Id'])
+                ->or_where('sender_data.Campus_Id', $params['Campus_Id'])
+            ->group_end()
+            ->limit($results_per_page, $offset)
+            ->get()
+            ->result();
+    
+        return ($result) ? $result : null;
+    }
+    
   
     
 
@@ -153,7 +191,7 @@ class Transactions_Model extends CI_Model {
     public function read_transactionsinfo_by_address($AccountAddress) {
         $result = $this->db
             ->select('*')
-            ->from('tbl_transactionsinfos')
+            ->from('tbl_transactionsinfo')
             ->group_start()
                 ->where('Sender_Address', $AccountAddress)
                 ->or_where('Receiver_Address', $AccountAddress)

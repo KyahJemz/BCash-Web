@@ -38,8 +38,9 @@ class Accounting_Actor {
                 $response = null;
                 break;
 
+
             case 'get user transactions':
-                $response = null;
+                $response = $this->CI->Transaction_Actions->View_User_Transaction_History_Info ($Account, $requestPostBody);
                 break;
 
             case 'get user accounts':

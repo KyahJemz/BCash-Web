@@ -226,6 +226,8 @@ body {
         .sidebar-container .bottom-panel .menu .menuSelectionDropdownItems ul li {
             margin-top: 4px;
             margin-bottom: 4px;
+            overflow: hidden;
+            display: flex;
         }
 
         .sidebar-container .bottom-panel .menu .menuSelectionButton:hover {

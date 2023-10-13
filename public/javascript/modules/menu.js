@@ -11,7 +11,7 @@ export default class Menu {
     } else {
       menuMoreIcon.style.transform = "rotate(180deg)";
       menuSubitems.style.height = "fit-content";
-      menuSubitems.style.display = "list-item";
+      menuSubitems.style.display = "flex";
     }
   }
   
