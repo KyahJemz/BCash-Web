@@ -1,4 +1,44 @@
+:root {
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
+    --AsccentColor: #CB8213; /* Buttons */
+    --TextColor: #4b4b4b; /* text */
+    --DarkColor: #363636; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
 
+    --TextColor-White: #ffffff;
+    --TextColor-Red: #DA121A;
+    --TextColor-Gold: #F9AE28;
+    --TextColor-LightBlack: #333333;
+    --TextColor-Black: #0F1419;
+
+    --Button-Background-Red: #DA121A;
+    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Gold: #F9AE28;
+    --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-White: #ffffff;
+
+    --Selected-Background-LightBlack: #333333;
+
+    --Panel-Background-LightBlack: #333333;
+    --Panel-Background-Gold: #FFCC00;
+    --Panel-Background-Red: #DA121A;
+    --Panel-Background-White: #ffffff;
+    --Panel-Background-DarkWhite: #F2F2F2;
+
+    --color-White: #ffffff;
+    --color-DarkWhite: #F2F2F2;
+    --color-Red: #DA121A;
+    --color-DarkRed: #9A110D;
+    --color-Gold: #FFCC00;
+    --color-DarkGold: #F9AE28;
+    --color-Gray: #282828;
+    --color-LightBlack: #333333;
+    --color-Black: #0F1419;
+}
 
 
 /* ################## */
@@ -188,7 +228,6 @@
     .panel-transactions-table .table-header {
         background-color: var(--BackgroundContentTitleBarColor);
         width: max-content;
-        font-size: 0.8em;
         position: sticky;
         top: 0px;
     }
@@ -200,11 +239,12 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         word-break: break-all;
+        font-size: 0.8rem;
         padding: 5px;
     }
 
     .cell {
-        padding: 5px;
+        padding: 10px 10px;
         font-size: 0.8em;
         font-weight: 100;
         overflow: hidden;
@@ -217,60 +257,129 @@
 
     .panel-transactions-table table .col1 {
         width: 25px;
-        max-width: 25px;;
+        max-width: 25px;
     }
     .panel-transactions-table table .col2 {
-        width: 50px;
-        max-width: 50px;;
+        width: 30px;
+        max-width: 50px;
     }
     .panel-transactions-table table .col3 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
+        text-align: center;
+    }
+    .panel-transactions-table table .col3 a{
+        text-decoration: underline;
+        color: var(--TextColor-Gold);
+        cursor: pointer;
     }
     .panel-transactions-table table .col4 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
+        text-align: center;
     }
     .panel-transactions-table table .col5 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
+        text-align: center;
     }
     .panel-transactions-table table .col6 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
     }
     .panel-transactions-table table .col7 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
     }
     .panel-transactions-table table .col8 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
     }
     .panel-transactions-table table .col9 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
     }
     .panel-transactions-table table .col10 {
         width: 110px;
-        max-width: 110px;;
+        max-width: 110px;
+        text-align: center;
     }
     .panel-transactions-table table .col11 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
+        text-align: center;
     }
     .panel-transactions-table table .col12 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
     }
     .panel-transactions-table table .col13 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
     }
     .panel-transactions-table table .col14 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
     }
+
+
+
+
+    .Transaction-Details {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .Transaction-Details hr {
+        border-color: var(--color-DarkGold);
+        border-style: dashed;
+        border-width: 1px;
+    }
+
+    .Transaction-Details > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0px 10px;
+    }
+
+    .Transaction-Details p {
+        font-weight: bold;
+        color: inherit;
+
+    }
+
+    .Transaction-Details a {
+        font-weight: lighter;
+        color: var(--TextColor-LightBlack);
+    }
+
+    .Transaction-Details .details-header{
+        align-items: center;
+        text-align: center;
+        
+    }
+
+    .Transaction-Details .title {
+        font-size: 1.5rem;
+        color: var(--TextColor-Red);
+    }
+
+    .Transaction-Details .Status,
+    .Transaction-Details .Timestamp {
+        font-weight: lighter;
+    }
+
+
+    .Transaction-Details .TotalAmount,
+    .Transaction-Details .SenderName,
+    .Transaction-Details .ReceiverName {
+        color: var(--TextColor-Red);
+     }
+
+    
 
 
 @media (min-width: 0px) and (max-width: 768px) {

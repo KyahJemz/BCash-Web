@@ -64,13 +64,12 @@ class Functions_Model extends CI_Model {
 
         public function create_unique_transaction_address() {
 
-                $datePart = date('YmdHis');  // Format: YYYYMMDDHHMMSS
+                $datePart = date('YmdHis');
                 $randomString = $this->generate_random_alphanumeric(20 - strlen($datePart));
             
-                // Combine the date part and the random string to form the unique address
                 $uniqueAddress = $datePart . $randomString;
             
-                return substr($uniqueAddress, 0, 20);  // Trim to 20 characters
+                return substr($uniqueAddress, 0, 20);
         }
 
         

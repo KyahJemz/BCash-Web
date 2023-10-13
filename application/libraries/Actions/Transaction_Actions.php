@@ -82,10 +82,99 @@ class Transaction_Actions {
 /* 
 -- ---------------------
    VIEW USER TRANSACTION HISTORY INFO
+   - for accounting and administrator
+-- ---------------------
+*/  
+       public function Admin_Accounting_View_All_Transaction_History ($Account, $requestPostBody, $target) {
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('StartDate', 'StartDate', 'trim');
+              $this->CI->form_validation->set_rules('EndDate', 'EndDate', 'trim');
+              $this->CI->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim');
+              $this->CI->form_validation->set_rules('SearchName', 'SearchName', 'trim');
+              $this->CI->form_validation->set_rules('StatusFilter', 'StatusFilter', 'trim|required');
+
+              $this->CI->form_validation->set_rules('ResultsPerPage', 'ResultsPerPage', 'trim|required|numeric');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $StartDate = $this->CI->Functions_Model->sanitize($requestPostBody['StartDate']);
+              $EndDate = $this->CI->Functions_Model->sanitize($requestPostBody['EndDate']);
+              $TransactionAddress = $this->CI->Functions_Model->sanitize($requestPostBody['TransactionAddress']);
+              $SearchName = $this->CI->Functions_Model->sanitize($requestPostBody['SearchName']);
+              $StatusFilter = $this->CI->Functions_Model->sanitize($requestPostBody['StatusFilter']);
+
+              $ResultsPerPage = $this->CI->Functions_Model->sanitize($requestPostBody['ResultsPerPage']);
+              $Campus_Id = $Account->Campus_Id;
+
+              if ($target === 'my') {
+                     $AccountingTransactionHistoryInfo = $this->CI->Transactions_Model->read_all_user_transactions(array(
+                            'StartDate' => $StartDate,
+                            'EndDate' => $EndDate,
+                            'TransactionAddress' => $TransactionAddress,
+                            'AccountAddress' => 'ACT',
+                            'SearchName' => $SearchName,
+                            'StatusFilter' => $StatusFilter,
+                            'ResultsPerPage' => $ResultsPerPage,
+                            'Campus_Id' => $Campus_Id,
+                     ));
+                     return ['Success' => True,'Target' => null,'Parameters' => $AccountingTransactionHistoryInfo,'Response' => ''];
+              } else if ($target === 'all'){
+                     $AllTransactionHistoryInfo = $this->CI->Transactions_Model->read_all_user_transactions(array(
+                            'StartDate' => $StartDate,
+                            'EndDate' => $EndDate,
+                            'TransactionAddress' => $TransactionAddress,
+                            'SearchName' => $SearchName,
+                            'StatusFilter' => $StatusFilter,
+                            'ResultsPerPage' => $ResultsPerPage,
+                            'Campus_Id' => $Campus_Id,
+                     ));
+                     return ['Success' => True,'Target' => null,'Parameters' => $AllTransactionHistoryInfo,'Response' => ''];
+              } else {
+                     return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
+              }
+       }
+
+
+
+/* 
+-- ---------------------
+   VIEW USER TRANSACTION HISTORY INFO DETAILS
+   - for accounting and administrator
+-- ---------------------
+*/  
+public function Admin_Accounting_View_All_Transaction_History_Details ($Account, $requestPostBody) {
+
+       $this->CI->form_validation->set_data($requestPostBody);
+
+       $this->CI->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim');
+
+       if ($this->CI->form_validation->run() === FALSE) {
+              $validationErrors = validation_errors();
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+       }
+
+       $TransactionAddress = $this->CI->Functions_Model->sanitize($requestPostBody['TransactionAddress']);
+
+       $AccountingTransactionHistoryInfoDetails = $this->CI->Transactions_Model->read_transactionsinfo_by_transactionaddress(array(
+              'TransactionAddress' => $TransactionAddress,
+       ));
+       return ['Success' => True,'Target' => null,'Parameters' => $AccountingTransactionHistoryInfoDetails,'Response' => ''];
+      
+}
+
+
+/* 
+-- ---------------------
+   VIEW ACCOUNTING TRANSACTION HISTORY INFO
    - for accounting
 -- ---------------------
 */  
-public function View_User_Transaction_History_Info ($Account, $requestPostBody) {
+public function View_Accounting_Transaction_History_Info ($Account, $requestPostBody) {
 
        $this->CI->form_validation->set_data($requestPostBody);
 
@@ -111,12 +200,12 @@ public function View_User_Transaction_History_Info ($Account, $requestPostBody) 
 }
 
 
-/* 
+/*
 -- ---------------------
    VIEW RECENT CASHIN
    - for accounting use
 -- --------------------
-*/  
+*/
 public function View_Recent_CashIn () {
 
        $RecentCashIn = $this->CI->Transactions_Model->read_recent_cashin(array(

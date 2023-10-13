@@ -240,7 +240,17 @@ export default class Modals {
     
             if (notificationArray.length > 0) {
                 notificationArray.forEach(element => {
-                    layout = layout + element.getNotificationBoxView();;
+                    layout = layout + `
+                        <div class="notification-item" data-isnew="`+ element['IsNew'] +`" data-id="`+ element['Notification_ID '] +`">
+                            <div class="title-container">
+                                <p class="title">`+ element['Title'] +`</p>
+                                <p class="date">`+ element['Timestamp'] +`</p>
+                            </div>
+                            <div class="content-container">
+                                <p class="content">`+ element['Content'] +`</p>
+                            </div>
+                        </div>
+                    `;
                 });
         
                 view = view + `<div id="notification-list" class="notification-list">` + layout + `</div>`;
@@ -249,6 +259,8 @@ export default class Modals {
             return view;
     
         } else if (type=="Settings Panel"){
+            const Information = value;
+            console.log(Information);
             return `
                 <div class="personal-information-container">
                     <fieldset class="personalInformationSettings">
@@ -259,33 +271,33 @@ export default class Modals {
                                 </td>
                                 <td>
                                     <p>User Id:</p>
-                                    <input type="text" name="UserId" value="merch-123653">
+                                    <input id="AccountSettings-AccountAddress" type="text" readonly name="UserId" value="${Information.Account['WebAccounts_Address']}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <p>Firstname:</p>
-                                    <input type="text" name="Firstname" value="Stephen Regan James">
+                                    <input id="AccountSettings-Firstname" type="text" name="Firstname" value="${Information.Account['Firstname']}">
                                 </td>
                                 <td>
                                     <p>Lastname:</p>
-                                    <input type="text" name="Lastname" value="Layson">
+                                    <input id="AccountSettings-Lastname" type="text" name="Lastname" value="${Information.Account['Lastname']}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <p>User Category:</p>
-                                    <input type="text" name="ActorCategory" value="Merchant">
+                                    <input type="text" readonly name="ActorCategory" value="${Information.Account['ActorCategory']}">
                                 </td>
-                                <td>
+                                ${Information.Account['MerchantCategory'] ? `<td>
                                     <p>Merhant Category:</p>
-                                    <input type="text" name="MerchantCategory" value="Baste Canteen">
-                                </td>
+                                    <input type="text" readonly name="MerchantCategory" value="${Information.Account['MerchantCategory']}">
+                                </td>` : ``}
                             </tr>
                             <tr>
                                 <td>
                                     <p>E-Mail:</p>
-                                    <input type="text" name="email" value="jameslayson.0@gmail.com">
+                                    <input id="AccountSettings-Email" type="text" name="Email" value="${Information.Account['Email']}">
                                 </td>
                             </tr>
                         </table>
@@ -295,19 +307,19 @@ export default class Modals {
                         <table>
                             <tr>
                                 <td><label for="changePassword"><p>Change Password?</p></label></td>
-                                <td><input type="checkbox" name="changePassword" id="changePassword"></td>
+                                <td><input type="checkbox" name="changePassword" id="AccountSettings-ChangePassword"></td>
                             </tr>
                             <tr>
                                 <td><p>Old Password:</p></td>
-                                <td><input type="text" name="OldPassword" value="*****************"></td>
+                                <td><input id="AccountSettings-OldPassword" type="password" name="OldPassword" placeholder="*****************"></td>
                             </tr>
                             <tr>
                                 <td><p>New Password:</p></td>
-                                <td><input type="text" name="NewPassword" value="*****************"></td>
+                                <td><input id="AccountSettings-NewPassword1" type="password" name="NewPassword" placeholder="*****************"></td>
                             </tr>
                             <tr>
                                 <td><p>Re-type New Password:</p></td>
-                                <td><input type="text" name="ConfirmNewPassword" value="*****************"></td>
+                                <td><input id="AccountSettings-NewPassword2" type="password" name="ConfirmNewPassword" placeholder="*****************"></td>
                             </tr>
                         </table>
                     </fieldset>
@@ -316,25 +328,25 @@ export default class Modals {
                         <table>
                             <tr>
                                 <td><label for="changePinCode"><p>Change PIN code?</p></label></td>
-                                <td><input type="checkbox" name="changePinCode" id="changePinCode"></td>
+                                <td><input type="checkbox" name="changePinCode" id="AccountSettings-ChangePINCode"></td>
                             </tr>
                             <tr>
                                 <td><p>Old PIN Code:</p></td>
-                                <td><input type="text" name="OldPinCode" value="******"></td>
+                                <td><input id="AccountSettings-OldPINCode" type="password" name="OldPinCode" placeholder="******"></td>
                             </tr>
                             <tr>
                                 <td><p>New PIN Code:</p></td>
-                                <td><input type="text" name="NewPinCode" value="******"></td>
+                                <td><input id="AccountSettings-NewPINCode1 type="password" name="NewPinCode" placeholder="******"></td>
                             </tr>
                             <tr>
                                 <td><p>Re-type New PIN Code:</p></td>
-                                <td><input type="text" name="ConfirmNewPinCode" value="******"></td>
+                                <td><input id="AccountSettings-NewPINCode2 type="password" name="ConfirmNewPinCode" placeholder="******"></td>
                             </tr>
                         </table>
                     </fieldset>
                     <div class="buttons-container">
                         <button class="btn-back dialog-box-close-button">Close</button>
-                        <button class="btn-submit">Update Changes</button>
+                        <button id="btn-submit-account-changes" class="btn-submit ">Update Changes</button>
                     </div>
                 </div>
             `;

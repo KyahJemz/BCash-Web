@@ -35,12 +35,15 @@ class Accounting_Actor {
                 break;
 
             case 'get my transactions':
-                $response = null;
+                $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History ($Account, $requestPostBody, 'my');
                 break;
 
+            case 'get all transactions':
+                $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History ($Account, $requestPostBody, 'all');
+                break;
 
-            case 'get user transactions':
-                $response = $this->CI->Transaction_Actions->View_User_Transaction_History_Info ($Account, $requestPostBody);
+            case 'get transactions details':
+                $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History_Details ($Account, $requestPostBody);
                 break;
 
             case 'get user accounts':

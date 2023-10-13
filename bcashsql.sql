@@ -4,25 +4,6 @@ CREATE TABLE tbl_ActorCategory (
     Name VARCHAR(255) NOT NULL
 );
 
--- Create tbl_Course
-CREATE TABLE tbl_Course (
-    Course_Id INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    Abbreviation VARCHAR(20) NULL
-);
-
--- Create tbl_Department
-CREATE TABLE tbl_Department (
-    Department_Id INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    Abbreviation VARCHAR(20) NULL
-);
-
--- Create tbl_Group
-CREATE TABLE tbl_Group (
-    Group_Id INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL
-);
 
 -- Create tbl_Campus
 CREATE TABLE tbl_Campus (
@@ -98,6 +79,7 @@ CREATE TABLE tbl_Notifications (
     Title VARCHAR(255) NOT NULL,
     Content TEXT NOT NULL,
     IsNew BIT DEFAULT 1
+    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create tbl_Authentications
@@ -192,6 +174,7 @@ CREATE TABLE tbl_TransactionsInfo (
     DiscountReason VARCHAR(255) NULL,
     TotalAmount FLOAT NOT NULL,
     PostedBy VARCHAR(15) NOT NULL,
+    PaymentMethod VARCHAR(50) NULL,
     Message VARCHAR(255) NULL,
     Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -31,6 +31,14 @@ export default class Helper {
 		}
 	}
 
+	addElementClickListenerByElement(elements, callback){
+		if (elements.length > 0) {
+			elements.forEach((element) => {
+				element.addEventListener('click', callback);
+			});
+		}
+	}
+
 	formatNumber(number) {
 		const formattedNumber = new Intl.NumberFormat('en-US', {
 			minimumFractionDigits: 2,

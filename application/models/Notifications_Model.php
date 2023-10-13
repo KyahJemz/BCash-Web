@@ -10,8 +10,10 @@ class Notifications_Model extends CI_Model {
         $result = $this->db
             ->select('*')
             ->from('tbl_notifications')
-            ->get();
-        return ($result) ? $result : null;
+            ->order_by('Timestamp', 'DESC') 
+            ->get()
+            ->result();
+        return ($result) ? $result : [];
     }
 
     public function read_by_id($params){

@@ -11,20 +11,31 @@ import AjaxRequest from './ajax.js';
 
 import Helper from './helper.js';
 
+
 ////////////////////////////
 // VARIABLES
 ////////////////////////////
+const helper = new Helper();
+const Ajax = new AjaxRequest(BaseURL);
+const modals = new Modals();
 
 const notifications = new Notifications();
 const myTransactions = new Transactions(
   document.getElementById("My-Transactions-Table"),
-  document.getElementById("My-Transactions-Query"));
+  document.getElementById("My-Transactions-Query"),
+  document.getElementById("My-Transactions-Footer-Query"),
+  Ajax,
+  helper,
+  modals
+);
 const allTransactions = new Transactions(
   document.getElementById("All-Transactions-Table"),
-  document.getElementById("All-Transactions-Query"));
-const userTransactions = new Transactions(
-  document.getElementById("User-Transactions-Table"),
-  document.getElementById("User-Transactions-Query"));
+  document.getElementById("All-Transactions-Query"),
+  document.getElementById("All-Transactions-Footer-Query"),
+  Ajax,
+  helper,
+  modals
+  );
 const userAccounts = new Accounts(
   "users",
   document.getElementById("accounts-table-header"),
@@ -33,22 +44,9 @@ const userAccounts = new Accounts(
   );
 const myOrders = new Orders();
 const myItems = new Items();
-const modals = new Modals();
+
 const menu = new Menu();
 const dropdown = new Dropdown();
-const helper = new Helper();
-const Ajax = new AjaxRequest(BaseURL);
-
-
-var notificationArray = [];
-
-export function getItemsArray(){
-  return myItems.getItemsArray();
-}
-
-export function getOrdersArray(){
-  return myOrders.getOrdersArray();
-}
 
 ////////////////////////////
 // EVENT LISTENERS
@@ -84,67 +82,6 @@ export function makeModal(type, title, content){
   modals.activateModal(type, title, content);
 }
 
-myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png")
-myItems.registerItem("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../public/images/items/2.png");
-myItems.registerItem("3","Margherita Pizza","180","Pizza","2023-06-29","2023-06-29", "../public/images/items/3.png");
-myItems.registerItem("4","Vegetable Curry with Naan Bread","130","Food","2023-06-29","2023-06-29", "../public/images/items/4.png");
-myItems.registerItem("5","BBQ Pulled Pork Burger","140","Food","2023-06-29","2023-06-29", "../public/images/items/5.png");
-myItems.registerItem("6","Fish Tacos with Salsa","160","Food","2023-06-29","2023-06-29", "../public/images/items/6.png");
-myItems.registerItem("7","Iced Caramel Macchiato","110","Drink","2023-06-29","2023-06-29", "../public/images/items/7.png");
-myItems.registerItem("8","Strawberry Banana Smoothie","90","Drink","2023-06-29","2023-06-29", "../public/images/items/8.png");
-myItems.registerItem("9","Chocolate Chip Ice Cream","70","Disert","2023-06-29","2023-06-29", "../public/images/items/9.png");
-myItems.registerItem("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-06-29", "../public/images/items/10.png");
-
-//console.log(myItems.getItemsArray());
-
-//displayItemsEvents(items, "CreateOrder");
-
-
-
-
-////////////////////////////
-// ORDER
-////////////////////////////
-
-function onTxtOrderDiscountInput(){
-  myOrders.refreshReceiptValues(myOrders);
-}
-
-function onCreateOrderClearClick(){
-  myOrders.clearOrder(myOrders)
-}
-
-function onCreateOrderPlaceOrderClick(){
-  if (myOrders.items.length > 0) {
-    makeModal("Modal", "Order Confirmation", modals.getModalView("Place-Order",myOrders));
-   // openDialogBoxEvents("Place-Order");
-  } else {
-    makeAlert("Invalid Order", "No items selectd to place an order. Please select and try again...");
-  //  openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
-  }
-}
-
-helper.addElementInputListenerById('txt-order-Discount',onTxtOrderDiscountInput);
-helper.addElementClickListenerById('createorder-clear',onCreateOrderClearClick);
-helper.addElementClickListenerById('createorder-placeorder',onCreateOrderPlaceOrderClick);
-
-
-
-
-//#####//
-// ITEMS MODULE
-//#####//
-
-function onCreateOrderSearchInput(){
-  myItems.displayItems(myItems, myOrders, "CreateOrder");
-}
-
-function onItemManagementSearchInput(){
-  myItems.displayItems(myItems, myOrders, "ItemManagement");
-}
-
-helper.addElementInputListenerById('createorder-search', onCreateOrderSearchInput);
-helper.addElementInputListenerById('itemmanagement-search', onItemManagementSearchInput)
 
 
 ////////////////////////////
@@ -152,7 +89,7 @@ helper.addElementInputListenerById('itemmanagement-search', onItemManagementSear
 ////////////////////////////
 
 function onMenuSelectionButton(event) {
-  menu.menuSelectionEvents(event, myItems, myOrders);
+  menu.menuSelectionEvents(event, null, null);
 }
 
 helper.addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
@@ -168,7 +105,7 @@ function onDropdownButtonClick(event) {
 }
 
 function onDropdownButtonSubItemClick(event) {
-  dropdown.changeSelectionEvents(event, myItems, myOrders);
+  dropdown.changeSelectionEvents(event, null, null);
 }
 
 export function bindDropdownSubItemEventButtons() {
@@ -185,37 +122,19 @@ helper.addElementClickListener('.dropdownButtonSubItem', onDropdownButtonSubItem
 ////////////////////////////
 
 async function onTransactionsSearchClick(event) {
-  const transactionPanel = event.currentTarget.parentNode.parentNode.dataset.transactiontype;
-  if (transactionPanel === "MyTransactions") {
-
-    myTransactions.applyTransactionsQueries(event);
-
-  } else if (transactionPanel === "AllTransactions") {
-    const intent = "get user transactions";
-    const data = {
-      PageNumber : '1',
-      ResultsPerPage : '10',
-    }; 
-    await Ajax.sendRequest(data, intent)
-      .then(responseData => {
-        console.log('Response ssss:', responseData);
-        if (responseData.Success) {
-          allTransactions.applyTransactionsQueries(event, responseData.Parameters);
-        }
-    })
-      .catch(error => {
-        console.error('Request Error:', error);
-    });
-  }
+	const transactionPanel = event.currentTarget.parentNode.parentNode.dataset.transactiontype;
+	if (transactionPanel === "MyTransactions") {
+		myTransactions.applyTransactionsQueries(event, "get my transactions");
+	} else if (transactionPanel === "AllTransactions") {
+		allTransactions.applyTransactionsQueries(event, "get all transactions");
+	}
 }
 
 async function onTransactionsClearClick(event) {
   const transactionPanel = event.currentTarget.parentNode.parentNode.dataset.transactiontype;
   if (transactionPanel === "MyTransactions") {
-    
     myTransactions.clearTransactionsQueries(event);
   } else if (transactionPanel === "AllTransactions") {
-    
     allTransactions.clearTransactionsQueries(event);
   }
 }
@@ -241,23 +160,44 @@ helper.addElementClickListenerById('Modal-Close-Button', onModalCloseButtonClick
 
 
 
-
 ////////////////////////////
 // MENU PRIMARY BUTTONS
 ////////////////////////////
 
-function onMenuNotificationButtonClick() {
-  makeModal("Modal", "Notifications", modals.getModalView("Notification Panel"));
+async function onMenuNotificationButtonClick() {
+  await Ajax.sendRequest([], 'get my notifications')
+    .then(responseData => {
+      if (responseData.Success) {
+        console.log(responseData);
+        makeModal("Modal", "Notifications", modals.getModalView("Notification Panel",responseData.Parameters));
+      }
+  })
+    .catch(error => {
+      console.error('Request Error:', error);
+  });
 }
 
-function onMenuSettingsButtonClick() {
-  makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel"));
+async function onMenuSettingsButtonClick() {
+  await Ajax.sendRequest([], 'get my account')
+    .then(responseData => {
+      if (responseData.Success) {
+        console.log(responseData);
+        makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
+        helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
+      }
+  })
+    .catch(error => {
+      console.error('Request Error:', error);
+  });
+}
+
+async function updateAccount () {
+  
+  
 }
 
 helper.addElementClickListenerById('menu-notification-button', onMenuNotificationButtonClick);
 helper.addElementClickListenerById('menu-settings-button', onMenuSettingsButtonClick);
-
-makeModal("Modal", "Personal Settings Panel", modals.getModalView("Settings Panel"));
 
 
 
@@ -283,9 +223,6 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
     }
 });
 
-export function setNotificationArray(data){
-  notificationArray = data;
-}
 
 
 ////////////////////////////
