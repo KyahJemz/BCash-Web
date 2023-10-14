@@ -127,6 +127,10 @@ b {
     font-size: 0.8rem;
 }
 
+.center-text {
+    text-align: center;
+}
+
 /* 
     DROP DOWN 
 */
@@ -349,7 +353,7 @@ button img{
     transform: translateX(-50%);
     max-width: 50%;
     height: fit-content;
-    z-index: 9;
+    z-index: 200;
     display: flex; /* flex */
     flex-direction: column;
 }
@@ -362,7 +366,6 @@ button img{
 
 .Alert-Box-Table .Alert-box{
     width: 100%;
-    transition: opacity 0.5s ease;
 }
 
 .Alert-Box-Table .Alert-box .Alert-content {
@@ -373,6 +376,7 @@ button img{
 
 .Alert-Box-Table .Alert-box * p {
     color: inherit;
+    text-align: center;
 }
 
 .Alert-Box-Table .Alert-box .danger{
@@ -395,13 +399,12 @@ button img{
     color: var(--TextColor-LightBlack);
 }
 
-
 .remove-Alert {
     transform: translateX(100%);
 }
 
-.add-Alert {
-    transform: translateX(0);
+.add-Alert{
+    animation: addAlertKeyframes 0.5s forwards;
 }
 
 

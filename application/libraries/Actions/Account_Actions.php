@@ -72,48 +72,51 @@ class Account_Actions {
 
               $this->CI->form_validation->set_data($requestPostBody);
 
-              $this->CI->form_validation->set_rules('OldPinCode', 'OldPinCode', 'trim|required|number|exact_length[6]');
-              $this->CI->form_validation->set_rules('NewPinCode1', 'NewPinCode1', 'trim|required|number|exact_length[6]');
-              $this->CI->form_validation->set_rules('NewPinCode2', 'NewPinCode2', 'trim|required|number|exact_length[6]|matches[NewPinCode1]');
+              $this->CI->form_validation->set_rules('CurrentPIN', 'CurrentPIN', 'trim|required|numeric|exact_length[6]');
+              $this->CI->form_validation->set_rules('NewPINCode1', 'NewPINCode1', 'trim|required|numeric|exact_length[6]');
+              $this->CI->form_validation->set_rules('NewPINCode2', 'NewPINCode2', 'trim|required|numeric|exact_length[6]|matches[NewPINCode1]');
 
               if ($this->CI->form_validation->run() === FALSE) {
                      $validationErrors = validation_errors();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
               }
 
-              $OldPinCode = $this->CI->Functions_Model->sanitize($requestPostBody['OldPinCode']);
-              $NewPinCode1 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPinCode1']);
-              $NewPinCode2 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPinCode2']);
+              $CurrentPIN = $this->CI->Functions_Model->sanitize($requestPostBody['CurrentPIN']);
+              $NewPINCode1 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPINCode1']);
+              $NewPINCode2 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPINCode2']);
 
-              if ($OldPinCode != $Account->PinCode) {
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Old PIN Code does not match with the current PIN Code!'];
+              if ($CurrentPIN != $Account->PinCode) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'PIN Code is incorrect!'];
               }
 
-              if ($NewPinCode1 != $NewPinCode2) {
+              if ($NewPINCode1 != $NewPINCode2) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'New PIN Code does not match!'];
               }
 
               if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6') {
-                     $this->CI->UsersAccount_Model->update_pin($Account->UsersAccount_Address, $NewPinCode2);
+                     $this->CI->UsersAccount_Model->update_pin($Account->UsersAccount_Address, $NewPINCode2);
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->UsersAccount_Address,
-                            'Task ' => 'Updated its own PIN Code.',
+                            'Task' => 'Updated its own PIN Code.',
                      ));
               } else if ($Account->ActorCategory_Id === '7') {
-                     $this->CI->UsersAccount_Model->update_pin($Account->GuardianAccount_Address, $NewPinCode2);
+                     // $this->CI->GuardianAccount_Address->update_pin(array(
+                     //        'Account_Address'=>$Account->GuardianAccount_Address, 
+                     //        'PinCode' =>$NewPINCode2
+                     // ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->GuardianAccount_Address,
-                            'Task ' => 'Updated its own PIN Code.',
+                            'Task' => 'Updated its own PIN Code.',
                      ));
               } else {
-                     $this->CI->UsersAccount_Model->update_pin($Account->WebAccounts_Address, $NewPinCode2);
+                     $this->CI->WebAccounts_Model->update_pin($Account->WebAccounts_Address, $NewPINCode2);
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
-                            'Task ' => 'Updated its own PIN Code.',
+                            'Task' => 'Updated its own PIN Code.',
                      ));
               }
 
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
+              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'PIN Code successfully updated!'];
        }
 
 
@@ -128,7 +131,7 @@ class Account_Actions {
 
               $this->CI->form_validation->set_data($requestPostBody);
 
-              $this->CI->form_validation->set_rules('OldPassword', 'OldPassword', 'trim|required|min_length[8]|max_length[50]');
+              $this->CI->form_validation->set_rules('CurrentPassword', 'CurrentPassword', 'trim|required|max_length[50]');
               $this->CI->form_validation->set_rules('NewPassword1', 'NewPassword1', 'trim|required|min_length[8]|max_length[50]');
               $this->CI->form_validation->set_rules('NewPassword2', 'NewPassword2', 'trim|required|min_length[8]|max_length[50]|matches[NewPassword1]');
 
@@ -137,12 +140,12 @@ class Account_Actions {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
               }
 
-              $OldPassword = $this->CI->Functions_Model->sanitize($requestPostBody['OldPassword']);
+              $CurrentPassword = $this->CI->Functions_Model->sanitize($requestPostBody['CurrentPassword']);
               $NewPassword1 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPassword1']);
               $NewPassword2 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPassword2']);
 
-              if (!password_verify($OldPassword, $Account->Password)) {
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Old password does not match with the current password!'];
+              if (!password_verify($CurrentPassword, $Account->Password)) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Password is incorrect!'];
               }
 
               if ($NewPassword1 != $NewPassword2) {
@@ -156,7 +159,7 @@ class Account_Actions {
                      'Task ' => 'Updated its own password.',
               ));
 
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
+              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Password successfully updated!'];
        }
 
 
@@ -269,6 +272,88 @@ class Account_Actions {
 
               return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
        }
+
+
+/* 
+-- ---------------------
+   UPDATE MY DETAILS 
+   - for WEB ACTORS
+-- ---------------------
+*/  
+       public function Update_My_Account($Account, $requestPostBody) {
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('Firstname', 'Firstname', 'trim|required|alpha_numeric_spaces|max_length[50]');
+              $this->CI->form_validation->set_rules('Lastname', 'Lastname', 'trim|required|alpha_numeric_spaces|max_length[50]');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim|required|valid_email');
+              $this->CI->form_validation->set_rules('CurrentPassword', 'CurrentPassword', 'trim|required|max_length[50]');
+              $this->CI->form_validation->set_rules('CurrentPIN', 'CurrentPIN', 'trim|required|numeric|exact_length[6]');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Firstname = $this->CI->Functions_Model->sanitize($requestPostBody['Firstname']);
+              $Lastname = $this->CI->Functions_Model->sanitize($requestPostBody['Lastname']);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
+              $CurrentPassword = $this->CI->Functions_Model->sanitize($requestPostBody['CurrentPassword']);
+              $CurrentPIN = $this->CI->Functions_Model->sanitize($requestPostBody['CurrentPIN']);
+
+              if (!password_verify($CurrentPassword, $Account->Password)) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Password is incorrect!'];
+              }
+
+              if ($CurrentPIN != $Account->PinCode) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'PIN Code is incorrect!'];
+              }
+
+              $this->CI->db->trans_start(); 
+
+                     if ($Account->Firstname != $Firstname) {
+                            $this->CI->WebAccounts_Model->update_firstname()(array(
+                                   'AccountAddress' => $Account->WebAccounts_Address,
+                                   'Firstname' => $Firstname
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated its own Firstname to '.$Firstname.'.',
+                            ));
+                     }
+
+                     if ($Account->Lastname != $Lastname) {
+                            $this->CI->WebAccounts_Model->update_lastname(array(
+                                   'AccountAddress' => $Account->WebAccounts_Address,
+                                   'Lastname' => $Lastname
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated its own Lastname to '.$Lastname.'.',
+                            ));
+                     }
+
+                     if ($Account->Email != $Email) {
+                            $this->CI->WebAccounts_Model->update_email()(array(
+                                   'AccountAddress' => $Account->WebAccounts_Address,
+                                   'Email' => $Email
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated its own Email to '.$Email.'.',
+                            ));
+                     }
+
+              $this->CI->db->trans_complete(); 
+
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->db->error();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+              }
+
+              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Account updated successfully!'];
+       } 
 
 
 

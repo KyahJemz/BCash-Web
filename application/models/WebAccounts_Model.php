@@ -63,6 +63,57 @@ class WebAccounts_Model extends CI_Model {
         }
     }
 
+    public function update_email($params) {
+        $data = [
+            'Email ' => $params['Email']
+        ];
+        $this->db->where('WebAccounts_Address', $params['AccountAddress']);
+        $this->db->update('tbl_webaccounts', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_firstname($params) {
+        $data = [
+            'Firstname ' => $params['Firstname']
+        ];
+        $this->db->where('WebAccounts_Address', $params['AccountAddress']);
+        $this->db->update('tbl_webaccounts', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_lastname($params) {
+        $data = [
+            'Lastname ' => $params['Lastname']
+        ];
+        $this->db->where('WebAccounts_Address', $params['AccountAddress']);
+        $this->db->update('tbl_webaccounts', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    // public function update_pin($params) {
+    //     $data = [
+    //         'PinCode ' => $params['PinCode']
+    //     ];
+    //     $this->db->where('WebAccounts_Address', $params['AccountAddress']);
+    //     $this->db->update('tbl_webaccounts', $data);
+
+    //     return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
     public function uploadPass() {
         $hashed_password = password_hash("12345", PASSWORD_BCRYPT);
     

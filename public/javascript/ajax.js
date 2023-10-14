@@ -6,12 +6,8 @@ export default class AjaxRequest {
         this.baseURL = baseURL
     }
 
-    makeAlert(type,text){
-        const alerts = new Alerts(document.querySelector(".Alert-Box-Table"));
-        alerts.createAlertElement(type,text);
-    }
-
     sendRequest(data, intent) {
+        const alerts = new Alerts(document.querySelector(".Alert-Box-Table"));
         return new Promise((resolve, reject) => {
             fetch(this.baseURL, {
                 method: 'POST',
@@ -33,9 +29,19 @@ export default class AjaxRequest {
                 }
                 return response.json();
             })
-            .then(data => resolve(data))
+            .then(data => {
+                if (data.Success === false) {
+                    alerts.createAlertElement('danger', data.Response)
+                } else {
+                    console.log(data);
+                    if (data.Response !== '' && data.Response !== null){
+                        alerts.createAlertElement('success', data.Response)
+                    }
+                }
+                resolve(data);
+            })
             .catch(error => {
-                this.makeAlert('danger', error);
+                alerts.createAlertElement('danger', error);
                 reject(error);
             });
         });

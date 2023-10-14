@@ -66,9 +66,9 @@ class ActivityLogs_Model extends CI_Model {
     public function create($params){
         $data = [
             'Account_Address' => $params['Account_Address'],
-            'Task ' => $params['Task'],
+            'Task' => $params['Task'],
         ];
-        $this->db->insert('tbl_transactions', $data);
+        $this->db->insert('tbl_activitylogs', $data);
         $result = $this->db->insert_id();
         return ($result) ? $result : FALSE;
     }

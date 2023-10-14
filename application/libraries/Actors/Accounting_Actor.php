@@ -70,6 +70,10 @@ class Accounting_Actor {
                 $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
                 break;
 
+            case 'update my account':
+                $response = $this->CI->Account_Actions->Update_My_Account($Account, $requestPostBody);
+                break;
+
             case 'update my pin':
                 $response = $this->CI->Account_Actions->Update_My_PinCode($Account, $requestPostBody);
                 break;

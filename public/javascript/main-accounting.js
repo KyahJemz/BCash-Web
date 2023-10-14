@@ -15,6 +15,12 @@ import Helper from './helper.js';
 ////////////////////////////
 // VARIABLES
 ////////////////////////////
+
+export function makeAlert(type,text){
+  const alerts = new Alerts(document.querySelector(".Alert-Box-Table", ));
+  alerts.createAlertElement(type,text);
+}
+
 const helper = new Helper();
 const Ajax = new AjaxRequest(BaseURL);
 const modals = new Modals();
@@ -68,10 +74,7 @@ window.addEventListener('click', (event) => {
 ////////////////////////////
 
 
-export function makeAlert(type,text){
-  const alerts = new Alerts(document.querySelector(".Alert-Box-Table"));
-  alerts.createAlertElement(type,text);
-}
+
 
 export function makeNotification(id,title,content){
  // const notification = new Notification();
@@ -191,9 +194,67 @@ async function onMenuSettingsButtonClick() {
   });
 }
 
-async function updateAccount () {
+async function updateAccount (event) {
+  const parent = event.currentTarget.parentNode.parentNode;
+
+  const Firstname = parent.querySelector('#AccountSettings-Firstname').value;
+  const Lastname = parent.querySelector('#AccountSettings-Lastname').value;
+  const Email = parent.querySelector('#AccountSettings-Email').value;
+
+  const CurrentPassword = parent.querySelector('#AccountSettings-OldPassword');
+  const CurrentPIN = parent.querySelector('#AccountSettings-OldPINCode');
+
+  const data = {
+    Firstname : Firstname,
+    Lastname : Lastname,
+    Email : Email,
+    CurrentPassword : CurrentPassword.value,
+    CurrentPIN : CurrentPIN.value,
+  }
+
+  await Ajax.sendRequest(data, 'update my account')
+    .then(responseData => {
+      if (responseData.Success) {
+      }
+  });
+
+  if (parent.querySelector('#AccountSettings-ChangePassword').checked) {
+    const NewPassword1 = parent.querySelector('#AccountSettings-NewPassword1').value;
+    const NewPassword2 = parent.querySelector('#AccountSettings-NewPassword2').value;
+
+    const data = {
+      NewPassword1 : NewPassword1,
+      NewPassword2 : NewPassword2,
+      CurrentPassword : CurrentPassword.value,
+    }
   
+    await Ajax.sendRequest(data, 'update my password')
+      .then(responseData => {
+    });
+  }
+
+  if (parent.querySelector('#AccountSettings-ChangePINCode').checked) {
+    const NewPINCode1 = parent.querySelector('#AccountSettings-NewPINCode1').value;
+    const NewPINCode2 = parent.querySelector('#AccountSettings-NewPINCode2').value;
+
+    const data = {
+      NewPINCode1 : NewPINCode1,
+      NewPINCode2 : NewPINCode2,
+      CurrentPIN : CurrentPIN.value,
+    }
   
+    await Ajax.sendRequest(data, 'update my pin')
+      .then(responseData => {
+    });
+  }
+
+  CurrentPassword.value = '';
+  CurrentPIN.value = '';
+
+  parent.querySelector('#AccountSettings-NewPassword1').value = '';
+  parent.querySelector('#AccountSettings-NewPassword2').value = '';
+  parent.querySelector('#AccountSettings-NewPINCode1').value = '';
+  parent.querySelector('#AccountSettings-NewPINCode2').value = '';
 }
 
 helper.addElementClickListenerById('menu-notification-button', onMenuNotificationButtonClick);

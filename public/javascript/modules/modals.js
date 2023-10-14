@@ -310,10 +310,6 @@ export default class Modals {
                                 <td><input type="checkbox" name="changePassword" id="AccountSettings-ChangePassword"></td>
                             </tr>
                             <tr>
-                                <td><p>Old Password:</p></td>
-                                <td><input id="AccountSettings-OldPassword" type="password" name="OldPassword" placeholder="*****************"></td>
-                            </tr>
-                            <tr>
                                 <td><p>New Password:</p></td>
                                 <td><input id="AccountSettings-NewPassword1" type="password" name="NewPassword" placeholder="*****************"></td>
                             </tr>
@@ -331,21 +327,36 @@ export default class Modals {
                                 <td><input type="checkbox" name="changePinCode" id="AccountSettings-ChangePINCode"></td>
                             </tr>
                             <tr>
-                                <td><p>Old PIN Code:</p></td>
-                                <td><input id="AccountSettings-OldPINCode" type="password" name="OldPinCode" placeholder="******"></td>
-                            </tr>
-                            <tr>
                                 <td><p>New PIN Code:</p></td>
-                                <td><input id="AccountSettings-NewPINCode1 type="password" name="NewPinCode" placeholder="******"></td>
+                                <td><input id="AccountSettings-NewPINCode1" type="password" name="NewPinCode" placeholder="******"></td>
                             </tr>
                             <tr>
                                 <td><p>Re-type New PIN Code:</p></td>
-                                <td><input id="AccountSettings-NewPINCode2 type="password" name="ConfirmNewPinCode" placeholder="******"></td>
+                                <td><input id="AccountSettings-NewPINCode2" type="password" name="ConfirmNewPinCode" placeholder="******"></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    <fieldset class="ConfirmChanges">
+                        <legend><p>Confirmation</p></legend>
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <p class="center-text">Required to apply changes.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Current Password:</p>
+                                    <input id="AccountSettings-OldPassword" type="password" name="OldPassword" placeholder="">
+                                </td>
+                                <td>
+                                    <p>Current PIN Code:</p>
+                                    <input id="AccountSettings-OldPINCode" type="password" name="OldPINCode" placeholder="">
+                                </td>
                             </tr>
                         </table>
                     </fieldset>
                     <div class="buttons-container">
-                        <button class="btn-back dialog-box-close-button">Close</button>
                         <button id="btn-submit-account-changes" class="btn-submit ">Update Changes</button>
                     </div>
                 </div>

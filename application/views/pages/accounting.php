@@ -467,7 +467,7 @@
                     </div>
                 </div>
 
-    <!-- 
+    <!--  ### DONE ###
         My TRANSACTIONS 
     -->
                 <div id="panel-mytransactions" class="body-content-panel hidden">
@@ -603,7 +603,7 @@
                     </div>
                 </div>
 
-    <!--
+    <!-- ### DONE ###
         ALL TRANSACTIONS 
     -->
                 <div id="panel-alltransactions" class="body-content-panel hidden">
@@ -746,7 +746,7 @@
                     <div id="accounts-query" class="panel-accounts-query panel">
                         <div class="form-container">
                             <div>
-                                <label for="accountschoolid">Id Number</label>
+                                <label for="accountschoolid">Account Address</label>
                                 <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
                             </div>
                             <div>
@@ -757,7 +757,7 @@
                                 <label for="accountlastname">Last name</label>
                                 <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
                             </div>
-                            <div>
+                            <!-- <div>
                                 <label>Group Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
@@ -771,8 +771,8 @@
                                         <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
+                            </div> -->
+                            <!-- <div>
                                 <label>Department Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
@@ -786,8 +786,8 @@
                                         <a class="dropdownButtonSubItem" href="javascript:void(0)">SDS</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
+                            </div> -->
+                            <!-- <div>
                                 <label>Course Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
@@ -818,7 +818,7 @@
                                         <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="panel-accounts-buttons" data-transactiontype="mytransactions">
