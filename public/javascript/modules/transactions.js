@@ -53,7 +53,6 @@ export default class Transactions {
 		}; 
 		await this.Ajax.sendRequest(data, intent)
 			.then(responseData => {
-				console.log('Response ssss:', responseData);
 				if (responseData.Success) {
           this.data = responseData.Parameters;
           this.displayTransactionsToTable();
@@ -81,6 +80,11 @@ export default class Transactions {
     let count = 0;
     if (this.data) {
         this.data.forEach((record) => {  
+              Object.keys(record).forEach(key => {
+                if (record[key] === null || record[key] === "") {
+                    record[key] = "?";
+                }
+              });
             count++;
             template = template + `
             <tr>
@@ -111,29 +115,6 @@ export default class Transactions {
     const TransactionAddress = event.currentTarget.querySelector('.transaction-viewdata-button').textContent
     console.log(TransactionAddress);
 
-// Amount
-// Discount
-// DiscountReason
-// PostedBy
-// Receiver_Address
-// Receiver_Campus_Id
-// Receiver_Email
-// Receiver_Firstname
-// Receiver_Lastname
-// Receiver_SchoolPersonalId
-// Sender_Address
-// Sender_Email
-// Sender_Firstname
-// Sender_Lastname
-// Status
-// Timestamp
-// TotalAmount
-// TransactionType
-// TransactionType_Id
-// Transaction_Address
-// sender_Campus_Id
-// sender_SchoolPersonalId
-
     const data = {
       TransactionAddress: TransactionAddress,
 		}; 
@@ -141,7 +122,6 @@ export default class Transactions {
     const Ajax = new AjaxRequest(BaseURL);
 		await Ajax.sendRequest(data, 'get transactions details')
 			.then(responseData => {
-				console.log('Response Details:', responseData);
 				if (responseData.Success) {
           const layout = `
             <div class="Transaction-Details">

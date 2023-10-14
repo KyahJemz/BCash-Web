@@ -86,9 +86,69 @@ class UsersData_Model extends CI_Model {
 
     public function update_user_balance($params){
         $data = [
-            'Balance ' => $params['Balance'],
+            'Balance' => $params['Balance'],
         ];
         $this->db->where('UsersAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_usersdata', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_SchoolPersonalId($params) {
+        $data = [
+            'SchoolPersonalId' => (int)$params['SchoolPersonalId']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersdata', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_CanDoTransfers($params) {
+        $data = [
+            'CanDoTransfers' => (int)$params['CanDoTransfers']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersdata', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_CanDoTransactions($params) {
+        $data = [
+            'CanDoTransactions' => (int)$params['CanDoTransactions']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersdata', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_CanUseCard($params) {
+        $data = [
+            'CanUseCard' => (int)$params['CanUseCard']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersdata', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_CanModifySettings($params) {
+        $data = [
+            'CanModifySettings' => (int)$params['CanModifySettings']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersdata', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_IsTransactionAutoConfirm($params) {
+        $data = [
+            'IsTransactionAutoConfirm' => (int)$params['IsTransactionAutoConfirm']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
         $this->db->update('tbl_usersdata', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;

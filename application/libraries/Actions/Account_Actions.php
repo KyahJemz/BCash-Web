@@ -156,7 +156,7 @@ class Account_Actions {
 
               $this->CI->ActivityLogs_Model->create(array(
                      'Account_Address' => $Account->WebAccounts_Address,
-                     'Task ' => 'Updated its own password.',
+                     'Task' => 'Updated its own password.',
               ));
 
               return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Password successfully updated!'];
@@ -231,7 +231,7 @@ class Account_Actions {
                                    if ($Details_->CanModifySettings != $CanModifySettings) {
                                           $this->CI->ActivityLogs_Model->create(array(
                                                  'Account_Address' => $AccountAddress,
-                                                 'Task ' => 'Updated its own CanModifySettings settings to '.$CanModifySettings.'.',
+                                                 'Task' => 'Updated its own CanModifySettings settings to '.$CanModifySettings.'.',
                                           ));
                                    }
                             }
@@ -239,25 +239,25 @@ class Account_Actions {
                             if ($Details_->CanDoTransfers != $CanDoTransfers) {
                                    $this->CI->ActivityLogs_Model->create(array(
                                           'Account_Address' => $AccountAddress,
-                                          'Task ' => 'Updated its own CanDoTransfers settings to '.$CanDoTransfers.'.',
+                                          'Task' => 'Updated its own CanDoTransfers settings to '.$CanDoTransfers.'.',
                                    ));
                             }
                             if ($Details_->CanDoTransactions != $CanDoTransactions) {
                                    $this->CI->ActivityLogs_Model->create(array(
                                           'Account_Address' => $AccountAddress,
-                                          'Task ' => 'Updated its own CanDoTransactions settings to '.$CanDoTransactions.'.',
+                                          'Task' => 'Updated its own CanDoTransactions settings to '.$CanDoTransactions.'.',
                                    ));
                             }
                             if ($Details_->CanUseCard != $CanUseCard) {
                                    $this->CI->ActivityLogs_Model->create(array(
                                           'Account_Address' => $AccountAddress,
-                                          'Task ' => 'Updated its own CanUseCard settings to '.$CanUseCard.'.',
+                                          'Task' => 'Updated its own CanUseCard settings to '.$CanUseCard.'.',
                                    ));
                             }
                             if ($Details_->IsPurchaseAutoConfirm != $IsPurchaseAutoConfirm) {
                                    $this->CI->ActivityLogs_Model->create(array(
                                           'Account_Address' => $AccountAddress,
-                                          'Task ' => 'Updated its own IsPurchaseAutoConfirm settings to '.$IsPurchaseAutoConfirm.'.',
+                                          'Task' => 'Updated its own IsPurchaseAutoConfirm settings to '.$IsPurchaseAutoConfirm.'.',
                                    ));
                             }
                      }
@@ -360,178 +360,192 @@ class Account_Actions {
 /* 
 -- ---------------------
    UPDATE USER DETAILS 
-   - for accounting and admin
+   - for accounting
 -- ---------------------
 */  
-       public function Update_User_Account($Account, $requestPostBody) {
+       public function Update_User_Account_By_Accounting($Account, $requestPostBody) {
 
               $this->CI->form_validation->set_data($requestPostBody);
 
               $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|alpha_numeric|exact_length[15]');
+              $this->CI->form_validation->set_rules('PINCode', 'PINCode', 'trim|required|numeric|exact_length[6]');
 
-              $this->CI->form_validation->set_rules('Email', 'Email', 'trim|required|valid_email');
-              $this->CI->form_validation->set_rules('EmailId', 'EmailId', 'trim|required|valid_email');
-              $this->CI->form_validation->set_rules('Firstname', 'Firstname', 'trim|required|alpha_numeric');
-              $this->CI->form_validation->set_rules('Lastname', 'Lastname', 'trim|required|alpha_numeric');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim|valid_email|max_length[50]');
+              $this->CI->form_validation->set_rules('Firstname', 'Firstname', 'trim|alpha_numeric|max_length[50]');
+              $this->CI->form_validation->set_rules('Lastname', 'Lastname', 'trim|alpha_numeric|max_length[50]');
               $this->CI->form_validation->set_rules('IsAccountActive', 'IsAccountActive', 'trim|required|numeric|exact_length[1]');
 
-              $this->CI->form_validation->set_rules('Campus_Id', 'Campus_Id', 'trim|required|numeric');
-              $this->CI->form_validation->set_rules('SchoolPersonalId', 'SchoolPersonalId', 'trim|required|numeric');
+              $this->CI->form_validation->set_rules('SchoolPersonalId', 'SchoolPersonalId', 'trim|alpha_numeric');
               $this->CI->form_validation->set_rules('CanDoTransfers', 'CanDoTransfers', 'trim|required|numeric|exact_length[1]');
               $this->CI->form_validation->set_rules('CanDoTransactions', 'CanDoTransactions', 'trim|required|numeric|exact_length[1]');
               $this->CI->form_validation->set_rules('CanUseCard', 'CanUseCard', 'trim|required|numeric|exact_length[1]');
               $this->CI->form_validation->set_rules('CanModifySettings', 'CanModifySettings', 'trim|required|numeric|exact_length[1]');
-              $this->CI->form_validation->set_rules('IsPurchaseAutoConfirm', 'IsPurchaseAutoConfirm', 'trim|required|numeric|exact_length[1]');
+              $this->CI->form_validation->set_rules('IsTransactionAutoConfirm', 'IsTransactionAutoConfirm', 'trim|required|numeric|exact_length[1]');
 
               if ($this->CI->form_validation->run() === FALSE) {
                      $validationErrors = validation_errors();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
               }
 
-              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['OldPinCode']);
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $PINCode = $this->CI->Functions_Model->sanitize($requestPostBody['PINCode']);
 
               $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
-              $EmailId = $this->CI->Functions_Model->sanitize($requestPostBody['EmailId']);
               $Firstname = $this->CI->Functions_Model->sanitize($requestPostBody['Firstname']);
               $Lastname = $this->CI->Functions_Model->sanitize($requestPostBody['Lastname']);
               $IsAccountActive = $this->CI->Functions_Model->sanitize($requestPostBody['IsAccountActive']);
 
-              $Campus_Id = $this->CI->Functions_Model->sanitize($requestPostBody['Campus_Id']);
               $SchoolPersonalId = $this->CI->Functions_Model->sanitize($requestPostBody['SchoolPersonalId']);
               $CanDoTransfers = $this->CI->Functions_Model->sanitize($requestPostBody['CanDoTransfers']);
               $CanDoTransactions = $this->CI->Functions_Model->sanitize($requestPostBody['CanDoTransactions']);
               $CanUseCard = $this->CI->Functions_Model->sanitize($requestPostBody['CanUseCard']);
               $CanModifySettings = $this->CI->Functions_Model->sanitize($requestPostBody['CanModifySettings']);
-              $IsPurchaseAutoConfirm = $this->CI->Functions_Model->sanitize($requestPostBody['IsPurchaseAutoConfirm']);
+              $IsTransactionAutoConfirm = $this->CI->Functions_Model->sanitize($requestPostBody['IsTransactionAutoConfirm']);
+
+              if ($PINCode !== $Account->PinCode) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid PIN Code']; 
+              }
 
               $Account_ = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=> $AccountAddress));
               $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=> $AccountAddress));
 
-              $this->db->trans_start(); 
+              if (empty($Account_) || empty($Details_)) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid Account'];
+              }
 
-                     if (
-                            $Account_->Email != $Email || 
-                            $Account_->EmailId != $EmailId || 
-                            $Account_->Firstname != $Firstname || 
-                            $Account_->Lastname != $Lastname ||
-                            $Account_->IsAccountActive != $IsAccountActive
-                     ) {
+              $changes = 'Changes: ';
 
-                            $this->CI->UsersAccount_Model->update(array(
+              $this->CI->db->trans_start(); 
+
+                     if ($Account_->Email !== $Email) {
+                            $this->CI->UsersAccount_Model->update_Email(array(
                                    'UsersAccount_Address' => $AccountAddress,
-                                   'Email ' => $Email,
-                                   'EmailId ' => $EmailId,
-                                   'Firstname ' => $Firstname,
-                                   'Lastname ' => $Lastname,
+                                   'Email' => $Email,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] Email settings to '.$Email.'.',
+                            ));
+                            $changes = $changes . 'Email, ';
+                     }
+
+                     if ($Account_->Firstname !== $Firstname) {
+                            $this->CI->UsersAccount_Model->update_Firstname(array(
+                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Firstname' => $Firstname,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] Firstname settings to '.$Firstname.'.',
+                            ));
+                            $changes = $changes . 'Firstname, ';
+                     }
+
+                     if ($Account_->Lastname !== $Lastname) {
+                            $this->CI->UsersAccount_Model->update_Lastname(array(
+                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Lastname' => $Lastname,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] Lastname settings to '.$Lastname.'.',
+                            ));
+                            $changes = $changes . 'Lastname, ';
+                     }
+
+                     if ($Account_->IsAccountActive !== $IsAccountActive) {
+                            $this->CI->UsersAccount_Model->update_IsAccountActive(array(
+                                   'UsersAccount_Address' => $AccountAddress,
                                    'IsAccountActive' => $IsAccountActive,
                             ));
-                            
-                            if ($Account_->Email != $Email) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] Email settings to '.$Email.'.',
-                                   ));
-                            }
-                            if ($Account_->EmailId != $EmailId) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] EmailId settings to '.$EmailId.'.',
-                                   ));
-                            }
-                            if ($Account_->Firstname != $Firstname) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] Firstname settings to '.$Firstname.'.',
-                                   ));
-                            }
-                            if ($Account_->Lastname != $Lastname) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] Lastname settings to '.$Lastname.'.',
-                                   ));
-                            }
-                            if ($Account_->IsAccountActive != $IsAccountActive) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] IsAccountActive settings to '.$IsAccountActive.'.',
-                                   ));
-                            }
-                     }
-
-                     if (
-                            $Details_->Campus_Id != $Campus_Id ||
-                            $Details_->SchoolPersonalId != $SchoolPersonalId ||
-                            $Details_->CanDoTransfers != $CanDoTransfers ||
-                            $Details_->CanDoTransactions != $CanDoTransactions ||
-                            $Details_->CanUseCard != $CanUseCard ||
-                            $Details_->CanModifySettings != $CanModifySettings ||
-                            $Details_->IsPurchaseAutoConfirm != $IsPurchaseAutoConfirm
-                     ) {
-
-                            $this->CI->UsersData_Model->update_by_admin(array(
-                                   'UsersAccount_Address' => $AccountAddress,
-                                   'Campus_Id ' => $Campus_Id,
-                                   'SchoolPersonalId ' => $SchoolPersonalId,
-                                   'CanDoTransfers ' => $CanDoTransfers,
-                                   'CanDoTransactions ' => $CanDoTransactions,
-                                   'CanUseCard ' => $CanUseCard,
-                                   'CanModifySettings' => $CanModifySettings,
-                                   'IsPurchaseAutoConfirm' => $IsPurchaseAutoConfirm,
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] IsAccountActive settings to '.$IsAccountActive.'.',
                             ));
-
-                            if ($Details_->Campus_Id != $Campus_Id) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] Campus_Id to '.$Campus_Id.'.',
-                                   ));
-                            }
-                            if ($Details_->SchoolPersonalId != $SchoolPersonalId) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] SchoolPersonalId to '.$SchoolPersonalId.'.',
-                                   ));
-                            }
-                            if ($Details_->CanDoTransfers != $CanDoTransfers) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] CanDoTransfers settings to '.$CanDoTransfers.'.',
-                                   ));
-                            }
-                            if ($Details_->CanDoTransactions != $CanDoTransactions) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] CanDoTransactions settings to '.$CanDoTransactions.'.',
-                                   ));
-                            }
-                            if ($Details_->CanUseCard != $CanUseCard) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] CanUseCard settings to '.$CanUseCard.'.',
-                                   ));
-                            }
-                            if ($Details_->CanModifySettings != $CanModifySettings) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] CanModifySettings settings to '.$CanModifySettings.'.',
-                                   ));
-                            }
-                            if ($Details_->IsPurchaseAutoConfirm != $IsPurchaseAutoConfirm) {
-                                   $this->CI->ActivityLogs_Model->create(array(
-                                          'Account_Address' => $Account->WebAccounts_Address,
-                                          'Task ' => 'Updated ['.$AccountAddress.'] IsPurchaseAutoConfirm settings to '.$IsPurchaseAutoConfirm.'.',
-                                   ));
-                            }
+                            $changes = $changes . 'IsAccountActive, ';
                      }
 
-              $this->db->trans_complete(); 
+                     if ($Details_->SchoolPersonalId !== $SchoolPersonalId) {
+                            $this->CI->UsersData_Model->update_SchoolPersonalId(array(
+                                   'UsersAccount_Address' => $AccountAddress,
+                                   'SchoolPersonalId' => $SchoolPersonalId,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] SchoolPersonalId settings to '.$SchoolPersonalId.'.',
+                            ));
+                            $changes = $changes . 'SchoolPersonalId, ';
+                     }
 
-              if ($this->db->trans_status() === FALSE) {
-                     $this->db->trans_rollback();
-                     $error = $this->db->error();
+                     if ($Details_->CanDoTransfers !== $CanDoTransfers) {
+                            $this->CI->UsersData_Model->update_CanDoTransfers(array(
+                                   'UsersAccount_Address' => $AccountAddress,
+                                   'CanDoTransfers' => $CanDoTransfers,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] CanDoTransfers settings to '.$CanDoTransfers.'.',
+                            ));
+                            $changes = $changes . 'CanDoTransfers, ';
+                     }
+
+                     if ($Details_->CanDoTransactions !== $CanDoTransactions) {
+                            $this->CI->UsersData_Model->update_CanDoTransactions(array(
+                                   'UsersAccount_Address' => $AccountAddress,
+                                   'CanDoTransactions' => $CanDoTransactions,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] CanDoTransactions settings to '.$CanDoTransactions.'.',
+                            ));
+                            $changes = $changes . 'CanDoTransactions, ';
+                     }
+
+                     if ($Details_->CanUseCard !== $CanUseCard) {
+                            $this->CI->UsersData_Model->update_CanUseCard(array(
+                                   'UsersAccount_Address' => $AccountAddress,
+                                   'CanUseCard' => $CanDoTransactions,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] CanUseCard settings to '.$CanUseCard.'.',
+                            ));
+                            $changes = $changes . 'CanUseCard, ';
+                     }
+
+                     if ($Details_->CanModifySettings !== $CanModifySettings) {
+                            $this->CI->UsersData_Model->update_CanModifySettings(array(
+                                   'UsersAccount_Address' => $AccountAddress,
+                                   'CanModifySettings' => $CanDoTransactions,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] CanModifySettings settings to '.$CanModifySettings.'.',
+                            ));
+                            $changes = $changes . 'CanModifySettings, ';
+                     }
+
+                     if ($Details_->IsTransactionAutoConfirm !== $IsTransactionAutoConfirm) {
+                            $this->CI->UsersData_Model->update_IsTransactionAutoConfirm(array(
+                                   'UsersAccount_Address' => $AccountAddress,
+                                   'IsTransactionAutoConfirm' => $IsTransactionAutoConfirm,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] IsTransactionAutoConfirm settings to '.$IsTransactionAutoConfirm.'.',
+                            ));
+                            $changes = $changes . 'IsTransactionAutoConfirm, ';
+                     }
+
+              $this->CI->db->trans_complete(); 
+
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
               }
 
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
+              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => $changes];
        }
 
 
@@ -574,9 +588,37 @@ class Account_Actions {
    - for admin accounting use
 -- ---------------------
 */  
-       public function View_User_Accounts() {
+       public function View_User_Accounts($Account,$requestPostBody) {
 
-              $Accounts = $this->CI->UsersAccount_Model->read();
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim');
+              $this->CI->form_validation->set_rules('SchoolPersonalId', 'SchoolPersonalId', 'trim');
+              $this->CI->form_validation->set_rules('Name', 'Name', 'trim');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim');
+              $this->CI->form_validation->set_rules('Status', 'Status', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $SchoolPersonalId = $this->CI->Functions_Model->sanitize($requestPostBody['SchoolPersonalId']);
+              $Name = $this->CI->Functions_Model->sanitize($requestPostBody['Name']);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
+              $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
+
+              $Accounts = $this->CI->UsersAccount_Model->read_all_with_view_columns(array(
+                     'Campus_Id' => $Campus_Id,
+                     'AccountAddress' => $AccountAddress,
+                     'SchoolPersonalId' => $SchoolPersonalId,
+                     'Name' => $Name,
+                     'Email' => $Email,
+                     'Status' => $Status
+              ));
 
               return ['Success' => True,'Target' => null,'Parameters' => $Accounts,'Response' => ''];
        }
@@ -620,7 +662,7 @@ class Account_Actions {
 
               $this->CI->ActivityLogs_Model->create(array(
                      'Account_Address' => $Account->WebAccounts_Address,
-                     'Task ' => 'Updated [' . $AccountAddress .'] PIN Code.',
+                     'Task' => 'Updated [' . $AccountAddress .'] PIN Code.',
               ));
 
               return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
@@ -659,7 +701,7 @@ class Account_Actions {
 
               $this->CI->ActivityLogs_Model->create(array(
                      'Account_Address' => $Account->WebAccounts_Address,
-                     'Task ' => 'Updated [' . $AccountAddress . '] password.',
+                     'Task' => 'Updated [' . $AccountAddress . '] password.',
               ));
 
               return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];

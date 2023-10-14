@@ -47,11 +47,11 @@ class Accounting_Actor {
                 break;
 
             case 'get user accounts':
-                $response =  $this->CI->Account_Actions->View_User_Accounts();
+                $response =  $this->CI->Account_Actions->View_User_Accounts($Account, $requestPostBody);
                 break;
 
             case 'update user details': 
-                $response =  $this->CI->Account_Actions->Update_User_Account($Account, $requestPostBody);
+                $response =  $this->CI->Account_Actions->Update_User_Account_By_Accounting($Account, $requestPostBody);
                 break;
 
             case 'get user details':

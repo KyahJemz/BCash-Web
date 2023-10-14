@@ -1,6 +1,4 @@
 import Transactions from './modules/transactions.js';
-import Orders from './modules/order.js';
-import Items from './modules/items.js';
 import Notifications from './modules/notifications.js';
 import Alerts from './modules/alerts.js';
 import Modals from './modules/modals.js';
@@ -16,16 +14,10 @@ import Helper from './helper.js';
 // VARIABLES
 ////////////////////////////
 
-export function makeAlert(type,text){
-  const alerts = new Alerts(document.querySelector(".Alert-Box-Table", ));
-  alerts.createAlertElement(type,text);
-}
-
 const helper = new Helper();
 const Ajax = new AjaxRequest(BaseURL);
 const modals = new Modals();
 
-const notifications = new Notifications();
 const myTransactions = new Transactions(
   document.getElementById("My-Transactions-Table"),
   document.getElementById("My-Transactions-Query"),
@@ -41,15 +33,15 @@ const allTransactions = new Transactions(
   Ajax,
   helper,
   modals
-  );
+);
 const userAccounts = new Accounts(
   "users",
-  document.getElementById("accounts-table-header"),
   document.getElementById("accounts-table-body"),
-  document.getElementById("accounts-query")
-  );
-const myOrders = new Orders();
-const myItems = new Items();
+  document.getElementById("accounts-query"),
+  Ajax,
+  helper,
+  modals
+);
 
 const menu = new Menu();
 const dropdown = new Dropdown();
@@ -65,7 +57,7 @@ window.addEventListener('click', (event) => {
   const dialogContent = document.querySelector('.modal-content');
     
   if (event.target === dialogContainer && !dialogContent.contains(event.target)) {
-      modals.closeModal();
+    onModalCloseButtonClick();
   }
 });
 
@@ -73,8 +65,10 @@ window.addEventListener('click', (event) => {
 // INITIALIZATIONS
 ////////////////////////////
 
-
-
+export function makeAlert(type,text){
+  const alerts = new Alerts(document.querySelector(".Alert-Box-Table", ));
+  alerts.createAlertElement(type,text);
+}
 
 export function makeNotification(id,title,content){
  // const notification = new Notification();
@@ -156,11 +150,10 @@ helper.addElementClickListener('.transaction-export-button', onTransactionsExpor
 ////////////////////////////
 
 function onModalCloseButtonClick() {
-  modals.closeModal();
+  document.getElementById("Modal-Container").style.display = "none";
 }
 
 helper.addElementClickListenerById('Modal-Close-Button', onModalCloseButtonClick);
-
 
 
 ////////////////////////////
@@ -171,7 +164,6 @@ async function onMenuNotificationButtonClick() {
   await Ajax.sendRequest([], 'get my notifications')
     .then(responseData => {
       if (responseData.Success) {
-        console.log(responseData);
         makeModal("Modal", "Notifications", modals.getModalView("Notification Panel",responseData.Parameters));
       }
   })
@@ -184,7 +176,6 @@ async function onMenuSettingsButtonClick() {
   await Ajax.sendRequest([], 'get my account')
     .then(responseData => {
       if (responseData.Success) {
-        console.log(responseData);
         makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
         helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
       }
@@ -291,18 +282,57 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
 ////////////////////////////
 
 function onUsersAccountsSearchClick(event) {
-  userAccounts.applyAccountsQuery(event);
-  console.log("eee");
+  userAccounts.applyAccountsQuery(event, 'get user accounts', uploadUserChanges);
 }
 
 function onUserAccountsClearClick(event) {
-  console.log("eee");
   userAccounts.clearAccountsQuery(event);
-  
+}
+
+async function uploadUserChanges(event) {
+  console.log('trigger');
+  const parent = event.currentTarget.parentNode.parentNode;
+
+  const AccountAddress = parent.querySelector('#AccountDetails-AccountAddress').textContent;
+  const Firstname = parent.querySelector('#AccountDetails-Firstname').value;
+  const Lastname = parent.querySelector('#AccountDetails-Lastname').value;
+  const Email = parent.querySelector('#AccountDetails-Email').value;
+  const ShoolPersonalId = parent.querySelector('#AccountDetails-ShoolPersonalId').value; 
+  const PINCode = parent.querySelector('#AccountDetails-PINCode'); 
+
+  const IsAccountActive = parent.querySelector('#AccountDetails-IsAccountActive').checked; 
+  const CanDoTransactions = parent.querySelector('#AccountDetails-CanDoTransactions').checked; 
+  const CanDoTransfers = parent.querySelector('#AccountDetails-CanDoTransfers').checked; 
+  const CanModifySettings = parent.querySelector('#AccountDetails-CanModifySettings').checked; 
+  const CanUseCard = parent.querySelector('#AccountDetails-CanUseCard').checked; 
+  const IsTransactionAutoConfirm = parent.querySelector('#AccountDetails-IsTransactionAutoConfirm').checked; 
+
+  const data = {
+    AccountAddress : AccountAddress,
+    Firstname : Firstname,
+    Lastname : Lastname,
+    Email : Email,
+    ShoolPersonalId : ShoolPersonalId,
+    PINCode : PINCode.value,
+    IsAccountActive : (IsAccountActive === true) ? '1' : '0',
+    CanDoTransactions : (CanDoTransactions === true) ? '1' : '0',
+    CanDoTransfers : (CanDoTransfers === true) ? '1' : '0',
+    CanModifySettings : (CanModifySettings === true) ? '1' : '0',
+    CanUseCard : (CanUseCard === true) ? '1' : '0',
+    IsTransactionAutoConfirm : (IsTransactionAutoConfirm === true) ? '1' : '0'
+  }
+
+  await Ajax.sendRequest(data, 'update user details')
+    .then(responseData => {
+      if (responseData.Success) {
+      }
+  });
 }
 
 helper.addElementClickListener('.accounts-search-button', onUsersAccountsSearchClick);
 helper.addElementClickListener('.accounts-clear-button', onUserAccountsClearClick);
+
+
 
 
 ////////////////////////////
@@ -405,6 +435,27 @@ async function CashIn_RecentCashIn () {
   })
     .catch(error => {
       console.error('Request Error:', error);
+  });
+}
+
+GetMyData();
+async function GetMyData () {
+  await Ajax.sendRequest([], "get my account")
+    .then(responseData => {
+      if (responseData.Success) {
+        const name = (responseData['Parameters']['Account']['Firstname'] + " " + responseData['Parameters']['Account']['Lastname']);
+        document.getElementById('WebAccountFullName').innerHTML = name;
+      } else {
+        setTimeout(() => {
+          GetMyData ();
+        }, 2000);
+      }
+  })
+    .catch(error => {
+      console.error('Request Error:', error);
+      setTimeout(() => {
+        GetMyData ();
+      }, 2000);
   });
 }
 

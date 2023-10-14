@@ -321,7 +321,21 @@
     flex-direction: row;
     align-self: flex-end;
     gap: 10px;
-    
+    cursor: pointer;
+}
+.personal-information-container button {
+    cursor: pointer;
+}
+
+
+.personal-information-container .warning {
+    color: var(--TextColor-Red);
+}
+
+.personal-information-container .title {
+    color: var(--TextColor-Red);
+    font-weight: bold;
+    font-size: 1.3rem;
 }
 
 .personal-information-container .buttons-container button:last-child {

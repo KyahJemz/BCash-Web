@@ -136,12 +136,12 @@ class Transactions_Model extends CI_Model {
                 sender.Firstname AS Sender_Firstname, 
                 sender.Lastname AS Sender_Lastname, 
                 sender.Email AS Sender_Email, 
-                sender_data.Campus_Id AS sender_Campus_Id, 
+                sender.Campus_Id AS sender_Campus_Id, 
                 sender_data.SchoolPersonalId AS sender_SchoolPersonalId,
                 receiver.Firstname AS Receiver_Firstname, 
                 receiver.Lastname AS Receiver_Lastname, 
                 receiver.Email AS Receiver_Email, 
-                receiver_data.Campus_Id AS Receiver_Campus_Id, 
+                receiver.Campus_Id AS Receiver_Campus_Id, 
                 receiver_data.SchoolPersonalId AS Receiver_SchoolPersonalId,
                 transactiontype.Name as TransactionType')
             ->from('tbl_transactionsinfo')
@@ -152,8 +152,8 @@ class Transactions_Model extends CI_Model {
             ->join('tbl_usersdata as receiver_data', 'receiver.UsersAccount_Address = receiver_data.UsersAccount_Address', 'left')
             ->join('tbl_transactiontype as transactiontype', 'tbl_transactionsinfo.TransactionType_Id = transactiontype.TransactionType_Id', 'left')
             ->group_start()
-                ->where('receiver_data.Campus_Id', $params['Campus_Id'])
-                ->or_where('sender_data.Campus_Id', $params['Campus_Id'])
+                ->where('receiver.Campus_Id', $params['Campus_Id'])
+                ->or_where('sender.Campus_Id', $params['Campus_Id'])
             ->group_end()
             ->where('Timestamp >=', $start_timestamp)
             ->where('Timestamp <=', $end_timestamp)
@@ -181,9 +181,6 @@ class Transactions_Model extends CI_Model {
         }
     
         $result = $this->db->limit($results_per_page)->get()->result();
-
-        $sql_query = $this->db->last_query();
-        log_message('debug', 'SQL Query: ' . $sql_query);
     
         return ($result) ? $result : $result;
     }

@@ -65,6 +65,66 @@ class UsersAccount_Model extends CI_Model {
         }
     }
 
+    public function read_all_with_view_columns($params){
+        $this->db
+            ->select('
+                Account.UsersAccount_Address as UsersAccount_Address,
+                Account.Firstname as Firstname,
+                Account.Lastname as Lastname,
+                Account.Email as Email,
+                Campus.Name as Campus,
+                Actor.Name as ActorCategory,
+                Account.IsAccountActive as IsAccountActive,
+                Data.CanDoTransfers as CanDoTransfers,
+                Data.SchoolPersonalId as SchoolPersonalId,
+                Data.CanDoTransactions as CanDoTransactions,
+                Data.CanUseCard as CanUseCard,
+                Data.CanModifySettings as CanModifySettings,
+                Data.IsTransactionAutoConfirm as IsTransactionAutoConfirm,
+                Data.DateRegistered as DateRegistered,
+                Guardian.GuardianAccount_Address as GuardianAccount_Address,
+                Guardian.Firstname as GuardianFirstname,
+                Guardian.Lastname as GuardianLastname,
+                Guardian.Email as GuardianEmail,
+            ')
+            ->from('tbl_usersaccount as Account')
+            ->join('tbl_usersdata as Data', 'Account.UsersAccount_Address = Data.UsersAccount_Address', 'left')
+            ->join('tbl_campus as Campus', 'Account.Campus_Id = Campus.Campus_Id', 'left')
+            ->join('tbl_actorcategory as Actor', 'Account.ActorCategory_Id = Actor.ActorCategory_Id', 'left')
+            ->join('tbl_guardianaccount as Guardian', 'Account.UsersAccount_Address = Guardian.UsersAccount_Address', 'left')
+            ->where('Account.Campus_Id', $params['Campus_Id']);
+
+        if (!empty($params['AccountAddress'])) {
+            $this->db->like('Account.UsersAccount_Address', $params['AccountAddress']);
+        }
+
+        if (!empty($params['SchoolPersonalId'])) {
+            $this->db->like('Data.SchoolPersonalId', $params['SchoolPersonalId']);
+        }
+
+        if (!empty($params['Email'])) {
+            $this->db->like('Account.Email', $params['Email']);
+        }
+    
+        if (!empty($params['Name'])) {
+            $this->db->group_start()
+                ->like('Account.Firstname', $params['Name'])
+                ->or_like('Account.Lastname', $params['Name'])
+                ->or_like('Guardian.Firstname', $params['Name'])
+                ->or_like('Guardian.Lastname', $params['Name'])
+            ->group_end();
+        }
+
+        if ($params['Status'] === 'Active' || $params['Status'] === 'Inactive') {
+            $Status = ($params['Status'] === 'Active') ? '1' : '0';
+            $this->db->where('Account.IsAccountActive', $Status);
+        }
+
+        $result = $this->db->get()->result();
+
+        return ($result) ? $result : [] ;
+    }
+
     public function read_by_emailid($EmailId){
         $result = $this->db
             ->select('*')
@@ -81,16 +141,56 @@ class UsersAccount_Model extends CI_Model {
 
     public function update_pin($AccountAddress,$PIN) {
         $data = [
-            'PinCode ' => $PIN
+            'PinCode' => $PIN
         ];
         $this->db->where('UsersAccount_Address', $AccountAddress);
-        $this->db->update('tbl_usersaccounts', $data);
+        $this->db->update('tbl_usersaccount', $data);
 
         if ($this->db->affected_rows() > 0) {
              return TRUE;
         } else {
              return FALSE;
         }
+    }
+
+    public function update_Email($params) {
+        $data = [
+            'Email' => $params['Email']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersaccount', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_Firstname($params) {
+        $data = [
+            'Firstname' => $params['Firstname']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersaccount', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_Lastname($params) {
+        $data = [
+            'Lastname' => $params['Lastname']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersaccount', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_IsAccountActive($params) {
+        $data = [
+            'IsAccountActive' => (int)$params['IsAccountActive']
+        ];
+        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->update('tbl_usersaccount', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 
 }

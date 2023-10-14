@@ -30,10 +30,14 @@ export default class AjaxRequest {
                 return response.json();
             })
             .then(data => {
+                console.log('--Server Response--',data); // For Logs
                 if (data.Success === false) {
-                    alerts.createAlertElement('danger', data.Response)
+                    alerts.createAlertElement('danger', data.Response);
+                    if (data.Target === 'Login') {
+                        alert("Sign in required, Authentication failed or session expired.")
+                        window.location.href = 'http://localhost/';
+                    }
                 } else {
-                    console.log(data);
                     if (data.Response !== '' && data.Response !== null){
                         alerts.createAlertElement('success', data.Response)
                     }

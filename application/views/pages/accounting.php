@@ -33,7 +33,7 @@
             </div>
             <div class="details">
                 <div class="category">BCash: Accounting</div>
-                <div class="fullname">Juan Dela Cruz</div>
+                <div id="WebAccountFullName" class="fullname">Loading...</div>
             </div>
             <div class="button-container">
                 <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="../public/images/icons/notification-yellow.png" alt="notification-icon"></button>
@@ -411,15 +411,13 @@
 
                                 <div class="input-container">
                                     <label for="">Id:</label>
-                                    <input id="CashIn-Id" type="text" name="">
+                                    <input id="CashIn-Id" type="text" name="" autocomplete="off">
                                 </div>
 
                                 <div class="input-container">
                                     <label for="amount">Amount: </label>
-                                    <input id="CashIn-Amount" type="text" name="amount">
+                                    <input id="CashIn-Amount" type="text" name="amount" autocomplete="off">
                                 </div>
-    
-                                
     
                                 <button id="CashIn-Btn-SearchUser" class="search">Search User</button>
     
@@ -475,19 +473,19 @@
                         <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate">
+                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate" autocomplete="off">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate">
+                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate" autocomplete="off">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Number</label>
-                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber">
+                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber" autocomplete="off">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName">
+                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName" autocomplete="off">
                             </div>
                             <div>
                                 <label>Status Filter</label>
@@ -611,19 +609,19 @@
                         <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate">
+                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate" autocomplete="off">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate">
+                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate" autocomplete="off">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Address</label>
-                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber">
+                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber" autocomplete="off">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName">
+                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName" autocomplete="off">
                             </div>
                             <div>
                                 <label>Status Filter</label>
@@ -746,32 +744,35 @@
                     <div id="accounts-query" class="panel-accounts-query panel">
                         <div class="form-container">
                             <div>
-                                <label for="accountschoolid">Account Address</label>
-                                <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
+                                <label for="accounts-address">Account Address</label>
+                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountfirstname">First name</label>
-                                <input class="accounts-accountfirstname query textbox inputtext" type="text" name="accountfirstname">
+                                <label for="accounts-schoolpersonalid">School Personal Id</label>
+                                <input class="accounts-schoolpersonalid query textbox inputtext" type="text" name="accounts-schoolpersonalid" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountlastname">Last name</label>
-                                <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
+                                <label for="accounts-name">Name</label>
+                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
                             </div>
-                            <!-- <div>
-                                <label>Group Filter</label>
+                            <div>
+                                <label for="accounts-email">Email</label>
+                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
+                            </div>
+                            <div>
+                                <label>Status</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                             <!-- <div>
                                 <label>Department Filter</label>
                                 <div class="dropdown">
@@ -839,18 +840,18 @@
                                 <thead id="accounts-table-header">
                                     <tr>
                                         <th><div class="col1">#</div></th>
-                                        <th><div class="col2">Account ID</div></th>
+                                        <th><div class="col2">Account Address</div></th>
                                         <th><div class="col3">Status</div></th>
                                         <th><div class="col4">Category</div></th>
-                                        <th><div class="col5">Username</div></th>
-                                        <th><div class="col6">Firstname</div></th>
-                                        <th><div class="col7">Lastname</div></th>
-                                        <th><div class="col8">Email</div></th>
+                                        <th><div class="col5">Firstname</div></th>
+                                        <th><div class="col6">Lastname</div></th>
+                                        <th><div class="col7">Email</div></th>
+                                        <th><div class="col8">School Personal Id</div></th>
                                         <th><div class="col9">Campus</div></th>
-                                        <th><div class="col10">Group</div></th>
-                                        <th><div class="col11">Department</div></th>
-                                        <th><div class="col12">Course</div></th>
-                                        <th><div class="col13">Last Seen</div></th>
+                                        <th><div class="col10">Guardian Address</div></th>
+                                        <th><div class="col11">Guardian Email</div></th>
+                                        <th><div class="col12">Guardian Name</div></th>
+                                        <th><div class="col13">Date Registered</div></th>
                                     </tr>
                                 </thead>
                             </table>

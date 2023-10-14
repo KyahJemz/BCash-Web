@@ -187,6 +187,7 @@
         white-space: nowrap;
         word-break: break-all;
         padding: 5px;
+        font-size: 0.8rem;
     }
 
     .cell {
@@ -197,6 +198,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         word-break: break-all;
+        height: 100%;
         border-right: 1px solid var(--BackgroundPrimaryColor);
         border-bottom: 1px solid var(--BackgroundPrimaryColor);
     }
@@ -206,52 +208,62 @@
         max-width: 25px;;
     }
     .panel-accounts-table table .col2 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
+    }
+    .panel-accounts-table table .col2 a{
+        text-decoration: underline;
+        color: var(--TextColor-Gold);
+        cursor: pointer;
     }
     .panel-accounts-table table .col3 {
         width: 110px;
-        max-width: 110px;;
+        max-width: 110px;
+        text-align: center;
     }
     .panel-accounts-table table .col4 {
         width: 110px;
-        max-width: 110px;;
+        max-width: 110px;
+        text-align: center;
     }
     .panel-accounts-table table .col5 {
         width: 110px;
-        max-width: 110px;;
+        max-width: 110px;
     }
     .panel-accounts-table table .col6 {
         width: 110px;
-        max-width: 110px;;
+        max-width: 110px;
     }
     .panel-accounts-table table .col7 {
-        width: 110px;
-        max-width: 110px;;
+        width: 200px;
+        max-width: 200px;
     }
     .panel-accounts-table table .col8 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
+        text-align: center;
     }
     .panel-accounts-table table .col9 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
+        text-align: center;
     }
     .panel-accounts-table table .col10 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
     }
     .panel-accounts-table table .col11 {
-        width: 110px;
-        max-width: 110px;;
+        width: 200px;
+        max-width: 200px;
     }
     .panel-accounts-table table .col12 {
-        width: 110px;
-        max-width: 110px;;
+        width: 200px;
+        max-width: 200px;
     }
     .panel-accounts-table table .col13 {
-        width: 110px;
-        max-width: 110px;;
+        width: 150px;
+        max-width: 150px;
+        text-align: center;
     }
 
 @media (min-width: 0px) and (max-width: 768px) {

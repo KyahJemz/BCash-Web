@@ -262,6 +262,14 @@ public function View_Recent_CashIn () {
                             'Credit' => $Amount,
                      ));
 
+                     $this->CI->Transactions_Model->create_transaction(array(
+                            'Transaction_Address' => $TransactionAddress,
+                            'Account_Address' => $Account->WebAccounts_Address,
+                            'Status' => 'Completed',
+                            'Debit' => $Amount,
+                            'Credit' => '0',
+                     ));
+
                      $this->CI->Transactions_Model->create_transactioninfo(array(
                             'Transaction_Address' => $TransactionAddress,
                             'TransactionType_Id' => '1', // CASHIN
