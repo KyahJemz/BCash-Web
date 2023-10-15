@@ -460,6 +460,13 @@ async function GetMyData () {
 }
 
 
+test();
+async function test () {
+  await Ajax.sendRequest([], "get chart data")
+    .then(responseData => {})
+}
+
+
 
 
 

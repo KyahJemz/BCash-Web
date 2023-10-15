@@ -14,6 +14,8 @@ class Accounting_Actor {
         $this->CI->load->library('Actions/Notifications_Actions', NULL, 'Notifications_Actions');
         $this->CI->load->library('Actions/LoginHistory_Actions', NULL, 'LoginHistory_Actions');
         $this->CI->load->library('Actions/ActivityLogs_Actions', NULL, 'ActivityLogs_Actions');
+        $this->CI->load->library('Actions/Remittance_Actions', NULL, 'Remittance_Actions');
+        $this->CI->load->library('Actions/Chart_Actions', NULL, 'Chart_Actions');
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
@@ -23,7 +25,7 @@ class Accounting_Actor {
                 break;
 
             case 'get chart data':
-                $response = null;
+                $response = $this->CI->Chart_Actions->View_Accounting_Charts();
                 break;
 
             case 'get top recent cash in':
@@ -106,24 +108,25 @@ class Accounting_Actor {
                 $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
                 break;
 
-            case 'get top remittance':
-                $response = null;
+            case 'get all remittance':
+                $response = $this->CI->Remittance_Actions->View_All_Remittance();
                 break;
 
             case 'get remittance details':
-                $response = null;
+                $response = $this->CI->Remittance_Actions->View_Remittance_Deals($Account, $requestPostBody);
                 break;
 
-            case 'get todays total':
-                $response = null;
+            case 'initiate reject':
+                $response = $this->CI->Remittance_Actions->Update_Remittance_Reject($Account, $requestPostBody);
                 break;
 
-            case 'initiate remittance':
-                $response = null;
+            case 'initiate approve':
+                $response = $this->CI->Remittance_Actions->Update_Remittance_Approve($Account, $requestPostBody);
                 break;
 
             default:
                 $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
+                break;
         }
         return $response;
     }
