@@ -6,6 +6,7 @@ import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
 import Accounts from './modules/accounts.js';
 import AjaxRequest from './ajax.js';
+import { SetAccountingChart } from './chart.js';
 
 import Helper from './helper.js';
 
@@ -87,6 +88,12 @@ export function makeModal(type, title, content){
 
 function onMenuSelectionButton(event) {
   menu.menuSelectionEvents(event, null, null);
+  if (event.currentTarget.dataset.menu === "Home") {
+    Ajax.sendRequest([], "get chart data")
+    .then(responseData => {
+      SetAccountingChart(responseData.Parameters);
+    })
+  }
 }
 
 helper.addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
@@ -459,12 +466,17 @@ async function GetMyData () {
   });
 }
 
+Ajax.sendRequest([], "get chart data")
+    .then(responseData => {
+      SetAccountingChart(responseData.Parameters);
+    });
 
-test();
-async function test () {
-  await Ajax.sendRequest([], "get chart data")
-    .then(responseData => {})
-}
+
+// test();
+// async function test () {
+//   await Ajax.sendRequest([], "get chart data")
+//     .then(responseData => {})
+// }
 
 
 

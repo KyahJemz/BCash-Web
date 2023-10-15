@@ -133,11 +133,11 @@
                                 <div class="chart-header">
                                     <p class="chart-title">Total cash-in today</p>
                                     <div class="chart-value">
-                                        <p class="chart-number">P100.00</p>
-                                        <div class="chart-status">
+                                        <p class="chart-number">???</p>
+                                        <!-- <div class="chart-status">
                                             <p class="chart-status-number">150%</p>
                                             <img class="chart-status-image" src="" alt="">
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div id="chart-total-cash-in" class="chart-mini">
@@ -149,11 +149,11 @@
                                 <div class="chart-header">
                                     <p class="chart-title">Total orders in merchants</p>
                                     <div class="chart-value">
-                                        <p class="chart-number">P100.00</p>
-                                        <div class="chart-status">
+                                        <p class="chart-number">???</p>
+                                        <!-- <div class="chart-status">
                                             <p class="chart-status-number">150%</p>
                                             <img class="chart-status-image" src="" alt="">
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div id="chart-total-orders-merchants" class="chart-mini">
@@ -165,11 +165,11 @@
                                 <div class="chart-header">
                                     <p class="chart-title">Total Sales in merchants</p>
                                     <div class="chart-value">
-                                        <p class="chart-number">P100.00</p>
-                                        <div class="chart-status">
+                                        <p class="chart-number">???</p>
+                                        <!-- <div class="chart-status">
                                             <p class="chart-status-number">150%</p>
                                             <img class="chart-status-image" src="" alt="">
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div id="chart-total-sales-merchants" class="chart-mini">
@@ -181,11 +181,11 @@
                                 <div class="chart-header">
                                     <p class="chart-title">Total transactions today</p>
                                     <div class="chart-value">
-                                        <p class="chart-number">P100.00</p>
-                                        <div class="chart-status">
+                                        <p class="chart-number">???</p>
+                                        <!-- <div class="chart-status">
                                             <p class="chart-status-number">150%</p>
                                             <img class="chart-status-image" src="" alt="">
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div id="chart-total-transactions-today" class="chart-mini">
@@ -737,7 +737,7 @@
                     </div>
                 </div>
 
-    <!--
+    <!-- ### DONE ###
         ACCOUNTS 
     -->
                 <div id="panel-accounts" class="body-content-panel hidden">
@@ -874,37 +874,30 @@
                         <div class="left-panel">
                             <div class="top-panel">
                                 <div class="row">
-                                    <div class="flex"> 
-                                        <p>Date: </p>
-                                        <input type="date" name="" id="date-picker" value="">
-                                        <input type="text" name="" id="date-text" value="" disabled>
-                                    </div>
-                                    <div>
-                                        <button>Export as File</button>
-                                        <button>Submit to Accounting</button>
-                                    </div>
+                                    <div id="FundRemittance-TotalOrders">Total Orders: 250</div>
+                                    <div id="FundRemittance-TotalSales">Total Sales: 250</div>
                                 </div>
                                 <div class="row">
-                                    <div>Total Orders: 250</div>
-                                    <div>Total Sales: 250</div>
+                                    <div id="FundRemittance-TotalOrders">Total Orders: 250</div>
+                                    <div id="FundRemittance-TotalSales">Total Sales: 250</div>
                                 </div>
                             </div>
                             <div class="bottom-panel">
                                 <div class="table-container">
                                     <div class="table-header">
                                         <div class="table-row">
-                                            <div>#</div>
-                                            <div>Transaction#</div>
-                                            <div>Status</div>
-                                            <div>Amount</div>
+                                            <div class="c1">#</div>
+                                            <div class="c2">Transaction#</div>
+                                            <div class="c3">Status</div>
+                                            <div class="c4">Amount</div>
                                         </div>
                                     </div>
-                                    <div class="table-content">
+                                    <div class="table-content" id="FundRemittance-DetailsContainer">
                                         <div class="table-row">
-                                            <div>1</div>
-                                            <div>14235235252erwr3</div>
-                                            <div>Completed</div>
-                                            <div>123,556</div>
+                                            <div class="c1">1</div>
+                                            <div class="c2">14235235252erwr3</div>
+                                            <div class="c3">Completed</div>
+                                            <div class="c4">123,556</div>
                                         </div>
                                     </div>
                                 </div>
@@ -915,18 +908,18 @@
                             <div class="table-container">
                                 <div class="table-header">
                                     <div class="table-row">
-                                        <div>#</div>
-                                        <div>Date</div>
-                                        <div>Status</div>
-                                        <div>Amount</div>
+                                        <div class="c1">#</div>
+                                        <div class="c2">Date</div>
+                                        <div class="c3">Status</div>
+                                        <div class="c4">Amount</div>
                                     </div>
                                 </div>
-                                <div class="table-content">
+                                <div class="table-content" id="FundRemittance-RecentContainer">
                                     <div class="table-row">
-                                        <div class="num">12</div>
-                                        <div>September 16, 2023</div>
-                                        <div>Completed</div>
-                                        <div>123,556</div>
+                                        <div class="c1">12</div>
+                                        <div class="c2">September 16, 2023</div>
+                                        <div class="c3">Completed</div>
+                                        <div class="c4">123,556</div>
                                     </div>
                                    
                                 </div>

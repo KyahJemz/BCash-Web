@@ -98,7 +98,7 @@
 
 .panel-fundremittance-content .left-panel .table-container .table-row > div,
 .panel-fundremittance-content .right-panel .table-container .table-row > div {
-    width: calc(100% / 4);
+    /* width: calc(100% / 4); */
     text-align: center;
     text-wrap: nowrap;
 }
@@ -111,6 +111,10 @@
     padding-top: 5px;
     margin-bottom: 5px;
     padding-bottom: 5px;
+}
+
+.panel-fundremittance-content .right-panel .table-container .c1{
+    width: 40px;
 }
 
 

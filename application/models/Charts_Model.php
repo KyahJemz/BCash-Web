@@ -80,8 +80,8 @@ class Charts_Model extends CI_Model {
             ->from('tbl_transactions')
             ->where('Status', 'Completed')
             ->group_start()
-                ->where('Account_Address LIKE', 'USR%', 'OR')
-                ->or_like('Account_Address', 'GST%')
+                ->like('Account_Address', 'USR', 'after')
+                ->or_like('Account_Address', 'GST', 'after')
             ->group_end()
             ->where('Timestamp >= CURDATE()')
             ->group_by('HOUR(Timestamp)');
@@ -155,6 +155,7 @@ class Charts_Model extends CI_Model {
                 ->like('Receiver_Address', 'USR', 'after')
                 ->or_like('Receiver_Address', 'GST', 'after')
             ->group_end()
+
             ->order_by('Timestamp', 'DESC')
             ->limit(10)
             ->get()
@@ -163,9 +164,10 @@ class Charts_Model extends CI_Model {
     }
     public function RecentCashIn(){
         $RecentTransactions = $this->db
-            ->select('*')
+            ->select('tbl_transactionsinfo.*, tbl_usersaccount.Firstname, tbl_usersaccount.Lastname')
             ->from('tbl_transactionsinfo')
             ->like('Sender_Address', 'ACT', 'after')
+            ->join('tbl_usersaccount', 'tbl_transactionsinfo.Receiver_Address = tbl_usersaccount.UsersAccount_Address', 'right')
             ->order_by('Timestamp', 'DESC')
             ->limit(10)
             ->get()
