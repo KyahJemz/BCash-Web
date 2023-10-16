@@ -101,7 +101,7 @@
                     San Sebastian College - Recoletos
                 </div>
             </div>
-            <div class="right-side curson-pointer" onclick="">
+            <div class="right-side curson-pointer" id="Logout-Button">
                 <div class="text">
                     Log out
                 </div>
@@ -199,7 +199,7 @@
                                 <!-- Total Transactions Today -->
                                 <div class="chart-header">
                                     <p class="chart-title">Daily Transactions Line Graph</p>
-                                    <p class="chart-description">fhjuhfu sfjha hafewf a dfwef awfwa agn agag ag nag  </p>
+                                    <p class="chart-description">This graph depicts the circulation of BCash within the accounting department for the past 7 days.</p>
                                     <div class="chart-value">
                                         <div class="chart-value-1">
                                             <p class="chart-value-1-number"></p>
@@ -220,7 +220,7 @@
                                 <!-- Total Transactions Today -->
                                 <div class="chart-header">
                                     <p class="chart-title">Circulating Money</p>
-                                    <p class="chart-description">eithed dfmk sdfe sfesf </p>
+                                    <p class="chart-description">This chart illustrates the distribution of cash in circulation.</p>
                                 </div>
                                 <div id="chart-money-in-circulation" class="">
                                     <canvas></canvas>
@@ -235,7 +235,7 @@
                                     <p class="title">Recent Transactions</p>
                                     <p class="date">Last Update: 12:98AM</p>
                                 </div>
-                                <ul>
+                                <ul id="chart-recent-transactions">
                                     <li>
                                         <img src="" alt="" >
                                         <div>
@@ -247,51 +247,7 @@
                                             <p class="type">type</p>
                                         </div>
                                     </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-
+                                    
                                 </ul>
                             </div>
                             <div class="chart-8 chart-item">
@@ -300,7 +256,7 @@
                                     <p class="date">Last Update: 12:98AM</p>
                                 </div>
                                 <!-- Recent Cash In -->
-                                <ul>
+                                <ul id="chart-recent-cashin">
                                     <li>
                                         <img src="" alt="" >
                                         <div>
@@ -312,51 +268,7 @@
                                             <p class="type">type</p>
                                         </div>
                                     </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-
+                                    
                                 </ul>
                             </div>
                             <div class="chart-9 chart-item">
@@ -365,7 +277,7 @@
                                     <p class="date">Last Update: 12:98AM</p>
                                 </div>
                                 <!-- Recent Activities -->
-                                <ul>
+                                <ul id="chart-recent-activities">
                                     
                                     <li>
                                         <img src="" alt="" >
@@ -424,12 +336,12 @@
                                 <fieldset class="details-container">
                                     <legend>User Details</legend>
                                     <div class="item">
-                                        <p>Name: </p>
+                                        <p>Name : </p>
                                         <p id="CashIn-UserName"></p>
                                     </div>
     
                                     <div class="item">
-                                        <p>Curent Balance: </p>
+                                        <p>Curent Balance : </p>
                                         <p id="CashIn-UserBalance"></p>
                                     </div>
                                 </fieldset>
@@ -874,31 +786,24 @@
                         <div class="left-panel">
                             <div class="top-panel">
                                 <div class="row">
-                                    <div id="FundRemittance-TotalOrders">Total Orders: 250</div>
-                                    <div id="FundRemittance-TotalSales">Total Sales: 250</div>
+                                    <button>2</button>
+                                    <button>2</button>
                                 </div>
-                                <div class="row">
-                                    <div id="FundRemittance-TotalOrders">Total Orders: 250</div>
-                                    <div id="FundRemittance-TotalSales">Total Sales: 250</div>
+                                <div id="FundRemittance-Buttons">
+                                    
                                 </div>
                             </div>
                             <div class="bottom-panel">
                                 <div class="table-container">
                                     <div class="table-header">
-                                        <div class="table-row">
-                                            <div class="c1">#</div>
-                                            <div class="c2">Transaction#</div>
-                                            <div class="c3">Status</div>
-                                            <div class="c4">Amount</div>
-                                        </div>
+                                        <p class="details-title">Details</p>
+                                    </div>
+                                    <div class="row">
+                                        <div id="FundRemittance-TotalOrders">Total Orders: 0</div>
+                                        <div id="FundRemittance-TotalSales">Total Sales: ₱ 0.00</div>
                                     </div>
                                     <div class="table-content" id="FundRemittance-DetailsContainer">
-                                        <div class="table-row">
-                                            <div class="c1">1</div>
-                                            <div class="c2">14235235252erwr3</div>
-                                            <div class="c3">Completed</div>
-                                            <div class="c4">123,556</div>
-                                        </div>
+                                        <!-- TABLE -->
                                     </div>
                                 </div>
                             </div>
@@ -911,17 +816,11 @@
                                         <div class="c1">#</div>
                                         <div class="c2">Date</div>
                                         <div class="c3">Status</div>
-                                        <div class="c4">Amount</div>
+                                        <div class="c4">Merchant</div>
                                     </div>
                                 </div>
                                 <div class="table-content" id="FundRemittance-RecentContainer">
-                                    <div class="table-row">
-                                        <div class="c1">12</div>
-                                        <div class="c2">September 16, 2023</div>
-                                        <div class="c3">Completed</div>
-                                        <div class="c4">123,556</div>
-                                    </div>
-                                   
+                                    <!-- TABLE -->
                                 </div>
                             </div>
                         </div>

@@ -582,6 +582,44 @@ class Account_Actions {
 
 
 
+ /* 
+-- ---------------------
+   VIEW USER ACCOUNT BY SID
+   - for admin accounting use
+-- ---------------------
+*/  
+public function View_User_Account_By_SPID($Account, $requestPostBody) {
+
+       $this->CI->form_validation->set_data($requestPostBody);
+
+       $this->CI->form_validation->set_rules('Id', 'Id', 'trim|required');
+
+       if ($this->CI->form_validation->run() === FALSE) {
+              $validationErrors = validation_errors();
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+       }
+
+       $Id = $this->CI->Functions_Model->sanitize($requestPostBody['Id']);
+       $AccountAddress = $this->CI->UsersData_Model->read_by_id(array('SchoolPersonalId'=>$Id));
+       if (!$AccountAddress) {
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Account not found'];
+       }
+       $AccountAddress = $AccountAddress->UsersAccount_Address;
+       
+       $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
+              'Account_Address' => $AccountAddress,
+       ));
+       $Account_ = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
+       $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$AccountAddress));
+       $parameters = [
+              'Account'=> $Account_,
+              'Details'=> $Details_,
+       ];
+       return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
+}
+
+
+
 /* 
 -- ---------------------
    VIEW USER ACCOUNTS

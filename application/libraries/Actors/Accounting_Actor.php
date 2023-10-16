@@ -52,6 +52,10 @@ class Accounting_Actor {
                 $response =  $this->CI->Account_Actions->View_User_Accounts($Account, $requestPostBody);
                 break;
 
+            case 'get user account by spid': 
+                $response =  $this->CI->Account_Actions->View_User_Account_By_SPID($Account, $requestPostBody);
+                break;
+
             case 'update user details': 
                 $response =  $this->CI->Account_Actions->Update_User_Account_By_Accounting($Account, $requestPostBody);
                 break;
@@ -113,7 +117,7 @@ class Accounting_Actor {
                 break;
 
             case 'get remittance details':
-                $response = $this->CI->Remittance_Actions->View_Remittance_Deals($Account, $requestPostBody);
+                $response = $this->CI->Remittance_Actions->View_Remittance_Details($Account, $requestPostBody);
                 break;
 
             case 'initiate reject':

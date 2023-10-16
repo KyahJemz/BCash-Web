@@ -1,4 +1,44 @@
+:root {
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
+    --AsccentColor: #CB8213; /* Buttons */
+    --TextColor: #4b4b4b; /* text */
+    --DarkColor: #363636; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
 
+    --TextColor-White: #ffffff;
+    --TextColor-Red: #DA121A;
+    --TextColor-Gold: #F9AE28;
+    --TextColor-LightBlack: #333333;
+    --TextColor-Black: #0F1419;
+
+    --Button-Background-Red: #DA121A;
+    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Gold: #F9AE28;
+    --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-White: #ffffff;
+
+    --Selected-Background-LightBlack: #333333;
+
+    --Panel-Background-LightBlack: #333333;
+    --Panel-Background-Gold: #FFCC00;
+    --Panel-Background-Red: #DA121A;
+    --Panel-Background-White: #ffffff;
+    --Panel-Background-DarkWhite: #F2F2F2;
+
+    --color-White: #ffffff;
+    --color-DarkWhite: #F2F2F2;
+    --color-Red: #DA121A;
+    --color-DarkRed: #9A110D;
+    --color-Gold: #FFCC00;
+    --color-DarkGold: #F9AE28;
+    --color-Gray: #282828;
+    --color-LightBlack: #333333;
+    --color-Black: #0F1419;
+}
 
 
 .panel-home-content {
@@ -97,6 +137,12 @@
     grid-row-gap: 10px;
 }
 
+.panel-home-content .charts-container-row2 .chart-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+
 
 .panel-home-content .charts-container-row2 .chart-item{
     border: 1px solid gainsboro;
@@ -118,6 +164,7 @@
     flex-direction: column;
     border-radius: 5px;
 }
+
 
 .panel-home-content .charts-container-row3 .chart-item .header {
     display: flex;
@@ -149,7 +196,7 @@
 
 .panel-home-content .charts-container-row3 .chart-8 ul li,
 .panel-home-content .charts-container-row3 .chart-7 ul li {
-    grid-template-columns: 50px auto 50px;
+    grid-template-columns: 50px auto 60px;
 }
 
 .panel-home-content .charts-container-row3 .chart-9 ul li {
@@ -161,6 +208,8 @@
     width: 40px;
     border: 1px solid gainsboro;
     border-radius: 50%;
+    background-color: gainsboro;
+    padding: 6px;
 }
 
 .panel-home-content .charts-container-row3 .chart-item ul li .name {
@@ -168,15 +217,16 @@
 }
 
 .panel-home-content .charts-container-row3 .chart-item ul li .date {
-    
+    font-weight: lighter;
 }
 
 .panel-home-content .charts-container-row3 .chart-item ul li .amount {
-    
+ 
 }
 
 .panel-home-content .charts-container-row3 .chart-item ul li .type {
-    
+    font-weight: lighter;
+    text-wrap: nowrap;
 }
 
 

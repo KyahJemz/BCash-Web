@@ -231,7 +231,7 @@ public function View_Recent_CashIn () {
 
               $this->CI->form_validation->set_data($requestPostBody);
 
-              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|exact_length[15]');
+              $this->CI->form_validation->set_rules('Id', 'Id', 'trim|required');
               $this->CI->form_validation->set_rules('Amount', 'Amount', 'trim|required|numeric');
 
               if ($this->CI->form_validation->run() === FALSE) {
@@ -239,8 +239,14 @@ public function View_Recent_CashIn () {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
               }
 
-              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $Id = $this->CI->Functions_Model->sanitize($requestPostBody['Id']);
               $Amount = $this->CI->Functions_Model->sanitize($requestPostBody['Amount']);
+
+              $AccountData = $this->CI->UsersData_Model->read_by_id(array('SchoolPersonalId'=>$Id));
+              if (!$AccountData) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid receivers account!'];
+              }
+              $AccountAddress = $AccountData->UsersAccount_Address;
 
               $isAccountExist =  $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
               if (!$isAccountExist) {

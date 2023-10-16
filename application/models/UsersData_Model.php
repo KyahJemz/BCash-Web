@@ -84,6 +84,20 @@ class UsersData_Model extends CI_Model {
         }
     }
 
+     public function read_by_id($params){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_usersdata')
+            ->where('SchoolPersonalId ', $params['SchoolPersonalId'])
+            ->get()
+            ->row();
+        if ($result) {
+            return $result;
+        } else {
+            return null; 
+        }
+    }
+
     public function update_user_balance($params){
         $data = [
             'Balance' => $params['Balance'],

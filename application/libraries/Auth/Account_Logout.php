@@ -31,11 +31,11 @@ class Account_Logout {
         function Logout($Account) {
 
                 if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6') {
-                        $this->CI->Authentications_Model->delete($Account->$UsersAccount_Address);;
+                        $this->CI->Authentications_Model->delete($Account->UsersAccount_Address);;
                 } else if ($Account->ActorCategory_Id === '7') {
-                        $this->CI->Authentications_Model->delete($Account->$GuardianAccount_Address);
+                        $this->CI->Authentications_Model->delete($Account->GuardianAccount_Address);
                 } else {
-                        $this->CI->Authentications_Model->delete($Account->$WebAccounts_Address);
+                        $this->CI->Authentications_Model->delete($Account->WebAccounts_Address);
                 }
 
                 return ['Success' => TRUE,'Target' => 'Login','Parameters' => null,'Message' => '']; 

@@ -1,5 +1,4 @@
 import Transactions from './modules/transactions.js';
-import Notifications from './modules/notifications.js';
 import Alerts from './modules/alerts.js';
 import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
@@ -94,6 +93,19 @@ function onMenuSelectionButton(event) {
       SetAccountingChart(responseData.Parameters);
     })
   }
+  if (event.currentTarget.dataset.menu === "Fund Remittance") {
+    document.getElementById('FundRemittance-DetailsContainer').innerHTML = "";
+    document.getElementById('FundRemittance-Buttons').innerHTML = "";
+    document.getElementById('FundRemittance-RecentContainer').innerHTML = "";
+    document.getElementById('FundRemittance-TotalOrders').innerHTML = `Total Orders : 0`;
+    document.getElementById('FundRemittance-TotalSales').innerHTML = `Total Sales : ₱ 0.00`;
+    Ajax.sendRequest([], "get all remittance")
+    .then(responseData => {
+      fundRemittance(responseData.Parameters);
+    })
+  }
+
+
 }
 
 helper.addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
@@ -357,12 +369,18 @@ function displayparameters(){
   console.log('------------------------------------------');
 }
 
+helper.addElementClickListenerById('Logout-Button', Logout); 
+async function Logout (){
+  await Ajax.sendRequest([], "Logout")
+    .then(responseData => {
+    });
+}
 
 helper.addElementClickListenerById('CashIn-Btn-SearchUser', CashIn_SearchUser);
 async function CashIn_SearchUser () {
-  const intent = "get user details";
+  const intent = "get user account by spid";
   const data = { 
-    AccountAddress : document.getElementById('CashIn-Id').value,
+    Id : document.getElementById('CashIn-Id').value,
     Amount : document.getElementById('CashIn-Amount').value,
   }; 
 
@@ -374,7 +392,6 @@ async function CashIn_SearchUser () {
       } else {
         document.getElementById('CashIn-UserName').innerHTML = '';
         document.getElementById('CashIn-UserBalance').innerHTML = '';
-        makeAlert('danger',responseData.Response);
       }
       CashIn_RecentCashIn ();
   })
@@ -387,7 +404,7 @@ helper.addElementClickListenerById('CashIn-Btn-Transfer', CashIn_Transfer);
 async function CashIn_Transfer () {
   const intent = "initiate cash in";
   const data = { 
-    AccountAddress : document.getElementById('CashIn-Id').value,
+    Id : document.getElementById('CashIn-Id').value,
     Amount : document.getElementById('CashIn-Amount').value,
   }; 
   
@@ -398,11 +415,9 @@ async function CashIn_Transfer () {
         document.getElementById('CashIn-Amount').value = '';
         document.getElementById('CashIn-UserName').innerHTML = '';
         document.getElementById('CashIn-UserBalance').innerHTML = '';
-        makeAlert('success',responseData.Response);
       } else {
         document.getElementById('CashIn-UserName').innerHTML = '';
         document.getElementById('CashIn-UserBalance').innerHTML = '';
-        makeAlert('danger',responseData.Response);
       }
       CashIn_RecentCashIn ();
   })
@@ -470,6 +485,83 @@ Ajax.sendRequest([], "get chart data")
     .then(responseData => {
       SetAccountingChart(responseData.Parameters);
     });
+
+export function fundRemittance (parameters){
+  document.getElementById('FundRemittance-DetailsContainer').innerHTML = "";
+  document.getElementById('FundRemittance-Buttons').innerHTML = "";
+  document.getElementById('FundRemittance-RecentContainer').innerHTML = "";
+  document.getElementById('FundRemittance-TotalOrders').innerHTML = `Total Orders : 0`;
+  document.getElementById('FundRemittance-TotalSales').innerHTML = `Total Sales : ₱ 0.00`;
+  const FundRemittance = document.getElementById('FundRemittance-RecentContainer');
+  FundRemittance.innerHTML = '';
+  parameters.forEach(element => {
+    FundRemittance.innerHTML = FundRemittance.innerHTML + `
+      <div class="table-row RecentRemittanceBtn" data-remittance="${element.Remittance_Id}">
+          <div class="c1">${element.Remittance_Id}</div>
+          <div class="c2">${helper.getDate(element.DateResponse)}</div>
+          <div class="c3 ${element.Status}">${element.Status}</div>
+          <div class="c4">${element.Submitted_By}</div>
+      </div>
+    `;
+  });
+  
+  helper.addElementClickListenerByElement(FundRemittance.querySelectorAll('.RecentRemittanceBtn'),(event)=>{
+    const data = {
+      Remittance_Id : event.currentTarget.dataset.remittance,
+    };
+    Ajax.sendRequest(data, "get remittance details")
+      .then(responseData => {
+        let TotalAmount = 0;
+        let TotalOrders = 0;
+        const FundRemittanceDetails = document.getElementById('FundRemittance-DetailsContainer');
+        FundRemittanceDetails.innerHTML = '';
+        responseData.Parameters.RemittanceList.forEach(element => {
+          let bottomLayout = '';
+          element.Items.forEach(element => {
+            bottomLayout = bottomLayout + `
+              <div class="bottom">
+                <p class="name">${element.ItemName}</p>
+                <p class="quantity">x${element.ItemQuantity}</p>
+                <p class="price">₱ ${helper.formatNumber(element.ItemAmount * element.ItemQuantity)}</p>
+              </div>
+            `;
+          });
+          FundRemittanceDetails.innerHTML = FundRemittanceDetails.innerHTML + `
+            <div class="table-row-details">
+                <div class="top">
+                  <p>Id: ${element.Transaction_Address}</p>
+                  <p>Total: ₱ ${helper.formatNumber(element.Credit)}</p>
+                </div>
+                ${bottomLayout}
+            </div>
+          `;
+          TotalAmount = TotalAmount + Number(element.Credit); // floating number
+          TotalOrders = TotalOrders + 1;
+        });
+        document.getElementById('FundRemittance-TotalOrders').innerHTML = `Total Orders : ${TotalOrders}`;
+        document.getElementById('FundRemittance-TotalSales').innerHTML = `Total Sales : ₱ ${helper.formatNumber(TotalAmount)}`;
+        if (responseData.Parameters.Remittance.Status === "Waiting"){
+          document.getElementById('FundRemittance-Buttons').innerHTML = `
+            <button data-RemittanceId="${responseData.Parameters.Remittance.Remittance_Id}" id="FundRemittance-RejectBtn">Reject</button>
+            <button data-RemittanceId="${responseData.Parameters.Remittance.Remittance_Id}" id="FundRemittance-ApproveBtn">Approve</button>
+          `;
+          helper.addElementClickListenerById('FundRemittance-RejectBtn',(event)=>{
+            let data = {Remittance_Id: event.currentTarget.dataset.remittanceid};
+            console.log(event.currentTarget);
+            Ajax.sendRequest(data, "initiate reject").then(responseData => fundRemittance(responseData.Parameters));
+          });
+          helper.addElementClickListenerById('FundRemittance-ApproveBtn',(event)=>{
+            let data = {Remittance_Id: event.currentTarget.dataset.remittanceid};
+            console.log(event.currentTarget);
+            Ajax.sendRequest(data, "initiate approve").then(responseData => fundRemittance(responseData.Parameters));
+          });
+        }
+      });
+
+  })
+}
+
+
 
 
 // test();

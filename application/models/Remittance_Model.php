@@ -15,21 +15,57 @@ class Remittance_Model extends CI_Model {
             ->where('Remittance_Id', $params['Remittance_Id'])
             ->get()
             ->row();
-
-        $RemittanceList = $this->db
-            ->select('*')
-            ->from('tbl_transactions')
-            ->where('Remittance_Id', $params['Remittance_Id'])
+    
+        $RemittanceRawList = $this->db
+            ->select('
+                transactions.*,
+                items.Quantity as ItemQuantity,
+                items.Amount as ItemAmount,
+                names.Name as ItemName
+            ')
+            ->from('tbl_transactions as transactions')
+            ->where('transactions.Remittance_Id', $params['Remittance_Id'])  // Fix: Use 'transactions.Remittance_Id' instead of just 'Remittance_Id'
+            ->join('tbl_transactionitems as items', 'transactions.Transaction_Address = items.Transaction_Address')
+            ->join('tbl_merchantitems as names', 'items.MerchantItems_Id = names.MerchantItems_Id')
             ->get()
             ->result();
-
-        return ($Remittance && $RemittanceList) ? array('Remittance'=>$Remittance, 'RemittanceList'=>$RemittanceList) : array('Remittance'=>[], 'RemittanceList'=>[]);
+    
+        $RemittanceList = [];
+    
+        foreach ($RemittanceRawList as $transaction) {
+            $transactionAddress = $transaction->Transaction_Address;  // Use -> to access object properties
+    
+            if (!isset($RemittanceList[$transactionAddress])) {
+                $RemittanceList[$transactionAddress] = [
+                    'Transaction_Address' => $transactionAddress,
+                    'Account_Address' => $transaction->Account_Address,
+                    'Status' => $transaction->Status,
+                    'Debit' => $transaction->Debit,
+                    'Credit' => $transaction->Credit,
+                    'Remittance_Id' => $transaction->Remittance_Id,
+                    'Timestamp' => $transaction->Timestamp,
+                    'Items' => []
+                ];
+            }
+    
+            $item = [
+                'ItemQuantity' => $transaction->ItemQuantity,
+                'ItemName' => $transaction->ItemName,
+                'ItemAmount' => $transaction->ItemAmount
+            ];
+    
+            $RemittanceList[$transactionAddress]['Items'][] = $item;
+        }
+    
+        return ($Remittance && $RemittanceList) ? ['Remittance' => $Remittance, 'RemittanceList' => array_values($RemittanceList)] : ['Remittance' => [], 'RemittanceList' => []];
     }
+    
 
     public function read_all(){
         $Remittance = $this->db
             ->select('*')
             ->from('tbl_remittance')
+            ->order_by('Timestamp', 'DESC') 
             ->get()
             ->result();
 

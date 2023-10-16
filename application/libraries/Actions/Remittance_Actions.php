@@ -21,7 +21,7 @@ class Remittance_Actions {
    - accounting & merchants
 -- ---------------------
 */ 
-public function View_Remittance_Deals ($Account, $requestPostBody) {
+public function View_Remittance_Details ($Account, $requestPostBody) {
 
        $this->CI->form_validation->set_data($requestPostBody);
 
@@ -77,7 +77,7 @@ public function Update_Remittance_Reject($Account, $requestPostBody) {
        
        $this->CI->form_validation->set_data($requestPostBody);
 
-       $this->CI->form_validation->set_rules('Remittance_Id', 'TransactionAddress', 'trim|required|numeric');
+       $this->CI->form_validation->set_rules('Remittance_Id', 'Remittance_Id', 'trim|required|numeric');
 
        if ($this->CI->form_validation->run() === FALSE) {
               $validationErrors = validation_errors();
@@ -86,17 +86,17 @@ public function Update_Remittance_Reject($Account, $requestPostBody) {
 
        $Remittance_Id = $this->CI->Functions_Model->sanitize($requestPostBody['Remittance_Id']);
 
-       $this->db->trans_start(); 
+       $this->CI->db->trans_start(); 
 
               $this->CI->Remittance_Model->update_date_rejected(array(
                      'Remittance_Id' => $Remittance_Id,
               ));
               
-       $this->db->trans_complete(); 
+       $this->CI->db->trans_complete(); 
 
-       if ($this->db->trans_status() === FALSE) {
-              $this->db->trans_rollback();
-              $error = $this->db->error();
+       if ($this->CI->db->trans_status() === FALSE) {
+              $this->CI->db->trans_rollback();
+              $error = $this->CI->db->error();
               return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
        }
 
@@ -105,7 +105,9 @@ public function Update_Remittance_Reject($Account, $requestPostBody) {
               'Task' => '[' . $Account->WebAccounts_Address . '] Rejected remittance id ['. $Remittance_Id .'].',
        ));
 
-       return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Remittance update status to rejected!'. $error];
+       $parameters = $this->CI->Remittance_Model->read_all();
+
+       return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => 'Remittance update status to rejected!'];
 }
 
 
@@ -120,7 +122,7 @@ public function Update_Remittance_Approve($Account, $requestPostBody) {
        
        $this->CI->form_validation->set_data($requestPostBody);
 
-       $this->CI->form_validation->set_rules('Remittance_Id', 'TransactionAddress', 'trim|required|numeric');
+       $this->CI->form_validation->set_rules('Remittance_Id', 'Remittance_Id', 'trim|required|numeric');
 
        if ($this->CI->form_validation->run() === FALSE) {
               $validationErrors = validation_errors();
@@ -129,17 +131,17 @@ public function Update_Remittance_Approve($Account, $requestPostBody) {
 
        $Remittance_Id = $this->CI->Functions_Model->sanitize($requestPostBody['Remittance_Id']);
 
-       $this->db->trans_start(); 
+       $this->CI->db->trans_start(); 
 
               $this->CI->Remittance_Model->update_date_approved(array(
                      'Remittance_Id' => $Remittance_Id,
               ));
               
-       $this->db->trans_complete(); 
+       $this->CI->db->trans_complete(); 
 
-       if ($this->db->trans_status() === FALSE) {
-              $this->db->trans_rollback();
-              $error = $this->db->error();
+       if ($this->CI->db->trans_status() === FALSE) {
+              $this->CI->db->trans_rollback();
+              $error = $this->CI->db->error();
               return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
        }
 
@@ -148,7 +150,9 @@ public function Update_Remittance_Approve($Account, $requestPostBody) {
               'Task' => '[' . $Account->WebAccounts_Address . '] Approved remittance id ['. $Remittance_Id .'].',
        ));
 
-       return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Remittance update status to approved!'. $error];
+       $parameters = $this->CI->Remittance_Model->read_all();
+
+       return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => 'Remittance update status to approved!'];
 }
 
 

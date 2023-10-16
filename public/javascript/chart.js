@@ -1,3 +1,5 @@
+import Helper from './helper.js';
+
 const options_MiniLineChart = {
   scales: {
     x: {
@@ -59,27 +61,17 @@ function setChart (element,type,options,title,labels,dataset,colors) {
   	new Chart(element, config);
 }
 
-// ACCOUNTING
-
-
 function clearAllCharts() {
 	Chart.helpers.each(Chart.instances, function (instance) {
 	  instance.destroy();
 	});
-     }
+}
 
-// CirculatingMoney
-// CurrentTime
-// DailyTransactions{CashIn: Array(7), CashOut: Array(7)}
-// RecentActivities(10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-// RecentCashIn(10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-// RecentTransactions[]
-// TotalCashIn(24) [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-// TotalOrdersInMerchants(24) [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-// TotalSalesInMerchants(24) [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-// TotalTransactions(24
+// ACCOUNTING
 
 export function SetAccountingChart(parameters){
+
+	const helper = new Helper();
 
 	clearAllCharts();
 
@@ -89,6 +81,60 @@ export function SetAccountingChart(parameters){
 	const chart4 = document.getElementById('chart-total-transactions-today').querySelector('canvas').getContext('2d');
 	const chart5 = document.getElementById('chart-cashin-total-history').querySelector('canvas').getContext('2d');
 	const chart6 = document.getElementById('chart-money-in-circulation').querySelector('canvas').getContext('2d');
+
+	const chart7 = document.getElementById('chart-recent-transactions');
+	const chart8 = document.getElementById('chart-recent-cashin');
+	const chart9 = document.getElementById('chart-recent-activities');
+
+	chart7.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
+	chart8.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
+	chart9.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
+
+	chart7.innerHTML = '';
+	parameters.RecentActivities.forEach(element => {
+		chart7.innerHTML = chart7.innerHTML +`
+			<li>
+				<img src="../public/images/icons/profile.png" alt="" >
+				<div>
+					<p class="name">name</p>
+					<p class="date">date</p>
+				</div>
+				<div>
+					<p class="amount">₱ </p>
+					<p class="type">type</p>
+				</div>
+			</li>
+		`;
+	});		
+
+	chart8.innerHTML = '';
+	parameters.RecentCashIn.forEach(element => {
+		chart8.innerHTML = chart8.innerHTML + `
+			<li>
+				<img src="../public/images/icons/money.png" alt="" >
+				<div>
+					<p class="name">${element.Firstname} ${element.Lastname}</p>
+					<p class="date">${element.Timestamp}</p>
+				</div>
+				<div>
+					<p class="amount">₱ ${helper.formatNumber(element.TotalAmount)}</p>
+					<p class="type">${element.TransactionType}</p>
+				</div>
+			</li>
+		`;
+	});		
+
+	chart9.innerHTML = '';
+	parameters.RecentActivities.forEach(element => {
+		chart9.innerHTML = chart9.innerHTML + `
+			<li>
+				<img src="../public/images/icons/bolt.png" alt="" >
+				<div>
+					<p class="name">${element.Account_Address}</p>
+					<p class="date">${element.Task}</p>
+				</div>
+			</li>`;
+		});
 
 	document.getElementById('chart-total-cash-in').parentNode.querySelector('.chart-number').innerHTML = 
 	'₱ ' + parameters.TotalCashIn.reduce((accumulator, currentValue) => {return accumulator + parseFloat(currentValue);}, 0);
@@ -177,22 +223,22 @@ export function SetAccountingChart(parameters){
 	});
 
 	const data1 = {
-		labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+		labels: ['Users', 'Guests', 'Merchants'],
 		datasets: [{
-			data: [12, 19, 3, 5, 2],
+			data: [
+				parameters.CirculatingMoney.UsersTotal,
+				parameters.CirculatingMoney.GuestsTotal,
+				parameters.CirculatingMoney.MerchantsTotal
+			],
 			backgroundColor: [
 				'rgba(255, 99, 132, 0.8)',
 				'rgba(54, 162, 235, 0.8)',
 				'rgba(255, 206, 86, 0.8)',
-				'rgba(75, 192, 192, 0.8)',
-				'rgba(153, 102, 255, 0.8)',
 			],
 			hoverBackgroundColor: [
 				'rgba(255, 99, 132, 1)',
 				'rgba(54, 162, 235, 1)',
 				'rgba(255, 206, 86, 1)',
-				'rgba(75, 192, 192, 1)',
-				'rgba(153, 102, 255, 1)',
 			],
 		}]
 	};
@@ -225,4 +271,7 @@ export function SetAccountingChart(parameters){
 			},
 		},
 	});
+
+
+
 }

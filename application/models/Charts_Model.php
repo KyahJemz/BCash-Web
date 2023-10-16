@@ -9,6 +9,9 @@ class Charts_Model extends CI_Model {
      ]);
     }
 
+// ALL
+
+//ACCOUNTING 
     public function TotalCashIn(){
         $hourlyDebitCounts = array_fill(0, 24, 0);
 
@@ -138,10 +141,36 @@ class Charts_Model extends CI_Model {
         }
     
         
-    }
-    
+    }  
     public function CirculatingMoney(){
+        $UsersTotal = $this->db
+            ->select('SUM(Credit) - SUM(Debit) as TotalCash')
+            ->from('tbl_transactions')
+            ->where('Status', 'Completed')
+            ->like('Account_Address', 'USR', 'after')
+            ->get()
+            ->row()
+            ->TotalCash;
 
+        $GuestsTotal = $this->db
+            ->select('SUM(Credit) - SUM(Debit) as TotalCash')
+            ->from('tbl_transactions')
+            ->where('Status', 'Completed')
+            ->like('Account_Address', 'GST', 'after')
+            ->get()
+            ->row()
+            ->TotalCash;
+
+        $MerchantsTotal = $this->db
+            ->select('SUM(Credit) - SUM(Debit) as TotalCash')
+            ->from('tbl_transactions')
+            ->where('Status', 'Completed')
+            ->like('Account_Address', 'MTA', 'after')
+            ->get()
+            ->row()
+            ->TotalCash;
+
+        return ['UsersTotal'=>$UsersTotal,'GuestsTotal'=>$GuestsTotal,'MerchantsTotal'=>$MerchantsTotal];
     } 
     public function RecentTransactions() {
         $RecentTransactions = $this->db
@@ -157,7 +186,7 @@ class Charts_Model extends CI_Model {
             ->group_end()
 
             ->order_by('Timestamp', 'DESC')
-            ->limit(10)
+            ->limit(5)
             ->get()
             ->result();
         return $RecentTransactions;
@@ -169,7 +198,7 @@ class Charts_Model extends CI_Model {
             ->like('Sender_Address', 'ACT', 'after')
             ->join('tbl_usersaccount', 'tbl_transactionsinfo.Receiver_Address = tbl_usersaccount.UsersAccount_Address', 'right')
             ->order_by('Timestamp', 'DESC')
-            ->limit(10)
+            ->limit(5)
             ->get()
             ->result();
         return $RecentTransactions;
@@ -179,7 +208,7 @@ class Charts_Model extends CI_Model {
             ->select('*')
             ->from('tbl_activitylogs')
             ->order_by('Timestamp', 'DESC')
-            ->limit(10)
+            ->limit(5)
             ->get()
             ->result();
         return $RecentActivities;
