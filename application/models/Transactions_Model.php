@@ -191,12 +191,12 @@ class Transactions_Model extends CI_Model {
                 sender.Firstname AS Sender_Firstname, 
                 sender.Lastname AS Sender_Lastname, 
                 sender.Email AS Sender_Email, 
-                sender_data.Campus_Id AS sender_Campus_Id, 
+                sender.Campus_Id AS sender_Campus_Id, 
                 sender_data.SchoolPersonalId AS sender_SchoolPersonalId,
                 receiver.Firstname AS Receiver_Firstname, 
                 receiver.Lastname AS Receiver_Lastname, 
                 receiver.Email AS Receiver_Email, 
-                receiver_data.Campus_Id AS Receiver_Campus_Id, 
+                receiver.Campus_Id AS Receiver_Campus_Id, 
                 receiver_data.SchoolPersonalId AS Receiver_SchoolPersonalId,
                 transactiontype.Name as TransactionType')
             ->from('tbl_transactionsinfo')

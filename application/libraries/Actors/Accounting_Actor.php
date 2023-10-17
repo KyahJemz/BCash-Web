@@ -48,20 +48,8 @@ class Accounting_Actor {
                 $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History_Details ($Account, $requestPostBody);
                 break;
 
-            case 'get user accounts':
-                $response =  $this->CI->Account_Actions->View_User_Accounts($Account, $requestPostBody);
-                break;
-
             case 'get user account by spid': 
                 $response =  $this->CI->Account_Actions->View_User_Account_By_SPID($Account, $requestPostBody);
-                break;
-
-            case 'update user details': 
-                $response =  $this->CI->Account_Actions->Update_User_Account_By_Accounting($Account, $requestPostBody);
-                break;
-
-            case 'get user details':
-                $response =  $this->CI->Account_Actions->View_User_Account($Account, $requestPostBody);
                 break;
 
             case 'get my notifications':
@@ -128,8 +116,22 @@ class Accounting_Actor {
                 $response = $this->CI->Remittance_Actions->Update_Remittance_Approve($Account, $requestPostBody);
                 break;
 
+            case 'get user accounts':
+                $response =  $this->CI->Account_Actions->View_User_Accounts($Account, $requestPostBody);
+                break;
+
+            case 'get user details':
+                $response =  $this->CI->Account_Actions->View_User_Account($Account, $requestPostBody);
+                break;
+
+            case 'update user details': 
+                $response =  $this->CI->Account_Actions->Update_User_Account_By_Accounting($Account, $requestPostBody);
+                break;
+
+
+
             default:
-                $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
+                $response = ['Success' => FALSE, 'Response' => 'Invalid Intent or Not Permitted']; 
                 break;
         }
         return $response;

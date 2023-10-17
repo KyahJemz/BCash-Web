@@ -30,7 +30,7 @@
             </div>
             <div class="details">
                 <div class="category">BCash: Administrator</div>
-                <div class="fullname">Juan Dela Cruz</div>
+                <div id="WebAccountFullName" class="fullname">Loading...</div>
             </div>
             <div class="button-container">
                 <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="../public/images/icons/notification-yellow.png" alt="notification-icon"></button>
@@ -57,14 +57,6 @@
                                     <div class="selected"></div>
                                     <p>All Transactions</p>
                                 </li>
-                                <li data-menu="User Transactions" class="curson-pointer menuSelectionButton">
-                                    <div class="selected"></div>
-                                    <p>User Transactions</p>
-                                </li>
-                                <li data-menu="Merchant Transactions" class="curson-pointer menuSelectionButton">
-                                    <div class="selected"></div>
-                                    <p>Merchant Transactions</p>
-                                </li>
                             </ul>
                         </li>
                     <li data-menu="Accounts Management" class="curson-pointer menuSelectionButton menuSelectionDropdownButton">
@@ -78,6 +70,10 @@
                                     <div class="selected"></div>
                                     <p>User Accounts</p>
                                 </li>
+                                <!-- <li data-menu="Guest Accounts" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>Guest Accounts</p>
+                                </li> -->
                                 <li data-menu="Merchant Accounts" class="curson-pointer menuSelectionButton">
                                     <div class="selected"></div>
                                     <p>Merchant Accounts</p>
@@ -86,9 +82,9 @@
                                     <div class="selected"></div>
                                     <p>Merchant Staffs Accounts</p>
                                 </li>
-                                <li data-menu="Parental Accounts" class="curson-pointer menuSelectionButton">
+                                <li data-menu="Guardian Accounts" class="curson-pointer menuSelectionButton">
                                     <div class="selected"></div>
-                                    <p>Parental Accounts</p>
+                                    <p>Guardian Accounts</p>
                                 </li>
                                 <li data-menu="Accounting Accounts" class="curson-pointer menuSelectionButton">
                                     <div class="selected"></div>
@@ -97,6 +93,10 @@
                                 <li data-menu="Administrator Accounts" class="curson-pointer menuSelectionButton">
                                     <div class="selected"></div>
                                     <p>Administrator Accounts</p>
+                                </li>
+                                <li data-menu="Add Account" class="curson-pointer menuSelectionButton">
+                                    <div class="selected"></div>
+                                    <p>Add Account</p>
                                 </li>
                             </ul>
                         </li>
@@ -133,7 +133,7 @@
                     San Sebastian College - Recoletos
                 </div>
             </div>
-            <div class="right-side curson-pointer" onclick="">
+            <div class="right-side curson-pointer" id="Logout-Button">
                 <div class="text">
                     Log out
                 </div>
@@ -192,9 +192,10 @@
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Success</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Failed</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Completed</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Payment Pending</a>
                                         <a class="dropdownButtonSubItem" href="javascript:void(0)">Waiting</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Canceled</a>
                                     </div>
                                 </div>
                             </div>
@@ -210,21 +211,8 @@
                                 <img src="../public/images/icons/clear-yellow.png" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button id="alltransactions-export-button" class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
-                                <img src="../public/images/icons/download-yellow.png" alt="search">
-                                <span>Export</span>
-                            </button>
                         </div>
-                        <div>
-                            <div>
-                                <div>Total Orders: </div>
-                                <div class="transaction-totalorders-text text">???</div>
-                            </div>
-                            <div>
-                                <div >Total Sales: </div>
-                                <div class="transaction-totalsales-text text">???</div>
-                            </div>
-                        </div>
+                        <div></div>
                     </div>
                     <div class="panel-transactions-table">
                         <div class="table-header">
@@ -249,16 +237,16 @@
                                 <tr>
                                     <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
                                     <th class="col2"><div>#</div></th>
-                                    <th class="col3"><div>Transaction ID</div></th>
-                                    <th class="col4"><div>Status</div></th>
-                                    <th class="col5"><div>In Charge</div></th>
-                                    <th class="col6"><div>Name</div></th>
-                                    <th class="col7"><div>Category</div></th>
-                                    <th class="col8"><div>Department</div></th>
-                                    <th class="col9"><div>Course</div></th>
-                                    <th class="col10"><div>Amount</div></th>
-                                    <th class="col11"><div>Items</div></th>
-                                    <th class="col12"><div>Timestamp</div></th>
+                                    <th class="col3"><div>Transaction Address</div></th> 
+                                    <th class="col4"><div>Transaction Type</div></th> 
+                                    <th class="col5"><div>Status</div></th>
+                                    <th class="col6"><div>Sender Address</div></th>
+                                    <th class="col7"><div>Sender Name</div></th>
+                                    <th class="col8"><div>Receiver Address</div></th>
+                                    <th class="col9"><div>Receiver Name</div></th>
+                                    <th class="col10"><div>Total Amount</div></th>
+                                    <th class="col11"><div>Timestamp</div></th>
+                                    <th class="col12"><div>PostedBy</div></th>
                                     <th class="col13"><div>Payment Method</div></th>
                                     <th class="col14"><div>Notes</div></th>
                                 </tr>
@@ -289,31 +277,16 @@
                             </table>
                         </div>
                     </div>
-                    <div class="panel-transactions-footer">
-                        <div class="page-numbers-container">
-                            <ul id="mytransaction-pagenumbers" class="page-numbers">
-                                <button id="transaction-leftpage-button">&lt;</button>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer selected" onclick="">1</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">2</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">3</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">4</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">5</a></li>
-                                <button id="mytransaction-rightpage-button">&gt;</button>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>Total: </div>
-                            <div class="transaction-totalsales-text text">???</div>
-                        </div>
+                    <div id="All-Transactions-Footer-Query" class="panel-transactions-footer">
                         <div class="dropdown">
                             <div class="dropdown-content">
-                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
+                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >50/Page</a>
                                 <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
+                                <a class="dropdownButtonSubItem" href="javascript:void(0)">200/Page</a>
+                                <a class="dropdownButtonSubItem" href="javascript:void(0)">All/Page</a>
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="transactions-recordscount-dropwond dropdown-text">25/Page</span>
+                                <span class="transactions-recordscount-dropdown dropdown-text">50/Page</span>
                                 <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                             </button>
                         </div>
@@ -321,323 +294,89 @@
                 </div>
 
     <!--
-        USER TRANSACTIONS 
-    -->
-                <div id="panel-usertransactions" class="body-content-panel hidden">
-                    <div id="User-Transactions-Query" class="panel-transactions-query panel">
+        GUEST ACCOUNTS 
+  
+                <div id="panel-guestaccounts" class="body-content-panel hidden">
+                    <div id="Guest-Accounts-Query" class="panel-accounts-query panel">
                         <div class="form-container">
                             <div>
-                                <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate">
+                                <label for="accounts-address">Account Address</label>
+                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
                             </div>
                             <div>
-                                <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate">
+                                <label for="accounts-schoolpersonalid">School Personal Id</label>
+                                <input class="accounts-schoolpersonalid query textbox inputtext" type="text" name="accounts-schoolpersonalid" autocomplete="off">
                             </div>
                             <div>
-                                <label for="TransactionNumber">Transaction Number</label>
-                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber">
+                                <label for="accounts-name">Name</label>
+                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
                             </div>
                             <div>
-                                <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName">
+                                <label for="accounts-email">Email</label>
+                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
                             </div>
                             <div>
-                                <label>Status Filter</label>
+                                <label>Status</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Success</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Failed</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Waiting</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-transactions-buttons" data-transactiontype="UserTransactions">
+                    <div class="panel-accounts-buttons" data-transactiontype="GuestAccounts">
                         <div>
-                            <button id="usertransaction-search-button" class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
+                            <button class="btn-default curson-pointer accounts-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../public/images/icons/search-yellow.png" alt="search">
                                 <span>Search</span>
                             </button>
-                            <button id="usertransaction-clear-button" class="btn-default curson-pointer transaction-clear-button" type="reset" value="Clear">
+                            <button class="btn-default curson-pointer accounts-clear-button" type="reset" value="Clear">
                                 <img src="../public/images/icons/clear-yellow.png" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button id="usertransaction-export-button" class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
-                                <img src="../public/images/icons/download-yellow.png" alt="search">
-                                <span>Export</span>
-                            </button>
-                        </div>
-                        <div>
-                            <div>
-                                <div>Total Orders: </div>
-                                <div class="transaction-totalorders-text text">???</div>
-                            </div>
-                            <div>
-                                <div >Total Sales: </div>
-                                <div class="transaction-totalsales-text text">???</div>
-                            </div>
                         </div>
                     </div>
-                    <div class="panel-transactions-table">
+                    <div class="panel-accounts-table">
                         <div class="table-header">
                             <table>
-                                <colgroup>
-                                    <col class="col1">
-                                    <col class="col2">
-                                    <col class="col3">
-                                    <col class="col4">
-                                    <col class="col5">
-                                    <col class="col6">
-                                    <col class="col7">
-                                    <col class="col8">
-                                    <col class="col9">
-                                    <col class="col10">
-                                    <col class="col11">
-                                    <col class="col12">
-                                    <col class="col13">
-                                    <col class="col14">
-                                </colgroup>
-                                <thead>
-                                <tr>
-                                    <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
-                                    <th class="col2"><div>#</div></th>
-                                    <th class="col3"><div>Transaction ID</div></th>
-                                    <th class="col4"><div>Status</div></th>
-                                    <th class="col5"><div>In Charge</div></th>
-                                    <th class="col6"><div>Name</div></th>
-                                    <th class="col7"><div>Category</div></th>
-                                    <th class="col8"><div>Department</div></th>
-                                    <th class="col9"><div>Course</div></th>
-                                    <th class="col10"><div>Amount</div></th>
-                                    <th class="col11"><div>Items</div></th>
-                                    <th class="col12"><div>Timestamp</div></th>
-                                    <th class="col13"><div>Payment Method</div></th>
-                                    <th class="col14"><div>Notes</div></th>
-                                </tr>
+                                <thead id="Guest-Accounts-Table-Header">
+                                    <tr>
+                                        <th><div class="col1">#</div></th>
+                                        <th><div class="col2">Account Address</div></th>
+                                        <th><div class="col3">Status</div></th>
+                                        <th><div class="col4">Category</div></th>
+                                        <th><div class="col5">Firstname</div></th>
+                                        <th><div class="col6">Lastname</div></th>
+                                        <th><div class="col7">Email</div></th>
+                                        <th><div class="col8">School Personal Id</div></th>
+                                        <th><div class="col9">Campus</div></th>
+                                        <th><div class="col10">Guardian Address</div></th>
+                                        <th><div class="col11">Guardian Email</div></th>
+                                        <th><div class="col12">Guardian Name</div></th>
+                                        <th><div class="col13">Date Registered</div></th>
+                                    </tr>
                                 </thead>
                             </table>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <table>
-                                <colgroup>
-                                    <col class="col1">
-                                    <col class="col2">
-                                    <col class="col3">
-                                    <col class="col4">
-                                    <col class="col5">
-                                    <col class="col6">
-                                    <col class="col7">
-                                    <col class="col8">
-                                    <col class="col9">
-                                    <col class="col10">
-                                    <col class="col11">
-                                    <col class="col12">
-                                    <col class="col13">
-                                    <col class="col14">
-                                </colgroup>
-                            <tbody id="User-Transactions-Table" class="transactions-table">
-                               
-                            </tbody>
+                                <tbody id="Guest-Accounts-Table-Body" class="accounts-table">
+                                    
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="panel-transactions-footer">
-                        <div class="page-numbers-container">
-                            <ul id="mytransaction-pagenumbers" class="page-numbers">
-                                <button id="transaction-leftpage-button">&lt;</button>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer selected" onclick="">1</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">2</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">3</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">4</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">5</a></li>
-                                <button id="mytransaction-rightpage-button">&gt;</button>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>Total: </div>
-                            <div class="transaction-totalsales-text text">???</div>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-content">
-                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
-                            </div>
-                            <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="transactions-recordscount-dropwond dropdown-text">25/Page</span>
-                                <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                </div> 
+            -->
 
-    <!--
-        MERCHANT TRANSACTIONS 
-    -->
-                <div id="panel-merchanttransactions" class="body-content-panel hidden">
-                    <div id="Merchant-Transactions-Query" class="panel-transactions-query panel">
-                        <div class="form-container">
-                            <div>
-                                <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate">
-                            </div>
-                            <div>
-                                <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate">
-                            </div>
-                            <div>
-                                <label for="TransactionNumber">Transaction Number</label>
-                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber">
-                            </div>
-                            <div>
-                                <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName">
-                            </div>
-                            <div>
-                                <label>Status Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Success</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Failed</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Waiting</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-transactions-buttons" data-transactiontype="MerchantTransactions">
-                        <div>
-                            <button id="merchanttransaction-search-button" class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
-                                <img src="../public/images/icons/search-yellow.png" alt="search">
-                                <span>Search</span>
-                            </button>
-                            <button id="merchanttransaction-clear-button" class="btn-default curson-pointer transaction-clear-button" type="reset" value="Clear">
-                                <img src="../public/images/icons/clear-yellow.png" alt="search">
-                                <span>Clear</span>
-                            </button>
-                            <button id="merchanttransaction-export-button" class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
-                                <img src="../public/images/icons/download-yellow.png" alt="search">
-                                <span>Export</span>
-                            </button>
-                        </div>
-                        <div>
-                            <div>
-                                <div>Total Orders: </div>
-                                <div class="transaction-totalorders-text text">???</div>
-                            </div>
-                            <div>
-                                <div >Total Sales: </div>
-                                <div class="transaction-totalsales-text text">???</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-transactions-table">
-                        <div class="table-header">
-                            <table>
-                                <colgroup>
-                                    <col class="col1">
-                                    <col class="col2">
-                                    <col class="col3">
-                                    <col class="col4">
-                                    <col class="col5">
-                                    <col class="col6">
-                                    <col class="col7">
-                                    <col class="col8">
-                                    <col class="col9">
-                                    <col class="col10">
-                                    <col class="col11">
-                                    <col class="col12">
-                                    <col class="col13">
-                                    <col class="col14">
-                                </colgroup>
-                                <thead>
-                                <tr>
-                                    <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
-                                    <th class="col2"><div>#</div></th>
-                                    <th class="col3"><div>Transaction ID</div></th>
-                                    <th class="col4"><div>Status</div></th>
-                                    <th class="col5"><div>In Charge</div></th>
-                                    <th class="col6"><div>Name</div></th>
-                                    <th class="col7"><div>Category</div></th>
-                                    <th class="col8"><div>Department</div></th>
-                                    <th class="col9"><div>Course</div></th>
-                                    <th class="col10"><div>Amount</div></th>
-                                    <th class="col11"><div>Items</div></th>
-                                    <th class="col12"><div>Timestamp</div></th>
-                                    <th class="col13"><div>Payment Method</div></th>
-                                    <th class="col14"><div>Notes</div></th>
-                                </tr>
-                                </thead>
-                            </table>
-                            </div>
-                            <div>
-                            <table>
-                                <colgroup>
-                                    <col class="col1">
-                                    <col class="col2">
-                                    <col class="col3">
-                                    <col class="col4">
-                                    <col class="col5">
-                                    <col class="col6">
-                                    <col class="col7">
-                                    <col class="col8">
-                                    <col class="col9">
-                                    <col class="col10">
-                                    <col class="col11">
-                                    <col class="col12">
-                                    <col class="col13">
-                                    <col class="col14">
-                                </colgroup>
-                            <tbody id="Merchant-Transactions-Table" class="transactions-table">
-                            
-                            </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="panel-transactions-footer">
-                        <div class="page-numbers-container">
-                            <ul id="merchanttransaction-pagenumbers" class="page-numbers">
-                                <button id="transaction-leftpage-button">&lt;</button>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer selected" onclick="">1</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">2</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">3</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">4</a></li>
-                                <li><a class="mytransaction-pagenumber-button curson-pointer" onclick="">5</a></li>
-                                <button id="mytransaction-rightpage-button">&gt;</button>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>Total: </div>
-                            <div class="transaction-totalsales-text text">???</div>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-content">
-                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
-                            </div>
-                            <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="transactions-recordscount-dropwond dropdown-text">25/Page</span>
-                                <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
+   
     <!--
         USER ACCOUNTS 
     -->
@@ -645,76 +384,32 @@
                     <div id="User-Accounts-Query" class="panel-accounts-query panel">
                         <div class="form-container">
                             <div>
-                                <label for="accountschoolid">Id Number</label>
-                                <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
+                                <label for="accounts-address">Account Address</label>
+                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountfirstname">First name</label>
-                                <input class="accounts-accountfirstname query textbox inputtext" type="text" name="accountfirstname">
+                                <label for="accounts-schoolpersonalid">School Personal Id</label>
+                                <input class="accounts-schoolpersonalid query textbox inputtext" type="text" name="accounts-schoolpersonalid" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountlastname">Last name</label>
-                                <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
+                                <label for="accounts-name">Name</label>
+                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
                             </div>
                             <div>
-                                <label>Group Filter</label>
+                                <label for="accounts-email">Email</label>
+                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
+                            </div>
+                            <div>
+                                <label>Status</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Department Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-department-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WAWA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">SDS</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Course Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-course-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSIT</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSN</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSCS</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSEE</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSA</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Group Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
                                     </div>
                                 </div>
                             </div>
@@ -736,7 +431,18 @@
                         <div class="table-header">
                             <table>
                                 <thead id="User-Accounts-Table-Header">
-                                   
+                                    <tr>
+                                        <th><div class="col1">#</div></th>
+                                        <th><div class="col2">Account Address</div></th>
+                                        <th><div class="col3">Status</div></th>
+                                        <th><div class="col4">Category</div></th>
+                                        <th><div class="col5">Firstname</div></th>
+                                        <th><div class="col6">Lastname</div></th>
+                                        <th><div class="col7">Email</div></th>
+                                        <th><div class="col8">School Personal Id</div></th>
+                                        <th><div class="col9">Campus</div></th>
+                                        <th><div class="col10">Date Registered</div></th>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
@@ -755,84 +461,40 @@
     -->
                 <div id="panel-merchantaccounts" class="body-content-panel hidden">
                     <div id="Merchant-Accounts-Query" class="panel-accounts-query panel">
-                        <div class="form-container">
+                    <div class="form-container">
                             <div>
-                                <label for="accountschoolid">Id Number</label>
-                                <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
+                                <label for="accounts-address">Account Address</label>
+                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountfirstname">First name</label>
-                                <input class="accounts-accountfirstname query textbox inputtext" type="text" name="accountfirstname">
+                                <label for="accounts-merchantcategory">Merchant Category</label>
+                                <input class="accounts-merchantcategory query textbox inputtext" type="text" name="accounts-merchantcategory" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountlastname">Last name</label>
-                                <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
+                                <label for="accounts-name">Name</label>
+                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
                             </div>
                             <div>
-                                <label>Group Filter</label>
+                                <label for="accounts-email">Email</label>
+                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
+                            </div>
+                            <div>
+                                <label>Status</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Department Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-department-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WAWA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">SDS</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Course Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-course-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSIT</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSN</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSCS</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSEE</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSA</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Group Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-accounts-buttons" data-transactiontype="UserAccounts">
+                    <div class="panel-accounts-buttons" data-transactiontype="MerchantAccounts">
                         <div>
                             <button class="btn-default curson-pointer accounts-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../public/images/icons/search-yellow.png" alt="search">
@@ -848,7 +510,18 @@
                         <div class="table-header">
                             <table>
                                 <thead id="Merchant-Accounts-Table-Header">
-                                   
+                                    <tr>
+                                        <th><div class="col1">#</div></th>
+                                        <th><div class="col2">Account Address</div></th>
+                                        <th><div class="col3">Status</div></th>
+                                        <th><div class="col4">Category</div></th>
+                                        <th><div class="col5">Firstname</div></th>
+                                        <th><div class="col6">Lastname</div></th>
+                                        <th><div class="col7">Email</div></th>
+                                        <th><div class="col8">Merchant Category</div></th>
+                                        <th><div class="col9">Campus</div></th>
+                                        <th><div class="col10">Date Registered</div></th>
+                                    </tr>   
                                 </thead>
                             </table>
                         </div>
@@ -867,85 +540,41 @@
         MERCHANT STAFFS ACCOUNTS 
     -->
                 <div id="panel-merchantstaffsaccounts" class="body-content-panel hidden">
-                    <div id="MercahntStaffs-Accounts-Query" class="panel-accounts-query panel">
-                        <div class="form-container">
+                    <div id="MerchantStaff-Accounts-Query" class="panel-accounts-query panel">
+                    <div class="form-container">
                             <div>
-                                <label for="accountschoolid">Id Number</label>
-                                <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
+                                <label for="accounts-address">Account Address</label>
+                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountfirstname">First name</label>
-                                <input class="accounts-accountfirstname query textbox inputtext" type="text" name="accountfirstname">
+                                <label for="accounts-merchantcategory">Merchant Category</label>
+                                <input class="accounts-merchantcategory query textbox inputtext" type="text" name="accounts-merchantcategory" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountlastname">Last name</label>
-                                <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
+                                <label for="accounts-name">Name</label>
+                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
                             </div>
                             <div>
-                                <label>Group Filter</label>
+                                <label for="accounts-email">Email</label>
+                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
+                            </div>
+                            <div>
+                                <label>Status</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Department Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-department-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WAWA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">SDS</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Course Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-course-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSIT</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSN</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSCS</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSEE</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSA</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Group Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-accounts-buttons" data-transactiontype="UserAccounts">
+                    <div class="panel-accounts-buttons" data-transactiontype="MerchantStaffAccounts">
                         <div>
                             <button class="btn-default curson-pointer accounts-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../public/images/icons/search-yellow.png" alt="search">
@@ -960,14 +589,25 @@
                     <div class="panel-accounts-table">
                         <div class="table-header">
                             <table>
-                                <thead id="MerchantStaffs-Accounts-Table-Header">
-                                
+                                <thead id="MerchantStaff-Accounts-Table-Header">
+                                    <tr>
+                                        <th><div class="col1">#</div></th>
+                                        <th><div class="col2">Account Address</div></th>
+                                        <th><div class="col3">Status</div></th>
+                                        <th><div class="col4">Category</div></th>
+                                        <th><div class="col5">Firstname</div></th>
+                                        <th><div class="col6">Lastname</div></th>
+                                        <th><div class="col7">Email</div></th>
+                                        <th><div class="col8">Merchant Category</div></th>
+                                        <th><div class="col9">Campus</div></th>
+                                        <th><div class="col10">Date Registered</div></th>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
                         <div>
                             <table>
-                                <tbody id="MerchantStaffs-Accounts-Table-Body" class="accounts-table">
+                                <tbody id="MerchantStaff-Accounts-Table-Body" class="accounts-table">
                                     
                                 </tbody>
                             </table>
@@ -976,88 +616,40 @@
                 </div>
 
     <!--
-        PARENTAL ACCOUNTS 
+        GUARDIAN ACCOUNTS 
     -->
-                <div id="panel-parentalaccounts" class="body-content-panel hidden">
-                    <div id="Parental-Accounts-Query" class="panel-accounts-query panel">
-                        <div class="form-container">
+                <div id="panel-guardianaccounts" class="body-content-panel hidden">
+                    <div id="Guardian-Accounts-Query" class="panel-accounts-query panel">
+                    <div class="form-container">
                             <div>
-                                <label for="accountschoolid">Id Number</label>
-                                <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
+                                <label for="accounts-address">Account Address</label>
+                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountfirstname">First name</label>
-                                <input class="accounts-accountfirstname query textbox inputtext" type="text" name="accountfirstname">
+                                <label for="accounts-name">Name</label>
+                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountlastname">Last name</label>
-                                <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
+                                <label for="accounts-email">Email</label>
+                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
                             </div>
                             <div>
-                                <label>Group Filter</label>
+                                <label>Status</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Department Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-department-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WAWA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">SDS</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Course Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-course-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSIT</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSN</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSCS</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSEE</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSA</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Group Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-accounts-buttons" data-transactiontype="UserAccounts">
+                    <div class="panel-accounts-buttons" data-transactiontype="GuardianAccounts">
                         <div>
                             <button class="btn-default curson-pointer accounts-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../public/images/icons/search-yellow.png" alt="search">
@@ -1072,14 +664,24 @@
                     <div class="panel-accounts-table">
                         <div class="table-header">
                             <table>
-                                <thead id="Parental-Accounts-Table-Header">
-                                   
+                                <thead id="Guardian-Accounts-Table-Header">
+                                    <tr>
+                                        <th><div class="col1">#</div></th>
+                                        <th><div class="col2">Account Address</div></th>
+                                        <th><div class="col3">Status</div></th>
+                                        <th><div class="col4">Category</div></th>
+                                        <th><div class="col5">Firstname</div></th>
+                                        <th><div class="col6">Lastname</div></th>
+                                        <th><div class="col7">Email</div></th>
+                                        <th><div class="col8">Campus</div></th>
+                                        <th><div class="col9">Date Registered</div></th>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
                         <div>
                             <table>
-                                <tbody id="Parental-Accounts-Table-Body" class="accounts-table">
+                                <tbody id="Guardian-Accounts-Table-Body" class="accounts-table">
                                     
                                 </tbody>
                             </table>
@@ -1092,84 +694,36 @@
     -->
                 <div id="panel-accountingaccounts" class="body-content-panel hidden">
                     <div id="Accounting-Accounts-Query" class="panel-accounts-query panel">
-                        <div class="form-container">
+                    <div class="form-container">
                             <div>
-                                <label for="accountschoolid">Id Number</label>
-                                <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
+                                <label for="accounts-address">Account Address</label>
+                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountfirstname">First name</label>
-                                <input class="accounts-accountfirstname query textbox inputtext" type="text" name="accountfirstname">
+                                <label for="accounts-name">Name</label>
+                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountlastname">Last name</label>
-                                <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
+                                <label for="accounts-email">Email</label>
+                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
                             </div>
                             <div>
-                                <label>Group Filter</label>
+                                <label>Status</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Department Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-department-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WAWA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">SDS</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Course Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-course-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSIT</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSN</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSCS</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSEE</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSA</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Group Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-accounts-buttons" data-transactiontype="UserAccounts">
+                    <div class="panel-accounts-buttons" data-transactiontype="AccountingAccounts">
                         <div>
                             <button class="btn-default curson-pointer accounts-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../public/images/icons/search-yellow.png" alt="search">
@@ -1185,7 +739,17 @@
                         <div class="table-header">
                             <table>
                                 <thead id="Accounting-Accounts-Table-Header">
-                                   
+                                    <tr>
+                                        <th><div class="col1">#</div></th>
+                                        <th><div class="col2">Account Address</div></th>
+                                        <th><div class="col3">Status</div></th>
+                                        <th><div class="col4">Category</div></th>
+                                        <th><div class="col5">Firstname</div></th>
+                                        <th><div class="col6">Lastname</div></th>
+                                        <th><div class="col7">Email</div></th>
+                                        <th><div class="col8">Campus</div></th>
+                                        <th><div class="col9">Date Registered</div></th>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
@@ -1206,82 +770,34 @@
                     <div id="Administrator-Accounts-Query" class="panel-accounts-query panel">
                         <div class="form-container">
                             <div>
-                                <label for="accountschoolid">Id Number</label>
-                                <input class="accounts-accountschoolid query textbox inputtext" type="text" name="accountschoolid">
+                                <label for="accounts-address">Account Address</label>
+                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountfirstname">First name</label>
-                                <input class="accounts-accountfirstname query textbox inputtext" type="text" name="accountfirstname">
+                                <label for="accounts-name">Name</label>
+                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
                             </div>
                             <div>
-                                <label for="accountlastname">Last name</label>
-                                <input class="accounts-accountlastname query textbox inputtext" type="text" name="accountlastname">
+                                <label for="accounts-email">Email</label>
+                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
                             </div>
                             <div>
-                                <label>Group Filter</label>
+                                <label>Status</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Department Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-department-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WAWA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">SDS</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Course Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-course-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSIT</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSN</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSCS</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSEE</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSA</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Group Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-accounts-buttons" data-transactiontype="UserAccounts">
+                    <div class="panel-accounts-buttons" data-transactiontype="AdministratorAccounts">
                         <div>
                             <button class="btn-default curson-pointer accounts-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
                                 <img src="../public/images/icons/search-yellow.png" alt="search">
@@ -1297,7 +813,17 @@
                         <div class="table-header">
                             <table>
                                 <thead id="Administrator-Accounts-Table-Header">
-                                   
+                                    <tr>
+                                        <th><div class="col1">#</div></th>
+                                        <th><div class="col2">Account Address</div></th>
+                                        <th><div class="col3">Status</div></th>
+                                        <th><div class="col4">Category</div></th>
+                                        <th><div class="col5">Firstname</div></th>
+                                        <th><div class="col6">Lastname</div></th>
+                                        <th><div class="col7">Email</div></th>
+                                        <th><div class="col8">Campus</div></th>
+                                        <th><div class="col9">Date Registered</div></th>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
@@ -1310,6 +836,16 @@
                         </div>
                     </div>
                 </div>
+
+    <!--
+        ADD ACCOUNT
+    -->
+                <div id="panel-addaccount" class="body-content-panel hidden">
+                    <div id="Administrator-Accounts-Query" class="panel-accounts-query panel">
+                        s
+                    </div>
+                </div>
+
 
     <!--
         NOTIFICATIONS CONTROL MANAGEMENT 

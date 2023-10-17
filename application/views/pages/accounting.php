@@ -119,7 +119,7 @@
 <!--
     CONTENT BODY
 -->
-    <!--
+    <!-- ### DONE ###
         HOME 
     -->
                 <div id="panel-home" class="body-content-panel visible">
@@ -778,7 +778,7 @@
                     </div>
                 </div>
 
-    <!--
+    <!-- ### DONE ###
         FUND REMITTANCE 
     -->
                 <div id="panel-fundremittance" class="body-content-panel hidden">
@@ -864,7 +864,6 @@ MODALS ###
     JAVASCRIPTS  ###
 -->
     <script src="../public/javascript/main-accounting.js" type="module"></script>
-    <script src="../public/javascript/chart.js" type="module"></script>
 </body>
 </html>
 

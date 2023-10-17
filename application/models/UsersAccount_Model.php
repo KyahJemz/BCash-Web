@@ -82,16 +82,12 @@ class UsersAccount_Model extends CI_Model {
                 Data.CanModifySettings as CanModifySettings,
                 Data.IsTransactionAutoConfirm as IsTransactionAutoConfirm,
                 Data.DateRegistered as DateRegistered,
-                Guardian.GuardianAccount_Address as GuardianAccount_Address,
-                Guardian.Firstname as GuardianFirstname,
-                Guardian.Lastname as GuardianLastname,
-                Guardian.Email as GuardianEmail,
+                Data.GuardianAccount_Address as GuardianAccount_Address,
             ')
             ->from('tbl_usersaccount as Account')
             ->join('tbl_usersdata as Data', 'Account.UsersAccount_Address = Data.UsersAccount_Address', 'left')
             ->join('tbl_campus as Campus', 'Account.Campus_Id = Campus.Campus_Id', 'left')
             ->join('tbl_actorcategory as Actor', 'Account.ActorCategory_Id = Actor.ActorCategory_Id', 'left')
-            ->join('tbl_guardianaccount as Guardian', 'Account.UsersAccount_Address = Guardian.UsersAccount_Address', 'left')
             ->where('Account.Campus_Id', $params['Campus_Id']);
 
         if (!empty($params['AccountAddress'])) {
@@ -153,11 +149,13 @@ class UsersAccount_Model extends CI_Model {
         }
     }
 
+    
+
     public function update_Email($params) {
         $data = [
             'Email' => $params['Email']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersaccount', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -167,7 +165,7 @@ class UsersAccount_Model extends CI_Model {
         $data = [
             'Firstname' => $params['Firstname']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersaccount', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -177,7 +175,7 @@ class UsersAccount_Model extends CI_Model {
         $data = [
             'Lastname' => $params['Lastname']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersaccount', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -187,7 +185,7 @@ class UsersAccount_Model extends CI_Model {
         $data = [
             'IsAccountActive' => (int)$params['IsAccountActive']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersaccount', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;

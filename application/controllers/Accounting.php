@@ -75,7 +75,6 @@ class Accounting extends CI_Controller {
                         return;  
                 }
 
-
                 $this->load->view('pages/'.$page, $data); // PAGE LOAD
 
                 echo '

@@ -274,6 +274,7 @@ class Account_Actions {
        }
 
 
+
 /* 
 -- ---------------------
    UPDATE MY DETAILS 
@@ -357,9 +358,79 @@ class Account_Actions {
 
 
 
+ /* 
+-- ---------------------
+   VIEW USER ACCOUNT BY SID
+   - for admin accounting use
+-- ---------------------
+*/  
+       public function View_User_Account_By_SPID($Account, $requestPostBody) {
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('Id', 'Id', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Id = $this->CI->Functions_Model->sanitize($requestPostBody['Id']);
+              $AccountAddress = $this->CI->UsersData_Model->read_by_id(array('SchoolPersonalId'=>$Id));
+              if (!$AccountAddress) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Account not found'];
+              }
+              $AccountAddress = $AccountAddress->UsersAccount_Address;
+              
+              $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
+                     'Account_Address' => $AccountAddress,
+              ));
+              $Account_ = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
+              $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$AccountAddress));
+              $parameters = [
+                     'Account'=> $Account_,
+                     'Details'=> $Details_,
+              ];
+              return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
+       }
+
+
+
 /* 
 -- ---------------------
-   UPDATE USER DETAILS 
+   VIEW USER ACCOUNT 
+   - for admin accounting use
+-- ---------------------
+*/  
+       public function View_User_Account($Account, $requestPostBody) {
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|alpha_numeric|exact_length[15]');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
+                     'Account_Address' => $AccountAddress,
+              ));
+              $Account_ = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
+              $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$AccountAddress));
+              $parameters = [
+                     'Account'=> $Account_,
+                     'Details'=> $Details_,
+              ];
+              return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
+       }
+
+
+
+/* 
+-- ---------------------
+   UPDATE USER ACCOUNTS 
    - for accounting
 -- ---------------------
 */  
@@ -419,7 +490,7 @@ class Account_Actions {
 
                      if ($Account_->Email !== $Email) {
                             $this->CI->UsersAccount_Model->update_Email(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'Email' => $Email,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -431,7 +502,7 @@ class Account_Actions {
 
                      if ($Account_->Firstname !== $Firstname) {
                             $this->CI->UsersAccount_Model->update_Firstname(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'Firstname' => $Firstname,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -443,7 +514,7 @@ class Account_Actions {
 
                      if ($Account_->Lastname !== $Lastname) {
                             $this->CI->UsersAccount_Model->update_Lastname(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'Lastname' => $Lastname,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -455,7 +526,7 @@ class Account_Actions {
 
                      if ($Account_->IsAccountActive !== $IsAccountActive) {
                             $this->CI->UsersAccount_Model->update_IsAccountActive(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'IsAccountActive' => $IsAccountActive,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -467,7 +538,7 @@ class Account_Actions {
 
                      if ($Details_->SchoolPersonalId !== $SchoolPersonalId) {
                             $this->CI->UsersData_Model->update_SchoolPersonalId(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'SchoolPersonalId' => $SchoolPersonalId,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -479,7 +550,7 @@ class Account_Actions {
 
                      if ($Details_->CanDoTransfers !== $CanDoTransfers) {
                             $this->CI->UsersData_Model->update_CanDoTransfers(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'CanDoTransfers' => $CanDoTransfers,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -491,7 +562,7 @@ class Account_Actions {
 
                      if ($Details_->CanDoTransactions !== $CanDoTransactions) {
                             $this->CI->UsersData_Model->update_CanDoTransactions(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'CanDoTransactions' => $CanDoTransactions,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -503,7 +574,7 @@ class Account_Actions {
 
                      if ($Details_->CanUseCard !== $CanUseCard) {
                             $this->CI->UsersData_Model->update_CanUseCard(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'CanUseCard' => $CanDoTransactions,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -515,7 +586,7 @@ class Account_Actions {
 
                      if ($Details_->CanModifySettings !== $CanModifySettings) {
                             $this->CI->UsersData_Model->update_CanModifySettings(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'CanModifySettings' => $CanDoTransactions,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -527,7 +598,7 @@ class Account_Actions {
 
                      if ($Details_->IsTransactionAutoConfirm !== $IsTransactionAutoConfirm) {
                             $this->CI->UsersData_Model->update_IsTransactionAutoConfirm(array(
-                                   'UsersAccount_Address' => $AccountAddress,
+                                   'Account_Address' => $AccountAddress,
                                    'IsTransactionAutoConfirm' => $IsTransactionAutoConfirm,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -550,83 +621,10 @@ class Account_Actions {
 
 
 
-/* 
--- ---------------------
-   VIEW USER ACCOUNT 
-   - for admin accounting use
--- ---------------------
-*/  
-       public function View_User_Account($Account, $requestPostBody) {
-
-              $this->CI->form_validation->set_data($requestPostBody);
-
-              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|alpha_numeric|exact_length[15]');
-
-              if ($this->CI->form_validation->run() === FALSE) {
-                     $validationErrors = validation_errors();
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
-              }
-
-              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
-              $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
-                     'Account_Address' => $AccountAddress,
-              ));
-              $Account_ = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
-              $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$AccountAddress));
-              $parameters = [
-                     'Account'=> $Account_,
-                     'Details'=> $Details_,
-              ];
-              return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
-       }
 
 
-
- /* 
--- ---------------------
-   VIEW USER ACCOUNT BY SID
-   - for admin accounting use
--- ---------------------
-*/  
-public function View_User_Account_By_SPID($Account, $requestPostBody) {
-
-       $this->CI->form_validation->set_data($requestPostBody);
-
-       $this->CI->form_validation->set_rules('Id', 'Id', 'trim|required');
-
-       if ($this->CI->form_validation->run() === FALSE) {
-              $validationErrors = validation_errors();
-              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
-       }
-
-       $Id = $this->CI->Functions_Model->sanitize($requestPostBody['Id']);
-       $AccountAddress = $this->CI->UsersData_Model->read_by_id(array('SchoolPersonalId'=>$Id));
-       if (!$AccountAddress) {
-              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Account not found'];
-       }
-       $AccountAddress = $AccountAddress->UsersAccount_Address;
-       
-       $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
-              'Account_Address' => $AccountAddress,
-       ));
-       $Account_ = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
-       $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$AccountAddress));
-       $parameters = [
-              'Account'=> $Account_,
-              'Details'=> $Details_,
-       ];
-       return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
-}
-
-
-
-/* 
--- ---------------------
-   VIEW USER ACCOUNTS
-   - for admin accounting use
--- ---------------------
-*/  
-       public function View_User_Accounts($Account,$requestPostBody) {
+    
+       public function View_User_Accounts($Account, $requestPostBody) {
 
               $this->CI->form_validation->set_data($requestPostBody);
 
@@ -660,6 +658,476 @@ public function View_User_Account_By_SPID($Account, $requestPostBody) {
 
               return ['Success' => True,'Target' => null,'Parameters' => $Accounts,'Response' => ''];
        }
+             
+       public function View_Guest_Accounts($Account, $requestPostBody){
+                         
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validaton->set_rules('AccountAddress', 'AccountAddress', 'trim');
+              $this->CI->form_validation->set_rules('SchoolPersonalId', 'SchoolPersonalId', 'trim');
+              $this->CI->form_validation->set_rules('Name', 'Name', 'trim');
+              $this->CI->form_validation->set_rules('Status', 'Status', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $SchoolPersonalId = $this->CI->Functions_Model->sanitize($requestPostBody['SchoolPersonalId']);
+              $Name = $this->CI->Functions_Model->sanitize($requestPostBody['Name']);
+              $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
+
+              $Accounts = $this->CI->UsersAccount_Model->read_all_with_view_columns(array(
+                     'Campus_Id' => $Campus_Id,
+                     'AccountAddress' => $AccountAddress,
+                     'SchoolPersonalId' => $SchoolPersonalId,
+                     'Name' => $Name,
+                     'Status' => $Status
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $Accounts,'Response' => ''];
+       }
+           
+
+       public function View_Guardian_Accounts($Account, $requestPostBody){
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim');
+              $this->CI->form_validation->set_rules('Name', 'Name', 'trim');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim');
+              $this->CI->form_validation->set_rules('Status', 'Status', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $Name = $this->CI->Functions_Model->sanitize($requestPostBody['Name']);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
+              $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
+
+              $Accounts = $this->CI->GuardianAccount_Model->read_gdn_with_filters(array(
+                     'Campus_Id' => $Campus_Id,
+                     'AccountAddress' => $AccountAddress,
+                     'Email' => $Email,
+                     'Name' => $Name,
+                     'Status' => $Status
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $Accounts,'Response' => ''];
+       }
+         
+       public function View_Merchant_Accounts($Account, $requestPostBody){
+                           
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim');
+              $this->CI->form_validation->set_rules('Name', 'Name', 'trim');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim');
+              $this->CI->form_validation->set_rules('MerchantCategory', 'MerchantCategory', 'trim');
+              $this->CI->form_validation->set_rules('Status', 'Status', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $Name = $this->CI->Functions_Model->sanitize($requestPostBody['Name']);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
+              $MerchantCategory = $this->CI->Functions_Model->sanitize($requestPostBody['MerchantCategory']);
+              $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
+
+              $Accounts = $this->CI->WebAccounts_Model->read_mta_mts_with_filters(array(
+                     'Target' => 'MTA',
+                     'Campus_Id' => $Campus_Id,
+                     'AccountAddress' => $AccountAddress,
+                     'MerchantCategory' => $MerchantCategory,
+                     'Email' => $Email,
+                     'Name' => $Name,
+                     'Status' => $Status
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $Accounts,'Response' => ''];
+       }
+        
+       public function View_MerchantStaff_Accounts($Account, $requestPostBody){
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim');
+              $this->CI->form_validation->set_rules('Name', 'Name', 'trim');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim');
+              $this->CI->form_validation->set_rules('MerchantCategory', 'MerchantCategory', 'trim');
+              $this->CI->form_validation->set_rules('Status', 'Status', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $Name = $this->CI->Functions_Model->sanitize($requestPostBody['Name']);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
+              $MerchantCategory = $this->CI->Functions_Model->sanitize($requestPostBody['MerchantCategory']);
+              $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
+
+              $Accounts = $this->CI->WebAccounts_Model->read_mta_mts_with_filters(array(
+                     'Target' => 'MTS',
+                     'Campus_Id' => $Campus_Id,
+                     'AccountAddress' => $AccountAddress,
+                     'MerchantCategory' => $MerchantCategory,
+                     'Email' => $Email,
+                     'Name' => $Name,
+                     'Status' => $Status
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $Accounts,'Response' => ''];
+       }
+         
+       public function View_Accounting_Accounts($Account, $requestPostBody){
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim');
+              $this->CI->form_validation->set_rules('Name', 'Name', 'trim');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim');
+              $this->CI->form_validation->set_rules('Status', 'Status', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $Name = $this->CI->Functions_Model->sanitize($requestPostBody['Name']);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
+              $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
+
+              $Accounts = $this->CI->WebAccounts_Model->read_adm_act_with_filters(array(
+                     'Target' => 'ACT',
+                     'Campus_Id' => $Campus_Id,
+                     'AccountAddress' => $AccountAddress,
+                     'Email' => $Email,
+                     'Name' => $Name,
+                     'Status' => $Status
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $Accounts,'Response' => ''];
+       }
+       
+       public function View_Administrator_Accounts($Account, $requestPostBody){
+              
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim');
+              $this->CI->form_validation->set_rules('Name', 'Name', 'trim');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim');
+              $this->CI->form_validation->set_rules('Status', 'Status', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $Name = $this->CI->Functions_Model->sanitize($requestPostBody['Name']);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
+              $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
+
+              $Accounts = $this->CI->WebAccounts_Model->read_adm_act_with_filters(array(
+                     'Target' => 'ADM',
+                     'Campus_Id' => $Campus_Id,
+                     'AccountAddress' => $AccountAddress,
+                     'Email' => $Email,
+                     'Name' => $Name,
+                     'Status' => $Status
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $Accounts,'Response' => ''];
+       }
+       
+
+       public function Update_Account_By_ADM ($Account, $requestPostBody) {
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|max_length[15]');
+              $this->CI->form_validation->set_rules('Firstname', 'Firstname', 'trim|max_length[50]');
+              $this->CI->form_validation->set_rules('Lastname', 'Lastname', 'trim|max_length[50]');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim|max_length[50]');
+              $this->CI->form_validation->set_rules('SchoolPersonalId', 'SchoolPersonalId', 'trim|max_length[15]');
+              $this->CI->form_validation->set_rules('AccountPINCode', 'AccountPINCode', 'trim|numeric|max_length[6]');
+              $this->CI->form_validation->set_rules('AccountPassword', 'AccountPassword', 'trim|max_length[50]');
+              $this->CI->form_validation->set_rules('PINCode', 'PINCode', 'trim|required|numeric|max_length[6]');
+              $this->CI->form_validation->set_rules('UserAccountAddress', 'UserAccountAddress', 'trim|max_length[15]');
+              $this->CI->form_validation->set_rules('GuardianAccountAddress', 'GuardianAccountAddress', 'trim|max_length[15]');
+              $this->CI->form_validation->set_rules('IsAccountActive', 'IsAccountActive', 'trim|numeric|max_length[1]');
+              $this->CI->form_validation->set_rules('CanDoTransactions', 'CanDoTransactions', 'trim|numeric|max_length[1]');
+              $this->CI->form_validation->set_rules('CanDoTransfers', 'CanDoTransfers', 'trim|numeric|max_length[1]');
+              $this->CI->form_validation->set_rules('CanModifySettings', 'CanModifySettings', 'trim|numeric|max_length[1]');
+              $this->CI->form_validation->set_rules('CanUseCard', 'CanUseCard', 'trim|numeric|max_length[1]');
+              $this->CI->form_validation->set_rules('IsTransactionAutoConfirm', 'IsTransactionAutoConfirm', 'trim|numeric|max_length[1]');
+ 
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress'] ?? null);
+              $PINCode = $this->CI->Functions_Model->sanitize($requestPostBody['PINCode'] ?? null);
+              $Firstname = $this->CI->Functions_Model->sanitize($requestPostBody['Firstname'] ?? null);
+              $Lastname = $this->CI->Functions_Model->sanitize($requestPostBody['Lastname'] ?? null);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email'] ?? null);
+              $AccountPINCode = $this->CI->Functions_Model->sanitize($requestPostBody['AccountPINCode'] ?? null);
+              $AccountPassword = $this->CI->Functions_Model->sanitize($requestPostBody['AccountPassword'] ?? null);
+              $IsAccountActive = $this->CI->Functions_Model->sanitize($requestPostBody['IsAccountActive'] ?? null);
+              $UserAccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['UserAccountAddress'] ?? null);
+              $GuardianAccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['GuardianAccountAddress'] ?? null);
+              $SchoolPersonalId = $this->CI->Functions_Model->sanitize($requestPostBody['SchoolPersonalId'] ?? null);
+              $CanDoTransactions = $this->CI->Functions_Model->sanitize($requestPostBody['CanDoTransactions'] ?? null);
+              $CanDoTransfers = $this->CI->Functions_Model->sanitize($requestPostBody['CanDoTransfers'] ?? null);
+              $CanModifySettings = $this->CI->Functions_Model->sanitize($requestPostBody['CanModifySettings'] ?? null);
+              $CanUseCard = $this->CI->Functions_Model->sanitize($requestPostBody['CanUseCard'] ?? null);
+              $IsTransactionAutoConfirm = $this->CI->Functions_Model->sanitize($requestPostBody['IsTransactionAutoConfirm'] ?? null);
+
+
+              $AccountToModify = $this->CI->Functions_Model->getAccountsByAddress($AccountAddress);
+              if (!$AccountToModify) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid account to modify.'];
+              }
+
+              if ($PINCode !== $Account->PinCode){
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Incorrect PIN Code'];
+              }
+
+              $changes = 'Changes: ';
+
+              $Account_Model;
+              $Data_Model;
+              $AccountDataToModify;
+
+              if ($AccountToModify->ActorCategory_Id === '1' || $AccountToModify->ActorCategory_Id === '2' || $AccountToModify->ActorCategory_Id === '3' || $AccountToModify->ActorCategory_Id === '4') {
+                     $Account_Model = $this->CI->WebAccounts_Model;
+              } else if ($AccountToModify->ActorCategory_Id === '5' || $AccountToModify->ActorCategory_Id === '6')  {
+                     $Account_Model = $this->CI->UsersAccount_Model;
+                     $Data_Model = $this->CI->UsersData_Model;
+              } else if ($AccountToModify->ActorCategory_Id === '7') {
+                     $Account_Model = $this->CI->GuardianAccount_Model;
+              } else {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Cannot find account category.'];
+              }
+
+              if (!empty($Data_Model)) {
+                     $AccountDataToModify = $Data_Model->read_by_address(array('Account_Address' => $AccountAddress));
+                     if (empty($AccountDataToModify)) {
+                            return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'No data model.'];
+                     }
+              }
+
+              $this->CI->db->trans_start(); 
+
+                     if (property_exists($AccountToModify, 'Firstname') && !empty($Firstname) && $AccountToModify->Firstname !== $Firstname) {
+                            $Account_Model->update_Firstname(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'Firstname' => $Firstname,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] Firstname settings to '.$Firstname.'.',
+                            ));
+                            $changes = $changes . 'Firstname, ';
+                     }
+
+                     if (property_exists($AccountToModify, 'Lastname') && !empty($Lastname) && $AccountToModify->Lastname !== $Lastname)  {
+                            $Account_Model->update_Lastname(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'Lastname' => $Lastname,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] Lastname settings to '.$Lastname.'.',
+                            ));
+                            $changes = $changes . 'Lastname, ';
+                     }
+
+                     if (property_exists($AccountToModify, 'Email') && !empty($Email) && $AccountToModify->Email !== $Email) {
+                            $Account_Model->update_Email(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'Email' => $Email,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] Email settings to '.$Email.'.',
+                            ));
+                            $changes = $changes . 'Email, ';
+                     }
+       
+                     if (property_exists($AccountToModify, 'PinCode') && !empty($AccountPINCode) && $AccountToModify->PinCode !== $AccountPINCode) {
+                            $Account_Model->update_PinCode(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'PinCode' => $PinCode,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] PinCode.',
+                            ));
+                            $changes = $changes . 'PinCode, ';
+                     }
+     
+                     if (property_exists($AccountToModify, 'Password') && !empty($AccountPassword) && !password_verify($AccountPassword, $AccountToModify->Password))  {
+                            $hashed_password = password_hash($AccountPassword, PASSWORD_BCRYPT);
+                            $Account_Model->update_Password(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'Password' => $hashed_password,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] Password.',
+                            ));
+                            $changes = $changes . 'Password, ';
+                     }
+
+                     if (property_exists($AccountToModify, 'IsAccountActive') && $AccountToModify->IsAccountActive !== $IsAccountActive) {
+                            $Account_Model->update_IsAccountActive(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'IsAccountActive' => $IsAccountActive,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] IsAccountActive settings to '.$IsAccountActive.'.',
+                            ));
+                            $changes = $changes . 'IsAccountActive, ';
+                     }
+
+                     if (!empty($AccountDataToModify) && $AccountDataToModify->SchoolPersonalId !== $SchoolPersonalId) {
+                            $Data_Model->update_SchoolPersonalId(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'SchoolPersonalId' => $SchoolPersonalId,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] SchoolPersonalId settings to '.$SchoolPersonalId.'.',
+                            ));
+                            $changes = $changes . 'SchoolPersonalId, ';
+                     }
+
+                     if (!empty($AccountDataToModify) && $AccountDataToModify->CanDoTransactions !== $CanDoTransactions) {
+                            $Data_Model->update_CanDoTransactions(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'CanDoTransactions' => $CanDoTransactions,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] CanDoTransactions settings to '.$CanDoTransactions.'.',
+                            ));
+                            $changes = $changes . 'CanDoTransactions, ';
+                     }
+
+                     if (!empty($AccountDataToModify) && $AccountDataToModify->CanDoTransfers !== $CanDoTransfers) {
+                            $Data_Model->update_CanDoTransfers(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'CanDoTransfers' => $CanDoTransfers,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] CanDoTransfers settings to '.$CanDoTransfers.'.',
+                            ));
+                            $changes = $changes . 'CanDoTransfers, ';
+                     }
+
+                     if (!empty($AccountDataToModify) && $AccountDataToModify->CanModifySettings !== $CanModifySettings) {
+                            $Data_Model->update_CanModifySettings(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'CanModifySettings' => $CanModifySettings,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] CanModifySettings settings to '.$CanModifySettings.'.',
+                            ));
+                            $changes = $changes . 'CanModifySettings, ';
+                     }
+
+                     if (!empty($AccountDataToModify) && $AccountDataToModify->CanUseCard !== $CanUseCard) {
+                            $Data_Model->update_CanUseCard(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'CanUseCard' => $CanUseCard,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] CanUseCard settings to '.$CanUseCard.'.',
+                            ));
+                            $changes = $changes . 'CanUseCard, ';
+                     }
+
+                     if (!empty($AccountDataToModify) && $AccountDataToModify->IsTransactionAutoConfirm !== $IsTransactionAutoConfirm) {
+                            $Data_Model->update_IsTransactionAutoConfirm(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'IsTransactionAutoConfirm' => $IsTransactionAutoConfirm,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] IsTransactionAutoConfirm settings to '.$IsTransactionAutoConfirm.'.',
+                            ));
+                            $changes = $changes . 'IsTransactionAutoConfirm, ';
+                     }
+
+                     if (!empty($AccountDataToModify) && $AccountDataToModify->GuardianAccount_Address !== $GuardianAccountAddress) {
+                            $Data_Model->update_GuardianAccountAddress(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'GuardianAccountAddress' => $GuardianAccountAddress,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] GuardianAccountAddress settings to '.$GuardianAccountAddress.'.',
+                            ));
+                            $changes = $changes . 'GuardianAccountAddress, ';
+                     }
+
+                     if ($AccountToModify->ActorCategory_Id === '7' && $AccountToModify->UsersAccount_Address && !empty($UserAccountAddress) &&  $AccountToModify->UsersAccount_Address !== $UserAccountAddress) {
+                            $Account_Model->update_UserAccountAddress(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'UserAccountAddress' => $UserAccountAddress,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Task' => 'Updated ['.$AccountAddress.'] UserAccountAddress settings to '.$UserAccountAddress.'.',
+                            ));
+                            $changes = $changes . 'UserAccountAddress, ';
+                     }
+
+              $this->CI->db->trans_complete(); 
+
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+              }
+
+              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => $changes];
+
+       }
+
+
+
+
+
 
 
 
@@ -669,7 +1137,7 @@ public function View_User_Account_By_SPID($Account, $requestPostBody) {
    - from admin use
 -- ---------------------
 */
-       public function Update_User_PinCode ($Account, $requestPostBody) {
+       public function Update_PinCode ($Account, $requestPostBody) {
 
               $this->CI->form_validation->set_data($requestPostBody);
 
@@ -707,14 +1175,13 @@ public function View_User_Account_By_SPID($Account, $requestPostBody) {
        }
 
 
-
 /*
 -- ---------------------
    UPDATE WEB ACCOUNT PASSWORD
    - from admin use
 -- ---------------------
 */
-       public function Update_WebAccount_Password ($Account, $requestPostBody) {
+       public function Update_Password ($Account, $requestPostBody) {
 
               $this->CI->form_validation->set_data($requestPostBody);
 

@@ -108,11 +108,14 @@ class UsersData_Model extends CI_Model {
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 
+
+
+    
     public function update_SchoolPersonalId($params) {
         $data = [
             'SchoolPersonalId' => (int)$params['SchoolPersonalId']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -122,7 +125,7 @@ class UsersData_Model extends CI_Model {
         $data = [
             'CanDoTransfers' => (int)$params['CanDoTransfers']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -132,7 +135,7 @@ class UsersData_Model extends CI_Model {
         $data = [
             'CanDoTransactions' => (int)$params['CanDoTransactions']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -142,7 +145,7 @@ class UsersData_Model extends CI_Model {
         $data = [
             'CanUseCard' => (int)$params['CanUseCard']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -152,7 +155,7 @@ class UsersData_Model extends CI_Model {
         $data = [
             'CanModifySettings' => (int)$params['CanModifySettings']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -162,7 +165,7 @@ class UsersData_Model extends CI_Model {
         $data = [
             'IsTransactionAutoConfirm' => (int)$params['IsTransactionAutoConfirm']
         ];
-        $this->db->where('UsersAccount_Address', $params['UsersAccount_Address']);
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;

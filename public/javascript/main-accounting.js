@@ -17,6 +17,8 @@ import Helper from './helper.js';
 const helper = new Helper();
 const Ajax = new AjaxRequest(BaseURL);
 const modals = new Modals();
+const menu = new Menu();
+const dropdown = new Dropdown();
 
 const myTransactions = new Transactions(
   document.getElementById("My-Transactions-Table"),
@@ -35,7 +37,7 @@ const allTransactions = new Transactions(
   modals
 );
 const userAccounts = new Accounts(
-  "users",
+  "user",
   document.getElementById("accounts-table-body"),
   document.getElementById("accounts-query"),
   Ajax,
@@ -43,8 +45,7 @@ const userAccounts = new Accounts(
   modals
 );
 
-const menu = new Menu();
-const dropdown = new Dropdown();
+
 
 ////////////////////////////
 // EVENT LISTENERS
@@ -175,6 +176,7 @@ function onModalCloseButtonClick() {
 helper.addElementClickListenerById('Modal-Close-Button', onModalCloseButtonClick);
 
 
+
 ////////////////////////////
 // MENU PRIMARY BUTTONS
 ////////////////////////////
@@ -186,9 +188,6 @@ async function onMenuNotificationButtonClick() {
         makeModal("Modal", "Notifications", modals.getModalView("Notification Panel",responseData.Parameters));
       }
   })
-    .catch(error => {
-      console.error('Request Error:', error);
-  });
 }
 
 async function onMenuSettingsButtonClick() {
@@ -199,9 +198,6 @@ async function onMenuSettingsButtonClick() {
         helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
       }
   })
-    .catch(error => {
-      console.error('Request Error:', error);
-  });
 }
 
 async function updateAccount (event) {
@@ -309,7 +305,6 @@ function onUserAccountsClearClick(event) {
 }
 
 async function uploadUserChanges(event) {
-  console.log('trigger');
   const parent = event.currentTarget.parentNode.parentNode;
 
   const AccountAddress = parent.querySelector('#AccountDetails-AccountAddress').textContent;
