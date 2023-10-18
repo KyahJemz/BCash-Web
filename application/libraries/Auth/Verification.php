@@ -38,7 +38,7 @@ class Verification {
                                 ];
                         } else {
                                 if ($this->CI->Functions_Model->generateNewAuth($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)){
-                                        $AuthToken = $this->CI->Authentications_Model->read_by_address($AccountAddress)->AuthToken;
+                                        $AuthToken = $this->CI->Authentications_Model->read_by_address(array('Account_Address'=>$AccountAddress))->AuthToken;
 
                                         // Check If New Sign In Device Or IP
                                         if ($this->CI->Functions_Model->validateIfNewAccountLogin($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)) {

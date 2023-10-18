@@ -53,13 +53,12 @@ class LoginHistory_Model extends CI_Model {
         return ($result > 0) ? TRUE : FALSE;
     }
 
-    public function create($AccountAddress,$IpAddress,$Location,$Device,$LastOnline){
+    public function create($AccountAddress,$IpAddress,$Location,$Device){
         $data = [
             'Account_Address' => $AccountAddress,
             'IpAddress' => $IpAddress,
             'Location' => $Location,
             'Device' => $Device,
-            'LastOnline' => $LastOnline
         ];
         $this->db->insert('tbl_loginhistory', $data);
         $result = $this->db->insert_id();
@@ -78,16 +77,5 @@ class LoginHistory_Model extends CI_Model {
         $result = $this->db->affected_rows();
         return ($result > 0) ? TRUE : FALSE;
     }
-    
-    public function update_lastonline_by_address($AccountAddress, $DateTime) {
-        $data = [
-            'LastOnline' => $DateTime,
-        ];
-        $this->db->where('Account_Address', $AccountAddress);
-        $this->db->update('tbl_loginhistory', $data);
-        $result = $this->db->affected_rows();
-        return ($result > 0) ? TRUE : FALSE;
-    }
-
 
 }

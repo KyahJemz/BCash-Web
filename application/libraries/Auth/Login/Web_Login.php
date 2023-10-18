@@ -48,7 +48,7 @@ class Web_Login {
                                         'Message' => ''. $validationErrors
                                 ];
                         } else {
-                                $validAccount = $this->CI->WebAccounts_Model->read_by_username($validatedUsername);
+                                $validAccount = $this->CI->WebAccounts_Model->read_by_username(array('Username'=>$validatedUsername));
                         
                                 if ($validAccount) {
                                         // log_message('debug', $validAccount->Password);
@@ -56,7 +56,7 @@ class Web_Login {
 
                                                 $AccountAddress = $validAccount->WebAccounts_Address;
 
-                                                if ($this->CI->Authentications_Model->read_by_address($AccountAddress)) {
+                                                if ($this->CI->Authentications_Model->read_by_address(array('Account_Address'=>$AccountAddress))) {
                                                         $this->CI->Authentications_Model->delete($AccountAddress);
                                                         $response = [
                                                                 'Success' => True,

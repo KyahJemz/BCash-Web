@@ -277,3 +277,62 @@
     /* Styles for wide screens */
   
   }
+
+
+#panel-addaccount {
+    padding: 20px;
+    position: relative;
+}
+
+#panel-addaccount .panel-add-account {
+    padding: 20px;
+    border: 1px solid gainsboro;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 300px;
+    margin: 10px;
+    box-shadow: 0px 0px 10px 1px gainsboro;
+}
+
+#panel-addaccount .panel-add-account > div {
+    width: 100%;
+}
+
+#panel-addaccount .panel-add-account input {
+    width: 100%
+}
+
+#panel-addaccount .panel-add-account .dropdown-content,
+#panel-addaccount .panel-add-account .dropdownButton{
+    width: 100%;
+}
+
+#panel-addaccount .panel-add-account .AddAccount-title{
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--TextColor-Red);
+    text-align: center;
+    
+}
+
+#panel-addaccount .panel-add-account .Btn {
+    background-color: var(--Button-Background-Gold);
+    margin: 2px 2px;
+    color: white;
+    cursor: pointer;
+}
+
+#panel-addaccount .panel-add-account .Btn:hover {
+    box-shadow: 0px 0px 2px 1px var(--Button-Background-Gold);  
+}
+
+#panel-addaccount .panel-add-account .Btn:active {
+    background-color: var(--Button-Background-Active-Gold);
+}
+
+#panel-addaccount .panel-add-account .btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+

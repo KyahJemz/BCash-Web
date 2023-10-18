@@ -136,7 +136,6 @@ b {
 */
 
 .dropdown {
-    height: 200%;
     position: relative;
     display: flex;
 }
@@ -171,7 +170,7 @@ b {
     background-color: #f1f1f1;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    height: fit-content;   
+    height: fit-content;
 }
 
 .dropdown .dropdown-content-top {

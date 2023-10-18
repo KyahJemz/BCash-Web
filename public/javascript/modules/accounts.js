@@ -1530,7 +1530,7 @@ export default class Accounts {
               const PINCode = parent.querySelector('#AccountDetails-PINCode');
               const AccountPINCode = parent.querySelector('#AccountDetails-AccountPINCode').value;  
               const AccountPassword = parent.querySelector('#AccountDetails-AccountPassword').value;
-              const UserAccountAddress = parent.querySelector('#AccountDetails-UserAccountAddress');
+              const UserAccountAddress = parent.querySelector('#AccountDetails-UserAccountAddress').value;
               const IsAccountActive = parent.querySelector('#AccountDetails-IsAccountActive').checked; 
             
               const data = {

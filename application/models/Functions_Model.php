@@ -74,17 +74,23 @@ class Functions_Model extends CI_Model {
 
         
         public function getAccountsByAddress($AccountAddress) {
-                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address($AccountAddress);
+                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_webaccounts) {
                         return $tbl_webaccounts;
                 }
                 
-                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address($AccountAddress);
+                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_usersaccount){
                         return $tbl_usersaccount;
                 }
 
-                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address($AccountAddress);
+                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_guardiansaccount){
                         return $tbl_guardiansaccount;
                 }
@@ -94,17 +100,23 @@ class Functions_Model extends CI_Model {
         }
 
         public function getActorType($AccountAddress) {
-                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address($AccountAddress);
+                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_webaccounts) {
                         return 'Web';
                 }
                 
-                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address($AccountAddress);
+                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_usersaccount){
                         return 'Mobile';
                 }
 
-                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address($AccountAddress);
+                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_guardiansaccount){
                         return 'Mobile';
                 }
@@ -214,7 +226,9 @@ class Functions_Model extends CI_Model {
         }
 
         public function validateClient($AccountAddress, $IpAddress, $Device, $Location) {
-                $tbl_authentications = $this->Authentications_Model->read_by_address($AccountAddress);
+                $tbl_authentications = $this->Authentications_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if (
                         $tbl_authentications && 
                         $IpAddress === $tbl_authentications->IpAddress &&
@@ -243,7 +257,9 @@ class Functions_Model extends CI_Model {
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$   
 
         public function generateNewAuth($AccountAddress,$IpAddress,$Device,$Location){
-                $existingAccount = $this->Authentications_Model->read_by_address($AccountAddress);
+                $existingAccount = $this->Authentications_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
 
                 $type = empty($existingAccount) ? "new" : "old"; // IF HAS RECORDS OR NONE
 
@@ -286,7 +302,9 @@ class Functions_Model extends CI_Model {
         }
 
         public function validateOTP($AccountAddress, $OTP) {
-                $tbl_authentications = $this->Authentications_Model->read_by_address($AccountAddress);
+                $tbl_authentications = $this->Authentications_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($OTP === $tbl_authentications->OtpCode) {
                         $cretionTime = strtotime($tbl_authentications->OtpCreationTime); // First timestamp
                         $expirationTime = strtotime($tbl_authentications->OtpExpirationTime); // Second timestamp
@@ -302,7 +320,7 @@ class Functions_Model extends CI_Model {
 
         public function validatePIN($AccountAddress, $PIN) {
                 $Account = $this->getAccountsByAddress($AccountAddress);
-                if ($PIN === $Account->PinCode) {
+                if (password_verify($PIN, $Account->PinCode)) {
                         return TRUE;
                 } else {
                         return FALSE;
@@ -319,21 +337,37 @@ class Functions_Model extends CI_Model {
         }
 
         public function updatePIN($AccountAddress, $PIN) {
-                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address($AccountAddress);
+                $hashed_pincode = password_hash($PIN, PASSWORD_BCRYPT);
+                $tbl_webaccounts = $this->WebAccounts_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_webaccounts) {
-                        $this->WebAccounts_Model->update_pin($AccountAddress, $PIN);
+                        $this->WebAccounts_Model->update_Pin(array(
+                                'Account_Address' => $AccountAddress,
+                                'PinCode' => $hashed_pincode
+                        ));
                         return TRUE;
                 }
                 
-                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address($AccountAddress);
+                $tbl_usersaccount = $this->UsersAccount_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_usersaccount){
-                        $this->UsersAccount_Model->update_pin($AccountAddress, $PIN);
+                        $this->UsersAccount_Model->update_Pin(array(
+                                'Account_Address' => $AccountAddress,
+                                'PinCode' => $hashed_pincode
+                        ));
                         return TRUE;
                 }
 
-                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address($AccountAddress);
+                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
                 if ($tbl_guardiansaccount){
-                        $this->GuardianAccount_Model->update_pin($AccountAddress, $PIN);
+                        $this->GuardianAccount_Model->update_Pin(array(
+                                'Account_Address' => $AccountAddress,
+                                'PinCode' => $hashed_pincode
+                        ));
                         return TRUE;
                 }
 

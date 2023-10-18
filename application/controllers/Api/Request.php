@@ -8,6 +8,7 @@ class Request extends CI_Controller {
         $this->load->model([
             'ActorCategory_Model', 
             'Functions_Model',
+
         ]);
         $this->load->library('Actors/Accounting_Actor', NULL, 'Accounting_Actor');
         $this->load->library('Actors/Administrator_Actor', NULL, 'Administrator_Actor');
@@ -30,6 +31,8 @@ class Request extends CI_Controller {
     private $ActorCategory;
 
     public function Process() {
+
+   
 
         $this->AuthorizationToken = $this->Functions_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
         $this->AccountAddress = $this->Functions_Model->sanitize($this->input->get_request_header('AccountAddress', TRUE));

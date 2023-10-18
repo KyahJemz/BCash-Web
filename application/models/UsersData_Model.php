@@ -6,13 +6,19 @@ class UsersData_Model extends CI_Model {
         $this->load->database();
     }
 
-    public function create($UsersAccount_Address) {
-        // $data = [
-        //     'UsersAccount_Address' => $UsersAccount_Address,
-        // ];
-        // $this->db->insert('tbl_usersdata', $data);
-        // $result = $this->db->insert_id();
-        // return ($result) ? TRUE : FALSE;
+    public function create($params) {
+        $data = [
+            'UsersAccount_Address' => $params['Account_Address'],
+            'SchoolPersonalId'=> $params['SchoolPersonalId'],
+            'CanDoTransfers'=> $params['CanDoTransfers'],
+            'CanDoTransactions'=> $params['CanDoTransactions'],
+            'CanUseCard'=> $params['CanUseCard'],
+            'CanModifySettings'=> $params['CanModifySettings'],
+            'IsTransactionAutoConfirm'=> $params['IsTransactionAutoConfirm'],
+        ];
+        $this->db->insert('tbl_usersdata', $data);
+        $result = $this->db->insert_id();
+        return ($result) ? TRUE : FALSE;
     }
 
     public function update_by_admin($params) {
@@ -81,6 +87,20 @@ class UsersData_Model extends CI_Model {
             return $result;
         } else {
             return null; 
+        }
+    }
+
+    public function read_by_SchoolPersonalId($params){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_usersdata')
+            ->where('SchoolPersonalId ', $params['SchoolPersonalId'])
+            ->get()
+            ->row();
+        if ($result) {
+            return $result;
+        } else {
+            return false; 
         }
     }
 
@@ -171,6 +191,13 @@ class UsersData_Model extends CI_Model {
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 
+    public function update_GuardianAccountAddress($params) {
+        $data = [
+            'GuardianAccount_Address' => $params['GuardianAccountAddress']
+        ];
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_usersdata', $data);
 
-
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
 }

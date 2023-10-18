@@ -19,6 +19,7 @@ class Account_Actions {
                      'Merchants_Model',
                      'WebAccounts_Model',
                      'ActivityLogs_Model',
+                     'Card_Model',
 
               ]);
        }
@@ -907,13 +908,12 @@ class Account_Actions {
               $CanUseCard = $this->CI->Functions_Model->sanitize($requestPostBody['CanUseCard'] ?? null);
               $IsTransactionAutoConfirm = $this->CI->Functions_Model->sanitize($requestPostBody['IsTransactionAutoConfirm'] ?? null);
 
-
               $AccountToModify = $this->CI->Functions_Model->getAccountsByAddress($AccountAddress);
               if (!$AccountToModify) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid account to modify.'];
               }
 
-              if ($PINCode !== $Account->PinCode){
+              if (!password_verify($PINCode, $Account->PinCode)){
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Incorrect PIN Code'];
               }
 
@@ -979,10 +979,11 @@ class Account_Actions {
                             $changes = $changes . 'Email, ';
                      }
        
-                     if (property_exists($AccountToModify, 'PinCode') && !empty($AccountPINCode) && $AccountToModify->PinCode !== $AccountPINCode) {
+                     if (property_exists($AccountToModify, 'PinCode') && !empty($AccountPINCode) && !password_verify($AccountPINCode, $AccountToModify->PinCode)) {
+                            $hashed_pincode = password_hash($AccountPINCode, PASSWORD_BCRYPT);
                             $Account_Model->update_PinCode(array(
                                    'Account_Address' => $AccountAddress,
-                                   'PinCode' => $PinCode,
+                                   'PinCode' => $hashed_pincode,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
@@ -1005,10 +1006,13 @@ class Account_Actions {
                      }
 
                      if (property_exists($AccountToModify, 'IsAccountActive') && $AccountToModify->IsAccountActive !== $IsAccountActive) {
-                            $Account_Model->update_IsAccountActive(array(
+                            if($Account_Model->update_IsAccountActive(array(
                                    'Account_Address' => $AccountAddress,
                                    'IsAccountActive' => $IsAccountActive,
-                            ));
+                            ))) {
+                                   
+                            }
+                            
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
                                    'Task' => 'Updated ['.$AccountAddress.'] IsAccountActive settings to '.$IsAccountActive.'.',
@@ -1088,7 +1092,7 @@ class Account_Actions {
                             $changes = $changes . 'IsTransactionAutoConfirm, ';
                      }
 
-                     if (!empty($AccountDataToModify) && $AccountDataToModify->GuardianAccount_Address !== $GuardianAccountAddress) {
+                     if (!empty($AccountDataToModify) && !empty($GuardianAccountAddress) && $AccountDataToModify->GuardianAccount_Address !== $GuardianAccountAddress) {
                             $Data_Model->update_GuardianAccountAddress(array(
                                    'Account_Address' => $AccountAddress,
                                    'GuardianAccountAddress' => $GuardianAccountAddress,
@@ -1099,7 +1103,7 @@ class Account_Actions {
                             ));
                             $changes = $changes . 'GuardianAccountAddress, ';
                      }
-
+                     log_message('debug',  $UserAccountAddress);
                      if ($AccountToModify->ActorCategory_Id === '7' && $AccountToModify->UsersAccount_Address && !empty($UserAccountAddress) &&  $AccountToModify->UsersAccount_Address !== $UserAccountAddress) {
                             $Account_Model->update_UserAccountAddress(array(
                                    'Account_Address' => $AccountAddress,
@@ -1109,6 +1113,7 @@ class Account_Actions {
                                    'Account_Address' => $Account->WebAccounts_Address,
                                    'Task' => 'Updated ['.$AccountAddress.'] UserAccountAddress settings to '.$UserAccountAddress.'.',
                             ));
+                            log_message('debug',  '=== 1');
                             $changes = $changes . 'UserAccountAddress, ';
                      }
 
@@ -1126,7 +1131,259 @@ class Account_Actions {
 
 
 
+       public function Add_Account_By_ADM ($Account, $requestPostBody){
 
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('Firstname', 'Firstname', 'trim|required|max_length[50]');
+              $this->CI->form_validation->set_rules('Lastname', 'Lastname', 'trim|required|max_length[50]');
+              $this->CI->form_validation->set_rules('Email', 'Email', 'trim|required|max_length[50]');
+              $this->CI->form_validation->set_rules('AccountCategory', 'AccountCategory', 'trim|required|max_length[255]');
+
+              $this->CI->form_validation->set_rules('MerchantCategory', 'MerchantCategory', 'trim|max_length[255]');
+              $this->CI->form_validation->set_rules('Username', 'Username', 'trim|max_length[50]');
+              $this->CI->form_validation->set_rules('Password', 'Password', 'trim|min_length[8]|max_length[50]');
+              $this->CI->form_validation->set_rules('CardAddress', 'CardAddress', 'trim|max_length[50]');
+              $this->CI->form_validation->set_rules('SchoolPersonalId', 'SchoolPersonalId', 'trim|max_length[15]');
+              $this->CI->form_validation->set_rules('MerchantCategoryAdd', 'MerchantCategoryAdd', 'trim|max_length[255]');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $Campus_Id = $Account->Campus_Id;
+
+              $Firstname = $this->CI->Functions_Model->sanitize($requestPostBody['Firstname']);
+              $Lastname = $this->CI->Functions_Model->sanitize($requestPostBody['Lastname']);
+              $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email']);
+              $AccountCategory = $this->CI->Functions_Model->sanitize($requestPostBody['AccountCategory']);
+
+              $MerchantCategory = $this->CI->Functions_Model->sanitize($requestPostBody['MerchantCategory'] ?? null);
+              $Username = $this->CI->Functions_Model->sanitize($requestPostBody['Username'] ?? null);
+              $Password = $this->CI->Functions_Model->sanitize($requestPostBody['Password'] ?? null);
+              $CardAddress = $this->CI->Functions_Model->sanitize($requestPostBody['CardAddress'] ?? null);
+              $SchoolPersonalId = $this->CI->Functions_Model->sanitize($requestPostBody['SchoolPersonalId'] ?? null);
+              $MerchantCategoryAdd = $this->CI->Functions_Model->sanitize($requestPostBody['MerchantCategoryAdd'] ?? null);
+
+              if (!empty($CardAddress)) {
+                     if (!empty($this->CI->Card_Model->read_by_CardAddress(array('Card_Address'=>$CardAddress))->UsersAccount_Address)){
+                            return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Card Address has a user connected already.'];
+                     }
+              }
+
+              if (!empty($SchoolPersonalId)) {
+                     if ($this->CI->UsersData_Model->read_by_SchoolPersonalId(array('SchoolPersonalId'=>$SchoolPersonalId))){
+                            return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'School Personal Id already exist.'];
+                     }
+              }
+              
+              $ActorCategory_Id = $this->CI->ActorCategory_Model->read_by_Name(array('Name'=>$AccountCategory));
+              if (empty($ActorCategory_Id)) {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Cannot find actor category.'];
+              }
+
+              if (!empty($MerchantCategory)) {
+                     $MerchantCategory = $this->CI->Merchants_Model->read_merchantcategory_by_ShopeName(array('ShopName'=>$MerchantCategory));
+                     if (!$MerchantCategory) {
+                            return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Cannot find merchant category.'];
+                     }
+              }
+
+              $hashed_password;
+              if (!empty($Password)){
+                     $hashed_password = password_hash($Password, PASSWORD_BCRYPT);
+              }
+
+              if (!empty($Username)){
+                     $UsernameExist = $this->CI->WebAccounts_Model->read_by_Username(array('Username'=>$Username));
+                     if ($UsernameExist) {
+                            return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Username already exist!'];
+                     }
+              }
+
+              $this->CI->db->trans_start(); 
+
+                     switch ($AccountCategory) {
+
+                            case 'Administrator': 
+                                   if (empty($Username) || empty($hashed_password)) {
+                                          trigger_error('Invalid Username or Password.', E_USER_ERROR);
+                                   };
+                                   $Account_Address = $this->CI->Functions_Model->create_unique_address('ADM');
+                                   $this->CI->WebAccounts_Model->create(array(
+                                          'Account_Address' => $Account_Address,
+                                          'ActorCategory_Id' => $ActorCategory_Id,
+                                          'Email' => $Email,
+                                          'Username' => $Username,
+                                          'Firstname' => $Firstname,
+                                          'Lastname' => $Lastname,
+                                          'Password' => $hashed_password,
+                                          'Campus_Id' => $Campus_Id,
+                                   ));
+                                   break;
+
+                            case 'Accounting': 
+                                   $Account_Address = $this->CI->Functions_Model->create_unique_address('ACT');
+                                   if (empty($Username) || empty($hashed_password)) {
+                                          trigger_error('Invalid Username or Password.', E_USER_ERROR);
+                                   };
+                                   $this->CI->WebAccounts_Model->create(array(
+                                          'Account_Address' => $Account_Address,
+                                          'ActorCategory_Id' => $ActorCategory_Id,
+                                          'Email' => $Email,
+                                          'Username' => $Username,
+                                          'Firstname' => $Firstname,
+                                          'Lastname' => $Lastname,
+                                          'Password' => $hashed_password,
+                                          'Campus_Id' => $Campus_Id,
+                                   ));
+                                   break;
+
+                            case 'Merchant Admin': 
+                                   if (empty($Username) || empty($hashed_password) || empty($MerchantCategoryAdd)) {
+                                          trigger_error('Invalid Username or Password or MerchantCategory.', E_USER_ERROR);
+                                   }
+                                   $Account_Address = $this->CI->Functions_Model->create_unique_address('MTA');
+                                   $this->CI->WebAccounts_Model->create(array(
+                                          'Account_Address' => $Account_Address,
+                                          'ActorCategory_Id' => $ActorCategory_Id,
+                                          'Email' => $Email,
+                                          'Username' => $Username,
+                                          'Firstname' => $Firstname,
+                                          'Lastname' => $Lastname,
+                                          'Password'  => $hashed_password,
+                                          'Campus_Id' => $Campus_Id,
+                                   ));
+                                   $this->CI->Merchants_Model->create_merchantcategory(array(
+                                          'Campus_Id' => $Campus_Id,
+                                          'ShopName' => $MerchantCategoryAdd,
+                                   ));
+                                   $MerchantCategory = $this->CI->Merchants_Model->read_merchantcategory_by_ShopeName(array('ShopName'=>$MerchantCategoryAdd));
+                                   if (!$MerchantCategory) {
+                                          trigger_error('Cannot create merchant category.', E_USER_ERROR); 
+                                   };
+                                   $this->CI->Merchants_Model->create_merchant(array(
+                                          'Account_Address' => $Account_Address,
+                                          'MerchantsCategory_Id' => $MerchantCategory,
+                                   ));
+                                   break;
+
+                            case 'Merchant Staff': 
+                                   if (empty($Username) || empty($hashed_password)) {
+                                          trigger_error('Invalid Username or Password', E_USER_ERROR);
+                                   }
+                                   $Account_Address = $this->CI->Functions_Model->create_unique_address('MTS');
+                                   $this->CI->WebAccounts_Model->create(array(
+                                          'Account_Address' => $Account_Address,
+                                          'ActorCategory_Id' => $ActorCategory_Id,
+                                          'Email' => $Email,
+                                          'Username' => $Username,
+                                          'Firstname' => $Firstname,
+                                          'Lastname' => $Lastname,
+                                          'Password' => $hashed_password,
+                                          'Campus_Id' => $Campus_Id,
+                                   ));
+                                   $this->CI->Merchants_Model->create_merchant(array(
+                                          'Account_Address' => $Account_Address,
+                                          'MerchantsCategory_Id' => $MerchantCategory,
+                                   ));
+                                   break;
+
+                            case 'User': 
+                                   if (empty($SchoolPersonalId) || empty($CardAddress)) {
+                                          trigger_error('Invalid SchoolPersonalId or CardAddress', E_USER_ERROR);
+                                   }
+                                   $Account_Address = $this->CI->Functions_Model->create_unique_address('USR');
+                                   $this->CI->UsersAccount_Model->create(array(
+                                          'Account_Address' => $Account_Address,
+                                          'ActorCategory_Id' => $ActorCategory_Id,
+                                          'Email' => $Email,
+                                          'Firstname' => $Firstname,
+                                          'Lastname' => $Lastname,
+                                          'Campus_Id ' => $Campus_Id,
+                                          'Password' => null,
+                                   ));
+                                   $this->CI->UsersData_Model->create_merchant(array(
+                                          'Account_Address' => $Account_Address,
+                                          'SchoolPersonalId'=> $SchoolPersonalId,
+                                          'CanDoTransfers'=> '1',
+                                          'CanDoTransactions'=> '1',
+                                          'CanUseCard'=> '1',
+                                          'CanModifySettings'=> '1',
+                                          'IsTransactionAutoConfirm'=> '0',
+                                   ));
+                                   $this->CI->Card_Model->update_account(array(
+                                          'Account_Address' => $Account_Address,
+                                          'Card_Address'=> $CardAddress,
+                                   ));
+                                   break;
+                            case 'Guest': 
+                                   if (empty($SchoolPersonalId) || empty($CardAddress) || empty($hashed_password)) {
+                                          trigger_error('Invalid SchoolPersonalId or CardAddress or Password', E_USER_ERROR);
+                                   }
+                                   $Account_Address = $this->CI->Functions_Model->create_unique_address('GST');
+                                   $this->CI->UsersAccount_Model->create(array(
+                                          'Account_Address' => $Account_Address,
+                                          'ActorCategory_Id' => $ActorCategory_Id,
+                                          'Email ' => $Email,
+                                          'Firstname ' => $Firstname,
+                                          'Lastname ' => $Lastname,
+                                          'Campus_Id ' => $Campus_Id,
+                                          'Password' => $hashed_password,
+                                   ));
+                                   $this->CI->UsersData_Model->create_merchant(array(
+                                          'Account_Address' => $Account_Address,
+                                          'SchoolPersonalId'=> $SchoolPersonalId,
+                                          'CanDoTransfers'=> '1',
+                                          'CanDoTransactions'=> '1',
+                                          'CanUseCard'=> '1',
+                                          'CanModifySettings'=> '1',
+                                          'IsTransactionAutoConfirm'=> '1',
+                                   ));
+                                   $this->CI->Card_Model->update_account(array(
+                                          'Account_Address' => $Account_Address,
+                                          'Card_Address'=> $CardAddress,
+                                   ));
+                                   break;
+                            case 'Guardian': 
+                                   $Account_Address = $this->CI->Functions_Model->create_unique_address('GDN');
+                                   $this->CI->GuardianAccount_Model->create(array(
+                                          'Account_Address' => $Account_Address,
+                                          'ActorCategory_Id' => $ActorCategory_Id,
+                                          'Email' => $Email,
+                                          'Firstname' => $Firstname,
+                                          'Lastname' => $Lastname,
+                                          'Campus_Id' => $Campus_Id,
+                                          'UsersAccount_Address' => null,
+                                   ));
+                                   break;
+
+                            default:
+                                   return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid Actor Category.'];
+                                   break;
+                     }
+
+              $this->CI->db->trans_complete(); 
+
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+              }
+
+              $this->CI->ActivityLogs_Model->create(array(
+                     'Account_Address' => $Account->WebAccounts_Address,
+                     'Task' => 'Added a new '.$AccountCategory.' Account.',
+              ));
+
+              return ['Success' => TRUE,'Target' => null,'Parameters' => null,'Response' => 'Successfully added a new '.$AccountCategory.' Account.'];
+
+       }
+
+
+
+       
 
 
 
@@ -1202,7 +1459,7 @@ class Account_Actions {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'New password does not match!'];
               }
 
-              $this->CI->WebAccounts_Model->update_password($AccountAddress, $NewPassword2);
+              $this->CI->WebAccounts_Model->update_pPassword($AccountAddress, $NewPassword2);
 
               $this->CI->ActivityLogs_Model->create(array(
                      'Account_Address' => $Account->WebAccounts_Address,

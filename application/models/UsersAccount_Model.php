@@ -6,14 +6,15 @@ class UsersAccount_Model extends CI_Model {
         $this->load->database();
     }
 
-    public function create($UsersAccount_Address, $Email, $EmailId, $Firstname, $Lastname) {
+    public function create($params) {
         $data = [
-            'UsersAccount_Address' => $PIN,
-            'ActorCategory_Id' => '5',
-            'Email ' => $PIN,
-            'EmailId ' => $PIN,
-            'Firstname ' => $PIN,
-            'Lastname ' => $PIN,
+            'UsersAccount_Address' => $params['Account_Address'],
+            'ActorCategory_Id' => $params['ActorCategory_Id'],
+            'Email ' => $params['Email'],
+            'Firstname ' => $params['Firstname'],
+            'Lastname ' => $params['Lastname'],
+            'Campus_Id ' => $params['Campus_Id'],
+            'Password ' => $params['Password'],
         ];
         $this->db->insert('tbl_usersaccount', $data);
         $result = $this->db->insert_id();
@@ -121,31 +122,17 @@ class UsersAccount_Model extends CI_Model {
         return ($result) ? $result : [] ;
     }
 
-    public function read_by_emailid($EmailId){
+    public function read_by_Email($Email){
         $result = $this->db
             ->select('*')
             ->from('tbl_usersaccount')
-            ->where('EmailId ', $EmailId)
+            ->where('Email ', $Email)
             ->get()
             ->row();
         if ($result) {
             return $result;
         } else {
             return null; 
-        }
-    }
-
-    public function update_pin($AccountAddress,$PIN) {
-        $data = [
-            'PinCode' => $PIN
-        ];
-        $this->db->where('UsersAccount_Address', $AccountAddress);
-        $this->db->update('tbl_usersaccount', $data);
-
-        if ($this->db->affected_rows() > 0) {
-             return TRUE;
-        } else {
-             return FALSE;
         }
     }
 
@@ -190,5 +177,28 @@ class UsersAccount_Model extends CI_Model {
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
+
+    public function update_Password($params) {
+        $data = [
+            'Password' => $params['Password']
+        ];
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_usersaccount', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_PinCode($params) {
+        $data = [
+            'PinCode' => $params['PinCode']
+        ];
+        $this->db->where('UsersAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_usersaccount', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+
+    
 
 }

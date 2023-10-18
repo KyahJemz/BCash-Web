@@ -6,11 +6,26 @@ class GuardianAccount_Model extends CI_Model {
         $this->load->database();
     }
 
-    public function read_by_address($AccountAdress){
+    public function create($params){
+        $data = [
+            'GuardianAccount_Address ' => $params['Account_Address'],
+            'UsersAccount_Address '=> $params['UsersAccount_Address'],
+            'ActorCategory_Id '=> $params['ActorCategory_Id'],
+            'Email'=> $params['Email'],
+            'Firstname'=> $params['Firstname'],
+            'Lastname'=> $params['Lastname'],
+            'Campus_Id '=> $params['Campus_Id'],
+        ];
+        $this->db->insert('tbl_guardianaccount', $data);
+        $result = $this->db->insert_id();
+        return ($result) ? TRUE : FALSE;
+    }
+
+    public function read_by_address($params){
         $result = $this->db
             ->select('*')
             ->from('tbl_guardianaccount')
-            ->where('GuardianAccount_Address ', $AccountAdress)
+            ->where('GuardianAccount_Address ', $params['Account_Address'])
             ->get()
             ->row();
         if ($result) {
@@ -31,20 +46,6 @@ class GuardianAccount_Model extends CI_Model {
             return $result;
         } else {
             return null; 
-        }
-    }
-
-    public function update_pin($AccountAddress,$PIN) {
-        $data = [
-            'PinCode ' => $PIN
-        ];
-        $this->db->where('GuardianAccount_Address', $AccountAddress);
-        $this->db->update('tbl_guardianaccount', $data);
-
-        if ($this->db->affected_rows() > 0) {
-             return TRUE;
-        } else {
-             return FALSE;
         }
     }
 
@@ -77,16 +78,40 @@ class GuardianAccount_Model extends CI_Model {
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
-
+    
     public function update_IsAccountActive($params) {
         $data = [
             'IsAccountActive' => (int)$params['IsAccountActive']
         ];
         $this->db->where('GuardianAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_guardianaccount', $data);
+        log_message('debug',  '=== ETESTETST');
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_UserAccountAddress($params) {
+        $data = [
+            'UsersAccount_Address' => $params['UserAccountAddress']
+        ];
+        $this->db->where('GuardianAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_guardianaccount', $data);
 
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
+
+    public function update_PinCode($params) {
+        $data = [
+            'PinCode' => $params['PinCode']
+        ];
+        $this->db->where('GuardianAccount_Address', $params['Account_Address']);
+        $this->db->update('tbl_guardianaccount', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    
+
+    
 
 
     public function read_gdn_with_filters($params) {

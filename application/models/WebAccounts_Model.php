@@ -6,11 +6,41 @@ class WebAccounts_Model extends CI_Model {
         $this->load->database();
     }
 
-    public function read_by_address($AccountAdress){
+    public function create($params) {
+        $data = [
+            'WebAccounts_Address' => $params['Account_Address'],
+            'ActorCategory_Id' => $params['ActorCategory_Id'],
+            'Email' => $params['Email'],
+            'Username' => $params['Username'],
+            'Firstname' => $params['Firstname'],
+            'Lastname' => $params['Lastname'],
+            'Password' => $params['Password'],
+            'Campus_Id' => $params['Campus_Id'],
+        ];
+        $this->db->insert('tbl_webaccounts', $data);
+        $result = $this->db->insert_id();
+        return ($result) ? TRUE : FALSE;
+    }
+
+    public function read_by_Username($params) {
         $result = $this->db
             ->select('*')
             ->from('tbl_webaccounts')
-            ->where('WebAccounts_Address ', $AccountAdress)
+            ->where('Username', $params['Username'])
+            ->get()
+            ->row();    
+        if ($result) {
+            return true;
+        } else {
+            return false; 
+        }
+    }
+
+    public function read_by_address($params){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_webaccounts')
+            ->where('WebAccounts_Address ',  $params['Account_Address'])
             ->get()
             ->row();    
         if ($result) {
@@ -18,82 +48,6 @@ class WebAccounts_Model extends CI_Model {
         } else {
             return null; 
         }
-    }
-
-    public function read_by_username($Username){
-        $result = $this->db
-            ->select('*')
-            ->from('tbl_webaccounts')
-            ->where('Username ', $Username)
-            ->get()
-            ->row();    
-        if ($result) {
-            return $result;
-        } else {
-            return null; 
-        }
-    }
-
-    public function update_pin($AccountAddress,$PIN) {
-        $data = [
-            'PinCode ' => $PIN
-        ];
-        $this->db->where('WebAccounts_Address', $AccountAddress);
-        $this->db->update('tbl_webaccounts', $data);
-
-        if ($this->db->affected_rows() > 0) {
-             return TRUE;
-        } else {
-             return FALSE;
-        }
-    }
-
-    public function update_password($AccountAddress, $Password) {
-        $hashed_password = password_hash($Password, PASSWORD_BCRYPT);
-        $data = [
-            'Password ' => $hashed_password
-        ];
-        $this->db->where('WebAccounts_Address', $AccountAddress);
-        $this->db->update('tbl_webaccounts', $data);
-
-        if ($this->db->affected_rows() > 0) {
-             return TRUE;
-        } else {
-             return FALSE;
-        }
-    }
-
-
-
-
-    public function update_email($params) {
-        $data = [
-            'Email ' => $params['Email']
-        ];
-        $this->db->where('WebAccounts_Address', $params['Account_Address']);
-        $this->db->update('tbl_webaccounts', $data);
-
-        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
-    }
-
-    public function update_firstname($params) {
-        $data = [
-            'Firstname ' => $params['Firstname']
-        ];
-        $this->db->where('WebAccounts_Address', $params['Account_Address']);
-        $this->db->update('tbl_webaccounts', $data);
-
-        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
-    }
-
-    public function update_lastname($params) {
-        $data = [
-            'Lastname ' => $params['Lastname']
-        ];
-        $this->db->where('WebAccounts_Address', $params['Account_Address']);
-        $this->db->update('tbl_webaccounts', $data);
-
-        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 
     public function update_IsAccountActive($params) {
@@ -106,17 +60,57 @@ class WebAccounts_Model extends CI_Model {
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 
+    public function update_Password($params) {
+        $data = [
+            'Password' => (int)$params['Password']
+        ];
+        $this->db->where('WebAccounts_Address', $params['Account_Address']);
+        $this->db->update('tbl_webaccounts', $data);
 
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
 
-    // public function update_pin($params) {
-    //     $data = [
-    //         'PinCode ' => $params['PinCode']
-    //     ];
-    //     $this->db->where('WebAccounts_Address', $params['AccountAddress']);
-    //     $this->db->update('tbl_webaccounts', $data);
+    public function update_PinCode($params) {
+        $data = [
+            'PinCode' => $params['PinCode']
+        ];
+        $this->db->where('WebAccounts_Address', $params['Account_Address']);
+        $this->db->update('tbl_webaccounts', $data);
 
-    //     return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
-    // }
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_Email($params) {
+        $data = [
+            'Email' => $params['Email']
+        ];
+        $this->db->where('WebAccounts_Address', $params['Account_Address']);
+        $this->db->update('tbl_webaccounts', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_Lastname($params) {
+        $data = [
+            'Lastname' => $params['Lastname']
+        ];
+        $this->db->where('WebAccounts_Address', $params['Account_Address']);
+        $this->db->update('tbl_webaccounts', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    public function update_Firstname($params) {
+        $data = [
+            'Firstname' => $params['Firstname']
+        ];
+        $this->db->where('WebAccounts_Address', $params['Account_Address']);
+        $this->db->update('tbl_webaccounts', $data);
+
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+
+    
 
     public function read_adm_act_with_filters($params) {
         $this->db
@@ -246,24 +240,6 @@ class WebAccounts_Model extends CI_Model {
 
 
 
-
-
-
-    // public function uploadPass() {
-    //     $hashed_password = password_hash("12345", PASSWORD_BCRYPT);
-    
-    //     $addresses = ['ADM000000000000', 'ACT000000000000', 'MTA000000000000', 'MTS000000000000'];
-    
-    //     $data = [
-    //         'Password' => $hashed_password
-    //     ];
-    
-    //     // Use or_where_in to match multiple values for 'WebAccounts_Address'
-    //     $this->db->where_in('WebAccounts_Address', $addresses);
-    //     $this->db->update('tbl_webaccounts', $data);
-    
-    //     return $this->db->affected_rows() > 0;
-    // }
 
 
 }

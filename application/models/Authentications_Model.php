@@ -9,11 +9,11 @@ class Authentications_Model extends CI_Model {
         ]);
     }
 
-    public function read_by_address($AccountAddress){
+    public function read_by_address($params){
         $result = $this->db
             ->select('*')
             ->from('tbl_authentications')
-            ->where('Account_Address ', $AccountAddress)
+            ->where('Account_Address', $params['Account_Address'])
             ->get()
             ->row();
         if ($result) {

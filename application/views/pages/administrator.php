@@ -841,8 +841,72 @@
         ADD ACCOUNT
     -->
                 <div id="panel-addaccount" class="body-content-panel hidden">
-                    <div id="Administrator-Accounts-Query" class="panel-accounts-query panel">
-                        s
+                    <div class="panel-add-account">
+                        <div>
+                            <p class="AddAccount-title">Add an Account Form</p>
+                        </div>
+                        <div>
+                            <p>Firstname : </p>
+                            <input id="AddAccount-Firstname" type="text">
+                        </div>
+                        <div>
+                            <p>Lastname : </p>
+                            <input id="AddAccount-Lastname" type="text">
+                        </div>
+                        <div>
+                            <p>Email : </p>
+                            <input id="AddAccount-Email" type="text">
+                        </div>
+                        <div>
+                            <label>Actor Category :</label>
+                            <div class="dropdown">
+                                <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
+                                    <span class="addaccount-accountcategory-dropdown dropdown-text query inputdropdown"></span>
+                                    <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                </button>
+                                <div class="dropdown-content" id="ActorCategory_Dropdown">
+                                    <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="AddAccount-UsernameContainer" style="display: none;">
+                            <p>Username : </p>
+                            <input id="AddAccount-Username" type="text">
+                        </div>
+                        <div id="AddAccount-PasswordContainer" style="display: none;">
+                            <p>Password : </p>
+                            <input id="AddAccount-Password" type="password">
+                        </div>
+                        <div id="AddAccount-CardAddressContainer" style="display: none;">
+                            <p>Card Address : </p>
+                            <input id="AddAccount-CardAddress" type="text">
+                        </div>
+                        <div id="AddAccount-SchoolPersonalIdContainer" style="display: none;">
+                            <p>School Personal Id : </p>
+                            <input id="AddAccount-SchoolPersonalId" type="text">
+                        </div>
+                        <div id="AddAccount-MerchantCategoryAddContainer" style="display: none;">
+                            <p>New Merchant Category : </p>
+                            <input id="AddAccount-MerchantCategoryAdd" type="text">
+                        </div>
+                        <div id="AddAccount-MerchantCategoryContainer" style="display: none;">
+                            <label>Merchant Category:</label>
+                            <div class="dropdown">
+                                <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
+                                    <span class="addaccount-merchantcategory-dropdown dropdown-text query inputdropdown"></span>
+                                    <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                </button>
+                                <div class="dropdown-content" id="MerchantCategory_Dropdown">
+                                    <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="btn-container">
+                            <button id="AddAccount-SubmitBtn" class="Btn">Add Account</button>
+                        </div>
+
                     </div>
                 </div>
 

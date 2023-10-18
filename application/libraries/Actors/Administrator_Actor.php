@@ -8,6 +8,10 @@ class Administrator_Actor {
     public function __construct() {
         $this->CI =& get_instance();
         $this->CI->load->library('form_validation');
+        $this->CI->load->model([
+            'Merchants_Model',
+            'ActorCategory_Model'
+        ]);
         $this->CI->load->library('Auth/Account_Logout', NULL, 'Account_Logout');
         $this->CI->load->library('Actions/Transaction_Actions', NULL, 'Transaction_Actions');
         $this->CI->load->library('Actions/Account_Actions', NULL, 'Account_Actions');
@@ -116,6 +120,18 @@ class Administrator_Actor {
 
             case 'update account':
                 $response =  $this->CI->Account_Actions->Update_Account_By_ADM($Account, $requestPostBody);
+                break;
+
+            case 'get account category list':
+                $response =  ['Success' => True, 'Parameters'=>$this->CI->ActorCategory_Model->read_accountcategory(), 'Target'=>null, 'Response'=>null];
+                break;
+
+            case 'get merchant category list':
+                $response =  ['Success' => True, 'Parameters'=>$this->CI->Merchants_Model->read_merchantcategory(array('Campus_Id' => $Account->Campus_Id)), 'Target'=>null, 'Response'=>null];
+                break;
+
+            case 'add account':
+                $response =  $this->CI->Account_Actions->Add_Account_By_ADM($Account, $requestPostBody);
                 break;
 
 

@@ -445,6 +445,119 @@ async function GetMyData () {
 
 
 
+/// ADD ACCOUNT
+
+// panel-addaccount
+GetAccountCategoryList();
+GetMerchantCategoryList();
+
+async function GetMerchantCategoryList () {
+  await Ajax.sendRequest([], "get merchant category list")
+    .then(responseData => {
+      if (responseData.Success) {
+        responseData.Parameters.forEach(element => {
+          document.getElementById('MerchantCategory_Dropdown').innerHTML = document.getElementById('MerchantCategory_Dropdown').innerHTML + 
+          `<a class="dropdownButtonSubItem" href="javascript:void(0)">${element['ShopName']}</a`
+        });
+        helper.addElementClickListener("#MerchantCategory_Dropdown .dropdownButtonSubItem", onDropdownButtonSubItemClick);
+        helper.addElementClickListener("#MerchantCategory_Dropdown .dropdownButtonSubItem", addAccountContainerUpdate);
+
+      }
+  })
+}
+
+async function GetAccountCategoryList () {
+  await Ajax.sendRequest([], "get account category list")
+    .then(responseData => {
+      if (responseData.Success) {
+        responseData.Parameters.forEach(element => {
+          document.getElementById('ActorCategory_Dropdown').innerHTML = document.getElementById('ActorCategory_Dropdown').innerHTML + 
+          `<a class="dropdownButtonSubItem" href="javascript:void(0)">${element['Name']}</a`
+        });
+        helper.addElementClickListener("#ActorCategory_Dropdown .dropdownButtonSubItem", onDropdownButtonSubItemClick);
+        helper.addElementClickListener("#ActorCategory_Dropdown .dropdownButtonSubItem", addAccountContainerUpdate);
+    }
+  })
+}
+
+function addAccountContainerUpdate(){
+
+  const AccountCategory = document.querySelector('#panel-addaccount .addaccount-accountcategory-dropdown').innerHTML;
+
+  document.getElementById('AddAccount-MerchantCategoryAddContainer').style.display = 'none';
+  document.getElementById('AddAccount-MerchantCategoryContainer').style.display = 'none';
+  document.getElementById('AddAccount-PasswordContainer').style.display = 'none';
+  document.getElementById('AddAccount-CardAddressContainer').style.display = 'none';
+  document.getElementById('AddAccount-SchoolPersonalIdContainer').style.display = 'none';
+  document.getElementById('AddAccount-UsernameContainer').style.display = 'none';
+
+  if (AccountCategory === 'Merchant Admin') {
+    document.getElementById('AddAccount-PasswordContainer').style.display = 'block';
+    document.getElementById('AddAccount-MerchantCategoryAddContainer').style.display = 'block';
+    document.getElementById('AddAccount-UsernameContainer').style.display = 'block';
+
+
+  } else if (AccountCategory === 'Merchant Staff') {
+    document.getElementById('AddAccount-PasswordContainer').style.display = 'block';
+    document.getElementById('AddAccount-MerchantCategoryContainer').style.display = 'block';
+    document.getElementById('AddAccount-UsernameContainer').style.display = 'block';
+
+
+  } else if (AccountCategory === 'Accounting' || AccountCategory === 'Administrator') {
+    document.getElementById('AddAccount-PasswordContainer').style.display = 'block';
+    document.getElementById('AddAccount-UsernameContainer').style.display = 'block';
+
+  } else if (AccountCategory === 'User') {
+    document.getElementById('AddAccount-CardAddressContainer').style.display = 'block';
+    document.getElementById('AddAccount-SchoolPersonalIdContainer').style.display = 'block';
+
+
+  } else if (AccountCategory === 'Guest'){
+    document.getElementById('AddAccount-PasswordContainer').style.display = 'block';
+    document.getElementById('AddAccount-CardAddressContainer').style.display = 'block';
+
+   
+  } else if (AccountCategory === 'Guardian') {
+
+
+  }
+}
+
+document.getElementById('AddAccount-SubmitBtn').addEventListener('click', () => {
+  const data = {
+    Firstname : document.getElementById('AddAccount-Firstname').value,
+    Lastname : document.getElementById('AddAccount-Lastname').value,
+    Email : document.getElementById('AddAccount-Email').value,
+    AccountCategory : document.querySelector('#panel-addaccount .addaccount-accountcategory-dropdown').textContent,
+
+    MerchantCategory :document.querySelector('#panel-addaccount .addaccount-merchantcategory-dropdown').textContent,
+    Username : document.getElementById('AddAccount-Username').value,
+    Password : document.getElementById('AddAccount-Password').value,
+    CardAddress : document.getElementById('AddAccount-CardAddress').value,
+    SchoolPersonalId : document.getElementById('AddAccount-SchoolPersonalId').value,
+    MerchantCategoryAdd : document.getElementById('AddAccount-MerchantCategoryAdd').value,
+
+  };
+
+  Ajax.sendRequest(data, "add account")
+    .then(responseData => {
+      if (responseData.Success) {
+        
+      }
+  })
+})
+
+
+
+
+
+ 
+
+
+
+
+
+
 
 
 

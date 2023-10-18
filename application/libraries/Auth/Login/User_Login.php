@@ -67,12 +67,11 @@ class User_Login {
 
                                 if (!isset($body['error'])) {
 
-                                        $validatedGoogleId = $body['sub'];
                                         $validatedGoogleEmail = $body['email'];
                                         $validatedGoogleFirstName = $body['given_name'];
                                         $validatedGoogleLastName = $body['family_name'];
 
-                                        $validAccount = $this->CI->UsersAccount_Model->read_by_emailid($validatedGoogleId);
+                                        $validAccount = $this->CI->UsersAccount_Model->read_by_Email($validatedGoogleEmail);
 
                                         if (!$validAccount) {
                                                 try {
@@ -81,7 +80,15 @@ class User_Login {
 
                                                         $this->CI->db->trans_start();
 
-                                                                $this->UsersAccount_Model->create($UsersAccount_Address, $validatedGoogleEmail, $validatedGoogleId, $validatedGoogleFirstName, $validatedGoogleLastName);
+                                                                $this->UsersAccount_Model->create(array(
+                                                                        'Account_Address' => $UsersAccount_Address,
+                                                                        'ActorCategory_Id' => '5',
+                                                                        'Email ' => $validatedGoogleEmail,
+                                                                        'Firstname ' => $validatedGoogleFirstName,
+                                                                        'Lastname ' => $validatedGoogleLastName,
+                                                                        'Campus_Id ' => '1',
+                                                                        'Password' => null,
+                                                                ));
 
                                                                 $this->UsersData_Model->create($UsersAccount_Address);
 
