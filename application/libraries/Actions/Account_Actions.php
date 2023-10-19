@@ -307,7 +307,7 @@ class Account_Actions {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Password is incorrect!'];
               }
 
-              if ($CurrentPIN != $Account->PinCode) {
+              if (!password_verify($CurrentPIN, $Account->PinCode)) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'PIN Code is incorrect!'];
               }
 
@@ -315,7 +315,7 @@ class Account_Actions {
 
                      if ($Account->Firstname != $Firstname) {
                             $this->CI->WebAccounts_Model->update_firstname()(array(
-                                   'AccountAddress' => $Account->WebAccounts_Address,
+                                   'Account_Address' => $Account->WebAccounts_Address,
                                    'Firstname' => $Firstname
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -326,7 +326,7 @@ class Account_Actions {
 
                      if ($Account->Lastname != $Lastname) {
                             $this->CI->WebAccounts_Model->update_lastname(array(
-                                   'AccountAddress' => $Account->WebAccounts_Address,
+                                   'Account_Address' => $Account->WebAccounts_Address,
                                    'Lastname' => $Lastname
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -337,7 +337,7 @@ class Account_Actions {
 
                      if ($Account->Email != $Email) {
                             $this->CI->WebAccounts_Model->update_email()(array(
-                                   'AccountAddress' => $Account->WebAccounts_Address,
+                                   'Account_Address' => $Account->WebAccounts_Address,
                                    'Email' => $Email
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
@@ -474,7 +474,7 @@ class Account_Actions {
               $CanModifySettings = $this->CI->Functions_Model->sanitize($requestPostBody['CanModifySettings']);
               $IsTransactionAutoConfirm = $this->CI->Functions_Model->sanitize($requestPostBody['IsTransactionAutoConfirm']);
 
-              if ($PINCode !== $Account->PinCode) {
+              if (password_verify($PINCode, $Account->PinCode)) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid PIN Code']; 
               }
 

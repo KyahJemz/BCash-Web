@@ -10,7 +10,7 @@ class Administrator_Actor {
         $this->CI->load->library('form_validation');
         $this->CI->load->model([
             'Merchants_Model',
-            'ActorCategory_Model'
+            'ActorCategory_Model',
         ]);
         $this->CI->load->library('Auth/Account_Logout', NULL, 'Account_Logout');
         $this->CI->load->library('Actions/Transaction_Actions', NULL, 'Transaction_Actions');
@@ -20,6 +20,7 @@ class Administrator_Actor {
         $this->CI->load->library('Actions/ActivityLogs_Actions', NULL, 'ActivityLogs_Actions');
         $this->CI->load->library('Actions/Remittance_Actions', NULL, 'Remittance_Actions');
         $this->CI->load->library('Actions/Chart_Actions', NULL, 'Chart_Actions');
+        $this->CI->load->library('Actions/Cards_Actions', NULL, 'Cards_Actions');
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
@@ -68,6 +69,10 @@ class Administrator_Actor {
 
             case 'update login history':
                 $response = $this->CI->LoginHistory_Actions->Update_My_LoginHistory($Account, $requestPostBody);
+                break;
+
+            case 'update my account':
+                $response = $this->CI->Account_Actions->Update_My_Account($Account, $requestPostBody);
                 break;
 
             case 'delete one login history':
@@ -133,6 +138,21 @@ class Administrator_Actor {
             case 'add account':
                 $response =  $this->CI->Account_Actions->Add_Account_By_ADM($Account, $requestPostBody);
                 break;
+
+
+
+            case 'get cards':
+                $response =  $this->CI->Cards_Actions->View_Cards($Account, $requestPostBody);
+                break;
+
+            case 'add card':
+                $response =  $this->CI->Cards_Actions->Add_Card($Account, $requestPostBody);
+                break;
+
+            case 'update card':
+                $response =  $this->CI->Cards_Actions->Update_Card($Account,$requestPostBody);
+                break;
+
 
 
     

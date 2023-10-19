@@ -1,4 +1,5 @@
 import Transactions from './modules/transactions.js';
+import Cards from './modules/cards.js';
 import Alerts from './modules/alerts.js';
 import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
@@ -19,10 +20,17 @@ const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
 
+const cards = new Cards(
+  document.getElementById("Cards-Table-Body"),
+  document.getElementById("Cards-Query"),
+  Ajax,
+  helper,
+  modals
+  );
+
 const allTransactions = new Transactions(
-  document.getElementById("All-Transactions-Table"),
-  document.getElementById("All-Transactions-Query"),
-  document.getElementById("All-Transactions-Footer-Query"),
+  document.getElementById("Cards-Table-Body"),
+  document.getElementById("Cards-Query"),
   Ajax,
   helper,
   modals
@@ -316,11 +324,33 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
     }
 });
 
-export function setNotificationArray(data){
-  notificationArray = data;
+
+////////////////////////////
+// CARDS
+////////////////////////////
+function onCardsSearchClick(event) {
+  cards.applyCardsQuery(event, 'get cards',addCardAddress);
 }
 
+function onCardsClearClick(event) {
+  cards.clearCardsQuery(event, addCardAddress);
+}
 
+export function addCardAddress(event){
+  const CardsAddress = event.currentTarget.parentNode.querySelector('.AddCardAddressForm').value;
+  const data = {
+    Card_Address : CardsAddress,
+  }
+  Ajax.sendRequest(data, 'add card')
+    .then(responseData => {
+
+    })
+}
+
+helper.addElementClickListener('.cards-search-button', onCardsSearchClick);
+helper.addElementClickListener('.cards-clear-button', onCardsClearClick);
+
+helper.addElementClickListenerByElement(document.querySelectorAll("#Cards-Table-Body .AddCardAddressButton"),addCardAddress);
 
 ////////////////////////////
 // ACCOUNTS
@@ -384,13 +414,6 @@ function onUserAccountsClearClick(event) {
   } else {
     console.log(panel);
   }
-  
-  
-  
-  
-  x
-  
-  
   
 }
 

@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/transactions.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/accounts.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/cards.css'); ?>">
 </head>
 
 <body>
@@ -100,6 +101,11 @@
                                 </li>
                             </ul>
                         </li>
+                    <li data-menu="Cards Management" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="../public/images/icons/card.png" alt="Add Card Icon">
+                        <p>Cards Management</p>
+                    </li>
                     <li data-menu="Notifications Control Management" class="curson-pointer menuSelectionButton">
                         <div class="selected"></div>
                         <img src="../public/images/icons/addnitification.png" alt="Add Notification Icon">
@@ -909,6 +915,81 @@
 
                     </div>
                 </div>
+
+    <!--
+        CARDS MANAGEMENT 
+    -->
+                <div id="panel-cardsmanagement" class="body-content-panel hidden">
+                        <div id="Cards-Query" class="panel-cards-query panel">
+                            <div class="form-container">
+                                <div>
+                                    <label for="cards-address">Card Address</label>
+                                    <input class="cards-address query textbox inputtext" type="text" name="cards-address" autocomplete="off">
+                                </div>
+                                <div>
+                                    <label for="cards-useraaddress">Card User Address</label>
+                                    <input class="cards-useraaddress query textbox inputtext" type="text" name="cards-useraaddress" autocomplete="off">
+                                </div>
+                                <div>
+                                    <label>Status</label>
+                                    <div class="dropdown">
+                                        <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
+                                            <span class="cards-status-dropdown dropdown-text query inputdropdown">All</span>
+                                            <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Active Cards</a>
+                                            <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive Cards</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-cards-buttons" data-transactiontype="Cards">
+                            <div>
+                                <button class="btn-default curson-pointer cards-search-button" type="submit" value="Search">
+                                    <img src="../public/images/icons/search-yellow.png" alt="search">
+                                    <span>Search</span>
+                                </button>
+                                <button class="btn-default curson-pointer cards-clear-button" type="reset" value="Clear">
+                                    <img src="../public/images/icons/clear-yellow.png" alt="search">
+                                    <span>Clear</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-cards-table">
+                            <div class="table-header">
+                                <table>
+                                    <thead id="Cards-Table-Header">
+                                        <tr>
+                                            <th><div class="col1">#</div></th>
+                                            <th><div class="col2">Card Address</div></th>
+                                            <th><div class="col3">Status</div></th>
+                                            <th><div class="col4">User Address</div></th>
+
+                                            <th><div class="col5">User Firstname</div></th>
+                                            <th><div class="col6">User Lastname</div></th>
+ 
+                                            <th><div class="col7">Notes</div></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <tbody id="Cards-Table-Body" class="cards-table">
+                                        <tr>
+                                            <td colspan="7"><div class="free"><input class="AddCardAddressForm" type="text"><Button class="AddCardAddressButton">Upload Card</Button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                </div>
+
+
 
 
     <!--

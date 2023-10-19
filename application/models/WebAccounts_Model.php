@@ -30,7 +30,7 @@ class WebAccounts_Model extends CI_Model {
             ->get()
             ->row();    
         if ($result) {
-            return true;
+            return $result;
         } else {
             return false; 
         }

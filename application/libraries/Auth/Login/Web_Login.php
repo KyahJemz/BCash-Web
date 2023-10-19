@@ -39,6 +39,16 @@ class Web_Login {
                         $response = $this->CI->Verification->Process($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
 
                 } else {
+                        if (empty($validatedUsername) && empty($validatedPassword)){
+                                $response = [
+                                        'Success' => true,
+                                        'Target' => 'Login',
+                                        'Parameters' => null,
+                                        'Message' => '',
+                                ]; 
+                                return $response;
+                        }
+
                         if ($this->CI->form_validation->run() === FALSE) {
                                 $validationErrors = validation_errors();
                                 $response = [
@@ -48,7 +58,7 @@ class Web_Login {
                                         'Message' => ''. $validationErrors
                                 ];
                         } else {
-                                $validAccount = $this->CI->WebAccounts_Model->read_by_username(array('Username'=>$validatedUsername));
+                                $validAccount = $this->CI->WebAccounts_Model->read_by_Username(array('Username'=>$validatedUsername));
                         
                                 if ($validAccount) {
                                         // log_message('debug', $validAccount->Password);
