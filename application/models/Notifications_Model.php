@@ -26,15 +26,22 @@ class Notifications_Model extends CI_Model {
         return ($result) ? $result : null;
     }
 
-    public function create($params){
+    public function Create($params){
         $data = [
             'Creator_Account_Address' => $params['Creator_Account_Address'],
-            'Level' => $params['Level'],
-            'Title ' => $params['Title'],
-            'Content ' => $params['Content'],
+            'Title' => $params['Title'],
+            'Content' => $params['Content'],
         ];
         $this->db->insert('tbl_notifications', $data);
         $result = $this->db->insert_id();
         return ($result) ? TRUE : FALSE;
+    }
+
+    public function Delete($params){
+
+        $this->db->where('Notification_ID', $params['Notification_ID']);
+        $this->db->delete('tbl_notifications');
+    
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE ;
     }
 }

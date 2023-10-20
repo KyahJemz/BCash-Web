@@ -23,7 +23,7 @@ class Verification {
                                 'Success' => False,
                                 'Target' => 'Login',
                                 'Parameters' => null,
-                                'Message' => 'Invalid client category, Try-again!'
+                                'Response' => 'Invalid client category, Try-again!'
                         ];
                 } else {
 
@@ -34,7 +34,7 @@ class Verification {
                                         'Success' => False,
                                         'Target' => 'Login',
                                         'Parameters' => null,
-                                        'Message' => 'Access to this account is blocked!'
+                                        'Response' => 'Access to this account is blocked!'
                                 ];
                         } else {
                                 if ($this->CI->Functions_Model->generateNewAuth($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)){
@@ -52,7 +52,7 @@ class Verification {
                                                         'Success' => True,
                                                         'Target' => 'OTPValidation',
                                                         'Parameters' => $parameters,
-                                                        'Message' => 'New Sign-in detected, OTP validation required!'
+                                                        'Response' => 'New Sign-in detected, OTP validation required!'
                                                 ];
 
                                         } else {
@@ -70,14 +70,14 @@ class Verification {
                                                                                 'Success' => True,
                                                                                 'Target' => $Actor,
                                                                                 'Parameters' => $parameters,
-                                                                                'Message' => 'Account is now Logged in!'
+                                                                                'Response' => 'Account is now Logged in!'
                                                                         ];
                                                                 } else {
                                                                         $response = [
                                                                                 'Success' => False,
                                                                                 'Target' => 'PINValidation',
                                                                                 'Parameters' => null,
-                                                                                'Message' => 'Wrong account PIN!'
+                                                                                'Response' => 'Wrong account PIN!'
                                                                         ];
                                                                 }
                                                         } else {
@@ -90,7 +90,7 @@ class Verification {
                                                                         'Success' => False,
                                                                         'Target' => 'PINValidation',
                                                                         'Parameters' => $parameters,
-                                                                        'Message' => 'PIN validation required!'
+                                                                        'Response' => 'PIN validation required!'
                                                                 ];
                                                         }
                                                 } else {
@@ -104,7 +104,7 @@ class Verification {
                                                                 'Success' => True,
                                                                 'Target' => 'PINCreation',
                                                                 'Parameters' => $parameters,
-                                                                'Message' => 'PIN creation required!'
+                                                                'Response' => 'PIN creation required!'
                                                         ];
                                                 }
                                         }
@@ -113,7 +113,7 @@ class Verification {
                                                 'Success' => False,
                                                 'Target' => 'Login',
                                                 'Parameters' => null,
-                                                'Message' => 'Auth creation failed, Try-again!'
+                                                'Response' => 'Auth creation failed, Try-again!'
                                         ];
                                 }
                         }

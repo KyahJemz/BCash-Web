@@ -145,6 +145,16 @@ function onMenuSelectionButton(event) {
     //   SetAccountingChart(responseData.Parameters);
     // })
   }
+  if (event.currentTarget.dataset.menu === "Application Control Management") {
+    SetConfiguration();
+  }
+  if (event.currentTarget.dataset.menu === "Notifications Control Management") {
+    SetNotifications();
+  }
+
+ 
+
+  
 }
 
 helper.addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
@@ -570,17 +580,116 @@ document.getElementById('AddAccount-SubmitBtn').addEventListener('click', () => 
   })
 })
 
+export function SetConfiguration() {
+  Ajax.sendRequest([], "get configuration")
+  .then(responseData => {
+    document.getElementById('Config-PinCode').value = "";
+    if (responseData.Success) {
+      responseData.Parameters.forEach(row => {
+        if (row['Title'] === 'AndroidAppVersion' || row['Title'] === 'WebAppVersion') {
+          document.getElementById('Config-'+row['Title']).value = (row['Value']) ? row['Value'] : '';
+        } else {
+          document.getElementById('Config-'+row['Title']).checked = (row['Value'] === '1') ? true : false;
+        }
+        document.getElementById('Config-'+row['Title']+'Description').value = (row['Description: ']) ? row['Description: '] : '';
+      });
+    }
+  })
+}
+
+helper.addElementClickListenerById('Config-Submit',UpdateConfigurations);
+export function UpdateConfigurations() {
+  const data = {
+    PinCode : document.getElementById('Config-PinCode').value,
+    IsMaintenance : (document.getElementById('Config-IsMaintenance').checked) ? '1' : '0',
+    IsMaintenanceDescription : (document.getElementById('Config-IsMaintenanceDescription').value) ?? '',
+    Transactions : (document.getElementById('Config-Transactions').checked) ? '1' : '0',
+    TransactionsDescription : (document.getElementById('Config-TransactionsDescription').value) ?? '',
+    Transfers : (document.getElementById('Config-Transfers').checked) ? '1' : '0',
+    TransfersDescription : (document.getElementById('Config-TransfersDescription').value) ?? '',
+    CashIn : (document.getElementById('Config-CashIn').checked) ? '1' : '0',
+    CashInDescription : (document.getElementById('Config-CashInDescription').value) ?? '',
+    AndroidAppVersion : (document.getElementById('Config-AndroidAppVersion').value) ?? '',
+    AndroidAppVersionDescription : (document.getElementById('Config-AndroidAppVersionDescription').value) ?? '',
+    WebAppVersion : (document.getElementById('Config-WebAppVersion').value) ?? '',
+    WebAppVersionDescription : (document.getElementById('Config-WebAppVersionDescription').value) ?? '',
+    Accounting : (document.getElementById('Config-Accounting').checked) ? '1' : '0',
+    AccountingDescription : (document.getElementById('Config-AccountingDescription').value) ?? '',
+    MerchantAdmin : (document.getElementById('Config-MerchantAdmin').checked) ? '1' : '0',
+    MerchantAdminDescription : (document.getElementById('Config-MerchantAdminDescription').value) ?? '',
+    MerchantStaff : (document.getElementById('Config-MerchantStaff').checked) ? '1' : '0',
+    MerchantStaffDescription : (document.getElementById('Config-MerchantStaffDescription').value) ?? '',
+    User : (document.getElementById('Config-User').checked) ? '1' : '0',
+    UserDescription : (document.getElementById('Config-UserDescription').value) ?? '',
+    Guest : (document.getElementById('Config-Guest').checked) ? '1' : '0',
+    GuestDescription : (document.getElementById('Config-GuestDescription').value) ?? '',
+    Guardian : (document.getElementById('Config-Guardian').checked) ? '1' : '0',
+    GuardianDescription : (document.getElementById('Config-GuardianDescription').value) ?? '',
+  };
+
+  Ajax.sendRequest(data, "update configurations")
+  .then(responseData => {
+    if (responseData.Success) {
+      document.getElementById('Config-PinCode').value = "";
+    }
+    document.getElementById('Config-PinCode').value = "";
+    SetConfiguration();
+})
+}
 
 
+export function SetNotifications() {
+  Ajax.sendRequest([], "get my notifications")
+  .then(responseData => {
+    if (responseData.Success) {
+      const container = document.getElementById('Notifications-Container');
+      container.innerHTML = `<div class="notification-text">Notifications</div>`;
+      responseData.Parameters.forEach(row => {
+        container.innerHTML = container.innerHTML + `
+          <div class="notification-item">
+            <div class="left-content">
+              <p class="notification-subject">${row['Title']}</p>
+              <p class="notification-date">${helper.getDate(row['Timestamp'])}</p>
+              <p class="notification-content">${row['Content']}</p>
+            </div>
+            <div class="right-content">
+              <button class="notification-delete" data-notification="${row['Notification_ID']}"><img src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
+            </div>
+          </div>
+        `;
+      });
+      helper.addElementClickListener('.notification-item .notification-delete',DeleteNotification);
+    }
+  })
+}
+export function DeleteNotification (event){
+  const data = {
+    Notification_ID : event.currentTarget.dataset.notification,
+  };
+  Ajax.sendRequest(data, "delete notification")
+  .then(responseData => {
+    if (responseData.Success) {
+      SetNotifications();
+    }
+  })
+}
 
 
- 
-
-
-
-
-
-
+helper.addElementClickListenerById('Notifications-SubmitBtn',AddNotifications);
+export function AddNotifications() {
+  const data = {
+    Title : document.getElementById('Notifications-Subject').value,
+    Content : document.getElementById('Notifications-Content').value
+  };
+  Ajax.sendRequest(data, "add notification")
+  .then(responseData => {
+    if (responseData.Success) {
+      document.getElementById('Notifications-Subject').value = "";
+      document.getElementById('Notifications-Content').value = "";
+      SetNotifications();
+    }
+  })
+}
 
 
 

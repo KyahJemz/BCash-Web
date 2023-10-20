@@ -18,8 +18,6 @@ class Web_Login {
 
         public function Process($requestPostBody,$AuthorizationTokenHeader,$AccountAddressHeader,$ClientVersionHeader){
 
-                // $this->CI->WebAccounts_Model->uploadPass();
-
                 $this->CI->form_validation->set_data($requestPostBody);
                 
                 $this->CI->form_validation->set_rules('Username', 'Username', 'trim|required|alpha_numeric');
@@ -44,7 +42,7 @@ class Web_Login {
                                         'Success' => true,
                                         'Target' => 'Login',
                                         'Parameters' => null,
-                                        'Message' => '',
+                                        'Response' => '',
                                 ]; 
                                 return $response;
                         }
@@ -55,7 +53,7 @@ class Web_Login {
                                         'Success' => False,
                                         'Target' => 'Login',
                                         'Parameters' => null,
-                                        'Message' => ''. $validationErrors
+                                        'Response' => ''. $validationErrors
                                 ];
                         } else {
                                 $validAccount = $this->CI->WebAccounts_Model->read_by_Username(array('Username'=>$validatedUsername));
@@ -72,7 +70,7 @@ class Web_Login {
                                                                 'Success' => True,
                                                                 'Target' => 'Login',
                                                                 'Parameters' => null,
-                                                                'Message' => 'Account is already active. Force logout activated, Please try again!'
+                                                                'Response' => 'Account is already active. Force logout activated, Please try again!'
                                                         ];
                                                 } else {
                                                         $response = $this->CI->Verification->Process($AccountAddress, null, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
@@ -83,7 +81,7 @@ class Web_Login {
                                                         'Success' => False,
                                                         'Target' => 'Login',
                                                         'Parameters' => null,
-                                                        'Message' => 'Incorrect Password!'
+                                                        'Response' => 'Incorrect Password!'
                                                 ];
                                         }
                                 } else {
@@ -91,7 +89,7 @@ class Web_Login {
                                                 'Success' => False,
                                                 'Target' => 'Login',
                                                 'Parameters' => null,
-                                                'Message' => 'Invalid Account!'
+                                                'Response' => 'Invalid Account!'
                                         ];
                                 }
                         }

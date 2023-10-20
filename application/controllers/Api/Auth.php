@@ -33,12 +33,12 @@ class Auth extends CI_Controller {
                 $requestPostBody = json_decode($requestPostBody, TRUE); // DECODES
 
                 $IsMaintenance = $this->Configurations_Model->IsMaintenance();
-                if ($IsMaintenance['success']) {
+                if ($IsMaintenance['Success']) {
                         $response = [
                                 'Success' => False,
                                 'Target' => 'Login',
                                 'Parameters' => null,
-                                'Message' => $IsMaintenance['response']
+                                'Response' => $IsMaintenance['Response']
                         ];
                 }
 
@@ -47,7 +47,7 @@ class Auth extends CI_Controller {
                                 'Success' => False,
                                 'Target' => 'Login',
                                 'Parameters' => null,
-                                'Message' => 'Invalid HTTPS body parameters!'
+                                'Response' => 'Invalid HTTPS body parameters!'
                         ];  
                 }  else {
                         switch ($IntentHeader) {
@@ -84,7 +84,7 @@ class Auth extends CI_Controller {
                                         'Success' => False,
                                         'Target' => 'Login',
                                         'Parameters' => null,
-                                        'Message' => 'No headers!'
+                                        'Response' => 'No headers!'
                                 ];
                         }
                 }

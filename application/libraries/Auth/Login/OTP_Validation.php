@@ -40,7 +40,7 @@ class OTP_Validation {
                                         'Success' => False,
                                         'Target' => 'OTPValidation',
                                         'Parameters' => null,
-                                        'Message' => 'Invalid OTP or time exceeded, Try-again!'
+                                        'Response' => 'Invalid OTP or time exceeded, Try-again!'
                                 ];
                         }
                 } else {
@@ -48,7 +48,7 @@ class OTP_Validation {
                                 'Success' => False,
                                 'Target' => 'Login',
                                 'Parameters' => null,
-                                'Message' => 'Invalid entry point, refresh and try-again!'
+                                'Response' => 'Invalid entry point, refresh and try-again!'
                         ];
                 }
                 return $response;

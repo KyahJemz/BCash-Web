@@ -18,12 +18,12 @@ class Account_Logout {
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
                         if ($this->CI->Functions_Model->validateAuthToken($AccountAddressHeader,$AuthorizationTokenHeader)) {
                                 $this->CI->Authentications_Model->delete($AccountAddressHeader);
-                                $response = ['Success' => TRUE,'Target' => 'Login','Parameters' => null,'Message' => 'Success!']; 
+                                $response = ['Success' => TRUE,'Target' => 'Login','Parameters' => null,'Response' => 'Success!']; 
                         } else {
-                                $response = ['Success' => FALSE,'Target' => 'Login','Parameters' => null,'Message' => 'Failed, Reason: AuthToken Invalid!']; 
+                                $response = ['Success' => FALSE,'Target' => 'Login','Parameters' => null,'Response' => 'Failed, Reason: AuthToken Invalid!']; 
                         }
                 } else {
-                        $response = ['Success' => FALSE,'Target' => 'Login','Parameters' => null,'Message' => 'Failed, Reason: Logout parameters are empty!'];
+                        $response = ['Success' => FALSE,'Target' => 'Login','Parameters' => null,'Response' => 'Failed, Reason: Logout parameters are empty!'];
                 }
                 return $response;
         }

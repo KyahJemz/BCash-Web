@@ -38,7 +38,7 @@ class PIN_Creation {
                                         'Success' => False,
                                         'Target' => 'PINCreation',
                                         'Parameters' => null,
-                                        'Message' => 'PIN registration failed, Try-again!'
+                                        'Response' => 'PIN registration failed, Try-again!'
                                 ];
                         }
                 } else {
@@ -46,7 +46,7 @@ class PIN_Creation {
                                 'Success' => False,
                                 'Target' => 'Login',
                                 'Parameters' => null,
-                                'Message' => 'Invalid entry point, refresh and try-again!'
+                                'Response' => 'Invalid entry point, refresh and try-again!'
                         ];
                 }
                 return $response;

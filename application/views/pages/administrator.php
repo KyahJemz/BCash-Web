@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/transactions.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/accounts.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/cards.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/configurations.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/notifications.css'); ?>">
 </head>
 
 <body>
@@ -997,6 +999,79 @@
     -->
                 <div id="panel-notificationscontrolmanagement" class="body-content-panel hidden">
                     <div class="panel-notificationscontrolmanagement-content">
+
+                        <div class="notification-add-form">
+                            <div class="notification-input">
+                                <p class="notification-form-title">Add Notification Form</p>
+                            </div>
+
+                            <div class="notification-input">
+                                <p>Subject :</p>
+                                <input id="Notifications-Subject" type="text">
+                            </div>
+                            <div class="notification-input">
+                                <p>Content :</p>
+                                <textarea id="Notifications-Content" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="notification-input">
+                                <button id="Notifications-SubmitBtn">Set Notification</button>
+                            </div>
+                        </div>
+
+                        <div id="Notifications-Container" class="notification-list">
+                            <div class="notification-text">Notifications</div>
+                            <div class="notification-item">
+                                <div class="left-content">
+                                    <p class="notification-subject">subject</p>
+                                    <p class="notification-date">date</p>
+                                    <p class="notification-content">content</p>
+                                </div>
+                                <div class="right-content">
+                                    <button class="delete"><img src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="left-content">
+                                    <p class="notification-subject">subject</p>
+                                    <p class="notification-date">date</p>
+                                    <p class="notification-content">content</p>
+                                </div>
+                                <div class="right-content">
+                                    <button class="delete"><img src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="left-content">
+                                    <p class="notification-subject">subject</p>
+                                    <p class="notification-date">date</p>
+                                    <p class="notification-content">content</p>
+                                </div>
+                                <div class="right-content">
+                                    <button class="delete"><img class="icon" src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="left-content">
+                                    <p class="notification-subject">subject</p>
+                                    <p class="notification-date">date</p>
+                                    <p class="notification-content">content</p>
+                                </div>
+                                <div class="right-content">
+                                    <button class="delete"><img class="icon" src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="left-content">
+                                    <p class="notification-subject">subject</p>
+                                    <p class="notification-date">date</p>
+                                    <p class="notification-content">content</p>
+                                </div>
+                                <div class="right-content">
+                                    <button class="delete"><img class="icon" src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
+                                </div>
+                            </div>
+                        </div>
+
                     
                     </div>
                 </div>
@@ -1006,10 +1081,154 @@
     -->
                 <div id="panel-applicationcontrolmanagement" class="body-content-panel hidden">
                     <div class="panel-applicationcontrolmanagement-content">
-                    
+
+                        <div class="config-group-container">
+                            <div class="config-title">System Main Settings</div>
+
+                            <div class="config">
+                                <p>Maintenance :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-IsMaintenance" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-IsMaintenanceDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>Android App Version :</p>
+                                <div class="settings">
+                                    <input id="Config-AndroidAppVersion" type="text">
+                                    <input id="Config-AndroidAppVersionDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>Web App Version :</p>
+                                <div class="settings">
+                                    <input id="Config-WebAppVersion" type="text">
+                                    <input id="Config-WebAppVersionDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-group-container">
+                            <div class="config-title">System Transactions Settings</div>
+
+                            <div class="config">
+                                <p>Can use Transactions :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-Transactions" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-TransactionsDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>Can use Transfers :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-Transfers" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-TransfersDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>Can use CashIn :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-CashIn" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-CashInDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="config-group-container">
+                            <div class="config-title">System Accounts Settings</div>
+
+                            <div class="config">
+                                <p>Accounting Accounts :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-Accounting" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-AccountingDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>Merchant Admin Accounts :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-MerchantAdmin" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-MerchantAdminDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>Merchant Staff Accounts :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-MerchantStaff" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-MerchantStaffDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>User Accounts :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-User" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-UserDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>Guest Accounts :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-Guest" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-GuestDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+
+                            <div class="config">
+                                <p>Guardian Accounts :</p>
+                                <div class="settings">
+                                    <label class="switch">
+                                        <input id="Config-Guardian" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input id="Config-GuardianDescription" type="text" placeholder="Message...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-pin-container">
+                            <div class="settings">
+                                <p>Your PIN Code:</p>
+                                <input id="Config-PinCode" type="password" placeholder=" * * * * * * ">
+                                <button id="Config-Submit">Update</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
     <!--
         END 
     -->

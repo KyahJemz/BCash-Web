@@ -474,7 +474,7 @@ class Account_Actions {
               $CanModifySettings = $this->CI->Functions_Model->sanitize($requestPostBody['CanModifySettings']);
               $IsTransactionAutoConfirm = $this->CI->Functions_Model->sanitize($requestPostBody['IsTransactionAutoConfirm']);
 
-              if (password_verify($PINCode, $Account->PinCode)) {
+              if (!password_verify($PINCode, $Account->PinCode)) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid PIN Code']; 
               }
 

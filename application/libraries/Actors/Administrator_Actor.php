@@ -21,20 +21,27 @@ class Administrator_Actor {
         $this->CI->load->library('Actions/Remittance_Actions', NULL, 'Remittance_Actions');
         $this->CI->load->library('Actions/Chart_Actions', NULL, 'Chart_Actions');
         $this->CI->load->library('Actions/Cards_Actions', NULL, 'Cards_Actions');
+        $this->CI->load->library('Actions/Configuration_Actions', NULL, 'Configuration_Actions');
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
         switch ($Intent) {
 
+
+// Logout
             case 'Logout':
                 $response = $this->CI->Account_Logout->Logout($Account);
                 break;
 
+
+// Charts
             case 'get chart data':
                 $response = null;
                 // $response = $this->CI->Chart_Actions->View_Accounting_Charts();
                 break;
 
+
+// Notifications
             case 'get my notifications':
                 $response = $this->CI->Notifications_Actions->View_My_Notifications();
                 break;
@@ -43,6 +50,16 @@ class Administrator_Actor {
                 $response = $this->CI->Notifications_Actions->View_My_Notifications_Details($requestPostBody);
                 break;
 
+            case 'add notification':
+                $response = $this->CI->Notifications_Actions->Add_Notifications($Account,$requestPostBody);
+                break;
+
+            case 'delete notification':
+                $response = $this->CI->Notifications_Actions->Delete_Notifications($Account,$requestPostBody);
+                break;
+                
+
+// My Accounts
             case 'get my account':
                 $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
                 break;
@@ -55,6 +72,12 @@ class Administrator_Actor {
                 $response = $this->CI->Account_Actions->Update_My_Password($Account, $requestPostBody);
                 break;
 
+            case 'update my account':
+                $response = $this->CI->Account_Actions->Update_My_Account($Account, $requestPostBody);
+                break;
+
+
+// Activity Logs
             case 'get all activity logs':
                 $response = $this->CI->ActivityLogs_Actions->View_All_ActivityLogs($Account);
                 break;
@@ -63,16 +86,15 @@ class Administrator_Actor {
                 $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
                 break;
 
+
+
+// Login History
             case 'get login history':
                 $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
                 break;
 
             case 'update login history':
                 $response = $this->CI->LoginHistory_Actions->Update_My_LoginHistory($Account, $requestPostBody);
-                break;
-
-            case 'update my account':
-                $response = $this->CI->Account_Actions->Update_My_Account($Account, $requestPostBody);
                 break;
 
             case 'delete one login history':
@@ -83,6 +105,8 @@ class Administrator_Actor {
                 $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
                 break;
 
+    
+// Transactions
             case 'get all transactions':
                 $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History ($Account, $requestPostBody, 'all');
                 break;
@@ -127,6 +151,8 @@ class Administrator_Actor {
                 $response =  $this->CI->Account_Actions->Update_Account_By_ADM($Account, $requestPostBody);
                 break;
 
+
+// Accounts  
             case 'get account category list':
                 $response =  ['Success' => True, 'Parameters'=>$this->CI->ActorCategory_Model->read_accountcategory(), 'Target'=>null, 'Response'=>null];
                 break;
@@ -140,7 +166,7 @@ class Administrator_Actor {
                 break;
 
 
-
+// Cards
             case 'get cards':
                 $response =  $this->CI->Cards_Actions->View_Cards($Account, $requestPostBody);
                 break;
@@ -151,6 +177,17 @@ class Administrator_Actor {
 
             case 'update card':
                 $response =  $this->CI->Cards_Actions->Update_Card($Account,$requestPostBody);
+                break;
+
+
+// Configurations
+
+            case 'update configurations':
+                $response =  $this->CI->Configuration_Actions->Update_Configurations($Account,$requestPostBody);
+                break;
+
+            case 'get configuration':
+                $response =  $this->CI->Configuration_Actions->View_Configurations();
                 break;
 
 

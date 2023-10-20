@@ -1,0 +1,121 @@
+
+:root {
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
+    --AsccentColor: #CB8213; /* Buttons */
+    --TextColor: #4b4b4b; /* text */
+    --DarkColor: #363636; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
+
+    --TextColor-White: #ffffff;
+    --TextColor-Red: #DA121A;
+    --TextColor-Gold: #F9AE28;
+    --TextColor-LightBlack: #333333;
+    --TextColor-Black: #0F1419;
+
+    --Button-Background-Red: #DA121A;
+    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Gold: #F9AE28;
+    --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-White: #ffffff;
+
+    --Selected-Background-LightBlack: #333333;
+
+    --Panel-Background-LightBlack: #333333;
+    --Panel-Background-Gold: #FFCC00;
+    --Panel-Background-Red: #DA121A;
+    --Panel-Background-White: #ffffff;
+    --Panel-Background-DarkWhite: #F2F2F2;
+
+    --color-White: #ffffff;
+    --color-DarkWhite: #F2F2F2;
+    --color-Red: #DA121A;
+    --color-DarkRed: #9A110D;
+    --color-Gold: #FFCC00;
+    --color-DarkGold: #F9AE28;
+    --color-Gray: #282828;
+    --color-LightBlack: #333333;
+    --color-Black: #0F1419;
+}
+.panel-applicationcontrolmanagement-content{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: scroll;
+    gap: 20px;
+}
+
+#panel-applicationcontrolmanagement .config-group-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    width: fit-content;
+    border: 1px solid var(--TextColor-Gold);
+    border-radius: 5px;
+    flex: 1;
+}
+
+#panel-applicationcontrolmanagement .config{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+#panel-applicationcontrolmanagement .config-pin-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#panel-applicationcontrolmanagement .config-pin-container .settings{
+    padding: 10px;
+    border: 1px solid var(--color-DarkGold);
+} 
+
+#panel-applicationcontrolmanagement .config-pin-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#panel-applicationcontrolmanagement .config-pin-container button{
+    border-color: var(--Button-Background-Gold);
+    cursor: pointer;
+}
+
+#panel-applicationcontrolmanagement .settings{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+
+#panel-applicationcontrolmanagement .config-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--TextColor-Red);
+}
+
+#panel-applicationcontrolmanagement .switch input:checked + .slider {
+    background-color: var(--color-Red);
+  }
+  
+#panel-applicationcontrolmanagement .switch input:focus + .slider {
+    box-shadow: 0 0 1px var(--color-Red);
+  }
+
+/* #panel-applicationcontrolmanagement .config p{
+    color: var(--TextColor-Gold);
+} */

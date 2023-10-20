@@ -43,7 +43,7 @@ class Guardian_Login {
                                         'Success' => False,
                                         'Target' => 'Login',
                                         'Parameters' => null,
-                                        'Message' => ''. $validationErrors
+                                        'Response' => ''. $validationErrors
                                 ];
                         } else {
 
@@ -74,7 +74,7 @@ class Guardian_Login {
                                                         'Success' => False,
                                                         'Target' => 'Login',
                                                         'Parameters' => null,
-                                                        'Message' => 'Account does not exist!'
+                                                        'Response' => 'Account does not exist!'
                                                 ];
                                         }
                                 } else {
@@ -82,7 +82,7 @@ class Guardian_Login {
                                                 'Success' => False,
                                                 'Target' => 'Login',
                                                 'Parameters' => null,
-                                                'Message' => 'Invalid Token! ' + $body['error']
+                                                'Response' => 'Invalid Token! ' + $body['error']
                                         ];   
                                 }
                         }

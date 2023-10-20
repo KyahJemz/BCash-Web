@@ -1,4 +1,5 @@
 <?php
+
 class Configurations_Model extends CI_Model {
 
     public function __construct() {
@@ -6,9 +7,39 @@ class Configurations_Model extends CI_Model {
         $this->load->database();
     }
 
-    //
-    // FUNCTIONS
-    //
+    public function Update($params){
+        $existingData = $this->db->get_where('tbl_configurations', ['Title' => $params['Title']])->row_array();
+
+        if ($existingData) {
+            if ($existingData['Value'] !== $params['Value'] || $existingData['Description'] !== $params['Description']) {
+                $data = [
+                    'Value' => $params['Value'],
+                    'Description' => (empty($params['Description'])) ? null : $params['Description'],
+                ];
+                
+                $this->db->where('Title', $params['Title']);
+                $this->db->update('tbl_configurations', $data);
+
+                return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function Read(){
+        $this->db->select('
+            Title,
+            Value,
+            Description
+        ');
+        $this->db->from('tbl_configurations');
+        $result = $this->db->get()->result();
+
+        return $result;
+    }
 
     public function IsMaintenance() {
         $result = $this->db
@@ -17,62 +48,199 @@ class Configurations_Model extends CI_Model {
             ->where('Title', 'IsMaintenance')
             ->get()
             ->row();
-        if ($result->Value === 'FALSE') {
-            return ['success' => FALSE, 'response' => 'The server is currently running normally.'];
-        } else if ($result->Value === 'TRUE') {
-            return ['success' => TRUE, 'response' => 'The server is currently undergoing maintenance. ' . $result->Description];
+        if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => 'The server is currently running normally.'];
+        } else if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => 'The server is currently undergoing maintenance. ' . $result->Description];
         } else {
-            return ['success' => TRUE, 'response' => 'The server is temporarily unreachable. Please try again later.'];
+            return ['Success' => TRUE, 'Response' => 'The server is temporarily unreachable. Please try again later.'];
         }
     }
 
-    public function ValidateMobileVersion($Version) {
+    public function AndroidAppVersion($Version) {
         $result = $this->db
             ->select('*')
             ->from('tbl_configurations')
-            ->where('Title', 'MobileVersion')
+            ->where('Title', 'AndroidAppVersion')
             ->get()
             ->row();    
     
         if ($result->Value === $Version) {
-            return ['success' => TRUE, 'response' => 'The version is up to date.'];
+            return ['Success' => TRUE, 'Response' => 'This version is up to date.'];
         } else if ($result->Value === 'TRUE') {
-            return ['success' => TRUE, 'response' => 'The version is not supported.'];
+            return ['Success' => FALSE, 'Response' => 'The current version is '.$result->Value.', Please update your application.' ];
         } else {
-            return ['success' => TRUE, 'response' => 'The server is unreachable at the moment.'];
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
         }
     }
 
-    public function ValidateWebVersion($Version){
+    public function WebAppVersion($Version){
         $result = $this->db
             ->select('*')
             ->from('tbl_configurations')
-            ->where('Title', 'WebVersion')
+            ->where('Title', 'WebAppVersion')
             ->get()
             ->row();    
 
         if ($result->Value === $Version) {
-            return ['success' => TRUE, 'response' => 'The version is up to date.'];
+            return ['Success' => TRUE, 'Response' => 'The version is up to date.'];
         } else if ($result->Value === 'TRUE') {
-            return ['success' => TRUE, 'response' => 'The version is not supported.'];
+            return ['Success' => FALSE, 'Response' => 'The version is not supported.'];
         } else {
-            return ['success' => TRUE, 'response' => 'The server is unreachable at the moment.'];
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
         }
     }
 
-    //
-    // DATABASE
-    //
-
-    public function read() {
+    public function CanTransactions(){
         $result = $this->db
             ->select('*')
             ->from('tbl_configurations')
-            ->get();
-        if ($result->num_rows() > 0) {
-            return [TRUE, $result->result()];
+            ->where('Title', 'Transactions')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
         } else {
-            return [FALSE];
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
+        }
+    }
+
+    public function CanTransfers(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_configurations')
+            ->where('Title', 'Transfers')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
+        } else {
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
+        }
+    }
+
+    public function CanCashIn(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_configurations')
+            ->where('Title', 'CashIn')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
+        } else {
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
+        }
+    }
+
+    public function AccountingAccess(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_configurations')
+            ->where('Title', 'Accounting')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
+        } else {
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
+        }
+    }
+
+    public function MerchantAdminAccess(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_configurations')
+            ->where('Title', 'MerchantAdmin')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
+        } else {
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
+        }
+    }
+
+    public function MerchantStaffAccess(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_configurations')
+            ->where('Title', 'MerchantStaff')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
+        } else {
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
+        }
+    }
+
+    public function UserAccess(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_configurations')
+            ->where('Title', 'User')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
+        } else {
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
+        }
+    }
+
+    public function GuestAccess(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_configurations')
+            ->where('Title', 'Guest')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
+        } else {
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
+        }
+    }
+
+    public function GuardianAccess(){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_configurations')
+            ->where('Title', 'Guardian')
+            ->get()
+            ->row();    
+
+        if ($result->Value === '1') {
+            return ['Success' => TRUE, 'Response' => $result->Description];
+        } else if ($result->Value === '0') {
+            return ['Success' => FALSE, 'Response' => $result->Description];
+        } else {
+            return ['Success' => FALSE, 'Response' => 'The server is unreachable at the moment. Please try again later.'];
         }
     }
 }

@@ -53,7 +53,7 @@ class User_Login {
                                         'Success' => False,
                                         'Target' => 'Login',
                                         'Parameters' => null,
-                                        'Message' => ''. $validationErrors
+                                        'Response' => ''. $validationErrors
                                 ];
                         } else {
 
@@ -100,7 +100,7 @@ class User_Login {
                                                                         'Success' => False,
                                                                         'Target' => 'Login',
                                                                         'Parameters' => null,
-                                                                        'Message' => 'Error during registering your account!'
+                                                                        'Response' => 'Error during registering your account!'
                                                                 ];
                                                         } else {
                                                                 // Continue
@@ -111,7 +111,7 @@ class User_Login {
                                                                 'Success' => False,
                                                                 'Target' => 'Login',
                                                                 'Parameters' => null,
-                                                                'Message' => 'Database Error! ' + $e
+                                                                'Response' => 'Database Error! ' + $e
                                                         ];   
                                                 }
                                         } 
@@ -125,7 +125,7 @@ class User_Login {
                                                 'Success' => False,
                                                 'Target' => 'Login',
                                                 'Parameters' => null,
-                                                'Message' => 'Invalid Token! ' + $body['error']
+                                                'Response' => 'Invalid Token! ' + $body['error']
                                         ];   
                                 }
                         }

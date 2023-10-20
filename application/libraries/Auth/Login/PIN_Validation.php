@@ -39,7 +39,7 @@ class PIN_Validation {
                                         'Success' => False,
                                         'Target' => 'PINValidation',
                                         'Parameters' => null,
-                                        'Message' => 'Invalid PIN, Try-again!'
+                                        'Response' => 'Invalid PIN, Try-again!'
                                 ];
                         }
                 } else {
@@ -47,7 +47,7 @@ class PIN_Validation {
                                 'Success' => False,
                                 'Target' => 'Login',
                                 'Parameters' => null,
-                                'Message' => 'Invalid entry point, refresh and try-again!'
+                                'Response' => 'Invalid entry point, refresh and try-again!'
                         ];
                 }
                 return $response;

@@ -269,8 +269,8 @@ function validate (){
             }
         }
 
-        if (responseData.Message){
-            ResponseMessage = responseData.Message;
+        if (responseData.Response){
+            ResponseMessage = responseData.Response;
         }
 
         console.log(ResponseMessage);
