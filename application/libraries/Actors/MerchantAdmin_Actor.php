@@ -47,6 +47,10 @@ class MerchantAdmin_Actor {
                 $response = $this->CI->Account_Actions->Update_My_Password($Account, $requestPostBody);
                 break;
 
+            case 'update my account':
+                $response = $this->CI->Account_Actions->Update_My_Account($Account, $requestPostBody);
+                break;
+
             case 'get all activity logs':
                 $response = $this->CI->ActivityLogs_Actions->View_All_ActivityLogs($Account);
                 break;
@@ -71,6 +75,13 @@ class MerchantAdmin_Actor {
                 $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
                 break;
 
+            case 'get my transactions':
+                $response = $this->CI->Transaction_Actions->Merchant_View_All_Transaction_History ($Account, $requestPostBody);
+                break;
+
+            case 'get transactions details':
+                $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History_Details ($Account, $requestPostBody);
+                break;
 
                 
             default:

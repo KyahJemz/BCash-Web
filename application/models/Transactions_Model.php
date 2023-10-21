@@ -173,7 +173,10 @@ class Transactions_Model extends CI_Model {
         }
 
         if (isset($params['AccountAddress'])) {
-            $this->db->like('tbl_transactionsinfo.Sender_Address', $params['AccountAddress'], 'after');
+            $this->db->group_start()
+                ->like('tbl_transactionsinfo.Receiver_Address', $params['AccountAddress'], 'after')
+                ->or_like('tbl_transactionsinfo.Sender_Address', $params['AccountAddress'], 'after')
+            ->group_end();
         }
     
         if ($params['StatusFilter'] != 'All') {
@@ -181,6 +184,8 @@ class Transactions_Model extends CI_Model {
         }
     
         $result = $this->db->limit($results_per_page)->get()->result();
+
+        Log_message('debug', $this->db->last_query());
     
         return ($result) ? $result : $result;
     }

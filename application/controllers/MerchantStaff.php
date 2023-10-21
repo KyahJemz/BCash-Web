@@ -57,7 +57,7 @@ class MerchantStaff extends CI_Controller {
                 $data['Location'] = "Unknown";
                 $data['AccountAddress'] = "Unknown";
                 $data['AuthToken'] = "Unknown";
-                $data['BaseURL'] = "http://localhost/index.php/";
+                $data['BaseURL'] = "http://localhost/index.php/Api/Request/Process";
 
                 if ($data['IpAddress'] != $IpAddress || $data['Location'] != $Location || $data['Device'] != $Device) {
                          redirect('Login/index');

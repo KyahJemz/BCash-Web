@@ -314,7 +314,7 @@ class Account_Actions {
               $this->CI->db->trans_start(); 
 
                      if ($Account->Firstname != $Firstname) {
-                            $this->CI->WebAccounts_Model->update_firstname()(array(
+                            $this->CI->WebAccounts_Model->update_firstname(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
                                    'Firstname' => $Firstname
                             ));

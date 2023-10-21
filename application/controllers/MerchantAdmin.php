@@ -10,7 +10,7 @@ class MerchantAdmin extends CI_Controller {
                 $this->load->model([
                         'Functions_Model',
                         'Authentications_Model',
-                        'Merchants_Model'
+                        'Merchants_Model',
                 ]);
         }
 
@@ -57,7 +57,7 @@ class MerchantAdmin extends CI_Controller {
                 $data['Location'] = "Unknown";
                 $data['AccountAddress'] = "Unknown";
                 $data['AuthToken'] = "Unknown";
-                $data['BaseURL'] = "http://localhost/index.php/";
+                $data['BaseURL'] = "http://localhost/index.php/Api/Request/Process";
 
                 if ($data['IpAddress'] != $IpAddress || $data['Location'] != $Location || $data['Device'] != $Device) {
                          redirect('Login/index');
@@ -74,6 +74,7 @@ class MerchantAdmin extends CI_Controller {
                 if ( ! file_exists(APPPATH.'views/pages/'.$page.'.php'))
                 {
                         show_404();
+                        return;  
                 }
 
                 $this->load->view('pages/'.$page, $data);
@@ -83,6 +84,7 @@ class MerchantAdmin extends CI_Controller {
                         <script>
                                 var AccountAddress = ' . json_encode($AccountAddress) . ';
                                 var AuthToken = ' . json_encode($AuthToken) . ';
+                                const ClientVersion = ' . json_encode('1.0') . ';
                                 const IpAddress = ' . json_encode($data['IpAddress']) . ';
                                 const Device = ' . json_encode($data['Device']) . ';
                                 const Location = ' . json_encode($data['Location']) . ';

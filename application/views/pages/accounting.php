@@ -427,10 +427,6 @@
                                 <img src="../public/images/icons/clear-yellow.png" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button id="mytransaction-export-button" class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
-                                <img src="../public/images/icons/download-yellow.png" alt="search">
-                                <span>Export</span>
-                            </button>
                         </div>
                         <div></div>
                     </div>
@@ -507,7 +503,7 @@
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
                                 <span class="transactions-recordscount-dropdown dropdown-text">50/Page</span>
-                                <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
                             </button>
                         </div>
                     </div>

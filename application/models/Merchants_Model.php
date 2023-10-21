@@ -22,6 +22,28 @@ class Merchants_Model extends CI_Model {
           }
        }
 
+       public function get_merchantadminaddress($params) {
+              $merchant = $this->db
+                     ->select('*')
+                     ->from('tbl_Merchants')
+                     ->where('WebAccounts_Address ', $params['WebAccounts_Address'])
+                     ->get()
+                     ->row();
+              $result = $this->db
+                     ->select('*')
+                     ->from('tbl_Merchants')
+                     ->where('MerchantsCategory_Id', $merchant->MerchantsCategory_Id)
+                     ->like('WebAccounts_Address', 'MTA', 'after')
+                     ->get()
+                     ->row();
+              
+          if ($result) {
+              return $result;
+          } else {
+              return $result; 
+          }
+       }
+
        public function read_merchantcategory_by_ShopeName($params) {
               $result = $this->db
               ->select('*')
