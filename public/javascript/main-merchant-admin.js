@@ -70,29 +70,24 @@ export function makeAlert(type,text){
   alerts.createAlert(type,text);
 }
 
-export function makeNotification(id,title,content){
- // const notification = new Notification();
- // notification.setPopupNotificationInfo(id,title,content);
-}
-
 export function makeModal(type, title, content){
   modals.activateModal(type, title, content);
 }
 
 function refreshItems(){
-  myItems.registerItem()
+  myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png")
+  myItems.registerItem("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../public/images/items/2.png");
+  myItems.registerItem("3","Margherita Pizza","180","Pizza","2023-06-29","2023-06-29", "../public/images/items/3.png");
+  myItems.registerItem("4","Vegetable Curry with Naan Bread","130","Food","2023-06-29","2023-06-29", "../public/images/items/4.png");
+  myItems.registerItem("5","BBQ Pulled Pork Burger","140","Food","2023-06-29","2023-06-29", "../public/images/items/5.png");
+  myItems.registerItem("6","Fish Tacos with Salsa","160","Food","2023-06-29","2023-06-29", "../public/images/items/6.png");
+  myItems.registerItem("7","Iced Caramel Macchiato","110","Drink","2023-06-29","2023-06-29", "../public/images/items/7.png");
+  myItems.registerItem("8","Strawberry Banana Smoothie","90","Drink","2023-06-29","2023-06-29", "../public/images/items/8.png");
+  myItems.registerItem("9","Chocolate Chip Ice Cream","70","Disert","2023-06-29","2023-06-29", "../public/images/items/9.png");
+  myItems.registerItem("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-06-29", "../public/images/items/10.png");
 }
 
-myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png")
-myItems.registerItem("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../public/images/items/2.png");
-myItems.registerItem("3","Margherita Pizza","180","Pizza","2023-06-29","2023-06-29", "../public/images/items/3.png");
-myItems.registerItem("4","Vegetable Curry with Naan Bread","130","Food","2023-06-29","2023-06-29", "../public/images/items/4.png");
-myItems.registerItem("5","BBQ Pulled Pork Burger","140","Food","2023-06-29","2023-06-29", "../public/images/items/5.png");
-myItems.registerItem("6","Fish Tacos with Salsa","160","Food","2023-06-29","2023-06-29", "../public/images/items/6.png");
-myItems.registerItem("7","Iced Caramel Macchiato","110","Drink","2023-06-29","2023-06-29", "../public/images/items/7.png");
-myItems.registerItem("8","Strawberry Banana Smoothie","90","Drink","2023-06-29","2023-06-29", "../public/images/items/8.png");
-myItems.registerItem("9","Chocolate Chip Ice Cream","70","Disert","2023-06-29","2023-06-29", "../public/images/items/9.png");
-myItems.registerItem("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-06-29", "../public/images/items/10.png");
+refreshItems();
 
 //console.log(myItems.getItemsArray());
 
@@ -234,7 +229,6 @@ function onMenuSettingsButtonClick() {
         helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
       }
   })
-  makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel"));
 }
 
 async function updateAccount (event) {
@@ -382,6 +376,25 @@ async function GetMyData () {
   });
 }
 
+helper.addElementClickListenerById('ItemManagement-AddItems', (event)=>{
+  makeModal("Modal", "Add Item Form", modals.getModalView("Add-Item",AddItem));
+  helper.addElementClickListenerById('AddItem-SubmitBtn',AddItem);
+  helper.addElementClickListenerById('AddItem-CancelBtn',onModalCloseButtonClick);
+})
+
+export function AddItem(){
+  const data = {
+    ItemImage : document.getElementById('AddItem-Image'),
+    ItemName : document.getElementById('AddItem-Name').value,
+    ItemCost : document.getElementById('AddItem-Cost').value,
+    ItemCategory : document.getElementById('AddItem-Category').value,
+  }
+
+  Ajax.sendRequest(data, "get my account")
+    .then(responseData => {
+      refreshItems();
+  })
+}
 
 
 

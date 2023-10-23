@@ -32,7 +32,7 @@
             </div>
             <div class="details">
                 <div class="category">BCash: Merchant</div>
-                <div class="fullname">Juan Dela Cruz</div>
+                <div class="fullname" id="WebAccountFullName">Loading...</div>
             </div>
             <div class="button-container">
                 <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="<?php echo base_url('./public/images/icons/notification-yellow.png'); ?>" alt="notification-icon"></button>
@@ -85,7 +85,7 @@
                     San Sebastian College - Recoletos
                 </div>
             </div>
-            <div class="right-side curson-pointer" onclick="">
+            <div class="right-side curson-pointer" id="Logout-Button">
                 <div class="text">
                     Log out
                 </div>
@@ -115,35 +115,36 @@
     -->
                 <div id="panel-transactions" class="body-content-panel hidden">
                     <div id="My-Tansactions-Query" class="panel-transactions-query panel">
-                        <div class="form-container">
+                    <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
-                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="StartDate">
+                                <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate" autocomplete="off">
                             </div>
                             <div>
                                 <label for="EndDate">End Date</label>
-                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="EndDate">
+                                <input class="transactions-enddate query inputdate" class="textbox" type="date" name="MyTransactionEndDate" autocomplete="off">
                             </div>
                             <div>
                                 <label for="TransactionNumber">Transaction Number</label>
-                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="TransactionNumber">
+                                <input class="transactions-transactionnumber query inputtext" class="textbox" type="text" name="MyTransactionNumber" autocomplete="off">
                             </div>
                             <div>
                                 <label for="TransactionName">Search Name</label>
-                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="TransactionName">
+                                <input class="transactions-transactionname query inputtext" class="textbox" type="text" name="MyTransactionName" autocomplete="off">
                             </div>
                             <div>
                                 <label>Status Filter</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
                                         <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
+                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Success</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Failed</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Completed</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Payment Pending</a>
                                         <a class="dropdownButtonSubItem" href="javascript:void(0)">Waiting</a>
+                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Canceled</a>
                                     </div>
                                 </div>
                             </div>
@@ -159,21 +160,8 @@
                                 <img src="<?php echo base_url('./public/images/icons/clear-yellow.png'); ?>" alt="search">
                                 <span>Clear</span>
                             </button>
-                            <button class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
-                                <img src="<?php echo base_url('./public/images/icons/download-yellow.png'); ?>" alt="search">
-                                <span>Export</span>
-                            </button>
                         </div>
-                        <div>
-                            <div>
-                                <div>Total Orders: </div>
-                                <div class="transaction-totalorders-text" class="text">???</div>
-                            </div>
-                            <div>
-                                <div >Total Sales: </div>
-                                <div class="transaction-totalsales-text" class="text">???</div>
-                            </div>
-                        </div>
+                        <div></div>
                     </div>
                     <div class="panel-transactions-table">
                         <div class="table-header">
@@ -198,16 +186,16 @@
                                 <tr>
                                     <th class="col1"><div><input type="checkbox" name="" id=""></div></th>
                                     <th class="col2"><div>#</div></th>
-                                    <th class="col3"><div>Transaction ID</div></th>
-                                    <th class="col4"><div>Status</div></th>
-                                    <th class="col5"><div>In Charge</div></th>
-                                    <th class="col6"><div>Name</div></th>
-                                    <th class="col7"><div>Category</div></th>
-                                    <th class="col8"><div>Department</div></th>
-                                    <th class="col9"><div>Course</div></th>
-                                    <th class="col10"><div>Amount</div></th>
-                                    <th class="col11"><div>Items</div></th>
-                                    <th class="col12"><div>Timestamp</div></th>
+                                    <th class="col3"><div>Transaction Address</div></th> 
+                                    <th class="col4"><div>Transaction Type</div></th> 
+                                    <th class="col5"><div>Status</div></th>
+                                    <th class="col6"><div>Sender Address</div></th>
+                                    <th class="col7"><div>Sender Name</div></th>
+                                    <th class="col8"><div>Receiver Address</div></th>
+                                    <th class="col9"><div>Receiver Name</div></th>
+                                    <th class="col10"><div>Total Amount</div></th>
+                                    <th class="col11"><div>Timestamp</div></th>
+                                    <th class="col12"><div>PostedBy</div></th>
                                     <th class="col13"><div>Payment Method</div></th>
                                     <th class="col14"><div>Notes</div></th>
                                 </tr>
@@ -238,31 +226,16 @@
                             </table>
                         </div>
                     </div>
-                    <div class="panel-transactions-footer">
-                        <div class="page-numbers-container">
-                            <ul id="transaction-pagenumbers" class="page-numbers">
-                                <button id="transaction-leftpage-button">&lt;</button>
-                                <li><a class="transaction-pagenumber-button curson-pointer selected" onclick="">1</a></li>
-                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">2</a></li>
-                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">3</a></li>
-                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">4</a></li>
-                                <li><a class="transaction-pagenumber-button curson-pointer" onclick="">5</a></li>
-                                <button id="transaction-rightpage-button">&gt;</button>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>Total: </div>
-                            <div class="transaction-totalsales-text" class="text">???</div>
-                        </div>
+                    <div class="panel-transactions-footer" id="My-Transactions-Footer-Query">
                         <div class="dropdown">
                             <div class="dropdown-content">
-                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >25/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">50/Page</a>
+                                <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >50/Page</a>
                                 <a class="dropdownButtonSubItem" href="javascript:void(0)">100/Page</a>
-                                <a class="dropdownButtonSubItem" href="javascript:void(0)">500/Page</a>
+                                <a class="dropdownButtonSubItem" href="javascript:void(0)">200/Page</a>
+                                <a class="dropdownButtonSubItem" href="javascript:void(0)">All/Page</a>
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="transactions-recordscount-dropwond" class="dropdown-text">25/Page</span>
+                                <span class="transactions-recordscount-dropwond" class="dropdown-text">50/Page</span>
                                 <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
                             </button>
                         </div>

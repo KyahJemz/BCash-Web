@@ -74,29 +74,29 @@ export default class Modals {
                     <div class="form">
                         <div>
                             <p>Item Image</p>
-                            <input type="file" name="item-image" accept="image/*">
+                            <input id="AddItem-Image" type="file" name="item-image" accept="image/*">
                         </div>
                         <div>
                             <p>Item Name</p>
-                            <input type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
+                            <input id="AddItem-Name" type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
                         </div>
                         <div>
                             <p>Item Cost</p>
-                            <input type="number" title="Number Only" name="item-cost" required>
+                            <input id="AddItem-Cost" type="number" title="Number Only" name="item-cost" required>
                         </div>
                         <div>
                             <p>Item Category</p>
-                            <input type="text" title="Can be Existing Category or new Category" name="item-category" required>
+                            <input id="AddItem-Category" type="text" title="Can be Existing Category or new Category" name="item-category" required>
                         </div>
                         <div class="button-container">
-                            <button class="dialog-box-close-button" type="button">Cancel</button>
-                            <button type="submit" name="form" value="Add-Item">Save Changes</button>
+                            <button id="AddItem-CancelBtn" class="dialog-box-close-button" type="button">Cancel</button>
+                            <button id="AddItem-SubmitBtn" type="submit" name="form" value="Add-Item">Save Changes</button>
                         </div>
                     </div>
                 </div>
             `;
     
-            // bindDialogBoxCloseButton();
+           // bindDialogBoxCloseButton();
     
         } else if (type=="Edit-Item"){
             return `

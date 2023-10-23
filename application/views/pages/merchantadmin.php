@@ -537,7 +537,7 @@
                             </div>
                             <div class="right-panel">
                                 <div>
-                                    <button class="curson-pointer addItemButton" type="button">
+                                    <button id="ItemManagement-AddItems" class="curson-pointer addItemButton" type="button">
                                         <img class="icon" src="<?php echo base_url('./public/images/icons/add-yellow.png'); ?>" alt="layout">
                                         <span>Add Item</span>
                                     </button>

@@ -1,11 +1,11 @@
 import Transactions from './modules/transactions.js';
 import Orders from './modules/order.js';
 import Items from './modules/items.js';
-import Notifications from './modules/notifications.js';
 import { createAlert } from './modules/alerts.js';
 import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
+import AjaxRequest from './ajax.js';
 
 import Helper from './helper.js';
 
@@ -13,16 +13,22 @@ import Helper from './helper.js';
 // VARIABLES
 ////////////////////////////
 
-const notifications = new Notifications();
-const myTransactions = new Transactions(document.getElementById("My-Tansactions-Table"),document.getElementById("My-Tansactions-Query"));
 const myOrders = new Orders();
 const myItems = new Items();
 const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
 const helper = new Helper();
+const Ajax = new AjaxRequest(BaseURL);
 
-var notificationArray = [];
+const myTransactions = new Transactions(
+  document.getElementById("My-Transactions-Table"),
+  document.getElementById("My-Transactions-Query"),
+  document.getElementById("My-Transactions-Footer-Query"),
+  Ajax,
+  helper,
+  modals
+  );
 
 export function getItemsArray(){
   return myItems.getItemsArray();
@@ -43,7 +49,7 @@ window.addEventListener('click', (event) => {
   const dialogContent = document.querySelector('.modal-content');
     
   if (event.target === dialogContainer && !dialogContent.contains(event.target)) {
-      modals.closeModal();
+      onModalCloseButtonClick()
   }
 });
 
@@ -51,14 +57,6 @@ window.addEventListener('click', (event) => {
 // INITIALIZATIONS
 ////////////////////////////
 
-
-
-
-
-export function makeNotification(id,title,content){
- // const notification = new Notification();
- // notification.setPopupNotificationInfo(id,title,content);
-}
 
 export function makeModal(type, title, content){
   modals.activateModal(type, title, content);
@@ -199,11 +197,85 @@ helper.addElementClickListenerById('Modal-Close-Button', onModalCloseButtonClick
 ////////////////////////////
 
 function onMenuNotificationButtonClick() {
-  makeModal("Modal", "Notifications", modals.getModalView("Notification Panel"));
+  Ajax.sendRequest([], 'get my notifications')
+    .then(responseData => {
+      if (responseData.Success) {
+        makeModal("Modal", "Notifications", modals.getModalView("Notification Panel",responseData.Parameters));
+      }
+  })
 }
 
 function onMenuSettingsButtonClick() {
-  makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel"));
+  Ajax.sendRequest([], 'get my account')
+  .then(responseData => {
+    if (responseData.Success) {
+      makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
+      helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
+    }
+  })
+}
+
+async function updateAccount (event) {
+  const parent = event.currentTarget.parentNode.parentNode;
+
+  const Firstname = parent.querySelector('#AccountSettings-Firstname').value;
+  const Lastname = parent.querySelector('#AccountSettings-Lastname').value;
+  const Email = parent.querySelector('#AccountSettings-Email').value;
+
+  const CurrentPassword = parent.querySelector('#AccountSettings-OldPassword');
+  const CurrentPIN = parent.querySelector('#AccountSettings-OldPINCode');
+
+  const data = {
+    Firstname : Firstname,
+    Lastname : Lastname,
+    Email : Email,
+    CurrentPassword : CurrentPassword.value,
+    CurrentPIN : CurrentPIN.value,
+  }
+
+  await Ajax.sendRequest(data, 'update my account')
+    .then(responseData => {
+      if (responseData.Success) {
+      }
+  });
+
+  if (parent.querySelector('#AccountSettings-ChangePassword').checked) {
+    const NewPassword1 = parent.querySelector('#AccountSettings-NewPassword1').value;
+    const NewPassword2 = parent.querySelector('#AccountSettings-NewPassword2').value;
+
+    const data = {
+      NewPassword1 : NewPassword1,
+      NewPassword2 : NewPassword2,
+      CurrentPassword : CurrentPassword.value,
+    }
+  
+    await Ajax.sendRequest(data, 'update my password')
+      .then(responseData => {
+    });
+  }
+
+  if (parent.querySelector('#AccountSettings-ChangePINCode').checked) {
+    const NewPINCode1 = parent.querySelector('#AccountSettings-NewPINCode1').value;
+    const NewPINCode2 = parent.querySelector('#AccountSettings-NewPINCode2').value;
+
+    const data = {
+      NewPINCode1 : NewPINCode1,
+      NewPINCode2 : NewPINCode2,
+      CurrentPIN : CurrentPIN.value,
+    }
+  
+    await Ajax.sendRequest(data, 'update my pin')
+      .then(responseData => {
+    });
+  }
+
+  CurrentPassword.value = '';
+  CurrentPIN.value = '';
+
+  parent.querySelector('#AccountSettings-NewPassword1').value = '';
+  parent.querySelector('#AccountSettings-NewPassword2').value = '';
+  parent.querySelector('#AccountSettings-NewPINCode1').value = '';
+  parent.querySelector('#AccountSettings-NewPINCode2').value = '';
 }
 
 helper.addElementClickListenerById('menu-notification-button', onMenuNotificationButtonClick);
@@ -216,8 +288,6 @@ helper.addElementClickListenerById('menu-settings-button', onMenuSettingsButtonC
 ////////////////////////////
 // OTHERS
 ////////////////////////////
-
-
 
 document.getElementById("menu-visibility-button").addEventListener('click', () => {
   console.log("ACTIVATED222 !");
@@ -235,6 +305,36 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
     }
 });
 
-export function setNotificationArray(data){
-  notificationArray = data;
+
+
+////////////////////////////
+// API
+////////////////////////////
+
+helper.addElementClickListenerById('Logout-Button', Logout); 
+async function Logout (){
+  await Ajax.sendRequest([], "Logout")
+    .then(responseData => {
+    });
+}
+
+GetMyData();
+async function GetMyData () {
+  await Ajax.sendRequest([], "get my account")
+    .then(responseData => {
+      if (responseData.Success) {
+        const name = (responseData['Parameters']['Account']['Firstname'] + " " + responseData['Parameters']['Account']['Lastname']);
+        document.getElementById('WebAccountFullName').innerHTML = name;
+      } else {
+        setTimeout(() => {
+          GetMyData ();
+        }, 2000);
+      }
+  })
+    .catch(error => {
+      console.error('Request Error:', error);
+      setTimeout(() => {
+        GetMyData ();
+      }, 2000);
+  });
 }

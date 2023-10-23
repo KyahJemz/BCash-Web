@@ -83,7 +83,28 @@ class MerchantAdmin_Actor {
                 $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History_Details ($Account, $requestPostBody);
                 break;
 
-                
+
+
+            case 'add item':
+                $response = null;
+                break;
+
+            case 'update item':
+                $response = null;
+                break;
+
+            case 'get items':
+                $response = null;
+                break;
+
+
+
+            case 'post order':
+                $response = null;
+                break;
+
+
+
             default:
                 $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
                 break;
