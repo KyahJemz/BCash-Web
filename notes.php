@@ -28,7 +28,7 @@ $this->db->insert('table_name', $data);
 
 
 // LOGGING MESSAGE
-    log_message('debug', $OTP . ' === ' . $tbl_authentications->OtpCode);
+    log_message('debug',);
 
 /*
 

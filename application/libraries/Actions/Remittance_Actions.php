@@ -67,6 +67,25 @@ public function View_All_Remittance() {
 }
 
 
+public function View_My_Remittance($Account) {
+
+       $RemittanceList = $this->CI->Remittance_Model->read_by_address(array(
+              'Account_Address' => $Account->WebAccounts_Address,
+       ));
+
+       return ['Success' => True,'Target' => null,'Parameters' => $RemittanceList,'Response' => ''];
+}
+
+public function View_My_Remaining_Remittance($Account) {
+
+       $RemittanceList = $this->CI->Remittance_Model->read_remaining_by_address(array(
+              'Account_Address' => $Account->WebAccounts_Address,
+       ));
+
+       return ['Success' => True,'Target' => null,'Parameters' => $RemittanceList,'Response' => ''];
+}
+
+
 /* 
 -- ---------------------
    UPDATE REMITTANCE REJECT
@@ -163,7 +182,27 @@ public function Update_Remittance_Approve($Account, $requestPostBody) {
    - merchantadmin
 -- ---------------------
 */ 
-      
+public function Upload_My_Remittance($Account) {
+
+       $this->CI->db->trans_start(); 
+
+              $this->CI->Remittance_Model->create(array(
+                     'Account_Address' => $Account->WebAccounts_Address,
+              ));
+
+       $this->CI->db->trans_complete(); 
+
+       if ($this->CI->db->trans_status() === FALSE) {
+              $this->CI->db->trans_rollback();
+              $error = $this->CI->db->error();
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+       }
+
+       $parameters = $this->View_My_Remittance($Account);
+
+       return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => 'Remittance successfully Submitted to the accounting department.'];
+}
+
 
 
 }

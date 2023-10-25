@@ -4,7 +4,7 @@ class Request extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(['form_validation']);
+        $this->load->library('form_validation');
         $this->load->model([
             'ActorCategory_Model', 
             'Functions_Model',
@@ -31,6 +31,41 @@ class Request extends CI_Controller {
 
     public function Process() {
 
+        // $config['upload_path'] = './public/images/temp/';
+        // $config['allowed_types'] = 'gif|jpg|png';
+        // $config['encrypt_name'] = TRUE; 
+
+        // $this->load->library('upload' , $config);
+        // if ($this->upload->do_upload('file')){
+        //     $data = array ('upload_data' => $this->upload->data());
+        //     $ItemName = $this->input->post('ItemName');
+        //     $ItemCost = $this->input->post('ItemCost');
+        //     $ItemCategory = $this->input->post('ItemCategory');
+            
+        //     $image = $data['upload_data']['file_name'];
+
+        //     log_message('debug', '----------' . $ItemName . '----------');
+        //     log_message('debug', '----------' . $ItemCost . '----------');
+        //     log_message('debug', '----------' . $ItemCategory . '----------');
+        //     log_message('debug', '----------' . $image . '----------');
+        // }
+
+        // if ($this->upload->do_upload('Image')){
+        //     $data = array ('upload_data' => $this->upload->data());
+        //     $ItemName = $this->input->post('ItemName');
+        //     $ItemCost = $this->input->post('ItemCost');
+        //     $ItemCategory = $this->input->post('ItemCategory');
+            
+        //     $image = $data['upload_data']['file_name'];
+
+        //     log_message('debug', '----------' . $ItemName . '----------');
+        //     log_message('debug', '----------' . $ItemCost . '----------');
+        //     log_message('debug', '----------' . $ItemCategory . '----------');
+        //     log_message('debug', '----------' . $image . '----------');
+        // }
+
+
+
         $this->AuthorizationToken = $this->Functions_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
         $this->AccountAddress = $this->Functions_Model->sanitize($this->input->get_request_header('AccountAddress', TRUE));
         $this->ClientVersion = $this->Functions_Model->sanitize($this->input->get_request_header('ClientVersion', TRUE));
@@ -39,7 +74,9 @@ class Request extends CI_Controller {
         $this->Location = $this->Functions_Model->sanitize($this->input->get_request_header('Location', TRUE));
         $this->Intent = $this->Functions_Model->sanitize($this->input->get_request_header('Intent', TRUE));
 
+
         $requestPostBody = $this->input->raw_input_stream; // READ POST BODY
+        
         $requestPostBody = json_decode($requestPostBody, TRUE); // DECODES
 
         $ValidateHeaders = $this->ValidateHeaders();
@@ -49,6 +86,8 @@ class Request extends CI_Controller {
             $this->Account = $this->Functions_Model->getAccountsByAddress($this->AccountAddress);
 
             $this->ActorCategory = $this->ActorCategory_Model->read_by_Id($this->Account->ActorCategory_Id);
+
+            $FileName = null;
 
             switch ($this->ActorCategory) {
                 case 'Administrator':
@@ -61,7 +100,7 @@ class Request extends CI_Controller {
                     $response = $this->MerchantAdmin_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
                     break;
                 case 'Merchant Staff':
-                    $response = $this->MerchantStaff_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
+                    $response = $this->MerchantStaff_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody, $FileName);
                     break;
                 case 'User':
                     $response = $this->User_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);

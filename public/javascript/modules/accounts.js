@@ -19,24 +19,37 @@ export default class Accounts {
     console.log("loaded");
 
     if (this.type === "merchantStaff") {
-        list.forEach(element => {
-        num++,
-        view = view + `
-          <tr class="table-row curson-pointer" data-userid="`+ element['User Id'] +`">
-            <td class="col1">
-              <div class="cell">
-                <div><p>`+ num +`</p></div>
-                <div><p class="`+ element['Status'].replace(new RegExp(" ", 'g'), '').toLowerCase() +`">`+ element['Status'] +`</p></div>
-                <div><p>`+ element['User Id'] +`</p></div>
-                <div><p>`+ element['Username'] +`</p> </div>
-                <div><p>`+ element['Firstname'] +`</p></div>
-                <div><p>`+ element['Lastname'] +`</p></div>
-              </div>
-            </td>
-          </tr>
-        `;
-      });
+      const NameUsernameEmail = this.queryContainer.querySelector(".NameUsernameEmail").value;
+      const Status = this.queryContainer.querySelector(".accounts-status-dropdown").textContent;
 
+      const data = {
+        NameUsernameEmail : NameUsernameEmail,
+        Status : Status,
+      }
+      this.Ajax.sendRequest(data, this.intent)
+        .then(responseData => {
+          responseData.Parameters.forEach(element => {
+            const status = (element['IsAccountActive'] === '1') ? 'Active' : 'Inactive' ;
+            num++,
+            view = view + `
+              <tr data-type="MTS-MTA" class="table-row StaffAccounts curson-pointer" data-userid="`+ element['WebAccounts_Address'] +`">
+                <td class="col1">
+                  <div class="cell">
+                    <div><p>`+ num +`</p></div>
+                    <div><p class="`+ status.replace(new RegExp(" ", 'g'), '').toLowerCase() +`">`+status +`</p></div>
+                    <div><p class='account-viewdata-button'>`+ element['WebAccounts_Address'] +`</p></div>
+                    <div><p>`+ element['Username'] +`</p> </div>
+                    <div><p>`+ element['Firstname'] +`</p></div>
+                    <div><p>`+ element['Lastname'] +`</p></div>
+                  </div>
+                </td>
+              </tr>
+            `;
+          });
+          this.tableBody.innerHTML = view;
+          const StaffAccounts = this.tableBody.querySelectorAll(".StaffAccounts");
+          this.Helper.addElementClickListenerByElement(StaffAccounts,this.openDialogBox);
+        })
     }
     
     if (this.type === "administrator-adm") {
@@ -390,7 +403,6 @@ export default class Accounts {
   openDialogBox(event) {
     const AccountAddress = event.currentTarget.querySelector('.account-viewdata-button').textContent;
     const Type = event.currentTarget.dataset.type;
-    console.log(AccountAddress, Type);
 
     if (Type === 'USR-ACT') {
       const data = {
@@ -1547,6 +1559,154 @@ export default class Accounts {
             
               const Ajax = new AjaxRequest(BaseURL);
               Ajax.sendRequest(data, 'update account')
+                .then(responseData => {
+                  if (responseData.Success) {
+                  }
+              });
+            });
+          }
+        })
+    }
+
+    if (Type === 'MTS-MTA') {
+      const data = {
+        AccountAddress : AccountAddress,
+        MerchantCategory : '',
+        Name : '',
+        Email : '',
+        Status : 'All'
+      }
+      const Ajax = new AjaxRequest(BaseURL);
+      Ajax.sendRequest(data, 'get merchantstaff accounts')
+        .then(responseData => {
+          if (responseData.Success) {
+            const data = responseData.Parameters[0];
+            const layout = `
+              <div class="personal-information-container">
+  
+                  <br>
+                  <p class="title center-text">Account Details</p>
+                  <p id="AccountDetails-AccountAddress" class="subtitle">${(data['WebAccounts_Address'])}</p>
+                  <br>
+  
+                  <fieldset class="PersonalDetailsSettings">
+                    <legend><p>Account Details</p></legend>
+                    <table>
+                      <tr>
+                        <td>
+                          <p>Firstname:</p>
+                          <input id="AccountDetails-Firstname" type="text" value="${(data['Firstname']) ? data['Firstname'] : ''}">
+                        </td>
+                        <td>
+                          <p>Lastname:</p>
+                          <input id="AccountDetails-Lastname" type="text" value="${(data['Lastname']) ? data['Lastname'] : ''}">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>Email:</p>
+                          <input id="AccountDetails-Email" type="text" value="${(data['Email']) ? data['Email'] : ''}">
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+  
+                  <fieldset class="AccountDetailsSettings">
+                      <legend><p>Account Settings</p></legend>
+                      <table>
+                        <tr>
+                          <td colspan="2">
+                              <p class="warning center-text">Warning, High level user settings.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>Is Account Active:</p>
+                          </td>
+                          <td>
+                            <label class="switch">
+                              <input id="AccountDetails-IsAccountActive" type="checkbox" ${(data['IsAccountActive'] === '1') ? 'checked' : ''}>
+                              <span class="slider round"></span>
+                            </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                              <p class="warning center-text">Leave this part blank, if no PIN and Password changes.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>New PIN Code:</p>
+                          </td>
+                          <td>
+                            <input id="AccountDetails-AccountPINCode" type="password" value="">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>New Password:</p>
+                          </td>
+                          <td>
+                            <input id="AccountDetails-AccountPassword" type="password" value="">
+                          </td>
+                        </tr>
+
+                      </table>
+                  </fieldset>
+                  <fieldset class="ConfirmChanges">
+                      <legend><p>Confirmation</p></legend>
+                      <table>
+                        <tr>
+                          <td colspan="2">
+                            <p class="center-text warning">Required to apply changes.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>Your PIN Code:</p>
+                          </td>
+                          <td>
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                          </td>
+                        </tr>
+                      </table>
+                  </fieldset>
+                  <div class="buttons-container">
+                      <button id="btn-submit-account-details-changes" class="btn-submit ">Upload Changes</button>
+                  </div>
+              </div>
+            `;
+            makeModal('Modal', 'Account Details Settings', layout);
+  
+            const element = document.getElementById("btn-submit-account-details-changes");
+            
+            element.addEventListener('click', (event) => {
+              const parent = event.currentTarget.parentNode.parentNode;
+            
+              const AccountAddress = parent.querySelector('#AccountDetails-AccountAddress').textContent;
+              const Firstname = parent.querySelector('#AccountDetails-Firstname').value;
+              const Lastname = parent.querySelector('#AccountDetails-Lastname').value;
+              const Email = parent.querySelector('#AccountDetails-Email').value;
+              const AccountPINCode = parent.querySelector('#AccountDetails-AccountPINCode').value;  
+              const AccountPassword = parent.querySelector('#AccountDetails-AccountPassword').value;   
+              const PINCode = parent.querySelector('#AccountDetails-PINCode'); 
+            
+              const IsAccountActive = parent.querySelector('#AccountDetails-IsAccountActive').checked; 
+            
+              const data = {
+                AccountAddress : AccountAddress,
+                Firstname : Firstname,
+                Lastname : Lastname,
+                Email : Email,
+                PINCode : PINCode.value,
+                AccountPINCode : AccountPINCode,
+                AccountPassword : AccountPassword,
+                IsAccountActive : (IsAccountActive === true) ? 1 : 0,
+              }
+            
+              const Ajax = new AjaxRequest(BaseURL);
+              Ajax.sendRequest(data, 'update staff account')
                 .then(responseData => {
                   if (responseData.Success) {
                   }

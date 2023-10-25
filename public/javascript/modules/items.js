@@ -6,10 +6,13 @@ Event Handler for Items
 */
 
 import Helper from '../helper.js';
+import Modals, { makeModal }  from './modals.js'
+import AjaxRequest from '../ajax.js';
 
 export default class Item {
     constructor() {
         this.items = [];
+        this.categories = [];
     }
 
     registerItem(itemId, name, cost, category, dateModified, dateCreated, image) {
@@ -23,6 +26,19 @@ export default class Item {
             image
         };
         this.items.push(newItem);
+
+        if (this.categories.includes(category)) {
+            this.categories.push(category);
+        }
+    }
+
+    getCategories(){
+        return this.categories;
+    }
+
+    clearItems() {
+        this.items = [];
+        this.categories = [];
     }
   /*
     deleteItem() {
@@ -232,7 +248,7 @@ export default class Item {
             temp.forEach(item => {
     
                 container.querySelector(layoutTag).innerHTML = container.querySelector(layoutTag).innerHTML + `
-                    <div class="item-container" data-item-id="`+ item.itemId +`" data-name="`+ item.name +`" data-cost="`+ item.cost +`"  data-image="`+ item.image +`">
+                    <div class="item-container" data-item-id="`+ item.itemId +`" data-name="`+ item.name +`" data-cost="`+ item.cost +`"  data-image="`+ item.image +`" data-category="`+ item.category +`">
                         <div class="item-image">
                             <img src="`+ item.image +`" alt="item-image">
                         </div>
@@ -275,9 +291,60 @@ export default class Item {
 
         const helper = new Helper();
         helper.addElementClickListener('.addToCartButton',(event) => order.addToCart(event, order));
-       // helper.addElementClickListener('.editItemButton',(event) => categorySelected(event));
-       // helper.addElementClickListener('.deleteItemButton',(event) => categorySelected(event));
-       // helper.addElementClickListener('.addItemButton',(event) => categorySelected(event));
+        helper.addElementClickListener('.editItemButton',(event) => {
+            const element = event.currentTarget.parentNode.parentNode;
+            const modal = new Modals();
+            const Parameters = {
+                ItemId : element.dataset.itemId,
+                ItemImage : element.dataset.image,
+                ItemName :element.dataset.name,
+                ItemCost : element.dataset.cost,
+                ItemCategory :element.dataset.category,
+            }
+            makeModal("Modal", "Edit Item Form", modal.getModalView("Edit-Item",Parameters));
+            helper.addElementClickListenerById('EditItem-SubmitBtn',(event)=> {
+                const element = event.currentTarget.parentNode.parentNode;
+                console.log("$$$$$$$$",element);
+                const Ajax = new AjaxRequest(BaseURL);
+                const data = {
+                    ItemId : event.currentTarget.parentNode.dataset.itemid,
+                    ItemImage : "",
+                    ItemName : element.querySelector('#EditItem-Name').value,
+                    ItemCost : element.querySelector('#EditItem-Cost').value,
+                    ItemCategory :element.querySelector('#EditItem-Category').value,
+                };
+                console.log(data);
+                Ajax.sendRequest(data, "update item").then(responseData => {document.getElementById("Modal-Container").style.display = "none";});
+            });
+            helper.addElementClickListenerById('EditItem-CancelBtn',()=> {
+                document.getElementById("Modal-Container").style.display = "none";
+            });
+        });
+
+        helper.addElementClickListener('.deleteItemButton',(event) => {
+            const element = event.currentTarget.parentNode.parentNode;
+            const modal = new Modals();
+            const Parameters = {
+                ItemId : element.dataset.itemId,
+                ItemImage : element.dataset.image,
+                ItemName :element.dataset.name,
+                ItemCost : element.dataset.cost,
+                ItemCategory :element.dataset.category,
+            }
+            makeModal("Modal", "Delete Item Form", modal.getModalView("Delete-Item",Parameters));
+            helper.addElementClickListenerById('DeleteItem-SubmitBtn',(event)=> {
+                const element = event.currentTarget.parentNode.parentNode;
+                const Ajax = new AjaxRequest(BaseURL);
+                const data = {
+                    ItemId : element.querySelector('#DeleteItem-ItemId').value,
+                    PinCode : element.querySelector('#DeleteItem-PINCode').value,
+                };
+                Ajax.sendRequest(data, "deactivate item").then(responseData => {document.getElementById("Modal-Container").style.display = "none";});
+            });
+            helper.addElementClickListenerById('DeleteItem-CancelBtn',()=> {
+                document.getElementById("Modal-Container").style.display = "none";
+            });
+        });
     }
 
     categorySelected(event, items, order) {

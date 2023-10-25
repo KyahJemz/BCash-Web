@@ -1,3 +1,45 @@
+:root {
+    --BackgroundPrimaryColor: #d3d3d3; /* Background */
+    --BackgroundPanelColor: #ffffff; /* 2nd Background */
+    --BackgroundTitleBarColor: #E3E4E6;
+    --BackgroundContentTitleBarColor: #e7e7e7;
+    --AsccentColor: #CB8213; /* Buttons */
+    --TextColor: #4b4b4b; /* text */
+    --DarkColor: #363636; /* text */
+    --ErrorColor: #E53935; 
+    --CorrectColor: #43A047;
+
+    --TextColor-White: #ffffff;
+    --TextColor-Red: #DA121A;
+    --TextColor-Gold: #F9AE28;
+    --TextColor-LightBlack: #333333;
+    --TextColor-Black: #0F1419;
+
+    --Button-Background-Red: #DA121A;
+    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Gold: #F9AE28;
+    --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-White: #ffffff;
+
+    --Selected-Background-LightBlack: #333333;
+
+    --Panel-Background-LightBlack: #333333;
+    --Panel-Background-Gold: #FFCC00;
+    --Panel-Background-Red: #DA121A;
+    --Panel-Background-White: #ffffff;
+    --Panel-Background-DarkWhite: #F2F2F2;
+
+    --color-White: #ffffff;
+    --color-DarkWhite: #F2F2F2;
+    --color-Red: #DA121A;
+    --color-DarkRed: #9A110D;
+    --color-Gold: #FFCC00;
+    --color-DarkGold: #F9AE28;
+    --color-Gray: #282828;
+    --color-LightBlack: #333333;
+    --color-Black: #0F1419;
+}
+
 .panel-fundremittance-content {
     display: flex;
     padding: 10px;
@@ -27,7 +69,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    flex: 0 0 125px;
+    flex: 0 0 100px;
 }
 
 .panel-fundremittance-content .left-panel .top-panel .row{
@@ -86,24 +128,56 @@
     overflow-y: scroll;
 }
 
-.panel-fundremittance-content .left-panel .table-container .table-row,
 .panel-fundremittance-content .right-panel .table-container .table-row{
     padding-top: 5px;
     padding-bottom: 5px;
     display: flex;
     width: 100%;
     border-bottom: 1px solid ghostwhite;
-
+    gap:20px;
+    padding-right: 8px; 
 }
 
-.panel-fundremittance-content .left-panel .table-container .table-row > div,
+.panel-fundremittance-content #FundRemittance-TotalOrders{
+    color: var(--TextColor-Red);
+}
+
+.panel-fundremittance-content #FundRemittance-TotalSales{
+    color: var(--TextColor-Red);
+}
+
+.panel-fundremittance-content .right-panel .table-content .table-row {
+    cursor: pointer;
+}
+
+.panel-fundremittance-content .right-panel .table-content .table-row:hover{
+    background-color: rgba(0, 0, 0, 0.100);
+}
+
 .panel-fundremittance-content .right-panel .table-container .table-row > div {
-    width: calc(100% / 4);
+    /* width: calc(100% / 4); */
     text-align: center;
     text-wrap: nowrap;
 }
 
-.panel-fundremittance-content .left-panel .table-container .table-header,
+.panel-fundremittance-content .left-panel .table-container .details-title {
+    padding: 10px 0px;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--TextColor-Red);
+    font-weight: bold;
+}
+
+.panel-fundremittance-content .right-panel .header {
+    font-size: 1rem;
+    color: var(--TextColor-Red);
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+.panel-fundremittance-content .left-panel .table-container .details-title,
 .panel-fundremittance-content .right-panel .table-container .table-header {
     border-top: 1px solid gainsboro;
     border-bottom: 1px solid gainsboro;
@@ -111,6 +185,69 @@
     padding-top: 5px;
     margin-bottom: 5px;
     padding-bottom: 5px;
+}
+
+.panel-fundremittance-content .right-panel .table-container .table-header .table-row {
+    padding-right: 16px;
+}
+
+.panel-fundremittance-content .right-panel .table-container .c1{
+    width: 40px;
+}
+
+.panel-fundremittance-content .right-panel .table-container .c2{
+    width: 200px;
+}
+.panel-fundremittance-content .right-panel .table-container .c3{
+    width: 100px;
+}
+
+.panel-fundremittance-content .right-panel .table-container .c4{
+    text-align: center;
+    width: 100%;
+}
+
+.panel-fundremittance-content .right-panel .table-container .c3.Waiting{
+    color: var(--color-DarkGold);
+}
+
+.panel-fundremittance-content .right-panel .table-container .c3.Approved{
+    color: var(--CorrectColor);
+}
+
+.panel-fundremittance-content .right-panel .table-container .c3.Rejected{
+    color: var(--color-Red);
+}
+
+.panel-fundremittance-content .left-panel .table-container .table-row-details{
+
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.panel-fundremittance-content .left-panel .table-container .table-row-details > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.panel-fundremittance-content .left-panel .table-container .table-row-details .bottom {
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.panel-fundremittance-content .left-panel .table-container .table-row-details .top {
+    justify-content: space-between;   
+    font-weight: bold;
+    border-bottom: 1px dashed gainsboro;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+.panel-fundremittance-content .left-panel .table-container .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 

@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCash - Merchant Admin</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
     <link rel="stylesheet" href="<?php echo base_url('./public/css/styles.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/dialog-box.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/menu.css'); ?>">
@@ -645,14 +647,14 @@
                     <div id="staffmanagement-table-query" class="panel-staffmanagement-query panel">
                         <div class="form-container">
                             <div>
-                                <label for="TransactionNumber">Name/Username/Email</label>
-                                <input class="staffmanagement-transactionnumber query inputtext" class="textbox" type="search" name="TransactionNumber">
+                                <label for="TransactionNumber">Name/Username/Email:</label>
+                                <input class="NameUsernameEmail staffmanagement-transactionnumber query inputtext" class="textbox" type="search" name="TransactionNumber">
                             </div>
                             <div>
-                                <label>Status Filter</label>
+                                <label>Status Filter:</label>
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
+                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
                                         <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
                                     </button>
                                     <div class="dropdown-content">
@@ -716,41 +718,24 @@
                         <div class="left-panel">
                             <div class="top-panel">
                                 <div class="row">
-                                    <div class="flex"> 
-                                        <p>Date: </p>
-                                        <input type="date" name="" id="date-picker" value="">
-                                        <input type="text" name="" id="date-text" value="" disabled>
-                                    </div>
-                                    <div>
-                                        <button>Export as File</button>
-                                        <button>Submit to Accounting</button>
-                                    </div>
+                                    <button>2</button>
+                                    <button>2</button>
                                 </div>
-                                <div class="row">
-                                    Remarks:<input type="text" name="" id="date-text" value="">
-                                </div>
-                                <div class="row">
-                                    <div>Total Orders: 250</div>
-                                    <div>Total Sales: 250</div>
+                                <div id="FundRemittance-Buttons">
+                                    
                                 </div>
                             </div>
                             <div class="bottom-panel">
                                 <div class="table-container">
                                     <div class="table-header">
-                                        <div class="table-row">
-                                            <div>#</div>
-                                            <div>Transaction#</div>
-                                            <div>Status</div>
-                                            <div>Amount</div>
-                                        </div>
+                                        <p class="details-title">Details</p>
                                     </div>
-                                    <div class="table-content">
-                                        <div class="table-row">
-                                            <div>1</div>
-                                            <div>14235235252erwr3</div>
-                                            <div>Completed</div>
-                                            <div>123,556</div>
-                                        </div>
+                                    <div class="row">
+                                        <div id="FundRemittance-TotalOrders">Total Orders: 0</div>
+                                        <div id="FundRemittance-TotalSales">Total Sales: ₱ 0.00</div>
+                                    </div>
+                                    <div class="table-content" id="FundRemittance-DetailsContainer">
+                                        <!-- TABLE -->
                                     </div>
                                 </div>
                             </div>
@@ -760,20 +745,14 @@
                             <div class="table-container">
                                 <div class="table-header">
                                     <div class="table-row">
-                                        <div>#</div>
-                                        <div>Date</div>
-                                        <div>Status</div>
-                                        <div>Amount</div>
+                                        <div class="c1">#</div>
+                                        <div class="c2">Date</div>
+                                        <div class="c3">Status</div>
+                                        <div class="c4">Merchant</div>
                                     </div>
                                 </div>
-                                <div class="table-content">
-                                    <div class="table-row">
-                                        <div class="num">12</div>
-                                        <div>September 16, 2023</div>
-                                        <div>Completed</div>
-                                        <div>123,556</div>
-                                    </div>
-                                   
+                                <div class="table-content" id="FundRemittance-RecentContainer">
+                                    <!-- TABLE -->
                                 </div>
                             </div>
                         </div>

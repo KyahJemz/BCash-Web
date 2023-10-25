@@ -32,10 +32,12 @@ const myTransactions = new Transactions(
 );
 
 const accounts = new Accounts(
-  "merchantStaffs", 
-  document.getElementById("staffmanagement-table-header"),
+  "merchantStaff", 
   document.getElementById("staffmanagement-table-body"),
-  document.getElementById("staffmanagement-table-query")
+  document.getElementById("staffmanagement-table-query"),
+  Ajax,
+  helper,
+  modals
   );
 
 export function getItemsArray(){
@@ -66,8 +68,8 @@ window.addEventListener('click', (event) => {
 ////////////////////////////
 
 export function makeAlert(type,text){
-  const alerts = new Alerts();
-  alerts.createAlert(type,text);
+  const alerts = new Alerts(document.querySelector(".Alert-Box-Table", ));
+  alerts.createAlertElement(type,text);
 }
 
 export function makeModal(type, title, content){
@@ -75,23 +77,15 @@ export function makeModal(type, title, content){
 }
 
 function refreshItems(){
-  myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png")
-  myItems.registerItem("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../public/images/items/2.png");
-  myItems.registerItem("3","Margherita Pizza","180","Pizza","2023-06-29","2023-06-29", "../public/images/items/3.png");
-  myItems.registerItem("4","Vegetable Curry with Naan Bread","130","Food","2023-06-29","2023-06-29", "../public/images/items/4.png");
-  myItems.registerItem("5","BBQ Pulled Pork Burger","140","Food","2023-06-29","2023-06-29", "../public/images/items/5.png");
-  myItems.registerItem("6","Fish Tacos with Salsa","160","Food","2023-06-29","2023-06-29", "../public/images/items/6.png");
-  myItems.registerItem("7","Iced Caramel Macchiato","110","Drink","2023-06-29","2023-06-29", "../public/images/items/7.png");
-  myItems.registerItem("8","Strawberry Banana Smoothie","90","Drink","2023-06-29","2023-06-29", "../public/images/items/8.png");
-  myItems.registerItem("9","Chocolate Chip Ice Cream","70","Disert","2023-06-29","2023-06-29", "../public/images/items/9.png");
-  myItems.registerItem("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-06-29", "../public/images/items/10.png");
+  myItems.clearItems();
+  Ajax.sendRequest([], "get items")
+    .then(responseData => {
+      responseData.Parameters.forEach(row => {
+        //myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png");
+        myItems.registerItem(row['MerchantItems_Id'],row['Name'],row['Price'],row['ItemCategory'],row['ModifiedTimestamp'],row['CreatedTimestamp'], row['Image']);
+      });
+    });
 }
-
-refreshItems();
-
-//console.log(myItems.getItemsArray());
-
-//displayItemsEvents(items, "CreateOrder");
 
 
 
@@ -108,13 +102,42 @@ function onCreateOrderClearClick(){
   myOrders.clearOrder(myOrders)
 }
 
+let intervalId;
+function startInterval() {
+  intervalId = setInterval(() => {
+    Ajax.sendRequest([], 'listen order event')
+      .then(responseData => {
+        if (responseData.Parameters.UsersAccount_Address !== null) {
+          document.getElementById('order-userid').value = responseData.Parameters.UsersAccount_Address;
+          clearInterval(intervalId);
+        }
+      });
+  }, 1000);
+}
+
+
 function onCreateOrderPlaceOrderClick(){
   if (myOrders.items.length > 0) {
-    makeModal("Modal", "Order Confirmation", modals.getModalView("Place-Order",myOrders));
-   // openDialogBoxEvents("Place-Order");
+    Ajax.sendRequest([], 'set order event')
+    .then(responseData => {
+      if (responseData.Success) {
+        makeModal("Modal", "Order Confirmation", modals.getModalView("Place-Order",myOrders));
+        const qrcode = new QRCode("order-qrcode", {
+          text: responseData.Parameters,
+          width: 128,
+          height: 128
+        });
+        startInterval();
+      }
+  })
+
+
+   
+    
+    
+
   } else {
-    makeAlert("Invalid Order", "No items selectd to place an order. Please select and try again...");
-  //  openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
+    makeAlert("danger", "No items selectd to place an order. Please select and try again...");
   }
 }
 
@@ -147,6 +170,29 @@ helper.addElementInputListenerById('itemmanagement-search', onItemManagementSear
 
 function onMenuSelectionButton(event) {
   menu.menuSelectionEvents(event, myItems, myOrders);
+  if (event.currentTarget.dataset.menu === "Item Management") {
+    refreshItems();
+  }
+  if (event.currentTarget.dataset.menu === "Create Order") {
+    refreshItems();
+  }
+  if (event.currentTarget.dataset.menu === "Fund Remittance") {
+    document.getElementById('FundRemittance-DetailsContainer').innerHTML = "";
+    document.getElementById('FundRemittance-Buttons').innerHTML = "";
+    document.getElementById('FundRemittance-RecentContainer').innerHTML = "";
+    document.getElementById('FundRemittance-TotalOrders').innerHTML = `Total Orders : 0`;
+    document.getElementById('FundRemittance-TotalSales').innerHTML = `Total Sales : ₱ 0.00`;
+    Ajax.sendRequest([], "get my remittance")
+      .then(responseData => {
+        fundRemittance(responseData.Parameters);
+      })
+    
+
+      
+  }
+
+
+  
 }
 
 helper.addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
@@ -330,7 +376,7 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
 ////////////////////////////
 
 function onMerchantStaffAccountsSearchClick(event) {
-  accounts.applyAccountsQuery(event);
+  accounts.applyAccountsQuery(event, 'get staff accounts');
 }
 
 function onMerchantStaffAccountsClearClick(event) {
@@ -376,21 +422,28 @@ async function GetMyData () {
   });
 }
 
-helper.addElementClickListenerById('ItemManagement-AddItems', (event)=>{
+helper.addElementClickListenerById('ItemManagement-AddItems', ()=>{
   makeModal("Modal", "Add Item Form", modals.getModalView("Add-Item",AddItem));
   helper.addElementClickListenerById('AddItem-SubmitBtn',AddItem);
   helper.addElementClickListenerById('AddItem-CancelBtn',onModalCloseButtonClick);
 })
 
 export function AddItem(){
+  const formData = new FormData(document.getElementById('AddItem-Form'));
+
+  const imageInput = document.getElementById('AddItem-Image');
+  if (imageInput.files.length > 0) {
+    formData.set('file', imageInput.files[0]);
+  }
+
   const data = {
-    ItemImage : document.getElementById('AddItem-Image'),
     ItemName : document.getElementById('AddItem-Name').value,
     ItemCost : document.getElementById('AddItem-Cost').value,
     ItemCategory : document.getElementById('AddItem-Category').value,
   }
 
-  Ajax.sendRequest(data, "get my account")
+
+  Ajax.sendRequest(data, "add item")
     .then(responseData => {
       refreshItems();
   })
@@ -399,6 +452,110 @@ export function AddItem(){
 
 
 
+export function fundRemittance (parameters){
+  document.getElementById('FundRemittance-DetailsContainer').innerHTML = "";
+  document.getElementById('FundRemittance-Buttons').innerHTML = "";
+  document.getElementById('FundRemittance-RecentContainer').innerHTML = "";
+  document.getElementById('FundRemittance-TotalOrders').innerHTML = `Total Orders : 0`;
+  document.getElementById('FundRemittance-TotalSales').innerHTML = `Total Sales : ₱ 0.00`;
+  const FundRemittance = document.getElementById('FundRemittance-RecentContainer');
+  FundRemittance.innerHTML = '';
+  parameters.forEach(element => {
+    FundRemittance.innerHTML = FundRemittance.innerHTML + `
+      <div class="table-row RecentRemittanceBtn" data-remittance="${element.Remittance_Id}">
+        <div class="c1">${element.Remittance_Id}</div>
+        <div class="c2">${helper.getDate(element.DateResponse)}</div>
+        <div class="c3 ${element.Status}">${element.Status}</div>
+        <div class="c4">${element.Submitted_By}</div>
+      </div>
+    `;
+  });
+  
+  helper.addElementClickListenerByElement(FundRemittance.querySelectorAll('.RecentRemittanceBtn'),(event)=>{
+    const data = {
+      Remittance_Id : event.currentTarget.dataset.remittance,
+    };
+    Ajax.sendRequest(data, "get remittance details")
+      .then(responseData => {
+        let TotalAmount = 0;
+        let TotalOrders = 0;
+        const FundRemittanceDetails = document.getElementById('FundRemittance-DetailsContainer');
+        FundRemittanceDetails.innerHTML = '';
+        responseData.Parameters.RemittanceList.forEach(element => {
+          let bottomLayout = '';
+          element.Items.forEach(element => {
+            bottomLayout = bottomLayout + `
+              <div class="bottom">
+                <p class="name">${element.ItemName}</p>
+                <p class="quantity">x${element.ItemQuantity}</p>
+                <p class="price">₱ ${helper.formatNumber(element.ItemAmount * element.ItemQuantity)}</p>
+              </div>
+            `;
+          });
+          FundRemittanceDetails.innerHTML = FundRemittanceDetails.innerHTML + `
+            <div class="table-row-details">
+                <div class="top">
+                  <p>Id: ${element.Transaction_Address}</p>
+                  <p>Total: ₱ ${helper.formatNumber(element.Credit)}</p>
+                </div>
+                ${bottomLayout}
+            </div>
+          `;
+          TotalAmount = TotalAmount + Number(element.Credit); // floating number
+          TotalOrders = TotalOrders + 1;
+        });
+        document.getElementById('FundRemittance-TotalOrders').innerHTML = `Total Orders : ${TotalOrders}`;
+        document.getElementById('FundRemittance-TotalSales').innerHTML = `Total Sales : ₱ ${helper.formatNumber(TotalAmount)}`;
+      });
 
+  })
+
+  Ajax.sendRequest([], "get remaining remittance")
+    .then(responseData => {
+      let TotalAmount = 0;
+        let TotalOrders = 0;
+        const FundRemittanceDetails = document.getElementById('FundRemittance-DetailsContainer');
+        FundRemittanceDetails.innerHTML = '';
+        responseData.Parameters.forEach(element => {
+          let bottomLayout = '';
+          element.Items.forEach(element => {
+            bottomLayout = bottomLayout + `
+              <div class="bottom">
+                <p class="name">${element.ItemName}</p>
+                <p class="quantity">x${element.ItemQuantity}</p>
+                <p class="price">₱ ${helper.formatNumber(element.ItemAmount * element.ItemQuantity)}</p>
+              </div>
+            `;
+          });
+          FundRemittanceDetails.innerHTML = FundRemittanceDetails.innerHTML + `
+            <div class="table-row-details">
+                <div class="top">
+                  <p>Id: ${element.Transaction_Address}</p>
+                  <p>Total: ₱ ${helper.formatNumber(element.Credit)}</p>
+                </div>
+                ${bottomLayout}
+            </div>
+          `;
+          TotalAmount = TotalAmount + Number(element.Credit); // floating number
+          TotalOrders = TotalOrders + 1;
+        });
+        document.getElementById('FundRemittance-TotalOrders').innerHTML = `Today Orders : ${TotalOrders}`;
+        document.getElementById('FundRemittance-TotalSales').innerHTML = `Today Sales : ₱ ${helper.formatNumber(TotalAmount)}`;
+
+        if (FundRemittanceDetails.innerHTML !== '') {
+          document.getElementById('FundRemittance-Buttons').innerHTML = `
+            <button id="FundRemittance-SubmitBtn">Remit</button>
+          `;
+          helper.addElementClickListenerById('FundRemittance-SubmitBtn',(event)=>{
+            console.log(event.currentTarget);
+            Ajax.sendRequest([], "Upload remittance").then(responseData => fundRemittance(responseData.Parameters));
+          });
+        }
+        
+
+       
+
+      })
+}
 
 

@@ -22,6 +22,20 @@ class Merchants_Model extends CI_Model {
           }
        }
 
+       public function get_categoryId($params) {
+              $result = $this->db
+              ->select('*')
+              ->from('tbl_merchants')
+              ->where('WebAccounts_Address', $params['Account_Address'])
+              ->get()
+              ->row();
+          if ($result) {
+              return $result;
+          } else {
+              return []; 
+          }
+       }
+
        public function get_merchantadminaddress($params) {
               $merchant = $this->db
                      ->select('*')
@@ -116,5 +130,34 @@ class Merchants_Model extends CI_Model {
                      return null; 
               }
        }
+
+       public function read_merchantstaff_by_category($params) {
+              $this->db
+                     ->select('*')
+                     ->from('tbl_Merchants')
+                     ->join('tbl_webaccounts', 'tbl_Merchants.WebAccounts_Address = tbl_webaccounts.WebAccounts_Address', 'left')
+                     ->where('tbl_Merchants.MerchantsCategory_Id ', $params['MerchantsCategory_Id'])
+                     ->like('tbl_Merchants.WebAccounts_Address ', 'MTS', 'after');
+              
+              if (!empty($params['NameUsernameEmail'])){
+                     $this->db
+                     ->group_start()
+                            ->like('tbl_webaccounts.WebAccounts_Address ', $params['NameUsernameEmail'])
+                            ->or_like('tbl_webaccounts.Username ', $params['NameUsernameEmail'])
+                            ->or_like('tbl_webaccounts.Email ', $params['NameUsernameEmail'])
+                            ->or_like('tbl_webaccounts.Firstname ', $params['NameUsernameEmail'])
+                            ->or_like('tbl_webaccounts.Lastname ', $params['NameUsernameEmail'])
+                     ->group_end();
+              }
+
+              if ($params['Status'] !== 'All'){
+                     $status = $params['Status'] === 'Active' ? '1' : '0';
+                     $this->db->where('tbl_webaccounts.IsAccountActive ', (int)$status);
+              }
+                     
+              return $this->db->get()->result();
+       
+       }
+
 
 }

@@ -365,7 +365,7 @@ public function View_Recent_CashIn () {
 
               $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|alpha_numeric|exact_length[15]');
               $this->CI->form_validation->set_rules('Amount', 'Amount', 'trim|required|number');
-              $this->form_validation->set_rules('Message', 'Message', 'trim');
+              $this->CI->form_validation->set_rules('Message', 'Message', 'trim');
 
               if ($this->CI->form_validation->run() === FALSE) {
                      $validationErrors = validation_errors();
@@ -395,14 +395,14 @@ public function View_Recent_CashIn () {
               ));
               $AccountBalance = (float)$AccountBalance;
               $Amount = (float)$Amount;
-              if (!is_numeric($AccountBalance) || !is_numeric($amount)) {
+              if (!is_numeric($AccountBalance) || !is_numeric($Amount)) {
                      return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'Invalid balance or amount provided.'];
               }
-              if ($AccountBalance < $amount) {
+              if ($AccountBalance < $Amount) {
                      return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'The amount declared is higher than the sender\'s current balance!'];
               }
 
-              $this->db->trans_start(); 
+              $this->CI->db->trans_start(); 
 
                      $TransactionAddress = $this->CI->Functions_Model->create_unique_transaction_address();
 
@@ -437,11 +437,11 @@ public function View_Recent_CashIn () {
                             'PostedBy' => $Account->UsersAccount_Address,
                      ));
 
-              $this->db->trans_complete(); 
+              $this->CI->db->trans_complete(); 
 
-              if ($this->db->trans_status() === FALSE) {
-                     $this->db->trans_rollback();
-                     $error = $this->db->error();
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
               }
 
@@ -526,7 +526,7 @@ public function View_Recent_CashIn () {
                      return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'The amount declared is higher than the receivers\'s current balance!'];
               }
 
-              $this->db->trans_start(); 
+              $this->CI->db->trans_start(); 
 
                      $TransactionAddress = $this->CI->Functions_Model->create_unique_transaction_address();
 
@@ -561,11 +561,11 @@ public function View_Recent_CashIn () {
                             'PostedBy' => $Account->UsersAccount_Address,
                      ));
 
-              $this->db->trans_complete(); 
+              $this->CI->db->trans_complete(); 
 
-              if ($this->db->trans_status() === FALSE) {
-                     $this->db->trans_rollback();
-                     $error = $this->db->error();
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
               }
 
@@ -609,10 +609,10 @@ public function Approve_Order ($Account, $AccountData, $requestPostBody) {
        ));
        $AccountBalance = (float)$AccountBalance;
        $Amount = (float)$Amount;
-       if (!is_numeric($AccountBalance) || !is_numeric($amount)) {
+       if (!is_numeric($AccountBalance) || !is_numeric($Amount)) {
               return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'Invalid balance or amount provided.'];
        }
-       if ($AccountBalance < $amount) {
+       if ($AccountBalance < $Amount) {
               return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'The amount declared is higher than the sender\'s current balance!'];
        }
 

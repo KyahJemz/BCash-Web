@@ -919,9 +919,9 @@ class Account_Actions {
 
               $changes = 'Changes: ';
 
-              $Account_Model;
-              $Data_Model;
-              $AccountDataToModify;
+              $Account_Model = null;
+              $Data_Model = null;
+              $AccountDataToModify = null;
 
               if ($AccountToModify->ActorCategory_Id === '1' || $AccountToModify->ActorCategory_Id === '2' || $AccountToModify->ActorCategory_Id === '3' || $AccountToModify->ActorCategory_Id === '4') {
                      $Account_Model = $this->CI->WebAccounts_Model;
@@ -1469,5 +1469,176 @@ class Account_Actions {
               return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
        }
 
+
+       /*
+-- ---------------------
+   VIEW STAFFS
+   - from merchant admin use
+-- ---------------------
+*/
+public function View_My_Staffs ($Account, $requestPostBody) {
+
+       $this->CI->form_validation->set_data($requestPostBody);
+
+       $this->CI->form_validation->set_rules('NameUsernameEmail', 'NameUsernameEmail', 'trim');
+       $this->CI->form_validation->set_rules('Status', 'Status', 'trim|required');
+
+       if ($this->CI->form_validation->run() === FALSE) {
+              $validationErrors = validation_errors();
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+       }
+
+       $NameUsernameEmail = $this->CI->Functions_Model->sanitize($requestPostBody['NameUsernameEmail']);
+       $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
+
+       $MerchantCategoryId = $this->CI->Merchants_Model->get_categoryId(array(
+              'Account_Address' => $Account->WebAccounts_Address,
+       ))->MerchantsCategory_Id;
+
+
+       $Staffs = $this->CI->Merchants_Model->read_merchantstaff_by_category(array(
+              'MerchantsCategory_Id' => $MerchantCategoryId,
+              'NameUsernameEmail' => $NameUsernameEmail,
+              'Status' => $Status,
+       ));
+
+       return ['Success' => True,'Target' => null,'Parameters' => $Staffs,'Response' => ''];
+}
+
+
+public function Update_Account_By_MTA ($Account, $requestPostBody) {
+
+       $this->CI->form_validation->set_data($requestPostBody);
+
+       $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|max_length[15]');
+       $this->CI->form_validation->set_rules('Firstname', 'Firstname', 'trim|max_length[50]');
+       $this->CI->form_validation->set_rules('Lastname', 'Lastname', 'trim|max_length[50]');
+       $this->CI->form_validation->set_rules('Email', 'Email', 'trim|max_length[50]');
+       $this->CI->form_validation->set_rules('AccountPINCode', 'AccountPINCode', 'trim|numeric|max_length[6]');
+       $this->CI->form_validation->set_rules('AccountPassword', 'AccountPassword', 'trim|max_length[50]');
+       $this->CI->form_validation->set_rules('PINCode', 'PINCode', 'trim|required|numeric|max_length[6]');
+       $this->CI->form_validation->set_rules('IsAccountActive', 'IsAccountActive', 'trim|numeric|max_length[1]');
+      
+       if ($this->CI->form_validation->run() === FALSE) {
+              $validationErrors = validation_errors();
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+       }
+
+       $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress'] ?? null);
+       $PINCode = $this->CI->Functions_Model->sanitize($requestPostBody['PINCode'] ?? null);
+       $Firstname = $this->CI->Functions_Model->sanitize($requestPostBody['Firstname'] ?? null);
+       $Lastname = $this->CI->Functions_Model->sanitize($requestPostBody['Lastname'] ?? null);
+       $Email = $this->CI->Functions_Model->sanitize($requestPostBody['Email'] ?? null);
+       $AccountPINCode = $this->CI->Functions_Model->sanitize($requestPostBody['AccountPINCode'] ?? null);
+       $AccountPassword = $this->CI->Functions_Model->sanitize($requestPostBody['AccountPassword'] ?? null);
+       $IsAccountActive = $this->CI->Functions_Model->sanitize($requestPostBody['IsAccountActive'] ?? null);
+      
+       $AccountToModify = $this->CI->Functions_Model->getAccountsByAddress($AccountAddress);
+       if (!$AccountToModify) {
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid account to modify.'];
+       }
+
+       if (!password_verify($PINCode, $Account->PinCode)){
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Incorrect PIN Code'];
+       }
+
+       $changes = 'Changes: ';
+
+       $Account_Model =  $this->CI->WebAccounts_Model;;
+
+       $this->CI->db->trans_start(); 
+
+              if (property_exists($AccountToModify, 'Firstname') && !empty($Firstname) && $AccountToModify->Firstname !== $Firstname) {
+                     $Account_Model->update_Firstname(array(
+                            'Account_Address' => $AccountAddress,
+                            'Firstname' => $Firstname,
+                     ));
+                     $this->CI->ActivityLogs_Model->create(array(
+                            'Account_Address' => $Account->WebAccounts_Address,
+                            'Task' => 'Updated ['.$AccountAddress.'] Firstname settings to '.$Firstname.'.',
+                     ));
+                     $changes = $changes . 'Firstname, ';
+              }
+
+              if (property_exists($AccountToModify, 'Lastname') && !empty($Lastname) && $AccountToModify->Lastname !== $Lastname)  {
+                     $Account_Model->update_Lastname(array(
+                            'Account_Address' => $AccountAddress,
+                            'Lastname' => $Lastname,
+                     ));
+                     $this->CI->ActivityLogs_Model->create(array(
+                            'Account_Address' => $Account->WebAccounts_Address,
+                            'Task' => 'Updated ['.$AccountAddress.'] Lastname settings to '.$Lastname.'.',
+                     ));
+                     $changes = $changes . 'Lastname, ';
+              }
+
+              if (property_exists($AccountToModify, 'Email') && !empty($Email) && $AccountToModify->Email !== $Email) {
+                     $Account_Model->update_Email(array(
+                            'Account_Address' => $AccountAddress,
+                            'Email' => $Email,
+                     ));
+                     $this->CI->ActivityLogs_Model->create(array(
+                            'Account_Address' => $Account->WebAccounts_Address,
+                            'Task' => 'Updated ['.$AccountAddress.'] Email settings to '.$Email.'.',
+                     ));
+                     $changes = $changes . 'Email, ';
+              }
+
+              if (property_exists($AccountToModify, 'PinCode') && !empty($AccountPINCode) && !password_verify($AccountPINCode, $AccountToModify->PinCode)) {
+                     $hashed_pincode = password_hash($AccountPINCode, PASSWORD_BCRYPT);
+                     $Account_Model->update_PinCode(array(
+                            'Account_Address' => $AccountAddress,
+                            'PinCode' => $hashed_pincode,
+                     ));
+                     $this->CI->ActivityLogs_Model->create(array(
+                            'Account_Address' => $Account->WebAccounts_Address,
+                            'Task' => 'Updated ['.$AccountAddress.'] PinCode.',
+                     ));
+                     $changes = $changes . 'PinCode, ';
+              }
+
+              if (property_exists($AccountToModify, 'Password') && !empty($AccountPassword) && !password_verify($AccountPassword, $AccountToModify->Password))  {
+                     $hashed_password = password_hash($AccountPassword, PASSWORD_BCRYPT);
+                     $Account_Model->update_Password(array(
+                            'Account_Address' => $AccountAddress,
+                            'Password' => $hashed_password,
+                     ));
+                     $this->CI->ActivityLogs_Model->create(array(
+                            'Account_Address' => $Account->WebAccounts_Address,
+                            'Task' => 'Updated ['.$AccountAddress.'] Password.',
+                     ));
+                     $changes = $changes . 'Password, ';
+              }
+
+              if (property_exists($AccountToModify, 'IsAccountActive') && $AccountToModify->IsAccountActive !== $IsAccountActive) {
+                     if($Account_Model->update_IsAccountActive(array(
+                            'Account_Address' => $AccountAddress,
+                            'IsAccountActive' => $IsAccountActive,
+                     ))) {
+                            
+                     }
+                     
+                     $this->CI->ActivityLogs_Model->create(array(
+                            'Account_Address' => $Account->WebAccounts_Address,
+                            'Task' => 'Updated ['.$AccountAddress.'] IsAccountActive settings to '.$IsAccountActive.'.',
+                     ));
+                     $changes = $changes . 'IsAccountActive, ';
+              }
+
+       $this->CI->db->trans_complete(); 
+
+       if ($this->CI->db->trans_status() === FALSE) {
+              $this->CI->db->trans_rollback();
+              $error = $this->CI->db->error();
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+       }
+
+       if ($changes === 'Changes: '){
+              $changes = 'No Changes!';
+       }
+
+       return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => $changes];
+
+}
 
 }

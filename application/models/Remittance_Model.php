@@ -76,11 +76,60 @@ class Remittance_Model extends CI_Model {
         $Remittance = $this->db
             ->select('*')
             ->from('tbl_remittance')
-            ->where('Account_Address', $params['Account_Address'])
+            ->where('Submitted_By', $params['Account_Address'])
+            ->order_by('Timestamp', 'DESC') 
             ->get()
             ->result();
 
         return ($Remittance) ? $Remittance : [];
+    }
+
+    public function read_remaining_by_address($params){
+        $RemittanceRawList = $this->db
+            ->select('
+                transactions.*,
+                items.Quantity as ItemQuantity,
+                items.Amount as ItemAmount,
+                names.Name as ItemName
+            ')
+            ->from('tbl_transactions as transactions')
+            ->where('transactions.Account_Address', $params['Account_Address'])
+            ->where('transactions.Remittance_Id', null)  
+            ->where('transactions.Status', 'Completed')  
+            ->join('tbl_transactionitems as items', 'transactions.Transaction_Address = items.Transaction_Address')
+            ->join('tbl_merchantitems as names', 'items.MerchantItems_Id = names.MerchantItems_Id')
+            ->get()
+            ->result();
+    
+        $RemittanceList = [];
+    
+        foreach ($RemittanceRawList as $transaction) {
+            $transactionAddress = $transaction->Transaction_Address;  // Use -> to access object properties
+    
+            if (!isset($RemittanceList[$transactionAddress])) {
+                $RemittanceList[$transactionAddress] = [
+                    'Transaction_Address' => $transactionAddress,
+                    'Account_Address' => $transaction->Account_Address,
+                    'Status' => $transaction->Status,
+                    'Debit' => $transaction->Debit,
+                    'Credit' => $transaction->Credit,
+                    'Remittance_Id' => $transaction->Remittance_Id,
+                    'Timestamp' => $transaction->Timestamp,
+                    'Items' => []
+                ];
+            }
+    
+            $item = [
+                'ItemQuantity' => $transaction->ItemQuantity,
+                'ItemName' => $transaction->ItemName,
+                'ItemAmount' => $transaction->ItemAmount
+            ];
+    
+            $RemittanceList[$transactionAddress]['Items'][] = $item;
+        }
+    
+        return array_values($RemittanceList);
+
     }
 
     public function update_date_approved($params){
@@ -111,19 +160,20 @@ class Remittance_Model extends CI_Model {
 
         $RemittanceListTotal = $this->db
             ->select('
-                SUM(Quantity) AS TotalAmount,
-                COUNT(Quantity) AS TotalOrders
+                SUM(Credit) AS TotalAmount,
+                COUNT(Credit) AS TotalOrders
             ')
             ->from('tbl_transactions')
-            ->where('Remittance_Id', null)
+            ->where('Account_Address', $params['Account_Address'])
+            ->where('Remittance_Id', null)  
+            ->where('Status', 'Completed')  
             ->get()
             ->row();
 
         $data = [
             'Submitted_By' => $params['Account_Address'],
-            'TotalOrders' => $remittanceListTotal->TotalOrders,
-            'TotalAmount' => $remittanceListTotal->TotalAmount,
-            'Remarks' => ($params['Remarks']) ? $params['Remarks'] : '',
+            'TotalOrders' => $RemittanceListTotal->TotalOrders,
+            'TotalAmount' => $RemittanceListTotal->TotalAmount,
         ];
         $this->db->insert('tbl_remittance', $data);
 
@@ -133,15 +183,20 @@ class Remittance_Model extends CI_Model {
             'Remittance_Id' => $Remittance
         ];
 
-        $this->db->where('Account_Address', $params['Account_Address'])
-            ->where('Remittance_Id', null)
+        $this->db
+            ->where('Account_Address', $params['Account_Address'])
+            ->where('Remittance_Id', null)  
+            ->where('Status', 'Completed')  
             ->update('tbl_transactions', $data);
 
         $updatedRows = $this->db->affected_rows();
-        if ($updatedRows !== $remittanceListTotal->TotalOrders) {
+
+        log_message('debug', $RemittanceListTotal->TotalOrders);
+        log_message('debug', $updatedRows);
+        if ((int)$updatedRows != (int)$RemittanceListTotal->TotalOrders) {
             throw new Exception('Mismatch in updated rows. Rolling back transaction.');
         }
 
-        return ($Remittance) ? $Remittance : FALSE;
+        return $updatedRows;
     }
 }

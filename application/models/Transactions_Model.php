@@ -363,6 +363,39 @@ class Transactions_Model extends CI_Model {
     
     
     
-   
+  
+
+
+    public function Create_Order_Event($params){
+        $this->db->where('WebAccounts_Address', $params['WebAccounts_Address']);
+        $this->db->delete('tbl_ordersvalidation');
+
+        $data = [
+            'WebAccounts_Address' => $params['WebAccounts_Address'],
+            'UsersAccount_Address' => null,
+        ];
+        $this->db->insert('tbl_ordersvalidation', $data);
+    }
+
+    public function Update_Order_Event($params){
+        $data = [
+            'UsersAccount_Address' => $params['UsersAccount_Address'],
+        ];
+        
+        $this->db->where('WebAccounts_Address', $params['WebAccounts_Address']);
+        $this->db->update('tbl_ordersvalidation', $data);
+    }
+
+    public function Delete_Order_Event($params){
+        $this->db->where('WebAccounts_Address', $params['WebAccounts_Address']);
+        $this->db->delete('tbl_ordersvalidation');
+    }
+
+    public function Read_Order_Event($params){
+        $this->db->select('*');
+        $this->db->from('tbl_ordersvalidation');
+        $this->db->where('WebAccounts_Address', $params['WebAccounts_Address']);
+        return $this->db->get()->row();
+    }
 }
 

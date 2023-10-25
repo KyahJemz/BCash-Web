@@ -71,28 +71,28 @@ export default class Modals {
                     <div class="image">
                         <img src="../images/school.jpg" alt="">
                     </div>
-                    <div class="form">
+                    <form action="" onsubmit="return false;" class="form" id="AddItem-Form" enctype="multipart/form-data">
                         <div>
                             <p>Item Image</p>
-                            <input id="AddItem-Image" type="file" name="item-image" accept="image/*">
+                            <input id="AddItem-Image" type="file" name="Image" accept="image/*">
                         </div>
                         <div>
                             <p>Item Name</p>
-                            <input id="AddItem-Name" type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
+                            <input id="AddItem-Name" type="text" title="25 Character Limit"  name="ItemName" maxlength="25" required>
                         </div>
                         <div>
                             <p>Item Cost</p>
-                            <input id="AddItem-Cost" type="number" title="Number Only" name="item-cost" required>
+                            <input id="AddItem-Cost" type="number" title="Number Only" name="ItemCost" required>
                         </div>
                         <div>
                             <p>Item Category</p>
-                            <input id="AddItem-Category" type="text" title="Can be Existing Category or new Category" name="item-category" required>
+                            <input id="AddItem-Category" type="text" title="Can be Existing Category or new Category" name="ItemCategory" required>
                         </div>
                         <div class="button-container">
                             <button id="AddItem-CancelBtn" class="dialog-box-close-button" type="button">Cancel</button>
                             <button id="AddItem-SubmitBtn" type="submit" name="form" value="Add-Item">Save Changes</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             `;
     
@@ -107,23 +107,23 @@ export default class Modals {
                     <div class="form">
                         <div>
                             <p>Item Image</p>
-                            <input type="file" name="item-image" accept="image/*">
+                            <input id="EditItem-Image" type="file" value="${value['ItemImage']}" name="item-image" accept="image/*">
                         </div>
                         <div>
                             <p>Item Name</p>
-                            <input type="text" title="25 Character Limit"  name="item-name" maxlength="25" required>
+                            <input id="EditItem-Name" type="text" value="${value['ItemName']}" title="25 Character Limit"  name="item-name" maxlength="25" required>
                         </div>
                         <div>
                             <p>Item Cost</p>
-                            <input type="number" title="Number Only" name="item-cost" required>
+                            <input id="EditItem-Cost" type="number" value="${value['ItemCost']}" title="Number Only" name="item-cost" required>
                         </div>
                         <div>
                             <p>Item Category</p>
-                            <input type="text" title="Can be Existing Category or new Category" name="item-category" required>
+                            <input id="EditItem-Category" type="text" value="${value['ItemCategory']}" title="Can be Existing Category or new Category" name="item-category" required>
                         </div>
-                        <div class="button-container">
-                            <button class="dialog-box-close-button" type="button">Cancel</button>
-                            <button type="submit" name="form" value="Add-Item">Save Changes</button>
+                        <div class="button-container" data-itemid="${value['ItemId']}">
+                            <button id="EditItem-CancelBtn" class="dialog-box-close-button" type="button">Cancel</button>
+                            <button id="EditItem-SubmitBtn" type="submit" name="form" value="Add-Item">Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -137,16 +137,17 @@ export default class Modals {
                     <div class="form">
                         <div>
                             <p><strong>Are you sure you want to delete this item?</strong></p>
-                            <p><em>Item Name: Tinapaty</em></p>
-                            <p><em>Item Cost: $132</em></p>
-                            <p><em>Item Category: Food</em></p>
+                            <p><em>Item Name: ${value['ItemName']}</em></p>
+                            <p><em>Item Cost: ${value['ItemCost']}</em></p>
+                            <p><em>Item Category: ${value['ItemCategory']}</em></p>
                             <br>
                             <p>Please confirm the deletion by entering your PIN CODE below:</p>
-                            <input type="text" name="item-delete-Pin-Code">
+                            <input id="DeleteItem-PINCode" type="password">
+                            <input id="DeleteItem-ItemId" value="${value['ItemId']}" hidden type="text">
                         </div>
                         <div class="button-container">
-                            <button class="dialog-box-close-button" type="button">Cancel</button>
-                            <button type="submit" name="form" value="Add-Item">Delete</button>
+                            <button id="DeleteItem-CancelBtn" class="dialog-box-close-button" type="button">Cancel</button>
+                            <button id="DeleteItem-SubmitBtn" type="submit">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -201,21 +202,18 @@ export default class Modals {
                                     </div>
                                 </div>
                                 <div class="right-panel">
-                                    <div class="qr-code">
+                                    <div id="order-qrcode" class="qr-code">
                                         <p><strong>QR-Code:</strong></p>
-                                        <img src="../public/images/sample-qr.jpg" alt="">
-                                        <button>Generate</button>
                                     </div>
                                     <div class="id-card">
                                         <p><strong>Id Card or Manual Input: </strong></p>
-                                        <input type="search">
+                                        <input id="order-userid" type="search">
                                     </div>
                                     <div class="details">
                                         <fieldset>
                                             <legend>Details:</legend>
                                             <p class="Name"><strong>Name: </strong></p>
-                                            <p class="Category"><strong>Categoty: </strong></p>
-                                            <p class="waletId"><strong>Wallet Id: </strong></p>
+                                            <p class="Balance"><strong>Balance: </strong></p>
                                         </fieldset>
                                     </div>
                                 </div>

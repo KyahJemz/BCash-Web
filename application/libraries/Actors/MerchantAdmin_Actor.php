@@ -14,6 +14,9 @@ class MerchantAdmin_Actor {
         $this->CI->load->library('Actions/Notifications_Actions', NULL, 'Notifications_Actions');
         $this->CI->load->library('Actions/LoginHistory_Actions', NULL, 'LoginHistory_Actions');
         $this->CI->load->library('Actions/ActivityLogs_Actions', NULL, 'ActivityLogs_Actions');
+        $this->CI->load->library('Actions/Items_Actions', NULL, 'Items_Actions');
+        $this->CI->load->library('Actions/Remittance_Actions', NULL, 'Remittance_Actions');
+        $this->CI->load->library('Actions/Order_Actions', NULL, 'Order_Actions');
     }
     
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
@@ -86,16 +89,31 @@ class MerchantAdmin_Actor {
 
 
             case 'add item':
-                $response = null;
+                $response = $this->CI->Items_Actions->Add_Item($Account, $requestPostBody);
                 break;
 
             case 'update item':
-                $response = null;
+                $response = $this->CI->Items_Actions->Update_Item($Account, $requestPostBody);;
+                break;
+
+            case 'deactivate item':
+                $response = $this->CI->Items_Actions->Deactivate_Item($Account, $requestPostBody);
                 break;
 
             case 'get items':
-                $response = null;
+                $response = $this->CI->Items_Actions->Get_Items($Account);
                 break;
+
+
+
+            case 'set order event':
+                $response = $this->CI->Order_Actions->Set_Event($Account);
+                break;
+
+            case 'listen order event':
+                $response = $this->CI->Order_Actions->Listen_Event($Account);
+                break;
+
 
 
 
@@ -104,6 +122,36 @@ class MerchantAdmin_Actor {
                 break;
 
 
+            case 'get merchantstaff accounts':
+                $response =  $this->CI->Account_Actions->View_MerchantStaff_Accounts($Account, $requestPostBody);
+                break;
+
+            case 'update staff account':
+                $response =  $this->CI->Account_Actions->Update_Account_By_MTA($Account, $requestPostBody);
+                break;
+                
+
+
+            case 'get my remittance':
+                $response = $this->CI->Remittance_Actions->View_My_Remittance($Account);
+                break;
+
+            case 'get remittance details':
+                $response = $this->CI->Remittance_Actions->View_Remittance_Details($Account, $requestPostBody);
+                break;
+
+            case 'get remaining remittance':
+                $response = $this->CI->Remittance_Actions->View_My_Remaining_Remittance($Account);
+                break;
+                
+            case 'Upload remittance':
+                $response = $this->CI->Remittance_Actions->Upload_My_Remittance($Account);
+                break;
+
+
+            case 'get staff accounts':
+                $response = $this->CI->Account_Actions->View_My_Staffs($Account, $requestPostBody);
+                break;
 
             default:
                 $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
