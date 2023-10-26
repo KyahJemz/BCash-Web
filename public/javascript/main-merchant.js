@@ -1,11 +1,12 @@
 import Transactions from './modules/transactions.js';
 import Orders from './modules/order.js';
 import Items from './modules/items.js';
-import { createAlert } from './modules/alerts.js';
+import Alerts from './modules/alerts.js';
 import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
 import AjaxRequest from './ajax.js';
+import LoginHistory from './modules/loginhistory.js'
 
 import Helper from './helper.js';
 
@@ -20,6 +21,7 @@ const menu = new Menu();
 const dropdown = new Dropdown();
 const helper = new Helper();
 const Ajax = new AjaxRequest(BaseURL);
+const loginHistory = new LoginHistory();
 
 const myTransactions = new Transactions(
   document.getElementById("My-Transactions-Table"),
@@ -28,7 +30,7 @@ const myTransactions = new Transactions(
   Ajax,
   helper,
   modals
-  );
+);
 
 export function getItemsArray(){
   return myItems.getItemsArray();
@@ -57,25 +59,25 @@ window.addEventListener('click', (event) => {
 // INITIALIZATIONS
 ////////////////////////////
 
+export function makeAlert(type,text){
+  const alerts = new Alerts(document.querySelector(".Alert-Box-Table", ));
+  alerts.createAlertElement(type,text);
+}
 
 export function makeModal(type, title, content){
   modals.activateModal(type, title, content);
 }
 
-myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png")
-myItems.registerItem("2","Beef Stir-fry with Rice","150","Food","2023-06-29","2023-06-29", "../public/images/items/2.png");
-myItems.registerItem("3","Margherita Pizza","180","Pizza","2023-06-29","2023-06-29", "../public/images/items/3.png");
-myItems.registerItem("4","Vegetable Curry with Naan Bread","130","Food","2023-06-29","2023-06-29", "../public/images/items/4.png");
-myItems.registerItem("5","BBQ Pulled Pork Burger","140","Food","2023-06-29","2023-06-29", "../public/images/items/5.png");
-myItems.registerItem("6","Fish Tacos with Salsa","160","Food","2023-06-29","2023-06-29", "../public/images/items/6.png");
-myItems.registerItem("7","Iced Caramel Macchiato","110","Drink","2023-06-29","2023-06-29", "../public/images/items/7.png");
-myItems.registerItem("8","Strawberry Banana Smoothie","90","Drink","2023-06-29","2023-06-29", "../public/images/items/8.png");
-myItems.registerItem("9","Chocolate Chip Ice Cream","70","Disert","2023-06-29","2023-06-29", "../public/images/items/9.png");
-myItems.registerItem("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-06-29", "../public/images/items/10.png");
-
-//console.log(myItems.getItemsArray());
-
-//displayItemsEvents(items, "CreateOrder");
+function refreshItems(){
+  Ajax.sendRequest([], "get items")
+    .then(responseData => {
+      myItems.clearItems();
+      responseData.Parameters.forEach(row => {
+        //myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png");
+        myItems.registerItem(row['MerchantItems_Id'],row['Name'],row['Price'],row['ItemCategory'],row['ModifiedTimestamp'],row['CreatedTimestamp'], row['Image']);
+      });
+    });
+}
 
 
 
@@ -83,6 +85,7 @@ myItems.registerItem("10","Fresh Fruit Salad","100","Disert","2023-06-29","2023-
 ////////////////////////////
 // ORDER
 ////////////////////////////
+
 
 function onTxtOrderDiscountInput(){
   myOrders.refreshReceiptValues(myOrders);
@@ -92,13 +95,151 @@ function onCreateOrderClearClick(){
   myOrders.clearOrder(myOrders)
 }
 
+let qrScan = false;
+let intervalId;
+function FetchEventChanges() {
+  const qrcode = new QRCode("order-qrcode", {
+    text: AccountAddress,
+    width: 128,
+    height: 128
+  });
+  intervalId = setInterval(() => {
+    const data = {
+      UserAddress : '',
+      CardAddress : '',
+    };
+    Ajax.sendRequest(data, 'listen order event')
+      .then(responseData => {
+        if (responseData.Parameters.UsersAccount_Address !== null) {
+          document.getElementById('order-userid').value = responseData.Parameters.UsersAccount_Address;
+          document.getElementById('order-name').value = responseData.Parameters.UserName;
+          document.getElementById('order-balance').value = responseData.Parameters.UserBalance;
+          clearInterval(intervalId);
+        } else {
+          document.getElementById('order-name').value = '';
+          document.getElementById('order-balance').value = '';
+        }
+      });
+  }, 1000);
+}
+
+function FetchConfirmationChanges(TransactionAddress) {
+    const data = {
+      TransactionAddress : TransactionAddress,
+    };
+    Ajax.sendRequest(data, 'listen confirmation event')
+      .then(responseData => {
+        if (responseData.Success){
+          if (responseData.Parameters.Status === 'Completed' || responseData.Parameters.Status === 'Canceled'){
+            if (responseData.Parameters.Status === 'Completed'){
+              document.getElementById('order-status').innerHTML = '<p class="success">Status: Transaction Complete.</p>';
+              document.getElementById('order-content').innerHTML = `
+                Payment received for ${responseData.Parameters.Transaction_Address}, Transaction Complete!
+              `;
+              makeAlert('success', 'Payment received for ' + responseData.Parameters.Transaction_Address+', Transaction Complete!');
+              document.getElementById('order-buttons').innerHTML = `
+                <button class="btn-submit" onClick="document.getElementById('Modal-Container').style.display = 'none';">Close</button>
+              `;
+              myOrders.clearOrder(myOrders);
+            }
+            if (responseData.Parameters.Status === 'Canceled'){
+              document.getElementById('order-status').innerHTML = '<p class="danger">Status: Transaction Canceled.</p>';
+              document.getElementById('order-content').innerHTML = `
+                Payment canceled for ${responseData.Parameters.Transaction_Address}, Transaction failed!
+              `;
+              makeAlert('danger', 'Payment canceled for ' + responseData.Parameters.Transaction_Address+', Transaction failed!');
+              document.getElementById('order-buttons').innerHTML = `
+                <button class="btn-submit" onClick="document.getElementById('Modal-Container').style.display = 'none';">Close</button>
+              `;
+              myOrders.clearOrder(myOrders);
+            }
+          } else {
+            FetchConfirmationChanges(TransactionAddress);
+          }
+        }
+      });
+
+}
+
+
 function onCreateOrderPlaceOrderClick(){
   if (myOrders.items.length > 0) {
-    makeModal("Modal", "Order Confirmation", modals.getModalView("Place-Order",myOrders));
-   // openDialogBoxEvents("Place-Order");
+    Ajax.sendRequest([], 'set order event')
+    .then(responseData => {
+      if (responseData.Success) {
+        makeModal("Modal", "Order Confirmation", modals.getModalView("Place-Order",myOrders));
+
+        document.getElementById('order-userid').addEventListener('change',(event)=>{
+          document.getElementById('order-name').value = "";
+          document.getElementById('order-balance').value = "";
+
+          if(document.getElementById('order-userid').value){
+            const data = {
+              UserAddress : document.getElementById('order-userid').value,
+              CardAddress : document.getElementById('order-userid').value,
+            };
+            Ajax.sendRequest(data, 'listen order event')
+              .then(responseData => {
+                if (responseData.Parameters.UsersAccount_Address !== null) {
+                  document.getElementById('order-userid').value = responseData.Parameters.UsersAccount_Address;
+                  document.getElementById('order-name').value = responseData.Parameters.UserName;
+                  document.getElementById('order-balance').value = responseData.Parameters.UserBalance;
+                } else {
+                  document.getElementById('order-name').value = '';
+                  document.getElementById('order-balance').value = '';
+                }
+              });
+
+            }
+        });
+
+        // use qr
+        document.getElementById('order-qrScan').addEventListener('click',(event)=>{
+          if (qrScan){
+            qrScan = false;
+            clearInterval(intervalId);
+            document.getElementById('order-qrcode').querySelector('img').remove();
+            document.getElementById('order-qrcode').querySelector('canvas').remove();
+            document.getElementById('order-qrScan').textContent = "Use QR";
+          } else {
+            qrScan = true;
+            FetchEventChanges();
+            document.getElementById('order-qrScan').textContent = "Stop";
+          }
+        });
+
+        document.getElementById('order-submit').addEventListener('click',(event)=>{
+          const order = myOrders.getOrdersArray();
+          const data = {
+            AccountAddress : document.getElementById('order-userid').value,
+            Discount : document.getElementById('order-discount').dataset.value,
+            DiscountReason : null,
+            ItemsArray : []
+          };
+          order.forEach(element => {
+            data['ItemsArray'].push({
+              ItemId: element['itemId'],
+              ItemQuantity: element['quantity']
+            });
+          });
+          Ajax.sendRequest(data, 'post order')
+            .then(responseData => {
+              if (responseData.Success){
+                document.getElementById('order-status').innerHTML = '<p class="warning">Status: Waiting for payment...</p>';
+                document.getElementById('order-buttons').innerHTML = '';
+                document.getElementById('order-content').innerHTML = `
+                  Waiting for user confirmation of order [${responseData.Parameters.TransactionAddress}]
+                `;
+                FetchConfirmationChanges(responseData.Parameters.TransactionAddress);
+              }
+            });
+        });
+      }
+    })
+
+
   } else {
-    createAlert("warning", "No items selectd to place an order. Please select and try again...");
-  //  openAlertDialogBoxEvents("Invalid Order", "No items selectd to place an order. Please select and try again...")
+    makeAlert("danger", "No items selectd to place an order. Please select and try again...");
   }
 }
 
@@ -131,6 +272,9 @@ helper.addElementInputListenerById('itemmanagement-search', onItemManagementSear
 
 function onMenuSelectionButton(event) {
   menu.menuSelectionEvents(event, myItems, myOrders);
+  if (event.currentTarget.dataset.menu === "Create Order") {
+    refreshItems();
+  }
 }
 
 helper.addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
@@ -162,12 +306,12 @@ helper.addElementClickListener('.dropdownButtonSubItem', onDropdownButtonSubItem
 // TRANSACTIONS
 ////////////////////////////
 
-function onTransactionsSearchClick() {
-  myTransactions.applyTransactionsQueries(this);
+function onTransactionsSearchClick(event) {
+  myTransactions.applyTransactionsQueries(event, 'get my transactions');
 }
 
-function onTransactionsClearClick() {
-  myTransactions.clearTransactionsQueries(this);
+function onTransactionsClearClick(event) {
+  myTransactions.clearTransactionsQueries(event);
 }
 
 function onTransactionsExportClick() {
@@ -184,7 +328,7 @@ helper.addElementClickListener('.transaction-export-button', onTransactionsExpor
 ////////////////////////////
 
 function onModalCloseButtonClick() {
-  modals.closeModal();
+  document.getElementById("Modal-Container").style.display = "none";
 }
 
 helper.addElementClickListenerById('Modal-Close-Button', onModalCloseButtonClick);
@@ -211,6 +355,7 @@ function onMenuSettingsButtonClick() {
     if (responseData.Success) {
       makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
       helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
+      helper.addElementClickListenerById('btn-login-history',()=>{loginHistory.open()});
     }
   })
 }

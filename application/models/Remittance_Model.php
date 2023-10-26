@@ -127,6 +127,8 @@ class Remittance_Model extends CI_Model {
     
             $RemittanceList[$transactionAddress]['Items'][] = $item;
         }
+
+        log_message('debug',$this->db->last_query());
     
         return array_values($RemittanceList);
 

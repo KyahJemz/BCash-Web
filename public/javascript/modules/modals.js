@@ -185,8 +185,8 @@ export default class Modals {
         
                     view = `
                         <div class="order-confirmation">
-                            <div class="status">Status: PREPARING</div>
-                            <div class="content">
+                            <div id="order-status" class="status"><p class="warning">Status: Preparing<p></div>
+                            <div id="order-content" class="content">
                                 <div class="left-panel">
                                     <div class="list">
                                         <div class="list-header">
@@ -197,13 +197,14 @@ export default class Modals {
                                     <div class="summary">
                                         <p class="quantity"><strong>Items: </strong>`+quantiy+`</p>
                                         <p class="subtotal"><strong>Subtotal: </strong>₱ `+Number(subtotal).toFixed(2)+`</p>
-                                        <p class="discount"><strong>Discount: </strong>₱ `+Number(discount).toFixed(2)+`</p>
-                                        <p class="total"><strong>Total: </strong>₱ `+(Number(subtotal)-Number(discount)).toFixed(2)+`</p>
+                                        <p id="order-discount" data-value="`+(discount)+`" class="discount"><strong>Discount: </strong>₱ `+Number(discount).toFixed(2)+`</p>
+                                        <p class="total"><strong>Total: </strong>₱ <a id="order-total">`+(Number(subtotal)-Number(discount)).toFixed(2)+`</a></p>
                                     </div>
                                 </div>
                                 <div class="right-panel">
                                     <div id="order-qrcode" class="qr-code">
                                         <p><strong>QR-Code:</strong></p>
+                                        <button id="order-qrScan">Use QR</button>
                                     </div>
                                     <div class="id-card">
                                         <p><strong>Id Card or Manual Input: </strong></p>
@@ -212,15 +213,15 @@ export default class Modals {
                                     <div class="details">
                                         <fieldset>
                                             <legend>Details:</legend>
-                                            <p class="Name"><strong>Name: </strong></p>
-                                            <p class="Balance"><strong>Balance: </strong></p>
+                                            <p class="Name"><strong>Name: </strong><input readonly type="text" id="order-name"></p>
+                                            <p class="Balance"><strong>Balance: </strong><input readonly type="text" id="order-balance"></p>
                                         </fieldset>
                                     </div>
                                 </div>
                             </div>
-                            <div class="buttons">
+                            <div id="order-buttons" class="buttons">
                                 <button class="btn-back dialog-box-close-button">Cancel</button>
-                                <button class="btn-submit">Submit</button>
+                                <button id="order-submit" class="btn-submit">Submit</button>
                             </div>
                         </div>
                     `;
@@ -355,6 +356,7 @@ export default class Modals {
                         </table>
                     </fieldset>
                     <div class="buttons-container">
+                        <button id="btn-login-history" class="btn-submit ">Login History</button>
                         <button id="btn-submit-account-changes" class="btn-submit ">Update Changes</button>
                     </div>
                 </div>

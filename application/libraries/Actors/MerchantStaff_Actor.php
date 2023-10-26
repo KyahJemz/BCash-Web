@@ -22,10 +22,6 @@ class MerchantStaff_Actor {
                 $response = $this->CI->Account_Logout->Logout($Account);
                 break;
 
-            case 'get chart data':
-                $response = null;
-                break;
-
             case 'get my notifications':
                 $response = $this->CI->Notifications_Actions->View_My_Notifications();
                 break;
@@ -46,8 +42,8 @@ class MerchantStaff_Actor {
                 $response = $this->CI->Account_Actions->Update_My_Password($Account, $requestPostBody);
                 break;
 
-            case 'get all activity logs':
-                $response = $this->CI->ActivityLogs_Actions->View_All_ActivityLogs($Account);
+            case 'update my account':
+                $response = $this->CI->Account_Actions->Update_My_Account($Account, $requestPostBody);
                 break;
 
             case 'get my activity logs':
@@ -58,19 +54,41 @@ class MerchantStaff_Actor {
                 $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
                 break;
 
-            case 'update login history':
-                $response = $this->CI->LoginHistory_Actions->Update_My_LoginHistory($Account, $requestPostBody);
-                break;
-
             case 'delete one login history':
                 $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);
                 break;
 
             case 'delete all login history':
-                $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
                 break;
 
+            case 'get my transactions':
+                $response = $this->CI->Transaction_Actions->Merchant_View_All_Transaction_History ($Account, $requestPostBody);
+                break;
 
+            case 'get transactions details':
+                $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History_Details ($Account, $requestPostBody);
+                break;
+
+            case 'get items':
+                $response = $this->CI->Items_Actions->Get_Items($Account);
+                break;
+
+            case 'set order event':
+                $response = $this->CI->Order_Actions->Set_Event($Account);
+                break;
+
+            case 'listen order event':
+                $response = $this->CI->Order_Actions->Listen_Event($Account,$requestPostBody);
+                break;
+
+            case 'post order':
+                $response = $this->CI->Transaction_Actions->Create_Order($Account, $requestPostBody);
+                break;
+
+            case 'listen confirmation event':
+                $response = $this->CI->Order_Actions->Listen_Confirmation_Event($requestPostBody);
+                break;
                 
             default:
                 $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 

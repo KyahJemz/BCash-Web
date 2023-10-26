@@ -66,16 +66,12 @@ class MerchantAdmin_Actor {
                 $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
                 break;
 
-            case 'update login history':
-                $response = $this->CI->LoginHistory_Actions->Update_My_LoginHistory($Account, $requestPostBody);
-                break;
-
             case 'delete one login history':
                 $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);
                 break;
 
             case 'delete all login history':
-                $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
                 break;
 
             case 'get my transactions':
@@ -85,8 +81,6 @@ class MerchantAdmin_Actor {
             case 'get transactions details':
                 $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History_Details ($Account, $requestPostBody);
                 break;
-
-
 
             case 'add item':
                 $response = $this->CI->Items_Actions->Add_Item($Account, $requestPostBody);
@@ -104,23 +98,17 @@ class MerchantAdmin_Actor {
                 $response = $this->CI->Items_Actions->Get_Items($Account);
                 break;
 
-
-
             case 'set order event':
                 $response = $this->CI->Order_Actions->Set_Event($Account);
                 break;
 
             case 'listen order event':
-                $response = $this->CI->Order_Actions->Listen_Event($Account);
+                $response = $this->CI->Order_Actions->Listen_Event($Account,$requestPostBody);
                 break;
-
-
-
 
             case 'post order':
-                $response = null;
+                $response = $this->CI->Transaction_Actions->Create_Order($Account, $requestPostBody);
                 break;
-
 
             case 'get merchantstaff accounts':
                 $response =  $this->CI->Account_Actions->View_MerchantStaff_Accounts($Account, $requestPostBody);
@@ -130,8 +118,6 @@ class MerchantAdmin_Actor {
                 $response =  $this->CI->Account_Actions->Update_Account_By_MTA($Account, $requestPostBody);
                 break;
                 
-
-
             case 'get my remittance':
                 $response = $this->CI->Remittance_Actions->View_My_Remittance($Account);
                 break;
@@ -148,9 +134,12 @@ class MerchantAdmin_Actor {
                 $response = $this->CI->Remittance_Actions->Upload_My_Remittance($Account);
                 break;
 
-
             case 'get staff accounts':
                 $response = $this->CI->Account_Actions->View_My_Staffs($Account, $requestPostBody);
+                break;
+
+            case 'listen confirmation event':
+                $response = $this->CI->Order_Actions->Listen_Confirmation_Event($requestPostBody);
                 break;
 
             default:

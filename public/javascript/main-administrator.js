@@ -6,6 +6,7 @@ import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
 import Accounts from './modules/accounts.js';
 import AjaxRequest from './ajax.js';
+import LoginHistory from './modules/loginhistory.js'
 // import { SetAccountingChart } from './chart.js';
 
 import Helper from './helper.js';
@@ -19,6 +20,7 @@ const Ajax = new AjaxRequest(BaseURL);
 const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
+const loginHistory = new LoginHistory();
 
 const cards = new Cards(
   document.getElementById("Cards-Table-Body"),
@@ -240,6 +242,7 @@ function onMenuSettingsButtonClick() {
       if (responseData.Success) {
         makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
         helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
+        helper.addElementClickListenerById('btn-login-history',()=>{loginHistory.open()});
       }
   })
 }

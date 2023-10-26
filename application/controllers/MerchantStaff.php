@@ -83,6 +83,7 @@ class MerchantStaff extends CI_Controller {
                         <script>
                                 var AccountAddress = ' . json_encode($AccountAddress) . ';
                                 var AuthToken = ' . json_encode($AuthToken) . ';
+                                const ClientVersion = ' . json_encode('1.0') . ';
                                 const IpAddress = ' . json_encode($data['IpAddress']) . ';
                                 const Device = ' . json_encode($data['Device']) . ';
                                 const Location = ' . json_encode($data['Location']) . ';

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/accounts.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/cashinform.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/fundremittance.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/loginhistory.css'); ?>">
 </head>
 
 <body>

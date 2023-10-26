@@ -88,16 +88,12 @@ class Accounting_Actor {
                 $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
                 break;
 
-            case 'update login history':
-                $response = $this->CI->LoginHistory_Actions->Update_My_LoginHistory($Account, $requestPostBody);
-                break;
-
             case 'delete one login history':
                 $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);
                 break;
 
             case 'delete all login history':
-                $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
                 break;
 
             case 'get all remittance':

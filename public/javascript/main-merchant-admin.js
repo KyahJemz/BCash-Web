@@ -7,6 +7,7 @@ import Modals from './modules/modals.js';
 import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
 import AjaxRequest from './ajax.js';
+import LoginHistory from './modules/loginhistory.js'
 
 import Helper from './helper.js';
 
@@ -21,6 +22,7 @@ const menu = new Menu();
 const dropdown = new Dropdown();
 const helper = new Helper();
 const Ajax = new AjaxRequest(BaseURL);
+const loginHistory = new LoginHistory();
 
 const myTransactions = new Transactions(
   document.getElementById("My-Transactions-Table"),
@@ -77,9 +79,9 @@ export function makeModal(type, title, content){
 }
 
 function refreshItems(){
-  myItems.clearItems();
   Ajax.sendRequest([], "get items")
     .then(responseData => {
+      myItems.clearItems();
       responseData.Parameters.forEach(row => {
         //myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png");
         myItems.registerItem(row['MerchantItems_Id'],row['Name'],row['Price'],row['ItemCategory'],row['ModifiedTimestamp'],row['CreatedTimestamp'], row['Image']);
@@ -102,17 +104,71 @@ function onCreateOrderClearClick(){
   myOrders.clearOrder(myOrders)
 }
 
+let qrScan = false;
 let intervalId;
-function startInterval() {
+function FetchEventChanges() {
+  const qrcode = new QRCode("order-qrcode", {
+    text: AccountAddress,
+    width: 128,
+    height: 128
+  });
   intervalId = setInterval(() => {
-    Ajax.sendRequest([], 'listen order event')
+    const data = {
+      UserAddress : '',
+      CardAddress : '',
+    };
+    Ajax.sendRequest(data, 'listen order event')
       .then(responseData => {
         if (responseData.Parameters.UsersAccount_Address !== null) {
           document.getElementById('order-userid').value = responseData.Parameters.UsersAccount_Address;
+          document.getElementById('order-name').value = responseData.Parameters.UserName;
+          document.getElementById('order-balance').value = responseData.Parameters.UserBalance;
           clearInterval(intervalId);
+        } else {
+          document.getElementById('order-name').value = '';
+          document.getElementById('order-balance').value = '';
         }
       });
   }, 1000);
+}
+
+function FetchConfirmationChanges(TransactionAddress) {
+    const data = {
+      TransactionAddress : TransactionAddress,
+    };
+    Ajax.sendRequest(data, 'listen confirmation event')
+      .then(responseData => {
+        if (responseData.Success){
+          if (responseData.Parameters.Status === 'Completed' || responseData.Parameters.Status === 'Canceled'){
+            if (responseData.Parameters.Status === 'Completed'){
+              document.getElementById('order-status').innerHTML = '<p class="success">Status: Transaction Complete.</p>';
+              document.getElementById('order-content').innerHTML = `
+                Payment received for ${responseData.Parameters.Transaction_Address}, Transaction Complete!
+              `;
+              makeAlert('success', 'Payment received for ' + responseData.Parameters.Transaction_Address+', Transaction Complete!');
+              document.getElementById('order-buttons').innerHTML = `
+                <button class="btn-submit" onClick="document.getElementById('Modal-Container').style.display = 'none';">Close</button>
+              `;
+              myOrders.clearOrder(myOrders);
+            }
+            if (responseData.Parameters.Status === 'Canceled'){
+              document.getElementById('order-status').innerHTML = '<p class="danger">Status: Transaction Canceled.</p>';
+              document.getElementById('order-content').innerHTML = `
+                Payment canceled for ${responseData.Parameters.Transaction_Address}, Transaction failed!
+              `;
+              makeAlert('danger', 'Payment canceled for ' + responseData.Parameters.Transaction_Address+', Transaction failed!');
+              document.getElementById('order-buttons').innerHTML = `
+                <button class="btn-submit" onClick="document.getElementById('Modal-Container').style.display = 'none';">Close</button>
+              `;
+              myOrders.clearOrder(myOrders);
+            }
+          } else {
+            FetchConfirmationChanges(TransactionAddress);
+          }
+          
+        }
+      });
+
 }
 
 
@@ -122,19 +178,75 @@ function onCreateOrderPlaceOrderClick(){
     .then(responseData => {
       if (responseData.Success) {
         makeModal("Modal", "Order Confirmation", modals.getModalView("Place-Order",myOrders));
-        const qrcode = new QRCode("order-qrcode", {
-          text: responseData.Parameters,
-          width: 128,
-          height: 128
+
+        document.getElementById('order-userid').addEventListener('change',(event)=>{
+          document.getElementById('order-name').value = "";
+          document.getElementById('order-balance').value = "";
+
+          if(document.getElementById('order-userid').value){
+            const data = {
+              UserAddress : document.getElementById('order-userid').value,
+              CardAddress : document.getElementById('order-userid').value,
+            };
+            Ajax.sendRequest(data, 'listen order event')
+              .then(responseData => {
+                if (responseData.Parameters.UsersAccount_Address !== null) {
+                  document.getElementById('order-userid').value = responseData.Parameters.UsersAccount_Address;
+                  document.getElementById('order-name').value = responseData.Parameters.UserName;
+                  document.getElementById('order-balance').value = responseData.Parameters.UserBalance;
+                } else {
+                  document.getElementById('order-name').value = '';
+                  document.getElementById('order-balance').value = '';
+                }
+              });
+
+            }
         });
-        startInterval();
+
+        // use qr
+        document.getElementById('order-qrScan').addEventListener('click',(event)=>{
+          if (qrScan){
+            qrScan = false;
+            clearInterval(intervalId);
+            document.getElementById('order-qrcode').querySelector('img').remove();
+            document.getElementById('order-qrcode').querySelector('canvas').remove();
+            document.getElementById('order-qrScan').textContent = "Use QR";
+          } else {
+            qrScan = true;
+            FetchEventChanges();
+            document.getElementById('order-qrScan').textContent = "Stop";
+          }
+        });
+
+        document.getElementById('order-submit').addEventListener('click',(event)=>{
+          const order = myOrders.getOrdersArray();
+          const data = {
+            AccountAddress : document.getElementById('order-userid').value,
+            Discount : document.getElementById('order-discount').dataset.value,
+            DiscountReason : null,
+            ItemsArray : []
+          };
+          order.forEach(element => {
+            data['ItemsArray'].push({
+              ItemId: element['itemId'],
+              ItemQuantity: element['quantity']
+            });
+          });
+          Ajax.sendRequest(data, 'post order')
+            .then(responseData => {
+              if (responseData.Success){
+                document.getElementById('order-status').innerHTML = '<p class="warning">Status: Waiting for payment...</p>';
+                document.getElementById('order-buttons').innerHTML = '';
+                document.getElementById('order-content').innerHTML = `
+                  Waiting for user confirmation of order [${responseData.Parameters.TransactionAddress}]
+                `;
+                FetchConfirmationChanges(responseData.Parameters.TransactionAddress);
+              }
+            });
+        });
       }
-  })
+    })
 
-
-   
-    
-    
 
   } else {
     makeAlert("danger", "No items selectd to place an order. Please select and try again...");
@@ -186,13 +298,7 @@ function onMenuSelectionButton(event) {
       .then(responseData => {
         fundRemittance(responseData.Parameters);
       })
-    
-
-      
   }
-
-
-  
 }
 
 helper.addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
@@ -273,6 +379,7 @@ function onMenuSettingsButtonClick() {
       if (responseData.Success) {
         makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
         helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
+        helper.addElementClickListenerById('btn-login-history',()=>{loginHistory.open()});
       }
   })
 }

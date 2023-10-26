@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/cards.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/configurations.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/notifications.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/loginhistory.css'); ?>">
 </head>
 
 <body>

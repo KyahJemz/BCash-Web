@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/transactions.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/accounts.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/fundremittance.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/loginhistory.css'); ?>">
 </head>
 
 <body>

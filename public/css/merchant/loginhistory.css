@@ -1,0 +1,45 @@
+
+#login-history-item-list {
+       display: flex;
+       width: 100%;
+       flex-direction: column;
+       padding: 10px 20px;
+       gap: 20px;
+}
+
+#login-history-item-list .login-history-item {
+       display: flex;
+       width: 100%;
+       flex-direction: column;
+       padding: 10px;
+       border: 1px solid gainsboro;
+       border-radius: 5px;
+}
+
+#login-history-item-list .LastOnline{
+       border-bottom: 1px dashed gainsboro;
+       margin-bottom: 5px;
+       padding-bottom: 5px;
+       font-weight: bold;
+}
+
+#login-history-item-list .Device,
+#login-history-item-list .IpAddress,
+#login-history-item-list .Location {
+       margin-bottom: 5px;
+}
+
+#login-history-item-list .remove-btn{
+       cursor: pointer;
+       text-align: center;
+       align-self: center;
+       width: fit-content;
+}
+
+
+
+
+
+
+
+

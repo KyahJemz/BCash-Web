@@ -167,6 +167,10 @@
     gap: 10px;
 }
 
+.order-confirmation .content .right-panel .details input {
+    width: 100%;
+}
+
 
 .order-confirmation .content .right-panel .qr-code button{
     width: 50%;
@@ -184,16 +188,12 @@
     gap: 4px;
 }
 
-
-
-
 .order-confirmation .buttons{
     width: fit-content;
     display: flex;
     flex-direction: row;
     align-self: flex-end;
     gap: 10px;
-    
 }
 
 

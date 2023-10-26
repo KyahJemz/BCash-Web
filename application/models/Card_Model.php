@@ -27,11 +27,8 @@ class Card_Model extends CI_Model {
             ->where('Card_Address ', $params['Card_Address'])
             ->get()
             ->row();
-        if ($result) {
-            return $result;
-        } else {
-            return false; 
-        }
+        return $result;
+    
     }
 
 

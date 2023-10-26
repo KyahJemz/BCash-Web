@@ -198,6 +198,17 @@ class UsersAccount_Model extends CI_Model {
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 
+    public function read_name($params) {
+        $result = $this->db
+            ->select('Firstname, Lastname')
+            ->from('tbl_usersaccount')
+            ->where('UsersAccount_Address ', $params['UsersAccount_Address'])
+            ->get()
+            ->row();
+
+        return $result;
+    }
+
 
     
 

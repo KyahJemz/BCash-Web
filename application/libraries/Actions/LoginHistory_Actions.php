@@ -100,7 +100,7 @@ class LoginHistory_Actions {
               } else {
                      $LoginHistory = $this->CI->LoginHistory_Model->delete_specific($Account->WebAccounts_Address, $IpAddress, $Device, $Location);
               }
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
+              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Removed '.$IpAddress.' | '.$Device.' | '.$Location];
        }
 
 

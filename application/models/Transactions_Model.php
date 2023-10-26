@@ -67,7 +67,7 @@ class Transactions_Model extends CI_Model {
             ->select('SUM(Credit) - SUM(Debit) AS total_balance', FALSE)
             ->from('tbl_Transactions')
             ->where('Account_Address', $params['Account_Address'])
-            ->where('Status !=', 'Canceled')
+            ->where('Status', 'Completed')
             ->get()
             ->row()
             ->total_balance;
@@ -396,6 +396,27 @@ class Transactions_Model extends CI_Model {
         $this->db->from('tbl_ordersvalidation');
         $this->db->where('WebAccounts_Address', $params['WebAccounts_Address']);
         return $this->db->get()->row();
+    }
+
+    public function Listen_Confirmation_Event($params){
+        $this->db->select('*');
+        $this->db->from('tbl_transactionsinfo');
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);
+        $this->db->limit(1);
+
+        return $this->db->get()->row();
+    }
+
+    public function create_transaction_items($params){
+        foreach ($params['Items'] as $row) {
+            $data = [
+                'Transaction_Address' => $params['Transaction_Address'],
+                'MerchantItems_Id' => $row['MerchantItems_Id'],
+                'Quantity' => $row['Quantity'],
+                'Amount' => $row['Amount'],
+            ];
+            $this->db->insert('tbl_transactionitems', $data);
+        }
     }
 }
 

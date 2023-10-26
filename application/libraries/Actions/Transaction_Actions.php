@@ -475,10 +475,13 @@ public function View_Recent_CashIn () {
               $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
               $Discount = $this->CI->Functions_Model->sanitize($requestPostBody['Discount']);
               $DiscountReason = $this->CI->Functions_Model->sanitize($requestPostBody['DiscountReason']);
+
               $Amount = 0;
               $TotalAmount = 0;
               $ItemId = [];
+              $ItemToSave = [];
               $transformedItems = [];
+
               foreach ($requestPostBody['ItemsArray'] as $index => $item) {
                      $transformedItems[$index] = [
                          'ItemId' => $this->CI->Functions_Model->sanitize($item['ItemId']),
@@ -491,20 +494,35 @@ public function View_Recent_CashIn () {
                      'ItemId' => $ItemId,
               ));
 
+              
+
               if (count($ItemId) !== count($Items)) {
                      return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'Invalid items!'];
               } else {
-                     foreach ($Items as $row) {
-                            $Amount += (float)$row->Price;
-                            if ($row->IsActive === '0') {
-                                   return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => $row->Name . ' - is not available!'];
+                     foreach ($transformedItems as $order) {
+                            foreach ($Items as $item){
+                                   if ($order['ItemId'] === $item->MerchantItems_Id){
+                                          $Amount += ((float)$item->Price * (float)$order['ItemQuantity']);
+                                          $ItemToSave[] = [
+                                                 'MerchantItems_Id' => $item->MerchantItems_Id,
+                                                 'Quantity' => $order['ItemQuantity'],
+                                                 'Amount' => $item->Price,
+                                          ];
+                                          if ($item->IsActive === '0') {
+                                                 return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => $item->Name . ' - is not available!'];
+                                          }
+                                   }
                             }
                      }
+
                      $TotalAmount = $Amount - (float)$Discount;
               }
 
-              $ReceiverAccount =  $this->CI->UsersAccount_Model->read_by_address($AccountAddress);
-              $ReceiverAccountData = $this->CI->UsersData_Model->read_by_address($AccountAddress);
+              $MerchantAddress = $this->CI->Merchants_Model->get_merchantadminaddress(array(
+                     'WebAccounts_Address'=>$Account->WebAccounts_Address,
+              ))->WebAccounts_Address;
+              $ReceiverAccount =  $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
+              $ReceiverAccountData = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$AccountAddress));
               if (!$ReceiverAccount) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid receivers account!'];
               }
@@ -533,8 +551,8 @@ public function View_Recent_CashIn () {
                      // SENDER
                      $this->CI->Transactions_Model->create_transaction(array(
                             'Transaction_Address' => $TransactionAddress,
-                            'Account_Address' => $Account->UsersAccount_Address,
-                            'Status' => ($ReceiverAccountData->IsPurchaseAutoConfirm === '1') ? 'Completed' : 'Pending Payment',  
+                            'Account_Address' => $AccountAddress,
+                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Completed' : 'Payment',  
                             'Debit' => $TotalAmount,
                             'Credit' => '0',
                      ));
@@ -542,8 +560,8 @@ public function View_Recent_CashIn () {
                      // RECEIVER
                      $this->CI->Transactions_Model->create_transaction(array(
                             'Transaction_Address' => $TransactionAddress,
-                            'Account_Address' => $AccountAddress,
-                            'Status' => ($ReceiverAccountData->IsPurchaseAutoConfirm === '1') ? 'Completed' : 'Pending Payment',  
+                            'Account_Address' => $MerchantAddress,
+                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Completed' : 'Payment',  
                             'Debit' => '0',
                             'Credit' => $TotalAmount,
                      ));
@@ -551,15 +569,21 @@ public function View_Recent_CashIn () {
                      $this->CI->Transactions_Model->create_transactioninfo(array(
                             'Transaction_Address' => $TransactionAddress,
                             'TransactionType_Id' => '3', // Purchase
-                            'Sender_Address' => $Account->UsersAccount_Address, /// shop name
-                            'Receiver_Address' => $AccountAddress,
-                            'Status' => ($ReceiverAccountData->IsPurchaseAutoConfirm === '1') ? 'Completed' : 'Pending Payment',  
+                            'Sender_Address' => $AccountAddress, /// shop name
+                            'Receiver_Address' => $MerchantAddress,
+                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Completed' : 'Payment',  
                             'Amount' => $Amount,
                             'Discount' => $Discount,
                             'DiscountReason' => $DiscountReason,
                             'TotalAmount' => $TotalAmount,
-                            'PostedBy' => $Account->UsersAccount_Address,
+                            'PostedBy' => $Account->WebAccounts_Address,
                      ));
+
+                     $this->CI->Transactions_Model->create_transaction_items(array(
+                            'Transaction_Address' => $TransactionAddress,
+                            'Items' => $ItemToSave,
+                     ));
+
 
               $this->CI->db->trans_complete(); 
 
@@ -573,7 +597,7 @@ public function View_Recent_CashIn () {
                      'TransactionAddress' => $TransactionAddress
               ];
 
-              return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => 'Success'];
+              return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => 'Order posted, Waiting for payment.'];
        }
     
 

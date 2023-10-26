@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCash - Merchant</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
     <link rel="stylesheet" href="<?php echo base_url('./public/css/styles.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/dialog-box.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/menu.css'); ?>">
@@ -14,6 +16,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/itemmanagement.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/createorder.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/transactions.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/loginhistory.css'); ?>">
 </head>
 
 
@@ -114,8 +117,8 @@
         TRANSACTIONS 
     -->
                 <div id="panel-transactions" class="body-content-panel hidden">
-                    <div id="My-Tansactions-Query" class="panel-transactions-query panel">
-                    <div class="form-container">
+                    <div id="My-Transactions-Query" class="panel-transactions-query panel">
+                        <div class="form-container">
                             <div>
                                 <label for="StartDate">Start Date</label>
                                 <input class="transactions-startdate query inputdate" class="textbox" type="date" name="MyTransactionStartDate" autocomplete="off">
@@ -220,13 +223,13 @@
                                     <col class="col13">
                                     <col class="col14">
                                 </colgroup>
-                            <tbody id="My-Tansactions-Table" class="transactions-table">
+                            <tbody id="My-Transactions-Table" class="transactions-table">
                                       
                             </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="panel-transactions-footer" id="My-Transactions-Footer-Query">
+                    <div id="My-Transactions-Footer-Query" class="panel-transactions-footer">
                         <div class="dropdown">
                             <div class="dropdown-content">
                                 <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)" >50/Page</a>
@@ -235,7 +238,7 @@
                                 <a class="dropdownButtonSubItem" href="javascript:void(0)">All/Page</a>
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="transactions-recordscount-dropwond" class="dropdown-text">50/Page</span>
+                                <span class="transactions-recordscount-dropdown" class="dropdown-text">50/Page</span>
                                 <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
                             </button>
                         </div>

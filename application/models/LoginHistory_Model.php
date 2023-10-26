@@ -11,12 +11,9 @@ class LoginHistory_Model extends CI_Model {
             ->select('*')
             ->from('tbl_loginhistory')
             ->where('Account_Address', $AccountAddress)
-            ->get();
-        if ($result) {
-            return $result;
-        } else {
-            return null; 
-        }
+            ->get()
+            ->result();
+        return $result;
     }
 
     public function read_by_specific($AccountAddress,$IpAddress,$Device,$Location){
@@ -29,26 +26,22 @@ class LoginHistory_Model extends CI_Model {
             ->where('Location', $Location)
             ->get()
             ->row();
-        if ($result) {
-            return $result;
-        } else {
-            return null; 
-        }
+        return $result;
     }
 
-    public function delete_specific($AccountAddress,$IpAddress,$Location,$Device) {
+    public function delete_specific($AccountAddress,$IpAddress,$Device,$Location) {
         $this->db->where('Account_Address', $AccountAddress);
         $this->db->where('IpAddress', $IpAddress);
         $this->db->where('Location', $Location);
         $this->db->where('Device', $Device);
-        $this->db->delete('tbl_authentications');
+        $this->db->delete('tbl_loginhistory');
         $result = $this->db->affected_rows();
-        return ($result > 0) ? TRUE : FALSE;
+        return $this->db->last_query();
     }
 
     public function delete($AccountAddress) {
         $this->db->where('Account_Address', $AccountAddress);
-        $this->db->delete('tbl_authentications');
+        $this->db->delete('tbl_loginhistory');
         $result = $this->db->affected_rows();
         return ($result > 0) ? TRUE : FALSE;
     }
@@ -79,3 +72,4 @@ class LoginHistory_Model extends CI_Model {
     }
 
 }
+
