@@ -7,7 +7,7 @@ import Dropdown from './modules/dropdown.js';
 import Accounts from './modules/accounts.js';
 import AjaxRequest from './ajax.js';
 import LoginHistory from './modules/loginhistory.js'
-// import { SetAccountingChart } from './chart.js';
+import { SetAdministratorChart } from './chart.js';
 
 import Helper from './helper.js';
 
@@ -142,10 +142,10 @@ export function makeModal(type, title, content){
 function onMenuSelectionButton(event) {
   menu.menuSelectionEvents(event, null, null);
   if (event.currentTarget.dataset.menu === "Home") {
-    // Ajax.sendRequest([], "get chart data")
-    // .then(responseData => {
-    //   SetAccountingChart(responseData.Parameters);
-    // })
+    Ajax.sendRequest([], "get chart data")
+    .then(responseData => {
+      SetAdministratorChart(responseData.Parameters);
+    })
   }
   if (event.currentTarget.dataset.menu === "Application Control Management") {
     SetConfiguration();
@@ -698,3 +698,7 @@ export function AddNotifications() {
 
 
 
+Ajax.sendRequest([], "get chart data")
+    .then(responseData => {
+      SetAdministratorChart(responseData.Parameters);
+    })

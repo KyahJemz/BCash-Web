@@ -8,6 +8,7 @@ import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
 import AjaxRequest from './ajax.js';
 import LoginHistory from './modules/loginhistory.js'
+import { SetMerchantAdminChart } from './chart.js';
 
 import Helper from './helper.js';
 
@@ -282,6 +283,12 @@ helper.addElementInputListenerById('itemmanagement-search', onItemManagementSear
 
 function onMenuSelectionButton(event) {
   menu.menuSelectionEvents(event, myItems, myOrders);
+  if (event.currentTarget.dataset.menu === "Home") {
+    Ajax.sendRequest([], "get chart data")
+    .then(responseData => {
+      SetMerchantAdminChart(responseData.Parameters);
+    })
+  }
   if (event.currentTarget.dataset.menu === "Item Management") {
     refreshItems();
   }
@@ -665,4 +672,7 @@ export function fundRemittance (parameters){
       })
 }
 
-
+Ajax.sendRequest([], "get chart data")
+    .then(responseData => {
+      SetMerchantAdminChart(responseData.Parameters);
+    })

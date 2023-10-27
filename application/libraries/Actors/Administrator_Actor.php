@@ -36,8 +36,7 @@ class Administrator_Actor {
 
 // Charts
             case 'get chart data':
-                $response = null;
-                // $response = $this->CI->Chart_Actions->View_Accounting_Charts();
+                $response = $this->CI->Chart_Actions->View_Administrator_Charts();
                 break;
 
 

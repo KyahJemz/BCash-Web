@@ -27,7 +27,7 @@ class MerchantAdmin_Actor {
                 break;
 
             case 'get chart data':
-                $response = null;
+                $response = $this->CI->Chart_Actions->View_MerchantAdmin_Charts($Account);
                 break;
 
             case 'get my notifications':

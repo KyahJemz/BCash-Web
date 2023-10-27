@@ -4,14 +4,9 @@ class Charts_Model extends CI_Model {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model([
-            'Functions_Model',
-     ]);
     }
 
-// ALL
-
-//ACCOUNTING 
+// ACCOUNTING 
     public function TotalCashIn(){
         $hourlyDebitCounts = array_fill(0, 24, 0);
 
@@ -213,4 +208,356 @@ class Charts_Model extends CI_Model {
             ->result();
         return $RecentActivities;
     } 
+
+
+
+// ADMINISTRARTOR 
+    public function TotalCashInsPerHour() {
+        $hourlyCashInCounts = array_fill(0, 24, 0);
+
+        $query = $this->db
+            ->select('HOUR(Timestamp) as Hour, COUNT(Debit) as TotalCashIn')
+            ->from('tbl_transactions')
+            ->where('Status', 'Completed')
+            ->like('Account_Address', 'ACT', 'after')
+            ->where('Timestamp >= CURDATE()')
+            ->group_by('HOUR(Timestamp)')
+            ->get();
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $hour = $row->Hour;
+                $totalCashIn = $row->TotalCashIn;
+                $hourlyCashInCounts[$hour] = $totalCashIn;
+            }
+        }
+        return $hourlyCashInCounts;
+    }
+    public function TotalTransfersPerHour() {
+        $hourlyTransfersCounts = array_fill(0, 24, 0);
+
+        $query = $this->db
+            ->select('HOUR(Timestamp) as Hour, COUNT(Transaction_Address) as TotalTransfers')
+            ->from('tbl_transactionsinfo')
+            ->where('Status', 'Completed')
+            ->group_start()
+                ->like('Sender_Address', 'USR', 'after')
+                ->or_like('Sender_Address', 'GST', 'after')
+            ->group_end()
+            ->group_start()
+                ->like('Receiver_Address', 'USR', 'after')
+                ->or_like('Receiver_Address', 'GST', 'after')
+            ->group_end()
+            ->where('Timestamp >= CURDATE()')
+            ->group_by('HOUR(Timestamp)')
+            ->get();
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $hour = $row->Hour;
+                $totalTransfers = $row->TotalTransfers;
+                $hourlyTransfersCounts[$hour] = $totalTransfers;
+            }
+        }
+        return $hourlyTransfersCounts;
+    }
+    public function TotalPurchasesPerHour() {
+        $hourlyPurchasesCounts = array_fill(0, 24, 0);
+
+        $query = $this->db
+            ->select('HOUR(Timestamp) as Hour, COUNT(Transaction_Address) as TotalPurchases')
+            ->from('tbl_transactionsinfo')
+            ->where('Status', 'Completed')
+            ->like('Receiver_Address', 'MTA', 'after')
+            ->where('Timestamp >= CURDATE()')
+            ->group_by('HOUR(Timestamp)')
+            ->get();
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $hour = $row->Hour;
+                $totalPurchases = $row->TotalPurchases;
+                $hourlyPurchasesCounts[$hour] = $totalPurchases;
+            }
+        }
+        return $hourlyPurchasesCounts;
+    }
+    public function EveryHourTransactions() {
+        $hourlyTransactionsCounts = array_fill(0, 24, 0);
+
+        $query = $this->db
+            ->select('HOUR(Timestamp) as Hour, COUNT(Transaction_Address) as TotalTransactions')
+            ->from('tbl_transactionsinfo')
+            ->where('Status', 'Completed')
+            ->where('Timestamp >= CURDATE()')
+            ->group_by('HOUR(Timestamp)')
+            ->get();
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $hour = $row->Hour;
+                $totalTransactions = $row->TotalTransactions;
+                $hourlyTransactionsCounts[$hour] = $totalTransactions;
+            }
+        }
+        return $hourlyTransactionsCounts;
+    }
+    public function NumberOfActors() {
+        $ADM = $this->db
+            ->select('COUNT(WebAccounts_Address) as ADM')
+            ->from('tbl_webaccounts')
+            ->like('WebAccounts_Address', 'ADM', 'after')
+            ->get()
+            ->row()
+            ->ADM;
+
+        $ACT = $this->db
+            ->select('COUNT(WebAccounts_Address) as ACT')
+            ->from('tbl_webaccounts')
+            ->like('WebAccounts_Address', 'ACT', 'after')
+            ->get()
+            ->row()
+            ->ACT;
+
+        $MTA = $this->db
+            ->select('COUNT(WebAccounts_Address) as MTA')
+            ->from('tbl_webaccounts')
+            ->like('WebAccounts_Address', 'MTA', 'after')
+            ->get()
+            ->row()
+            ->MTA;
+
+        $MTS = $this->db
+            ->select('COUNT(WebAccounts_Address) as MTS')
+            ->from('tbl_webaccounts')
+            ->like('WebAccounts_Address', 'MTS', 'after')
+            ->get()
+            ->row()
+            ->MTS;
+
+        $USR = $this->db
+            ->select('COUNT(UsersAccount_Address) as USR')
+            ->from('tbl_usersaccount')
+            ->like('UsersAccount_Address', 'USR', 'after')
+            ->get()
+            ->row()
+            ->USR;
+
+        $GST = $this->db
+            ->select('COUNT(UsersAccount_Address) as GST')
+            ->from('tbl_usersaccount')
+            ->like('UsersAccount_Address', 'GST', 'after')
+            ->get()
+            ->row()
+            ->GST;
+        
+        $GDN = $this->db
+            ->select('COUNT(GuardianAccount_Address) as GDN')
+            ->from('tbl_guardianaccount')
+            ->get()
+            ->row()
+            ->GDN;
+
+        return [
+            'labels' => [
+                'ADM',
+                'ACT',
+                'MTA',
+                'MTS',
+                'USR',
+                'GST',
+                'GDN',
+            ],
+            'numbers' => [
+                (int)$ADM,
+                (int)$ACT,
+                (int)$MTA,
+                (int)$MTS,
+                (int)$USR,
+                (int)$GST,
+                (int)$GDN
+            ]
+        ];
+    }
+    public function RecentAdminActivities() {
+        $RecentActivities = $this->db
+            ->select('*')
+            ->from('tbl_activitylogs')
+            ->like('Account_Address', 'ADM', 'after')
+            ->order_by('Timestamp', 'DESC')
+            ->limit(5)
+            ->get()
+            ->result();
+        return $RecentActivities;
+    }
+    public function RecentAccountingMerchantActivities() {
+        $RecentActivities = $this->db
+            ->select('*')
+            ->from('tbl_activitylogs')
+            ->group_start()
+                ->like('Account_Address', 'ACT', 'after')
+                ->or_like('Account_Address', 'MTA', 'after')
+                ->or_like('Account_Address', 'MTS', 'after')
+            ->group_end()
+            ->order_by('Timestamp', 'DESC')
+            ->limit(5)
+            ->get()
+            ->result();
+        return $RecentActivities;
+    }
+    public function RecentUsersActivities() {
+        $RecentActivities = $this->db
+            ->select('*')
+            ->from('tbl_activitylogs')
+            ->group_start()
+                ->like('Account_Address', 'USR', 'after')
+                ->or_like('Account_Address', 'GST', 'after')
+                ->or_like('Account_Address', 'GDN', 'after')
+            ->group_end()
+            ->order_by('Timestamp', 'DESC')
+            ->limit(5)
+            ->get()
+            ->result();
+        return $RecentActivities;
+    }
+
+
+
+// MERCHANT ADMIN 
+    public function TotalOrdersPerHour($Account_Address){
+        $hourlyOrdersCounts = array_fill(0, 24, 0);
+
+        $query = $this->db
+            ->select('HOUR(Timestamp) as Hour, COUNT(Transaction_Address) as TotalOrders')
+            ->from('tbl_transactionsinfo')
+            ->where('Status', 'Completed')
+            ->where('Receiver_Address', $Account_Address)
+            ->where('Timestamp >= CURDATE()')
+            ->group_by('HOUR(Timestamp)')
+            ->get();
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $hour = $row->Hour;
+                $totalOrders = $row->TotalOrders;
+                $hourlyOrdersCounts[$hour] = $totalOrders;
+            }
+        }
+        return $hourlyOrdersCounts;
+    }
+    public function TotalSalesPerHour($Account_Address){
+        $hourlySalesCounts = array_fill(0, 24, 0);
+
+        $query = $this->db
+            ->select('HOUR(Timestamp) as Hour, SUM(TotalAmount) as TotalSales')
+            ->from('tbl_transactionsinfo')
+            ->where('Status', 'Completed')
+            ->where('Receiver_Address', $Account_Address)
+            ->where('Timestamp >= CURDATE()')
+            ->group_by('HOUR(Timestamp)')
+            ->get();
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $hour = $row->Hour;
+                $totalSales = $row->TotalSales;
+                $hourlySalesCounts[$hour] = $totalSales;
+            }
+        }
+        return $hourlySalesCounts;
+    }
+    public function EveryDayTotalSales($Account_Address){
+        $Sales = array_fill(0, 7, 0);
+    
+        $currentTimestamp = date('Y-m-d H:i:s');
+    
+        if ($currentTimestamp) {
+            $this->db->select('DATE(Timestamp) as Date, SUM(Credit) as TotalCredit');
+            $this->db->where('Account_Address', $Account_Address);
+            $this->db->where("DATE(Timestamp) >= DATE_SUB('$currentTimestamp', INTERVAL 6 DAY)", null, false);
+            $this->db->where('Status', 'Completed');
+            $this->db->group_by('DATE(Timestamp)');
+            $querySales = $this->db->get('tbl_transactions');
+            $SalesResults = $querySales->result();
+
+            foreach ($SalesResults as $result) {
+                $date = new DateTime($result->Date);
+                $dayIndex = 6 - intval($date->diff(new DateTime())->format('%a'));
+                $Sales[$dayIndex] = $result->TotalCredit;
+            }
+        }
+
+        return ['Sales' => $Sales];
+    }
+    public function TopItems($Account_Address){
+        $TopItemsList = $this->db
+            ->select('items.MerchantItems_Id, itemdetails.Name, SUM(items.Quantity) as TotalQuantity')
+            ->from('tbl_transactionitems as items')
+            ->join('tbl_transactions as transaction', 'items.Transaction_Address = transaction.Transaction_Address', 'left')
+            ->join('tbl_merchantitems as itemdetails', 'items.MerchantItems_Id = itemdetails.MerchantItems_Id', 'left')
+            ->where('transaction.Account_Address', $Account_Address)
+            ->group_by('items.MerchantItems_Id')
+            ->order_by('TotalQuantity', 'DESC')
+            ->limit(10)
+            ->get()
+            ->result();
+
+        $names = [];
+        $totalQuantities = [];
+
+        foreach ($TopItemsList as $item) {
+            $names[] = $item->Name;
+            $totalQuantities[] = $item->TotalQuantity;
+        }
+
+        return ['Name'=>$names,'Total'=>$totalQuantities];
+    }
+    public function RecentMerchantActivities($Account_Address){
+        $MerchantsCategory_Id = $this->db
+            ->select('*')
+            ->from('tbl_merchants')
+            ->where('WebAccounts_Address', $Account_Address)
+            ->get()
+            ->row()
+            ->MerchantsCategory_Id;
+
+        $RecentActivities = $this->db
+            ->select('
+                logs.*,
+                accounts.Firstname as Firstname,
+                accounts.Lastname as Lastname
+            ')
+            ->from('tbl_activitylogs as logs')
+            ->join('tbl_merchants as merchant', 'logs.Account_Address = merchant.WebAccounts_Address', 'left')
+            ->join('tbl_webaccounts as accounts', 'logs.Account_Address = accounts.WebAccounts_Address', 'left')
+            ->where('MerchantsCategory_Id', $MerchantsCategory_Id)
+            ->order_by('Timestamp', 'DESC')
+            ->limit(5)
+            ->get()
+            ->result();
+
+        return $RecentActivities;
+    }
+    public function RecentPurchases($Account_Address){
+        $recentPurchases = $this->db
+            ->select('
+                tbl_transactionsinfo.*,
+                accounts.Firstname as Firstname,
+                accounts.Lastname as Lastname,
+                type.Name as TransactionType
+            ')
+            ->from('tbl_transactionsinfo')
+            ->join('tbl_usersaccount as accounts', 'tbl_transactionsinfo.Sender_Address = accounts.UsersAccount_Address', 'left')
+            ->join('tbl_transactiontype as type', 'tbl_transactionsinfo.TransactionType_Id = type.TransactionType_Id', 'left')
+            ->where('tbl_transactionsinfo.Receiver_Address', $Account_Address)
+            ->where('tbl_transactionsinfo.Status', 'Completed')
+            ->order_by('tbl_transactionsinfo.Timestamp', 'DESC')
+            ->limit(5)
+            ->get()
+            ->result();
+        return $recentPurchases;
+    }
+
+
+
 }

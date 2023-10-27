@@ -132,15 +132,10 @@
                         </div>
                         <div class="charts-container-row1">
                             <div class="chart-item">
-                                <!-- Orders Summary Per Hour -->
                                 <div class="chart-header">
                                     <p class="chart-title">Orders Summary Per Hour</p>
                                     <div class="chart-value">
                                         <p class="chart-number">P100.00</p>
-                                        <div class="chart-status">
-                                            <p class="chart-status-number">150%</p>
-                                            <img class="chart-status-image" src="" alt="">
-                                        </div>
                                     </div>
                                 </div>
                                 <div id="chart-1" class="chart-mini">
@@ -148,15 +143,11 @@
                                 </div>
                             </div>
                             <div class="chart-item">
-                                <!-- Sales Summary Per Hour  -->
                                 <div class="chart-header">
                                     <p class="chart-title">Sales Summary Per Hour</p>
                                     <div class="chart-value">
                                         <p class="chart-number">P100.00</p>
-                                        <div class="chart-status">
-                                            <p class="chart-status-number">150%</p>
-                                            <img class="chart-status-image" src="" alt="">
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div id="chart-2" class="chart-mini">
@@ -169,8 +160,8 @@
                             <div class="chart-5 chart-item">
                                 <!-- Total Transactions Today -->
                                 <div class="chart-header">
-                                    <p class="chart-title">Daily sales ghraph</p>
-                                    <p class="chart-description">fhjuhfu sfjha hafewf a dfwef awfwa agn agag ag nag  </p>
+                                    <p class="chart-title">Daily sales graph</p>
+                                    <p class="chart-description">This graph shows your sales within the past 7 days.</p>
                                     <div class="chart-value">
                                         <div class="chart-value-1">
                                             <p class="chart-value-1-number"></p>
@@ -191,7 +182,7 @@
                                 <!-- Total Transactions Today -->
                                 <div class="chart-header">
                                     <p class="chart-title">Top Item</p>
-                                    <p class="chart-description">Top 10 sold items</p>
+                                    <p class="chart-description">This graph shows your top selling items</p>
                                 </div>
                                 <div id="chart-4" class="">
                                     <canvas></canvas>
@@ -201,56 +192,11 @@
 
                         <div class="charts-container-row3">
                             <div class="chart-7 chart-item">
-                                <!-- Recent Transactions -->
                                 <div class="header">
-                                    <p class="title">Recent Transactions</p>
+                                    <p class="title">Recent Merchant Activities</p>
                                     <p class="date">Last Update: 12:98AM</p>
                                 </div>
-                                <ul>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
+                                <ul id="chart-5" >
                                     <li>
                                         <img src="" alt="" >
                                         <div>
@@ -267,11 +213,10 @@
                             </div>
                             <div class="chart-8 chart-item">
                                 <div class="header">
-                                    <p class="title">Recent Cash-In</p>
+                                    <p class="title">Recent Purchases</p>
                                     <p class="date">Last Update: 12:98AM</p>
                                 </div>
-                                <!-- Recent Cash In -->
-                                <ul>
+                                <ul id="chart-6" >
                                     <li>
                                         <img src="" alt="" >
                                         <div>
@@ -283,88 +228,11 @@
                                             <p class="type">type</p>
                                         </div>
                                     </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="chart-9 chart-item">
-                                <div class="header">
-                                    <p class="title">Recent Activities</p>
-                                    <p class="date">Last Update: 12:98AM</p>
-                                </div>
-                                <!-- Recent Activities -->
-                                <ul>
-                                    
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                    </li>
-
                                 </ul>
                             </div>
                         </div>
 
-                       <!--
-                    
-
-
-                        Total Cash In Today / Total Amount
-                        Total Orders In Merchants
-                        Total Total Sales In Merhcants
-                        Total Transactions Today
-
-                        Mpney in Circulation
-                            Hold By Users
-                            Hold By Merchants   
-
-                        graph of sales every day Cash ins               
-                       -->
+                        
                     </div>
                 </div>
 
@@ -815,7 +683,6 @@ MODALS ###
 <!--
     JAVASCRIPTS  ###
 -->
-    <script src="../public/javascript/chart-MerchantAdmin.js"></script>
     <script src="../public/javascript/main-merchant-admin.js" type="module"></script>
 </body>
 </html>

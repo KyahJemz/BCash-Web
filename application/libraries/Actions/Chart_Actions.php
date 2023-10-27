@@ -62,4 +62,83 @@ class Chart_Actions {
        }
 
 
+       
+/* 
+-- ---------------------
+   VIEW ADMINISTRATOR CHARTS
+   - administrator
+-- ---------------------
+*/  
+
+       public function View_Administrator_Charts() {
+
+              $TotalCashInsPerHour = $this->CI->Charts_Model->TotalCashInsPerHour();
+
+              $TotalTransfersPerHour = $this->CI->Charts_Model->TotalTransfersPerHour();
+
+              $TotalPurchasesPerHour = $this->CI->Charts_Model->TotalPurchasesPerHour();
+
+              $EveryHourTransactions = $this->CI->Charts_Model->EveryHourTransactions();
+
+              $NumberOfActors = $this->CI->Charts_Model->NumberOfActors();
+
+              $RecentAdminActivities = $this->CI->Charts_Model->RecentAdminActivities();
+
+              $RecentAccountingMerchantActivities = $this->CI->Charts_Model->RecentAccountingMerchantActivities();
+
+              $RecentUsersActivities = $this->CI->Charts_Model->RecentUsersActivities();
+
+              $CurrentTime = $this->CI->Functions_Model->get_current_timestamp();
+              
+              $Parameters = [
+                     'TotalCashInsPerHour' => $TotalCashInsPerHour,
+                     'TotalTransfersPerHour' => $TotalTransfersPerHour,
+                     'TotalPurchasesPerHour' => $TotalPurchasesPerHour,
+                     'EveryHourTransactions' => $EveryHourTransactions,
+                     'NumberOfActors' => $NumberOfActors,
+                     'RecentAdminActivities' => $RecentAdminActivities,
+                     'RecentAccountingMerchantActivities' => $RecentAccountingMerchantActivities,
+                     'RecentUsersActivities' => $RecentUsersActivities,
+                     'CurrentTime' => $CurrentTime,
+              ];
+
+            return ['Success' => True,'Target' => null,'Parameters' => $Parameters,'Response' => ''];
+       }
+
+
+
+/* 
+-- ---------------------
+   VIEW MERCHANT ADMIN CHARTS
+   - merchant admin
+-- ---------------------
+*/  
+public function View_MerchantAdmin_Charts($Account) {
+
+       $TotalOrdersPerHour = $this->CI->Charts_Model->TotalOrdersPerHour($Account->WebAccounts_Address);
+
+       $TotalSalesPerHour = $this->CI->Charts_Model->TotalSalesPerHour($Account->WebAccounts_Address);
+
+       $EveryDayTotalSales = $this->CI->Charts_Model->EveryDayTotalSales($Account->WebAccounts_Address);
+
+       $TopItems = $this->CI->Charts_Model->TopItems($Account->WebAccounts_Address);
+
+       $RecentMerchantActivities = $this->CI->Charts_Model->RecentMerchantActivities($Account->WebAccounts_Address);
+
+       $RecentPurchases = $this->CI->Charts_Model->RecentPurchases($Account->WebAccounts_Address);
+
+       $CurrentTime = $this->CI->Functions_Model->get_current_timestamp();
+       
+       $Parameters = [
+              'TotalOrdersPerHour' => $TotalOrdersPerHour,
+              'TotalSalesPerHour' => $TotalSalesPerHour,
+              'EveryDayTotalSales' => $EveryDayTotalSales,
+              'TopItems' => $TopItems,
+              'RecentMerchantActivities' => $RecentMerchantActivities,
+              'RecentPurchases' => $RecentPurchases,
+              'CurrentTime' => $CurrentTime,
+       ];
+
+     return ['Success' => True,'Target' => null,'Parameters' => $Parameters,'Response' => ''];
+}
 }

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/configurations.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/notifications.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/loginhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/home.css'); ?>">
 </head>
 
 <body>
@@ -165,7 +166,115 @@
     -->
                 <div id="panel-home" class="body-content-panel visible">
                     <div class="panel-home-content">
-                       
+                        
+                        <div class="header">
+                            <p>Welcome to Dashboard</p>
+                        </div>
+
+                        <div class="charts-container-row1">
+
+                            <div class="chart-item">
+                                <div class="chart-header">
+                                    <p class="chart-title">Total cash-in today</p>
+                                    <div class="chart-value">
+                                        <p class="chart-number">???</p>
+                                    </div>
+                                </div>
+                                <div id="chart-1" class="chart-mini">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+
+                            <div class="chart-item">
+                                <div class="chart-header">
+                                    <p class="chart-title">Total purchases today</p>
+                                    <div class="chart-value">
+                                        <p class="chart-number">???</p>
+                                    </div>
+                                </div>
+                                <div id="chart-2" class="chart-mini">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+
+                            <div class="chart-item">
+                                <div class="chart-header">
+                                    <p class="chart-title">Total transfers today</p>
+                                    <div class="chart-value">
+                                        <p class="chart-number">???</p>
+                                    </div>
+                                </div>
+                                <div id="chart-3" class="chart-mini">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="charts-container-row2">
+
+                            <div class="chart-5 chart-item">
+                                <div class="chart-header">
+                                    <p class="chart-title">Hourly Transactions Line Graph</p>
+                                    <p class="chart-description">This graph depicts the circulation of BCash within the accounting department for the past 7 days.</p>
+                                    <div class="chart-value">
+                                        <div class="chart-value-1">
+                                            <p class="chart-value-1-number"></p>
+                                            <p class="chart-value-1-title"></p>
+                                        </div>
+                                        <div class="chart-value-2">
+                                            <p class="chart-value-2-number"></p>
+                                            <p class="chart-value-2-title"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="chart-4" class="">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+
+                            <div class="chart-6 chart-item">
+                                <div class="chart-header">
+                                    <p class="chart-title">Accounts Status</p>
+                                    <p class="chart-description">This chart illustrates the total count of accounts in each category.</p>
+                                </div>
+                                <div id="chart-5" class="">
+                                    <canvas></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="charts-container-row3">
+
+                            <div class="chart-7 chart-item">
+                                <div class="header">
+                                    <p class="title">Administrator Activities</p>
+                                    <p class="date">Last Update: 12:98AM</p>
+                                </div>
+                                <ul id="chart-6">
+                                </ul>
+                            </div>
+
+                            <div class="chart-8 chart-item">
+                                <div class="header">
+                                    <p class="title">Accounting / Merchant Activities</p>
+                                    <p class="date">Last Update: 12:98AM</p>
+                                </div>
+                                <ul id="chart-7">
+                                </ul>
+                            </div>
+
+                            <div class="chart-9 chart-item">
+                                <div class="header">
+                                    <p class="title">Users Activities</p>
+                                    <p class="date">Last Update: 12:98AM</p>
+                                </div>
+                                <ul id="chart-8">
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
