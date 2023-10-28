@@ -336,9 +336,10 @@ public function View_Recent_CashIn () {
                             'Status' => 'Completed',
                             'Amount' => $Amount,
                             'Discount' => '0',
-                            'DiscountReason' => '',
                             'TotalAmount' => $Amount,
                             'PostedBy' => $Account->WebAccounts_Address,
+                            'Notes ' => "",
+                            'PaymentMethod ' => "Cash",
                      ));
 
               $this->CI->db->trans_complete(); 
@@ -432,9 +433,10 @@ public function View_Recent_CashIn () {
                             'Status' => 'Completed',
                             'Amount' => $Amount,
                             'Discount' => '0',
-                            'DiscountReason' => '',
                             'TotalAmount' => $Amount,
                             'PostedBy' => $Account->UsersAccount_Address,
+                            'Notes ' => "",
+                            'PaymentMethod ' => "BCash",
                      ));
 
               $this->CI->db->trans_complete(); 
@@ -569,14 +571,15 @@ public function View_Recent_CashIn () {
                      $this->CI->Transactions_Model->create_transactioninfo(array(
                             'Transaction_Address' => $TransactionAddress,
                             'TransactionType_Id' => '3', // Purchase
-                            'Sender_Address' => $AccountAddress, /// shop name
+                            'Sender_Address' => $AccountAddress, 
                             'Receiver_Address' => $MerchantAddress,
                             'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Completed' : 'Payment',  
                             'Amount' => $Amount,
                             'Discount' => $Discount,
-                            'DiscountReason' => $DiscountReason,
                             'TotalAmount' => $TotalAmount,
                             'PostedBy' => $Account->WebAccounts_Address,
+                            'Notes ' => "",
+                            'PaymentMethod ' => "BCash",
                      ));
 
                      $this->CI->Transactions_Model->create_transaction_items(array(

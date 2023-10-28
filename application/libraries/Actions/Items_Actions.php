@@ -12,6 +12,7 @@ class Items_Actions {
               $this->CI->load->model([
                      'Items_Model',
                      'Merchants_Model',
+                     'ActivityLogs_Model',
               ]);
        }
 
@@ -43,6 +44,13 @@ class Items_Actions {
                             'Price' => $ItemCost,
                             'Image' => '',
                             'ModifiedTimestamp' => $ModifiedTimestamp,
+                     ));
+
+                     $this->CI->ActivityLogs_Model->create(array(
+                            'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $Account->UsersAccount_Address,
+                            'Action' => 'Add',
+                            'Task' => 'Added new Item ['.$ItemName.'].',
                      ));
 
               $this->CI->db->trans_complete(); 
@@ -97,6 +105,12 @@ class Items_Actions {
                                    'Name' => $ItemName,
                                    'MerchantItems_Id' => $ItemId,
                             ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Action' => 'Edit',
+                                   'Task' => 'Updated ItemName from ['.$item->Name.'] to ['.$ItemName.'].',
+                            ));
                             $Changes = $Changes . 'ItemName, ';
                      }
 
@@ -105,6 +119,12 @@ class Items_Actions {
                                    'Price' => $ItemCost,
                                    'MerchantItems_Id' => $ItemId,
                             ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Action' => 'Edit',
+                                   'Task' => 'Updated ItemCost from ['.$item->Price.'] to ['.$ItemCost.'].',
+                            ));
                             $Changes = $Changes . 'ItemCost, ';
                      }
 
@@ -112,6 +132,12 @@ class Items_Actions {
                             $this->CI->Items_Model->update_ItemCategory(array(
                                    'ItemCategory' => $ItemCategory,
                                    'MerchantItems_Id' => $ItemId,
+                            ));
+                            $this->CI->ActivityLogs_Model->create(array(
+                                   'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Action' => 'Edit',
+                                   'Task' => 'Updated ItemCategory from ['.$item->ItemCategory.'] to ['.$ItemCategory.'].',
                             ));
                             $Changes = $Changes . 'ItemCategory, ';
                      }
@@ -157,6 +183,13 @@ class Items_Actions {
 
               $this->CI->Items_Model->deactivate_item(array(
                      'MerchantItems_Id'=>$ItemId
+              ));
+
+              $this->CI->ActivityLogs_Model->create(array(
+                     'Account_Address' => $Account->WebAccounts_Address,
+                     'Target_Account_Address' => $Account->UsersAccount_Address,
+                     'Action' => 'Delete',
+                     'Task' => 'Deleted Item ['.$ItemId.'].',
               ));
 
               return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Item successfully deactivated!'];

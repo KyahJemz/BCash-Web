@@ -16,8 +16,6 @@ export default class Accounts {
     let view = '';
     let num = 0;
 
-    console.log("loaded");
-
     if (this.type === "merchantStaff") {
       const NameUsernameEmail = this.queryContainer.querySelector(".NameUsernameEmail").value;
       const Status = this.queryContainer.querySelector(".accounts-status-dropdown").textContent;
@@ -1732,9 +1730,9 @@ export default class Accounts {
 
     if (this.queryContainer) {
       const queryList = this.queryContainer.querySelectorAll(".query");
-
+      const today = new Date().toISOString().slice(0, 10);
       queryList.forEach(element => {
-        element.classList.contains("inputdate") ? element.value = "" : '';
+        element.classList.contains("inputdate") ? element.value = today : '';
         element.classList.contains("inputtext") ? element.value = "" : '';
         element.classList.contains("inputdropdown") ? element.textContent = "All" : '';
       });

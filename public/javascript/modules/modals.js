@@ -259,18 +259,17 @@ export default class Modals {
     
         } else if (type=="Settings Panel"){
             const Information = value;
-            console.log(Information);
             return `
                 <div class="personal-information-container">
                     <fieldset class="personalInformationSettings">
                         <table>
                             <tr>
                                 <td>
-                                    <img src="" alt="">
+                                    <img src="../public/images/profiles/default.png" alt="profile">
                                 </td>
                                 <td>
-                                    <p>User Id:</p>
-                                    <input id="AccountSettings-AccountAddress" type="text" readonly name="UserId" value="${Information.Account['WebAccounts_Address']}">
+                                    <p>Account Address:</p>
+                                    <input id="AccountSettings-AccountAddress" style="background-color: rgb(220, 220, 220);" type="text" readonly name="UserId" value="${Information.Account['WebAccounts_Address']}">
                                 </td>
                             </tr>
                             <tr>
@@ -285,19 +284,26 @@ export default class Modals {
                             </tr>
                             <tr>
                                 <td>
-                                    <p>User Category:</p>
-                                    <input type="text" readonly name="ActorCategory" value="${Information.Account['ActorCategory']}">
+                                    <p>Category:</p>
+                                    <input type="text" style="background-color: rgb(220, 220, 220);" readonly name="ActorCategory" value="${Information.Details['ActorCategory']}">
                                 </td>
-                                ${Information.Account['MerchantCategory'] ? `<td>
-                                    <p>Merhant Category:</p>
-                                    <input type="text" readonly name="MerchantCategory" value="${Information.Account['MerchantCategory']}">
+                                ${Information.Details['MerchantCategory'] ? `<td>
+                                    <p>Merchant Category:</p>
+                                    <input type="text" style="background-color: rgb(220, 220, 220);" readonly name="MerchantCategory" value="${Information.Details['MerchantCategory']}">
                                 </td>` : ``}
                             </tr>
                             <tr>
+                                ${Information.Details['ActorCategory'] === 'Merchant Staff' ? `
+                                <td>
+                                    <p>E-Mail:</p>
+                                    <input style="background-color: rgb(220, 220, 220);" id="AccountSettings-Email" readonly type="text" name="Email" value="${Information.Account['Email']}">
+                                </td>
+                                ` : `
                                 <td>
                                     <p>E-Mail:</p>
                                     <input id="AccountSettings-Email" type="text" name="Email" value="${Information.Account['Email']}">
                                 </td>
+                                `}
                             </tr>
                         </table>
                     </fieldset>

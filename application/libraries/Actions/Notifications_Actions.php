@@ -11,6 +11,7 @@ class Notifications_Actions {
               $this->CI->load->library('form_validation');
               $this->CI->load->model([
                      'Notifications_Model',
+                     'ActivityLogs_Model',
               ]);
        }
 
@@ -36,6 +37,8 @@ class Notifications_Actions {
               ))) {
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $Account->WebAccounts_Address,
+                            'Action' => 'Add',
                             'Task' => 'Created notification ['.$Title.'].',
                      ));
               }
@@ -65,6 +68,8 @@ class Notifications_Actions {
               ))) {
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $Account->WebAccounts_Address,
+                            'Action' => 'Delete',
                             'Task' => 'Deleted notification ['.$Notification_ID.'].',
                      ));
               }

@@ -112,6 +112,8 @@ class Cards_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated UsersAccount_Address of ['.$Card_Address.'] to ['.$UsersAccount_Address.'].',
                             ));
                             $changes = $changes . 'UsersAccount_Address, ';
@@ -124,6 +126,8 @@ class Cards_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated Notes of ['.$Card_Address.'] to ['.$Notes.'].',
                             ));
                             $changes = $changes . 'Notes, ';
@@ -136,6 +140,8 @@ class Cards_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated IsActive of ['.$Card_Address.'] to ['.$IsActive.'].',
                             ));
                             $changes = $changes . 'IsActive, ';
@@ -184,6 +190,8 @@ class Cards_Actions {
 
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $Account->WebAccounts_Address,
+                            'Action' => 'Add',
                             'Task' => 'Uploaded a new card ['.$Card_Address.'].',
                      ));
 

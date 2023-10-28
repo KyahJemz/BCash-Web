@@ -66,9 +66,25 @@
 
 
 .order-confirmation .status {
-    background-color: yellow;
-    padding: 5px;
     font-size: 0.8rem;
+}
+
+.order-confirmation .status .success {
+    background-color: #43A047;
+    color: white;
+    padding: 5px;
+}
+
+.order-confirmation .status .danger {
+    background-color: #DA121A;
+    color: white;
+    padding: 5px;
+}
+
+.order-confirmation .status .warning {
+    background-color: #FFCC00;
+    color: black;
+    padding: 5px;
 }
 
 .order-confirmation .content {

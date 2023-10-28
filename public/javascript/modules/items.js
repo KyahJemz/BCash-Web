@@ -304,7 +304,6 @@ export default class Item {
             makeModal("Modal", "Edit Item Form", modal.getModalView("Edit-Item",Parameters));
             helper.addElementClickListenerById('EditItem-SubmitBtn',(event)=> {
                 const element = event.currentTarget.parentNode.parentNode;
-                console.log("$$$$$$$$",element);
                 const Ajax = new AjaxRequest(BaseURL);
                 const data = {
                     ItemId : event.currentTarget.parentNode.dataset.itemid,
@@ -313,7 +312,6 @@ export default class Item {
                     ItemCost : element.querySelector('#EditItem-Cost').value,
                     ItemCategory :element.querySelector('#EditItem-Category').value,
                 };
-                console.log(data);
                 Ajax.sendRequest(data, "update item").then(responseData => {document.getElementById("Modal-Container").style.display = "none";});
             });
             helper.addElementClickListenerById('EditItem-CancelBtn',()=> {

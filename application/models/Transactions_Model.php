@@ -18,9 +18,11 @@ class Transactions_Model extends CI_Model {
             'Status ' => $params['Status'],
             'Amount ' => $params['Amount'],
             'Discount ' => $params['Discount'],
-            'DiscountReason ' => $params['DiscountReason'],
             'TotalAmount ' => $params['TotalAmount'],
             'PostedBy ' => $params['PostedBy'],
+            'Notes ' => $params['Notes'] ?? "",
+            'PaymentMethod ' => $params['PaymentMethod'] ?? "",
+            
         ];
         $this->db->insert('tbl_transactionsinfo', $data);
         $result = $this->db->insert_id();
@@ -190,30 +192,106 @@ class Transactions_Model extends CI_Model {
         return ($result) ? $result : $result;
     }
 
-    public function read_transactionsinfo_by_transactionaddress($pararms){
-        $result = $this->db
-            ->select('tbl_transactionsinfo.*, 
-                sender.Firstname AS Sender_Firstname, 
-                sender.Lastname AS Sender_Lastname, 
-                sender.Email AS Sender_Email, 
-                sender.Campus_Id AS sender_Campus_Id, 
-                sender_data.SchoolPersonalId AS sender_SchoolPersonalId,
-                receiver.Firstname AS Receiver_Firstname, 
-                receiver.Lastname AS Receiver_Lastname, 
-                receiver.Email AS Receiver_Email, 
-                receiver.Campus_Id AS Receiver_Campus_Id, 
-                receiver_data.SchoolPersonalId AS Receiver_SchoolPersonalId,
-                transactiontype.Name as TransactionType')
+    public function read_transactionsinfo_by_transactionaddress($params){
+        $Sender = $this->db
+            ->select('*')
+            ->where('Transaction_Address', $params['TransactionAddress'])
             ->from('tbl_transactionsinfo')
-            ->join('tbl_usersaccount as sender', 'tbl_transactionsinfo.Sender_Address = sender.UsersAccount_Address', 'left')
-            ->join('tbl_usersaccount as receiver', 'tbl_transactionsinfo.Receiver_Address = receiver.UsersAccount_Address', 'left')
-            ->join('tbl_usersdata as sender_data', 'sender.UsersAccount_Address = sender_data.UsersAccount_Address', 'left')
-            ->join('tbl_usersdata as receiver_data', 'receiver.UsersAccount_Address = receiver_data.UsersAccount_Address', 'left')
-            ->join('tbl_transactiontype as transactiontype', 'tbl_transactionsinfo.TransactionType_Id = transactiontype.TransactionType_Id', 'left')
-            ->where('Transaction_Address ', $pararms['TransactionAddress'])
             ->get()
-            ->row();
-        return ($result) ? $result : $result;
+            ->row()
+            ->Sender_Address;
+
+        $Receiver = $this->db
+            ->select('*')
+            ->where('Transaction_Address', $params['TransactionAddress'])
+            ->from('tbl_transactionsinfo')
+            ->get()
+            ->row()
+            ->Receiver_Address;
+
+        if (substr($Sender, 0, 3) === "ACT") {
+            $result = $this->db
+                ->select('tbl_transactionsinfo.*, 
+                        "Accounting" AS Sender_Firstname, 
+                        " " AS Sender_Lastname, 
+                        " " AS Sender_Email, 
+                        " " AS sender_Campus_Id, 
+                        receiver.Firstname AS Receiver_Firstname, 
+                        receiver.Lastname AS Receiver_Lastname, 
+                        receiver.Email AS Receiver_Email, 
+                        receiver.Campus_Id AS Receiver_Campus_Id, 
+                        receiver_data.SchoolPersonalId AS Receiver_SchoolPersonalId,
+                        transactiontype.Name as TransactionType')
+                ->from('tbl_transactionsinfo')
+                ->join('tbl_usersaccount as receiver', 'tbl_transactionsinfo.Receiver_Address = receiver.UsersAccount_Address', 'left')
+                ->join('tbl_usersdata as receiver_data', 'receiver.UsersAccount_Address = receiver_data.UsersAccount_Address', 'left')
+                ->join('tbl_transactiontype as transactiontype', 'tbl_transactionsinfo.TransactionType_Id = transactiontype.TransactionType_Id', 'left')
+                ->where('Transaction_Address', $params['TransactionAddress'])
+                ->get()
+                ->row();
+            $items = [];
+        } else if (substr($Receiver, 0, 3) === "MTA") {
+            $result = $this->db
+                ->select('tbl_transactionsinfo.*, 
+                    sender.Firstname AS Sender_Firstname, 
+                    sender.Lastname AS Sender_Lastname, 
+                    sender.Email AS Sender_Email, 
+                    sender.Campus_Id AS sender_Campus_Id, 
+                    sender_data.SchoolPersonalId AS sender_SchoolPersonalId,
+                    merchantcategory.ShopName AS Receiver_Firstname, 
+                    " " AS Receiver_Lastname, 
+                    " " AS Receiver_Email, 
+                    " " AS Receiver_Campus_Id, 
+                    transactiontype.Name as TransactionType')
+                ->from('tbl_transactionsinfo')
+                ->join('tbl_usersaccount as sender', 'tbl_transactionsinfo.Sender_Address = sender.UsersAccount_Address', 'left')
+                ->join('tbl_usersdata as sender_data', 'sender.UsersAccount_Address = sender_data.UsersAccount_Address', 'left')
+
+                ->join('tbl_merchants as merchant', 'tbl_transactionsinfo.Receiver_Address = merchant.WebAccounts_Address', 'left')
+                ->join('tbl_merchantscategory as merchantcategory', 'merchant.MerchantsCategory_Id = merchantcategory.MerchantsCategory_Id', 'left')
+
+                ->join('tbl_transactiontype as transactiontype', 'tbl_transactionsinfo.TransactionType_Id = transactiontype.TransactionType_Id', 'left')
+                ->where('Transaction_Address', $params['TransactionAddress'])
+                ->get()
+                ->row();
+            $items =  $this->db
+                ->select('
+                    items.Quantity as ItemQuantity,
+                    items.Amount as ItemAmount,
+                    details.Name as ItemName
+                ')
+                ->from('tbl_transactionitems as items')
+                ->join('tbl_merchantitems as details', 'items.MerchantItems_Id = details.MerchantItems_Id', 'left')
+                ->where('items.Transaction_Address', $params['TransactionAddress'])
+                ->get()
+                ->result();
+        } else {
+            $result = $this->db
+                ->select('tbl_transactionsinfo.*, 
+                    sender.Firstname AS Sender_Firstname, 
+                    sender.Lastname AS Sender_Lastname, 
+                    sender.Email AS Sender_Email, 
+                    sender.Campus_Id AS sender_Campus_Id, 
+                    sender_data.SchoolPersonalId AS sender_SchoolPersonalId,
+                    receiver.Firstname AS Receiver_Firstname, 
+                    receiver.Lastname AS Receiver_Lastname, 
+                    receiver.Email AS Receiver_Email, 
+                    receiver.Campus_Id AS Receiver_Campus_Id, 
+                    receiver_data.SchoolPersonalId AS Receiver_SchoolPersonalId,
+                    transactiontype.Name as TransactionType')
+                ->from('tbl_transactionsinfo')
+                ->join('tbl_usersaccount as sender', 'tbl_transactionsinfo.Sender_Address = sender.UsersAccount_Address', 'left')
+                ->join('tbl_usersaccount as receiver', 'tbl_transactionsinfo.Receiver_Address = receiver.UsersAccount_Address', 'left')
+                ->join('tbl_usersdata as sender_data', 'sender.UsersAccount_Address = sender_data.UsersAccount_Address', 'left')
+                ->join('tbl_usersdata as receiver_data', 'receiver.UsersAccount_Address = receiver_data.UsersAccount_Address', 'left')
+                ->join('tbl_transactiontype as transactiontype', 'tbl_transactionsinfo.TransactionType_Id = transactiontype.TransactionType_Id', 'left')
+                ->where('Transaction_Address', $params['TransactionAddress'])
+                ->get()
+                ->row();
+            $items = [];
+        }
+
+        return ['Info'=>$result, 'Items'=>$items];
     }
     
   

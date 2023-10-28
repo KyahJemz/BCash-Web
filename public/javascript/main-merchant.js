@@ -7,7 +7,6 @@ import Menu from './modules/menu.js';
 import Dropdown from './modules/dropdown.js';
 import AjaxRequest from './ajax.js';
 import LoginHistory from './modules/loginhistory.js'
-
 import Helper from './helper.js';
 
 ////////////////////////////
@@ -55,6 +54,8 @@ window.addEventListener('click', (event) => {
   }
 });
 
+
+
 ////////////////////////////
 // INITIALIZATIONS
 ////////////////////////////
@@ -73,11 +74,12 @@ function refreshItems(){
     .then(responseData => {
       myItems.clearItems();
       responseData.Parameters.forEach(row => {
-        //myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png");
         myItems.registerItem(row['MerchantItems_Id'],row['Name'],row['Price'],row['ItemCategory'],row['ModifiedTimestamp'],row['CreatedTimestamp'], row['Image']);
       });
+      onCreateOrderSearchInput();
     });
 }
+refreshItems()
 
 
 
@@ -85,7 +87,6 @@ function refreshItems(){
 ////////////////////////////
 // ORDER
 ////////////////////////////
-
 
 function onTxtOrderDiscountInput(){
   myOrders.refreshReceiptValues(myOrders);
@@ -309,6 +310,7 @@ helper.addElementClickListener('.dropdownButtonSubItem', onDropdownButtonSubItem
 function onTransactionsSearchClick(event) {
   myTransactions.applyTransactionsQueries(event, 'get my transactions');
 }
+myTransactions.applyTransactionsQueries(null, 'get my transactions');
 
 function onTransactionsClearClick(event) {
   myTransactions.clearTransactionsQueries(event);
@@ -435,7 +437,6 @@ helper.addElementClickListenerById('menu-settings-button', onMenuSettingsButtonC
 ////////////////////////////
 
 document.getElementById("menu-visibility-button").addEventListener('click', () => {
-  console.log("ACTIVATED222 !");
   const sidebar = document.querySelector(".sidebar-container");
   const screenWidth = window.innerWidth;
 
@@ -448,6 +449,17 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
       sidebar.style.minWidth = "0px";
       document.getElementById("menu-visibility-button").style.transform = "rotate(0deg)";
     }
+});
+
+const dateInputs = document.querySelectorAll('.inputdate');
+const today = new Date().toISOString().slice(0, 10);
+dateInputs.forEach(input => {
+    input.value = today;
+    input.addEventListener('change', (event) => {
+        if (!input.value) {
+            input.value = today;
+        }
+    });
 });
 
 
@@ -477,7 +489,6 @@ async function GetMyData () {
       }
   })
     .catch(error => {
-      console.error('Request Error:', error);
       setTimeout(() => {
         GetMyData ();
       }, 2000);

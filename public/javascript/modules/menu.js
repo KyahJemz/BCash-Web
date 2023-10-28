@@ -75,7 +75,6 @@ menuSelectionEvents(event, items, order) {
 
   // Check and Refresh Items Depending On Panel Clicked
 
-  console.log(panelName);
   if (panelName === "Item Management"){
     try {
       items.displayItems(items, order, panelName.replace(new RegExp(" ", 'g'), ''));

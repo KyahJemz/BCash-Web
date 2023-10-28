@@ -110,6 +110,13 @@ public function Update_Remittance_Reject($Account, $requestPostBody) {
               $this->CI->Remittance_Model->update_date_rejected(array(
                      'Remittance_Id' => $Remittance_Id,
               ));
+
+              $this->CI->ActivityLogs_Model->create(array(
+                     'Account_Address' => $Account->WebAccounts_Address,
+                     'Target_Account_Address' => $Account->WebAccounts_Address,
+                     'Action' => 'Edit',
+                     'Task' => '[' . $Account->WebAccounts_Address . '] Rejected remittance id ['. $Remittance_Id .'].',
+              ));
               
        $this->CI->db->trans_complete(); 
 
@@ -118,11 +125,6 @@ public function Update_Remittance_Reject($Account, $requestPostBody) {
               $error = $this->CI->db->error();
               return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
        }
-
-       $this->CI->ActivityLogs_Model->create(array(
-              'Account_Address' => $Account->WebAccounts_Address,
-              'Task' => '[' . $Account->WebAccounts_Address . '] Rejected remittance id ['. $Remittance_Id .'].',
-       ));
 
        $parameters = $this->CI->Remittance_Model->read_all();
 
@@ -155,6 +157,13 @@ public function Update_Remittance_Approve($Account, $requestPostBody) {
               $this->CI->Remittance_Model->update_date_approved(array(
                      'Remittance_Id' => $Remittance_Id,
               ));
+
+              $this->CI->ActivityLogs_Model->create(array(
+              'Account_Address' => $Account->WebAccounts_Address,
+              'Target_Account_Address' => $Account->WebAccounts_Address,
+              'Action' => 'Edit',
+              'Task' => '[' . $Account->WebAccounts_Address . '] Approved remittance id ['. $Remittance_Id .'].',
+       ));
               
        $this->CI->db->trans_complete(); 
 
@@ -163,11 +172,6 @@ public function Update_Remittance_Approve($Account, $requestPostBody) {
               $error = $this->CI->db->error();
               return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
        }
-
-       $this->CI->ActivityLogs_Model->create(array(
-              'Account_Address' => $Account->WebAccounts_Address,
-              'Task' => '[' . $Account->WebAccounts_Address . '] Approved remittance id ['. $Remittance_Id .'].',
-       ));
 
        $parameters = $this->CI->Remittance_Model->read_all();
 

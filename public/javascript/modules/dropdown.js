@@ -1,6 +1,3 @@
-
-import Helper from '../helper.js';
-
 export default class Dropdown {
 
   dropdown(event, value, position) {
@@ -18,22 +15,13 @@ export default class Dropdown {
 }
   
 changeSelection(element) {
-  console.log(element.parentNode.parentNode);
-  console.log(element.innerHTML);
     let grandparent = element.parentNode.parentNode;
     let btnText = grandparent.querySelector(".dropdown-text");
-    btnText.innerHTML = element.innerHTML;
+    btnText.innerHTML = element.textContent;
 
     let dropdownSelected = element.parentNode.querySelector('.dropdown-selected');
     dropdownSelected.classList.remove('dropdown-selected');
     element.classList.add('dropdown-selected');
-/*
-    if (element.innerHTML === "Card") {
-        document.getElementById("icon-layout-1").src="../../images/icons/grid-yellow.png";
-    } else if (element.innerHTML === "List"){
-        document.getElementById("icon-layout-1").src="../../images/icons/list-yellow.png";
-    }
-*/
 }
 
 windowClickClearDropdown(event) {
@@ -67,37 +55,19 @@ dropdownEvents(event) {
 changeSelectionEvents(event,items,order) {
     const value = event.currentTarget;
     this.changeSelection(value);
-
     const panel = value.parentNode.parentNode.dataset.panel;
-    console.log(panel);
     if (panel != undefined){
         items.displayItems(items, order, panel);
-
-       // const helper = new Helper();
-        //helper.addElementClickListener(".dropdownButtonSubItem", (event) => this.changeSelectionEvents(event,items,order));
     }
   }
 
   customChangeSelectionEvents(target,items,order) {
     this.changeSelection(target);
-
     const panel = value.parentNode.parentNode.dataset.panel;
-    console.log(panel);
     if (panel != undefined){
         items.displayItems(items, order, panel);
-
-       // const helper = new Helper();
-        //helper.addElementClickListener(".dropdownButtonSubItem", (event) => this.changeSelectionEvents(event,items,order));
     }
   }
-
-
-  
-
-
-
-
-
 
 }
 

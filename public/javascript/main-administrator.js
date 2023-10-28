@@ -319,8 +319,6 @@ helper.addElementClickListenerById('menu-settings-button', onMenuSettingsButtonC
 // OTHERS
 ////////////////////////////
 
-
-
 document.getElementById("menu-visibility-button").addEventListener('click', () => {
   console.log("ACTIVATED222 !");
   const sidebar = document.querySelector(".sidebar-container");
@@ -335,6 +333,17 @@ document.getElementById("menu-visibility-button").addEventListener('click', () =
       sidebar.style.minWidth = "0px";
       document.getElementById("menu-visibility-button").style.transform = "rotate(0deg)";
     }
+});
+
+const dateInputs = document.querySelectorAll('.inputdate');
+const today = new Date().toISOString().slice(0, 10);
+dateInputs.forEach(input => {
+    input.value = today;
+    input.addEventListener('change', (event) => {
+        if (!input.value) {
+            input.value = today;
+        }
+    });
 });
 
 

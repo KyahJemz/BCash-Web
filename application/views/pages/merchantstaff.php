@@ -46,27 +46,15 @@
             <div class="pattern"></div>
             <nav class="menu">
                 <ul>
-                    <li data-menu="Home" class="curson-pointer menu-selected menuSelectionButton">
+                    <li data-menu="Create Order" class="curson-pointer menu-selected menuSelectionButton">
                         <div class="selected"></div>
-                        <img src="<?php echo base_url('./public/images/icons/home.png'); ?>" alt="Home Icon">
-                        <p>Home</p>
+                        <img src="<?php echo base_url('./public/images/icons/order.png'); ?>" alt="Create Order Icon">
+                        <p>Create Order</p>
                     </li>
-                    <li data-menu="My Orders" class="curson-pointer menuSelectionButton menuSelectionDropdownButton">
-                        <img src="<?php echo base_url('./public/images/icons/order.png'); ?>" alt="My Orders Icon">
-                        <p>My Orders</p>
-                        <img id="sidebar-bottom-menu-myorders-more" class="more" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="More Icon">
-                    </li>
-                    <li class="menuSelectionDropdownItems">
-                        <ul>
-                            <li data-menu="Create Order" class="curson-pointer menuSelectionButton">
-                                <div class="selected"></div>
-                                <p>Create Order</p>
-                            </li>
-                            <li data-menu="Transactions" class="curson-pointer menuSelectionButton">
-                                <div class="selected"></div>
-                                <p>Transactions</p>
-                            </li>
-                        </ul>
+                    <li data-menu="Transactions" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="<?php echo base_url('./public/images/icons/longreceipt.png'); ?>" alt="Transactions Icon">
+                        <p>Transactions</p>
                     </li>
                 </ul>
             </nav>
@@ -102,16 +90,10 @@
 -->
         <div class="bottom-panel">
             <div class="content">
-                <div class="titlebar"><p id="Panel-Title">Home</p></div>
+                <div class="titlebar"><p id="Panel-Title">Create Order</p></div>
 <!--
     CONTENT BODY
 -->
-    <!--
-        HOME 
-    -->
-                <div id="panel-home" class="body-content-panel visible">
-                   
-                </div>
 
     <!--
         TRANSACTIONS 
@@ -238,7 +220,7 @@
                                 <a class="dropdownButtonSubItem" href="javascript:void(0)">All/Page</a>
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
-                                <span class="transactions-recordscount-dropdown" class="dropdown-text">50/Page</span>
+                                <span class="transactions-recordscount-dropdown dropdown-text">50/Page</span>
                                 <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
                             </button>
                         </div>
@@ -247,7 +229,7 @@
     <!--
         CREATE ORDER 
     -->
-                <div id="panel-createorder" class="body-content-panel hidden">
+                <div id="panel-createorder" class="body-content-panel visible">
                     <div class="panel-createorder-content">
                         <div class="left-panel">
                             <div class="query-container panel"> 
@@ -303,14 +285,14 @@
                                     <hr>
                                     <div class="details">
                                         <p id="order-quantity">Quantity: 0</p>
-                                        <p id="order-subtotal">Subtotal: ₱0</p>
+                                        <p id="order-subtotal">Subtotal: ₱ 0</p>
                                     </div>
                                     <div class="discount">
-                                        <p>Discount: ₱</p>
+                                        <p>Discount: ₱ </p>
                                         <input id="txt-order-Discount" type="number" name="" id="" value="0.00">
                                     </div>
                                     <div class="total">
-                                        <p id="order-total">Total: ₱0</p>
+                                        <p id="order-total">Total: ₱ 0</p>
                                     </div>
                                     <hr>
                                     <div class="button-container">
@@ -362,7 +344,6 @@
 <!--
     JAVASCRIPTS  ###
 -->
-    <script src="../public/javascript/chart.js"></script>
     <script src="../public/javascript/main-merchant.js" type="module"></script>
 </body>
 </html>

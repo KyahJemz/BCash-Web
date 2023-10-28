@@ -131,6 +131,17 @@ class Merchants_Model extends CI_Model {
               }
        }
 
+       public function read_shopname_by_address($Account_Address) {
+              $result = $this->db
+                     ->select('*')
+                     ->from('tbl_Merchants')
+                     ->join('tbl_merchantscategory', 'tbl_Merchants.MerchantsCategory_Id = tbl_merchantscategory.MerchantsCategory_Id', 'left')
+                     ->where('WebAccounts_Address ', $Account_Address)
+                     ->get()
+                     ->row();
+              return $result;
+       }
+
        public function read_merchantstaff_by_category($params) {
               $this->db
                      ->select('*')

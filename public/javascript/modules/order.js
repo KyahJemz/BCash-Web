@@ -59,7 +59,6 @@ export default class Orders {
 
   uploadOrder(){
     uploadOrderData(this.walletAddress, this.items);
-    console.log("Uploading");
   }
 
   toggleItemButton(button) {
@@ -167,7 +166,6 @@ export default class Orders {
   clearOrder(order) {
     document.querySelectorAll(".addToCartButton").forEach(button => {
       if(button.dataset.type === "RemoveToCart") {
-        console.log(button.parentNode.parentNode.dataset.itemId);
         this.removeItem(button.parentNode.parentNode.dataset.itemId);
         this.toggleItemButton(button);
         this.displayOrders(order);

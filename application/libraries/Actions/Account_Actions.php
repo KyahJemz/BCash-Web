@@ -20,6 +20,7 @@ class Account_Actions {
                      'WebAccounts_Model',
                      'ActivityLogs_Model',
                      'Card_Model',
+                     'ActorCategory_Model',
 
               ]);
        }
@@ -34,15 +35,19 @@ class Account_Actions {
        public function View_My_Account_Details($Account) {
 
               if ($Account->ActorCategory_Id === '3' || $Account->ActorCategory_Id === '4') {
-                     $Details = $this->CI->Merchants_Model->read_merchant_by_address($Account->WebAccounts_Address);
+                     $MerchantCategory = $this->CI->Merchants_Model->read_shopname_by_address($Account->WebAccounts_Address)->ShopName;
+                     $ActorCategory = $this->CI->ActorCategory_Model->read_by_Id($Account->ActorCategory_Id);
                      $parameters = [
                             'Account'=> $Account,
-                            'Details'=> ['MerchantCategory' => $Details->MerchantsCategory_Id],
+                            'Details'=> [
+                                   'MerchantCategory' => $MerchantCategory,
+                                   'ActorCategory' => $ActorCategory
+                            ],
                      ];
                      return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
 
               } else if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6' || $Account->ActorCategory_Id === '7') {
-                     $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
+                     $this->CI->Transactions_Model->calculate_total_balance(array(
                             'Account_Address' => $Account->UsersAccount_Address,
                      ));
                      $Details = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$Account->UsersAccount_Address));
@@ -53,9 +58,12 @@ class Account_Actions {
                      return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
 
               } else {
+                     $ActorCategory = $this->CI->ActorCategory_Model->read_by_Id($Account->ActorCategory_Id);
                      $parameters = [
                             'Account'=> $Account,
-                            'Details'=> null,
+                            'Details'=> [
+                                   'ActorCategory' => $ActorCategory,
+                            ],
                      ];
                      return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
               }
@@ -98,6 +106,8 @@ class Account_Actions {
                      $this->CI->UsersAccount_Model->update_pin($Account->UsersAccount_Address, $NewPINCode2);
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->UsersAccount_Address,
+                            'Target_Account_Address' => $Account->UsersAccount_Address,
+                            'Action' => 'Edit',
                             'Task' => 'Updated its own PIN Code.',
                      ));
               } else if ($Account->ActorCategory_Id === '7') {
@@ -107,12 +117,16 @@ class Account_Actions {
                      // ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->GuardianAccount_Address,
+                            'Target_Account_Address' => $Account->GuardianAccount_Address,
+                            'Action' => 'Edit',
                             'Task' => 'Updated its own PIN Code.',
                      ));
               } else {
                      $this->CI->WebAccounts_Model->update_pin($Account->WebAccounts_Address, $NewPINCode2);
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $Account->WebAccounts_Address,
+                            'Action' => 'Edit',
                             'Task' => 'Updated its own PIN Code.',
                      ));
               }
@@ -157,6 +171,8 @@ class Account_Actions {
 
               $this->CI->ActivityLogs_Model->create(array(
                      'Account_Address' => $Account->WebAccounts_Address,
+                     'Target_Account_Address' => $Account->WebAccounts_Address,
+                     'Action' => 'Edit',
                      'Task' => 'Updated its own password.',
               ));
 
@@ -232,6 +248,8 @@ class Account_Actions {
                                    if ($Details_->CanModifySettings != $CanModifySettings) {
                                           $this->CI->ActivityLogs_Model->create(array(
                                                  'Account_Address' => $AccountAddress,
+                                                 'Target_Account_Address' => $Account->WebAccounts_Address,
+                                                 'Action' => 'Edit',
                                                  'Task' => 'Updated its own CanModifySettings settings to '.$CanModifySettings.'.',
                                           ));
                                    }
@@ -320,7 +338,9 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Task' => 'Updated its own Firstname to '.$Firstname.'.',
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
+                                   'Action' => 'Edit',
+                                   'Task' => 'Updated Firstname to '.$Firstname.'.',
                             ));
                      }
 
@@ -331,7 +351,9 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Task' => 'Updated its own Lastname to '.$Lastname.'.',
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
+                                   'Action' => 'Edit',
+                                   'Task' => 'Updated Lastname to '.$Lastname.'.',
                             ));
                      }
 
@@ -342,7 +364,9 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Task' => 'Updated its own Email to '.$Email.'.',
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
+                                   'Action' => 'Edit',
+                                   'Task' => 'Updated Email to '.$Email.'.',
                             ));
                      }
 
@@ -350,7 +374,7 @@ class Account_Actions {
 
               if ($this->CI->db->trans_status() === FALSE) {
                      $this->CI->db->trans_rollback();
-                     $error = $this->db->error();
+                     $error = $this->CI->db->error();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
               }
 
@@ -496,6 +520,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] Email settings to '.$Email.'.',
                             ));
                             $changes = $changes . 'Email, ';
@@ -508,6 +534,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] Firstname settings to '.$Firstname.'.',
                             ));
                             $changes = $changes . 'Firstname, ';
@@ -520,6 +548,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] Lastname settings to '.$Lastname.'.',
                             ));
                             $changes = $changes . 'Lastname, ';
@@ -532,6 +562,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] IsAccountActive settings to '.$IsAccountActive.'.',
                             ));
                             $changes = $changes . 'IsAccountActive, ';
@@ -544,6 +576,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] SchoolPersonalId settings to '.$SchoolPersonalId.'.',
                             ));
                             $changes = $changes . 'SchoolPersonalId, ';
@@ -556,6 +590,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] CanDoTransfers settings to '.$CanDoTransfers.'.',
                             ));
                             $changes = $changes . 'CanDoTransfers, ';
@@ -580,6 +616,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] CanUseCard settings to '.$CanUseCard.'.',
                             ));
                             $changes = $changes . 'CanUseCard, ';
@@ -592,6 +630,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] CanModifySettings settings to '.$CanModifySettings.'.',
                             ));
                             $changes = $changes . 'CanModifySettings, ';
@@ -604,6 +644,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] IsTransactionAutoConfirm settings to '.$IsTransactionAutoConfirm.'.',
                             ));
                             $changes = $changes . 'IsTransactionAutoConfirm, ';
@@ -950,6 +992,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] Firstname settings to '.$Firstname.'.',
                             ));
                             $changes = $changes . 'Firstname, ';
@@ -962,6 +1006,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] Lastname settings to '.$Lastname.'.',
                             ));
                             $changes = $changes . 'Lastname, ';
@@ -974,6 +1020,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] Email settings to '.$Email.'.',
                             ));
                             $changes = $changes . 'Email, ';
@@ -987,6 +1035,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] PinCode.',
                             ));
                             $changes = $changes . 'PinCode, ';
@@ -1000,21 +1050,22 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] Password.',
                             ));
                             $changes = $changes . 'Password, ';
                      }
 
                      if (property_exists($AccountToModify, 'IsAccountActive') && $AccountToModify->IsAccountActive !== $IsAccountActive) {
-                            if($Account_Model->update_IsAccountActive(array(
+                            $Account_Model->update_IsAccountActive(array(
                                    'Account_Address' => $AccountAddress,
                                    'IsAccountActive' => $IsAccountActive,
-                            ))) {
-                                   
-                            }
-                            
+                            ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] IsAccountActive settings to '.$IsAccountActive.'.',
                             ));
                             $changes = $changes . 'IsAccountActive, ';
@@ -1027,6 +1078,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] SchoolPersonalId settings to '.$SchoolPersonalId.'.',
                             ));
                             $changes = $changes . 'SchoolPersonalId, ';
@@ -1039,6 +1092,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] CanDoTransactions settings to '.$CanDoTransactions.'.',
                             ));
                             $changes = $changes . 'CanDoTransactions, ';
@@ -1051,6 +1106,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] CanDoTransfers settings to '.$CanDoTransfers.'.',
                             ));
                             $changes = $changes . 'CanDoTransfers, ';
@@ -1063,6 +1120,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] CanModifySettings settings to '.$CanModifySettings.'.',
                             ));
                             $changes = $changes . 'CanModifySettings, ';
@@ -1075,6 +1134,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] CanUseCard settings to '.$CanUseCard.'.',
                             ));
                             $changes = $changes . 'CanUseCard, ';
@@ -1087,6 +1148,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] IsTransactionAutoConfirm settings to '.$IsTransactionAutoConfirm.'.',
                             ));
                             $changes = $changes . 'IsTransactionAutoConfirm, ';
@@ -1099,6 +1162,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] GuardianAccountAddress settings to '.$GuardianAccountAddress.'.',
                             ));
                             $changes = $changes . 'GuardianAccountAddress, ';
@@ -1111,9 +1176,10 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] UserAccountAddress settings to '.$UserAccountAddress.'.',
                             ));
-                            log_message('debug',  '=== 1');
                             $changes = $changes . 'UserAccountAddress, ';
                      }
 
@@ -1190,7 +1256,7 @@ class Account_Actions {
                      }
               }
 
-              $hashed_password;
+              $hashed_password = '';
               if (!empty($Password)){
                      $hashed_password = password_hash($Password, PASSWORD_BCRYPT);
               }
@@ -1221,6 +1287,12 @@ class Account_Actions {
                                           'Password' => $hashed_password,
                                           'Campus_Id' => $Campus_Id,
                                    ));
+                                   $this->CI->ActivityLogs_Model->create(array(
+                                          'Account_Address' => $Account->WebAccounts_Address,
+                                          'Target_Account_Address' => $Account_Address,
+                                          'Action' => 'Add',
+                                          'Task' => 'Added new Administrator ['.$Email.'] - ['.$Account_Address.'].',
+                                   ));
                                    break;
 
                             case 'Accounting': 
@@ -1237,6 +1309,12 @@ class Account_Actions {
                                           'Lastname' => $Lastname,
                                           'Password' => $hashed_password,
                                           'Campus_Id' => $Campus_Id,
+                                   ));
+                                   $this->CI->ActivityLogs_Model->create(array(
+                                          'Account_Address' => $Account->WebAccounts_Address,
+                                          'Target_Account_Address' => $Account_Address,
+                                          'Action' => 'Add',
+                                          'Task' => 'Added new Accounting ['.$Email.'] - ['.$Account_Address.'].',
                                    ));
                                    break;
 
@@ -1267,6 +1345,12 @@ class Account_Actions {
                                           'Account_Address' => $Account_Address,
                                           'MerchantsCategory_Id' => $MerchantCategory,
                                    ));
+                                   $this->CI->ActivityLogs_Model->create(array(
+                                          'Account_Address' => $Account->WebAccounts_Address,
+                                          'Target_Account_Address' => $Account_Address,
+                                          'Action' => 'Add',
+                                          'Task' => 'Added new Merchant Admin ['.$Email.'] - ['.$Account_Address.'].',
+                                   ));
                                    break;
 
                             case 'Merchant Staff': 
@@ -1287,6 +1371,12 @@ class Account_Actions {
                                    $this->CI->Merchants_Model->create_merchant(array(
                                           'Account_Address' => $Account_Address,
                                           'MerchantsCategory_Id' => $MerchantCategory,
+                                   ));
+                                   $this->CI->ActivityLogs_Model->create(array(
+                                          'Account_Address' => $Account->WebAccounts_Address,
+                                          'Target_Account_Address' => $Account_Address,
+                                          'Action' => 'Add',
+                                          'Task' => 'Added new Merchant Staff ['.$Email.'] - ['.$Account_Address.'].',
                                    ));
                                    break;
 
@@ -1317,6 +1407,12 @@ class Account_Actions {
                                           'Account_Address' => $Account_Address,
                                           'Card_Address'=> $CardAddress,
                                    ));
+                                   $this->CI->ActivityLogs_Model->create(array(
+                                          'Account_Address' => $Account->WebAccounts_Address,
+                                          'Target_Account_Address' => $Account_Address,
+                                          'Action' => 'Add',
+                                          'Task' => 'Added new User ['.$Email.'] - ['.$Account_Address.'].',
+                                   ));
                                    break;
                             case 'Guest': 
                                    if (empty($SchoolPersonalId) || empty($CardAddress) || empty($hashed_password)) {
@@ -1345,6 +1441,12 @@ class Account_Actions {
                                           'Account_Address' => $Account_Address,
                                           'Card_Address'=> $CardAddress,
                                    ));
+                                   $this->CI->ActivityLogs_Model->create(array(
+                                          'Account_Address' => $Account->WebAccounts_Address,
+                                          'Target_Account_Address' => $Account_Address,
+                                          'Action' => 'Add',
+                                          'Task' => 'Added new Guest ['.$Email.'] - ['.$Account_Address.'].',
+                                   ));
                                    break;
                             case 'Guardian': 
                                    $Account_Address = $this->CI->Functions_Model->create_unique_address('GDN');
@@ -1356,6 +1458,12 @@ class Account_Actions {
                                           'Lastname' => $Lastname,
                                           'Campus_Id' => $Campus_Id,
                                           'UsersAccount_Address' => null,
+                                   ));
+                                   $this->CI->ActivityLogs_Model->create(array(
+                                          'Account_Address' => $Account->WebAccounts_Address,
+                                          'Target_Account_Address' => $Account_Address,
+                                          'Action' => 'Add',
+                                          'Task' => 'Added new Guardian ['.$Email.'] - ['.$Account_Address.'].',
                                    ));
                                    break;
 
@@ -1385,92 +1493,7 @@ class Account_Actions {
 
        
 
-
-
-
 /*
--- ---------------------
-   UPDATE USER PIN CODE
-   - from admin use
--- ---------------------
-*/
-       public function Update_PinCode ($Account, $requestPostBody) {
-
-              $this->CI->form_validation->set_data($requestPostBody);
-
-              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|exact_length[15]');
-              $this->CI->form_validation->set_rules('NewPinCode1', 'NewPinCode1', 'trim|required|number|exact_length[6]');
-              $this->CI->form_validation->set_rules('NewPinCode2', 'NewPinCode2', 'trim|required|number|exact_length[6]|matches[NewPinCode1]');
-
-              if ($this->CI->form_validation->run() === FALSE) {
-                     $validationErrors = validation_errors();
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
-              }
-
-              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
-              $NewPinCode1 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPinCode1']);
-              $NewPinCode2 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPinCode2']);
-
-              if ($NewPinCode1 != $NewPinCode2) {
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'New PIN Code does not match!'];
-              }
-
-              if ($Account_->ActorCategory_Id === '5' || $Account_->ActorCategory_Id === '6') {
-                     $this->CI->UsersAccount_Model->update_pin($AccountAddress, $NewPinCode2);
-              } else if ($Account_->ActorCategory_Id === '7') {
-                     $this->CI->GuardianAccount_Model->update_pin($AccountAddress, $NewPinCode2);
-              } else {
-                     $this->CI->WebAccounts_Model->update_pin($AccountAddress, $NewPinCode2);
-              }
-
-              $this->CI->ActivityLogs_Model->create(array(
-                     'Account_Address' => $Account->WebAccounts_Address,
-                     'Task' => 'Updated [' . $AccountAddress .'] PIN Code.',
-              ));
-
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
-       }
-
-
-/*
--- ---------------------
-   UPDATE WEB ACCOUNT PASSWORD
-   - from admin use
--- ---------------------
-*/
-       public function Update_Password ($Account, $requestPostBody) {
-
-              $this->CI->form_validation->set_data($requestPostBody);
-
-              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|exact_length[15]');
-              $this->CI->form_validation->set_rules('NewPassword1', 'NewPassword1', 'trim|required|min_length[8]|max_length[50]');
-              $this->CI->form_validation->set_rules('NewPassword2', 'NewPassword2', 'trim|required|min_length[8]|max_length[50]|matches[NewPassword1]');
-
-              if ($this->CI->form_validation->run() === FALSE) {
-                     $validationErrors = validation_errors();
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
-              }
-
-              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
-              $NewPassword1 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPassword1']);
-              $NewPassword2 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPassword2']);
-
-              if ($NewPassword1 != $NewPassword2) {
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'New password does not match!'];
-              }
-
-              $this->CI->WebAccounts_Model->update_pPassword($AccountAddress, $NewPassword2);
-
-              $this->CI->ActivityLogs_Model->create(array(
-                     'Account_Address' => $Account->WebAccounts_Address,
-                     'Task' => 'Updated [' . $AccountAddress . '] password.',
-              ));
-
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
-       }
-
-
-       /*
 -- ---------------------
    VIEW STAFFS
    - from merchant admin use
@@ -1555,6 +1578,8 @@ public function Update_Account_By_MTA ($Account, $requestPostBody) {
                      ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $AccountAddress,
+                            'Action' => 'Edit',
                             'Task' => 'Updated ['.$AccountAddress.'] Firstname settings to '.$Firstname.'.',
                      ));
                      $changes = $changes . 'Firstname, ';
@@ -1567,6 +1592,8 @@ public function Update_Account_By_MTA ($Account, $requestPostBody) {
                      ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $AccountAddress,
+                            'Action' => 'Edit',
                             'Task' => 'Updated ['.$AccountAddress.'] Lastname settings to '.$Lastname.'.',
                      ));
                      $changes = $changes . 'Lastname, ';
@@ -1579,6 +1606,8 @@ public function Update_Account_By_MTA ($Account, $requestPostBody) {
                      ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $AccountAddress,
+                            'Action' => 'Edit',
                             'Task' => 'Updated ['.$AccountAddress.'] Email settings to '.$Email.'.',
                      ));
                      $changes = $changes . 'Email, ';
@@ -1592,6 +1621,8 @@ public function Update_Account_By_MTA ($Account, $requestPostBody) {
                      ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $AccountAddress,
+                            'Action' => 'Edit',
                             'Task' => 'Updated ['.$AccountAddress.'] PinCode.',
                      ));
                      $changes = $changes . 'PinCode, ';
@@ -1605,21 +1636,22 @@ public function Update_Account_By_MTA ($Account, $requestPostBody) {
                      ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $AccountAddress,
+                            'Action' => 'Edit',
                             'Task' => 'Updated ['.$AccountAddress.'] Password.',
                      ));
                      $changes = $changes . 'Password, ';
               }
 
               if (property_exists($AccountToModify, 'IsAccountActive') && $AccountToModify->IsAccountActive !== $IsAccountActive) {
-                     if($Account_Model->update_IsAccountActive(array(
+                     $Account_Model->update_IsAccountActive(array(
                             'Account_Address' => $AccountAddress,
                             'IsAccountActive' => $IsAccountActive,
-                     ))) {
-                            
-                     }
-                     
+                     ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
+                            'Target_Account_Address' => $AccountAddress,
+                            'Action' => 'Edit',
                             'Task' => 'Updated ['.$AccountAddress.'] IsAccountActive settings to '.$IsAccountActive.'.',
                      ));
                      $changes = $changes . 'IsAccountActive, ';
