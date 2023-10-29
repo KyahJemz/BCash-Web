@@ -30,10 +30,25 @@
 }
 
 #login-history-item-list .remove-btn{
-       cursor: pointer;
        text-align: center;
        align-self: center;
+}
+
+#login-history-item-list .remove-btn,
+#login-history-item-list .remove-all{
+       cursor: pointer;
        width: fit-content;
+       border: 1px solid #F9AE28;
+}
+
+#login-history-item-list .remove-btn:hover,
+#login-history-item-list .remove-all:hover{
+       box-shadow: 0 0 2px 2px gainsboro;
+}
+
+#login-history-item-list .remove-btn:active,
+#login-history-item-list .remove-all:active{
+       background-color: #F9AE28;
 }
 
 

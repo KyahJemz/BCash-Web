@@ -8,6 +8,7 @@ import Accounts from './modules/accounts.js';
 import AjaxRequest from './ajax.js';
 import LoginHistory from './modules/loginhistory.js'
 import { SetAdministratorChart } from './chart.js';
+import ActivityHistory from './modules/activityhistory.js';
 
 import Helper from './helper.js';
 
@@ -21,6 +22,9 @@ const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
 const loginHistory = new LoginHistory();
+const MyActivityHistory = new ActivityHistory('get my activity logs');
+const AdministratorsActivityHistory = new ActivityHistory('get all administrators activity logs');
+const AllActivityHistory = new ActivityHistory('get all activity logs');
 
 const cards = new Cards(
   document.getElementById("Cards-Table-Body"),
@@ -243,6 +247,10 @@ function onMenuSettingsButtonClick() {
         makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
         helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
         helper.addElementClickListenerById('btn-login-history',()=>{loginHistory.open()});
+
+        helper.addElementClickListenerById('btn-activity-history',()=>{MyActivityHistory.open()});
+        helper.addElementClickListenerById('btn-administrators-activity-history',()=>{AdministratorsActivityHistory.open()});
+        helper.addElementClickListenerById('btn-all-activity-history',()=>{AllActivityHistory.open()});
       }
   })
 }
@@ -502,7 +510,7 @@ async function GetMerchantCategoryList () {
       if (responseData.Success) {
         responseData.Parameters.forEach(element => {
           document.getElementById('MerchantCategory_Dropdown').innerHTML = document.getElementById('MerchantCategory_Dropdown').innerHTML + 
-          `<a class="dropdownButtonSubItem" href="javascript:void(0)">${element['ShopName']}</a`
+          `<a class="dropdownButtonSubItem" href="javascript:void(0)">${element['ShopName']}</a>`
         });
         helper.addElementClickListener("#MerchantCategory_Dropdown .dropdownButtonSubItem", onDropdownButtonSubItemClick);
         helper.addElementClickListener("#MerchantCategory_Dropdown .dropdownButtonSubItem", addAccountContainerUpdate);
@@ -517,7 +525,7 @@ async function GetAccountCategoryList () {
       if (responseData.Success) {
         responseData.Parameters.forEach(element => {
           document.getElementById('ActorCategory_Dropdown').innerHTML = document.getElementById('ActorCategory_Dropdown').innerHTML + 
-          `<a class="dropdownButtonSubItem" href="javascript:void(0)">${element['Name']}</a`
+          `<a class="dropdownButtonSubItem" href="javascript:void(0)">${element['Name']}</a>`
         });
         helper.addElementClickListener("#ActorCategory_Dropdown .dropdownButtonSubItem", onDropdownButtonSubItemClick);
         helper.addElementClickListener("#ActorCategory_Dropdown .dropdownButtonSubItem", addAccountContainerUpdate);

@@ -1,0 +1,39 @@
+
+#activity-logs-list {
+       display: flex;
+       width: 100%;
+       flex-direction: column;
+       padding: 10px 20px;
+       gap: 10px;
+}
+
+#activity-logs-list .activity-logs-row {
+       display: flex;
+       width: 100%;
+       flex-direction: row;
+       padding: 10px;
+       border: 1px solid gainsboro;
+       border-radius: 5px;
+       gap: 20px;
+}
+
+#activity-logs-list .activity-logs-row .mark{
+       aspect-ratio: 1/1;
+       height: 30px;
+       background-position: center;
+       background-size: cover;
+}
+
+#activity-logs-list .activity-logs-row .details .date{
+       font-weight: lighter;
+}
+#activity-logs-list .activity-logs-row .details .name{
+       font-weight: bold;
+}
+#activity-logs-list .activity-logs-row .details .task{
+       text-wrap: wrap;
+}
+
+
+
+

@@ -1394,7 +1394,7 @@ class Account_Actions {
                                           'Campus_Id ' => $Campus_Id,
                                           'Password' => null,
                                    ));
-                                   $this->CI->UsersData_Model->create_merchant(array(
+                                   $this->CI->UsersData_Model->create(array(
                                           'Account_Address' => $Account_Address,
                                           'SchoolPersonalId'=> $SchoolPersonalId,
                                           'CanDoTransfers'=> '1',
@@ -1415,20 +1415,20 @@ class Account_Actions {
                                    ));
                                    break;
                             case 'Guest': 
-                                   if (empty($SchoolPersonalId) || empty($CardAddress) || empty($hashed_password)) {
+                                   if (empty($SchoolPersonalId) || empty($CardAddress)) {
                                           trigger_error('Invalid SchoolPersonalId or CardAddress or Password', E_USER_ERROR);
                                    }
                                    $Account_Address = $this->CI->Functions_Model->create_unique_address('GST');
                                    $this->CI->UsersAccount_Model->create(array(
                                           'Account_Address' => $Account_Address,
                                           'ActorCategory_Id' => $ActorCategory_Id,
-                                          'Email ' => $Email,
-                                          'Firstname ' => $Firstname,
-                                          'Lastname ' => $Lastname,
-                                          'Campus_Id ' => $Campus_Id,
-                                          'Password' => $hashed_password,
+                                          'Email' => $Email,
+                                          'Firstname' => $Firstname,
+                                          'Lastname' => $Lastname,
+                                          'Campus_Id' => $Campus_Id,
+                                          'Password' => null,
                                    ));
-                                   $this->CI->UsersData_Model->create_merchant(array(
+                                   $this->CI->UsersData_Model->create(array(
                                           'Account_Address' => $Account_Address,
                                           'SchoolPersonalId'=> $SchoolPersonalId,
                                           'CanDoTransfers'=> '1',
@@ -1479,11 +1479,6 @@ class Account_Actions {
                      $error = $this->CI->db->error();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
               }
-
-              $this->CI->ActivityLogs_Model->create(array(
-                     'Account_Address' => $Account->WebAccounts_Address,
-                     'Task' => 'Added a new '.$AccountCategory.' Account.',
-              ));
 
               return ['Success' => TRUE,'Target' => null,'Parameters' => null,'Response' => 'Successfully added a new '.$AccountCategory.' Account.'];
 

@@ -1559,6 +1559,7 @@ export default class Accounts {
               Ajax.sendRequest(data, 'update account')
                 .then(responseData => {
                   if (responseData.Success) {
+                    document.getElementById("Modal-Container").style.display = "none";
                   }
               });
             });
@@ -1703,10 +1704,13 @@ export default class Accounts {
                 IsAccountActive : (IsAccountActive === true) ? 1 : 0,
               }
             
+              parent.querySelector('#AccountDetails-PINCode').value = '';
+
               const Ajax = new AjaxRequest(BaseURL);
               Ajax.sendRequest(data, 'update staff account')
                 .then(responseData => {
                   if (responseData.Success) {
+                    document.getElementById("Modal-Container").style.display = "none";
                   }
               });
             });

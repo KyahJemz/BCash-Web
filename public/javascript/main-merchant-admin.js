@@ -9,6 +9,7 @@ import Dropdown from './modules/dropdown.js';
 import AjaxRequest from './ajax.js';
 import LoginHistory from './modules/loginhistory.js'
 import { SetMerchantAdminChart } from './chart.js';
+import ActivityHistory from './modules/activityhistory.js';
 
 import Helper from './helper.js';
 
@@ -24,6 +25,8 @@ const dropdown = new Dropdown();
 const helper = new Helper();
 const Ajax = new AjaxRequest(BaseURL);
 const loginHistory = new LoginHistory();
+const myActivityHistory = new ActivityHistory('get my activity logs');
+const myMerchantsActivityHistory = new ActivityHistory('get my merchants activity logs');
 
 const myTransactions = new Transactions(
   document.getElementById("My-Transactions-Table"),
@@ -84,11 +87,11 @@ function refreshItems(){
     .then(responseData => {
       myItems.clearItems();
       responseData.Parameters.forEach(row => {
-        //myItems.registerItem("1","Spicy Chicken Sandwich","120","Food","2023-06-29","2023-06-29", "../public/images/items/1.png");
         myItems.registerItem(row['MerchantItems_Id'],row['Name'],row['Price'],row['ItemCategory'],row['ModifiedTimestamp'],row['CreatedTimestamp'], row['Image']);
       });
     });
 }
+refreshItems();
 
 
 
@@ -387,6 +390,8 @@ function onMenuSettingsButtonClick() {
         makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
         helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
         helper.addElementClickListenerById('btn-login-history',()=>{loginHistory.open()});
+        helper.addElementClickListenerById('btn-activity-history',()=>{myActivityHistory.open()});
+        helper.addElementClickListenerById('btn-merchant-activity-history',()=>{myMerchantsActivityHistory.open()});
       }
   })
 }

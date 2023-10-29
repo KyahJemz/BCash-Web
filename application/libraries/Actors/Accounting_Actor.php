@@ -76,12 +76,12 @@ class Accounting_Actor {
                 $response = $this->CI->Account_Actions->Update_My_Password($Account, $requestPostBody);
                 break;
 
-            case 'get all activity logs':
-                $response = $this->CI->ActivityLogs_Actions->View_All_ActivityLogs($Account);
+            case 'get all accountings activity logs':
+                $response = $this->CI->ActivityLogs_Actions->View_All_Accountings_ActivityLogs($Account);
                 break;
 
             case 'get my activity logs':
-                $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
+                $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account);
                 break;
 
             case 'get login history':
@@ -124,7 +124,9 @@ class Accounting_Actor {
                 $response =  $this->CI->Account_Actions->Update_User_Account_By_Accounting($Account, $requestPostBody);
                 break;
 
-
+            case 'add account':
+                $response =  $this->CI->Account_Actions->Add_Account_By_ADM($Account, $requestPostBody);
+                break;
 
             default:
                 $response = ['Success' => FALSE, 'Response' => 'Invalid Intent or Not Permitted']; 

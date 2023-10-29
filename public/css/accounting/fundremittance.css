@@ -232,8 +232,9 @@
 
 .panel-fundremittance-content .left-panel .table-container .table-row-details .bottom {
     padding-left: 20px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 50px 100px;
+    column-gap: 20px;
 }
 
 .panel-fundremittance-content .left-panel .table-container .table-row-details .top {
@@ -249,6 +250,41 @@
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
+#FundRemittance-SubmitBtn {
+    cursor: pointer;
+    margin: 2px 2px ;
+    padding: 5px 20px;
+    font-weight: bold;
+    background-color: #FFCC00;
+    border-radius: 5px;
+    color: white;
+}
+#FundRemittance-SubmitBtn:hover {
+    box-shadow: 0px 0px 2px 2px gainsboro;
+}
+#FundRemittance-SubmitBtn:active {
+    background-color: #DA121A;
+    box-shadow: 0px 0px 2px 2px gainsboro;
+}
+
+#FundRemittance-Buttons button {
+    cursor: pointer;
+    margin: 2px 2px ;
+    padding: 5px 20px;
+    font-weight: bold;
+    background-color: #FFCC00;
+    border-radius: 5px;
+    color: white;
+}
+#FundRemittance-Buttons button:hover {
+    box-shadow: 0px 0px 2px 2px gainsboro;
+}
+#FundRemittance-Buttons button:active {
+    background-color: #DA121A;
+    box-shadow: 0px 0px 2px 2px gainsboro;
+}
+
 
 
 

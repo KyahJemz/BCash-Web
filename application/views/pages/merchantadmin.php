@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/accounts.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/fundremittance.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/loginhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/activityhistory.css'); ?>">
 </head>
 
 <body>
@@ -127,10 +128,13 @@
     -->
                 <div id="panel-home" class="body-content-panel visible">
                     <div class="panel-home-content">
+
                         <div class="header">
                             <p>Welcome to Dashboard</p>
                         </div>
+
                         <div class="charts-container-row1">
+
                             <div class="chart-item">
                                 <div class="chart-header">
                                     <p class="chart-title">Orders Summary Per Hour</p>
@@ -142,6 +146,7 @@
                                     <canvas></canvas>
                                 </div>
                             </div>
+
                             <div class="chart-item">
                                 <div class="chart-header">
                                     <p class="chart-title">Sales Summary Per Hour</p>
@@ -154,11 +159,12 @@
                                     <canvas></canvas>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="charts-container-row2">
+
                             <div class="chart-5 chart-item">
-                                <!-- Total Transactions Today -->
                                 <div class="chart-header">
                                     <p class="chart-title">Daily sales graph</p>
                                     <p class="chart-description">This graph shows your sales within the past 7 days.</p>
@@ -179,7 +185,6 @@
                             </div>
 
                             <div class="chart-6 chart-item">
-                                <!-- Total Transactions Today -->
                                 <div class="chart-header">
                                     <p class="chart-title">Top Item</p>
                                     <p class="chart-description">This graph shows your top selling items</p>
@@ -188,51 +193,31 @@
                                     <canvas></canvas>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="charts-container-row3">
+
                             <div class="chart-7 chart-item">
                                 <div class="header">
                                     <p class="title">Recent Merchant Activities</p>
-                                    <p class="date">Last Update: 12:98AM</p>
                                 </div>
                                 <ul id="chart-5" >
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-
+                                    <!-- Data -->
                                 </ul>
                             </div>
+
                             <div class="chart-8 chart-item">
                                 <div class="header">
                                     <p class="title">Recent Purchases</p>
-                                    <p class="date">Last Update: 12:98AM</p>
                                 </div>
                                 <ul id="chart-6" >
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
+                                    <!-- Data -->
                                 </ul>
                             </div>
+
                         </div>
 
-                        
                     </div>
                 </div>
 
@@ -586,10 +571,7 @@
                     <div class="panel-fundremittance-content">
                         <div class="left-panel">
                             <div class="top-panel">
-                                <div class="row">
-                                    <button>2</button>
-                                    <button>2</button>
-                                </div>
+
                                 <div id="FundRemittance-Buttons">
                                     
                                 </div>
@@ -634,49 +616,38 @@
             </div>
         </div>
     </div>
+
+
+
 <!--
     ALERTS ###
 -->
-<div id="Alert-Box-Container" class="Alert-container">
-    <table class="Alert-Box-Table">
-        
-    </table>
-</div>
-<!--
-MODALS ###
--->
-<div id="Modal-Container" class="modal-container">
-    <div class="modal-content">
-        <div class="header">
-            <div class="title">
-                <p id="Modal-Header" class="text">N/A</p>
-            </div>
-            <div class="close" >
-                <p id="Modal-Close-Button" class="close-btn curson-pointer">X</p>
-            </div>
-        </div>
-        <div id="Modal-Body" class="body">
+    <div id="Alert-Box-Container" class="Alert-container">
+        <table class="Alert-Box-Table">
             
+        </table>
+    </div>
+
+
+
+<!--
+    MODALS ###
+-->
+    <div id="Modal-Container" class="modal-container">
+        <div class="modal-content">
+            <div class="header">
+                <div class="title">
+                    <p id="Modal-Header" class="text">N/A</p>
+                </div>
+                <div class="close" >
+                    <p id="Modal-Close-Button" class="close-btn curson-pointer">X</p>
+                </div>
+            </div>
+            <div id="Modal-Body" class="body">
+                
+            </div>
         </div>
     </div>
-</div>
-
-
-    <div class="numpad-container">
-        <button class="numpad numpad-7 curson-pointer">7</button>
-        <button class="numpad numpad-8 curson-pointer">8</button>
-        <button class="numpad numpad-9 curson-pointer">9</button>
-        <button class="numpad numpad-4 curson-pointer">4</button>
-        <button class="numpad numpad-5 curson-pointer">5</button>
-        <button class="numpad numpad-6 curson-pointer">6</button>
-        <button class="numpad numpad-1 curson-pointer">1</button>
-        <button class="numpad numpad-2 curson-pointer">2</button>
-        <button class="numpad numpad-3 curson-pointer">3</button>
-        <button class="numpad numpad-clear curson-pointer">X</button>
-        <button class="numpad numpad-0 curson-pointer">0</button>
-        <button class="numpad numpad-backspace curson-pointer">&lt</button>
-    </div>
-
 
 
 

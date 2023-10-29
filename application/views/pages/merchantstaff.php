@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/createorder.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/transactions.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/loginhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/activityhistory.css'); ?>">
 </head>
 
 

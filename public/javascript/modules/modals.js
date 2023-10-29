@@ -102,7 +102,7 @@ export default class Modals {
             return `
                 <div class="Edit-Item">
                     <div class="image">
-                        <img src="../images/school.jpg" alt="">
+                        <img src="../public/images/items/${value['ItemImage']}" alt="">
                     </div>
                     <div class="form">
                         <div>
@@ -362,6 +362,11 @@ export default class Modals {
                         </table>
                     </fieldset>
                     <div class="buttons-container">
+                        ${Information.Account['WebAccounts_Address'].substring(0, 3) === 'ADM' ? `<button id="btn-all-activity-history" class="btn-submit">All Activity Logs</button>` : ''}
+                        ${Information.Account['WebAccounts_Address'].substring(0, 3) === 'ADM' ? `<button id="btn-administrators-activity-history" class="btn-submit">Administrators Activity Logs</button>` : ''}
+                        ${Information.Account['WebAccounts_Address'].substring(0, 3) === 'ACT' ? `<button id="btn-all-accountings-activity-history" class="btn-submit">All Accountings Activity Logs</button>` : ''}
+                        ${Information.Account['WebAccounts_Address'].substring(0, 3) === 'MTA' ? `<button id="btn-merchant-activity-history" class="btn-submit">Merchant Activity Logs</button>` : ''}
+                        <button id="btn-activity-history" class="btn-submit ">Activity Logs</button>
                         <button id="btn-login-history" class="btn-submit ">Login History</button>
                         <button id="btn-submit-account-changes" class="btn-submit ">Update Changes</button>
                     </div>

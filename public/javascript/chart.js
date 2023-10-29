@@ -85,10 +85,6 @@ export function SetAccountingChart(parameters){
 	const chart8 = document.getElementById('chart-recent-cashin');
 	const chart9 = document.getElementById('chart-recent-activities');
 
-	chart7.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
-	chart8.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
-	chart9.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
-
 	chart7.innerHTML = '';
 	parameters.RecentActivities.forEach(element => {
 		chart7.innerHTML = chart7.innerHTML +`
@@ -293,10 +289,6 @@ export function SetAdministratorChart(parameters){
 	const chart7 = document.getElementById('chart-7');
 	const chart8 = document.getElementById('chart-8');
 
-	chart6.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
-	chart7.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
-	chart8.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
-
 	chart6.innerHTML = '';
 	parameters.RecentAdminActivities.forEach(element => {
 		chart6.innerHTML = chart6.innerHTML +`
@@ -477,9 +469,6 @@ export function SetMerchantAdminChart(parameters){
 
 	const chart5 = document.getElementById('chart-5');
 	const chart6 = document.getElementById('chart-6');
-
-	chart5.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
-	chart6.parentNode.querySelector('.date').innerHTML = 'Last update: ' + helper.getTime(parameters.CurrentTime);
 	
 	chart6.innerHTML = '';
 	parameters.RecentPurchases.forEach(element => {

@@ -42,13 +42,13 @@ class Items_Actions {
                             'MerchantsCategory_Id' => $MerchantsCategory_Id->MerchantsCategory_Id,
                             'Name' =>  $ItemName,
                             'Price' => $ItemCost,
-                            'Image' => '',
+                            'Image' => 'default.png',
                             'ModifiedTimestamp' => $ModifiedTimestamp,
                      ));
 
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
-                            'Target_Account_Address' => $Account->UsersAccount_Address,
+                            'Target_Account_Address' => $Account->WebAccounts_Address,
                             'Action' => 'Add',
                             'Task' => 'Added new Item ['.$ItemName.'].',
                      ));
@@ -107,7 +107,7 @@ class Items_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated ItemName from ['.$item->Name.'] to ['.$ItemName.'].',
                             ));
@@ -121,7 +121,7 @@ class Items_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated ItemCost from ['.$item->Price.'] to ['.$ItemCost.'].',
                             ));
@@ -135,7 +135,7 @@ class Items_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated ItemCategory from ['.$item->ItemCategory.'] to ['.$ItemCategory.'].',
                             ));
@@ -187,7 +187,7 @@ class Items_Actions {
 
               $this->CI->ActivityLogs_Model->create(array(
                      'Account_Address' => $Account->WebAccounts_Address,
-                     'Target_Account_Address' => $Account->UsersAccount_Address,
+                     'Target_Account_Address' => $Account->WebAccounts_Address,
                      'Action' => 'Delete',
                      'Task' => 'Deleted Item ['.$ItemId.'].',
               ));

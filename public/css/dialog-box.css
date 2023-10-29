@@ -354,17 +354,16 @@
     font-size: 1.3rem;
 }
 
-.personal-information-container .buttons-container button:last-child {
-    background-color: var(--Button-Background-Gold);
-    color: var(--TextColor-White);
+.personal-information-container .buttons-container button {
+    border: 1px solid var(--Button-Background-Gold);
     border-radius: 3px;
     transition: 100ms;
 }
 
-.personal-information-container .buttons-container button:first-child {
-    border: 1px solid var(--Button-Background-Gold);
-    border-radius: 3px;
-    transition: 100ms;
+.personal-information-container .buttons-container button:last-child {
+    background-color: var(--Button-Background-Gold);
+    color: var(--TextColor-White);
+    border: 0px solid var(--Button-Background-Gold);
 }
 
 .personal-information-container .buttons-container button:active {

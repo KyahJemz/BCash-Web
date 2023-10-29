@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/cards.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/configurations.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/notifications.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/loginhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/loginhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/activityhistory.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/administrator/home.css'); ?>">
 </head>
 
@@ -75,10 +76,6 @@
                                     <div class="selected"></div>
                                     <p>User Accounts</p>
                                 </li>
-                                <!-- <li data-menu="Guest Accounts" class="curson-pointer menuSelectionButton">
-                                    <div class="selected"></div>
-                                    <p>Guest Accounts</p>
-                                </li> -->
                                 <li data-menu="Merchant Accounts" class="curson-pointer menuSelectionButton">
                                     <div class="selected"></div>
                                     <p>Merchant Accounts</p>
@@ -250,7 +247,6 @@
                             <div class="chart-7 chart-item">
                                 <div class="header">
                                     <p class="title">Administrator Activities</p>
-                                    <p class="date">Last Update: 12:98AM</p>
                                 </div>
                                 <ul id="chart-6">
                                 </ul>
@@ -259,7 +255,6 @@
                             <div class="chart-8 chart-item">
                                 <div class="header">
                                     <p class="title">Accounting / Merchant Activities</p>
-                                    <p class="date">Last Update: 12:98AM</p>
                                 </div>
                                 <ul id="chart-7">
                                 </ul>
@@ -268,7 +263,6 @@
                             <div class="chart-9 chart-item">
                                 <div class="header">
                                     <p class="title">Users Activities</p>
-                                    <p class="date">Last Update: 12:98AM</p>
                                 </div>
                                 <ul id="chart-8">
                                 </ul>
@@ -410,90 +404,6 @@
                         </div>
                     </div>
                 </div>
-
-    <!--
-        GUEST ACCOUNTS 
-  
-                <div id="panel-guestaccounts" class="body-content-panel hidden">
-                    <div id="Guest-Accounts-Query" class="panel-accounts-query panel">
-                        <div class="form-container">
-                            <div>
-                                <label for="accounts-address">Account Address</label>
-                                <input class="accounts-address query textbox inputtext" type="text" name="accounts-address" autocomplete="off">
-                            </div>
-                            <div>
-                                <label for="accounts-schoolpersonalid">School Personal Id</label>
-                                <input class="accounts-schoolpersonalid query textbox inputtext" type="text" name="accounts-schoolpersonalid" autocomplete="off">
-                            </div>
-                            <div>
-                                <label for="accounts-name">Name</label>
-                                <input class="accounts-name query textbox inputtext" type="text" name="accounts-name" autocomplete="off">
-                            </div>
-                            <div>
-                                <label for="accounts-email">Email</label>
-                                <input class="accounts-email query textbox inputtext" type="text" name="accounts-email" autocomplete="off">
-                            </div>
-                            <div>
-                                <label>Status</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Active</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Inactive</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-accounts-buttons" data-transactiontype="GuestAccounts">
-                        <div>
-                            <button class="btn-default curson-pointer accounts-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
-                                <img src="../public/images/icons/search-yellow.png" alt="search">
-                                <span>Search</span>
-                            </button>
-                            <button class="btn-default curson-pointer accounts-clear-button" type="reset" value="Clear">
-                                <img src="../public/images/icons/clear-yellow.png" alt="search">
-                                <span>Clear</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="panel-accounts-table">
-                        <div class="table-header">
-                            <table>
-                                <thead id="Guest-Accounts-Table-Header">
-                                    <tr>
-                                        <th><div class="col1">#</div></th>
-                                        <th><div class="col2">Account Address</div></th>
-                                        <th><div class="col3">Status</div></th>
-                                        <th><div class="col4">Category</div></th>
-                                        <th><div class="col5">Firstname</div></th>
-                                        <th><div class="col6">Lastname</div></th>
-                                        <th><div class="col7">Email</div></th>
-                                        <th><div class="col8">School Personal Id</div></th>
-                                        <th><div class="col9">Campus</div></th>
-                                        <th><div class="col10">Guardian Address</div></th>
-                                        <th><div class="col11">Guardian Email</div></th>
-                                        <th><div class="col12">Guardian Name</div></th>
-                                        <th><div class="col13">Date Registered</div></th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                        <div>
-                            <table>
-                                <tbody id="Guest-Accounts-Table-Body" class="accounts-table">
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div> 
-            -->
-
    
     <!--
         USER ACCOUNTS 

@@ -29,11 +29,7 @@ class Merchants_Model extends CI_Model {
               ->where('WebAccounts_Address', $params['Account_Address'])
               ->get()
               ->row();
-          if ($result) {
-              return $result;
-          } else {
-              return []; 
-          }
+       return $result;
        }
 
        public function get_merchantadminaddress($params) {
@@ -168,6 +164,18 @@ class Merchants_Model extends CI_Model {
                      
               return $this->db->get()->result();
        
+       }
+
+       public function read_merchants_by_category($params) {
+
+              $MerchantId = $this->get_categoryId($params)->MerchantsCategory_Id;
+
+              return $this->db
+                     ->select('WebAccounts_Address')
+                     ->from('tbl_Merchants')
+                     ->where('MerchantsCategory_Id', $MerchantId) // Fixed the condition here
+                     ->get()
+                     ->result();
        }
 
 

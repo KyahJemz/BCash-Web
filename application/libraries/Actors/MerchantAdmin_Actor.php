@@ -54,8 +54,8 @@ class MerchantAdmin_Actor {
                 $response = $this->CI->Account_Actions->Update_My_Account($Account, $requestPostBody);
                 break;
 
-            case 'get all activity logs':
-                $response = $this->CI->ActivityLogs_Actions->View_All_ActivityLogs($Account);
+            case 'get my merchants activity logs':
+                $response = $this->CI->ActivityLogs_Actions->View_My_Merchant_ActivityLogs($Account);
                 break;
 
             case 'get my activity logs':

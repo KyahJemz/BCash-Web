@@ -19,6 +19,14 @@ export default class Transactions {
   
   clearTransactionsQueries(){
     this.tableContainer ? this.tableContainer.innerHTML = "" : '';
+    if (AccountAddress.substring(0, 3) === 'ACT'){
+      document.getElementById('mytransaction-records-cashin').innerHTML = `
+        Records : <a class="display-record">0</a>
+      `;
+      document.getElementById('mytransaction-total-cashin').innerHTML = `
+        Amount Total : <a class="display-record">₱ 0.00</a>
+      `;
+    }
 
     if (this.queryContainer) {
       const queryList = this.queryContainer.querySelectorAll(".query");
@@ -74,17 +82,21 @@ export default class Transactions {
   }
 
   displayTransactionsToTable(){
+    let totalAmount = 0;
+    let totalRecords = 0;
     let template = ``;
     let count = 0;
     if (this.data) {
         this.data.forEach((record) => {  
-              Object.keys(record).forEach(key => {
-                if (record[key] === null || record[key] === "") {
-                    record[key] = "?";
-                }
-              });
-            count++;
-            template = template + `
+            Object.keys(record).forEach(key => {
+              if (record[key] === null || record[key] === "") {
+                  record[key] = "?";
+              }
+            });
+          count++;
+          totalRecords++;
+          totalAmount = totalAmount + Number(record["TotalAmount"]);
+          template = template + `
             <tr class="transactions-row">
                 <td><div class="col1 cell" title="checkbox"><input class="transactionCheckbox" type="checkbox" name="`+record["Transaction ID"]+`" id=""></div></td>
                 <td><div class="col2 cell" title="`+count+`"><center>`+count+`</center></div></td>
@@ -101,8 +113,16 @@ export default class Transactions {
                 <td><div class="col13 cell" title="`+record["PaymentMethod"]+`">`+record["PaymentMethod"]+`</div></td>
                 <td><div class="col14 cell" title="`+record["Notes"]+`">`+record["Notes"]+`</div></td>
             </tr>       
-        `
+          `
         });
+    }
+    if (AccountAddress.substring(0, 3) === 'ACT'){
+      document.getElementById('mytransaction-records-cashin').innerHTML = `
+        Records : <a class="display-record">${totalRecords}</a>
+      `;
+      document.getElementById('mytransaction-total-cashin').innerHTML = `
+        Amount Total : <a class="display-record">₱ ${this.Helper.formatNumber(totalAmount)}</a>
+      `;
     }
     this.tableContainer.innerHTML = template;
     const TransactionAddress = this.tableContainer.querySelectorAll(".TransactionAddress");

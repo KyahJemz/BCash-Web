@@ -8,6 +8,7 @@ import Dropdown from './modules/dropdown.js';
 import AjaxRequest from './ajax.js';
 import LoginHistory from './modules/loginhistory.js'
 import Helper from './helper.js';
+import ActivityHistory from './modules/activityhistory.js';
 
 ////////////////////////////
 // VARIABLES
@@ -21,6 +22,7 @@ const dropdown = new Dropdown();
 const helper = new Helper();
 const Ajax = new AjaxRequest(BaseURL);
 const loginHistory = new LoginHistory();
+const myActivityHistory = new ActivityHistory('get my activity logs');
 
 const myTransactions = new Transactions(
   document.getElementById("My-Transactions-Table"),
@@ -79,7 +81,7 @@ function refreshItems(){
       onCreateOrderSearchInput();
     });
 }
-refreshItems()
+refreshItems();
 
 
 
@@ -309,7 +311,7 @@ helper.addElementClickListener('.dropdownButtonSubItem', onDropdownButtonSubItem
 
 function onTransactionsSearchClick(event) {
   myTransactions.applyTransactionsQueries(event, 'get my transactions');
-}
+}  
 myTransactions.applyTransactionsQueries(null, 'get my transactions');
 
 function onTransactionsClearClick(event) {
@@ -358,6 +360,7 @@ function onMenuSettingsButtonClick() {
       makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
       helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
       helper.addElementClickListenerById('btn-login-history',()=>{loginHistory.open()});
+      helper.addElementClickListenerById('btn-activity-history',()=>{myActivityHistory.open()});
     }
   })
 }

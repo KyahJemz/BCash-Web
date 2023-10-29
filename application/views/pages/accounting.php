@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/cashinform.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/fundremittance.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/loginhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/loginhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/activityhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/accounting/cards.css'); ?>">
 </head>
 
 <body>
@@ -62,9 +65,9 @@
                     </li>
                     <li class="menuSelectionDropdownItems">
                         <ul>
-                            <li data-menu="My Transactions" class="curson-pointer menuSelectionButton">
+                            <li data-menu="Accounting Transactions" class="curson-pointer menuSelectionButton">
                                 <div class="selected"></div>
-                                <p>My Transactions</p>
+                                <p>Accounting Transactions</p>
                             </li>
                             <li data-menu="All Transactions" class="curson-pointer menuSelectionButton">
                                 <div class="selected"></div>
@@ -76,6 +79,11 @@
                         <div class="selected"></div>
                         <img src="../public/images/icons/accounts.png" alt="Accounts Icon">
                         <p>Accounts</p>
+                    </li>
+                    <li data-menu="Add Guest Account" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="../public/images/icons/group.png" alt="Card Icon">
+                        <p>Add Guest Account</p>
                     </li>
                     <li data-menu="Fund Remittance" class="curson-pointer menuSelectionButton">
                         <div class="selected"></div>
@@ -120,84 +128,71 @@
 <!--
     CONTENT BODY
 -->
-    <!-- ### DONE ###
+    <!-- 
         HOME 
     -->
                 <div id="panel-home" class="body-content-panel visible">
                     <div class="panel-home-content">
+
                         <div class="header">
                             <p>Welcome to Dashboard</p>
                         </div>
+
                         <div class="charts-container-row1">
+
                             <div class="chart-item">
-                                <!-- Total Cash In Today / Total Amount -->
                                 <div class="chart-header">
                                     <p class="chart-title">Total cash-in today</p>
                                     <div class="chart-value">
                                         <p class="chart-number">???</p>
-                                        <!-- <div class="chart-status">
-                                            <p class="chart-status-number">150%</p>
-                                            <img class="chart-status-image" src="" alt="">
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div id="chart-total-cash-in" class="chart-mini">
                                     <canvas></canvas>
                                 </div>
                             </div>
+
                             <div class="chart-item">
-                                <!-- Total Orders In Merchants  -->
                                 <div class="chart-header">
                                     <p class="chart-title">Total orders in merchants</p>
                                     <div class="chart-value">
                                         <p class="chart-number">???</p>
-                                        <!-- <div class="chart-status">
-                                            <p class="chart-status-number">150%</p>
-                                            <img class="chart-status-image" src="" alt="">
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div id="chart-total-orders-merchants" class="chart-mini">
                                     <canvas></canvas>
                                 </div>
                             </div>
+
                             <div class="chart-item">
-                                <!-- Total Total Sales In Merchants -->
                                 <div class="chart-header">
                                     <p class="chart-title">Total Sales in merchants</p>
                                     <div class="chart-value">
                                         <p class="chart-number">???</p>
-                                        <!-- <div class="chart-status">
-                                            <p class="chart-status-number">150%</p>
-                                            <img class="chart-status-image" src="" alt="">
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div id="chart-total-sales-merchants" class="chart-mini">
                                     <canvas></canvas>
                                 </div>
                             </div>
+
                             <div class="chart-item">
-                                <!-- Total Transactions Today -->
                                 <div class="chart-header">
                                     <p class="chart-title">Total transactions today</p>
                                     <div class="chart-value">
                                         <p class="chart-number">???</p>
-                                        <!-- <div class="chart-status">
-                                            <p class="chart-status-number">150%</p>
-                                            <img class="chart-status-image" src="" alt="">
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div id="chart-total-transactions-today" class="chart-mini">
                                     <canvas></canvas>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="charts-container-row2">
+
                             <div class="chart-5 chart-item">
-                                <!-- Total Transactions Today -->
                                 <div class="chart-header">
                                     <p class="chart-title">Daily Transactions Line Graph</p>
                                     <p class="chart-description">This graph depicts the circulation of BCash within the accounting department for the past 7 days.</p>
@@ -218,7 +213,6 @@
                             </div>
 
                             <div class="chart-6 chart-item">
-                                <!-- Total Transactions Today -->
                                 <div class="chart-header">
                                     <p class="chart-title">Circulating Money</p>
                                     <p class="chart-description">This chart illustrates the distribution of cash in circulation.</p>
@@ -227,90 +221,44 @@
                                     <canvas></canvas>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="charts-container-row3">
+
                             <div class="chart-7 chart-item">
-                                <!-- Recent Transactions -->
                                 <div class="header">
                                     <p class="title">Recent Transactions</p>
-                                    <p class="date">Last Update: 12:98AM</p>
                                 </div>
                                 <ul id="chart-recent-transactions">
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    
+                                    <!-- Data -->
                                 </ul>
                             </div>
+
                             <div class="chart-8 chart-item">
                                 <div class="header">
                                     <p class="title">Recent Cash-In</p>
-                                    <p class="date">Last Update: 12:98AM</p>
                                 </div>
-                                <!-- Recent Cash In -->
                                 <ul id="chart-recent-cashin">
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                        <div>
-                                            <p class="amount">amount</p>
-                                            <p class="type">type</p>
-                                        </div>
-                                    </li>
-                                    
+                                    <!-- Data -->
                                 </ul>
                             </div>
+
                             <div class="chart-9 chart-item">
                                 <div class="header">
                                     <p class="title">Recent Activities</p>
-                                    <p class="date">Last Update: 12:98AM</p>
                                 </div>
-                                <!-- Recent Activities -->
                                 <ul id="chart-recent-activities">
-                                    
-                                    <li>
-                                        <img src="" alt="" >
-                                        <div>
-                                            <p class="name">name</p>
-                                            <p class="date">date</p>
-                                        </div>
-                                    </li>
-
+                                   <!-- Data -->
                                 </ul>
                             </div>
+
                         </div>
 
-                       <!--
-                    
-
-
-                        Total Cash In Today / Total Amount
-                        Total Orders In Merchants
-                        Total Total Sales In Merhcants
-                        Total Transactions Today
-
-                        Mpney in Circulation
-                            Hold By Users
-                            Hold By Merchants   
-
-                        graph of sales every day Cash ins               
-                       -->
                     </div>
                 </div>
 
-    <!-- ### DONE ###
+    <!-- 
         CASH IN FORM 
     -->
                 <div id="panel-cashinform" class="body-content-panel hidden">
@@ -324,18 +272,16 @@
 
                                 <div class="input-container">
                                     <label for="">Id:</label>
-                                    <input id="CashIn-Id" type="text" name="" autocomplete="off">
+                                    <input id="CashIn-Id" type="search" name="" autocomplete="off">
                                 </div>
 
                                 <div class="input-container">
                                     <label for="amount">Amount: </label>
                                     <input id="CashIn-Amount" type="text" name="amount" autocomplete="off">
                                 </div>
-    
-                                <button id="CashIn-Btn-SearchUser" class="search">Search User</button>
-    
+
                                 <fieldset class="details-container">
-                                    <legend>User Details</legend>
+                                    <legend>Details</legend>
                                     <div class="item">
                                         <p>Name : </p>
                                         <p id="CashIn-UserName"></p>
@@ -354,23 +300,9 @@
                             <div class="header">
                                 <p class="title">Recent Cash-In</p>
                             </div>
-                            <!-- Recent Cash In -->
+                            
                             <ul id="CashIn-Content">
-                            <!-- 
-                                <li>
-                                    <img src="" alt="" >
-                                    <div>
-                                        <p class="name">name</p>
-                                        <p class="date">date</p>
-                                    </div>
-                                    <div>
-                                        <p class="amount">amount</p>
-                                        <p class="type">type</p>
-                                    </div>
-                                </li> 
-                            -->
-                                
-
+                                <!-- Data -->
                             </ul>
                         </div>                        
 
@@ -378,10 +310,10 @@
                     </div>
                 </div>
 
-    <!--  ### DONE ###
-        My TRANSACTIONS 
+    <!--  
+        ACCOUNTING TRANSACTIONS 
     -->
-                <div id="panel-mytransactions" class="body-content-panel hidden">
+                <div id="panel-accountingtransactions" class="body-content-panel hidden">
                     <div id="My-Transactions-Query" class="panel-transactions-query panel">
                         <div class="form-container">
                             <div>
@@ -429,7 +361,10 @@
                                 <span>Clear</span>
                             </button>
                         </div>
-                        <div></div>
+                        <div>
+                            <p id='mytransaction-records-cashin'>Records : <a class="display-record">0</a></p>
+                            <p id='mytransaction-total-cashin'>Amount Total : <a class="display-record">₱ 0.00</a></p>
+                        </div>
                     </div>
                     <div class="panel-transactions-table">
                         <div class="table-header">
@@ -510,7 +445,7 @@
                     </div>
                 </div>
 
-    <!-- ### DONE ###
+    <!-- 
         ALL TRANSACTIONS 
     -->
                 <div id="panel-alltransactions" class="body-content-panel hidden">
@@ -646,7 +581,7 @@
                     </div>
                 </div>
 
-    <!-- ### DONE ###
+    <!-- 
         ACCOUNTS 
     -->
                 <div id="panel-accounts" class="body-content-panel hidden">
@@ -682,53 +617,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div>
-                                <label>Department Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-department-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WAWA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">WA</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">SDS</a>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div>
-                                <label>Course Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-course-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSIT</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSN</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSCS</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSEE</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">BSA</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Group Filter</label>
-                                <div class="dropdown">
-                                    <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
-                                        <span class="accounts-group-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Teacher</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Student</a>
-                                        <a class="dropdownButtonSubItem" href="javascript:void(0)">Highschool</a>
-                                    </div>
-                                </div>
-                            </div> -->
+                            
                         </div>
                     </div>
                     <div class="panel-accounts-buttons" data-transactiontype="mytransactions">
@@ -757,10 +646,7 @@
                                         <th><div class="col7">Email</div></th>
                                         <th><div class="col8">School Personal Id</div></th>
                                         <th><div class="col9">Campus</div></th>
-                                        <th><div class="col10">Guardian Address</div></th>
-                                        <th><div class="col11">Guardian Email</div></th>
-                                        <th><div class="col12">Guardian Name</div></th>
-                                        <th><div class="col13">Date Registered</div></th>
+                                        <th><div class="col10">Date Registered</div></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -775,7 +661,57 @@
                     </div>
                 </div>
 
-    <!-- ### DONE ###
+    <!-- 
+        ADD GUEST ACCOUNT 
+    -->
+                <div id="panel-addguestaccount" class="body-content-panel hidden">
+                    <div class="panel-add-account">
+                        <div>
+                            <p class="AddAccount-title">Add Guest Account Form</p>
+                        </div>
+                        <div>
+                            <p>Firstname : </p>
+                            <input id="AddAccount-Firstname" type="text">
+                        </div>
+                        <div>
+                            <p>Lastname : </p>
+                            <input id="AddAccount-Lastname" type="text">
+                        </div>
+                        <div>
+                            <p>Email : </p>
+                            <input id="AddAccount-Email" type="text">
+                        </div>
+                        <div>
+                            <label>Actor Category :</label>
+                            <div class="dropdown">
+                                <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
+                                    <span class="addaccount-accountcategory-dropdown dropdown-text query inputdropdown">Guest</span>
+                                    <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                </button>
+                                <div class="dropdown-content" id="ActorCategory_Dropdown">
+                                    <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">Guest</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="AddAccount-CardAddressContainer" style="display: block;">
+                            <p>Card Address : </p>
+                            <input id="AddAccount-CardAddress" type="text">
+                        </div>
+                        <div id="AddAccount-SchoolPersonalIdContainer" style="display: block;">
+                            <p>School Personal Id : </p>
+                            <input id="AddAccount-SchoolPersonalId" type="text">
+                        </div>
+                        <hr>
+                        <div class="btn-container">
+                            <button id="AddAccount-SubmitBtn" class="Btn">Add Account</button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+    <!-- 
         FUND REMITTANCE 
     -->
                 <div id="panel-fundremittance" class="body-content-panel hidden">
@@ -783,10 +719,8 @@
                         <div class="left-panel">
                             <div class="top-panel">
                                 <div class="row">
-                                    <button>2</button>
-                                    <button>2</button>
                                 </div>
-                                <div id="FundRemittance-Buttons">
+                                <div class="row" id="FundRemittance-Buttons">
                                     
                                 </div>
                             </div>
@@ -824,43 +758,54 @@
                     </div>
                 </div>
 
-
     <!--
         END 
     -->
             </div>
         </div>
     </div>
+
+
+
 <!--
     ALERTS ###
 -->
-<div id="Alert-Box-Container" class="Alert-container">
-    <table class="Alert-Box-Table">
-        
-    </table>
-</div>
-<!--
-MODALS ###
--->
-<div id="Modal-Container" class="modal-container">
-    <div class="modal-content">
-        <div class="header">
-            <div class="title">
-                <p id="Modal-Header" class="text">N/A</p>
-            </div>
-            <div class="close" >
-                <p id="Modal-Close-Button" class="close-btn curson-pointer">X</p>
-            </div>
-        </div>
-        <div id="Modal-Body" class="body">
+    <div id="Alert-Box-Container" class="Alert-container">
+        <table class="Alert-Box-Table">
             
+        </table>
+    </div>
+
+
+
+<!--
+    MODALS ###
+-->
+    <div id="Modal-Container" class="modal-container">
+        <div class="modal-content">
+            <div class="header">
+                <div class="title">
+                    <p id="Modal-Header" class="text">N/A</p>
+                </div>
+                <div class="close" >
+                    <p id="Modal-Close-Button" class="close-btn curson-pointer">X</p>
+                </div>
+            </div>
+            <div id="Modal-Body" class="body">
+                
+            </div>
         </div>
     </div>
-</div>
+
+
+
 <!--
     JAVASCRIPTS  ###
 -->
     <script src="../public/javascript/main-accounting.js" type="module"></script>
 </body>
 </html>
+
+
+
 

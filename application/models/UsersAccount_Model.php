@@ -10,11 +10,11 @@ class UsersAccount_Model extends CI_Model {
         $data = [
             'UsersAccount_Address' => $params['Account_Address'],
             'ActorCategory_Id' => $params['ActorCategory_Id'],
-            'Email ' => $params['Email'],
-            'Firstname ' => $params['Firstname'],
-            'Lastname ' => $params['Lastname'],
-            'Campus_Id ' => $params['Campus_Id'],
-            'Password ' => $params['Password'],
+            'Email' => $params['Email'],
+            'Firstname' => $params['Firstname'],
+            'Lastname' => $params['Lastname'],
+            'Campus_Id' => $params['Campus_Id'],
+            'Password' => $params['Password'],
         ];
         $this->db->insert('tbl_usersaccount', $data);
         $result = $this->db->insert_id();

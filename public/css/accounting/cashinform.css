@@ -190,7 +190,7 @@
 }
 
 .panel-cashinform-content .right-container ul li{
-    grid-template-columns: 50px auto 50px;
+    grid-template-columns: 50px 1fr 75px;
 }
 
 .panel-cashinform-content .right-container ul li img {
@@ -205,7 +205,7 @@
 }
 
 .panel-cashinform-content .right-container ul li .date {
-    
+    font-weight: lighter;
 }
 
 .panel-cashinform-content .right-container ul li .amount {

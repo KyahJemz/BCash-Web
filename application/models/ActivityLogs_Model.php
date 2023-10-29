@@ -7,43 +7,51 @@ class ActivityLogs_Model extends CI_Model {
     }
 
     public function read_by_id($params){
-        $result = $this->db
+        return $this->db
             ->select('*')
             ->from('tbl_activitylogs')
             ->where('ActivityLogs_Id ', $params['Id'])
             ->get()
             ->row();
-        return ($result) ? $result : FALSE;
     }
 
     public function read_by_address($params){
-        $page = isset($params['PageNumber']) ? (int)$params['PageNumber'] : 1; 
-        $results_per_page = isset($params['ResultsPerPage']) ? (int)$params['ResultsPerPage'] : 50;
-        $offset = ($page - 1) * $results_per_page;
+        return $this->db
+            ->select('
+                logs.*,
+            ')
+            ->from('tbl_activitylogs as logs')
+            ->group_start()
+                ->where('logs.Target_Account_Address', $params['Account_Address'])
+                ->or_where('logs.Account_Address', $params['Account_Address'])
+            ->group_end()
+            ->order_by('logs.Timestamp', 'DESC')
+            ->get()
+            ->result();
+    }
 
-        $result = $this->db
-            ->select('*')
-            ->from('tbl_activitylogs')
-            ->where('Account_Address', $params['Account_Address'])
-            ->limit($results_per_page, $offset)
-            ->get();
-
-        return ($result) ? $result : FALSE;
+    public function read_by_address_bulk($params){
+        return $this->db
+            ->select('
+                logs.*,
+            ')
+            ->from('tbl_activitylogs as logs')
+            ->group_start()
+                ->where_in('logs.Target_Account_Address', $params['Account_Address'])
+                ->or_where_in('logs.Account_Address', $params['Account_Address'])
+            ->group_end()
+            ->order_by('logs.Timestamp', 'DESC')
+            ->get()
+            ->result();
     }
 
     public function read_by_target_address($params){
-        $page = isset($params['PageNumber']) ? (int)$params['PageNumber'] : 1; 
-        $results_per_page = isset($params['ResultsPerPage']) ? (int)$params['ResultsPerPage'] : 50;
-        $offset = ($page - 1) * $results_per_page;
-
-        $result = $this->db
+        return $this->db
             ->select('*')
             ->from('tbl_activitylogs')
             ->where('Target_Account_Address', $params['Target_Account_Address'])
-            ->limit($results_per_page, $offset)
-            ->get();
-
-        return ($result) ? $result : FALSE;
+            ->get()
+            ->result();
     }
 
     // public function read_by_merchant($params){
@@ -65,17 +73,10 @@ class ActivityLogs_Model extends CI_Model {
     // }
 
     public function read_all($params) {
-        $page = isset($params['PageNumber']) ? (int)$params['PageNumber'] : 1; 
-        $results_per_page = isset($params['ResultsPerPage']) ? (int)$params['ResultsPerPage'] : 50;
-        $offset = ($page - 1) * $results_per_page;
-    
-        $result = $this->db
+        return $this->db
             ->select('*')
             ->from('tbl_activitylogs')
-            ->limit($results_per_page, $offset)
             ->get();
-    
-        return ($result) ? $result : FALSE;
     }
 
     public function create($params){
@@ -86,7 +87,6 @@ class ActivityLogs_Model extends CI_Model {
             'Task' => $params['Task'],
         ];
         $this->db->insert('tbl_activitylogs', $data);
-        $result = $this->db->insert_id();
-        return ($result) ? $result : FALSE;
+        return $this->db->insert_id();
     }
 }

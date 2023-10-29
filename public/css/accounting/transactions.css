@@ -144,6 +144,11 @@
         column-gap: 30px;
     }
 
+    .panel-transactions-buttons .display-record {
+        font-weight: bold;
+        color: var(--TextColor-Red);
+    }
+
     /* ################ */
     /* FOOTER CONTAINER */
     /* ################ */
@@ -264,8 +269,8 @@
         max-width: 50px;
     }
     .panel-transactions-table table .col3 {
-        width: 150px;
-        max-width: 150px;
+        width: 200px;
+        max-width: 200px;
         text-align: center;
     }
     .panel-transactions-table table .col3 a{
@@ -325,6 +330,7 @@
 
 
 
+ 
     .Transaction-Details {
         padding: 20px;
         display: flex;
@@ -378,6 +384,21 @@
     .Transaction-Details .ReceiverName {
         color: var(--TextColor-Red);
      }
+
+    .Transaction-Details .details-items {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .Transaction-Details .details-items .item {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        text-align: center;
+        align-items: center;
+    }
+    .Transaction-Details .details-items .item p{
+        font-weight: normal;
+    }
 
     
 

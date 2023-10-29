@@ -7,6 +7,8 @@ import Accounts from './modules/accounts.js';
 import AjaxRequest from './ajax.js';
 import { SetAccountingChart } from './chart.js';
 import LoginHistory from './modules/loginhistory.js'
+import ActivityHistory from './modules/activityhistory.js';
+import Cards from './modules/cards.js';
 
 import Helper from './helper.js';
 
@@ -21,6 +23,16 @@ const modals = new Modals();
 const menu = new Menu();
 const dropdown = new Dropdown();
 const loginHistory = new LoginHistory();
+const myActivityHistory = new ActivityHistory('get my activity logs');
+const myAllAccountingsActivityHistory = new ActivityHistory('get all accountings activity logs');
+
+const cards = new Cards(
+  document.getElementById("Cards-Table-Body"),
+  document.getElementById("Cards-Query"),
+  Ajax,
+  helper,
+  modals
+  );
 
 const myTransactions = new Transactions(
   document.getElementById("My-Transactions-Table"),
@@ -199,6 +211,8 @@ async function onMenuSettingsButtonClick() {
         makeModal("Modal", "Personal Settings", modals.getModalView("Settings Panel",responseData.Parameters));
         helper.addElementClickListenerById('btn-submit-account-changes', updateAccount);
         helper.addElementClickListenerById('btn-login-history',()=>{loginHistory.open()});
+        helper.addElementClickListenerById('btn-activity-history',()=>{myActivityHistory.open()});
+        helper.addElementClickListenerById('btn-all-accountings-activity-history',()=>{myAllAccountingsActivityHistory.open()});
       }
   })
 }
@@ -365,17 +379,6 @@ helper.addElementClickListener('.accounts-clear-button', onUserAccountsClearClic
 ////////////////////////////
 // API
 ////////////////////////////
-function displayparameters(){
-  console.log('------------------------------------------');
-  console.log('--AccountAddress--', AccountAddress);
-  console.log('--AuthToken--', AuthToken);
-  console.log('--ClientVersion--', ClientVersion);
-  console.log('--IpAddress--', IpAddress);
-  console.log('--Device--', Device);
-  console.log('--Location--', Location);
-  console.log('--BaseURL--', BaseURL);
-  console.log('------------------------------------------');
-}
 
 helper.addElementClickListenerById('Logout-Button', Logout); 
 async function Logout (){
@@ -384,23 +387,21 @@ async function Logout (){
     });
 }
 
-helper.addElementClickListenerById('CashIn-Btn-SearchUser', CashIn_SearchUser);
+document.getElementById('CashIn-Id').addEventListener('change', CashIn_SearchUser)
 async function CashIn_SearchUser () {
   const intent = "get user account by spid";
   const data = { 
     Id : document.getElementById('CashIn-Id').value,
     Amount : document.getElementById('CashIn-Amount').value,
   }; 
-
+  document.getElementById('CashIn-UserName').innerHTML = '';
+  document.getElementById('CashIn-UserBalance').innerHTML = '';
   await Ajax.sendRequest(data, intent)
     .then(responseData => {
       if (responseData.Success) {
         document.getElementById('CashIn-UserName').innerHTML = responseData.Parameters.Account.Firstname + ' ' + responseData.Parameters.Account.Lastname;
         document.getElementById('CashIn-UserBalance').innerHTML = responseData.Parameters.Details.Balance;
-      } else {
-        document.getElementById('CashIn-UserName').innerHTML = '';
-        document.getElementById('CashIn-UserBalance').innerHTML = '';
-      }
+      } 
       CashIn_RecentCashIn ();
   })
     .catch(error => {
@@ -423,9 +424,6 @@ async function CashIn_Transfer () {
         document.getElementById('CashIn-Amount').value = '';
         document.getElementById('CashIn-UserName').innerHTML = '';
         document.getElementById('CashIn-UserBalance').innerHTML = '';
-      } else {
-        document.getElementById('CashIn-UserName').innerHTML = '';
-        document.getElementById('CashIn-UserBalance').innerHTML = '';
       }
       CashIn_RecentCashIn ();
   })
@@ -446,7 +444,7 @@ async function CashIn_RecentCashIn () {
         responseData.Parameters.forEach(row => {
           layout = layout + `
             <li>
-              <img src="" alt="" >
+              <img src="../public/images/profiles/default.png" alt="" >
               <div>
                 <p class="name">${row['Firstname']} ${row['Lastname']}</p>
                 <p class="date">${row['Timestamp']}</p>
@@ -570,17 +568,36 @@ export function fundRemittance (parameters){
 }
 
 
+////////////////////////////
+// ADD ACCOUNT
+////////////////////////////
 
+document.getElementById('AddAccount-SubmitBtn').addEventListener('click', () => {
+  const data = {
+    Firstname : document.getElementById('AddAccount-Firstname').value,
+    Lastname : document.getElementById('AddAccount-Lastname').value,
+    Email : document.getElementById('AddAccount-Email').value,
+    AccountCategory : document.querySelector('#panel-addguestaccount .addaccount-accountcategory-dropdown').textContent,
 
-// test();
-// async function test () {
-//   await Ajax.sendRequest([], "get chart data")
-//     .then(responseData => {})
-// }
+    MerchantCategory : '',
+    Username : '',
+    Password : '',
+    CardAddress : document.getElementById('AddAccount-CardAddress').value,
+    SchoolPersonalId : document.getElementById('AddAccount-SchoolPersonalId').value,
+    MerchantCategoryAdd : '',
+  };
 
-
-
-
+  Ajax.sendRequest(data, "add account")
+    .then(responseData => {
+      if (responseData.Success) {
+        document.getElementById('AddAccount-Firstname').value = '';
+        document.getElementById('AddAccount-Lastname').value = '';
+        document.getElementById('AddAccount-Email').value = '';
+        document.getElementById('AddAccount-CardAddress').value = '';
+        document.getElementById('AddAccount-SchoolPersonalId').value = '';
+      }
+  })
+})
 
 
 

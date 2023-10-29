@@ -200,7 +200,7 @@ export default class Item {
                 container.querySelector(layoutTag).innerHTML = container.querySelector(layoutTag).innerHTML + `
                 <div class="item-container" data-item-id="`+ item.itemId +`" data-name="`+ item.name +`" data-cost="`+ item.cost +`"  data-image="`+ item.image +`">
                     <div class="item-image">
-                        <img src="`+ item.image +`">
+                        <img src="../public/images/items/`+ item.image +`">
                     </div>
                     <div class="item-details-container">
                         <div class="info-container">
@@ -250,7 +250,7 @@ export default class Item {
                 container.querySelector(layoutTag).innerHTML = container.querySelector(layoutTag).innerHTML + `
                     <div class="item-container" data-item-id="`+ item.itemId +`" data-name="`+ item.name +`" data-cost="`+ item.cost +`"  data-image="`+ item.image +`" data-category="`+ item.category +`">
                         <div class="item-image">
-                            <img src="`+ item.image +`" alt="item-image">
+                            <img src="../public/images/items/`+ item.image +`" alt="item-image">
                         </div>
                         <div class="item-details-container">
                             <div class="info-container">
