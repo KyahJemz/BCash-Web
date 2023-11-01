@@ -46,6 +46,16 @@ class WebAccounts_Model extends CI_Model {
             ->result();    
     }
 
+    public function read_administrartor_by_campusid($params) {
+        return $this->db
+            ->select('WebAccounts_Address')
+            ->from('tbl_webaccounts')
+            ->where('Campus_Id', $params['Campus_Id'])
+            ->like('WebAccounts_Address', 'ADM', 'after')
+            ->get()
+            ->result();    
+    }
+
     public function read_by_address($params){
         $result = $this->db
             ->select('*')

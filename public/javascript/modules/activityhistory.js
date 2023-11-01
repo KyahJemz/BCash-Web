@@ -19,7 +19,7 @@ export default class ActivityHistory {
             ${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
             : element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
             : element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
-            : 'ss'
+            : ''
             }
             <div class="details">
               <p class="name">

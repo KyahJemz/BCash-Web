@@ -77,16 +77,31 @@ class ActivityLogs_Actions {
 */  
        public function View_All_ActivityLogs($Account) {
 
-              if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6') {
-                     $LoginHistory = $this->CI->LoginHistory->read_by_address($Account->UsersAccount_Address);
-              } else if ($Account->ActorCategory_Id === '7') {
-                     $LoginHistory = $this->CI->LoginHistory->read_by_address($Account->GuardianAccount_Address);
-              } else {
-                     $LoginHistory = $this->CI->LoginHistory->read_by_address($Account->WebAccounts_Address);
-              }
-            return ['Success' => True,'Target' => null,'Parameters' => $LoginHistory,'Response' => ''];
+              $ActivityHistory = $this->CI->ActivityLogs_Model->read_all();
+           
+              return ['Success' => True,'Target' => null,'Parameters' => $ActivityHistory,'Response' => ''];
        }
 
+
+
+       public function View_All_Administrators_ActivityLogs($Account){
+
+              $Administrators = $this->CI->WebAccounts_Model->read_administrartor_by_campusid(array(
+                     'Campus_Id' => $Account->Campus_Id,
+              ));
+
+              $administratorAddresses = array(); 
+
+              foreach ($Administrators as $Accounts) {
+                     $administratorAddresses[] = $Accounts->WebAccounts_Address;
+              }
+
+              $ActivityHistory = $this->CI->ActivityLogs_Model->read_by_address_bulk(array(
+                     'Account_Address' => $administratorAddresses,
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $ActivityHistory,'Response' => ''];
+       }
 
 
        public function View_All_Accountings_ActivityLogs($Account){

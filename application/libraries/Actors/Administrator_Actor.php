@@ -82,7 +82,11 @@ class Administrator_Actor {
                 break;
 
             case 'get my activity logs':
-                $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
+                $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account);
+                break;
+
+            case 'get all administrartor activity logs':
+                $response = $this->CI->ActivityLogs_Actions->View_All_Administrators_ActivityLogs($Account);
                 break;
 
 

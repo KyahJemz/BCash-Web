@@ -23,14 +23,14 @@ export default class Modals {
             this.box.style.display = "flex";
             this.header.innerHTML = this.title;
             this.body.innerHTML = `
-            <div class="message-container">
-                <div class="message">${this.message}</div>
-                <div class="button"><button id="modal-btn-ok">OK</button></div>
-            </div>
+                <div class="message-container">
+                    <div class="message">${this.message}</div>
+                    <div class="button"><button id="modal-btn-ok">OK</button></div>
+                </div>
             `;
 
             document.getElementById("modal-box-btn-ok").addEventListener('click', () => {
-                this.closeDialogBox();
+                this.closeModal();
             });
         }
     }
@@ -41,7 +41,7 @@ export default class Modals {
         }
     }
 
-    activateModal(type, title, content) {
+    activateModal(type, title, content, targetFunction) {
         this.box = document.getElementById("Modal-Container");
         this.header = document.getElementById("Modal-Header");
         this.body = document.getElementById("Modal-Body");
@@ -58,8 +58,34 @@ export default class Modals {
             this.openAlertModal();
         } else if (this.type === "Modal") {
             this.openModal();
+        } else if (this.type === "ConfirmModal") {
+            this.openConfirmationBox(targetFunction);
         } else {
             throw new Error("Invalid modal type.");
+        }
+    }
+
+    openConfirmationBox(targetFunction) {
+        if (this.box && this.header && this.body) {
+            this.box.style.display = "flex";
+            this.header.innerHTML = this.title;
+            this.body.innerHTML = `
+                <div class="message-container">
+                    <div class="message">${this.content}</div>
+                    <div class="alert-button">
+                        <button id="modal-btn-no">No</button>
+                        <button id="modal-btn-yes">Yes</button>
+                     </div>
+                </div>
+            `;
+
+            document.getElementById("modal-btn-yes").addEventListener('click', ()=>{
+                targetFunction();
+                document.getElementById("Modal-Container").style.display = "none";
+            });
+            document.getElementById("modal-btn-no").addEventListener('click', ()=>{
+                document.getElementById("Modal-Container").style.display = "none";
+            });
         }
     }
 

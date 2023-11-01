@@ -691,3 +691,7 @@ Ajax.sendRequest([], "get chart data")
     .then(responseData => {
       SetMerchantAdminChart(responseData.Parameters);
     })
+
+
+
+

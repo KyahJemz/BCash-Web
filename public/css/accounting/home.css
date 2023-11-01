@@ -229,7 +229,12 @@
     text-wrap: nowrap;
 }
 
-
+.panel-home-content .charts-container-row3 .chart-item .mark{
+    aspect-ratio: 1/1;
+    height: 30px;
+    background-position: center;
+    background-size: cover;
+}
 
 
 @media (min-width: 0px) and (max-width: 1107px){

@@ -1011,9 +1011,6 @@
 
                 </div>
 
-
-
-
     <!--
         NOTIFICATIONS CONTROL MANAGEMENT 
     -->
@@ -1039,8 +1036,9 @@
                         </div>
 
                         <div id="Notifications-Container" class="notification-list">
-                            <div class="notification-text">Notifications</div>
-                            <div class="notification-item">
+                            <!-- <div class="notification-text">Notifications</div> -->
+                            
+                            <!-- <div class="notification-item">
                                 <div class="left-content">
                                     <p class="notification-subject">subject</p>
                                     <p class="notification-date">date</p>
@@ -1049,47 +1047,8 @@
                                 <div class="right-content">
                                     <button class="delete"><img src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
                                 </div>
-                            </div>
-                            <div class="notification-item">
-                                <div class="left-content">
-                                    <p class="notification-subject">subject</p>
-                                    <p class="notification-date">date</p>
-                                    <p class="notification-content">content</p>
-                                </div>
-                                <div class="right-content">
-                                    <button class="delete"><img src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
-                                </div>
-                            </div>
-                            <div class="notification-item">
-                                <div class="left-content">
-                                    <p class="notification-subject">subject</p>
-                                    <p class="notification-date">date</p>
-                                    <p class="notification-content">content</p>
-                                </div>
-                                <div class="right-content">
-                                    <button class="delete"><img class="icon" src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
-                                </div>
-                            </div>
-                            <div class="notification-item">
-                                <div class="left-content">
-                                    <p class="notification-subject">subject</p>
-                                    <p class="notification-date">date</p>
-                                    <p class="notification-content">content</p>
-                                </div>
-                                <div class="right-content">
-                                    <button class="delete"><img class="icon" src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
-                                </div>
-                            </div>
-                            <div class="notification-item">
-                                <div class="left-content">
-                                    <p class="notification-subject">subject</p>
-                                    <p class="notification-date">date</p>
-                                    <p class="notification-content">content</p>
-                                </div>
-                                <div class="right-content">
-                                    <button class="delete"><img class="icon" src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
-                                </div>
-                            </div>
+                            </div> -->
+
                         </div>
 
                     

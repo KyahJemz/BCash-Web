@@ -23,7 +23,7 @@ const menu = new Menu();
 const dropdown = new Dropdown();
 const loginHistory = new LoginHistory();
 const MyActivityHistory = new ActivityHistory('get my activity logs');
-const AdministratorsActivityHistory = new ActivityHistory('get all administrators activity logs');
+const AdministratorsActivityHistory = new ActivityHistory('get all administrartor activity logs');
 const AllActivityHistory = new ActivityHistory('get all activity logs');
 
 const cards = new Cards(
@@ -678,13 +678,19 @@ export function SetNotifications() {
           </div>
         `;
       });
-      helper.addElementClickListener('.notification-item .notification-delete',DeleteNotification);
+      helper.addElementClickListener('.notification-item .notification-delete',(event)=>{
+          const title = event.currentTarget.parentNode.parentNode.querySelector('.notification-subject').textContent;
+          const Notification_ID = event.currentTarget.dataset.notification;
+          modals.activateModal('ConfirmModal', 'Delete Confirmation', `Do you want to remove this notification?<br><br>Title : ${title}`, ()=>{DeleteNotification(Notification_ID)});
+        }
+      );
     }
   })
 }
-export function DeleteNotification (event){
+
+export function DeleteNotification (Notification_ID){
   const data = {
-    Notification_ID : event.currentTarget.dataset.notification,
+    Notification_ID : Notification_ID,
   };
   Ajax.sendRequest(data, "delete notification")
   .then(responseData => {
@@ -719,3 +725,7 @@ Ajax.sendRequest([], "get chart data")
     .then(responseData => {
       SetAdministratorChart(responseData.Parameters);
     })
+
+
+    
+    

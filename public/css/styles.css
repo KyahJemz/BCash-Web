@@ -340,6 +340,32 @@ button img{
     background-color: var(--Button-Background-Active-Gold);
     color: var(--TextColor-White);
 }
+.modal-container .modal-content .body .message-container .alert-button{
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    width: 100%;
+}
+
+.modal-container .modal-content .body .message-container .alert-button > button {
+    margin: 2px 2px;
+    padding: 3px 30px;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+    border: 1px solid var(--Button-Background-Gold);
+}
+.modal-container .modal-content .body .message-container .alert-button > button:last-child {
+    background-color: var(--Button-Background-Gold);
+}
+.modal-container .modal-content .body .message-container .alert-button > button:hover {
+    box-shadow: 0 0 2px 2px gainsboro;
+}
+.modal-container .modal-content .body .message-container .alert-button > button:active {
+    background-color: var(--Button-Background-Active-Gold);
+    border: 1px solid var(--Button-Background-Active-Gold);
+    color: white;
+}
 
 
 /* 

@@ -89,7 +89,11 @@ export function SetAccountingChart(parameters){
 	parameters.RecentActivities.forEach(element => {
 		chart7.innerHTML = chart7.innerHTML +`
 			<li>
-				<img src="../public/images/icons/profile.png" alt="" >
+				${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
+				: element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
+				: element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
+				: ''
+				}
 				<div>
 					<p class="name">name</p>
 					<p class="date">date</p>
@@ -106,7 +110,11 @@ export function SetAccountingChart(parameters){
 	parameters.RecentCashIn.forEach(element => {
 		chart8.innerHTML = chart8.innerHTML + `
 			<li>
-				<img src="../public/images/icons/money.png" alt="" >
+				${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
+				: element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
+				: element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
+				: ''
+				}
 				<div>
 					<p class="name">${element.Firstname} ${element.Lastname}</p>
 					<p class="date">${element.Timestamp}</p>
@@ -123,7 +131,11 @@ export function SetAccountingChart(parameters){
 	parameters.RecentActivities.forEach(element => {
 		chart9.innerHTML = chart9.innerHTML + `
 			<li>
-				<img src="../public/images/icons/bolt.png" alt="" >
+				${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
+				: element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
+				: element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
+				: ''
+				}
 				<div>
 					<p class="name">${element.Account_Address}</p>
 					<p class="date">${element.Task}</p>
@@ -293,7 +305,11 @@ export function SetAdministratorChart(parameters){
 	parameters.RecentAdminActivities.forEach(element => {
 		chart6.innerHTML = chart6.innerHTML +`
 			<li>
-				<img src="../public/images/icons/bolt.png" alt="" >
+				${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
+				: element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
+				: element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
+				: ''
+				}
 				<div>
 					<p class="name">${element.Account_Address}</p>
 					<p class="date">${element.Task}</p>
@@ -305,7 +321,11 @@ export function SetAdministratorChart(parameters){
 	parameters.RecentAdminActivities.forEach(element => {
 		chart7.innerHTML = chart7.innerHTML + `
 			<li>
-				<img src="../public/images/icons/bolt.png" alt="" >
+				${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
+				: element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
+				: element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
+				: ''
+				}
 				<div>
 					<p class="name">${element.Account_Address}</p>
 					<p class="date">${element.Task}</p>
@@ -317,7 +337,11 @@ export function SetAdministratorChart(parameters){
 	parameters.RecentUsersActivities.forEach(element => {
 		chart8.innerHTML = chart8.innerHTML + `
 			<li>
-				<img src="../public/images/icons/bolt.png" alt="" >
+				${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
+				: element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
+				: element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
+				: ''
+				}
 				<div>
 					<p class="name">${element.Account_Address}</p>
 					<p class="date">${element.Task}</p>
@@ -491,7 +515,11 @@ export function SetMerchantAdminChart(parameters){
 	parameters.RecentMerchantActivities.forEach(element => {
 		chart5.innerHTML = chart5.innerHTML + `
 			<li>
-				<img src="../public/images/icons/bolt.png" alt="" >
+				${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
+				: element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
+				: element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
+				: ''
+				}
 				<div>
 					<p class="name">${element.Firstname} ${element.Lastname}</p>
 					<p class="date">${element.Task}</p>

@@ -50,6 +50,7 @@ class ActivityLogs_Model extends CI_Model {
             ->select('*')
             ->from('tbl_activitylogs')
             ->where('Target_Account_Address', $params['Target_Account_Address'])
+            ->order_by('Timestamp', 'DESC')
             ->get()
             ->result();
     }
@@ -72,11 +73,13 @@ class ActivityLogs_Model extends CI_Model {
     //     return ($result) ? $result : FALSE;
     // }
 
-    public function read_all($params) {
+    public function read_all() {
         return $this->db
             ->select('*')
             ->from('tbl_activitylogs')
-            ->get();
+            ->order_by('Timestamp', 'DESC')
+            ->get()
+            ->result();
     }
 
     public function create($params){
