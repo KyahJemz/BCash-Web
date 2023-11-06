@@ -83,8 +83,10 @@ class LoginHistory_Actions {
                             'Task' => 'Deleted ['.$IpAddress.'|'.$Device.'|'.$Location.'] from login history.',
                      ));
               }
+
+              $parameters = $this->View_My_LoginHistory($Account);
               
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Removed '.$IpAddress.' | '.$Device.' | '.$Location];
+              return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => 'Removed'];
        }
 
 
@@ -122,6 +124,9 @@ class LoginHistory_Actions {
                             'Task' => 'Cleared login history.',
                      ));
               }
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => ''];
+
+              $parameters = $this->View_My_LoginHistory($Account);
+              
+              return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => 'Removed All'];
        }
 }

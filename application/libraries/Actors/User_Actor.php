@@ -67,26 +67,32 @@ class User_Actor {
                 $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
                 break;
 
-
-
-
-            case 'update my settings':
-                $response = $this->CI->Account_Actions->Update_My_Details($Account,$requestPostBody);
-                break;
-
-            
-
-            
-
-            
-
             case 'delete one login history':
                 $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);
                 break;
 
             case 'delete all login history':
-                $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
                 break;
+
+            case 'get my whitelist':
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
+                break;
+
+            case 'remove one from whitelist':
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
+                break;
+    
+            case 'add one to whitelist':
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
+                break;
+
+
+            
+
+            
+
+            
 
 
 
