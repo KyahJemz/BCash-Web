@@ -59,8 +59,15 @@ class User_Actor {
                 $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 100);
                 break;
 
+            case 'get my activity logs':
+                $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
+                break;
                 
-                
+            case 'get my login history':
+                $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
+                break;
+
+
 
 
             case 'update my settings':
@@ -69,13 +76,9 @@ class User_Actor {
 
             
 
-            case 'get my activity logs':
-                $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
-                break;
+            
 
-            case 'get my login history':
-                $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
-                break;
+            
 
             case 'delete one login history':
                 $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);

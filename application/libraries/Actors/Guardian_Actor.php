@@ -14,6 +14,7 @@ class Guardian_Actor {
         $this->CI->load->library('Actions/Notifications_Actions', NULL, 'Notifications_Actions');
         $this->CI->load->library('Actions/LoginHistory_Actions', NULL, 'LoginHistory_Actions');
         $this->CI->load->library('Actions/ActivityLogs_Actions', NULL, 'ActivityLogs_Actions');
+        $this->CI->load->library('Actions/Transaction_Actions', NULL, 'Transaction_Actions');
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
@@ -30,28 +31,32 @@ class Guardian_Actor {
                 $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
                 break;
 
-            case 'update my settings':
-                $response = $this->CI->Account_Actions->Update_My_Details($Account,$requestPostBody);
+            case 'get other account':
+                $response = $this->CI->Account_Actions->View_User_Account_By_SPID($Account, $requestPostBody);
+                break;
+
+            case 'initiate transfer':
+                $response = $this->CI->Transaction_Actions->Transfer_Cash($Account, $AccountData, $requestPostBody);
+                break;
+
+            case 'get receipt':
+                $response = $this->CI->Transaction_Actions->View_My_Receipt($Account, $AccountData, $requestPostBody);
                 break;
 
             case 'update my pin':
                 $response = $this->CI->Account_Actions->Update_My_PinCode($Account, $requestPostBody);
                 break;
 
+            case 'get recent transactions':
+                $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 5);
+                break;
+
+            case 'get all transactions':
+                $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 100);
+                break;
+
             case 'get my activity logs':
                 $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
-                break;
-
-            case 'get my login history':
-                $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
-                break;
-
-            case 'delete one login history':
-                $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);
-                break;
-
-            case 'delete all login history':
-                $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
                 break;
 
 
