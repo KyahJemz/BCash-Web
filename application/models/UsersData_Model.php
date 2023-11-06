@@ -10,11 +10,11 @@ class UsersData_Model extends CI_Model {
         $data = [
             'UsersAccount_Address' => $params['Account_Address'],
             'SchoolPersonalId'=> $params['SchoolPersonalId'],
-            'CanDoTransfers'=> $params['CanDoTransfers'],
-            'CanDoTransactions'=> $params['CanDoTransactions'],
-            'CanUseCard'=> $params['CanUseCard'],
-            'CanModifySettings'=> $params['CanModifySettings'],
-            'IsTransactionAutoConfirm'=> $params['IsTransactionAutoConfirm'],
+            'CanDoTransfers'=> (INT) $params['CanDoTransfers'],
+            'CanDoTransactions'=> (INT) $params['CanDoTransactions'],
+            'CanUseCard'=> (INT) $params['CanUseCard'],
+            'CanModifySettings'=> (INT) $params['CanModifySettings'],
+            'IsTransactionAutoConfirm'=> (INT) $params['IsTransactionAutoConfirm'],
         ];
         $this->db->insert('tbl_usersdata', $data);
         $result = $this->db->insert_id();
@@ -24,12 +24,12 @@ class UsersData_Model extends CI_Model {
     public function update_by_admin($params) {
         $data = [
             'Campus_Id' => $params['Campus_Id'],
-            'SchoolPersonalId ' => $params['SchoolPersonalId'],
-            'CanDoTransfers ' => $params['CanDoTransfers'],
-            'CanDoTransactions ' => $params['CanDoTransactions'],
-            'CanUseCard ' => $params['CanUseCard'],
-            'CanModifySettings ' => $params['CanModifySettings'],
-            'IsPurchaseAutoConfirm' => $params['IsPurchaseAutoConfirm'],
+            'SchoolPersonalId' => $params['SchoolPersonalId'],
+            'CanDoTransfers' => (int)$params['CanDoTransfers'],
+            'CanDoTransactions' => (int)$params['CanDoTransactions'],
+            'CanUseCard' => (int)$params['CanUseCard'],
+            'CanModifySettings' =>(int) $params['CanModifySettings'],
+            'IsTransactionAutoConfirm' =>(int) $params['IsTransactionAutoConfirm'],
         ];
         $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);
@@ -43,11 +43,11 @@ class UsersData_Model extends CI_Model {
 
     public function update_by_users($params) {
         $data = [
-            'CanDoTransfers ' => $params['CanDoTransfers'],
-            'CanDoTransactions ' => $params['CanDoTransactions'],
-            'CanUseCard ' => $params['CanUseCard'],
-            'CanModifySettings ' => $params['CanModifySettings'],
-            'IsPurchaseAutoConfirm' => $params['IsPurchaseAutoConfirm'],
+            'CanDoTransfers' => (int)$params['CanDoTransfers'],
+            'CanDoTransactions' => (int)$params['CanDoTransactions'],
+            'CanUseCard' => (int)$params['CanUseCard'],
+            'CanModifySettings' => (int)$params['CanModifySettings'],
+            'IsTransactionAutoConfirm' => (int)$params['IsTransactionAutoConfirm'],
         ];
         $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);
@@ -61,10 +61,11 @@ class UsersData_Model extends CI_Model {
 
     public function update_by_guardian($params) {
         $data = [
-            'CanDoTransfers ' => $params['CanDoTransfers'],
-            'CanDoTransactions ' => $params['CanDoTransactions'],
-            'CanUseCard ' => $params['CanUseCard'],
-            'IsPurchaseAutoConfirm' => $params['IsPurchaseAutoConfirm'],
+            'CanDoTransfers' => (int)$params['CanDoTransfers'],
+            'CanDoTransactions' => (int)$params['CanDoTransactions'],
+            'CanUseCard' => (int)$params['CanUseCard'],
+            'CanModifySettings' => (int)$params['CanModifySettings'],
+            'IsTransactionAutoConfirm' => (int)$params['IsTransactionAutoConfirm'],
         ];
         $this->db->where('UsersAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_usersdata', $data);

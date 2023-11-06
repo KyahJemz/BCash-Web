@@ -22,44 +22,28 @@ class Guest_Actor {
                 $response = $this->CI->Account_Logout->Logout($Account);
                 break;
 
-            case 'get chart data':
-                $response = null;
-                break;
-
             case 'get my notifications':
                 $response = $this->CI->Notifications_Actions->View_My_Notifications();
-                break;
-
-            case 'get my notifications details':
-                $response = $this->CI->Notifications_Actions->View_My_Notifications_Details($requestPostBody);
                 break;
 
             case 'get my account':
                 $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
                 break;
 
+            case 'update my settings':
+                $response = $this->CI->Account_Actions->Update_My_Details($Account,$requestPostBody);
+                break;
+
             case 'update my pin':
                 $response = $this->CI->Account_Actions->Update_My_PinCode($Account, $requestPostBody);
-                break;
-
-            case 'update my password':
-                $response = $this->CI->Account_Actions->Update_My_Password($Account, $requestPostBody);
-                break;
-
-            case 'get all activity logs':
-                $response = $this->CI->ActivityLogs_Actions->View_All_ActivityLogs($Account);
                 break;
 
             case 'get my activity logs':
                 $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
                 break;
 
-            case 'get login history':
+            case 'get my login history':
                 $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
-                break;
-
-            case 'update login history':
-                $response = $this->CI->LoginHistory_Actions->Update_My_LoginHistory($Account, $requestPostBody);
                 break;
 
             case 'delete one login history':

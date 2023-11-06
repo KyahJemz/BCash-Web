@@ -130,8 +130,6 @@ class WebAccounts_Model extends CI_Model {
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 
-    
-
     public function read_adm_act_with_filters($params) {
         $this->db
         ->select('
@@ -238,24 +236,6 @@ class WebAccounts_Model extends CI_Model {
 
         return ($result) ? $result : [] ;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,5 +1,5 @@
 <?php
-
+defined('BASEPATH') or exit('No direct script access allowed');
 class Request extends CI_Controller {
 
     public function __construct() {
@@ -30,6 +30,17 @@ class Request extends CI_Controller {
     private $ActorCategory;
 
     public function Process() {
+
+        $headers = $this->input->request_headers();
+
+                foreach ($headers as $header => $value) {
+                        log_message('debug', $header . ': ' . $value);
+                }
+
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $body = file_get_contents('php://input');
+                        log_message('debug', 'Request Body: ' . $body);
+                }
 
         // $config['upload_path'] = './public/images/temp/';
         // $config['allowed_types'] = 'gif|jpg|png';
@@ -110,6 +121,7 @@ class Request extends CI_Controller {
                     break;
                 case 'Guardian':
                     $response = $this->Guardian_Actor->Process($this->Account, $this->ActorCategory, $this->Intent, $requestPostBody);
+                    break;
                 default:
                     $response = [
                         'Success' => False,
@@ -122,6 +134,8 @@ class Request extends CI_Controller {
             $response = $ValidateHeaders; 
         }
 
+        $data = json_encode($response);
+        log_message('debug','Return : '.$data);
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
 

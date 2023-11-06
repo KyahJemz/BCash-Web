@@ -7,6 +7,7 @@ class User_Actor {
 
     public function __construct() {
         $this->CI =& get_instance();
+        $this->CI->load->model('UsersData_Model');
         $this->CI->load->library('form_validation');
         $this->CI->load->library('Auth/Account_Logout', NULL, 'Account_Logout');
         $this->CI->load->library('Actions/Account_Logout', NULL, 'Account_Logout');
@@ -14,52 +15,66 @@ class User_Actor {
         $this->CI->load->library('Actions/Notifications_Actions', NULL, 'Notifications_Actions');
         $this->CI->load->library('Actions/LoginHistory_Actions', NULL, 'LoginHistory_Actions');
         $this->CI->load->library('Actions/ActivityLogs_Actions', NULL, 'ActivityLogs_Actions');
+        $this->CI->load->library('Actions/Transaction_Actions', NULL, 'Transaction_Actions');
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
+
+        $AccountData = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$Account->UsersAccount_Address));
+
         switch ($Intent) {
             case 'Logout':
                 $response = $this->CI->Account_Logout->Logout($Account);
-                break;
-
-            case 'get chart data':
-                $response = null;
                 break;
 
             case 'get my notifications':
                 $response = $this->CI->Notifications_Actions->View_My_Notifications();
                 break;
 
-            case 'get my notifications details':
-                $response = $this->CI->Notifications_Actions->View_My_Notifications_Details($requestPostBody);
-                break;
-
             case 'get my account':
                 $response = $this->CI->Account_Actions->View_My_Account_Details($Account);
+                break;
+
+            case 'get other account':
+                $response = $this->CI->Account_Actions->View_User_Account_By_SPID($Account, $requestPostBody);
+                break;
+
+            case 'initiate transfer':
+                $response = $this->CI->Transaction_Actions->Transfer_Cash($Account, $AccountData, $requestPostBody);
+                break;
+
+            case 'get receipt':
+                $response = $this->CI->Transaction_Actions->View_My_Receipt($Account, $AccountData, $requestPostBody);
                 break;
 
             case 'update my pin':
                 $response = $this->CI->Account_Actions->Update_My_PinCode($Account, $requestPostBody);
                 break;
 
-            case 'update my password':
-                $response = $this->CI->Account_Actions->Update_My_Password($Account, $requestPostBody);
+            case 'get recent transactions':
+                $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 5);
                 break;
 
-            case 'get all activity logs':
-                $response = $this->CI->ActivityLogs_Actions->View_All_ActivityLogs($Account);
+            case 'get all transactions':
+                $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 100);
                 break;
+
+                
+                
+
+
+            case 'update my settings':
+                $response = $this->CI->Account_Actions->Update_My_Details($Account,$requestPostBody);
+                break;
+
+            
 
             case 'get my activity logs':
                 $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
                 break;
 
-            case 'get login history':
+            case 'get my login history':
                 $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
-                break;
-
-            case 'update login history':
-                $response = $this->CI->LoginHistory_Actions->Update_My_LoginHistory($Account, $requestPostBody);
                 break;
 
             case 'delete one login history':
@@ -69,6 +84,10 @@ class User_Actor {
             case 'delete all login history':
                 $response = $this->CI->LoginHistory_Actions->Clear_My_LoginHistory($Account);
                 break;
+
+
+
+
 
 
                 

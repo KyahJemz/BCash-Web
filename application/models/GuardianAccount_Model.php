@@ -49,6 +49,21 @@ class GuardianAccount_Model extends CI_Model {
         }
     }
 
+    public function read_by_email($Email){
+        $result = $this->db
+            ->select('*')
+            ->from('tbl_guardianaccount')
+            ->where('Email ', $Email)
+            ->get()
+            ->row();
+        if ($result) {
+            return $result;
+        } else {
+            return null; 
+        }
+    }
+
+
     public function update_Email($params) {
         $data = [
             'Email' => $params['Email']

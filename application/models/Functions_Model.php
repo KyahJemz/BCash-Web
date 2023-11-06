@@ -1,4 +1,8 @@
 <?php
+
+require 'vendor/autoload.php';
+use \Mailjet\Resources;
+
 class Functions_Model extends CI_Model {
 
     public function __construct() {
@@ -289,17 +293,40 @@ class Functions_Model extends CI_Model {
 
         public function generateOTP($AccountAddress) {
                 $OTP = $this->Authentications_Model->create_otp($AccountAddress);
-                if ($OTP){
-                        return FALSE;
-                } else {
+                if ($OTP) {
                         $receiver = $this->getAccountsByAddress($AccountAddress)->Email;
-                        // if ($this->sendMmail($receiver,$OTP)){
-                        //         return TRUE;
-                        // } else {
-                        //         return FALSE;
-                        // }
+                        // $mj = new \Mailjet\Client('e7a7aafdf70a4d005ada887621f0a97e', 'fef635b0630e9815bab152f6544160a7', true, ['version' => 'v3.1']);
+                        // $body = [
+                        //         'Messages' => [
+                        //         [
+                        //                 'From' => [
+                        //                 'Email' => "s.stephen.layson@sscr.edu",
+                        //                 'Name' => "SSCR - BCash"
+                        //                 ],
+                        //                 'To' => [
+                        //                 [
+                        //                         'Email' => $receiver,
+                        //                         'Name' => $receiver
+                        //                 ]
+                        //                 ],
+                        //                 'Subject' => "Baste E-Wallet",
+                        //                 'TextPart' => "Your OTP is " . $OTP,
+                        //                 'HTMLPart' => "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
+                        //                 'CustomID' => "AppGettingStartedTest"
+                        //         ]
+                        //         ]
+                        // ];
+                        // $response = $mj->post(Resources::$Email, ['body' => $body]);
+                } else {
+                    return FALSE;
                 }
-        }
+            }
+
+
+
+       
+
+
 
         public function validateOTP($AccountAddress, $OTP) {
                 $tbl_authentications = $this->Authentications_Model->read_by_address(array(
@@ -338,11 +365,12 @@ class Functions_Model extends CI_Model {
 
         public function updatePIN($AccountAddress, $PIN) {
                 $hashed_pincode = password_hash($PIN, PASSWORD_BCRYPT);
+
                 $tbl_webaccounts = $this->WebAccounts_Model->read_by_address(array(
                         'Account_Address' => $AccountAddress
                 ));
                 if ($tbl_webaccounts) {
-                        $this->WebAccounts_Model->update_Pin(array(
+                        $this->WebAccounts_Model->update_PinCode(array(
                                 'Account_Address' => $AccountAddress,
                                 'PinCode' => $hashed_pincode
                         ));
@@ -353,7 +381,7 @@ class Functions_Model extends CI_Model {
                         'Account_Address' => $AccountAddress
                 ));
                 if ($tbl_usersaccount){
-                        $this->UsersAccount_Model->update_Pin(array(
+                        $this->UsersAccount_Model->update_PinCode(array(
                                 'Account_Address' => $AccountAddress,
                                 'PinCode' => $hashed_pincode
                         ));
@@ -364,7 +392,7 @@ class Functions_Model extends CI_Model {
                         'Account_Address' => $AccountAddress
                 ));
                 if ($tbl_guardiansaccount){
-                        $this->GuardianAccount_Model->update_Pin(array(
+                        $this->GuardianAccount_Model->update_PinCode(array(
                                 'Account_Address' => $AccountAddress,
                                 'PinCode' => $hashed_pincode
                         ));

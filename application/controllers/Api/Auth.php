@@ -1,5 +1,5 @@
 <?php
-
+defined('BASEPATH') or exit('No direct script access allowed');
 class Auth extends CI_Controller {
 
         public function __construct() {
@@ -12,8 +12,7 @@ class Auth extends CI_Controller {
                         'Configurations_Model' 
                 ]);
                 $this->load->library('Auth/Login/Web_Login', NULL, 'Web_Login');
-                $this->load->library('Auth/Login/User_Login', NULL, 'User_Login');
-                $this->load->library('Auth/Login/Guardian_Login', NULL, 'Guardian_Login');
+                $this->load->library('Auth/Login/Mobile_Login', NULL, 'Mobile_Login');
                 $this->load->library('Auth/Login/OTP_Validation', NULL, 'OTP_Validation');
                 $this->load->library('Auth/Login/PIN_Creation', NULL, 'PIN_Creation');
                 $this->load->library('Auth/Login/PIN_Validation', NULL, 'PIN_Validation');
@@ -21,6 +20,17 @@ class Auth extends CI_Controller {
         }
 
         public function Process() {
+
+                $headers = $this->input->request_headers();
+
+                foreach ($headers as $header => $value) {
+                        log_message('debug', $header . ': ' . $value);
+                }
+
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $body = file_get_contents('php://input');
+                        log_message('debug', 'Request Body: ' . $body);
+                }
 
                 $response = null;
 
@@ -52,43 +62,41 @@ class Auth extends CI_Controller {
                 }  else {
                         switch ($IntentHeader) {
                                 case 'WebLogin':
-                                    $response = $this->Web_Login->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader, $ClientVersionHeader);
-                                    break;
+                                        $response = $this->Web_Login->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader, $ClientVersionHeader);
+                                        break;
                             
-                                case 'UserLogin':
-                                    $response = $this->User_Login->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader, $ClientVersionHeader);
-                                    break;
-                            
-                                case 'GuardianLogin':
-                                    $response = $this->Guardian_Login->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader, $ClientVersionHeader);
-                                    break;
-                            
+                                case 'MobileLogin':
+                                        $response = $this->Mobile_Login->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader, $ClientVersionHeader);
+                                        break;
+                                
                                 case 'OTPValidation':
-                                    $response = $this->OTP_Validation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
-                                    break;
+                                        $response = $this->OTP_Validation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
+                                        break;
                             
                                 case 'PINValidation':
-                                    $response = $this->PIN_Validation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
-                                    break;
+                                        $response = $this->PIN_Validation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
+                                        break;
                             
                                 case 'PINCreation':
-                                    $response = $this->PIN_Creation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
-                                    break;
+                                        $response = $this->PIN_Creation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
+                                        break;
                             
                                 case 'Logout':
-                                    $response = $this->Account_Logout->Process($AuthorizationTokenHeader, $AccountAddressHeader);
-                                    break;
+                                        $response = $this->Account_Logout->Process($AuthorizationTokenHeader, $AccountAddressHeader);
+                                        break;
                             
                                 default:
-                                    $response = [
-                                        'Success' => False,
-                                        'Target' => 'Login',
-                                        'Parameters' => null,
-                                        'Response' => 'No headers!'
-                                ];
+                                        $response = [
+                                                'Success' => False,
+                                                'Target' => 'Login',
+                                                'Parameters' => null,
+                                                'Response' => 'No headers!'
+                                        ];
                         }
                 }
                 // Return the response as JSON 
+                $data = json_encode($response);
+                log_message('debug','Return : '.$data);
                 $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }
 }

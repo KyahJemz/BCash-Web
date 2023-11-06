@@ -21,7 +21,7 @@ class PIN_Creation {
                 $this->CI->form_validation->set_rules('NewPIN', 'NewPIN', 'trim|required|numeric|min_length[6]');
                 $this->CI->form_validation->set_rules('IpAddress', 'IpAddress', 'trim|required|valid_ip');
                 $this->CI->form_validation->set_rules('Device', 'Device', 'trim|required');
-                $this->CI->form_validation->set_rules('Location', 'Location', 'trim|required|alpha_numeric');
+                $this->CI->form_validation->set_rules('Location', 'Location', 'trim|required');
 
                 $validatedNewPIN = $requestPostBody['NewPIN'];
                 $validatedIpAddress = $requestPostBody['IpAddress'];
@@ -31,7 +31,9 @@ class PIN_Creation {
                 if (!empty($AuthorizationTokenHeader) && !empty($AccountAddressHeader)) {
 
                         if ($this->CI->Functions_Model->validateNewPIN($AccountAddressHeader)) {
+                                
                                 $this->CI->Functions_Model->updatePIN($AccountAddressHeader,$validatedNewPIN);
+
                                 $response = $this->CI->Verification->Process($AccountAddressHeader, $AuthorizationTokenHeader, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
                         } else {
                                 $response = [

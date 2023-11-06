@@ -23,7 +23,7 @@ class OTP_Validation {
                 $this->CI->form_validation->set_rules('OTP', 'OTP', 'trim|required|numeric|min_length[6]');
                 $this->CI->form_validation->set_rules('IpAddress', 'IpAddress', 'trim|required|valid_ip');
                 $this->CI->form_validation->set_rules('Device', 'Device', 'trim|require');
-                $this->CI->form_validation->set_rules('Location', 'Location', 'trim|required|alpha_numeric');
+                $this->CI->form_validation->set_rules('Location', 'Location', 'trim|required');
 
                 $validatedOTP = $requestPostBody['OTP'];
                 $validatedIpAddress = $requestPostBody['IpAddress'];

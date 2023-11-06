@@ -46,7 +46,7 @@ class Account_Actions {
                      ];
                      return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
 
-              } else if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6' || $Account->ActorCategory_Id === '7') {
+              } else if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6') {
                      $this->CI->Transactions_Model->calculate_total_balance(array(
                             'Account_Address' => $Account->UsersAccount_Address,
                      ));
@@ -57,6 +57,19 @@ class Account_Actions {
                      ];
                      return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
 
+              } else if ($Account->ActorCategory_Id === '7') {
+                     $this->CI->Transactions_Model->calculate_total_balance(array(
+                            'Account_Address' => $Account->UsersAccount_Address,
+                     ));
+                     $Details = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$Account->UsersAccount_Address));
+                     $UserAccount = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$Account->UsersAccount_Address));
+                     $parameters = [
+                            'Guardian'=> $Account,
+                            'Account'=> $UserAccount,
+                            'Details'=> $Details,
+                     ];
+                     return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
+                     
               } else {
                      $ActorCategory = $this->CI->ActorCategory_Model->read_by_Id($Account->ActorCategory_Id);
                      $parameters = [
@@ -68,8 +81,6 @@ class Account_Actions {
                      return ['Success' => True,'Target' => null,'Parameters' => $parameters,'Response' => ''];
               }
        }
-
-
 
 /*
 -- ---------------------
@@ -94,7 +105,7 @@ class Account_Actions {
               $NewPINCode1 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPINCode1']);
               $NewPINCode2 = $this->CI->Functions_Model->sanitize($requestPostBody['NewPINCode2']);
 
-              if ($CurrentPIN != $Account->PinCode) {
+              if (!password_verify($CurrentPIN, $Account->PinCode)) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'PIN Code is incorrect!'];
               }
 
@@ -102,8 +113,12 @@ class Account_Actions {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'New PIN Code does not match!'];
               }
 
+              $hashed_pincode = password_hash($NewPINCode1, PASSWORD_BCRYPT);
+
               if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6') {
-                     $this->CI->UsersAccount_Model->update_pin($Account->UsersAccount_Address, $NewPINCode2);
+                     $this->CI->UsersAccount_Model->update_PinCode(array(
+                            'Account_Address'=>$Account->UsersAccount_Address, 
+                            'PinCode' =>$hashed_pincode));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->UsersAccount_Address,
                             'Target_Account_Address' => $Account->UsersAccount_Address,
@@ -111,10 +126,10 @@ class Account_Actions {
                             'Task' => 'Updated its own PIN Code.',
                      ));
               } else if ($Account->ActorCategory_Id === '7') {
-                     // $this->CI->GuardianAccount_Address->update_pin(array(
-                     //        'Account_Address'=>$Account->GuardianAccount_Address, 
-                     //        'PinCode' =>$NewPINCode2
-                     // ));
+                     $this->CI->GuardianAccount_Model->update_PinCode(array(
+                            'Account_Address'=>$Account->GuardianAccount_Address, 
+                            'PinCode' =>$hashed_pincode
+                     ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->GuardianAccount_Address,
                             'Target_Account_Address' => $Account->GuardianAccount_Address,
@@ -122,7 +137,10 @@ class Account_Actions {
                             'Task' => 'Updated its own PIN Code.',
                      ));
               } else {
-                     $this->CI->WebAccounts_Model->update_pin($Account->WebAccounts_Address, $NewPINCode2);
+                     $this->CI->WebAccounts_Model->update_PinCode(array(
+                            'Account_Address'=>$Account->WebAccounts_Address, 
+                            'PinCode' =>$hashed_pincode
+                     ));
                      $this->CI->ActivityLogs_Model->create(array(
                             'Account_Address' => $Account->WebAccounts_Address,
                             'Target_Account_Address' => $Account->WebAccounts_Address,
@@ -190,11 +208,12 @@ class Account_Actions {
 
               $this->CI->form_validation->set_data($requestPostBody);
 
+              $this->CI->form_validation->set_rules('PinCode', 'PinCode', 'trim|required|numeric|exact_length[6]');
               $this->CI->form_validation->set_rules('CanDoTransfers', 'CanDoTransfers', 'trim|required|numeric|exact_length[1]');
               $this->CI->form_validation->set_rules('CanDoTransactions', 'CanDoTransactions', 'trim|required|numeric|exact_length[1]');
               $this->CI->form_validation->set_rules('CanUseCard', 'CanUseCard', 'trim|required|numeric|exact_length[1]');
               $this->CI->form_validation->set_rules('CanModifySettings', 'CanModifySettings', 'trim|required|numeric|exact_length[1]');
-              $this->CI->form_validation->set_rules('IsPurchaseAutoConfirm', 'IsPurchaseAutoConfirm', 'trim|required|numeric|exact_length[1]');
+              $this->CI->form_validation->set_rules('IsTransactionAutoConfirm', 'IsTransactionAutoConfirm', 'trim|required|numeric|exact_length[1]');
 
               if ($this->CI->form_validation->run() === FALSE) {
                      $validationErrors = validation_errors();
@@ -203,23 +222,24 @@ class Account_Actions {
 
               $AccountAddress = $Account->UsersAccount_Address;
 
+              $PinCode = $this->CI->Functions_Model->sanitize($requestPostBody['PinCode']);
               $CanDoTransfers = $this->CI->Functions_Model->sanitize($requestPostBody['CanDoTransfers']);
               $CanDoTransactions = $this->CI->Functions_Model->sanitize($requestPostBody['CanDoTransactions']);
               $CanUseCard = $this->CI->Functions_Model->sanitize($requestPostBody['CanUseCard']);
               $CanModifySettings = $this->CI->Functions_Model->sanitize($requestPostBody['CanModifySettings']);
-              $IsPurchaseAutoConfirm = $this->CI->Functions_Model->sanitize($requestPostBody['IsPurchaseAutoConfirm']);
+              $IsTransactionAutoConfirm = $this->CI->Functions_Model->sanitize($requestPostBody['IsTransactionAutoConfirm']);
 
        
               $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=> $AccountAddress));
 
-              $this->db->trans_start(); 
+              $this->CI->db->trans_start(); 
 
                      if (
                             $Details_->CanDoTransfers != $CanDoTransfers ||
                             $Details_->CanDoTransactions != $CanDoTransactions ||
                             $Details_->CanUseCard != $CanUseCard ||
                             $Details_->CanModifySettings != $CanModifySettings ||
-                            $Details_->IsPurchaseAutoConfirm != $IsPurchaseAutoConfirm
+                            $Details_->IsTransactionAutoConfirm != $IsTransactionAutoConfirm
                      ) {
 
                             if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6') {
@@ -227,28 +247,29 @@ class Account_Actions {
                                           return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'You do not have permission, CanModifySettings is turned off!'];
                                    }
                                    $this->CI->UsersData_Model->update_by_users(array(
-                                          'UsersAccount_Address' => $AccountAddress,
-                                          'CanDoTransfers ' => $CanDoTransfers,
-                                          'CanDoTransactions ' => $CanDoTransactions,
-                                          'CanUseCard ' => $CanUseCard,
-                                          'IsPurchaseAutoConfirm' => $IsPurchaseAutoConfirm,
+                                          'Account_Address' => $AccountAddress,
+                                          'CanDoTransfers' => $CanDoTransfers,
+                                          'CanDoTransactions' => $CanDoTransactions,
+                                          'CanUseCard' => $CanUseCard,
+                                          'CanModifySettings' => $CanModifySettings,
+                                          'IsTransactionAutoConfirm' => $IsTransactionAutoConfirm,
                                    ));
                             }
 
                             if ($Account->ActorCategory_Id === '7') {
                                    $this->CI->UsersData_Model->update_by_guardian(array(
-                                          'UsersAccount_Address' => $AccountAddress,
-                                          'CanDoTransfers ' => $CanDoTransfers,
-                                          'CanDoTransactions ' => $CanDoTransactions,
-                                          'CanUseCard ' => $CanUseCard,
+                                          'Account_Address' => $AccountAddress,
+                                          'CanDoTransfers' => $CanDoTransfers,
+                                          'CanDoTransactions' => $CanDoTransactions,
+                                          'CanUseCard' => $CanUseCard,
                                           'CanModifySettings' => $CanModifySettings,
-                                          'IsPurchaseAutoConfirm' => $IsPurchaseAutoConfirm,
+                                          'IsTransactionAutoConfirm' => $IsTransactionAutoConfirm,
                                    ));
 
                                    if ($Details_->CanModifySettings != $CanModifySettings) {
                                           $this->CI->ActivityLogs_Model->create(array(
                                                  'Account_Address' => $AccountAddress,
-                                                 'Target_Account_Address' => $Account->WebAccounts_Address,
+                                                 'Target_Account_Address' => $AccountAddress,
                                                  'Action' => 'Edit',
                                                  'Task' => 'Updated its own CanModifySettings settings to '.$CanModifySettings.'.',
                                           ));
@@ -258,34 +279,42 @@ class Account_Actions {
                             if ($Details_->CanDoTransfers != $CanDoTransfers) {
                                    $this->CI->ActivityLogs_Model->create(array(
                                           'Account_Address' => $AccountAddress,
+                                          'Target_Account_Address' => $AccountAddress,
+                                          'Action' => 'Edit',
                                           'Task' => 'Updated its own CanDoTransfers settings to '.$CanDoTransfers.'.',
                                    ));
                             }
                             if ($Details_->CanDoTransactions != $CanDoTransactions) {
                                    $this->CI->ActivityLogs_Model->create(array(
                                           'Account_Address' => $AccountAddress,
+                                          'Target_Account_Address' => $AccountAddress,
+                                          'Action' => 'Edit',
                                           'Task' => 'Updated its own CanDoTransactions settings to '.$CanDoTransactions.'.',
                                    ));
                             }
                             if ($Details_->CanUseCard != $CanUseCard) {
                                    $this->CI->ActivityLogs_Model->create(array(
                                           'Account_Address' => $AccountAddress,
+                                          'Target_Account_Address' => $AccountAddress,
+                                          'Action' => 'Edit',
                                           'Task' => 'Updated its own CanUseCard settings to '.$CanUseCard.'.',
                                    ));
                             }
-                            if ($Details_->IsPurchaseAutoConfirm != $IsPurchaseAutoConfirm) {
+                            if ($Details_->IsTransactionAutoConfirm != $IsTransactionAutoConfirm) {
                                    $this->CI->ActivityLogs_Model->create(array(
                                           'Account_Address' => $AccountAddress,
-                                          'Task' => 'Updated its own IsPurchaseAutoConfirm settings to '.$IsPurchaseAutoConfirm.'.',
+                                          'Target_Account_Address' => $AccountAddress,
+                                          'Action' => 'Edit',
+                                          'Task' => 'Updated its own IsPurchaseAutoConfirm settings to '.$IsTransactionAutoConfirm.'.',
                                    ));
                             }
                      }
 
-              $this->db->trans_complete(); 
+              $this->CI->db->trans_complete(); 
 
-              if ($this->db->trans_status() === FALSE) {
-                     $this->db->trans_rollback();
-                     $error = $this->db->error();
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
               }
 
@@ -410,6 +439,7 @@ class Account_Actions {
               $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
                      'Account_Address' => $AccountAddress,
               ));
+              
               $Account_ = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));
               $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$AccountAddress));
               $parameters = [

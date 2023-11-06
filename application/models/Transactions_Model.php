@@ -13,14 +13,14 @@ class Transactions_Model extends CI_Model {
         $data = [
             'Transaction_Address' => $params['Transaction_Address'],
             'TransactionType_Id' => $params['TransactionType_Id'],
-            'Sender_Address ' => $params['Sender_Address'],
-            'Receiver_Address ' => $params['Receiver_Address'],
-            'Status ' => $params['Status'],
-            'Amount ' => $params['Amount'],
-            'Discount ' => $params['Discount'],
-            'TotalAmount ' => $params['TotalAmount'],
-            'PostedBy ' => $params['PostedBy'],
-            'Notes ' => $params['Notes'] ?? "",
+            'Sender_Address' => $params['Sender_Address'],
+            'Receiver_Address' => $params['Receiver_Address'],
+            'Status' => $params['Status'],
+            'Amount' => $params['Amount'],
+            'Discount' => $params['Discount'],
+            'TotalAmount' => $params['TotalAmount'],
+            'PostedBy' => $params['PostedBy'],
+            'Notes' => $params['Notes'] ?? "",
             'PaymentMethod ' => $params['PaymentMethod'] ?? "",
             
         ];
@@ -85,17 +85,35 @@ class Transactions_Model extends CI_Model {
     }
 
     public function read_transactions_by_address($params) {
-        $result = $this->db
+        $this->db
             ->select('*')
             ->from('tbl_transactions')
-            ->where('Account_Address', $params['Account_Address']);
+            ->where('Account_Address', $params['Account_Address'])
+            ->order_by('Timestamp', 'DESC')
+            ->limit((int)$params['Limit']);
     
-        if (isset($params['Limit']) && strtolower($params['Limit']) !== 'all') {
-            $limit = (int)$params['Limit'];
-            $result->limit($limit);
+        $result = $this->db->get()->result();
+    
+        if ($result) {
+            return ['status' => TRUE, 'response' => $result];
+        } else {
+            return ['status' => FALSE, 'response' => []];
         }
+    }
+
+    public function read_transactionsinfo_limit_by_address($params) {
+        $this->db
+            ->select('tbl_transactionsinfo.*, transactiontype.Name as TransactionType')
+            ->from('tbl_transactionsinfo')
+            ->join('tbl_transactiontype as transactiontype', 'tbl_transactionsinfo.TransactionType_Id = transactiontype.TransactionType_Id', 'left')
+            ->group_start()
+                ->where('tbl_transactionsinfo.Sender_Address', $params['Account_Address'])
+                ->or_where('tbl_transactionsinfo.Receiver_Address', $params['Account_Address'])
+            ->group_end()
+            ->order_by('tbl_transactionsinfo.Timestamp', 'DESC')
+            ->limit((int)$params['Limit']);
     
-        $result = $result->get();
+        $result = $this->db->get()->result();
     
         if ($result) {
             return ['status' => TRUE, 'response' => $result];

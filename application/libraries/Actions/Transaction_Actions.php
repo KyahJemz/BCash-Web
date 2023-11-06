@@ -16,7 +16,9 @@ class Transaction_Actions {
                      'Functions_Model',
                      'MerchantItems_Model',
                      'UsersData_Model',
-                     'GuardianAccount_Model'
+                     'GuardianAccount_Model',
+                     'Configurations_Model',
+                     'Whitelist_Model'
               ]);
        }
 
@@ -192,6 +194,36 @@ public function Merchant_View_All_Transaction_History ($Account,$requestPostBody
 
 
 
+
+
+/* 
+-- ---------------------
+   VIEW USER TRANSACTION HISTORY INFO DETAILS
+   - for user guest guardian
+-- ---------------------
+*/  
+       public function View_My_Receipt($Account, $AccountData, $requestPostBody){
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('TransactionAddress', 'StartDate', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $TransactionAddress = $this->CI->Functions_Model->sanitize($requestPostBody['TransactionAddress']);
+
+              $TransactionDetails = $this->CI->Transactions_Model->read_transactionsinfo_by_transactionaddress(array(
+                     'TransactionAddress'=>$TransactionAddress
+              ));
+
+              return ['Success' => True,'Target' => null,'Parameters' => $TransactionDetails,'Response' => ''];
+
+       }
+
+
 /* 
 -- ---------------------
    VIEW USER TRANSACTION HISTORY INFO DETAILS
@@ -270,6 +302,21 @@ public function View_Recent_CashIn () {
 
 
 
+/*
+-- ---------------------
+   VIEW RECENT TRANSACTIONS
+   - for user guest guardian
+-- --------------------
+*/
+public function View_My_Recent_Transactions ($Account, $Limit) {
+
+       $RecentTransactions = $this->CI->Transactions_Model->read_transactionsinfo_limit_by_address(array(
+              'Account_Address'=>$Account->UsersAccount_Address,
+              'Limit'=>$Limit
+       ));
+      
+       return ['Success' => True,'Target' => null,'Parameters' => $RecentTransactions['response'],'Response' => ''];
+}
 
 
 
@@ -360,12 +407,17 @@ public function View_Recent_CashIn () {
    TRANSFER CASH
 -- -----------------
 */
-       public function Transfer_Cash ($Account, $AccountData, $requestPostBody) {
+       public function Transfer_Cash($Account, $AccountData, $requestPostBody) {
+
+              $CanTransfers = $this->CI->Configurations_Model->CanTransfers();
+              if (!$CanTransfers['Success']){
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => $CanTransfers['Response']];
+              }
 
               $this->CI->form_validation->set_data($requestPostBody);
 
-              $this->CI->form_validation->set_rules('AccountAddress', 'AccountAddress', 'trim|required|alpha_numeric|exact_length[15]');
-              $this->CI->form_validation->set_rules('Amount', 'Amount', 'trim|required|number');
+              $this->CI->form_validation->set_rules('SchoolPersonalId', 'SchoolPersonalId', 'trim|required');
+              $this->CI->form_validation->set_rules('Amount', 'Amount', 'trim|required|numeric');
               $this->CI->form_validation->set_rules('Message', 'Message', 'trim');
 
               if ($this->CI->form_validation->run() === FALSE) {
@@ -373,22 +425,32 @@ public function View_Recent_CashIn () {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
               }
 
-              $AccountAddress = $this->CI->Functions_Model->sanitize($requestPostBody['AccountAddress']);
+              $SchoolPersonalId = $this->CI->Functions_Model->sanitize($requestPostBody['SchoolPersonalId']);
               $Amount = $this->CI->Functions_Model->sanitize($requestPostBody['Amount']);
-              $Message = $this->CI->Functions_Model->sanitize($requestPostBody['Message']);
+              $Message = $this->CI->Functions_Model->sanitize($requestPostBody['Message']) ?? "";
 
-              $isAccountExist =  $this->CI->UsersAccount_Model->read_by_address($AccountAddress);
-              if (!$isAccountExist) {
+              $ReceiverDetails = $this->CI->UsersData_Model->read_by_SchoolPersonalId(array('SchoolPersonalId'=>$SchoolPersonalId));
+              $ReceiverAccount = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$ReceiverDetails->UsersAccount_Address));
+
+              if (empty($ReceiverDetails)) {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid receivers account!'];
               }
-              if ($isAccountExist->IsAccountActive === '0') {
+              if ($ReceiverAccount->IsAccountActive === '0') {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'The receiver account was declared Inactive, cannot proceed to transaction!'];
+              }
+              if ($Account->IsAccountActive === '0') {
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Your account was declared Inactive, cannot proceed to transaction!'];
               }
               if ($AccountData->CanDoTransfers === '0') {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'The sender account has CanDoTransfers turned off!'];
               }
-              if ($AccountData->CanDoTransfers === '0') {
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'The receiver is not on the senders whitelist!'];
+
+              $Whitelist = $this->CI->Whitelist_Model->verify(array(
+                     'AccountAddress' => $Account->UsersAccount_Address,
+                     'WhitelistedAddress' => $ReceiverAccount->UsersAccount_Address,
+              ));
+              if (empty($Whitelist)){
+                     return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'Receiver account is not in the list of your whitlisted accounts.'];
               }
 
               $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
@@ -402,6 +464,8 @@ public function View_Recent_CashIn () {
               if ($AccountBalance < $Amount) {
                      return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'The amount declared is higher than the sender\'s current balance!'];
               }
+
+              $TransactionAddress = null;
 
               $this->CI->db->trans_start(); 
 
@@ -419,7 +483,7 @@ public function View_Recent_CashIn () {
                      // RECEIVER
                      $this->CI->Transactions_Model->create_transaction(array(
                             'Transaction_Address' => $TransactionAddress,
-                            'Account_Address' => $AccountAddress,
+                            'Account_Address' => $ReceiverAccount->UsersAccount_Address,
                             'Status' => 'Completed',
                             'Debit' => '0',
                             'Credit' => $Amount,
@@ -429,13 +493,13 @@ public function View_Recent_CashIn () {
                             'Transaction_Address' => $TransactionAddress,
                             'TransactionType_Id' => '2', // TRANSFER
                             'Sender_Address' => $Account->UsersAccount_Address,
-                            'Receiver_Address' => $AccountAddress,
+                            'Receiver_Address' => $ReceiverAccount->UsersAccount_Address,
                             'Status' => 'Completed',
                             'Amount' => $Amount,
                             'Discount' => '0',
                             'TotalAmount' => $Amount,
                             'PostedBy' => $Account->UsersAccount_Address,
-                            'Notes ' => "",
+                            'Notes' => $Message,
                             'PaymentMethod ' => "BCash",
                      ));
 
@@ -447,7 +511,7 @@ public function View_Recent_CashIn () {
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
               }
 
-              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Success'];
+              return ['Success' => True,'Target' => null,'Parameters' => $TransactionAddress,'Response' => 'Transfer Success'];
        }
 
 
