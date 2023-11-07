@@ -35,8 +35,9 @@ const cards = new Cards(
   );
 
 const allTransactions = new Transactions(
-  document.getElementById("Cards-Table-Body"),
-  document.getElementById("Cards-Query"),
+  document.getElementById("All-Transactions-Table"),
+  document.getElementById("All-Transactions-Query"),
+  document.getElementById("All-Transactions-Footer-Query"),
   Ajax,
   helper,
   modals

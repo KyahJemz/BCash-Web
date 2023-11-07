@@ -15,6 +15,8 @@ class Guest_Actor {
         $this->CI->load->library('Actions/LoginHistory_Actions', NULL, 'LoginHistory_Actions');
         $this->CI->load->library('Actions/ActivityLogs_Actions', NULL, 'ActivityLogs_Actions');
         $this->CI->load->library('Actions/Transaction_Actions', NULL, 'Transaction_Actions');
+        $this->CI->load->library('Actions/Whitelist_Actions', NULL, 'Whitelist_Actions');
+        $this->CI->load->library('Actions/Order_Actions', NULL, 'Order_Actions');
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
@@ -48,7 +50,7 @@ class Guest_Actor {
                 break;
 
             case 'get recent transactions':
-                $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 5);
+                $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 10);
                 break;
 
             case 'get all transactions':
@@ -58,14 +60,53 @@ class Guest_Actor {
             case 'get my activity logs':
                 $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
                 break;
-
-
-
-
-
                 
+            case 'get my login history':
+                $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
+                break;
+
+            case 'delete one login history':
+                $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);
+                break;
+
+            case 'delete all login history':
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
+                break;
+
+            case 'get my whitelist':
+                $response = $this->CI->Whitelist_Actions->View_My_Whitelist($Account);
+                break;
+
+            case 'remove one from whitelist':
+                $response = $this->CI->Whitelist_Actions->Remove_From_Whitelist($Account, $requestPostBody);
+                break;
+    
+            case 'add one to whitelist':
+                $response = $this->CI->Whitelist_Actions->Add_To_Whitelist($Account, $requestPostBody);
+                break;
+
+            case 'update my settings':
+                $response = $this->CI->Account_Actions->Update_My_Details($Account, $requestPostBody);
+                break;
+
+            case 'QRscan for purchase':
+                $response = $this->CI->Order_Actions->Update_Event($Account, $requestPostBody);
+                break;
+
+            case 'scan for purchases':
+                $response = $this->CI->Order_Actions->Get_Pending_Purchase($Account, $requestPostBody);
+                break;
+
+            case 'set purchase cancel':
+                $response = $this->CI->Order_Actions->Set_Purchase_Cancel($Account, $requestPostBody);
+                break;
+
+            case 'set purchase approved':
+                $response = $this->CI->Order_Actions->Set_Purchase_Approved($Account, $requestPostBody);
+                break;
+    
             default:
-                $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
+                $response = ['Success' => FALSE, 'Response' => 'Invalid Intent or Not Permitted']; 
                 break;
         }
         return $response;

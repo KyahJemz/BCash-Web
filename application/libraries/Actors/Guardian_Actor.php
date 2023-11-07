@@ -48,7 +48,7 @@ class Guardian_Actor {
                 break;
 
             case 'get recent transactions':
-                $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 5);
+                $response = $this->CI->Transaction_Actions->View_My_Recent_Transactions($Account, 10);
                 break;
 
             case 'get all transactions':
@@ -58,12 +58,25 @@ class Guardian_Actor {
             case 'get my activity logs':
                 $response = $this->CI->ActivityLogs_Actions->View_My_ActivityLogs($Account, $requestPostBody);
                 break;
+                
+            case 'get my login history':
+                $response = $this->CI->LoginHistory_Actions->View_My_LoginHistory($Account);
+                break;
 
+            case 'delete one login history':
+                $response = $this->CI->LoginHistory_Actions->Clear_One_My_LoginHistory($Account, $requestPostBody);
+                break;
 
+            case 'delete all login history':
+                $response = $this->CI->LoginHistory_Actions->Clear_All_My_LoginHistory($Account);
+                break;
 
+            case 'update my settings':
+                $response = $this->CI->Account_Actions->Update_My_Details($Account, $requestPostBody);
+                break;
                 
             default:
-                $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 
+                $response = ['Success' => FALSE, 'Response' => 'Invalid Intent or Not Permitted']; 
                 break;
         }
         return $response;

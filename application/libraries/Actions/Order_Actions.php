@@ -35,6 +35,37 @@ class Order_Actions {
               return ['Success' => True,'Target' => null,'Parameters' => $Account->WebAccounts_Address,'Response' => ''];
        }
 
+       public function Update_Event($Account, $requestPostBody){
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('MerchantAddress', 'MerchantAddress', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $MerchantAddress = $this->CI->Functions_Model->sanitize($requestPostBody['MerchantAddress']) ?? "";
+
+              $this->CI->db->trans_start(); 
+
+                     $this->CI->Transactions_Model->Update_Order_Event(array(
+                            'WebAccounts_Address' => $MerchantAddress,
+                            'UsersAccount_Address'=> $Account->UsersAccount_Address
+                     ));
+
+              $this->CI->db->trans_complete(); 
+
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+              }
+
+              return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Scan QR Complete'];
+       }
+
        public function Listen_Event($Account,$requestPostBody){
 
               $this->CI->form_validation->set_data($requestPostBody);
@@ -115,29 +146,90 @@ class Order_Actions {
        }
 
 
-       // public function Create_Order_Event($params){
-       //        $this->db->where('WebAccounts_Address', $params['WebAccounts_Address']);
-       //        $this->db->delete('tbl_ordersvalidation');
-      
-       //        $data = [
-       //            'WebAccounts_Address' => $params['WebAccounts_Address'],
-       //            'UsersAccount_Address' => null,
-       //        ];
-       //        $this->db->insert('tbl_ordersvalidation', $data);
-       //    }
-      
-       //    public function Update_Order_Event($params){
-       //        $data = [
-       //            'UsersAccount_Address' => $params['UsersAccount_Address'],
-       //        ];
-              
-       //        $this->db->where('WebAccounts_Address', $params['WebAccounts_Address']);
-       //        $this->db->update('tbl_ordersvalidation', $data);
-       //    }
-      
-       //    public function Delete_Order_Event($params){
-       //        $this->db->where('WebAccounts_Address', $params['WebAccounts_Address']);
-       //        $this->db->delete('tbl_ordersvalidation');
-       //    }
 
+
+
+
+       public function Set_Purchase_Approved($Account,$requestPostBody){
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $TransactionAddress = $this->CI->Functions_Model->sanitize($requestPostBody['TransactionAddress']);
+
+              $this->CI->db->trans_start(); 
+
+                     $this->CI->Transactions_Model->update_transactions_approved(array(
+                            'Transaction_Address' => $TransactionAddress
+                     ));
+
+                     $this->CI->Transactions_Model->update_transactionsinfo_approved(array(
+                            'Transaction_Address' => $TransactionAddress
+                     ));
+
+              $this->CI->db->trans_complete(); 
+
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+              }
+
+              return ['Success' => True,'Target' => null,'Parameters' => $TransactionAddress,'Response' => ''];
+
+       }
+
+       public function Set_Purchase_Cancel($Account,$requestPostBody) {
+
+              $this->CI->form_validation->set_data($requestPostBody);
+
+              $this->CI->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim|required');
+
+              if ($this->CI->form_validation->run() === FALSE) {
+                     $validationErrors = validation_errors();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+              }
+
+              $TransactionAddress = $this->CI->Functions_Model->sanitize($requestPostBody['TransactionAddress']);
+
+              $this->CI->db->trans_start(); 
+
+                     $this->CI->Transactions_Model->update_transactions_cancel(array(
+                            'Transaction_Address' => $TransactionAddress
+                     ));
+
+                     $this->CI->Transactions_Model->update_transactionsinfo_cancel(array(
+                            'Transaction_Address' => $TransactionAddress
+                     ));
+
+              $this->CI->db->trans_complete(); 
+
+              if ($this->CI->db->trans_status() === FALSE) {
+                     $this->CI->db->trans_rollback();
+                     $error = $this->CI->db->error();
+                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+              }
+
+              return ['Success' => True,'Target' => null,'Parameters' => $TransactionAddress,'Response' => ''];
+       }
+
+       public function Get_Pending_Purchase($Account,$requestPostBody){
+              $Pending = $this->CI->Transactions_Model->read_pending_transactions(array(
+                     'UsersAccount_Address' => $Account->UsersAccount_Address
+              ));
+
+              if (!empty($Pending)){
+                     return ['Success' => true,'Target' => null,'Parameters' => $Pending->Transaction_Address,'Response' => ''];
+              } else {
+                     return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => ''];
+              }
+
+              
+       }
 }

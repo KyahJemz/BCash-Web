@@ -42,41 +42,6 @@ class Request extends CI_Controller {
                         log_message('debug', 'Request Body: ' . $body);
                 }
 
-        // $config['upload_path'] = './public/images/temp/';
-        // $config['allowed_types'] = 'gif|jpg|png';
-        // $config['encrypt_name'] = TRUE; 
-
-        // $this->load->library('upload' , $config);
-        // if ($this->upload->do_upload('file')){
-        //     $data = array ('upload_data' => $this->upload->data());
-        //     $ItemName = $this->input->post('ItemName');
-        //     $ItemCost = $this->input->post('ItemCost');
-        //     $ItemCategory = $this->input->post('ItemCategory');
-            
-        //     $image = $data['upload_data']['file_name'];
-
-        //     log_message('debug', '----------' . $ItemName . '----------');
-        //     log_message('debug', '----------' . $ItemCost . '----------');
-        //     log_message('debug', '----------' . $ItemCategory . '----------');
-        //     log_message('debug', '----------' . $image . '----------');
-        // }
-
-        // if ($this->upload->do_upload('Image')){
-        //     $data = array ('upload_data' => $this->upload->data());
-        //     $ItemName = $this->input->post('ItemName');
-        //     $ItemCost = $this->input->post('ItemCost');
-        //     $ItemCategory = $this->input->post('ItemCategory');
-            
-        //     $image = $data['upload_data']['file_name'];
-
-        //     log_message('debug', '----------' . $ItemName . '----------');
-        //     log_message('debug', '----------' . $ItemCost . '----------');
-        //     log_message('debug', '----------' . $ItemCategory . '----------');
-        //     log_message('debug', '----------' . $image . '----------');
-        // }
-
-
-
         $this->AuthorizationToken = $this->Functions_Model->sanitize($this->input->get_request_header('Authorization', TRUE));
         $this->AccountAddress = $this->Functions_Model->sanitize($this->input->get_request_header('AccountAddress', TRUE));
         $this->ClientVersion = $this->Functions_Model->sanitize($this->input->get_request_header('ClientVersion', TRUE));

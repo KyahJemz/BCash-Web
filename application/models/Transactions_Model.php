@@ -514,5 +514,62 @@ class Transactions_Model extends CI_Model {
             $this->db->insert('tbl_transactionitems', $data);
         }
     }
+
+
+
+
+
+
+
+
+    public function read_pending_transactions($params) {
+        return $this->db
+            ->select('*')
+            ->from('tbl_transactionsinfo')
+            ->group_start()
+                ->where('Sender_Address', $params['UsersAccount_Address'])
+                ->or_where('Receiver_Address', $params['UsersAccount_Address'])
+            ->group_end()
+            ->where('Status', 'Payment')
+            ->limit(1)
+            ->get()
+            ->row();
+    }
+    
+    public function update_transactions_approved($params){
+        $data = [
+            'Status' => 'Completed'
+        ];
+        
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);
+        $this->db->update('tbl_transactions', $data);
+    }
+
+    public function update_transactions_cancel($params){
+        $data = [
+            'Status' => 'Canceled'
+        ];
+        
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);
+        $this->db->update('tbl_transactions', $data);
+    }
+
+    public function update_transactionsinfo_approved($params){
+        $data = [
+            'Status' => 'Completed'
+        ];
+        
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);
+        $this->db->update('tbl_transactionsinfo', $data);
+    }
+
+    public function update_transactionsinfo_cancel($params){
+        $data = [
+            'Status' => 'Canceled'
+        ];
+        
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);
+        $this->db->update('tbl_transactionsinfo', $data);
+    }
 }
 
