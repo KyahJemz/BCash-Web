@@ -248,7 +248,7 @@
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
                                         <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                        <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more.png'); ?>" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
@@ -654,7 +654,7 @@
 <!--
     JAVASCRIPTS  ###
 -->
-    <script src="../public/javascript/main-merchant-admin.js" type="module"></script>
+    <script src="<?php echo base_url('./public/javascript/main-merchant-admin.js'); ?>" type="module"></script>
 </body>
 </html>
 

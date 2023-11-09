@@ -17,7 +17,6 @@ class MerchantAdmin extends CI_Controller {
 
         public function index($page = 'merchantadmin')
         {
-                $config['base_url'] = 'http://localhost/index.php/';
 
                 $requestPostBody = $this->input->raw_input_stream;
                 

@@ -39,6 +39,7 @@ class Login extends CI_Controller {
                         const Location = ' . json_encode($data['Location']) . ';
                         var AccountAddress = "";
                         var AuthToken = "";
+                        var BaseURL = "http://localhost/index.php/";
                 </script>
             ';
         }

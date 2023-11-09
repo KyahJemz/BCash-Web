@@ -33,15 +33,15 @@
     <div class="sidebar-container">
         <div class="top-panel">
             <div class="image">
-                <img src="../public/images/bcash-logo.png" alt="BCash Logo">
+                <img src="<?php echo base_url('./public/images/bcash-logo'); ?>" alt="BCash Logo">
             </div>
             <div class="details">
                 <div class="category">BCash: Accounting</div>
                 <div id="WebAccountFullName" class="fullname">Loading...</div>
             </div>
             <div class="button-container">
-                <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="../public/images/icons/notification-yellow.png" alt="notification-icon"></button>
-                <button id="menu-settings-button" type="button" class="curson-pointer" title="Settings"><img src="../public/images/icons/settings-yellow.png" alt="settings-icon"></button>
+                <button id="menu-notification-button" type="button" class="curson-pointer" title="Notifications"><img src="<?php echo base_url('./public/images/icons/notification-yellow'); ?>" alt="notification-icon"></button>
+                <button id="menu-settings-button" type="button" class="curson-pointer" title="Settings"><img src="<?php echo base_url('./public/images/icons/settings-yellow'); ?>" alt="settings-icon"></button>
             </div>
         </div>
         <div class="bottom-panel">
@@ -50,18 +50,18 @@
                 <ul>
                     <li data-menu="Home" class="curson-pointer menu-selected menuSelectionButton">
                         <div class="selected"></div>
-                        <img src="../public/images/icons/home.png" alt="Home Icon">
+                        <img src="<?php echo base_url('./public/images/icons/home'); ?>" alt="Home Icon">
                         <p>Home</p>
                     </li>
                     <li data-menu="Cash In Form" class="curson-pointer menuSelectionButton">
                         <div class="selected"></div>
-                        <img src="../public/images/icons/cashin.png" alt="Cash In Icon">
+                        <img src="<?php echo base_url('./public/images/icons/cashin'); ?>" alt="Cash In Icon">
                         <p>Cash-In Form</p>
                     </li>
                     <li data-menu="Transactions Management" class="curson-pointer menuSelectionButton menuSelectionDropdownButton">
-                        <img src="../public/images/icons/longreceipt.png" alt="Transactions Icon">
+                        <img src="<?php echo base_url('./public/images/icons/longreceipt'); ?>" alt="Transactions Icon">
                         <p>Transactions</p>
-                        <img id="sidebar-bottom-menu-myorders-more" class="more" src="../public/images/icons/more.png" alt="More Icon">
+                        <img id="sidebar-bottom-menu-myorders-more" class="more" src="<?php echo base_url('./public/images/icons/more'); ?>" alt="More Icon">
                     </li>
                     <li class="menuSelectionDropdownItems">
                         <ul>
@@ -77,17 +77,17 @@
                     </li>
                     <li data-menu="Accounts" class="curson-pointer menuSelectionButton">
                         <div class="selected"></div>
-                        <img src="../public/images/icons/accounts.png" alt="Accounts Icon">
+                        <img src="<?php echo base_url('./public/images/icons/accounts'); ?>" alt="Accounts Icon">
                         <p>Accounts</p>
                     </li>
                     <li data-menu="Add Guest Account" class="curson-pointer menuSelectionButton">
                         <div class="selected"></div>
-                        <img src="../public/images/icons/group.png" alt="Card Icon">
+                        <img src="<?php echo base_url('./public/images/icons/group'); ?>" alt="Card Icon">
                         <p>Add Guest Account</p>
                     </li>
                     <li data-menu="Fund Remittance" class="curson-pointer menuSelectionButton">
                         <div class="selected"></div>
-                        <img src="../public/images/icons/remittance.png" alt="Fund Remittance Icon">
+                        <img src="<?php echo base_url('./public/images/icons/remittance'); ?>" alt="Fund Remittance Icon">
                         <p>Fund Remittance</p>
                     </li>
                 </ul>
@@ -101,10 +101,10 @@
         <div class="top-panel">
             <div class="left-side">
                 <div id="menu-visibility-button" class="curson-pointer">
-                    <img src="../public/images/icons/view-more-white.png" alt="view more">
+                    <img src="<?php echo base_url('./public/images/icons/view-more-white'); ?>" alt="view more">
                 </div>
                 <div class="image">
-                    <img src="../public/images/sscr-logo.png" alt="SSCR Logo">
+                    <img src="<?php echo base_url('./public/images/sscr-logo'); ?>" alt="SSCR Logo">
                 </div>
                 <div class="text">
                     San Sebastian College - Recoletos
@@ -115,7 +115,7 @@
                     Log out
                 </div>
                 <div class="image">
-                    <img src="../public/images/icons/logout.png" alt="Logout Icon">
+                    <img src="<?php echo base_url('./public/images/icons/logout'); ?>" alt="Logout Icon">
                 </div>
             </div>
         </div>
@@ -337,7 +337,7 @@
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
                                         <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                        <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more'); ?>" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
@@ -353,11 +353,11 @@
                     <div class="panel-transactions-buttons" data-transactiontype="MyTransactions">
                         <div>
                             <button id="mytransaction-search-button" class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
-                                <img src="../public/images/icons/search-yellow.png" alt="search">
+                                <img src="<?php echo base_url('./public/images/icons/search-yellow'); ?>" alt="search">
                                 <span>Search</span>
                             </button>
                             <button id="mytransaction-clear-button" class="btn-default curson-pointer transaction-clear-button" type="reset" value="Clear">
-                                <img src="../public/images/icons/clear-yellow.png" alt="search">
+                                <img src="<?php echo base_url('./public/images/icons/clear-yellow'); ?>" alt="search">
                                 <span>Clear</span>
                             </button>
                         </div>
@@ -472,7 +472,7 @@
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
                                         <span class="transactions-status-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                        <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more'); ?>" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
@@ -488,15 +488,15 @@
                     <div class="panel-transactions-buttons" data-transactiontype="AllTransactions">
                         <div>
                             <button id="mytransaction-search-button" class="btn-default curson-pointer transaction-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
-                                <img src="../public/images/icons/search-yellow.png" alt="search">
+                                <img src="<?php echo base_url('./public/images/icons/search-yellow'); ?>" alt="search">
                                 <span>Search</span>
                             </button>
                             <button id="mytransaction-clear-button" class="btn-default curson-pointer transaction-clear-button" type="reset" value="Clear">
-                                <img src="../public/images/icons/clear-yellow.png" alt="search">
+                                <img src="<?php echo base_url('./public/images/icons/clear-yellow'); ?>" alt="search">
                                 <span>Clear</span>
                             </button>
                             <button id="mytransaction-export-button" class="btn-default curson-pointer transaction-export-button" type="button" value="Export">
-                                <img src="../public/images/icons/download-yellow.png" alt="search">
+                                <img src="<?php echo base_url('./public/images/icons/download-yellow'); ?>" alt="search">
                                 <span>Export</span>
                             </button>
                         </div>
@@ -575,7 +575,7 @@
                             </div>
                             <button class="dropdownButton dropdownbtn curson-pointer" data-layout="top">
                                 <span class="transactions-recordscount-dropdown dropdown-text">50/Page</span>
-                                <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more'); ?>" alt="more">
                             </button>
                         </div>
                     </div>
@@ -608,7 +608,7 @@
                                 <div class="dropdown">
                                     <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
                                         <span class="accounts-status-dropdown dropdown-text query inputdropdown">All</span>
-                                        <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                        <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more'); ?>" alt="more">
                                     </button>
                                     <div class="dropdown-content">
                                         <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">All</a>
@@ -623,11 +623,11 @@
                     <div class="panel-accounts-buttons" data-transactiontype="mytransactions">
                         <div>
                             <button class="btn-default curson-pointer accounts-search-button" type="submit" value="Search" name="MyTransactionsSubmit">
-                                <img src="../public/images/icons/search-yellow.png" alt="search">
+                                <img src="<?php echo base_url('./public/images/icons/search-yellow'); ?>" alt="search">
                                 <span>Search</span>
                             </button>
                             <button class="btn-default curson-pointer accounts-clear-button" type="reset" value="Clear">
-                                <img src="../public/images/icons/clear-yellow.png" alt="search">
+                                <img src="<?php echo base_url('./public/images/icons/clear-yellow'); ?>" alt="search">
                                 <span>Clear</span>
                             </button>
                         </div>
@@ -686,7 +686,7 @@
                             <div class="dropdown">
                                 <button class="dropdownButton dropdownbtn curson-pointer" data-layout="bottom">
                                     <span class="addaccount-accountcategory-dropdown dropdown-text query inputdropdown">Guest</span>
-                                    <img class="dropdown-arrow" src="../public/images/icons/more.png" alt="more">
+                                    <img class="dropdown-arrow" src="<?php echo base_url('./public/images/icons/more'); ?>" alt="more">
                                 </button>
                                 <div class="dropdown-content" id="ActorCategory_Dropdown">
                                     <a class="dropdownButtonSubItem dropdown-selected" href="javascript:void(0)">Guest</a>
@@ -802,7 +802,7 @@
 <!--
     JAVASCRIPTS  ###
 -->
-    <script src="../public/javascript/main-accounting.js" type="module"></script>
+    <script src="<?php echo base_url('./public/javascript/main-accounting.js'); ?>" type="module"></script>
 </body>
 </html>
 

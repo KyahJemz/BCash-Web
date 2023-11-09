@@ -15,7 +15,6 @@ class Administrator extends CI_Controller {
 
         public function index($page = 'administrator')
         {
-                $config['base_url'] = 'http://localhost/index.php/';
 
                 $requestPostBody = $this->input->raw_input_stream;
                 

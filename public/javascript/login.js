@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost/index.php';
+const baseUrl = BaseURL;
 var Intent = "";
 var ResponseMessage = "";
 

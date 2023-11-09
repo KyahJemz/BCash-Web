@@ -21,7 +21,6 @@ class Account_Actions {
                      'ActivityLogs_Model',
                      'Card_Model',
                      'ActorCategory_Model',
-
               ]);
        }
 

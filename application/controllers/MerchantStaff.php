@@ -17,7 +17,6 @@ class MerchantStaff extends CI_Controller {
 
         public function index($page = 'merchantstaff')
         {
-                $config['base_url'] = 'http://localhost/index.php/';
 
                 $requestPostBody = $this->input->raw_input_stream;
                 
