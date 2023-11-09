@@ -29,19 +29,19 @@
         </div>
         <div class="left-box">
             <p class="welcome">WELCOME TO</p>
-            <img class="logo" src="<?php echo base_url('./public/images/bcash-logo.png'); ?>" alt="">
-            <p class="title">BCASH</p>
+            <br>
+            <p class="title">BCash</p>
+            <br>
             <p class="quote">An E-wallet application for SSC-RdC</p>
             <br>
-            <p class="intro">BCASH is a payment portal designed to offer food and supplies to all students in the school.</p>
+            <p class="intro">BCash is an e-wallet app for SSC-RdC. It enables you to pay for school needs and monitor your finances with ease. BCash is your smart and convenient payment portal.</p>
             <br>
             <div class="button-contianer">
-                <button class="curson-pointer moreinfo-btn">More Info</button>
                 <button class="curson-pointer signin-btn">Sign-In</button>
             </div>
         </div>
         <div class="right-box">
-            <img src="" alt="">
+            <img src="<?php echo base_url('./public/images/bcash-logo-bw.gif'); ?>" alt="">
         </div>
     </div>
 

@@ -152,16 +152,15 @@ body {
 
 .content-container .left-box .welcome {
     font-size: 0.7rem;
-    padding-bottom: 10px;
 }
 
-.content-container .left-box .logo {
+/* .content-container .left-box .logo {
     aspect-ratio: 1/1;
     height: 75px;
-}
+} */
 
 .content-container .left-box .title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
 }
 
@@ -202,15 +201,15 @@ body {
 .content-container .left-box .button-contianer .signin-btn {
     background-color: var(--Button-Background-Red);
     color: var(--TextColor-White);
+    transition: 0.5s ;
 }
 
-
-.content-container .left-box .button-contianer > *:hover {
+.content-container .left-box .button-contianer .signin-btn:hover {
     transform: scale(0.99);
     border-color: var(--color-DarkGold);
 }
 
-.content-container .left-box .button-contianer > *:active {
+.content-container .left-box .button-contianer .signin-btn:active {
     transform: scale(0.97);
     background-color: var(--Button-Background-Active-Red);
     color: var(--TextColor-White);
@@ -243,6 +242,16 @@ body {
     background-color: #000000b2;
     justify-content: center;
     align-items: center;
+    animation: formBackgroundAnim 0.3s ease-out;
+}
+
+@keyframes formBackgroundAnim {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
 }
 
 .pin-container,
@@ -259,7 +268,25 @@ body {
     flex-direction: column;
     gap: 10px;
     align-items: center;
-    
+    transition: 1s; 
+}
+
+.pin-container,
+.create-pin-container,
+.otp-container,
+.login-container{
+    animation: fromAnim 0.3s ease-in;
+}
+
+@keyframes fromAnim {
+    from {
+        transform: translateY(200%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 100;
+    }
 }
 
 .pin-container .form-title,
@@ -386,6 +413,7 @@ body {
     background-color: var(--Button-Background-Gold);
     color: rgb(31, 31, 31);
     font-weight: bold;
+    transition: 0.5s ;
 }
 
 .pin-container button:hover,
@@ -494,25 +522,4 @@ body {
       width: 600px;
       height: 400px;
     }
-  }
-
-
-
-
-
-  .test-links {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-  }
-
-  .test-links button {
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
-  .test-links button a{
-    text-decoration: none;
   }
