@@ -64,8 +64,6 @@ class Mobile_Login {
                                         $validatedGoogleFirstName = $body['given_name'];
                                         $validatedGoogleLastName = $body['family_name'];
 
-                                        log_message('debug', "---TEST---".$validatedGoogleEmail);
-
                                         $validUserAccount = $this->CI->UsersAccount_Model->read_by_Email($validatedGoogleEmail);
                                         $validGuardianAccount = $this->CI->GuardianAccount_Model->read_by_Email($validatedGoogleEmail);
 
@@ -135,7 +133,12 @@ class Mobile_Login {
                                                                 ];
                                                         } 
 
-                                                        $response = $this->CI->Verification->Process($UsersAccount_Address, null, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
+                                                        $response = [
+                                                                'Success' => True,
+                                                                'Target' => 'Login',
+                                                                'Parameters' => null,
+                                                                'Response' => '1st account sign-in, Registration complete.'
+                                                        ];
 
                                                 } else {
                                                         return [

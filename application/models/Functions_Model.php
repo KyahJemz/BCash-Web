@@ -214,11 +214,15 @@ class Functions_Model extends CI_Model {
                         $tbl_authentications = $this->Authentications_Model->read_by_address(array(
                                 "Account_Address"=>$AccountAddress
                         ));
+                        log_message('error', $AuthToken ." === ". $tbl_authentications->AuthToken);
                         if ($tbl_authentications && $this->get_current_timestamp() <= $tbl_authentications->AuthExpirationTime) {
                                 if ($AuthToken === $tbl_authentications->AuthToken) {
                                         $newAuthTokenCreationTime = $this->get_current_timestamp();
                                         $newAuthTokenExpirationTime = $this->get_current_timestamp_add($newAuthTokenCreationTime);
                                         $this->Authentications_Model->Update_Auth_Session($AccountAddress, $newAuthTokenExpirationTime);
+                                        
+                                        
+                                        
                                         return TRUE;
                                 } else {
                                         return FALSE;

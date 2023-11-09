@@ -374,7 +374,10 @@ export function addCardAddress(event){
   }
   Ajax.sendRequest(data, 'add card')
     .then(responseData => {
-
+      if (responseData.Success) {
+        cards.applyCardsQuery(null, 'get cards',addCardAddress);    
+        event.currentTarget.parentNode.querySelector('.AddCardAddressForm').value = "";
+      }
     })
 }
 
@@ -567,9 +570,8 @@ function addAccountContainerUpdate(){
 
 
   } else if (AccountCategory === 'Guest'){
-    document.getElementById('AddAccount-PasswordContainer').style.display = 'block';
     document.getElementById('AddAccount-CardAddressContainer').style.display = 'block';
-
+    document.getElementById('AddAccount-SchoolPersonalIdContainer').style.display = 'block';
    
   } else if (AccountCategory === 'Guardian') {
 
@@ -596,7 +598,17 @@ document.getElementById('AddAccount-SubmitBtn').addEventListener('click', () => 
   Ajax.sendRequest(data, "add account")
     .then(responseData => {
       if (responseData.Success) {
-        
+        document.getElementById('AddAccount-Firstname').value = "";
+        document.getElementById('AddAccount-Lastname').value = "";
+        document.getElementById('AddAccount-Email').value = "";
+        document.querySelector('#panel-addaccount .addaccount-accountcategory-dropdown').textContent = "";
+
+        document.querySelector('#panel-addaccount .addaccount-merchantcategory-dropdown').textContent = "";
+        document.getElementById('AddAccount-Username').value = "";
+        document.getElementById('AddAccount-Password').value = "";
+        document.getElementById('AddAccount-CardAddress').value = "";
+        document.getElementById('AddAccount-SchoolPersonalId').value = "";
+        document.getElementById('AddAccount-MerchantCategoryAdd').value = "";
       }
   })
 })

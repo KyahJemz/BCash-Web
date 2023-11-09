@@ -173,6 +173,7 @@ export default class Cards {
               Ajax.sendRequest(data, 'update card')
                 .then(responseData => {
                   if (responseData.Success) {
+                    
                   }
               });
               PinCode.value = '';

@@ -1189,6 +1189,10 @@ class Account_Actions {
                                    'Account_Address' => $AccountAddress,
                                    'GuardianAccountAddress' => $GuardianAccountAddress,
                             ));
+                            $this->CI->GuardianAccount_Model->update_UserAccountAddress(array(
+                                   'Account_Address' => $GuardianAccountAddress,
+                                   'UserAccountAddress' => $AccountAddress,
+                            ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
                                    'Target_Account_Address' => $AccountAddress,
@@ -1197,11 +1201,14 @@ class Account_Actions {
                             ));
                             $changes = $changes . 'GuardianAccountAddress, ';
                      }
-                     log_message('debug',  $UserAccountAddress);
-                     if ($AccountToModify->ActorCategory_Id === '7' && $AccountToModify->UsersAccount_Address && !empty($UserAccountAddress) &&  $AccountToModify->UsersAccount_Address !== $UserAccountAddress) {
+                     if ($AccountToModify->ActorCategory_Id === '7' && !empty($UserAccountAddress) && $AccountToModify->UsersAccount_Address !== $UserAccountAddress) {
                             $Account_Model->update_UserAccountAddress(array(
                                    'Account_Address' => $AccountAddress,
                                    'UserAccountAddress' => $UserAccountAddress,
+                            ));
+                            $this->CI->UsersData_Model->update_GuardianAccountAddress(array(
+                                   'Account_Address' => $AccountAddress,
+                                   'GuardianAccountAddress' => $GuardianAccountAddress,
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
@@ -1218,6 +1225,10 @@ class Account_Actions {
                      $this->CI->db->trans_rollback();
                      $error = $this->CI->db->error();
                      return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $error];
+              }
+
+              if ($changes === 'Changes: '){
+                     $changes = 'No Changes';
               }
 
               return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => $changes];
@@ -1420,7 +1431,7 @@ class Account_Actions {
                                           'Email' => $Email,
                                           'Firstname' => $Firstname,
                                           'Lastname' => $Lastname,
-                                          'Campus_Id ' => $Campus_Id,
+                                          'Campus_Id' => $Campus_Id,
                                           'Password' => null,
                                    ));
                                    $this->CI->UsersData_Model->create(array(
@@ -1445,7 +1456,7 @@ class Account_Actions {
                                    break;
                             case 'Guest': 
                                    if (empty($SchoolPersonalId) || empty($CardAddress)) {
-                                          trigger_error('Invalid SchoolPersonalId or CardAddress or Password', E_USER_ERROR);
+                                          trigger_error('Invalid SchoolPersonalId or CardAddress', E_USER_ERROR);
                                    }
                                    $Account_Address = $this->CI->Functions_Model->create_unique_address('GST');
                                    $this->CI->UsersAccount_Model->create(array(

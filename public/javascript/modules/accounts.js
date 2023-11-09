@@ -1454,7 +1454,7 @@ export default class Accounts {
                         </td>
                         <td>
                           <p>User Account Address:</p>
-                          <input id="AccountDetails-UserAccountAddress" type="text" value="${(data['UsersAccount_Address']) ? data['UserAccount_Address'] : ''}">
+                          <input id="AccountDetails-UserAccountAddress" type="text" value="${(data['UsersAccount_Address']) ? data['UsersAccount_Address'] : ''}">
                         </td>
                     </table>
                     

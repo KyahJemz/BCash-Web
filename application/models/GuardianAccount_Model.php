@@ -100,7 +100,6 @@ class GuardianAccount_Model extends CI_Model {
         ];
         $this->db->where('GuardianAccount_Address', $params['Account_Address']);
         $this->db->update('tbl_guardianaccount', $data);
-        log_message('debug',  '=== ETESTETST');
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 
