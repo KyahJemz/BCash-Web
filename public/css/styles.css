@@ -393,6 +393,21 @@ button img{
     width: 100%;
 }
 
+.Alert-Box-Table .Alert-box{
+    width: 100%;
+    animation: alertAnim 0.3s ease-out;
+}
+@keyframes alertAnim {
+    from {
+        transform: translateY(-200%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 100;
+    }
+}
+
 .Alert-Box-Table .Alert-box .Alert-content {
     padding: 15px;
     height: fit-content;

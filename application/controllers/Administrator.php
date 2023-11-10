@@ -55,6 +55,7 @@ class Administrator extends CI_Controller {
                 $data['AccountAddress'] = "Unknown";
                 $data['AuthToken'] = "Unknown";
                 $data['BaseURL'] = "http://localhost/index.php/Api/Request/Process";
+                $data['MainURL'] = "http://localhost/";
 
                 if ($data['IpAddress'] != $IpAddress || $data['Location'] != $Location || $data['Device'] != $Device) {
                          redirect('Login/index');
@@ -84,6 +85,7 @@ class Administrator extends CI_Controller {
                                 const Device = ' . json_encode($data['Device']) . ';
                                 const Location = ' . json_encode($data['Location']) . ';
                                 const BaseURL = ' . json_encode($data['BaseURL']) . ';
+                                const MainURL = ' . json_encode($data['MainURL']) . ';
                         </script>
                 ';
         

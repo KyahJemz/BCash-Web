@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCash - Login</title>
     <link rel="stylesheet" href="<?php echo base_url('./public/css/login.css'); ?>">
+    <link rel="icon" href="<?php echo base_url('./public/images/bcash_logo_white.png'); ?>">
 </head>
 <body> 
     <div class="design-background"></div>

@@ -50,7 +50,6 @@ class Request extends CI_Controller {
         $this->Location = $this->Functions_Model->sanitize($this->input->get_request_header('Location', TRUE));
         $this->Intent = $this->Functions_Model->sanitize($this->input->get_request_header('Intent', TRUE));
 
-
         $requestPostBody = $this->input->raw_input_stream; // READ POST BODY
         
         $requestPostBody = json_decode($requestPostBody, TRUE); // DECODES

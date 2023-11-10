@@ -589,6 +589,7 @@ export default class Accounts {
               Ajax.sendRequest(data, 'update user details')
                 .then(responseData => {
                   if (responseData.Success) {
+                    document.getElementById("Modal-Container").style.display = "none";
                   }
               });
             });

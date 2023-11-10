@@ -112,7 +112,7 @@ export default class Orders {
         document.getElementById("order-list").innerHTML = document.getElementById("order-list").innerHTML + `
           <div class="item" data-item-id="`+ item.itemId +`" data-cost="`+ item.cost +`"  data-name=`+ item.name +` data-image="`+ item.image +`">
             <div class="image">
-              <img src="../public/images/items/`+ item.image +`" alt="">
+              <img src="${MainURL}public/images/items/`+ item.image +`" alt="">
             </div>
             <div class="details">
               <p class="name-text">`+ item.name +`</p>

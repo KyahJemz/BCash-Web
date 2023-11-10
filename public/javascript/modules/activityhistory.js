@@ -16,9 +16,9 @@ export default class ActivityHistory {
       this.records.forEach(element => {
         layout = layout + `
           <div class='activity-logs-row'>
-            ${element.Action === 'Add' ? `<div style="background-image: url('../public/images/icons/bolt.png');" class="mark"></div>` 
-            : element.Action === 'Edit' ? `<div style="background-image: url('../public/images/icons/edit.png');" class="mark"></div>` 
-            : element.Action === 'Delete' ? `<div style="background-image: url('../public/images/icons/delete.png');" class="mark"></div>` 
+            ${element.Action === 'Add' ? `<div style="background-image: url('${MainURL}public/images/icons/bolt.png');" class="mark"></div>` 
+            : element.Action === 'Edit' ? `<div style="background-image: url('${MainURL}public/images/icons/edit.png');" class="mark"></div>` 
+            : element.Action === 'Delete' ? `<div style="background-image: url('${MainURL}public/images/icons/delete.png');" class="mark"></div>` 
             : ''
             }
             <div class="details">

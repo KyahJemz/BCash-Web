@@ -169,18 +169,30 @@ class Charts_Model extends CI_Model {
     } 
     public function RecentTransactions() {
         $RecentTransactions = $this->db
-            ->select('*')
-            ->from('tbl_transactionsinfo')
+            ->select('
+                transactions.Transaction_Address as TransactionAddress,
+                transactions.Timestamp as Timestamp,
+                transactions.TotalAmount as TotalAmount,
+                sender.Firstname as SenderFirstname,
+                sender.Lastname as SenderLastname,
+                receiver.Firstname as ReceiverFirstname,
+                receiver.Lastname as ReceiverLastname
+            ')
+            ->from('tbl_transactionsinfo as transactions')
+
             ->group_start()
-                ->like('Sender_Address', 'USR', 'after')
-                ->or_like('Sender_Address', 'GST', 'after')
+                ->like('transactions.Sender_Address', 'USR', 'after')
+                ->or_like('transactions.Sender_Address', 'GST', 'after')
             ->group_end()
             ->group_start()
-                ->like('Receiver_Address', 'USR', 'after')
-                ->or_like('Receiver_Address', 'GST', 'after')
+                ->like('transactions.Receiver_Address', 'USR', 'after')
+                ->or_like('transactions.Receiver_Address', 'GST', 'after')
             ->group_end()
 
-            ->order_by('Timestamp', 'DESC')
+            ->join('tbl_usersaccount as sender', 'transactions.Sender_Address = sender.UsersAccount_Address', 'left')
+            ->join('tbl_usersaccount as receiver', 'transactions.Receiver_Address = receiver.UsersAccount_Address', 'left')
+
+            ->order_by('transactions.Timestamp', 'DESC')
             ->limit(5)
             ->get()
             ->result();
@@ -198,16 +210,26 @@ class Charts_Model extends CI_Model {
             ->result();
         return $RecentTransactions;
     } 
-    public function RecentActivities(){
+    public function RecentActivities() {
         $RecentActivities = $this->db
-            ->select('*')
-            ->from('tbl_activitylogs')
-            ->order_by('Timestamp', 'DESC')
+            ->select('logs.*, 
+                mobile.Firstname as MobileFirstname, 
+                mobile.Lastname as MobileLastname, 
+                web.Firstname as WebFirstname, 
+                web.Lastname as WebLastname, 
+                guardian.Firstname as GuardianFirstname, 
+                guardian.Lastname as GuardianLastname')
+            ->from('tbl_activitylogs as logs')
+            ->join('tbl_usersaccount as mobile', 'logs.Account_Address = mobile.UsersAccount_Address', 'left')
+            ->join('tbl_webaccounts as web', 'logs.Account_Address = web.WebAccounts_Address', 'left')
+            ->join('tbl_guardianaccount as guardian', 'logs.Account_Address = guardian.GuardianAccount_Address', 'left')
+            ->order_by('logs.Timestamp', 'DESC')
             ->limit(5)
             ->get()
             ->result();
+    
         return $RecentActivities;
-    } 
+    }
 
 
 
@@ -382,9 +404,10 @@ class Charts_Model extends CI_Model {
     public function RecentAdminActivities() {
         $RecentActivities = $this->db
             ->select('*')
-            ->from('tbl_activitylogs')
-            ->like('Account_Address', 'ADM', 'after')
-            ->order_by('Timestamp', 'DESC')
+            ->from('tbl_activitylogs as logs')
+            ->join('tbl_webaccounts as web', 'logs.Account_Address = web.WebAccounts_Address', 'left')
+            ->like('logs.Account_Address', 'ADM', 'after')
+            ->order_by('logs.Timestamp', 'DESC')
             ->limit(5)
             ->get()
             ->result();
@@ -393,13 +416,14 @@ class Charts_Model extends CI_Model {
     public function RecentAccountingMerchantActivities() {
         $RecentActivities = $this->db
             ->select('*')
-            ->from('tbl_activitylogs')
+            ->from('tbl_activitylogs as logs')
             ->group_start()
-                ->like('Account_Address', 'ACT', 'after')
-                ->or_like('Account_Address', 'MTA', 'after')
-                ->or_like('Account_Address', 'MTS', 'after')
+                ->like('logs.Account_Address', 'ACT', 'after')
+                ->or_like('logs.Account_Address', 'MTA', 'after')
+                ->or_like('logs.Account_Address', 'MTS', 'after')
             ->group_end()
-            ->order_by('Timestamp', 'DESC')
+            ->join('tbl_webaccounts as web', 'logs.Account_Address = web.WebAccounts_Address', 'left')
+            ->order_by('logs.Timestamp', 'DESC')
             ->limit(5)
             ->get()
             ->result();
@@ -407,14 +431,20 @@ class Charts_Model extends CI_Model {
     }
     public function RecentUsersActivities() {
         $RecentActivities = $this->db
-            ->select('*')
-            ->from('tbl_activitylogs')
+            ->select('logs.*, 
+                mobile.Firstname as MobileFirstname, 
+                mobile.Lastname as MobileLastname, 
+                guardian.Firstname as GuardianFirstname, 
+                guardian.Lastname as GuardianLastname')
+            ->from('tbl_activitylogs as logs')
+            ->join('tbl_usersaccount as mobile', 'logs.Account_Address = mobile.UsersAccount_Address', 'left')
+            ->join('tbl_guardianaccount as guardian', 'logs.Account_Address = guardian.GuardianAccount_Address', 'left')
             ->group_start()
                 ->like('Account_Address', 'USR', 'after')
                 ->or_like('Account_Address', 'GST', 'after')
                 ->or_like('Account_Address', 'GDN', 'after')
             ->group_end()
-            ->order_by('Timestamp', 'DESC')
+            ->order_by('logs.Timestamp', 'DESC')
             ->limit(5)
             ->get()
             ->result();

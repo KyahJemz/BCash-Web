@@ -38,6 +38,6 @@ class Account_Logout {
                         $this->CI->Authentications_Model->delete($Account->WebAccounts_Address);
                 }
 
-                return ['Success' => TRUE,'Target' => 'Login','Parameters' => null,'Response' => '']; 
+                return ['Success' => true,'Target' => 'Login','Parameters' => null,'Response' => '']; 
         }
 }

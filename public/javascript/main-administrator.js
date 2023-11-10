@@ -686,7 +686,7 @@ export function SetNotifications() {
               <p class="notification-content">${row['Content']}</p>
             </div>
             <div class="right-content">
-              <button class="notification-delete" data-notification="${row['Notification_ID']}"><img src="../public/images/icons/delete-red.png" alt="" srcset=""></button>
+              <button class="notification-delete" data-notification="${row['Notification_ID']}"><img src="${MainURL}public/images/icons/delete-red.png" alt="" srcset=""></button>
             </div>
           </div>
         `;

@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCash - Administrator</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="<?php echo base_url('./public/images/bcash_logo_white.png'); ?>">
+    
     <link rel="stylesheet" href="<?php echo base_url('./public/css/styles.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/dialog-box.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/menu.css'); ?>">
@@ -32,7 +34,7 @@
     <div class="sidebar-container">
         <div class="top-panel">
             <div class="image">
-                <img src="<?php echo base_url('./public/images/bcash-logo.png'); ?>" alt="BCash Logo">
+                <img src="<?php echo base_url('./public/images/bcash_logo_white.png'); ?>" alt="BCash Logo">
             </div>
             <div class="details">
                 <div class="category">BCash: Administrator</div>

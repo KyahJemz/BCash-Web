@@ -71,12 +71,32 @@ class Mobile_Login {
 
                                                 $AccountAddress = $validGuardianAccount->GuardianAccount_Address;
 
+                                                if ($this->CI->Authentications_Model->read_by_address(array('Account_Address'=>$AccountAddress))) {
+                                                        $this->CI->Authentications_Model->delete($AccountAddress);
+                                                        return [
+                                                                'Success' => True,
+                                                                'Target' => 'Login',
+                                                                'Parameters' => null,
+                                                                'Response' => 'Account is already active. Force logout activated, Please try again!'
+                                                        ];
+                                                }
+
                                                 $response = $this->CI->Verification->Process($AccountAddress, null, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
 
                                         } else {
                                                 if (!empty($validUserAccount)) {
 
                                                         $AccountAddress = $validUserAccount->UsersAccount_Address;
+
+                                                        if ($this->CI->Authentications_Model->read_by_address(array('Account_Address'=>$AccountAddress))) {
+                                                                $this->CI->Authentications_Model->delete($AccountAddress);
+                                                                return [
+                                                                        'Success' => True,
+                                                                        'Target' => 'Login',
+                                                                        'Parameters' => null,
+                                                                        'Response' => 'Account is already active. Force logout activated, Please try again!'
+                                                                ];
+                                                        }
 
                                                         $response = $this->CI->Verification->Process($AccountAddress, null, $validatedIpAddress, $validatedDevice, $validatedLocation, null);
 

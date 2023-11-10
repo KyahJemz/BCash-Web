@@ -231,6 +231,12 @@ class Account_Actions {
        
               $Details_ = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=> $AccountAddress));
 
+              if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6') {
+                     if ($Details_->CanModifySettings === '0') {
+                            return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'You do not have permission, CanModifySettings is turned off!'];
+                     }
+              }
+
               $this->CI->db->trans_start(); 
 
                      if (
@@ -242,9 +248,6 @@ class Account_Actions {
                      ) {
 
                             if ($Account->ActorCategory_Id === '5' || $Account->ActorCategory_Id === '6') {
-                                   if ($Details_->CanModifySettings === '0') {
-                                          return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'You do not have permission, CanModifySettings is turned off!'];
-                                   }
                                    $this->CI->UsersData_Model->update_by_users(array(
                                           'Account_Address' => $AccountAddress,
                                           'CanDoTransfers' => $CanDoTransfers,
@@ -413,7 +416,7 @@ class Account_Actions {
 
  /* 
 -- ---------------------
-   VIEW USER ACCOUNT BY SID
+   VIEW USER ACCOUNT BY SIDView_User_Account_By_SPID
    - for admin accounting use
 -- ---------------------
 */  
@@ -429,10 +432,21 @@ class Account_Actions {
               }
 
               $Id = $this->CI->Functions_Model->sanitize($requestPostBody['Id']);
+
+              // by studnet id
               $AccountAddress = $this->CI->UsersData_Model->read_by_id(array('SchoolPersonalId'=>$Id));
               if (!$AccountAddress) {
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Account not found'];
+                     // by card
+                     $AccountAddress = $this->CI->Card_Model->read_by_CardAddress(array('Card_Address'=>$Id));
+                     if (!$AccountAddress) {
+                            // by address
+                            $AccountAddress = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$Id));
+                            if (!$AccountAddress) {
+                                   return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Account not found'];
+                            }
+                     }
               }
+              
               $AccountAddress = $AccountAddress->UsersAccount_Address;
               
               $AccountBalance = $this->CI->Transactions_Model->calculate_total_balance(array(
@@ -633,6 +647,8 @@ class Account_Actions {
                             ));
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
+                                   'Target_Account_Address' => $AccountAddress,
+                                   'Action' => 'Edit',
                                    'Task' => 'Updated ['.$AccountAddress.'] CanDoTransactions settings to '.$CanDoTransactions.'.',
                             ));
                             $changes = $changes . 'CanDoTransactions, ';

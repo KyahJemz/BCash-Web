@@ -95,7 +95,7 @@ export default class Modals {
             return `
                 <div class="Add-Item">
                     <div class="image">
-                        <img src="../images/school.jpg" alt="">
+                        <img src="${MainURL}public/images/school.jpg" alt="">
                     </div>
                     <form action="" onsubmit="return false;" class="form" id="AddItem-Form" enctype="multipart/form-data">
                         <div>
@@ -128,7 +128,7 @@ export default class Modals {
             return `
                 <div class="Edit-Item">
                     <div class="image">
-                        <img src="../public/images/items/${value['ItemImage']}" alt="">
+                        <img src="${MainURL}public/images/items/${value['ItemImage']}" alt="">
                     </div>
                     <div class="form">
                         <div>
@@ -291,7 +291,7 @@ export default class Modals {
                         <table>
                             <tr>
                                 <td>
-                                    <img src="../public/images/profiles/default.png" alt="profile">
+                                    <img src="${MainURL}public/images/profiles/default.png" alt="profile">
                                 </td>
                                 <td>
                                     <p>Account Address:</p>

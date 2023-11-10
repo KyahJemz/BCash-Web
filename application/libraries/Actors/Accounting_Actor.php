@@ -48,7 +48,7 @@ class Accounting_Actor {
                 $response = $this->CI->Transaction_Actions->Admin_Accounting_View_All_Transaction_History_Details ($Account, $requestPostBody);
                 break;
 
-            case 'get user account by spid': 
+            case 'get user account to cash in': 
                 $response =  $this->CI->Account_Actions->View_User_Account_By_SPID($Account, $requestPostBody);
                 break;
 

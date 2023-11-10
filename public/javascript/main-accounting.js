@@ -389,7 +389,7 @@ async function Logout (){
 
 document.getElementById('CashIn-Id').addEventListener('change', CashIn_SearchUser)
 async function CashIn_SearchUser () {
-  const intent = "get user account by spid";
+  const intent = "get user account to cash in";
   const data = { 
     Id : document.getElementById('CashIn-Id').value,
     Amount : document.getElementById('CashIn-Amount').value,
@@ -444,7 +444,7 @@ async function CashIn_RecentCashIn () {
         responseData.Parameters.forEach(row => {
           layout = layout + `
             <li>
-              <img src="../public/images/profiles/default.png" alt="" >
+              <img src="${MainURL}public/images/profiles/default.png" alt="" >
               <div>
                 <p class="name">${row['Firstname']} ${row['Lastname']}</p>
                 <p class="date">${row['Timestamp']}</p>
