@@ -309,6 +309,9 @@ function onMenuSelectionButton(event) {
         fundRemittance(responseData.Parameters);
       })
   }
+  if (event.currentTarget.dataset.menu === "Orders") {
+    refreshOrders();
+  }
 }
 
 helper.addElementClickListener('.menuSelectionButton', onMenuSelectionButton);
@@ -685,6 +688,61 @@ export function fundRemittance (parameters){
        
 
       })
+}
+
+async function refreshOrders() {
+  await Ajax.sendRequest([], "get orders")
+  .then(responseData => {
+    if(responseData.Success) {
+      document.getElementById("orders-container").innerHTML = '';
+      responseData.Parameters.forEach(element => {
+        let view = `
+            <div class="order-items-row">
+                <p class="Item-Name"><a class="highlight">Name</a></p>
+                <p class="Item-Quantity"><a class="highlight">Quantity</a></p>
+            </div>
+          `;
+        element.Items.forEach(item => {
+          view = view + `
+              <div class="order-items-row">
+                  <p class="Item-Name">${item.Name}</p>
+                  <p class="Item-Quantity">x${item.Quantity}</p>
+              </div>
+          `;
+        });
+        document.getElementById("orders-container").innerHTML = document.getElementById("orders-container").innerHTML + `
+            <div class="orders-item">
+                <p class="TransactionAddress">Ref. No.: <a class="highlight">${element.Transaction_Address}</a></p>
+                <p class="ReceiverName">Name: <a class="highlight">${element.Firstname} ${element.Lastname}</a></p>
+                <p class="TotalAmount">Amount: <a class="highlight">₱ ${helper.formatNumber(element.TotalAmount)}</a></p>
+                <hr/>
+                <div class="order-items">
+                  ${view}
+                </div>
+                <hr/>
+                <p class="Timestamp">Time: ${helper.getTime(element.Timestamp)}</p>
+                <button data-transactionaddress="${element.Transaction_Address}" class="CompleteBtn">Mark As Complete</button>
+            </div>
+        `;
+      });
+      const elements = document.querySelectorAll('#panel-orders .CompleteBtn');
+      elements.forEach(element => {
+        element.addEventListener('click', (event) => {
+          const data = {
+            TransactionAddress: event.currentTarget.dataset.transactionaddress
+          };
+          Ajax.sendRequest(data, "complete order")
+          .then(responseData => {
+            if (responseData.Success) {
+              refreshOrders();
+            }
+          });
+        })
+      });
+
+              
+    }
+  });
 }
 
 Ajax.sendRequest([], "get chart data")

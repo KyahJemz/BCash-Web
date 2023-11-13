@@ -25,7 +25,7 @@ class GuardianAccount_Model extends CI_Model {
         $result = $this->db
             ->select('*')
             ->from('tbl_guardianaccount')
-            ->where('GuardianAccount_Address ', $params['Account_Address'])
+            ->where('GuardianAccount_Address', $params['Account_Address'])
             ->get()
             ->row();
         if ($result) {

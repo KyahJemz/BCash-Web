@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/transactions.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/loginhistory.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/activityhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/orders.css'); ?>">
 </head>
 
 
@@ -57,6 +58,11 @@
                         <div class="selected"></div>
                         <img src="<?php echo base_url('./public/images/icons/longreceipt.png'); ?>" alt="Transactions Icon">
                         <p>Transactions</p>
+                    </li>
+                    <li data-menu="Orders" class="curson-pointer menuSelectionButton">
+                        <div class="selected"></div>
+                        <img src="<?php echo base_url('./public/images/icons/order-receipt.png'); ?>" alt="Orders Icon">
+                        <p>Orders</p>
                     </li>
                 </ul>
             </nav>
@@ -311,6 +317,15 @@
                         </div>
                     </div>
                 </div>
+
+    <!--
+        ORDERS 
+    -->
+                <div id="panel-orders" class="body-content-panel hidden">       
+                    <div id="orders-container" class="orders-container">
+                    </div>
+                </div>
+
     <!--
         END 
     -->

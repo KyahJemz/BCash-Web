@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/fundremittance.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/loginhistory.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/activityhistory.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('./public/css/merchant/orders.css'); ?>">
 </head>
 
 <body>
@@ -68,6 +69,10 @@
                             <li data-menu="Transactions" class="curson-pointer menuSelectionButton">
                                 <div class="selected"></div>
                                 <p>Transactions</p>
+                            </li>
+                            <li data-menu="Orders" class="curson-pointer menuSelectionButton">
+                                <div class="selected"></div>
+                                <p>Orders</p>
                             </li>
                         </ul>
                     </li>
@@ -610,6 +615,26 @@
                         </div>
                     </div>
                 </div>
+
+    <!--
+        ORDERS 
+    -->
+                <div id="panel-orders" class="body-content-panel hidden">       
+                    <div id="orders-container" class="orders-container">
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!--
         END 

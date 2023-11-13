@@ -84,6 +84,13 @@ class Functions_Model extends CI_Model {
                 if ($tbl_webaccounts) {
                         return $tbl_webaccounts;
                 }
+
+                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address(array(
+                        'Account_Address' => $AccountAddress
+                ));
+                if ($tbl_guardiansaccount){
+                        return $tbl_guardiansaccount;
+                }
                 
                 $tbl_usersaccount = $this->UsersAccount_Model->read_by_address(array(
                         'Account_Address' => $AccountAddress
@@ -92,12 +99,7 @@ class Functions_Model extends CI_Model {
                         return $tbl_usersaccount;
                 }
 
-                $tbl_guardiansaccount = $this->GuardianAccount_Model->read_by_address(array(
-                        'Account_Address' => $AccountAddress
-                ));
-                if ($tbl_guardiansaccount){
-                        return $tbl_guardiansaccount;
-                }
+                
 
                 return FALSE;
 
@@ -300,6 +302,63 @@ class Functions_Model extends CI_Model {
                 $OTP = $this->Authentications_Model->create_otp($AccountAddress);
                 if ($OTP) {
                         $receiver = $this->getAccountsByAddress($AccountAddress)->Email;
+                        log_message('error','Email : ['.$receiver.'], OTP : ['.$OTP.']');
+
+                        $this->load->library('email');
+                        $config = array(
+                                'protocol' => 'smtp',
+                                'smtp_host' => 'smtp.elasticemail.com',
+                                'smtp_port' => 2525,
+                                'smtp_user' => 's.stephen.layson@sscr.edu',
+                                'smtp_pass' => '739F3559A0950E475EB397D847CE5B49DB67',
+                                'smtp_crypto' => 'tls', 
+                                'mailtype'  => 'html',
+                                'charset'   => 'utf-8',
+                                'newline'   => "\r\n",
+                        );
+
+                        $this->email->initialize($config);
+                        
+                        $this->email->from('stephenreganjames.layson@gmail.com', 'Baste Cash');
+                        $this->email->to($receiver);
+                        $this->email->subject('Your One-Time Password (OTP)');
+                        $this->email->message('Your One-Time Password (OTP) for authentication is: '.$OTP);
+                        
+                        // Send the email
+                        if ($this->email->send()) {
+                                log_message('error','Email sent successfully.');
+                        } else {
+                                log_message('error','Error sending email: ' . $this->email->print_debugger());
+                        }
+
+                        // $url = 'https://api.elasticemail.com/v2/email/send';
+                        // log_message('error','Email : ['.$receiver.'], OTP : ['.$OTP.']');
+                        // try{
+                        //         $post = array('from' => 'stephenreganjames.layson@gmail.com',
+                        //                 'fromName' => 'Baste Cash (BCash)',
+                        //                 'apikey' => 'D8D5F4F8AA7229A81C6B372B1286B52D50EF12D6409E6D8B5E4B6A4864563144436925CABB5A2F59AB281760C9EE19D3',
+                        //                 'subject' => 'Your One-Time Password (OTP)',
+                        //                 'to' => $receiver,
+                        //                 'bodyHtml' => '<h1>Your One-Time Password (OTP) for authentication is: '.$OTP.'</h1>',
+                        //                 'bodyText' => 'Your One-Time Password (OTP) for authentication is: '.$OTP,
+                        //                 'isTransactional' => true);         
+                        //                 $ch = curl_init();
+                        //                 curl_setopt_array($ch, array(
+                        //                 CURLOPT_URL => $url,
+                        //                                 CURLOPT_POST => true,
+                        //                                 CURLOPT_POSTFIELDS => $post,
+                        //                 CURLOPT_RETURNTRANSFER => true,
+                        //                 CURLOPT_HEADER => false,
+                        //                                 CURLOPT_SSL_VERIFYPEER => false
+                        //         ));        
+                        //         $result=curl_exec ($ch);
+                        //         curl_close ($ch);       
+                        //         log_message('error',$result);
+                        // }
+                        // catch(Exception $ex){
+                        //         log_message('error',$ex->getMessage());
+                        // }
+
                         // $mj = new \Mailjet\Client('e7a7aafdf70a4d005ada887621f0a97e', 'fef635b0630e9815bab152f6544160a7', true, ['version' => 'v3.1']);
                         // $body = [
                         //         'Messages' => [

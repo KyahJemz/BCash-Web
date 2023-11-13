@@ -204,8 +204,6 @@ class Transactions_Model extends CI_Model {
         }
     
         $result = $this->db->limit($results_per_page)->get()->result();
-
-        Log_message('debug', $this->db->last_query());
     
         return ($result) ? $result : $result;
     }
@@ -515,13 +513,6 @@ class Transactions_Model extends CI_Model {
         }
     }
 
-
-
-
-
-
-
-
     public function read_pending_transactions($params) {
         return $this->db
             ->select('*')
@@ -538,7 +529,7 @@ class Transactions_Model extends CI_Model {
     
     public function update_transactions_approved($params){
         $data = [
-            'Status' => 'Completed'
+            'Status' => 'Paid'
         ];
         
         $this->db->where('Transaction_Address', $params['Transaction_Address']);
@@ -556,7 +547,7 @@ class Transactions_Model extends CI_Model {
 
     public function update_transactionsinfo_approved($params){
         $data = [
-            'Status' => 'Completed'
+            'Status' => 'Paid'
         ];
         
         $this->db->where('Transaction_Address', $params['Transaction_Address']);
@@ -570,6 +561,85 @@ class Transactions_Model extends CI_Model {
         
         $this->db->where('Transaction_Address', $params['Transaction_Address']);
         $this->db->update('tbl_transactionsinfo', $data);
+    }
+
+
+
+    public function read_paid_transactions($params) {
+
+        $Orders = $this->db
+            ->select('
+                items.Transaction_Address as Transaction_Address,
+                transaction.Timestamp as Timestamp,
+                transaction.Status as Status,
+                transaction.TotalAmount as TotalAmount,
+                account.Firstname as Firstname,
+                account.Lastname as Lastname,
+                details.Name as Name,
+                items.Quantity as Quantity
+            ')
+            ->from('tbl_transactionitems as items')
+            ->join('tbl_merchantitems as details', 'items.MerchantItems_Id = details.MerchantItems_Id', 'left')
+            ->join('tbl_transactionsinfo as transaction', 'items.Transaction_Address = transaction.Transaction_Address', 'left')
+            ->join('tbl_usersaccount as account', 'transaction.Sender_Address = account.UsersAccount_Address', 'left')
+            ->where('transaction.Status', 'Paid')
+            ->where('transaction.Receiver_Address', $params['Receiver_Address'])
+            ->get()
+            ->result();
+    
+        $OrdersArray = [];
+        $processedTransactionAddresses = [];
+    
+        foreach ($Orders as $value) {
+            $transactionAddress = $value->Transaction_Address;
+    
+            // Check if the transaction address has already been processed
+            if (!in_array($transactionAddress, $processedTransactionAddresses)) {
+                $order = [
+                    'Transaction_Address' => $transactionAddress,
+                    'Timestamp' => $value->Timestamp,
+                    'Status' => $value->Status,
+                    'TotalAmount' => $value->TotalAmount,
+                    'Firstname' => $value->Firstname,
+                    'Lastname' => $value->Lastname,
+                    'Items' => [
+                        [
+                            'Name' => $value->Name,
+                            'Quantity' => $value->Quantity
+                        ]
+                    ]
+                ];
+    
+                $OrdersArray[] = $order;
+    
+                // Mark the transaction address as processed
+                $processedTransactionAddresses[] = $transactionAddress;
+            } else {
+                // If the transaction address has already been processed, add items to the existing order
+                $existingOrderIndex = array_search($transactionAddress, array_column($OrdersArray, 'Transaction_Address'));
+                $OrdersArray[$existingOrderIndex]['Items'][] = [
+                    'Name' => $value->Name,
+                    'Quantity' => $value->Quantity
+                ];
+            }
+        }
+    
+        return $OrdersArray;
+    }
+
+    public function complete_transaction($params) {
+        $data = [
+            'Status' => 'Completed'
+        ];
+
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);
+        $this->db->update('tbl_transactionsinfo', $data);
+
+        $this->db->where('Transaction_Address', $params['Transaction_Address']);
+        $this->db->update('tbl_transactions', $data);
+
+        return ($this->db->affected_rows() > 0); 
+
     }
 }
 

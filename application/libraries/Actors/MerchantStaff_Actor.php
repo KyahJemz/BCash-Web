@@ -89,6 +89,14 @@ class MerchantStaff_Actor {
             case 'listen confirmation event':
                 $response = $this->CI->Order_Actions->Listen_Confirmation_Event($requestPostBody);
                 break;
+
+            case 'get orders':
+                $response = $this->CI->Transaction_Actions->Get_Orders($Account);
+                break;
+
+            case 'complete order':
+                $response = $this->CI->Transaction_Actions->Complete_Order($Account, $requestPostBody);
+                break;  
                 
             default:
                 $response = ['success' => FALSE, 'response' => 'Invalid Intent or Not Permitted']; 

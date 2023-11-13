@@ -38,9 +38,7 @@ class Verification {
                                 ];
                         } else {
                                 if ($this->CI->Functions_Model->generateNewAuth($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)){
-                                        log_message('error', "################ Generatring");
                                         $AuthToken = $this->CI->Authentications_Model->read_by_address(array('Account_Address'=>$AccountAddress))->AuthToken;
-                                        log_message('error', "################ kuku = ".$AuthToken);
 
                                         // Check If New Sign In Device Or IP
                                         if ($this->CI->Functions_Model->validateIfNewAccountLogin($AccountAddress,$validatedIpAddress,$validatedDevice,$validatedLocation)) {
@@ -63,6 +61,8 @@ class Verification {
                                                 if ($this->CI->Functions_Model->validateIfAccountHasPINCode($AccountAddress)) {
                                                         if (!empty($validatedPin)){
                                                                 if ($this->CI->Functions_Model->validatePIN($AccountAddress, $validatedPin)) {
+                                                                        $Actor = $account->ActorCategory_Id;
+                                                                        
                                                                         $parameters = [
                                                                                 'AccountAddress' => $AccountAddress,
                                                                                 'AuthorizationToken' => $AuthToken,

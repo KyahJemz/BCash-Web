@@ -618,7 +618,7 @@ public function View_My_Recent_Transactions ($Account, $Limit) {
                      $this->CI->Transactions_Model->create_transaction(array(
                             'Transaction_Address' => $TransactionAddress,
                             'Account_Address' => $AccountAddress,
-                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Completed' : 'Payment',  
+                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Paid' : 'Payment',  
                             'Debit' => $TotalAmount,
                             'Credit' => '0',
                      ));
@@ -627,7 +627,7 @@ public function View_My_Recent_Transactions ($Account, $Limit) {
                      $this->CI->Transactions_Model->create_transaction(array(
                             'Transaction_Address' => $TransactionAddress,
                             'Account_Address' => $MerchantAddress,
-                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Completed' : 'Payment',  
+                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Paid' : 'Payment',  
                             'Debit' => '0',
                             'Credit' => $TotalAmount,
                      ));
@@ -637,7 +637,7 @@ public function View_My_Recent_Transactions ($Account, $Limit) {
                             'TransactionType_Id' => '3', // Purchase
                             'Sender_Address' => $AccountAddress, 
                             'Receiver_Address' => $MerchantAddress,
-                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Completed' : 'Payment',  
+                            'Status' => ($ReceiverAccountData->IsTransactionAutoConfirm === '1') ? 'Paid' : 'Payment',  
                             'Amount' => $Amount,
                             'Discount' => $Discount,
                             'TotalAmount' => $TotalAmount,
@@ -690,7 +690,7 @@ public function Approve_Order ($Account, $AccountData, $requestPostBody) {
        $Status = $this->CI->Functions_Model->sanitize($requestPostBody['Status']);
 
        if ($Status === 'canceled' || $Status === 'confirmed') {
-              $Status = ($Status === 'canceled') ? 'Canceled' : 'Completed';
+              $Status = ($Status === 'canceled') ? 'Canceled' : 'Paid';
        } else {
               return ['Success' => false,'Target' => null,'Parameters' => null,'Response' => 'Invalid status parameter'];
        }
@@ -728,6 +728,51 @@ public function Approve_Order ($Account, $AccountData, $requestPostBody) {
        }
 
        return ['Success' => True,'Target' => null,'Parameters' => null,'Response' => 'Success'];
+}
+
+public function Get_Orders($Account){
+
+       $MerchantAddress = $this->CI->Merchants_Model->get_merchantadminaddress(array(
+              'WebAccounts_Address'=>$Account->WebAccounts_Address,
+       ))->WebAccounts_Address;
+
+       $PainOrders = $this->CI->Transactions_Model->read_paid_transactions(array(
+              'Receiver_Address' => $MerchantAddress,
+       ));
+
+       return ['Success' => True,'Target' => null,'Parameters' => $PainOrders,'Response' => ''];
+}
+
+public function Complete_Order($Account, $requestPostBody){
+
+       $this->CI->form_validation->set_data($requestPostBody);
+
+       $this->CI->form_validation->set_rules('TransactionAddress', 'TransactionAddress', 'trim|required|alpha_numeric|exact_length[20]');
+
+       if ($this->CI->form_validation->run() === FALSE) {
+              $validationErrors = validation_errors();
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => ''. $validationErrors];
+       }
+
+       $TransactionAddress = $this->CI->Functions_Model->sanitize($requestPostBody['TransactionAddress']);
+
+       $MerchantAddress = $this->CI->Merchants_Model->get_merchantadminaddress(array(
+              'WebAccounts_Address'=>$Account->WebAccounts_Address,
+       ))->WebAccounts_Address;
+
+       $Transaction = $this->CI->Transactions_Model->read_transactionsinfo_by_transactionaddress(array(
+              'TransactionAddress' => $TransactionAddress
+       ));
+
+       if ($Transaction['Info']->Receiver_Address !== $MerchantAddress){
+              return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid, Not Your Orders.'];
+       }
+
+       $this->CI->Transactions_Model->complete_transaction(array(
+              'Transaction_Address' => $TransactionAddress,
+       ));
+
+       return ['Success' => True,'Target' => null,'Parameters' => $Transaction,'Response' => 'Suucessfull'];
 }
 
 

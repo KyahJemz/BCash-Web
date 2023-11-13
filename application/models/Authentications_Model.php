@@ -60,7 +60,7 @@ class Authentications_Model extends CI_Model {
         $this->db->where('Account_Address', $AccountAddress);
         $this->db->update('tbl_authentications', $data);
         $result = $this->db->affected_rows();
-        return ($result > 0) ? TRUE : FALSE;
+        return $newOTP;
     }
 
     public function clear_otp($AccountAddress){
