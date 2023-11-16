@@ -341,10 +341,20 @@ public function View_My_Recent_Transactions ($Account, $Limit) {
               $Id = $this->CI->Functions_Model->sanitize($requestPostBody['Id']);
               $Amount = $this->CI->Functions_Model->sanitize($requestPostBody['Amount']);
 
+              // by studnet id
               $AccountData = $this->CI->UsersData_Model->read_by_id(array('SchoolPersonalId'=>$Id));
               if (!$AccountData) {
-                     return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Invalid receivers account!'];
+                     // by card
+                     $AccountData = $this->CI->Card_Model->read_by_CardAddress(array('Card_Address'=>$Id));
+                     if (!$AccountData) {
+                            // by address
+                            $AccountData = $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$Id));
+                            if (!$AccountData) {
+                                   return ['Success' => False,'Target' => null,'Parameters' => null,'Response' => 'Account not found'];
+                            }
+                     }
               }
+
               $AccountAddress = $AccountData->UsersAccount_Address;
 
               $isAccountExist =  $this->CI->UsersAccount_Model->read_by_address(array('Account_Address'=>$AccountAddress));

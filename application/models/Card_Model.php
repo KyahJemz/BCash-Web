@@ -24,7 +24,7 @@ class Card_Model extends CI_Model {
         $result = $this->db
             ->select('*')
             ->from('tbl_card')
-            ->where('Card_Address ', $params['Card_Address'])
+            ->where('Card_Address', $params['Card_Address'])
             ->get()
             ->row();
         return $result;

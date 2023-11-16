@@ -95,7 +95,7 @@ export default class Modals {
             return `
                 <div class="Add-Item">
                     <div class="image">
-                        <img src="${MainURL}public/images/school.jpg" alt="">
+                        <img src="${MainURL}public/images/items/default.png" alt="">
                     </div>
                     <form action="" onsubmit="return false;" class="form" id="AddItem-Form" enctype="multipart/form-data">
                         <div>

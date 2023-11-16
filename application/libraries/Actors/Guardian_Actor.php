@@ -18,6 +18,9 @@ class Guardian_Actor {
     }
 
     public function Process ($Account, $ActorCategory, $Intent, $requestPostBody) {
+
+        $AccountData = $this->CI->UsersData_Model->read_by_address(array('Account_Address'=>$Account->UsersAccount_Address));
+
         switch ($Intent) {
             case 'Logout':
                 $response = $this->CI->Account_Logout->Logout($Account);
