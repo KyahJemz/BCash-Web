@@ -1204,7 +1204,7 @@
                         <div class="config-pin-container">
                             <div class="settings">
                                 <p>Your PIN Code:</p>
-                                <input id="Config-PinCode" type="password" placeholder=" * * * * * * ">
+                                <input id="Config-PinCode" maxlength="6" type="password" placeholder=" * * * * * * ">
                                 <button id="Config-Submit">Update</button>
                             </div>
                         </div>
