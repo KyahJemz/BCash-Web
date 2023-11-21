@@ -13,8 +13,29 @@
 <body>
 
     <div id="app"></div>
+    
+    <div id="g_id_onload"
+        data-client_id="953479842774-oou2sv3r8ku0ug4kes6u9mfundf9ok84.apps.googleusercontent.com"
+        data-context="signin"
+        data-ux_mode="popup"
+        data-callback="handleCredentialResponse"
+        data-nonce=""
+        data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin"
+        data-type="standard"
+        data-shape="rectangular"
+        data-theme="outline"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="center"
+        data-width="400">
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <script src="<?php echo base_url('./public/javascript/mobile/main.js'); ?>" type="module"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
 </body>
 </html>

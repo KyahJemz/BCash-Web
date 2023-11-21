@@ -27,8 +27,9 @@ html, body, #app {
 }
 
 .keypad table tr td{
-    padding: 15px;
+    padding: 20px;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 
@@ -46,6 +47,10 @@ html, body, #app {
     flex: 1;
     aspect-ratio: 1/1;
     border: 1px solid gainsboro;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
 }
 
 
@@ -249,6 +254,7 @@ html, body, #app {
     border-radius: 5px;
     width: 100%;
     padding: 10px 50px;
+    cursor: pointer;
   }
 
   .Form-Dual-Button-Box{
@@ -263,6 +269,7 @@ html, body, #app {
     border-radius: 5px;
     width: 100%;
     padding: 10px 50px;
+    cursor: pointer;
   }
 
   .Form-Button:hover {
@@ -272,4 +279,16 @@ html, body, #app {
   .Form-Button:active {
     box-shadow: 0px 0px 3px 3px gainsboro;
     background-color: #490506;
+  }
+
+
+
+  
+  #Home-Card-SID-Toggle, #Home-Card-Balance-Toggle{
+    cursor: pointer;
+  }
+
+
+  .Pointer, .Nav, .Home-Nav, .Back{
+    cursor: pointer;
   }

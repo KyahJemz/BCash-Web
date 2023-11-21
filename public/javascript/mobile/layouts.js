@@ -1,4 +1,5 @@
 export default class Layouts {
+
     static SplashScreen(){
         return `
         <div class="SplashScreen">
@@ -22,7 +23,7 @@ export default class Layouts {
             </div>
             <div class="Bottom">
                 <p>Sign in with your SSCR email</p>
-                <div id="Login-SignIn" class="Login-button g-signin2" data-onsuccess="onSignIn">
+                <div id="Login-SignIn" class="Login-button g_id_signin" data-type="standard">
                    
                 </div>
             </div>
@@ -49,10 +50,10 @@ export default class Layouts {
             <div class="Bottom">
                 <div class="keypad">
                     <table>
-                        <tr><td>1</td><td>2</td><td>3</td></tr>
-                        <tr><td>4</td><td>5</td><td>6</td></tr>
-                        <tr><td>7</td><td>8</td><td>9</td></tr>
-                        <tr><td>X</td><td>0</td><td>&lt;</td></tr>
+                        <tr><td class="keypad-1">1</td><td class="keypad-2">2</td><td class="keypad-3">3</td></tr>
+                        <tr><td class="keypad-4">4</td><td class="keypad-5">5</td><td class="keypad-6">6</td></tr>
+                        <tr><td class="keypad-7">7</td><td class="keypad-8">8</td><td class="keypad-9">9</td></tr>
+                        <tr><td class="keypad-11">X</td><td class="keypad-0">0</td><td class="keypad-12">&lt;</td></tr>
                     </table>
                 </div>
             </div>
@@ -87,10 +88,10 @@ export default class Layouts {
             <div class="Bottom">
                 <div class="keypad">
                     <table>
-                        <tr><td>1</td><td>2</td><td>3</td></tr>
-                        <tr><td>4</td><td>5</td><td>6</td></tr>
-                        <tr><td>7</td><td>8</td><td>9</td></tr>
-                        <tr><td>X</td><td>0</td><td>&lt;</td></tr>
+                        <tr><td class="keypad-1">1</td><td class="keypad-2">2</td><td class="keypad-3">3</td></tr>
+                        <tr><td class="keypad-4">4</td><td class="keypad-5">5</td><td class="keypad-6">6</td></tr>
+                        <tr><td class="keypad-7">7</td><td class="keypad-8">8</td><td class="keypad-9">9</td></tr>
+                        <tr><td class="keypad-11">X</td><td class="keypad-0">0</td><td class="keypad-12">&lt;</td></tr>
                     </table>
                 </div>
             </div>
@@ -102,7 +103,7 @@ export default class Layouts {
         return `
         <div class="OTPValidation">
             <div class="Top">
-                <p class="OTPValidation-title">Enter PIN code</p>
+                <p class="OTPValidation-title">Enter OTP code</p>
                 <div class="CodeBoxContainer">
                     <div class="CodeBox OTPValidation1"></div>
                     <div class="CodeBox OTPValidation2"></div>
@@ -117,10 +118,10 @@ export default class Layouts {
             <div class="Bottom">
                 <div class="keypad">
                     <table>
-                        <tr><td>1</td><td>2</td><td>3</td></tr>
-                        <tr><td>4</td><td>5</td><td>6</td></tr>
-                        <tr><td>7</td><td>8</td><td>9</td></tr>
-                        <tr><td>X</td><td>0</td><td>&lt;</td></tr>
+                        <tr><td class="keypad-1">1</td><td class="keypad-2">2</td><td class="keypad-3">3</td></tr>
+                        <tr><td class="keypad-4">4</td><td class="keypad-5">5</td><td class="keypad-6">6</td></tr>
+                        <tr><td class="keypad-7">7</td><td class="keypad-8">8</td><td class="keypad-9">9</td></tr>
+                        <tr><td class="keypad-11">X</td><td class="keypad-0">0</td><td class="keypad-12">&lt;</td></tr>
                     </table>
                 </div>
             </div>
@@ -135,8 +136,8 @@ export default class Layouts {
             <div class="Home-Content">
                 <div class="Home-Header">
                     <div class="Left">
-                        <p class="Home-Greetings">Hello,</p>
-                        <p class="Home-FullName">Stephen Layson</p>
+                        <p class="Home-Greetings">Good day,</p>
+                        <p id="Home-Fullname" class="Home-FullName">Stephen Layson</p>
                     </div>
                     <div class="Right">
                         <img src="${BaseURL}.${BaseURL}../public/images/mobile/icon_nav2.png" alt="pp">
@@ -147,7 +148,7 @@ export default class Layouts {
                     <p class="Home-Card-P2">Balance</p>
                     <div class="Home-Card-Row"><p id="Home-Card-Balance">Loading...</p><img id="Home-Card-Balance-Toggle" src="${BaseURL}../public/images/mobile/icon_visibility_off.png" alt=""></div>
                     <div class="Home-Card-Row"><p id="Home-Card-SID">Loading...</p><img id="Home-Card-SID-Toggle" src="${BaseURL}../public/images/mobile/icon_visibility_off.png" alt=""></div>
-                    <p class="Home-Card-P2">Stephen Layson</p>
+                    <p id="Home-Card-Name" class="Home-Card-P2">Stephen Layson</p>
                     <img class="Home-Card-Logo" src="${BaseURL}../public/images/mobile/logo_sscr.png" alt="">
                 </div>
                 <div class="Home-NavBar">
@@ -175,11 +176,11 @@ export default class Layouts {
                 <div class="Home-RecentTransactions">
                     <div class="Home-RecentTransactions-Header">
                         <p class="title">Recent Transactions</p>
-                        <p id="Home-RecentTransactions-More" class="more">View More</p>
+                        <p id="Home-RecentTransactions-More" class="more pointer">View More</p>
                     </div>
                     <hr/>
                     <div class="Home-RecentTransactions-Content">
-                        <div class="scroll">
+                        <div id="Home-RecentTransactions" class="scroll">
                            
                         </div>
                     </div>
@@ -215,7 +216,7 @@ export default class Layouts {
                 <p>Transaction History</p>
             </div>
 
-            <div class="Transactions-Content">
+            <div id="Transactions-Container" class="Transactions-Content">
                 
             </div>
 
@@ -286,7 +287,7 @@ export default class Layouts {
                 <p class="Profile-Name">Stephen Layson</p>
                 <p class="Profile-Email">s.stephen.layson@sscr.edu</p>
 
-                <div class="Profile-Row">
+                <div class="Profile-Row Pointer Profile-Nav-1">
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_security_settings.png" alt=""></div>
                     <p>Security Settings</p>
                     <img class="right" src="${BaseURL}../public/images/mobile/icon_next.png" alt="">
@@ -300,7 +301,7 @@ export default class Layouts {
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_transfer.png" alt=""></div>
                     <p>Allow Transfers</p>
                     <label class="switch right">
-                        <input id="Config-Guardian" type="checkbox">
+                        <input class="Config" id="Config-AllowTransfer" type="checkbox">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -309,7 +310,7 @@ export default class Layouts {
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_transactions.png" alt=""></div>
                     <p>Allow Transactions</p>
                     <label class="switch right">
-                        <input id="Config-Guardian" type="checkbox">
+                        <input class="Config" id="Config-AllowTransactions" type="checkbox">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -318,7 +319,7 @@ export default class Layouts {
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_card.png" alt=""></div>
                     <p>Allow Use of Card</p>
                     <label class="switch right">
-                        <input id="Config-Guardian" type="checkbox">
+                        <input class="Config" id="Config-AllowCard" type="checkbox">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -327,7 +328,7 @@ export default class Layouts {
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_confirm.png" alt=""></div>
                     <p>Transaction Auto Confirm</p>
                     <label class="switch right">
-                        <input id="Config-Guardian" type="checkbox">
+                        <input class="Config" id="Config-AutoConfirm" type="checkbox">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -336,7 +337,7 @@ export default class Layouts {
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_confirm_manage_settings.png" alt=""></div>
                     <p>Allow Modify Settings</p>
                     <label class="switch right">
-                        <input id="Config-Guardian" type="checkbox">
+                        <input class="Config" id="Config-ManageSettings" type="checkbox">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -345,25 +346,25 @@ export default class Layouts {
                     <p class="title">More</p>
                 </div>
 
-                <div class="Profile-Row">
+                <div class="Profile-Row Pointer Profile-Nav-2">
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_whitelist.png" alt=""></div>
                     <p>Whitelist</p>
                     <img class="right" src="${BaseURL}../public/images/mobile/icon_next.png" alt="">
                 </div>
 
-                <div class="Profile-Row">
+                <div class="Profile-Row Pointer Profile-Nav-3">
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_activity_logs.png" alt=""></div>
                     <p>Activity Logs</p>
                     <img class="right" src="${BaseURL}../public/images/mobile/icon_next.png" alt="">
                 </div>
 
-                <div class="Profile-Row">
+                <div class="Profile-Row Pointer Profile-Nav-4">
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_login_history.png" alt=""></div>
                     <p>Login History</p>
                     <img class="right" src="${BaseURL}../public/images/mobile/icon_next.png" alt="">
                 </div>
 
-                <div class="Profile-Row">
+                <div class="Profile-Row Pointer Profile-Nav-5">
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_logout.png" alt=""></div>
                     <p>Logout</p>
                     <img class="right" src="${BaseURL}../public/images/mobile/icon_next.png" alt="">
@@ -397,7 +398,7 @@ export default class Layouts {
         <div class="SecuritySettings">
             <div class="SecuritySettings-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="SecuritySettings-Content">
@@ -407,18 +408,18 @@ export default class Layouts {
                 <p class="Activity-Notes bold center">Thank you for keeping your account secure!</p>
                 <div class="Form-Box">
                     <p class="Form-Label">Old PIN code</p>
-                    <input class="Form-Pin" type="password" maxlength="6" placeholder="Old PIN code">
+                    <input id="SecuritySettings-OldPin" class="Form-Pin" type="password" maxlength="6" placeholder="Old PIN code">
                 </div>
                 <div class="Form-Box">
                     <p class="Form-Label">New PIN code</p>
-                    <input class="Form-Pin" type="password" maxlength="6" placeholder="New PIN code">
+                    <input id="SecuritySettings-NewPin" class="Form-Pin" type="password" maxlength="6" placeholder="New PIN code">
                 </div>
                 <div class="Form-Box">
                     <p class="Form-Label">Re-type new PIN code</p>
-                    <input class="Form-Pin" type="password" maxlength="6"  placeholder="Re-type new PIN code">
+                    <input id="SecuritySettings-ReNewPin" class="Form-Pin" type="password" maxlength="6"  placeholder="Re-type new PIN code">
                 </div>
                 <div class="Form-Box">
-                    <button class="Form-Button">Change PIN code</button>
+                    <button id="SecuritySettings-Btn" class="Form-Button">Change PIN code</button>
                 </div>
             </div>
         </div>
@@ -430,7 +431,7 @@ export default class Layouts {
         <div class="Whitelist">
             <div class="Whitelist-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="Whitelist-Header">
@@ -446,20 +447,19 @@ export default class Layouts {
 
             <div class="Whitelist-Footer">
                 <div class="Form-Box">
-                    <button class="Form-Button">Add Account</button>
+                    <button id="Whitelist-Add" class="Form-Button">Add Account</button>
                 </div>
             </div>
         </div>
         `;
     }
 
-
     static WhitelistAdd(){
         return `
         <div class="WhitelistAdd">
             <div class="WhitelistAdd-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="WhitelistAdd-Header">
@@ -471,25 +471,25 @@ export default class Layouts {
 
                 <div class="Form-Box">
                     <p class="Form-Label">Whitelisting School ID Number:</p>
-                    <input class="Form-Text" type="text"  placeholder="Id Number">
+                    <input id="WhitelistAdd-Id" class="Form-Text" type="text"  placeholder="Id Number">
                 </div>
 
-                <div class="Form-Box">
+                <div class="Form-Box WhitelistAdd-closed">
                     <p class="Form-Label">Whitelisting Name:</p>
-                    <input class="Form-Text" type="text" disabled>
+                    <input id="WhitelistAdd-Name" class="Form-Text" type="text" disabled>
                 </div>
 
                 <p class="Activity-Notes WhitelistAdd-TopNotes">By adding an account to your whitelist, you confirm that the provided information is accurate and has been validated to the best of your knowledge. Proceeding with this action will authorize the added account for privileged access and transactions based on your permissions.</p>
                 <p class="Activity-Notes">Please ensure that the account details and permissions are verified before adding them to your whitelist.</p>
-                <p class="Activity-Notes WhitelistAdd-BottomNotes">Would you like to continue and add this account to your whitelist?</p>
+                <p class="Activity-Notes WhitelistAdd-BottomNotes WhitelistAdd-closed">Would you like to continue and add this account to your whitelist?</p>
               
-                <div class="Form-Box WhitelistAdd-Footer" >
+                <div class="Form-Box WhitelistAdd-Footer WhitelistAdd-closed" >
                     <p class="Form-Label">Your PIN Code</p>
-                    <input class="Form-Text" type="password" maxlength="6" placeholder="6 digit PIN code">
+                    <input id="WhitelistAdd-PIN" class="Form-Text" type="password" maxlength="6" placeholder="6 digit PIN code">
                 </div>
 
-                <div class="Form-Box">
-                    <button class="Form-Button">Add Account</button>
+                <div class="Form-Box WhitelistAdd-closed">
+                    <button id="WhitelistAdd-Add" class="Form-Button">Add Account</button>
                 </div>
 
             </div>
@@ -503,7 +503,7 @@ export default class Layouts {
         <div class="ActivityLogs">
             <div class="ActivityLogs-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="ActivityLogs-Header">
@@ -524,7 +524,7 @@ export default class Layouts {
         <div class="LoginHistory">
             <div class="LoginHistory-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="LoginHistory-Header">
@@ -532,13 +532,13 @@ export default class Layouts {
                 <p class="Activity-Notes">Monitor your login history closely and be vigilant for any unauthorized access. Should such incidents reoccur, change your PIN immediately and seek guidance from system administrators.</p>
             </div>
 
-            <div class="LoginHistory-Content">
+            <div id="LoginHistory-Content" class="LoginHistory-Content">
 
             </div>
 
             <div class="LoginHistory-Footer">
                 <div class="Form-Box">
-                    <button class="Form-Button">Remove all saved logins</button>
+                    <button id="LoginHistory-Btn" class="Form-Button">Remove all saved logins</button>
                 </div>
             </div>
 
@@ -551,7 +551,7 @@ export default class Layouts {
         <div class="Transfer">
             <div class="Transfer-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="Transfer-Header">
@@ -563,21 +563,21 @@ export default class Layouts {
 
                 <div class="Form-Box" >
                     <p class="Form-Label">Receiver School Id Number:</p>
-                    <input class="Form-Text" type="text" placeholder="Id number">
+                    <input id="Transfer-SchooId" class="Form-Text" type="text" placeholder="Id number">
                 </div>
 
                 <div class="Form-Box" >
                     <p class="Form-Label">Amount:</p>
-                    <input class="Form-Text" type="number" placeholder="1.00 - 1,000.00">
+                    <input id="Transfer-Amount" class="Form-Text" type="number" placeholder="1.00 - 1,000.00">
                 </div>
 
                 <div class="Form-Box" >
                     <p class="Form-Label">Message:</p>
-                    <input class="Form-Text" type="text" placeholder="optional">
+                    <input id="Transfer-Message" class="Form-Text" type="text" placeholder="optional">
                 </div>
 
                 <div class="Form-Box">
-                    <button class="Form-Button">Transfer</button>
+                    <button id="Transfer-Btn" class="Form-Button">Transfer</button>
                 </div>
             </div>
 
@@ -585,13 +585,12 @@ export default class Layouts {
         `;
     }
 
-
     static TransferConfirmation(){
         return `
         <div class="TransferConfirmation">
             <div class="TransferConfirmation-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="TransferConfirmation-Header">
@@ -633,7 +632,7 @@ export default class Layouts {
                 <p class="Activity-Notes center TransferConfirmation-LastNote">Please ensure all information is corrrect. By clicking \'Transfer\' button means that you have validated all information and confirming it to be correct.</p>
 
                 <div class="Form-Box">
-                    <button class="Form-Button">Confirm Transfer</button>
+                    <button id="TransferConfirmation-Transfer" class="Form-Button">Confirm Transfer</button>
                 </div>
             </div>
 
@@ -647,7 +646,7 @@ export default class Layouts {
         <div class="PurchaseConfirmation">
             <div class="PurchaseConfirmation-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="PurchaseConfirmation-Header">
@@ -705,7 +704,7 @@ export default class Layouts {
         <div class="ScanQR">
             <div class="ScanQR-Background"></div>
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="ScanQR-Header">
@@ -725,7 +724,7 @@ export default class Layouts {
         return `
         <div class="Receipt">
             <div class="Mini-Header">
-                <img src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
+                <img class="Back" src="${BaseURL}../public/images/mobile/icon_back.png" alt="">
             </div>
 
             <div class="Receipt-Content">
@@ -735,45 +734,45 @@ export default class Layouts {
                         <p id="Receipt-Timestamp">October 1, 2023</p>
                     </div>
                     <p class="title">Transaction Receipt</p>
+                    <p id="Receipt-Type" class="subtitle">Transaction Receipt</p>
                     <Table>
                         <tr>
                             <td>Source</td>
-                            <td><div class="TransferConfirmation-2Row">
-                                <p id="TransferConfirmation-SourceName">-</p>
-                                <p id="TransferConfirmation-SourceId">-</p>
+                            <td><div class="Receipt-2Row">
+                                <p id="Receipt-SourceName">-</p>
+                                <p id="Receipt-SourceId">-</p>
                             </div></td>
                         </tr>
                         <tr>
                             <td>Destination</td>
-                            <td><div class="TransferConfirmation-2Row">
-                                <p id="TransferConfirmation-DestinationName">-</p>
-                                <p id="TransferConfirmation-DestinationId">-</p>
+                            <td><div class="Receipt-2Row">
+                                <p id="Receipt-DestinationName">-</p>
+                                <p id="Receipt-DestinationId">-</p>
                             </div></td>
                         </tr>
-                        <tr>
+                        <tr id="Receipt-Amount-Container">
                             <td>Amount</td>
-                            <td id="TransferConfirmation-Amount">-</td>
+                            <td id="Receipt-Amount">-</td>
+                        </tr>
+                        <tr id="Receipt-Discount-Container">
+                            <td>Discount</td>
+                            <td id="Receipt-Discount">-</td>
                         </tr>
                         <tr>
-                            <td>Purpose</td>
-                            <td>Fund Transfer</td>
+                            <td>Total Amount</td>
+                            <td id="Receipt-TotalAmount">-</td>
                         </tr>
                         <tr>
                             <td>Message</td>
-                            <td id="TransferConfirmation-Message">-</td>
+                            <td id="Receipt-Message">-</td>
                         </tr>
                     </Table>
                 </div>
                 <div class="Mid">
-                    <p>Ref. No.</p>
+                    <p id="Receipt-Reference">Ref. No.</p>
                 </div>
-                <div class="Bot">
-                    <table>
-                        <tr>
-                            <td>Item 1</td>
-                            <td>X2</td>
-                            <td>P100.00</td>
-                        </tr>
+                <div class="Bot" id="Receipt-Items-Container">
+                    <table id="Receipt-Items">
                     </table>
                 </div>
             </div>
@@ -781,9 +780,4 @@ export default class Layouts {
         </div>
         `;
     }
-
-
-
-
-
 }

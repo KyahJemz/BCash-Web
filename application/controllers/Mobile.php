@@ -37,9 +37,18 @@ class Mobile extends CI_Controller {
                         const IpAddress = ' . json_encode($data['IpAddress']) . ';
                         const Device = ' . json_encode($data['Device']) . ';
                         const Location = ' . json_encode($data['Location']) . ';
+                        const ClientVersion = ' . json_encode('1.0') . ';
                         var AccountAddress = "";
                         var AuthToken = "";
                         var BaseURL = "http://localhost/index.php/";
+                        var userActorCategory;
+                        var userBalance;
+                        var userAuthorization;
+                        var userProfileImage;
+                        var userPersonalId;
+                        var userEmail;
+                        var userLastname;
+                        var userFirstname;
                 </script>
             ';
         }
