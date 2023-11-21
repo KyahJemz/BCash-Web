@@ -1,0 +1,1140 @@
+
+/*
+ |-----------
+ | SplashScreen
+ | ----------
+*/ 
+.SplashScreen {
+    background-color: #810a0b;
+    padding-top: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.SplashScreen-logo {
+    width: 70%;
+}
+
+.SplashScreen-logo img{
+    width: 100%;
+    aspect-ratio: 1.2/1;
+}
+
+.SplashScreen p {
+    color: white;
+}
+
+.SplashScreen-title{
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.SplashScreen-subtitle{
+    margin-top: 10px;
+    font-size: 0.8rem;
+}
+
+
+
+/*
+ |-----------
+ | Login
+ | ----------
+*/ 
+.Login {
+    background: linear-gradient(45deg, #810a0b, #FFAF88, #810a0b);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50%;
+}
+
+.Login-Background {
+    opacity: 25%;
+    background: url("../../images/mobile/bg_stags.png");
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+}
+
+.Login p {
+    color: white;
+    text-align: center;
+}
+
+.Login .Top {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Login .Login-head1 {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.Login .Login-head2 {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.Login .Bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 1;
+}
+
+.Login-button {
+    border-radius: 5px;
+    background-color: white;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 40px;
+    padding: 5px;
+}
+
+.Login-button img {
+    height: 100%;
+    width: 25px;
+}
+
+.Login-button p {
+    color: black;
+    text-wrap: nowrap;
+}
+
+
+
+/*
+ |-----------
+ | PinValidation
+ | ----------
+*/ 
+.PinValidation{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PinValidation .Top {
+   width: 100%;
+   padding-left: 50px;
+   padding-right: 50px;
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.PinValidation .Bottom {
+    width: 100%;
+}
+
+.PinValidation-title{ 
+    font-size: 1rem;
+}
+
+.PinValidation-subtitle{
+    font-size: 0.7rem;
+    margin-bottom: 5px;
+}
+
+
+/*
+ |-----------
+ | PinCreation
+ | ----------
+*/ 
+.PinCreation{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PinCreation .Top {
+   width: 100%;
+   padding-left: 50px;
+   padding-right: 50px;
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.PinCreation .Bottom {
+    width: 100%;
+}
+
+.PinCreation-title{ 
+    font-size: 1rem;
+}
+
+
+
+/*
+ |-----------
+ | OTPValidation
+ | ----------
+*/ 
+.OTPValidation{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.OTPValidation .Top {
+   width: 100%;
+   padding-left: 50px;
+   padding-right: 50px;
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.OTPValidation .Bottom {
+    width: 100%;
+}
+
+.OTPValidation-title{ 
+    font-size: 1rem;
+}
+
+.OTPValidation-subtitle{
+    font-size: 0.7rem;
+    margin-bottom: 5px;
+}
+
+
+
+/*
+ |-----------
+ | Home
+ | ----------
+*/ 
+.Home {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Home-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.Home-Content {
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    flex: 1;
+    width: 100%;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Home-Header{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.Home-Header .Left{
+    flex: 1;
+}
+
+.Home-Header .Right {
+    aspect-ratio: 1/1;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Home-Header .Right img{
+    aspect-ratio: 1/1;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid gainsboro;
+}
+
+.Home-Greetings{
+    font-size: 0.8rem;
+}
+
+.Home-FullName{
+    font-size: 1.2rem;
+    margin-top: 5px;
+    color: #810a0b;
+    font-weight: bold;
+}
+
+.Home-Card{
+    margin-top: 20px;
+    background-color: #810a0b;
+    width: 100%;
+    border-radius: 10px;
+    position: relative;
+    padding: 20px;
+}
+
+.Home-Card-Logo{
+    opacity: 25%;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 75%;
+    aspect-ratio: 1/1;
+}
+
+.Home-Card-P1{
+    color: white;
+    font-weight: bold;
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+}
+
+.Home-Card-P2{
+    color: white;
+    font-size: 0.6rem;
+}
+
+.Home-Card-Row{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.Home-Card-Row p{
+    color: white;
+    font-size: 0.8rem;
+}
+
+.Home-Card-Row img{
+    filter: invert();
+    height: 1.3rem;
+    margin-left: 10px;
+}
+
+.Home-NavBar{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.Home-NavBar .Home-Nav{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Home-NavBar .Home-Nav p{
+    font-size: 0.6rem;
+    margin-top: 5px;
+}
+
+.Home-NavBar .Home-Nav .Home-Nav-Icon{
+    background-color: #810a0b;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Home-NavBar .Home-Nav .Home-Nav-Icon img{
+    height: 50%;
+    filter: invert();
+}
+
+
+
+
+
+.Home-RecentTransactions{  
+    width: 100%;
+    flex: 1;
+    overflow-y: hidden;
+}
+
+.Home-RecentTransactions-Header{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.Home-RecentTransactions-Header .title {
+    color: #810a0b;
+}
+
+.Home-RecentTransactions-Header .more {
+    font-style: italic;
+}
+
+.Home-RecentTransactions-Content{
+    margin-top: 5px;
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.Home-RecentTransactions-Content .scroll{
+    width: 100%;
+    overflow-y: scroll;
+}
+
+
+
+/*
+ |-----------
+ | Transactions
+ | ----------
+*/ 
+.Transactions {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Transactions-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.Transactions-Content{
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    overflow-y: scroll;
+}
+
+
+
+
+/*
+ |-----------
+ | Announcements
+ | ----------
+*/ 
+.Announcements {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Announcements-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.Announcements-Content{
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    overflow-y: scroll;
+}
+
+
+
+/*
+ |-----------
+ | Profile
+ | ----------
+*/ 
+.Profile {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Profile-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.Profile-Content{
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    overflow-y: scroll;
+}
+
+.Profile-Image {
+    height: 150px;
+    width: 150px;
+    aspect-ratio: 1/1;
+}
+
+.Profile-Name{
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.Profile-Email{
+    margin-top: 10px;
+    font-size: 0.8rem;
+}
+
+.Profile-Row{
+    display: flex;
+    width: 100%;
+    padding: 10px 20px;
+    gap: 10px;
+    align-items: center;
+}
+
+.Profile-Row p{
+    flex: 1;
+    font-size: 1rem;
+}
+
+.Profile-Row img {
+    aspect-ratio: 1/1;
+    height: 50px;
+    width: 50px;
+}
+
+.Profile-Row .title {
+    font-size: 1.2rem;
+}
+
+.Profile-Row .left {
+    background-color: #810a0b;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.Profile-Row .left img{
+    height: 40px;
+    width: 40px;
+    aspect-ratio: 1/1;
+    filter: invert();
+}
+
+.Profile-Row .right {
+    padding: 5px;
+}
+
+
+
+
+
+
+
+/*
+ | -----------
+ | SecuritySettings
+ | ----------
+*/ 
+.SecuritySettings {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SecuritySettings-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.SecuritySettings-Content{
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/*
+ | -----------
+ | Whitelist
+ | ----------
+*/ 
+.Whitelist {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Whitelist-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.Whitelist-Header{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.Whitelist-Content{
+    padding: 20px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.Whitelist-Footer{
+    border-top: 1px solid gainsboro;
+    padding-bottom: 20px;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+
+/*
+ | -----------
+ | WhitelistAdd
+ | ----------
+*/ 
+.WhitelistAdd {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.WhitelistAdd-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.WhitelistAdd-Header{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.WhitelistAdd-Content{
+    padding: 20px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.WhitelistAdd-Footer{
+    border-top: 1px solid gainsboro;
+    padding-top: 20px;
+}
+
+.WhitelistAdd-TopNotes{
+    margin-top: 20px;
+}
+
+.WhitelistAdd-BottomNotes{
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+
+
+
+
+/*
+ | -----------
+ | ActivityLogs
+ | ----------
+*/ 
+.ActivityLogs {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ActivityLogs-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.ActivityLogs-Header{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.ActivityLogs-Content{
+    padding: 20px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+
+
+
+/*
+ | -----------
+ | LoginHistory
+ | ----------
+*/ 
+.LoginHistory {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LoginHistory-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.LoginHistory-Header{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.LoginHistory-Content{
+    padding: 20px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.LoginHistory-Footer{
+    border-top: 1px solid gainsboro;
+    padding-bottom: 20px;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+
+/*
+ | -----------
+ | Transfer
+ | ----------
+*/ 
+.Transfer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Transfer-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.Transfer-Header{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.Transfer-Content{
+    padding: 20px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+
+
+
+
+/*
+ | -----------
+ | TransferConfirmation
+ | ----------
+*/ 
+.TransferConfirmation {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TransferConfirmation-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.TransferConfirmation-Header{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.TransferConfirmation-Content{
+    padding: 20px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.TransferConfirmation-LastNote{
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.TransferConfirmation table{
+    background-color: #810a0b;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 20px;
+}
+
+.TransferConfirmation table tr td{
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.TransferConfirmation-2Row{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+
+
+/*
+ | -----------
+ | PurchaseConfirmation
+ | ----------
+*/ 
+.PurchaseConfirmation {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PurchaseConfirmation-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.PurchaseConfirmation-Header{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.PurchaseConfirmation-Content{
+    padding: 20px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.PurchaseConfirmation-LastNote{
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.PurchaseConfirmation table{
+    background-color: #810a0b;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 20px;
+    margin-bottom: 20px;
+
+}
+
+.PurchaseConfirmation table tr td{
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.PurchaseConfirmation-2Row{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+
+/*
+ | -----------
+ | ScanQR
+ | ----------
+*/ 
+.ScanQR {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ScanQR-Background{
+    background: url("../../images/mobile/bg_stags.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.ScanQR-Header{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+
+
+
+/*
+ | -----------
+ | Receipt
+ | ----------
+*/ 
+.Receipt{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #810a0b;
+    box-shadow: 0px 0px 2px 2px black;
+}
+
+.Receipt .Mini-Header {
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.50);
+}
+
+.Receipt-Content {
+    margin-top: 20px;
+    width: 90%;
+    height: 100px;
+}
+
+.Receipt-Content .Top{
+    background-color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom: 3px dotted white;
+}
+
+.Receipt-Content .Top .header{
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #535353;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.Receipt-Content .Top .header img{
+    height:60%;
+}
+
+.Receipt-Content .Top .header p{
+    font-size: 0.8rem;
+    color: white;
+}
+
+.Receipt-Content .Top .title{
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.Receipt-Content .Top table{
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
+    font-size: 0.9rem;
+}
+
+.Receipt-Content .Top table tr td {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.Receipt-Content .Mid{
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px 20px;
+    border-bottom: 3px dotted black;
+    border-top: 3px dotted black;
+    font-size: 0.8rem;
+}
+
+.Receipt-Content .Bot{
+    background-color: white;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    padding: 20px 20px;
+    border-top: 3px dotted white;
+    border-bottom: 3px dotted black;
+    font-size: 0.8rem;
+    width: 100%;
+}
+
+.Receipt-Content .Bot table {
+    width: 100%;
+    text-align: center;
+}
+
+
+

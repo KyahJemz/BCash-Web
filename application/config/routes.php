@@ -57,6 +57,7 @@ $route['Administrator'] = 'Administrator/index';
 $route['Accounting'] = 'Accounting/index';
 $route['MerchantAdmin'] = 'MerchantAdmin/index';
 $route['MerchantStaff'] = 'MerchantStaff/index';
+$route['Mobile'] = 'Mobile/index';
 
 
 

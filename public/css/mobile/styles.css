@@ -1,0 +1,275 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html, body, #app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#app {
+    
+}
+
+
+
+
+
+
+.keypad, .keypad table{
+    width: 100%;
+    text-align: center;
+}
+
+.keypad table tr td{
+    padding: 15px;
+    font-size: 1.5rem;
+}
+
+
+
+.CodeBoxContainer{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.CodeBoxContainer .CodeBox {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    flex: 1;
+    aspect-ratio: 1/1;
+    border: 1px solid gainsboro;
+}
+
+
+
+
+
+
+.NavBar {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    background-color: #810a0b;
+}
+
+.NavBar .Nav{
+    flex: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.NavBar .Nav p{
+    font-size: 0.7rem;
+    text-align: center;
+    width: 100%;
+    color: gray;
+}
+
+.NavBar .Nav img{
+    width: 35px;
+    aspect-ratio: 1/1;
+    filter: invert(50%);
+}
+
+.NavBar .Nav p.Active{
+    font-size: 0.7rem;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+
+.NavBar .Nav img.Active{
+    width: 30px;
+    aspect-ratio: 1/1;
+    filter: invert();
+}
+
+
+
+
+
+
+.Header {
+    background-color: #810a0b;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.Header p{
+    width: 100%;
+    text-align: center;
+    font-size: 1.4rem;
+    color: white;
+}
+
+
+.Mini-Header{
+    background-color: #810a0b;
+    width: 100%;
+    padding: 15px;
+}
+
+.Mini-Header img{
+    aspect-ratio: 1/1;
+    height: 2rem;
+    color: white;
+    filter: invert();
+}
+
+.Activity-Title{
+  font-weight: bold;
+  font-size: 1.6rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Activity-Notes{
+  margin-bottom: 20px;
+  line-height: 1.4rem;
+}
+
+
+.center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  
+  /* The slider */
+  .switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .switch input:checked + .slider {
+    background-color: #810a0b;
+  }
+  
+  .switch input:focus + .slider {
+    box-shadow: 0 0 1px #810a0b;
+  }
+  
+  .switch input:checked + .slider:before {
+    -webkit-transform: translateX(30px);
+    -ms-transform: translateX(30px);
+    transform: translateX(30px);
+  }
+  
+  /* Rounded sliders */
+  .switch .slider.round {
+    border-radius: 34px;
+  }
+  
+  .switch .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+
+
+
+  .Form-Box {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .Form-Label{
+    margin-bottom: 5px;
+    color: #810a0b;
+  }
+  .Form-Pin, .Form-Otp, .Form-Text {
+    text-align: center;
+    width: 100%;
+    padding: 10px 50px;
+  }
+
+  .Form-Text{
+    text-align: left;
+    padding: 10px 20px;
+  }
+
+  .Form-Button {
+    background-color: #810a0b;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px 50px;
+  }
+
+  .Form-Dual-Button-Box{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .Form-Dual-Button {
+    background-color: #810a0b;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px 50px;
+  }
+
+  .Form-Button:hover {
+    box-shadow: 0px 0px 3px 3px gainsboro;
+  }
+
+  .Form-Button:active {
+    box-shadow: 0px 0px 3px 3px gainsboro;
+    background-color: #490506;
+  }
