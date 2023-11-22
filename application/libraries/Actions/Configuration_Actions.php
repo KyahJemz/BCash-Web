@@ -112,7 +112,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' IsMaintenance,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [IsMaintenance].',
                             ));
@@ -126,7 +126,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' Transactions,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [Transactions].',
                             ));
@@ -140,7 +140,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' Transfers,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [Transfers].',
                             ));
@@ -154,7 +154,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' CashIn,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [CashIn].',
                             ));
@@ -168,7 +168,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' AndroidAppVersion,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [AndroidAppVersion].',
                             ));
@@ -182,7 +182,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' WebAppVersion,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [WebAppVersion].',
                             ));
@@ -196,7 +196,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' Accounting,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [Accounting].',
                             ));
@@ -210,7 +210,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' MerchantAdmin,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [MerchantAdmin].',
                             ));
@@ -224,7 +224,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' MerchantStaff,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [MerchantStaff].',
                             ));
@@ -238,7 +238,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' User,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [User].',
                             ));
@@ -252,7 +252,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' Guest,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [Guest].',
                             ));
@@ -266,7 +266,7 @@ class Configuration_Actions {
                             $Changes = $Changes . ' Guardian,';
                             $this->CI->ActivityLogs_Model->create(array(
                                    'Account_Address' => $Account->WebAccounts_Address,
-                                   'Target_Account_Address' => $Account->UsersAccount_Address,
+                                   'Target_Account_Address' => $Account->WebAccounts_Address,
                                    'Action' => 'Edit',
                                    'Task' => 'Updated Configuration [Guardian].',
                             ));

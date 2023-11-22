@@ -56,8 +56,8 @@ class MerchantAdmin extends CI_Controller {
                 $data['Location'] = "Unknown";
                 $data['AccountAddress'] = "Unknown";
                 $data['AuthToken'] = "Unknown";
-                $data['BaseURL'] = "http://192.168.0.164/index.php/Api/Request/Process";
-                $data['MainURL'] = "http://192.168.0.164/";
+                $data['BaseURL'] = "http://localhost/index.php/Api/Request/Process";
+                $data['MainURL'] = "http://localhost/";
 
                 if ($data['IpAddress'] != $IpAddress || $data['Location'] != $Location || $data['Device'] != $Device) {
                          redirect('Login/index');

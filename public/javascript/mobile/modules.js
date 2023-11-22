@@ -384,9 +384,9 @@ export default class Modules {
                     document.getElementById("Home-NavBar-4").style.display = "none";
                 } 
 
-                document.getElementById("Home-Fullname").innerHTML = Helper.toTitleCase(userFirstname + " " + userFirstname);
+                document.getElementById("Home-Fullname").innerHTML = Helper.toTitleCase(userFirstname + " " + userLastname);
 
-                document.getElementById("Home-Card-Name").innerHTML = userFirstname + " " + userFirstname;
+                document.getElementById("Home-Card-Name").innerHTML = userFirstname + " " + userLastname;
 
             } else {
                 Modules.HomeModule();
