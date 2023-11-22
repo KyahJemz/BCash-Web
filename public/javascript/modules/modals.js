@@ -168,7 +168,7 @@ export default class Modals {
                             <p><em>Item Category: ${value['ItemCategory']}</em></p>
                             <br>
                             <p>Please confirm the deletion by entering your PIN CODE below:</p>
-                            <input id="DeleteItem-PINCode" type="password">
+                            <input id="DeleteItem-PINCode" maxlength="6" type="password">
                             <input id="DeleteItem-ItemId" value="${value['ItemId']}" hidden type="text">
                         </div>
                         <div class="button-container">
@@ -359,11 +359,11 @@ export default class Modals {
                             </tr>
                             <tr>
                                 <td><p>New PIN Code:</p></td>
-                                <td><input id="AccountSettings-NewPINCode1" type="password" name="NewPinCode" placeholder="******"></td>
+                                <td><input id="AccountSettings-NewPINCode1" maxlength="6"  type="password" name="NewPinCode" placeholder="******"></td>
                             </tr>
                             <tr>
                                 <td><p>Re-type New PIN Code:</p></td>
-                                <td><input id="AccountSettings-NewPINCode2" type="password" name="ConfirmNewPinCode" placeholder="******"></td>
+                                <td><input id="AccountSettings-NewPINCode2" maxlength="6"  type="password" name="ConfirmNewPinCode" placeholder="******"></td>
                             </tr>
                         </table>
                     </fieldset>
@@ -382,7 +382,7 @@ export default class Modals {
                                 </td>
                                 <td>
                                     <p>Current PIN Code:</p>
-                                    <input id="AccountSettings-OldPINCode" type="password" name="OldPINCode" placeholder="">
+                                    <input id="AccountSettings-OldPINCode" maxlength="6" type="password" name="OldPINCode" placeholder="">
                                 </td>
                             </tr>
                         </table>

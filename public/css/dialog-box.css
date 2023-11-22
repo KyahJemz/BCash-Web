@@ -10,36 +10,35 @@
     --CorrectColor: #43A047;
 
     --TextColor-White: #ffffff;
-    --TextColor-Red: #DA121A;
+    --TextColor-Red: #810a0b;
     --TextColor-Gold: #F9AE28;
     --TextColor-LightBlack: #333333;
     --TextColor-Black: #0F1419;
 
-    --Button-Background-Red: #DA121A;
-    --Button-Background-Active-Red: #9A110D;
+    --Button-Background-Red: #810a0b;
+    --Button-Background-Active-Red: #640b0d;
     --Button-Background-Gold: #F9AE28;
-    --Button-Background-Active-Gold: #DA121A;
+    --Button-Background-Active-Gold: #810a0b;
     --Button-Background-White: #ffffff;
 
     --Selected-Background-LightBlack: #333333;
 
     --Panel-Background-LightBlack: #333333;
     --Panel-Background-Gold: #FFCC00;
-    --Panel-Background-Red: #DA121A;
+    --Panel-Background-Red: #810a0b;
     --Panel-Background-White: #ffffff;
     --Panel-Background-DarkWhite: #F2F2F2;
 
     --color-White: #ffffff;
     --color-DarkWhite: #F2F2F2;
-    --color-Red: #DA121A;
-    --color-DarkRed: #9A110D;
+    --color-Red: #810a0b;
+    --color-DarkRed: #640b0d;
     --color-Gold: #FFCC00;
     --color-DarkGold: #F9AE28;
     --color-Gray: #282828;
     --color-LightBlack: #333333;
     --color-Black: #0F1419;
 }
-
 
 
 .order-confirmation {

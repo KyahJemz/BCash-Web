@@ -337,12 +337,22 @@ export default class Modules {
         AjaxRequest.sendRequest([],"get my account",BaseURL+"Api/Request/Process")
         .then(responseData => {
             if (responseData.Success === true){
-                userActorCategory = responseData.Parameters.Account.ActorCategory_Id;
-                userBalance = responseData.Parameters.Details.Balance;
-                userPersonalId = responseData.Parameters.Details.SchoolPersonalId;
-                userEmail = responseData.Parameters.Account.Email;
-                userLastname = responseData.Parameters.Account.Lastname;
-                userFirstname = responseData.Parameters.Account.Firstname;
+                if (responseData.Parameters?.Guardian) {
+                    userActorCategory = responseData.Parameters.Guardian.ActorCategory_Id;
+                    userBalance = responseData.Parameters.Details.Balance;
+                    userPersonalId = responseData.Parameters.Details.SchoolPersonalId;
+                    userEmail = responseData.Parameters.Guardian.Email;
+                    userLastname = responseData.Parameters.Guardian.Lastname;
+                    userFirstname = responseData.Parameters.Guardian.Firstname;
+                } else {
+                    userActorCategory = responseData.Parameters.Account.ActorCategory_Id;
+                    userBalance = responseData.Parameters.Details.Balance;
+                    userPersonalId = responseData.Parameters.Details.SchoolPersonalId;
+                    userEmail = responseData.Parameters.Account.Email;
+                    userLastname = responseData.Parameters.Account.Lastname;
+                    userFirstname = responseData.Parameters.Account.Firstname;
+                }
+                
 
                 if (CardIdVisible) {
                     CardIdVisible = false;
@@ -510,17 +520,21 @@ export default class Modules {
             if (responseData.Success === true){
                 responseData.Parameters.forEach(element => {
                     document.querySelector(".Announcements-Content").innerHTML = document.querySelector(".Announcements-Content").innerHTML + `
-                    
+                        <div class="Announcements-container">
+                            <div class="Announcements-title">${element.Title}</div>
+                            <div class="Announcements-date">${Helper.convertTimestamp(element.Timestamp)}</div>
+                            <div class="Announcements-content-text">${element.Content}</div>
+                        </div>
                     `;
-                    String Title = parameterObject.optString("Title");
-                    String Contents = parameterObject.optString("Content");
-                    String Date = Helper.convertTimestamp(element.Timestamp);
                 });
             } 
         });
     }
 
     static ProfileModule() {
+
+        document.querySelector(".Profile-Name").innerHTML = userFirstname + " " + userLastname;
+        document.querySelector(".Profile-Email").innerHTML = userEmail;
 
         document.querySelector(".Profile-Nav-1").addEventListener('click', () => {
             ChangeLayout(Layouts.SecuritySettings(), Modules.SecuritySettingsModule, null);
@@ -554,6 +568,8 @@ export default class Modules {
             ChangeLayout(Layouts.Profile(), Modules.ProfileModule, null);
         });
 
+        document.querySelector(".pin-confirmation-container").style.display = 'none';
+
         AjaxRequest.sendRequest([],"get my account", BaseURL+"Api/Request/Process")
             .then(responseData => {
                 if (responseData.Success === true){
@@ -563,27 +579,43 @@ export default class Modules {
                     document.getElementById('Config-AutoConfirm').checked = responseData.Parameters.Details.IsTransactionAutoConfirm === '1';
                     document.getElementById('Config-ManageSettings').checked = responseData.Parameters.Details.CanModifySettings === '1';
 
-                    document.querySelectorAll('Config').forEach(element => {
+                    document.querySelectorAll('.Config').forEach(element => {
                         element.addEventListener('change', (e)=>{
-
+                            document.querySelector(".pin-confirmation-container").style.display = 'flex';
                         });
                     });
                 } 
             });
 
+        document.getElementById('btnCancel').addEventListener('click', () => {
+            ChangeLayout(Layouts.Profile(), Modules.ProfileModule, null);
+        });
 
-        // const settingsData = {
-        //     PinCode: document.getElementById('Config-PinCode').value(),
-        //     CanDoTransfers: document.getElementById('Config-AllowTransfer').value(),
-        //     CanDoTransactions: document.getElementById('Config-AllowTransactions').value(),
-        //     CanUseCard: document.getElementById('Config-AllowCard').value(),
-        //     IsTransactionAutoConfirm: document.getElementById('Config-AutoConfirm').value(),
-        //     CanModifySettings: document.getElementById('Config-ManageSettings').value(),
-        // };
-        // AjaxRequest.sendRequest(settingsData,"update my settings", BaseURL+"Api/Request/Process")
-        //     .then(responseData => {
-        //         Modules.ProfileModule();
-        //     });
+        document.getElementById('btnConfirm').addEventListener('click', () => {
+            const settingsData = {
+                PinCode: document.getElementById('Config-pinCode').value,
+                CanDoTransfers: document.getElementById('Config-AllowTransfer').checked === true ? "1" : "0",
+                CanDoTransactions: document.getElementById('Config-AllowTransactions').checked === true ? "1" : "0",
+                CanUseCard: document.getElementById('Config-AllowCard').checked === true ? "1" : "0",
+                IsTransactionAutoConfirm: document.getElementById('Config-AutoConfirm').checked === true ? "1" : "0",
+                CanModifySettings: document.getElementById('Config-ManageSettings').checked === true ? "1" : "0",
+            };
+            AjaxRequest.sendRequest(settingsData,"update my settings", BaseURL+"Api/Request/Process")
+                .then(responseData => {
+                    document.getElementById('Config-pinCode').value = "";
+                    ChangeLayout(Layouts.Profile(), Modules.ProfileModule, null);
+                });
+        });
+
+        if (userActorCategory === "7") {
+            document.querySelector(".Guardian-Row").style.display = "flex";
+            document.querySelector(".Profile-Nav-2").style.display = "none";
+        } else {
+            document.querySelector(".Guardian-Row").style.display = "none";
+            document.querySelector(".Profile-Nav-2").style.display = "flex";
+        }
+
+
     }
 
     static SecuritySettingsModule() {
@@ -888,7 +920,14 @@ export default class Modules {
     }
 
     static PurchaseConfirmationModule() {
-       
+        AjaxRequest.sendRequest({TransactionAddress: params},"get receipt",BaseURL+"Api/Request/Process")
+            .then(responseData => {
+                if (responseData.Success === true){
+                    
+                } else {
+
+                }
+            });
     }
 
     static ScanQRModule() {

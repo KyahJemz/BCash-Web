@@ -69,7 +69,10 @@ class Transactions_Model extends CI_Model {
             ->select('SUM(Credit) - SUM(Debit) AS total_balance', FALSE)
             ->from('tbl_Transactions')
             ->where('Account_Address', $params['Account_Address'])
-            ->where('Status', 'Completed')
+            ->group_start()
+                ->where('Status', 'Completed')
+                ->or_where('Status', 'Paid')
+            ->group_end()
             ->get()
             ->row()
             ->total_balance;

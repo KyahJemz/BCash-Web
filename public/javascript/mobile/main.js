@@ -21,3 +21,28 @@ window.handleCredentialResponse = (response) => {
 
     });
 }
+
+
+
+
+export function ScanForPurchases() {
+    if (AccountAddress === "" || AuthToken === "") {
+        return false;
+    }
+    AjaxRequest.sendRequest([],"scan for purchases",BaseURL+"Api/Auth/Process")
+        .then(responseData => {
+            if (responseData.Success === true) {
+                ChangeLayout(Layouts.PurchaseConfirmation(), Modules.PurchaseConfirmationModule, responseData.Parameters);
+            } else {
+                ScanForPurchases();
+            }
+        });
+}
+
+
+
+
+
+
+
+

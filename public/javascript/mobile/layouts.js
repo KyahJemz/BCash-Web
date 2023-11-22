@@ -333,7 +333,7 @@ export default class Layouts {
                     </label>
                 </div>
 
-                <div class="Profile-Row">
+                <div class="Profile-Row Guardian-Row">
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_confirm_manage_settings.png" alt=""></div>
                     <p>Allow Modify Settings</p>
                     <label class="switch right">
@@ -368,6 +368,17 @@ export default class Layouts {
                     <div class="left"><img src="${BaseURL}../public/images/mobile/icon_profile_logout.png" alt=""></div>
                     <p>Logout</p>
                     <img class="right" src="${BaseURL}../public/images/mobile/icon_next.png" alt="">
+                </div>
+
+                <div class="pin-confirmation-container" id="pinConfirmation">
+                    <div class="pin-confirmation-content">
+                        <div class="pin-confirmation-title">Enter Pin Code</div>
+                        <input type="password" class="pin-confirmation-input" id="Config-pinCode" maxlength="6" placeholder="6 digit PIN code">
+                        <div class="pin-confirmation-buttons">
+                            <div class="pin-confirmation-button" id="btnCancel">Cancel</div>
+                            <div class="pin-confirmation-button" id="btnConfirm">Confirm</div>
+                        </div>
+                    </div>
                 </div>
                 
             </div>

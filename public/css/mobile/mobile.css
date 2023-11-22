@@ -576,6 +576,36 @@
     height: 100%;
     flex: 1;
     overflow-y: scroll;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.Announcements-container {
+    height: fit-content;
+    padding: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: white;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+}
+
+.Announcements-title {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.Announcements-date {
+    font-weight: lighter;
+    font-size: 0.8rem;
+    font-style: italic;
+    padding-bottom: 10px;
+}
+
+.Announcements-content-text {
+    font-size: 0.9rem;
 }
 
 
@@ -670,6 +700,74 @@
 
 .Profile-Row .right {
     padding: 5px;
+}
+
+.Profile .pin-confirmation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Profile .pin-confirmation-content {
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    height: fit-content;
+}
+
+.Profile .pin-confirmation-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.Profile .pin-confirmation-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+.Profile .pin-confirmation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.Profile #btnCancel{
+    padding: 5px 20px;
+    border: 1px solid #810a0b;
+    cursor: pointer;
+    color: #810a0b;
+    background-color: white;
+}
+
+.Profile #btnConfirm{
+    padding: 5px 20px;
+    border: 1px solid #810a0b;
+    cursor: pointer;
+    color: white;
+    background-color: #810a0b;
+}
+
+.Profile #btnCancel:hover,
+.Profile #btnConfirm:hover{
+    box-shadow: 0px 0px 2px 2px gainsboro;
+}
+
+.Profile #btnCancel:active,
+.Profile #btnConfirm:active{
+    background-color: #410506;
+    color: white;
 }
 
 

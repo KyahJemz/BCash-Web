@@ -356,11 +356,11 @@ export function SetAdministratorChart(parameters){
 		});
 
 	document.getElementById('chart-1').parentNode.querySelector('.chart-number').innerHTML = 
-	'₱ ' + parameters.TotalCashInsPerHour.reduce((accumulator, currentValue) => {return accumulator + parseFloat(currentValue);}, 0);
+	'' + parameters.TotalCashInsPerHour.reduce((accumulator, currentValue) => {return accumulator + parseFloat(currentValue);}, 0) + ' cash in' ;
 	document.getElementById('chart-2').parentNode.querySelector('.chart-number').innerHTML = 
 	'' + parameters.TotalPurchasesPerHour.reduce((accumulator, currentValue) => {return accumulator + parseFloat(currentValue);}, 0) + ' orders' ;
 	document.getElementById('chart-3').parentNode.querySelector('.chart-number').innerHTML = 
-	'₱ ' + parameters.TotalTransfersPerHour.reduce((accumulator, currentValue) => {return accumulator + parseFloat(currentValue);}, 0);
+	'' + parameters.TotalTransfersPerHour.reduce((accumulator, currentValue) => {return accumulator + parseFloat(currentValue);}, 0) + ' transfers' ;
 	
 	setChart(
 		chart1,

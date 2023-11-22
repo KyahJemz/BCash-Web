@@ -32,16 +32,16 @@ export default class AjaxRequest {
                 if (data.Success === false) {
                     //alerts.createAlertElement('danger', data.Response);
                     if (data.Target === 'Login') {
-                        alert("Sign in required, Authentication failed or session expired.");
                         window.location.href = 'http://localhost/index.php/mobile/index';
+                        alert("Sign in required, Authentication failed or session expired.");
                     }
                 } else if (data.Success === true){
                     if (data.Response !== '' && data.Response !== null){
                         //alerts.createAlertElement('success', data.Response)
                     }
                     if (data.Target === 'Login') {
-                        alert("Signing out");
                         window.location.href = 'http://localhost/index.php/mobile/index';
+                        alert("Signing out");
                     }
                 }
                 if (data?.Parameters?.AccountAddress) {
