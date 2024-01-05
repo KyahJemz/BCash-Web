@@ -60,11 +60,12 @@ class Auth extends CI_Controller {
                                 'Response' => 'Invalid HTTPS body parameters!'
                         ];  
                 }  else {
+
                         switch ($IntentHeader) {
                                 case 'WebLogin':
                                         $response = $this->Web_Login->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader, $ClientVersionHeader);
                                         break;
-                            
+                                
                                 case 'MobileLogin':
                                         $response = $this->Mobile_Login->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader, $ClientVersionHeader);
                                         break;
@@ -72,19 +73,19 @@ class Auth extends CI_Controller {
                                 case 'OTPValidation':
                                         $response = $this->OTP_Validation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
                                         break;
-                            
+                                
                                 case 'PINValidation':
                                         $response = $this->PIN_Validation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
                                         break;
-                            
+                                
                                 case 'PINCreation':
                                         $response = $this->PIN_Creation->Process($requestPostBody, $AuthorizationTokenHeader, $AccountAddressHeader);
                                         break;
-                            
+                                
                                 case 'Logout':
                                         $response = $this->Account_Logout->Process($AuthorizationTokenHeader, $AccountAddressHeader);
                                         break;
-                            
+                                
                                 default:
                                         $response = [
                                                 'Success' => False,
@@ -92,11 +93,15 @@ class Auth extends CI_Controller {
                                                 'Parameters' => null,
                                                 'Response' => 'No headers!'
                                         ];
+                        }   
+
+                        $Maintenance = $this->Configurations_Model->AccountingAccess();
+                        if(!$Maintenance['Success']){
+                                $response = ['Success' => false,'Target' => 'Login','Parameters' => null,'Response' => $Maintenance['Response']];
                         }
                 }
-                // Return the response as JSON 
+
                 $data = json_encode($response);
-                log_message('debug','Return : '.$data);
                 $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }
 }

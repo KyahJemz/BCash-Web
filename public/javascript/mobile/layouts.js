@@ -373,7 +373,7 @@ export default class Layouts {
                 <div class="pin-confirmation-container" id="pinConfirmation">
                     <div class="pin-confirmation-content">
                         <div class="pin-confirmation-title">Enter Pin Code</div>
-                        <input type="password" class="pin-confirmation-input" id="Config-pinCode" maxlength="6" placeholder="6 digit PIN code">
+                        <input type="password" class="pin-confirmation-input" id="Config-pinCode" minlength="6" maxlength="6" placeholder="6 digit PIN code">
                         <div class="pin-confirmation-buttons">
                             <div class="pin-confirmation-button" id="btnCancel">Cancel</div>
                             <div class="pin-confirmation-button" id="btnConfirm">Confirm</div>
@@ -419,15 +419,15 @@ export default class Layouts {
                 <p class="Activity-Notes bold center">Thank you for keeping your account secure!</p>
                 <div class="Form-Box">
                     <p class="Form-Label">Old PIN code</p>
-                    <input id="SecuritySettings-OldPin" class="Form-Pin" type="password" maxlength="6" placeholder="Old PIN code">
+                    <input id="SecuritySettings-OldPin" class="Form-Pin" type="password" minlength="6" maxlength="6" placeholder="Old PIN code">
                 </div>
                 <div class="Form-Box">
                     <p class="Form-Label">New PIN code</p>
-                    <input id="SecuritySettings-NewPin" class="Form-Pin" type="password" maxlength="6" placeholder="New PIN code">
+                    <input id="SecuritySettings-NewPin" class="Form-Pin" type="password" minlength="6" maxlength="6" placeholder="New PIN code">
                 </div>
                 <div class="Form-Box">
                     <p class="Form-Label">Re-type new PIN code</p>
-                    <input id="SecuritySettings-ReNewPin" class="Form-Pin" type="password" maxlength="6"  placeholder="Re-type new PIN code">
+                    <input id="SecuritySettings-ReNewPin" class="Form-Pin" type="password" minlength="6" maxlength="6"  placeholder="Re-type new PIN code">
                 </div>
                 <div class="Form-Box">
                     <button id="SecuritySettings-Btn" class="Form-Button">Change PIN code</button>

@@ -133,13 +133,24 @@ function FetchConfirmationChanges(TransactionAddress) {
     Ajax.sendRequest(data, 'listen confirmation event')
       .then(responseData => {
         if (responseData.Success){
-          if (responseData.Parameters.Status === 'Completed' || responseData.Parameters.Status === 'Canceled'){
+          if (responseData.Parameters.Status === 'Completed' || responseData.Parameters.Status === 'Canceled' || responseData.Parameters.Status === 'Paid'){
             if (responseData.Parameters.Status === 'Completed'){
               document.getElementById('order-status').innerHTML = '<p class="success">Status: Transaction Complete.</p>';
               document.getElementById('order-content').innerHTML = `
                 Payment received for ${responseData.Parameters.Transaction_Address}, Transaction Complete!
               `;
               makeAlert('success', 'Payment received for ' + responseData.Parameters.Transaction_Address+', Transaction Complete!');
+              document.getElementById('order-buttons').innerHTML = `
+                <button class="btn-submit" onClick="document.getElementById('Modal-Container').style.display = 'none';">Close</button>
+              `;
+              myOrders.clearOrder(myOrders);
+            }
+            if (responseData.Parameters.Status === 'Paid'){
+              document.getElementById('order-status').innerHTML = '<p class="success">Status: Transaction Paid.</p>';
+              document.getElementById('order-content').innerHTML = `
+                Payment received for ${responseData.Parameters.Transaction_Address}, Transaction Paid!
+              `;
+              makeAlert('success', 'Payment received for ' + responseData.Parameters.Transaction_Address+', Transaction Paid!');
               document.getElementById('order-buttons').innerHTML = `
                 <button class="btn-submit" onClick="document.getElementById('Modal-Container').style.display = 'none';">Close</button>
               `;
@@ -159,6 +170,7 @@ function FetchConfirmationChanges(TransactionAddress) {
           } else {
             FetchConfirmationChanges(TransactionAddress);
           }
+          
         }
       });
 

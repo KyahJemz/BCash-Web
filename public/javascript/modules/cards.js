@@ -137,7 +137,7 @@ export default class Cards {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="CardDetails-PINCode" type="password"  placeholder="******">
+                            <input id="CardDetails-PINCode" type="password"  placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>

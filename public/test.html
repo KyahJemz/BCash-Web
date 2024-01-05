@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RFID Card Reader</title>
+</head>
+<body>
+  <input type="text" id="rfidcard" placeholder="Enter RFID Card">
+
+  <div>
+    <img id="img" src="https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg" alt="Profile Image">
+    <p id="fname"></p>
+    <p id="lname"></p>
+  </div>
+
+  <script>
+    const ndef = new NDEFReader();
+ndef.scan().then(() => {
+  console.log("Scan started successfully.");
+  ndef.onreadingerror = () => {
+    console.log("Cannot read data from the NFC tag. Try another one?");
+  };
+  ndef.onreading = event => {
+    console.log("NDEF message read.");
+  };
+}).catch(error => {
+  console.log(`Error! Scan failed to start: ${error}.`);
+});
+  </script>
+</body>
+</html>

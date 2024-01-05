@@ -539,7 +539,7 @@ export default class Accounts {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>
@@ -734,7 +734,7 @@ export default class Accounts {
                             <p>New PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-AccountPINCode" type="password" value="">
+                            <input id="AccountDetails-AccountPINCode" type="password" value="" minlength="6" maxlength="6">
                           </td>
                         </tr>
                         <tr>
@@ -760,7 +760,7 @@ export default class Accounts {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>
@@ -895,7 +895,7 @@ export default class Accounts {
                             <p>New PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-AccountPINCode" type="password" value="">
+                            <input id="AccountDetails-AccountPINCode" type="password" value="" minlength="6" maxlength="6">
                           </td>
                         </tr>
                         <tr>
@@ -921,7 +921,7 @@ export default class Accounts {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>
@@ -1044,7 +1044,7 @@ export default class Accounts {
                             <p>New PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-AccountPINCode" type="password" value="">
+                            <input id="AccountDetails-AccountPINCode" type="password" value="" minlength="6" maxlength="6">
                           </td>
                         </tr>
                         <tr>
@@ -1070,7 +1070,7 @@ export default class Accounts {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>
@@ -1191,7 +1191,7 @@ export default class Accounts {
                             <p>New PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-AccountPINCode" type="password" value="">
+                            <input id="AccountDetails-AccountPINCode" type="password" value="" minlength="6" maxlength="6">
                           </td>
                         </tr>
                         <tr>
@@ -1218,7 +1218,7 @@ export default class Accounts {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>
@@ -1340,7 +1340,7 @@ export default class Accounts {
                             <p>New PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-AccountPINCode" type="password" value="">
+                            <input id="AccountDetails-AccountPINCode" type="password" value="" minlength="6" maxlength="6">
                           </td>
                         </tr>
                         <tr>
@@ -1367,7 +1367,7 @@ export default class Accounts {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>
@@ -1490,7 +1490,7 @@ export default class Accounts {
                             <p>New PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-AccountPINCode" type="password" value="">
+                            <input id="AccountDetails-AccountPINCode" type="password" value="" minlength="6" maxlength="6">
                           </td>
                         </tr>
                         <tr>
@@ -1517,7 +1517,7 @@ export default class Accounts {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>
@@ -1640,7 +1640,7 @@ export default class Accounts {
                             <p>New PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-AccountPINCode" type="password" value="">
+                            <input id="AccountDetails-AccountPINCode" type="password" value="" minlength="6" maxlength="6">
                           </td>
                         </tr>
                         <tr>
@@ -1667,7 +1667,7 @@ export default class Accounts {
                             <p>Your PIN Code:</p>
                           </td>
                           <td>
-                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******">
+                            <input id="AccountDetails-PINCode" type="password" name="AccountDetails-PINCode" placeholder="******" minlength="6" maxlength="6">
                           </td>
                         </tr>
                       </table>
